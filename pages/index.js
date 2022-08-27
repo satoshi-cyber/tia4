@@ -92,7 +92,7 @@ export default function Home() {
           placeholder="lorem@ipsum.com"
           after={<FormIcon name="HiOutlineMail" size={20} />}
         />
-        <button className="bg-gradient-to-r from-purple-500 w-full p-3 text-sm bg-gray-800 text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm">
+        <button className=" bg-gradient-to-r from-purple-500 w-full p-3 text-sm bg-gray-800 text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm">
           Login / Signup
         </button>
         <p className="text-gray-600 my-5">OR</p>
