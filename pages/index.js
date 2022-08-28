@@ -79,7 +79,7 @@ const Input = ({
 
 export default function Home() {
   return (
-    <div className="flex w-full h-screen justify-center items-center">
+    <div className="flex flex-1 w-full justify-center items-center">
       <div className="p-6 max-w-[480px] w-full flex flex-col justify-center items-center ">
         <Logo className="absolute top-6 left-6" width={120} />
         <p className="text-3xl mb-6 text-gray-900 text-center">

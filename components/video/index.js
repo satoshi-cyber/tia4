@@ -13,7 +13,16 @@ const VideoPreview = ({ stream }) => {
   if (!stream) {
     return null;
   }
-  return <video ref={videoRef} width={500} height={500} autoPlay controls />;
+  return (
+    <video
+      ref={videoRef}
+      width="100%"
+      height="100%"
+      className="absolute top-0 left-0 right-0 bottom-0"
+      playsInline
+      autoPlay
+    />
+  );
 };
 
 const RecordView = () => (
@@ -32,7 +41,16 @@ const RecordView = () => (
           <button onClick={startRecording}>Start Recording</button>
           <button onClick={stopRecording}>Stop Recording</button>
           <VideoPreview stream={previewStream} />
-          <video src={mediaBlobUrl} controls autoPlay loop />
+          {mediaBlobUrl && (
+            <video
+              src={mediaBlobUrl}
+              width="100%"
+              height="100%"
+              className="absolute top-0 left-0 right-0 bottom-0"
+              playsInline
+              loop
+            />
+          )}
         </div>
       )}
     />
