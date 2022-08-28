@@ -28,7 +28,7 @@ const RecordView = () => {
   return (
     <>
       <VideoPreview stream={previewStream} />
-      {mediaBlobUrl && (
+      {mediaBlobUrl && status === "stopped" && (
         <video
           src={mediaBlobUrl}
           className={videoClassName}
