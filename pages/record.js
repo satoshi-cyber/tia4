@@ -1,12 +1,11 @@
-import VideoRecorder from "react-video-recorder";
+import dynamic from "next/dynamic";
 
-const Record = () => (
-  <VideoRecorder
-    onRecordingComplete={(videoBlob) => {
-      // Do something with the video...
-      console.log("videoBlob", videoBlob);
-    }}
-  />
+const Video = dynamic(() => import("../components/video"), { ssr: false });
+
+const RecordView = () => (
+  <div>
+    <Video />
+  </div>
 );
 
-export default Record;
+export default RecordView;
