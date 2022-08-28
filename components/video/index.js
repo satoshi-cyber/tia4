@@ -1,5 +1,8 @@
 import { useRef, useEffect } from "react";
-import { ReactMediaRecorder } from "react-media-recorder";
+import { useReactMediaRecorder } from "react-media-recorder";
+
+const videoClassName =
+  "absolute w-full h-full min-w-full min-h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover";
 
 const VideoPreview = ({ stream }) => {
   const videoRef = useRef(null);
@@ -14,47 +17,33 @@ const VideoPreview = ({ stream }) => {
     return null;
   }
   return (
-    <video
-      ref={videoRef}
-      width="100%"
-      height="100%"
-      className="absolute top-0 left-0 right-0 bottom-0"
-      playsInline
-      autoPlay
-    />
+    <video ref={videoRef} className={videoClassName} playsInline autoPlay />
   );
 };
 
-const RecordView = () => (
-  <div>
-    <ReactMediaRecorder
-      video
-      render={({
-        status,
-        startRecording,
-        stopRecording,
-        previewStream,
-        mediaBlobUrl,
-      }) => (
-        <div>
-          <p>{status}</p>
-          <button onClick={startRecording}>Start Recording</button>
-          <button onClick={stopRecording}>Stop Recording</button>
-          <VideoPreview stream={previewStream} />
-          {mediaBlobUrl && (
-            <video
-              src={mediaBlobUrl}
-              width="100%"
-              height="100%"
-              className="absolute top-0 left-0 right-0 bottom-0"
-              playsInline
-              loop
-            />
-          )}
-        </div>
+const RecordView = () => {
+  const { status, startRecording, stopRecording, mediaBlobUrl, previewStream } =
+    useReactMediaRecorder({ video: true, askPermissionOnMount: true });
+
+  return (
+    <>
+      <VideoPreview stream={previewStream} />
+      {mediaBlobUrl && (
+        <video
+          src={mediaBlobUrl}
+          className={videoClassName}
+          playsInline
+          loop
+          autoPlay
+        />
       )}
-    />
-  </div>
-);
+      <div className="fixed">
+        <p>{status}</p>
+        <button onClick={startRecording}>Start Recording</button>
+        <button onClick={stopRecording}>Stop Recording</button>
+      </div>
+    </>
+  );
+};
 
 export default RecordView;
