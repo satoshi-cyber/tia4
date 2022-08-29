@@ -54,7 +54,7 @@ const RecordView = () => {
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="absolute flex flex-1 w-full z-10"
+        className="absolute flex flex-1 w-full "
       >
         <SwiperSlide>
           {mediaBlobUrl && status === "stopped" && (
@@ -85,7 +85,7 @@ const RecordView = () => {
           )}
         </SwiperSlide>
       </Swiper>
-      <div className="absolute bg-red-200 z-20">
+      <div className="absolute bg-red-200">
         <p>{status}</p>
         <button onClick={onStartRecording}>Start Recording</button>
         <button onClick={onStopRecording}>Stop Recording</button>
