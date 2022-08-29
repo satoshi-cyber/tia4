@@ -14,6 +14,6 @@ body,
   @apply flex flex-col h-screen;
 }
 
-.swiper-slide-active video {
-  -webkit-filter: blur(2px);
+.swiper-slide{
+  trasnform: translateZ(0);
 }

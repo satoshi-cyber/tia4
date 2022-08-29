@@ -61,6 +61,7 @@ const RecordView = () => {
             <video
               src={mediaBlobUrl}
               className={videoClassName}
+              muted
               playsInline
               loop
               autoPlay
@@ -71,6 +72,7 @@ const RecordView = () => {
           {mediaBlobUrl && status === "stopped" && (
             <video
               src={mediaBlobUrl}
+              muted
               className={videoClassName}
               playsInline
               loop
