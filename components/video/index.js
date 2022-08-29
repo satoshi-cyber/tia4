@@ -53,9 +53,8 @@ const RecordView = () => {
           type: "progressbar",
         }}
         navigation={true}
-        effect="gl"
         modules={[Pagination, Navigation]}
-        className="absolute w-full h-full"
+        className="absolute w-full h-full z-10"
       >
         <SwiperSlide>
           {mediaBlobUrl && status === "stopped" && (
@@ -80,7 +79,7 @@ const RecordView = () => {
           )}
         </SwiperSlide>
       </Swiper>
-      <div className="absolute bg-red-200 z-10">
+      <div className="absolute bg-red-200 z-20">
         <p>{status}</p>
         <button onClick={onStartRecording}>Start Recording</button>
         <button onClick={onStopRecording}>Stop Recording</button>
