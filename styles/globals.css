@@ -15,5 +15,5 @@ body,
 }
 
 .swiper-slide{
-  trasnform: translateZ(0);
+  transform: translateZ(0);
 }
