@@ -46,6 +46,7 @@ const RecordView = () => {
 
   return (
     <>
+      <VideoPreview stream={previewStream} />
       <Swiper
         ref={swiper}
         pagination={{
@@ -53,7 +54,7 @@ const RecordView = () => {
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="absolute flex flex-1 w-full"
+        className="absolute flex flex-1 w-full z-10"
       >
         <SwiperSlide>
           {mediaBlobUrl && status === "stopped" && (
@@ -84,8 +85,7 @@ const RecordView = () => {
           )}
         </SwiperSlide>
       </Swiper>
-      <VideoPreview stream={previewStream} />
-      <div className="absolute bg-red-200 ">
+      <div className="absolute bg-red-200 z-20">
         <p>{status}</p>
         <button onClick={onStartRecording}>Start Recording</button>
         <button onClick={onStopRecording}>Stop Recording</button>
