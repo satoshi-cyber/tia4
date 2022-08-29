@@ -54,7 +54,7 @@ const RecordView = () => {
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="absolute w-full h-full z-10"
+        className="absolute w-full h-full min-w-full min-h-full z-10"
       >
         <SwiperSlide>
           {mediaBlobUrl && status === "stopped" && (
