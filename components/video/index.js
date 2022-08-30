@@ -97,24 +97,18 @@ const Buttons = ({
 };
 
 const VidePlayer = ({ src, index, swiper }) => {
-  const [realIndex, setRealIndex] = useState(swiper?.realIndex || 0);
+  const ref = useRef();
 
   useEffect(() => {
+    ref.play();
+
     swiper?.on("slideChange", () => {
-      setRealIndex(swiper.realIndex);
+      ref.stop();
     });
-  }, [swiper]);
+  }, [index, swiper]);
 
   return (
-    <video
-      src={src}
-      className={videoClassName}
-      playsInline
-      loop
-      autoPlay
-      muted={realIndex !== index}
-      controls=""
-    />
+    <video src={src} className={videoClassName} playsInline loop ref={ref} />
   );
 };
 
