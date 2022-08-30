@@ -8,7 +8,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
-import { useLayoutEffect } from "react";
 
 const QUESTIONS = [
   "Tell Me About Yourself",
@@ -97,22 +96,6 @@ const Buttons = ({
   );
 };
 
-const VidePlayer = ({ src, swiper }) => {
-  const ref = useRef();
-
-  useLayoutEffect(() => {
-    ref.current?.play();
-
-    swiper?.on("slideChange", () => {
-      ref.current?.stop();
-    });
-  }, [swiper]);
-
-  return (
-    <video src={src} className={videoClassName} playsInline loop ref={ref} />
-  );
-};
-
 const RecordView = () => {
   const swipeRef = useRef();
   const questions = QUESTIONS;
@@ -182,10 +165,13 @@ const RecordView = () => {
             {
               <div className="flex flex-1 w-full h-screen relative justify-center">
                 {mediaUrls[index] && status === "stopped" ? (
-                  <VidePlayer
-                    swiper={swipeRef.current?.swiper}
-                    index={index}
+                  <video
                     src={mediaUrls[index]}
+                    className={videoClassName}
+                    muted
+                    playsInline
+                    autoPlay
+                    loop
                   />
                 ) : (
                   <VideoPreview
