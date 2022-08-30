@@ -100,10 +100,10 @@ const VidePlayer = ({ src, swiper }) => {
   const ref = useRef();
 
   useEffect(() => {
-    ref.current.play();
+    ref.current?.play();
 
     swiper?.on("slideChange", () => {
-      ref.current.stop();
+      ref.current?.stop();
     });
   }, [swiper]);
 
