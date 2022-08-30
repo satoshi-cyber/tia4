@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/effect-creative";
 
 const videoClassName =
-  "absolute w-full h-screen min-w-full min-h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover";
+  "absolute w-full h-screen min-w-full min-h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover opacity-50";
 
 const VideoPreview = ({ stream }) => {
   const videoRef = useRef(null);
@@ -42,8 +42,8 @@ const RecordView = () => {
     useReactMediaRecorder({
       video: true,
       askPermissionOnMount: true,
-      onStop,
       stopStreamsOnStop: false,
+      onStop,
     });
 
   const handleStartRecording = () => {
