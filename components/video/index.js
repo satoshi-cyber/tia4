@@ -96,7 +96,7 @@ const Buttons = ({
   );
 };
 
-const VidePlayer = ({ src, index, swiper }) => {
+const VidePlayer = ({ src, swiper }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -105,7 +105,7 @@ const VidePlayer = ({ src, index, swiper }) => {
     swiper?.on("slideChange", () => {
       ref.stop();
     });
-  }, [index, swiper]);
+  }, [swiper]);
 
   return (
     <video src={src} className={videoClassName} playsInline loop ref={ref} />
