@@ -9,7 +9,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
 
-const videoClassName = "absolute w-full h-screen object-cover";
+const videoClassName =
+  "absolute w-full h-screen min-w-full min-h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover";
 
 const VideoPreview = ({ stream }) => {
   const videoRef = useRef(null);
@@ -57,7 +58,6 @@ const RecordView = () => {
 
   return (
     <>
-      <VideoPreview stream={previewStream} />
       <Swiper
         ref={swipeRef}
         pagination={{
@@ -65,17 +65,26 @@ const RecordView = () => {
         }}
         navigation={true}
         effect={"creative"}
+        creativeEffect={{
+          prev: {
+            shadow: true,
+            translate: [0, 0, -400],
+          },
+          next: {
+            translate: ["100%", 0, 0],
+          },
+        }}
         modules={[Pagination, Navigation, EffectCreative]}
-        className="absolute flex flex-1 w-full z-10"
+        className="absolute flex flex-1 w-full z-10 bg-gray-800"
       >
         <SwiperSlide>
           {
-            <div className="flex flex-1 w-full">
+            <div className="flex flex-1 w-full h-screen">
               <VideoPreview stream={previewStream} />
               {mediaUrls[0] && status === "stopped" && (
                 <video
                   src={mediaUrls[0]}
-                  className="absolute w-full h-screen object-cover"
+                  className={videoClassName}
                   muted
                   playsInline
                   loop
@@ -87,12 +96,12 @@ const RecordView = () => {
         </SwiperSlide>
         <SwiperSlide>
           {
-            <div className="flex flex-1 w-full">
+            <div className="flex flex-1 w-full h-screen">
               <VideoPreview stream={previewStream} />
               {mediaUrls[1] && status === "stopped" && (
                 <video
                   src={mediaUrls[1]}
-                  className="absolute w-full h-screen object-cover"
+                  className={videoClassName}
                   muted
                   playsInline
                   loop
