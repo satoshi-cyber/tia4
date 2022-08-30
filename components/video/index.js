@@ -19,7 +19,7 @@ const VideoPreview = ({ stream }) => {
     if (videoRef.current && stream) {
       videoRef.current.srcObject = stream;
     }
-  }, [stream]);
+  }, [stream, stream?.id]);
 
   if (!stream) {
     return null;
@@ -122,6 +122,8 @@ const RecordView = () => {
   const handleHandleNext = () => {
     swipeRef.current.swiper.slideNext();
   };
+
+  console.log(previewStream);
 
   return (
     <>
