@@ -112,6 +112,7 @@ const VidePlayer = ({ src, swiper }) => {
       playsInline
       loop
       muted={false}
+      controls
     />
   );
 };
