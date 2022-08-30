@@ -44,7 +44,7 @@ const Buttons = ({
   handleHandleNext,
   swiper,
 }) => {
-  const [realIndex, setRealIndex] = useState(swiper?.realIndex);
+  const [realIndex, setRealIndex] = useState(swiper?.realIndex || 0);
 
   useEffect(() => {
     swiper?.on("slideChange", () => {
