@@ -178,7 +178,7 @@ const RecordView = () => {
                 ) : (
                   <VideoPreview stream={previewStream} />
                 )}
-                <p className="w-[80vw] lg:w-[400px] z-10 text-3xl text-gray-100 text-center mt-10 pointer-events-none">
+                <p className="w-[80vw] lg:w-[400px] z-10 text-3xl text-gray-100 text-center mt-10 pointer-events-none drop-shadow-md translate-z-0">
                   {question}
                 </p>
               </div>
