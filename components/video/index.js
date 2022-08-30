@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
+import { useLayoutEffect } from "react";
 
 const QUESTIONS = [
   "Tell Me About Yourself",
@@ -99,7 +100,7 @@ const Buttons = ({
 const VidePlayer = ({ src, swiper }) => {
   const ref = useRef();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     ref.current?.play();
 
     swiper?.on("slideChange", () => {
