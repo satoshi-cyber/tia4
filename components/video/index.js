@@ -96,7 +96,7 @@ const RecordView = () => {
                   autoPlay
                 />
               ) : (
-                <VideoPreview stream={previewStream} />
+                <VideoPreview stream={previewStream} key={Math.random()} />
               )}
             </div>
           }
@@ -114,7 +114,7 @@ const RecordView = () => {
                   autoPlay
                 />
               ) : (
-                <VideoPreview stream={previewStream} />
+                <VideoPreview stream={previewStream} key={Math.random()} />
               )}
             </div>
           }
