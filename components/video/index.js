@@ -25,7 +25,13 @@ const VideoPreview = ({ stream }) => {
     return null;
   }
   return (
-    <video ref={videoRef} className={videoClassName} playsInline autoPlay />
+    <video
+      ref={videoRef}
+      className={videoClassName}
+      playsInline
+      autoPlay
+      muted
+    />
   );
 };
 
@@ -81,7 +87,6 @@ const RecordView = () => {
           {
             <div className="flex flex-1 w-full h-screen relative">
               <VideoPreview stream={previewStream} />
-              {mediaUrls[0]}
               {mediaUrls[0] && status === "stopped" && (
                 <video
                   src={mediaUrls[0]}
@@ -99,7 +104,6 @@ const RecordView = () => {
           {
             <div className="flex flex-1 w-full h-screen relative">
               <VideoPreview stream={previewStream} />
-              {mediaUrls[1]}
               {mediaUrls[1] && status === "stopped" && (
                 <video
                   src={mediaUrls[1]}
