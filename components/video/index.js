@@ -16,7 +16,7 @@ const VideoPreview = ({ stream }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    if (videoRef.current && stream) {
+    if (videoRef.current && stream?.id) {
       videoRef.current.srcObject = stream;
     }
   }, [stream]);
@@ -159,7 +159,7 @@ const RecordView = () => {
                   autoPlay
                 />
               ) : (
-                <VideoPreview key={previewStream?.id} stream={previewStream} />
+                <VideoPreview key={Math.random()} stream={previewStream} />
               )}
             </div>
           }
@@ -177,7 +177,7 @@ const RecordView = () => {
                   autoPlay
                 />
               ) : (
-                <VideoPreview key={previewStream?.id} stream={previewStream} />
+                <VideoPreview key={Math.random()} stream={previewStream} />
               )}
             </div>
           }
