@@ -53,7 +53,7 @@ const Buttons = ({
   }, [swiper]);
 
   return (
-    <div className="bg-purple-800 p-4 rounded-full fixed bg-red-200 z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
+    <div className="bg-purple-800 p-4 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
       {!mediaUrls[realIndex] && status !== "recording" && (
         <button
           onClick={handleStartRecording}
