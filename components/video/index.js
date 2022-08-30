@@ -9,8 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
 
-const videoClassName =
-  "absolute w-full h-screen min-w-full min-h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover";
+const videoClassName = "absolute w-full h-screen object-cover";
 
 const VideoPreview = ({ stream }) => {
   const videoRef = useRef(null);
@@ -58,6 +57,7 @@ const RecordView = () => {
 
   return (
     <>
+      <VideoPreview stream={previewStream} />
       <Swiper
         ref={swipeRef}
         pagination={{
@@ -66,46 +66,41 @@ const RecordView = () => {
         navigation={true}
         effect={"creative"}
         modules={[Pagination, Navigation, EffectCreative]}
-        creativeEffect={{
-          prev: {
-            translate: [0, 0, -400],
-            shadow: true,
-          },
-          next: {
-            translate: ["100%", 0, 0],
-          },
-        }}
-        className="absolute flex flex-1 w-full z-10 bg-gray-800"
+        className="absolute flex flex-1 w-full z-10"
       >
         <SwiperSlide>
-          <VideoPreview stream={previewStream} />
-          {mediaUrls[0] && status === "stopped" && (
+          {
             <div className="flex flex-1 w-full">
-              <video
-                src={mediaUrls[0]}
-                className="w-full h-screen object-cover"
-                muted
-                playsInline
-                loop
-                autoPlay
-              />
+              <VideoPreview stream={previewStream} />
+              {mediaUrls[0] && status === "stopped" && (
+                <video
+                  src={mediaUrls[0]}
+                  className="absolute w-full h-screen object-cover"
+                  muted
+                  playsInline
+                  loop
+                  autoPlay
+                />
+              )}
             </div>
-          )}
+          }
         </SwiperSlide>
         <SwiperSlide>
-          <VideoPreview stream={previewStream} />
-          {mediaUrls[1] && status === "stopped" && (
+          {
             <div className="flex flex-1 w-full">
-              <video
-                src={mediaUrls[1]}
-                muted
-                className="w-full h-screen object-cover"
-                playsInline
-                loop
-                autoPlay
-              />
+              <VideoPreview stream={previewStream} />
+              {mediaUrls[1] && status === "stopped" && (
+                <video
+                  src={mediaUrls[1]}
+                  className="absolute w-full h-screen object-cover"
+                  muted
+                  playsInline
+                  loop
+                  autoPlay
+                />
+              )}
             </div>
-          )}
+          }
         </SwiperSlide>
       </Swiper>
       <div className="absolute bg-red-200 z-20">
