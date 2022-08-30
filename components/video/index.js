@@ -112,7 +112,7 @@ const VidePlayer = ({ src, index, swiper }) => {
       playsInline
       loop
       autoPlay
-      muted
+      muted={realIndex !== index}
     />
   );
 };
@@ -194,7 +194,10 @@ const RecordView = () => {
                     src={mediaUrls[index]}
                   />
                 ) : (
-                  <VideoPreview key={previewStream.id} stream={previewStream} />
+                  <VideoPreview
+                    key={previewStream?.id}
+                    stream={previewStream}
+                  />
                 )}
                 <p className="absolute w-[80vw] lg:w-[400px] z-10 text-3xl text-gray-100 text-center mt-10 pointer-events-none drop-shadow-md translate-z-0">
                   {question}
