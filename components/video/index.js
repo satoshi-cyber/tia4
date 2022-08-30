@@ -111,7 +111,7 @@ const VidePlayer = ({ src, swiper }) => {
       autoPlay
       playsInline
       loop
-      muted
+      muted={false}
     />
   );
 };
