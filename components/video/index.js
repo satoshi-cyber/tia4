@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { useReactMediaRecorder } from "./media";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Logo from "../../public/logo-white.svg";
 
 import { Pagination, Navigation, EffectCreative } from "swiper";
 
@@ -53,7 +54,7 @@ const Buttons = ({
   }, [swiper]);
 
   return (
-    <div className="bg-purple-800 p-4 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
+    <div className="bg-purple-800 p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
       {!mediaUrls[realIndex] && status !== "recording" && (
         <button
           onClick={handleStartRecording}
@@ -181,6 +182,7 @@ const RecordView = () => {
           }
         </SwiperSlide>
       </Swiper>
+      <Logo className="absolute z-20 top-6 left-6" width={120} />
       <Buttons
         swiper={swipeRef.current?.swiper}
         status={status}
