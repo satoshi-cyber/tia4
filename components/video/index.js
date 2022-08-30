@@ -86,7 +86,7 @@ const RecordView = () => {
         <SwiperSlide>
           {
             <div className="flex flex-1 w-full h-screen relative">
-              <VideoPreview stream={previewStream} />
+              {!mediaUrls[0] && <VideoPreview stream={previewStream} />}
               {mediaUrls[0] && status === "stopped" && (
                 <video
                   src={mediaUrls[0]}
@@ -103,7 +103,7 @@ const RecordView = () => {
         <SwiperSlide>
           {
             <div className="flex flex-1 w-full h-screen relative">
-              <VideoPreview stream={previewStream} />
+              {!mediaUrls[1] && <VideoPreview stream={previewStream} />}
               {mediaUrls[1] && status === "stopped" && (
                 <video
                   src={mediaUrls[1]}
