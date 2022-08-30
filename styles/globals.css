@@ -17,3 +17,8 @@ body,
 .swiper-slide{
   transform: translateZ(0);
 }
+
+:root {
+  --swiper-theme-color: #fff !important;
+}
+

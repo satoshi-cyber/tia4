@@ -9,6 +9,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
 
+const QUESTIONS = [
+  "Tell Me About Yourself",
+  "Why Are You the Best Person for the Job?",
+  "Why Do You Want This Job?",
+  "How Has Your Experience Prepared You for This Role?",
+  "Why Are You Leaving (or Have Left) Your Job?",
+];
+
 const Icon = ({ name, ...props }) => {
   const IconComponent = Icons[name];
 
@@ -77,9 +85,9 @@ const Buttons = ({
       {mediaUrls[realIndex] && (
         <>
           <button onClick={handleClearRecording}>
-            <Icon name="HiTrash" size={40} className="m-[5px]" />
+            <Icon name="HiTrash" size={40} className="m-[5px] " />
           </button>
-          <button onClick={handleHandleNext} className="ml-[10px] m-[5px]">
+          <button onClick={handleHandleNext} className="ml-[10px] m-[5px] ">
             <Icon name="HiCheck" size={40} />
           </button>
         </>
@@ -90,7 +98,8 @@ const Buttons = ({
 
 const RecordView = () => {
   const swipeRef = useRef();
-  const [mediaUrls, setMediaUrls] = useState([,]);
+  const questions = QUESTIONS;
+  const [mediaUrls, setMediaUrls] = useState([...QUESTIONS].fill(undefined));
 
   const onStop = (boblUrl) => {
     const realIndex = swipeRef.current?.swiper?.realIndex;
@@ -153,42 +162,29 @@ const RecordView = () => {
         modules={[Pagination, Navigation, EffectCreative]}
         className="absolute flex flex-1 w-full z-10 bg-gray-800"
       >
-        <SwiperSlide>
-          {
-            <div className="flex flex-1 w-full h-screen relative">
-              {mediaUrls[0] && status === "stopped" ? (
-                <video
-                  src={mediaUrls[0]}
-                  className={videoClassName}
-                  muted
-                  playsInline
-                  loop
-                  autoPlay
-                />
-              ) : (
-                <VideoPreview stream={previewStream} />
-              )}
-            </div>
-          }
-        </SwiperSlide>
-        <SwiperSlide>
-          {
-            <div className="flex flex-1 w-full h-screen relative">
-              {mediaUrls[1] && status === "stopped" ? (
-                <video
-                  src={mediaUrls[1]}
-                  className={videoClassName}
-                  muted
-                  playsInline
-                  loop
-                  autoPlay
-                />
-              ) : (
-                <VideoPreview stream={previewStream} />
-              )}
-            </div>
-          }
-        </SwiperSlide>
+        {questions.map((question, index) => (
+          <SwiperSlide key={index}>
+            {
+              <div className="flex flex-1 w-full h-screen relative justify-center">
+                {mediaUrls[index] && status === "stopped" ? (
+                  <video
+                    src={mediaUrls[index]}
+                    className={videoClassName}
+                    muted
+                    playsInline
+                    loop
+                    autoPlay
+                  />
+                ) : (
+                  <VideoPreview stream={previewStream} />
+                )}
+                <p className="w-[80vw] lg:w-[400px] z-10 text-3xl text-gray-100 text-center mt-10 pointer-events-none">
+                  {question}
+                </p>
+              </div>
+            }
+          </SwiperSlide>
+        ))}
       </Swiper>
       <Buttons
         swiper={swipeRef.current?.swiper}
