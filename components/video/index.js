@@ -112,7 +112,7 @@ const VidePlayer = ({ src, index, swiper }) => {
       playsInline
       loop
       autoPlay
-      muted={realIndex !== index}
+      muted={realIndex !== index ? true : ""}
     />
   );
 };
@@ -159,8 +159,6 @@ const RecordView = () => {
   const handleHandleNext = () => {
     swipeRef.current.swiper.slideNext();
   };
-
-  console.log(previewStream);
 
   return (
     <>
