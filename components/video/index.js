@@ -19,7 +19,7 @@ const VideoPreview = ({ stream }) => {
     if (videoRef.current && stream) {
       videoRef.current.srcObject = stream;
     }
-  }, [stream, stream?.id]);
+  }, [stream]);
 
   if (!stream) {
     return null;
@@ -159,7 +159,7 @@ const RecordView = () => {
                   autoPlay
                 />
               ) : (
-                <VideoPreview stream={previewStream} />
+                <VideoPreview key={previewStream?.id} stream={previewStream} />
               )}
             </div>
           }
@@ -177,7 +177,7 @@ const RecordView = () => {
                   autoPlay
                 />
               ) : (
-                <VideoPreview stream={previewStream} />
+                <VideoPreview key={previewStream?.id} stream={previewStream} />
               )}
             </div>
           }
