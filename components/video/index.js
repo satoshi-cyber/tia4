@@ -24,7 +24,7 @@ const Icon = ({ name, ...props }) => {
 };
 
 const videoClassName =
-  "absolute w-full h-screen min-w-full min-h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover";
+  "absolute w-screen h-screen top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover";
 
 const VideoPreview = ({ stream }) => {
   const videoRef = useRef(null);
