@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
 import { Pagination, Navigation, EffectCreative } from "swiper";
 
@@ -35,13 +35,56 @@ const VideoPreview = ({ stream }) => {
   );
 };
 
+const Buttons = ({
+  status,
+  mediaUrls,
+  handleStartRecording,
+  handleStopRecording,
+  handleClearRecording,
+  handleHandleNext,
+  swiper,
+}) => {
+  const [realIndex, setRealIndex] = useState(swiper?.realIndex);
+
+  useEffect(() => {
+    swiper?.on("slideChange", () => {
+      setRealIndex(swiper.realIndex);
+    });
+  }, [swiper]);
+
+  return (
+    <div className="bg-purple-800 p-4 rounded-full fixed bg-red-200 z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
+      {!mediaUrls[realIndex] && status !== "recording" && (
+        <button
+          onClick={handleStartRecording}
+          className="bg-red-600 w-[50px] h-[50px] rounded-full"
+        />
+      )}
+
+      {status == "recording" && (
+        <button
+          onClick={handleStopRecording}
+          className="bg-red-600 w-[40px] h-[40px] rounded-md shadow-full m-[5px]"
+        />
+      )}
+
+      {mediaUrls[realIndex] && (
+        <>
+          <button onClick={handleClearRecording}>Clear Recording</button>
+          <button onClick={handleHandleNext} className="ml-2">
+            Next
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
+
 const RecordView = () => {
   const swipeRef = useRef();
   const [mediaUrls, setMediaUrls] = useState([,]);
 
-  const [realIndex, setRealIndex] = useState(
-    swipeRef.current?.swiper?.realIndex
-  );
+  const realIndex = swipeRef.current?.swiper?.realIndex;
 
   const onStop = (boblUrl) => {
     mediaUrls[realIndex] = boblUrl;
@@ -100,7 +143,6 @@ const RecordView = () => {
         }}
         modules={[Pagination, Navigation, EffectCreative]}
         className="absolute flex flex-1 w-full z-10 bg-gray-800"
-        onSlideChange={(swiper) => setRealIndex(swiper.realIndex)}
       >
         <SwiperSlide>
           {
@@ -139,31 +181,16 @@ const RecordView = () => {
           }
         </SwiperSlide>
       </Swiper>
+      <Buttons
+        swiper={swipeRef.current?.swiper}
+        status={status}
+        mediaUrls={mediaUrls}
+        handleStartRecording={handleStartRecording}
+        handleStopRecording={handleStopRecording}
+        handleClearRecording={handleClearRecording}
+        handleHandleNext={handleHandleNext}
+      />
       <div className="fixed bg-red-200 z-20 right-0">{status}</div>
-      <div className="bg-purple-800 p-4 rounded-full fixed bg-red-200 z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
-        {!mediaUrls[realIndex] && status !== "recording" && (
-          <button
-            onClick={handleStartRecording}
-            className="bg-red-600 w-[50px] h-[50px] rounded-full"
-          />
-        )}
-
-        {status == "recording" && (
-          <button
-            onClick={handleStopRecording}
-            className="bg-red-600 w-[40px] h-[40px] rounded-md shadow-full m-[5px]"
-          />
-        )}
-
-        {mediaUrls[realIndex] && (
-          <>
-            <button onClick={handleClearRecording}>Clear Recording</button>
-            <button onClick={handleHandleNext} className="ml-2">
-              Next
-            </button>
-          </>
-        )}
-      </div>
     </>
   );
 };
