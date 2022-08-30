@@ -96,6 +96,27 @@ const Buttons = ({
   );
 };
 
+const VidePlayer = ({ src, index, swiper }) => {
+  const [realIndex, setRealIndex] = useState(swiper?.realIndex || 0);
+
+  useEffect(() => {
+    swiper?.on("slideChange", () => {
+      setRealIndex(swiper.realIndex);
+    });
+  }, [swiper]);
+
+  return (
+    <video
+      src={src}
+      className={videoClassName}
+      playsInline
+      loop
+      autoPlay
+      muted={realIndex !== index}
+    />
+  );
+};
+
 const RecordView = () => {
   const swipeRef = useRef();
   const questions = QUESTIONS;
@@ -167,13 +188,10 @@ const RecordView = () => {
             {
               <div className="flex flex-1 w-full h-screen relative justify-center">
                 {mediaUrls[index] && status === "stopped" ? (
-                  <video
+                  <VidePlayer
+                    swiper={swipeRef.current?.swiper}
+                    index={index}
                     src={mediaUrls[index]}
-                    className={videoClassName}
-                    muted
-                    playsInline
-                    loop
-                    autoPlay
                   />
                 ) : (
                   <VideoPreview stream={previewStream} />
