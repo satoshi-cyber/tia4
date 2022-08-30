@@ -110,6 +110,7 @@ const VidePlayer = ({ src, index, swiper }) => {
     <video
       src={src}
       className={videoClassName}
+      autoPlay
       playsInline
       controls
       loop
