@@ -39,8 +39,12 @@ const RecordView = () => {
   const swipeRef = useRef();
   const [mediaUrls, setMediaUrls] = useState([,]);
 
+  const [realIndex, setRealIndex] = useState(
+    swipeRef.current?.swiper?.realIndex
+  );
+
   const onStop = (boblUrl) => {
-    mediaUrls[swipeRef.current?.swiper?.realIndex] = boblUrl;
+    mediaUrls[realIndex] = boblUrl;
     setMediaUrls(mediaUrls);
   };
 
@@ -60,6 +64,20 @@ const RecordView = () => {
   const handleStopRecording = () => {
     swipeRef.current?.swiper?.enable();
     stopRecording();
+  };
+
+  const handleClearRecording = () => {
+    const newMediaUrls = mediaUrls.map((value, i) =>
+      i === realIndex ? null : value
+    );
+
+    setMediaUrls(newMediaUrls);
+
+    console.log("test");
+  };
+
+  const handleHandleNext = () => {
+    swipeRef.current.swiper.slideNext();
   };
 
   return (
@@ -82,6 +100,7 @@ const RecordView = () => {
         }}
         modules={[Pagination, Navigation, EffectCreative]}
         className="absolute flex flex-1 w-full z-10 bg-gray-800"
+        onSlideChange={(swiper) => setRealIndex(swiper.realIndex)}
       >
         <SwiperSlide>
           {
@@ -120,10 +139,30 @@ const RecordView = () => {
           }
         </SwiperSlide>
       </Swiper>
-      <div className="absolute bg-red-200 z-20">
-        <p>{status}</p>
-        <button onClick={handleStartRecording}>Start Recording</button>
-        <button onClick={handleStopRecording}>Stop Recording</button>
+      <div className="fixed bg-red-200 z-20 right-0">{status}</div>
+      <div className="bg-purple-800 p-4 rounded-full fixed bg-red-200 z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
+        {!mediaUrls[realIndex] && status !== "recording" && (
+          <button
+            onClick={handleStartRecording}
+            className="bg-red-600 w-[50px] h-[50px] rounded-full"
+          />
+        )}
+
+        {status == "recording" && (
+          <button
+            onClick={handleStopRecording}
+            className="bg-red-600 w-[40px] h-[40px] rounded-md shadow-full m-[5px]"
+          />
+        )}
+
+        {mediaUrls[realIndex] && (
+          <>
+            <button onClick={handleClearRecording}>Clear Recording</button>
+            <button onClick={handleHandleNext} className="ml-2">
+              Next
+            </button>
+          </>
+        )}
       </div>
     </>
   );
