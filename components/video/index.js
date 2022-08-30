@@ -1,14 +1,19 @@
 import { useRef, useEffect, useState } from "react";
 import { useReactMediaRecorder } from "./media";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Logo from "../../public/logo-white.svg";
-
+import * as Icons from "react-icons/hi";
 import { Pagination, Navigation, EffectCreative } from "swiper";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
+
+const Icon = ({ name, ...props }) => {
+  const IconComponent = Icons[name];
+
+  return <IconComponent {...props} />;
+};
 
 const videoClassName =
   "absolute w-full h-screen min-w-full min-h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover";
@@ -54,7 +59,7 @@ const Buttons = ({
   }, [swiper]);
 
   return (
-    <div className="bg-purple-800 p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
+    <div className="bg-gray-100 p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
       {!mediaUrls[realIndex] && status !== "recording" && (
         <button
           onClick={handleStartRecording}
@@ -71,9 +76,11 @@ const Buttons = ({
 
       {mediaUrls[realIndex] && (
         <>
-          <button onClick={handleClearRecording}>Clear Recording</button>
-          <button onClick={handleHandleNext} className="ml-2">
-            Next
+          <button onClick={handleClearRecording}>
+            <Icon name="HiTrash" size={40} className="m-[5px]" />
+          </button>
+          <button onClick={handleHandleNext} className="ml-[10px] m-[5px]">
+            <Icon name="HiCheck" size={40} />
           </button>
         </>
       )}
@@ -85,9 +92,8 @@ const RecordView = () => {
   const swipeRef = useRef();
   const [mediaUrls, setMediaUrls] = useState([,]);
 
-  const realIndex = swipeRef.current?.swiper?.realIndex;
-
   const onStop = (boblUrl) => {
+    const realIndex = swipeRef.current?.swiper?.realIndex;
     mediaUrls[realIndex] = boblUrl;
     setMediaUrls(mediaUrls);
   };
@@ -111,6 +117,8 @@ const RecordView = () => {
   };
 
   const handleClearRecording = () => {
+    const realIndex = swipeRef.current?.swiper?.realIndex;
+
     const newMediaUrls = mediaUrls.map((value, i) =>
       i === realIndex ? null : value
     );
@@ -182,7 +190,6 @@ const RecordView = () => {
           }
         </SwiperSlide>
       </Swiper>
-      <Logo className="absolute z-20 top-6 left-6" width={120} />
       <Buttons
         swiper={swipeRef.current?.swiper}
         status={status}
