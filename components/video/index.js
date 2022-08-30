@@ -170,6 +170,7 @@ const RecordView = () => {
                     className={videoClassName}
                     muted
                     playsInline
+                    controls
                     autoPlay
                     loop
                   />
