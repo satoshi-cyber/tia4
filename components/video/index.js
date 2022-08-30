@@ -97,9 +97,7 @@ const Buttons = ({
   );
 };
 
-const VidePlayer = ({ src, index, swiper }) => {
-  const [realIndex, setRealIndex] = useState(swiper?.realIndex || 0);
-
+const VidePlayer = ({ src, swiper }) => {
   useLayoutEffect(() => {
     swiper?.on("slideChange", () => {
       setRealIndex(swiper.realIndex);
@@ -112,9 +110,8 @@ const VidePlayer = ({ src, index, swiper }) => {
       className={videoClassName}
       autoPlay
       playsInline
-      controls
       loop
-      muted={realIndex === index ? "" : true}
+      muted
     />
   );
 };
