@@ -112,7 +112,8 @@ const VidePlayer = ({ src, index, swiper }) => {
       playsInline
       loop
       autoPlay
-      muted={realIndex !== index ? true : ""}
+      muted={realIndex !== index}
+      controls=""
     />
   );
 };
