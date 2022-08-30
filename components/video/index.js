@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
-import { useReactMediaRecorder } from "react-media-recorder";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { useReactMediaRecorder } from "./media";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Pagination, Navigation, EffectCreative } from "swiper";
 
@@ -115,8 +115,6 @@ const RecordView = () => {
     );
 
     setMediaUrls(newMediaUrls);
-
-    console.log("test");
   };
 
   const handleHandleNext = () => {
@@ -159,7 +157,7 @@ const RecordView = () => {
                   autoPlay
                 />
               ) : (
-                <VideoPreview key={Math.random()} stream={previewStream} />
+                <VideoPreview stream={previewStream} />
               )}
             </div>
           }
@@ -177,7 +175,7 @@ const RecordView = () => {
                   autoPlay
                 />
               ) : (
-                <VideoPreview key={Math.random()} stream={previewStream} />
+                <VideoPreview stream={previewStream} />
               )}
             </div>
           }
