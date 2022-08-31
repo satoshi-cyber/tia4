@@ -3,12 +3,12 @@ import { useReactMediaRecorder } from "./media";
 import { Swiper, SwiperSlide } from "swiper/react";
 import * as Icons from "react-icons/hi";
 import { Pagination, Navigation, EffectCreative } from "swiper";
+import { useLayoutEffect } from "react";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
-import { useLayoutEffect } from "react";
 
 const QUESTIONS = [
   "Tell Me About Yourself",
@@ -98,22 +98,40 @@ const Buttons = ({
 };
 
 const VidePlayer = ({ src, swiper }) => {
-  useLayoutEffect(() => {
+  const video = useRef();
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
     swiper?.on("slideChange", () => {
-      setRealIndex(swiper.realIndex);
+      video.current.pause();
+      setPlaying(false);
     });
   }, [swiper]);
 
+  const handlePlay = () => {
+    video.current.play();
+    setPlaying(true);
+  };
+
   return (
-    <video
-      src={src}
-      className={videoClassName}
-      autoPlay
-      playsInline
-      loop
-      muted={false}
-      controls
-    />
+    <>
+      <video
+        ref={video}
+        src={src}
+        className={videoClassName}
+        playsInline
+        loop
+        muted={false}
+      />
+      {!playing && (
+        <button
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          onClick={handlePlay}
+        >
+          <Icon name="HiPlay" size={100} className="text-gray-100" />
+        </button>
+      )}
+    </>
   );
 };
 
@@ -188,7 +206,6 @@ const RecordView = () => {
                 {mediaUrls[index] && status === "stopped" ? (
                   <VidePlayer
                     swiper={swipeRef.current?.swiper}
-                    index={index}
                     src={mediaUrls[index]}
                   />
                 ) : (
