@@ -109,9 +109,14 @@ const VidePlayer = ({ src, swiper }) => {
   }, [swiper]);
 
   const handlePlay = () => {
-    video.current.play();
-    setPlaying(true);
+    if (video.current.play()) {
+      setPlaying(true);
+    }
   };
+
+  useEffect(() => {
+    handlePlay();
+  }, []);
 
   return (
     <>
@@ -206,6 +211,7 @@ const RecordView = () => {
                 {mediaUrls[index] && status === "stopped" ? (
                   <VidePlayer
                     swiper={swipeRef.current?.swiper}
+                    index={index}
                     src={mediaUrls[index]}
                   />
                 ) : (
