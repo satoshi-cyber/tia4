@@ -126,7 +126,8 @@ const VidePlayer = ({ src, swiper }) => {
         className={videoClassName}
         playsInline
         loop
-        muted={false}
+        autoPlay
+        muted
       />
       {!playing && (
         <button
