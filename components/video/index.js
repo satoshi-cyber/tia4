@@ -105,6 +105,10 @@ const VidePlayer = ({ src }) => {
 
   useEffect(() => {
     swiper.on("slideChange", () => {
+      if (!video.current) {
+        return;
+      }
+      console.log("slide changed");
       video.current.pause();
       setPlaying(false);
     });
