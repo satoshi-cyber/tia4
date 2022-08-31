@@ -130,7 +130,6 @@ const VidePlayer = ({ src, swiper }) => {
         playsInline
         loop
         autoPlay
-        muted
       />
       {!playing && (
         <button
