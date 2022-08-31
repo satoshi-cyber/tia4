@@ -3,7 +3,7 @@ import { useReactMediaRecorder } from "./media";
 import { Swiper, SwiperSlide } from "swiper/react";
 import * as Icons from "react-icons/hi";
 import { Pagination, Navigation, EffectCreative } from "swiper";
-import { useLayoutEffect } from "react";
+import canAutoPlay from "can-autoplay";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -109,13 +109,16 @@ const VidePlayer = ({ src, swiper }) => {
   }, [swiper]);
 
   const handlePlay = () => {
-    if (video.current.play()) {
-      setPlaying(true);
-    }
+    video.current.play();
+    setPlaying(true);
   };
 
   useEffect(() => {
-    handlePlay();
+    canAutoPlay.video().then(({ result }) => {
+      if (result) {
+        handlePlay();
+      }
+    });
   }, []);
 
   return (
