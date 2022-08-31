@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { useReactMediaRecorder } from "./media";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import * as Icons from "react-icons/hi";
 import { Pagination, Navigation, EffectCreative } from "swiper";
 import canAutoPlay from "can-autoplay";
@@ -97,12 +97,14 @@ const Buttons = ({
   );
 };
 
-const VidePlayer = ({ src, swiper }) => {
+const VidePlayer = ({ src }) => {
+  const swiper = useSwiper();
+
   const video = useRef();
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    swiper?.on("slideChange", () => {
+    swiper.on("slideChange", () => {
       video.current.pause();
       setPlaying(false);
     });
@@ -212,11 +214,7 @@ const RecordView = () => {
             {
               <div className="flex flex-1 w-full h-screen relative justify-center">
                 {mediaUrls[index] && status === "stopped" ? (
-                  <VidePlayer
-                    swiper={swipeRef.current?.swiper}
-                    index={index}
-                    src={mediaUrls[index]}
-                  />
+                  <VidePlayer src={mediaUrls[index]} />
                 ) : (
                   <VideoPreview
                     key={previewStream?.id}
