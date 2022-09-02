@@ -181,6 +181,8 @@ const VidePlayer = ({ id, index }) => {
         className={videoClassName}
         playsInline
         loop
+        muted={!playing}
+        autoPlay
       />
       {!playing && (
         <button
