@@ -126,9 +126,9 @@ const VidePlayer = ({ id, index }) => {
     }
 
     swiper.on("slideChange", () => {
-      // if (!video.current) {
-      //   return;
-      // }
+      if (!video.current) {
+        return;
+      }
 
       // if (index === swiper.realIndex) {
       //   canAutoPlay.video().then(({ result }) => {
