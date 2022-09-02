@@ -112,7 +112,7 @@ const VidePlayer = ({ id, index }) => {
   const [url, setUrl] = useState(undefined);
 
   useEffect(() => {
-    get(id).then((u) => setUrl(URL.createObjectURL(u) + "#t=0.001"));
+    get(id).then((u) => setUrl(URL.createObjectURL(u)));
   }, [id]);
 
   const swiper = useSwiper();
