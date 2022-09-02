@@ -165,6 +165,12 @@ const VidePlayer = ({ id, index }) => {
     setPlaying(true);
   };
 
+  useEffect(() => {
+    if (!url || !video.current) return;
+
+    video.current.currentTime = 0.01;
+  }, [url]);
+
   if (!url) return null;
 
   return (
