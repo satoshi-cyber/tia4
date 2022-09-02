@@ -49,6 +49,7 @@ const VideoPreview = ({ stream }) => {
   if (!stream) {
     return null;
   }
+
   return (
     <video
       ref={videoRef}
@@ -164,6 +165,8 @@ const VidePlayer = ({ id, index }) => {
     setPlaying(true);
   };
 
+  if (!url) return null;
+
   return (
     <>
       <video
@@ -176,7 +179,7 @@ const VidePlayer = ({ id, index }) => {
       />
       {!playing && (
         <button
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 m-10 "
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 flex items-center justify-center"
           onClick={handlePlay}
         >
           <Icon name="HiPlay" size={100} className="text-gray-100" />
