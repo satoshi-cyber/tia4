@@ -291,7 +291,9 @@ const RecordView = () => {
         handleClearRecording={handleClearRecording}
         handleHandleNext={handleHandleNext}
       />
-      <div className="fixed bg-red-200 z-20 right-0">{status}</div>
+      <div className="fixed bg-red-200 z-20 right-0">
+        {JSON.stringify(mediaUrls)}
+      </div>
     </>
   );
 };
