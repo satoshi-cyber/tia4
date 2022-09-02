@@ -34,6 +34,16 @@ const Icon = ({ name, ...props }) => {
   return <IconComponent {...props} />;
 };
 
+const blobToBase64 = (blob) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(blob);
+  return new Promise((resolve) => {
+    reader.onloadend = () => {
+      resolve(reader.result);
+    };
+  });
+};
+
 const videoClassName =
   "absolute w-screen h-screen top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover";
 
@@ -112,7 +122,7 @@ const VidePlayer = ({ id, index }) => {
   const [url, setUrl] = useState(undefined);
 
   useEffect(() => {
-    get(id).then((u) => setUrl(URL.createObjectURL(u)));
+    get(id).then((u) => setUrl(u));
   }, [id]);
 
   const swiper = useSwiper();
@@ -204,9 +214,11 @@ const RecordView = () => {
       swipeRef.current?.swiper?.realIndex === index ? true : value
     );
 
-    set(QUESTIONS_IDS[swipeRef.current?.swiper?.realIndex], blob);
+    blobToBase64(blob).then((res) => {
+      set(QUESTIONS_IDS[swipeRef.current?.swiper?.realIndex], res);
 
-    setMediaUrls(newMediaUrls);
+      setMediaUrls(newMediaUrls);
+    });
   };
 
   const { status, startRecording, stopRecording, previewStream } =
