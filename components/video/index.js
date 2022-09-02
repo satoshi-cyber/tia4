@@ -120,15 +120,17 @@ const VidePlayer = ({ base64, index }) => {
     }
 
     swiper.on("slideChange", () => {
+      if (!video.current) {
+        return;
+      }
+
       if (index === swiper.realIndex) {
         canAutoPlay.video().then(({ result }) => {
           if (result) {
             handlePlay();
           }
         });
-      }
 
-      if (!video.current) {
         return;
       }
 
