@@ -126,39 +126,39 @@ const VidePlayer = ({ id, index }) => {
     }
 
     swiper.on("slideChange", () => {
-      if (!video.current) {
-        return;
-      }
+      // if (!video.current) {
+      //   return;
+      // }
 
-      if (index === swiper.realIndex) {
-        canAutoPlay.video().then(({ result }) => {
-          if (result) {
-            handlePlay();
-          }
-        });
+      // if (index === swiper.realIndex) {
+      //   canAutoPlay.video().then(({ result }) => {
+      //     if (result) {
+      //       handlePlay();
+      //     }
+      //   });
 
-        return;
-      }
+      //   return;
+      // }
 
       video.current.pause();
       setPlaying(false);
     });
   }, [index, swiper]);
 
-  useLayoutEffect(() => {
-    if (!url) return;
+  // useLayoutEffect(() => {
+  //   if (!url) return;
 
-    if (index === swiper.realIndex) {
-      canAutoPlay.video().then(({ result }) => {
-        if (result) {
-          handlePlay();
-        }
-      });
-    } else {
-      video.current.pause();
-      setPlaying(false);
-    }
-  }, [index, swiper.realIndex, url]);
+  //   if (index === swiper.realIndex) {
+  //     canAutoPlay.video().then(({ result }) => {
+  //       if (result) {
+  //         handlePlay();
+  //       }
+  //     });
+  //   } else {
+  //     video.current.pause();
+  //     setPlaying(false);
+  //   }
+  // }, [index, swiper.realIndex, url]);
 
   const handlePlay = () => {
     video.current.play();
