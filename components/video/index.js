@@ -112,7 +112,7 @@ const VidePlayer = ({ id, index }) => {
   const [url, setUrl] = useState(undefined);
 
   useEffect(() => {
-    get(id).then((u) => setUrl(URL.createObjectURL(u)));
+    get(id).then((u) => setUrl(URL.createObjectURL(u) + "#t=0.001"));
   }, [id]);
 
   const swiper = useSwiper();
@@ -170,7 +170,7 @@ const VidePlayer = ({ id, index }) => {
   return (
     <>
       <video
-        preload
+        preload="auto"
         ref={video}
         src={url}
         className={videoClassName}
