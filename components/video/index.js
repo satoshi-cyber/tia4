@@ -267,7 +267,7 @@ const RecordView = () => {
         {questions.map((question, index) => (
           <SwiperSlide key={index}>
             {
-              <div className="flex flex-1 w-full h-screen relative justify-center bg-gray-600">
+              <div className="flex flex-1 w-full h-screen relative justify-center bg-gray-900">
                 {mediaUrls[index] && status !== "recording" ? (
                   <VidePlayer id={QUESTIONS_IDS[index]} index={index} />
                 ) : (
