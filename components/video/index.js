@@ -189,7 +189,7 @@ const VidePlayer = ({ id, index }) => {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 flex items-center justify-center"
           onClick={handlePlay}
         >
-          <Icon name="HiPlay" size={100} className="text-gray-100" />
+          <Icon name="HiVolumeUp" size={100} className="text-gray-100" />
         </button>
       )}
     </>
