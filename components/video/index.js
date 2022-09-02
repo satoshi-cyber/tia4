@@ -130,18 +130,13 @@ const VidePlayer = ({ id, index }) => {
         return;
       }
 
-      // if (index === swiper.realIndex) {
-      //   canAutoPlay.video().then(({ result }) => {
-      //     if (result) {
-      //       handlePlay();
-      //     }
-      //   });
-
-      //   return;
-      // }
-
-      video.current.pause();
       setPlaying(false);
+
+      if (index === swiper.realIndex) {
+        video.current.play();
+      } else {
+        video.current.pause();
+      }
     });
   }, [index, swiper]);
 
