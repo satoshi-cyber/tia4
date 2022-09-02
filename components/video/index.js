@@ -170,6 +170,7 @@ const VidePlayer = ({ id, index }) => {
   return (
     <>
       <video
+        preload="auto"
         ref={video}
         src={url}
         className={videoClassName}
