@@ -1,10 +1,11 @@
-import { useRef, useEffect, useState, useMemo, useLayoutEffect } from "react";
+import { useRef, useEffect, useState, useLayoutEffect } from "react";
 import { useReactMediaRecorder } from "./media";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import * as Icons from "react-icons/hi";
 import { Pagination, Navigation, EffectCreative } from "swiper";
 import canAutoPlay from "can-autoplay";
 import useLocalStorage from "use-local-storage";
+import { get, set, del } from "idb-keyval";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -19,15 +20,13 @@ const QUESTIONS = [
   "Why Are You Leaving (or Have Left) Your Job?",
 ];
 
-const blobToBase64 = (blob) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(blob);
-  return new Promise((resolve) => {
-    reader.onloadend = () => {
-      resolve(reader.result);
-    };
-  });
-};
+const QUESTIONS_IDS = [
+  "ce82c314-656a-469a-acd8-5d0da3a32b3f",
+  "eb8ca117-57ff-4d46-9c28-6c9b64506d98",
+  "600795a7-bcf8-4bda-bd94-7b2025d0f2aa",
+  "a4495041-b0de-4d96-8de8-cb8f4287ff7b",
+  "3d5ff433-2918-43a0-98f6-e09ef3f940e8",
+];
 
 const Icon = ({ name, ...props }) => {
   const IconComponent = Icons[name];
@@ -108,14 +107,20 @@ const Buttons = ({
   );
 };
 
-const VidePlayer = ({ base64, index }) => {
+const VidePlayer = ({ id, index }) => {
+  const [url, setUrl] = useState(undefined);
+
+  useEffect(() => {
+    get(id).then((u) => setUrl(URL.createObjectURL(u)));
+  }, [id]);
+
   const swiper = useSwiper();
 
   const video = useRef();
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    if (!swiper) {
+    if (!swiper && !url) {
       return;
     }
 
@@ -137,9 +142,11 @@ const VidePlayer = ({ base64, index }) => {
       video.current.pause();
       setPlaying(false);
     });
-  }, [index, swiper]);
+  }, [index, swiper, url]);
 
   useLayoutEffect(() => {
+    if (!url) return;
+
     if (index === swiper.realIndex) {
       canAutoPlay.video().then(({ result }) => {
         if (result) {
@@ -150,7 +157,7 @@ const VidePlayer = ({ base64, index }) => {
       video.current.pause();
       setPlaying(false);
     }
-  }, [index, swiper.realIndex]);
+  }, [index, swiper.realIndex, url]);
 
   const handlePlay = () => {
     video.current.play();
@@ -161,7 +168,7 @@ const VidePlayer = ({ base64, index }) => {
     <>
       <video
         ref={video}
-        src={base64}
+        src={url}
         className={videoClassName}
         playsInline
         loop
@@ -191,14 +198,12 @@ const RecordView = () => {
 
   const onStop = async (_, blob) => {
     const newMediaUrls = mediaUrls.map((value, index) =>
-      swipeRef.current?.swiper?.realIndex === index
-        ? blobToBase64(blob)
-        : Promise.resolve(value)
+      swipeRef.current?.swiper?.realIndex === index ? true : value
     );
 
-    const resolvevedMediaUrls = await Promise.all(newMediaUrls);
+    set(QUESTIONS_IDS[swipeRef.current?.swiper?.realIndex], blob);
 
-    setMediaUrls(resolvevedMediaUrls);
+    setMediaUrls(newMediaUrls);
   };
 
   const { status, startRecording, stopRecording, previewStream } =
@@ -225,6 +230,8 @@ const RecordView = () => {
     const newMediaUrls = mediaUrls.map((value, i) =>
       i === realIndex ? null : value
     );
+
+    del(QUESTIONS_IDS[swipeRef.current?.swiper?.realIndex]);
 
     setMediaUrls(newMediaUrls);
   };
@@ -260,7 +267,7 @@ const RecordView = () => {
             {
               <div className="flex flex-1 w-full h-screen relative justify-center">
                 {mediaUrls[index] && status !== "recording" ? (
-                  <VidePlayer base64={mediaUrls[index]} index={index} />
+                  <VidePlayer id={QUESTIONS_IDS[index]} index={index} />
                 ) : (
                   <VideoPreview
                     key={previewStream?.id}
