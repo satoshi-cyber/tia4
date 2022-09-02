@@ -1,9 +1,10 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo, useLayoutEffect } from "react";
 import { useReactMediaRecorder } from "./media";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import * as Icons from "react-icons/hi";
 import { Pagination, Navigation, EffectCreative } from "swiper";
 import canAutoPlay from "can-autoplay";
+import useLocalStorage from "use-local-storage";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -17,6 +18,16 @@ const QUESTIONS = [
   "How Has Your Experience Prepared You for This Role?",
   "Why Are You Leaving (or Have Left) Your Job?",
 ];
+
+const blobToBase64 = (blob) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(blob);
+  return new Promise((resolve) => {
+    reader.onloadend = () => {
+      resolve(reader.result);
+    };
+  });
+};
 
 const Icon = ({ name, ...props }) => {
   const IconComponent = Icons[name];
@@ -97,41 +108,58 @@ const Buttons = ({
   );
 };
 
-const VidePlayer = ({ src }) => {
+const VidePlayer = ({ base64, index }) => {
   const swiper = useSwiper();
 
   const video = useRef();
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
+    if (!swiper) {
+      return;
+    }
+
     swiper.on("slideChange", () => {
+      if (index === swiper.realIndex) {
+        canAutoPlay.video().then(({ result }) => {
+          if (result) {
+            handlePlay();
+          }
+        });
+      }
+
       if (!video.current) {
         return;
       }
-      console.log("slide changed");
+
       video.current.pause();
       setPlaying(false);
     });
-  }, [swiper]);
+  }, [index, swiper]);
+
+  useLayoutEffect(() => {
+    if (index === swiper.realIndex) {
+      canAutoPlay.video().then(({ result }) => {
+        if (result) {
+          handlePlay();
+        }
+      });
+    } else {
+      video.current.pause();
+      setPlaying(false);
+    }
+  }, [index, swiper.realIndex]);
 
   const handlePlay = () => {
     video.current.play();
     setPlaying(true);
   };
 
-  useEffect(() => {
-    canAutoPlay.video().then(({ result }) => {
-      if (result) {
-        handlePlay();
-      }
-    });
-  }, []);
-
   return (
     <>
       <video
         ref={video}
-        src={src}
+        src={base64}
         className={videoClassName}
         playsInline
         loop
@@ -139,7 +167,7 @@ const VidePlayer = ({ src }) => {
       />
       {!playing && (
         <button
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 m-10 "
           onClick={handlePlay}
         >
           <Icon name="HiPlay" size={100} className="text-gray-100" />
@@ -149,15 +177,26 @@ const VidePlayer = ({ src }) => {
   );
 };
 
+const INTERVIEW_ID = "c0fbb368-cbca-4673-bef9-48af98e3b556";
+
 const RecordView = () => {
   const swipeRef = useRef();
   const questions = QUESTIONS;
-  const [mediaUrls, setMediaUrls] = useState([...QUESTIONS].fill(undefined));
+  const [mediaUrls, setMediaUrls] = useLocalStorage(
+    INTERVIEW_ID,
+    [...QUESTIONS].fill(undefined)
+  );
 
-  const onStop = (boblUrl) => {
-    const realIndex = swipeRef.current?.swiper?.realIndex;
-    mediaUrls[realIndex] = boblUrl;
-    setMediaUrls(mediaUrls);
+  const onStop = async (_, blob) => {
+    const newMediaUrls = mediaUrls.map((value, index) =>
+      swipeRef.current?.swiper?.realIndex === index
+        ? blobToBase64(blob)
+        : Promise.resolve(value)
+    );
+
+    const resolvevedMediaUrls = await Promise.all(newMediaUrls);
+
+    setMediaUrls(resolvevedMediaUrls);
   };
 
   const { status, startRecording, stopRecording, previewStream } =
@@ -195,6 +234,7 @@ const RecordView = () => {
   return (
     <>
       <Swiper
+        preventClicks
         ref={swipeRef}
         pagination={{
           type: "progressbar",
@@ -217,8 +257,8 @@ const RecordView = () => {
           <SwiperSlide key={index}>
             {
               <div className="flex flex-1 w-full h-screen relative justify-center">
-                {mediaUrls[index] && status === "stopped" ? (
-                  <VidePlayer src={mediaUrls[index]} />
+                {mediaUrls[index] && status !== "recording" ? (
+                  <VidePlayer base64={mediaUrls[index]} index={index} />
                 ) : (
                   <VideoPreview
                     key={previewStream?.id}
