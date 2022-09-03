@@ -11,7 +11,7 @@
 html,
 body,
 #__next {
-  @apply flex flex-col h-screen;
+  @apply flex flex-col min-h-screen overflow-x-hidden;
 }
 
 .swiper-slide{
