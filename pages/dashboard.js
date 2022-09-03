@@ -151,7 +151,7 @@ export default function Home() {
             </div>
             <div className="border">
               <iframe
-                src="http://docs.google.com/gview?url=http://infolab.stanford.edu/pub/papers/google.pdf&amp;embedded=true"
+                src="https://docs.google.com/gview?url=http://infolab.stanford.edu/pub/papers/google.pdf&amp;embedded=true"
                 width={600}
                 height={700}
               ></iframe>
