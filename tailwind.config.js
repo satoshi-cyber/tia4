@@ -17,6 +17,9 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/forms"),
+    require("tailwindcss-scoped-groups")({
+      groups: ["one", "two"],
+    }),
     plugin(function ({ addVariant, e }) {
       addVariant("group-focus-within", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
