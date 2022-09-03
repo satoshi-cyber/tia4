@@ -55,7 +55,7 @@ const VideoPreview = ({ stream }) => {
       ref={videoRef}
       className={videoClassName}
       playsInline
-      controls="false"
+      controls={false}
       autoPlay
       muted
     />
