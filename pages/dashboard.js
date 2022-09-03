@@ -1,8 +1,11 @@
 import React from "react";
 import * as Icons from "react-icons/hi";
 import { Player } from "video-react";
+import { Input, FormIcon, Select } from "../components/forms";
+
 import "video-react/dist/video-react.css";
 
+import LogoSmall from "../public/logo-small.svg";
 import Logo from "../public/logo.svg";
 import Linkedin from "../public/linkedin.svg";
 
@@ -17,7 +20,14 @@ export default function Home() {
     <div className="flex flex-1 w-full justify-center items-center ">
       <div className="w-full flex flex-1 h-full flex-col justify-center items-center">
         <div className="fixed left-0 top-0 min-h-full w-[70px] border-r border-r-gray-200 pt-28 flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-10 bg-white hover:shadow-lg">
-          <Logo className="fixed top-6 left-6 z-20" width={120} />
+          <LogoSmall
+            className="absolute top-6 left-6 z-20 group-hover:opacity-0"
+            width={120}
+          />
+          <Logo
+            className="absolute top-6 left-6 z-20 opacity-0 group-hover:opacity-100"
+            width={120}
+          />
           <div className="absolute w-[240px]">
             <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
               <Icon
@@ -77,39 +87,44 @@ export default function Home() {
           <div className="flex flex-row h-full w-[600px] items-center justify-between">
             <div>
               <p className="text-xs mb-2 opacity-0">.</p>
-              <input type="text" className="w-full" placeholder="search" />
+              <Input
+                type="text"
+                className="w-full"
+                placeholder="search"
+                before={<FormIcon name="HiSearch" />}
+              />
             </div>
             <div>
               <p className="text-xs mb-2">Wached</p>
-              <select className="w-full">
+              <Select className="w-full">
                 <option>All</option>
                 <option>New</option>
-                <option>Wached</option>
-              </select>
+              </Select>
             </div>
             <div>
               <p className="text-xs mb-2">Rate</p>
-              <select className="w-full">
+              <Select className="w-full">
                 <option>All</option>
                 <option>5</option>
                 <option>4</option>
                 <option>3</option>
                 <option>2</option>
                 <option>1</option>
-              </select>
+              </Select>
             </div>
           </div>
+
           <div className="w-[280px]">
             <p className="text-xs mb-2">Job</p>
             <div className="flex flex-1 items-center justifly-center">
-              <select className="w-full">
+              <Select className="w-full">
                 <option>All jobs</option>
                 <option>Jobs / lorem ipsum job</option>
                 <option>Jobs / lorem ipsum job</option>
                 <option>Jobs / lorem ipsum job</option>
                 <option>Jobs / lorem ipsum job</option>
                 <option>Jobs / lorem ipsum job</option>
-              </select>
+              </Select>
             </div>
           </div>
         </div>
@@ -157,7 +172,9 @@ export default function Home() {
               ></iframe>
             </div>
           </div>
-          <div className="w-[280px] min-h-full bg-red-200"></div>
+          <div className="w-[280px] min-h-full bg-red-200">
+            <p>Total (200)</p>
+          </div>
         </div>
       </div>
     </div>
