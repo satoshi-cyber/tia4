@@ -176,7 +176,7 @@ const VidePlayer = ({ id, index }) => {
         src={url}
         className={videoClassName}
         playsInline
-        controls="false"
+        controls={false}
         loop
         muted={!playing}
         autoPlay
