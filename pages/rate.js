@@ -1,6 +1,6 @@
 import { Player } from "video-react";
 import React from "react";
-import Icon from "../components/icon";
+import Icon from "../components/Icon";
 import Menu from "../components/Menu";
 import "video-react/dist/video-react.css";
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import LogoSmall from "../../public/logo-small.svg";
 import Logo from "../../public/logo.svg";
 
-import Icon from "../icon";
+import Icon from "../Icon";
 
 const Menu = () => (
   <div className="fixed left-0 top-0 min-h-full w-[70px] border-r border-r-gray-200 pt-28 flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-10 bg-white hover:shadow-lg">
