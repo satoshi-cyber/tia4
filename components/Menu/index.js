@@ -85,6 +85,8 @@ const Menu = () => {
 
   const toggle = () => setOpen(!open);
 
+  const close = () => setOpen(false);
+
   return (
     <>
       <div className="absolute top-6 left-0 block md:hidden flex flex-row items-center">
@@ -94,7 +96,10 @@ const Menu = () => {
         <LogoMobile className="" width={120} />
       </div>
       {open && (
-        <div className="fixed top-0 left-0 w-screen h-screen bg-white z-20 md:hidden">
+        <div
+          className="fixed top-0 left-0 w-screen h-screen bg-white z-20 md:hidden"
+          onClick={close}
+        >
           <div className="flex flex-ro items-center mt-6 mb-12">
             <a onClick={toggle} className="cursor-pointer ml-5">
               <Icon name="HiMenu" size={30} className="text-gray-500 mr-4 " />
