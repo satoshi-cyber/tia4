@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <div className="flex flex-1 w-full justify-center items-center pt-20">
       <Menu />
-      <div className="flex flex-1 w-screen pl-[70px] justify-evenly">
-        <div className="flex flex-col w-[600px]">
+      <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
+        <div className="flex flex-col max-w-[600px] w-full px-8">
           <div className="flex flex-row mb-4 items-center">
             <Icon
               name="HiOutlineBriefcase"
@@ -21,8 +21,8 @@ export default function Home() {
             Senior software developer
           </div>
           <Player
-            className="flex-none rounded-2xl shadow-sm overflow-hidden"
-            width={600}
+            className="flex-none rounded-2xl shadow-sm overflow-hidden w-full"
+            width="100%"
             height={400}
             fluid={false}
             playsInline
@@ -52,7 +52,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div>
+            <div className="flex-none">
               <div className="grid grid-cols-2 grid-rows-1 gap-4 border-2 p-2 rounded-full">
                 <Icon name="HiThumbDown" size={50} className="text-black" />
                 <Icon name="HiThumbUp" size={50} className="text-black" />
@@ -63,7 +63,7 @@ export default function Home() {
           <div className="border">
             <iframe
               src="https://docs.google.com/gview?url=http://infolab.stanford.edu/pub/papers/google.pdf&amp;embedded=true"
-              width={600}
+              width="100%"
               height={700}
             ></iframe>
           </div>
