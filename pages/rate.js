@@ -8,10 +8,10 @@ import Linkedin from "../public/linkedin.svg";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 w-full justify-center items-center pt-20">
+    <div className="flex flex-1 w-full justify-center items-center pt-28">
       <Menu />
       <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
-        <div className="flex flex-col max-w-[600px] w-full px-8">
+        <div className="flex flex-col max-w-[600px] w-full px-2">
           <div className="flex flex-row mb-4 items-center">
             <Icon
               name="HiOutlineBriefcase"
@@ -29,7 +29,7 @@ export default function Home() {
             autoPlay={true}
             src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
           />
-          <div className="flex justify-between mt-4 mb-10">
+          <div className="flex justify-between mt-4 mb-4 md:mb-10">
             <div className="flex">
               <div className="mr-4">
                 <img
@@ -52,13 +52,19 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="flex-none">
+            <div className="flex-none hidden md:block">
               <div className="grid grid-cols-2 grid-rows-1 gap-4 border-2 p-2 rounded-full">
                 <Icon name="HiThumbDown" size={50} className="text-black" />
                 <Icon name="HiThumbUp" size={50} className="text-black" />
               </div>
             </div>
             <Icon name="HiBookmark" size={40} className="text-black" />
+          </div>
+          <div className="block md:hidden flex justify-center mb-6">
+            <div className="grid grid-cols-2 grid-rows-1 gap-4 border-2 p-2 rounded-full">
+              <Icon name="HiThumbDown" size={50} className="text-black" />
+              <Icon name="HiThumbUp" size={50} className="text-black" />
+            </div>
           </div>
           <div className="border">
             <iframe
