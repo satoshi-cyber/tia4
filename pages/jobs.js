@@ -5,7 +5,7 @@ import "video-react/dist/video-react.css";
 
 export default function Jobs() {
   return (
-    <div className="flex flex-1 w-full justify-center pt-28">
+    <div className="flex flex-1 w-full justify-center py-28">
       <Menu />
       <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
         <div className="flex flex-col max-w-[600px] w-full px-4">

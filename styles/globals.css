@@ -10,7 +10,7 @@
 
 html,
 body {
-  @apply flex flex-col min-h-screen overflow-x-hidden
+  @apply min-h-full overflow-x-hidden
 }
 
 #__next {

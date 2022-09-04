@@ -87,7 +87,7 @@ const Menu = () => {
 
   return (
     <>
-      <div className="absolute top-6 left-0 block md:hidden flex flex-ro items-center">
+      <div className="absolute top-6 left-0 block md:hidden flex flex-row items-center">
         <a onClick={toggle} className="cursor-pointer ml-5">
           <Icon name="HiMenu" size={30} className="text-gray-500 mr-4 " />
         </a>

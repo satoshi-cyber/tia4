@@ -5,7 +5,7 @@ const labelStyle = "text-sm text-gray-900 text-left w-full mb-2";
 
 export default function Submit() {
   return (
-    <div className="flex flex-1 w-full justify-center items-center py-20">
+    <div className="flex flex-1 flex-col w-full justify-center items-center py-20">
       <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
         <Menu />
         <p className="text-3xl mb-4 text-gray-900 text-center">
@@ -35,7 +35,7 @@ export default function Submit() {
         <TextArea type="email" name="email" placeholder="lorem@ipsum.com" />
         <p className={labelStyle}>Cv:</p>
         <TextArea type="email" name="email" placeholder="lorem@ipsum.com" />
-        <button className="sticky bottom-6 mt-4 bg-gradient-to-r from-purple-500 w-full p-3 text-sm bg-gray-800 text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm">
+        <button className="sticky self-start top-0 bottom-6 mt-4 bg-gradient-to-r from-purple-500 w-full p-3 text-sm bg-gray-800 text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm">
           Submit
         </button>
       </div>
