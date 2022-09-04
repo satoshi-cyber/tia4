@@ -2,9 +2,6 @@ import { Input, FormIcon, Select } from "../components/Form";
 import Menu from "../components/Menu";
 import Icon from "../components/Icon";
 
-import "@uiw/react-md-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
-
 const labelStyle = "text-sm text-gray-900 text-left w-full mb-2";
 
 export default function CreateJob() {
