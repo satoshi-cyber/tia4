@@ -11,7 +11,7 @@ export default function Home() {
     <div className="flex flex-1 w-full justify-center items-center pt-28">
       <Menu />
       <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
-        <div className="flex flex-col max-w-[600px] w-full px-2">
+        <div className="flex flex-col max-w-[600px] w-full px-4">
           <div className="flex flex-row mb-4 items-center">
             <Icon
               name="HiOutlineBriefcase"

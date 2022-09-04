@@ -8,7 +8,7 @@ export default function Jobs() {
     <div className="flex flex-1 w-full justify-center pt-28">
       <Menu />
       <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
-        <div className="flex flex-col max-w-[600px] w-full px-2">
+        <div className="flex flex-col max-w-[600px] w-full px-4">
           <div className="flex flex-col items-center ">
             <p className="text-3xl mb-10">Get more interviews Today!</p>
             <div className="flex flex-row items-center mb-20">

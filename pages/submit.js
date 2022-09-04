@@ -7,7 +7,7 @@ const labelStyle = "text-sm text-gray-900 text-left w-full mb-2";
 export default function Submit() {
   return (
     <div className="flex flex-1 w-full justify-center items-center py-20">
-      <div className="max-w-[480px] w-full flex flex-col justify-center items-center">
+      <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
         <Logo className="absolute top-6 left-6" width={120} />
         <p className="text-3xl mb-4 text-gray-900 text-center">
           Update your profile!
