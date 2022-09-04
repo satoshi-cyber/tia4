@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Input, FormIcon } from "../components/forms";
+import { Input, FormIcon } from "../components/Form";
 
 import Logo from "../public/logo.svg";
 

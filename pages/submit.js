@@ -1,4 +1,4 @@
-import { Input, FormIcon, TextArea } from "../components/forms";
+import { Input, FormIcon, TextArea } from "../components/Form";
 
 import Logo from "../public/logo.svg";
 

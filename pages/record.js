@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const Video = dynamic(() => import("../components/video"), { ssr: false });
+const Video = dynamic(() => import("../components/Video"), { ssr: false });
 
 const RecordView = () => <Video />;
 
