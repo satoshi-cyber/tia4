@@ -8,7 +8,7 @@ import Linkedin from "../public/linkedin.svg";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 w-full justify-center items-center pt-28">
+    <div className="flex flex-1 w-full justify-center items-center pt-28 md:pt-16">
       <Menu />
       <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
         <div className="flex flex-col max-w-[600px] w-full px-4">
