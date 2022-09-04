@@ -40,7 +40,7 @@ const Items = () => (
         className="text-gray-500 group-one-hover:text-purple-800"
       />
       <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-        Archive
+        All interviews
       </span>
     </a>
     <hr className="mb-4" />
