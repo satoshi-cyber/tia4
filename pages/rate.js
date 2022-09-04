@@ -70,7 +70,7 @@ export default function Home() {
             <iframe
               src="https://docs.google.com/gview?url=http://infolab.stanford.edu/pub/papers/google.pdf&amp;embedded=true"
               width="100%"
-              height={700}
+              className="h-[400px] md:h-[700px]"
             ></iframe>
           </div>
         </div>
