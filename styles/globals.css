@@ -9,9 +9,12 @@
 }
 
 html,
-body,
+body {
+  @apply flex flex-col min-h-screen overflow-x-hidden
+}
+
 #__next {
-  @apply flex flex-col min-h-screen overflow-x-hidden;
+  @apply flex flex-1;
 }
 
 .swiper-slide{

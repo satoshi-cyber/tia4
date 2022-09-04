@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useLayoutEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useReactMediaRecorder } from "./media";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import * as Icons from "react-icons/hi";

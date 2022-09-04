@@ -1,7 +1,10 @@
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 import React from "react";
 import * as Icons from "react-icons/hi";
 import { Player } from "video-react";
-import { Input, FormIcon, Select } from "../components/forms";
 
 import "video-react/dist/video-react.css";
 
@@ -46,10 +49,9 @@ export default function Home() {
                 className="text-gray-500 group-one-hover:text-purple-800"
               />
               <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-                Interviews
+                Rate
               </span>
             </a>
-            <hr className="mb-4" />
             <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
               <Icon
                 name="HiArchive"
@@ -57,9 +59,10 @@ export default function Home() {
                 className="text-gray-500 group-one-hover:text-purple-800"
               />
               <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-                My Drafts
+                Archive
               </span>
             </a>
+            <hr className="mb-4" />
             <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
               <Icon
                 name="HiUserCircle"
@@ -83,52 +86,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="flex w-screen pl-[70px] justify-evenly items-center h-28 top-0">
-          <div className="flex flex-row h-full w-[600px] items-center justify-between">
-            <div>
-              <p className="text-xs mb-2 opacity-0">.</p>
-              <Input
-                type="text"
-                className="w-full"
-                placeholder="search"
-                before={<FormIcon name="HiSearch" />}
-              />
-            </div>
-            <div>
-              <p className="text-xs mb-2">Wached</p>
-              <Select className="w-full">
-                <option>All</option>
-                <option>New</option>
-              </Select>
-            </div>
-            <div>
-              <p className="text-xs mb-2">Rate</p>
-              <Select className="w-full">
-                <option>All</option>
-                <option>5</option>
-                <option>4</option>
-                <option>3</option>
-                <option>2</option>
-                <option>1</option>
-              </Select>
-            </div>
-          </div>
-
-          <div className="w-[280px]">
-            <p className="text-xs mb-2">Job</p>
-            <div className="flex flex-1 items-center justifly-center">
-              <Select className="w-full">
-                <option>All jobs</option>
-                <option>Jobs / lorem ipsum job</option>
-                <option>Jobs / lorem ipsum job</option>
-                <option>Jobs / lorem ipsum job</option>
-                <option>Jobs / lorem ipsum job</option>
-                <option>Jobs / lorem ipsum job</option>
-              </Select>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-1 w-screen pl-[70px] justify-evenly">
+        <div className="flex flex-1 w-screen pl-[70px] justify-evenly mt-20">
           <div className="flex flex-col w-[600px]">
             <Player
               className="flex-none"
@@ -151,18 +109,24 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <p className="text-lg">Lorem ipsum</p>
+                  <div className="flex flex-row items-center">
+                    <Icon name="HiMail" size={30} className="text-black mr-3" />
+                    <Linkedin width={20} />
+                  </div>
+                  <p className="text-2xl">Lorem ipsum</p>
                   <p className="text-xs text-gray-500 max-w-[300px]">
                     Lorem ipsum dolor sit lorem dolor sum dolor sit lorem Lorem
                     ipsum dolor sit lorem dolor sum dolor sit lorem
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4">
-                <Icon name="HiHeart" size={30} className="text-black" />
-                <Icon name="HiMail" size={30} className="text-black" />
-                <Linkedin width={30} className="mt-1" />
+              <div>
+                <div className="grid grid-cols-2 grid-rows-1 gap-4 border-2 p-2 rounded-full">
+                  <Icon name="HiThumbDown" size={50} className="text-black" />
+                  <Icon name="HiThumbUp" size={50} className="text-black" />
+                </div>
               </div>
+              <Icon name="HiBookmark" size={40} className="text-black" />
             </div>
             <div className="border">
               <iframe
@@ -171,9 +135,6 @@ export default function Home() {
                 height={700}
               ></iframe>
             </div>
-          </div>
-          <div className="w-[280px] min-h-full bg-red-200">
-            <p>Total (200)</p>
           </div>
         </div>
       </div>
