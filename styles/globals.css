@@ -10,11 +10,11 @@
 
 html,
 body {
-  @apply min-h-full overflow-x-hidden
+  @apply min-h-screen overflow-x-hidden
 }
 
 #__next {
-  @apply flex flex-1;
+  @apply min-h-screen flex flex-1;
 }
 
 .swiper-slide{
