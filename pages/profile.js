@@ -5,9 +5,9 @@ const labelStyle = "text-sm text-gray-900 text-left w-full mb-2";
 
 export default function Submit() {
   return (
-    <div className="flex flex-1 flex-col w-full justify-center items-center py-28 md:py-16">
+    <div className="flex flex-1 flex-col w-full justify-center items-center py-28 md:py-16 md:pl-[70px] ">
+      <Menu />
       <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
-        <Menu />
         <p className="text-3xl mb-4 text-gray-900 text-center">
           Update your profile!
         </p>
