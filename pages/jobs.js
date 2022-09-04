@@ -3,7 +3,7 @@ import Menu from "../components/Menu";
 import Icon from "../components/Icon";
 import "video-react/dist/video-react.css";
 
-export default function Home() {
+export default function Jobs() {
   return (
     <div className="flex flex-1 w-full justify-center pt-20">
       <Menu />
