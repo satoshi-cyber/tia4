@@ -26,9 +26,8 @@ export default function Jobs() {
           <div className="grid grid-cols-1 gap-4">
             <div className="flex w-full flex-row justify-between items-center border p-4 rounded-lg shadow-sm">
               <div>
-                <p className="text-2xl">Lorem job</p>
+                <p className="text-2xl mb-2">Lorem job</p>
                 <p className="text-xs">Deadline: 11/12/2023</p>
-                <p className="text-sm">lorem ipsum dolor sit lore</p>
               </div>
               <div className="grid grid-cols-2 gap-4 ml-4">
                 <Icon name="HiPencil" size={30} className="text-black" />
@@ -37,9 +36,8 @@ export default function Jobs() {
             </div>
             <div className="flex w-full flex-row justify-between items-center border p-4 rounded-lg shadow-sm">
               <div>
-                <p className="text-2xl">Lorem job</p>
+                <p className="text-2xl mb-2">Lorem job</p>
                 <p className="text-xs">Deadline: 11/12/2023</p>
-                <p className="text-sm">lorem ipsum dolor sit lore</p>
               </div>
               <div className="grid grid-cols-2 gap-4 ml-4">
                 <Icon name="HiPencil" size={30} className="text-black" />
@@ -48,9 +46,8 @@ export default function Jobs() {
             </div>
             <div className="flex w-full flex-row justify-between items-center border p-4 rounded-lg shadow-sm">
               <div>
-                <p className="text-2xl">Lorem job</p>
+                <p className="text-2xl mb-2">Lorem job</p>
                 <p className="text-xs">Deadline: 11/12/2023</p>
-                <p className="text-sm">lorem ipsum dolor sit lore</p>
               </div>
               <div className="grid grid-cols-2 gap-4 ml-4">
                 <Icon name="HiPencil" size={30} className="text-black" />
