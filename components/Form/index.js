@@ -35,45 +35,50 @@ export const FormIcon = ({ name, className }) => {
   );
 };
 
-export const Input = ({
-  variant = "default",
-  before,
-  className,
-  after,
-  name,
-  ...restProps
-}) => {
-  const classNames = {
-    input: clsx(VARIANT[variant].padding, VARIANT[variant].style, className),
-    container: clsx(
-      VARIANT[variant].container,
-      VARIANT[variant].containerWidth
-    ),
-    appendContainer: VARIANT[variant].appendContainer,
-    appendLeft: VARIANT[variant].appendLeft,
-    appendRight: VARIANT[variant].appendRight,
-  };
+export const Input = React.forwardRef(
+  (
+    { variant = "default", before, className, after, name, ...restProps },
+    ref
+  ) => {
+    const classNames = {
+      input: clsx(VARIANT[variant].padding, VARIANT[variant].style, className),
+      container: clsx(
+        VARIANT[variant].container,
+        VARIANT[variant].containerWidth
+      ),
+      appendContainer: VARIANT[variant].appendContainer,
+      appendLeft: VARIANT[variant].appendLeft,
+      appendRight: VARIANT[variant].appendRight,
+    };
 
-  return (
-    <div className={classNames.container}>
-      {before && (
-        <label htmlFor={name} className={classNames.appendContainer}>
-          {React.cloneElement(before, {
-            className: classNames.appendLeft,
-          })}
-        </label>
-      )}
-      <input {...restProps} className={classNames.input} />
-      {after && (
-        <label htmlFor={name} className={classNames.appendContainer}>
-          {React.cloneElement(after, {
-            className: classNames.appendRight,
-          })}
-        </label>
-      )}
-    </div>
-  );
-};
+    return (
+      <div className={classNames.container}>
+        {before && (
+          <label htmlFor={name} className={classNames.appendContainer}>
+            {React.cloneElement(before, {
+              className: classNames.appendLeft,
+            })}
+          </label>
+        )}
+        <input
+          name={name}
+          {...restProps}
+          ref={ref}
+          className={classNames.input}
+        />
+        {after && (
+          <label htmlFor={name} className={classNames.appendContainer}>
+            {React.cloneElement(after, {
+              className: classNames.appendRight,
+            })}
+          </label>
+        )}
+      </div>
+    );
+  }
+);
+
+Input.displayName = "Input";
 
 export const TextArea = ({
   variant = "default",
