@@ -7,9 +7,9 @@ export const FormService = {
 };
 
 addHook(FormService.SubmitButton, (control) => {
-  const { isDirty, isSubmitting } = useFormState({ control });
+  const { isSubmitting } = useFormState({ control });
 
   return {
-    disabled: !isDirty || isSubmitting,
+    disabled: isSubmitting,
   };
 });

@@ -41,7 +41,7 @@ addHook(AuthService.login, () => {
 
       await router.push("/");
     },
-    [router]
+    [mutate, router]
   );
 });
 
@@ -64,14 +64,11 @@ addHook(AuthService.oAuthCallback, () => {
   useEffect(() => {
     magic.oauth
       .getRedirectResult()
-      .then((res) => console.log(res))
+      .then((res) => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, res.magic.idToken);
+        router.push("/");
+      })
       .catch((e) => console.log(e));
-
-    magic.user.getIdToken().then((did) => {
-      localStorage.setItem(LOCAL_STORAGE_KEY, did);
-
-      router.push("/");
-    });
   }, [router]);
 });
 
@@ -99,7 +96,7 @@ addHook(AuthService.logout, () => {
   const router = useRouter();
 
   return useCallback(() => {
-    magic.user.logout().then(() => {
+    return magic.user.logout().then(() => {
       localStorage.removeItem(LOCAL_STORAGE_KEY);
 
       mutate([AuthService.isLoggedIn]);
