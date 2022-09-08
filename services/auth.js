@@ -89,7 +89,11 @@ addHook(AuthService.redirect, () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!localStorage.getItem(AUTH_KEY) && router.pathname !== "/login") {
+    if (router.pathname === "/login") {
+      return;
+    }
+
+    if (!localStorage.getItem(AUTH_KEY)) {
       if (router.pathname !== "/logout") {
         localStorage.setItem(FROM_URL_KEY, window.location);
       }
