@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Input, FormIcon } from "../components/Form";
 
 import Logo from "../public/logo.svg";
-import { Hook, Inject, useAction } from "../lib";
+import { Action, Hook, Inject, useAction } from "../lib";
 import { AuthService, FormService } from "../services";
 
 export default function Home() {
@@ -30,7 +30,7 @@ export default function Home() {
           <Inject hookKey={[FormService.SubmitButton, control]}>
             <button
               type="submit"
-              className="bg-gradient-to-r from-purple-500 w-full p-3 text-sm bg-gray-800 text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm disabled:bg-gray-500 disabled:from-gray-800"
+              className="bg-gradient-to-r from-purple-500 w-full p-3 text-sm bg-gray-800 text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm disabled:bg-gray-800 disabled:from-gray-500"
             >
               Login / Signup
             </button>
@@ -38,12 +38,16 @@ export default function Home() {
         </form>
         <p className="text-gray-600 my-5">OR</p>
         <div className="grid grid-cols-2 grid-rows-1 gap-4 w-full">
-          <button className="p-4 text-xs bg-gray-800 text-gray-100 focus:outline-none rounded-full bg-[#1877F2]">
-            Continue with Facebook
-          </button>
-          <button className="p-4 text-xs bg-gray-800 text-gray-100 focus:outline-none rounded-full bg-[#2766C2]">
-            Sign in with Linkedin
-          </button>
+          <Action hookKey={[AuthService.loginWithProvider, "facebook"]}>
+            <button className="p-4 text-xs bg-gray-800 text-gray-100 focus:outline-none rounded-full bg-[#1877F2] disabled:bg-gray-800">
+              Continue with Facebook
+            </button>
+          </Action>
+          <Action hookKey={[AuthService.loginWithProvider, "linkedin"]}>
+            <button className="p-4 text-xs bg-gray-800 text-gray-100 focus:outline-none rounded-full bg-[#2766C2] disabled:bg-gray-800">
+              Sign in with Linkedin
+            </button>
+          </Action>
         </div>
       </div>
     </div>

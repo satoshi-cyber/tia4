@@ -1187,6 +1187,13 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@magic-ext/oauth@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@magic-ext/oauth/-/oauth-3.0.0.tgz#ef05d6d1c391dc05b3080166a9299df9a76c2821"
+  integrity sha512-XRNQ8BdbV2ai+8mRfNsHwSzulcoNboQBSFIfJRNonHq+Smg+NBMRY4api84yWBQo3Tl1SYPt7tCJB266tl0+3w==
+  dependencies:
+    "@magic-sdk/types" "^8.0.0"
+
 "@magic-sdk/commons@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@magic-sdk/commons/-/commons-5.0.0.tgz#b2be9d3f4e168ae9edb09887071af422616db0e8"

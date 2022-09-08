@@ -2,12 +2,15 @@ import { Magic } from "magic-sdk";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 import { useSWRConfig } from "swr";
+import { OAuthExtension } from "@magic-ext/oauth";
 
 import { addHook, useLoadData } from "../lib";
 
 export const AuthService = {
   isLoggedIn: "AuthService-isLoggedin",
   login: "AuthService-login",
+  oAuthCallback: "AuthService-callback",
+  loginWithProvider: "AuthServicer-loginWithProvider",
   redirect: "AuthService-redirect",
   logout: "AuthService-logout",
 };
@@ -16,13 +19,16 @@ const LOCAL_STORAGE_KEY = "auth";
 
 const magic =
   typeof window !== "undefined" &&
-  new Magic(process.env.NEXT_PUBLIC_MAGIC_PUB_KEY);
+  new Magic(process.env.NEXT_PUBLIC_MAGIC_PUB_KEY, {
+    extensions: [new OAuthExtension()],
+  });
 
 addHook(AuthService.isLoggedIn, () =>
   useCallback(() => localStorage.getItem(LOCAL_STORAGE_KEY), [])
 );
 
-addHook(AuthService.login, (provider) => {
+addHook(AuthService.login, () => {
+  const { mutate } = useSWRConfig();
   const router = useRouter();
 
   return useCallback(
@@ -31,10 +37,42 @@ addHook(AuthService.login, (provider) => {
 
       localStorage.setItem(LOCAL_STORAGE_KEY, did);
 
-      router.push("/record");
+      mutate([AuthService.isLoggedIn]);
+
+      await router.push("/");
     },
-    [router, provider]
+    [router]
   );
+});
+
+addHook(AuthService.loginWithProvider, (provider) =>
+  useCallback(
+    () =>
+      new Promise(() => {
+        magic?.oauth.loginWithRedirect({
+          provider,
+          redirectURI: "http://localhost:3000/callback",
+        });
+      }),
+    [provider]
+  )
+);
+
+addHook(AuthService.oAuthCallback, () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    magic.oauth
+      .getRedirectResult()
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+
+    magic.user.getIdToken().then((did) => {
+      localStorage.setItem(LOCAL_STORAGE_KEY, did);
+
+      router.push("/");
+    });
+  }, [router]);
 });
 
 addHook(AuthService.redirect, () => {
@@ -63,9 +101,10 @@ addHook(AuthService.logout, () => {
   return useCallback(() => {
     magic.user.logout().then(() => {
       localStorage.removeItem(LOCAL_STORAGE_KEY);
-      mutate([AuthService.isLoggedIn]);
-    });
 
-    router.push("/login");
+      mutate([AuthService.isLoggedIn]);
+
+      router.push("/login");
+    });
   }, [mutate, router]);
 });
