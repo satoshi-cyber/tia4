@@ -62,11 +62,9 @@ addHook(AuthService.login, () => {
 addHook(AuthService.loginWithProvider, (provider) =>
   useCallback(
     () =>
-      new Promise(() => {
-        magic?.oauth.loginWithRedirect({
-          provider,
-          redirectURI: `${window.location.origin}/oauth-callback`,
-        });
+      magic?.oauth.loginWithRedirect({
+        provider,
+        redirectURI: `${window.location.origin}/oauth-callback`,
       }),
     [provider]
   )
@@ -89,7 +87,7 @@ addHook(AuthService.redirect, () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (router.pathname === "/login") {
+    if (router.pathname !== "/login") {
       return;
     }
 

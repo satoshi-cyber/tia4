@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Input, FormIcon } from "../components/Form";
 
 import Logo from "../public/logo.svg";
-import { Action, Hook, Inject, useAction } from "../lib";
+import { Action, Inject, useAction } from "../lib";
 import { AuthService, FormService } from "../services";
 
 export default function Home() {
@@ -13,8 +13,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 w-full justify-center items-center py-20">
-      <div className="p-6 max-w-[480px] w-full flex flex-col justify-center items-center ">
-        <Hook hookKey={[AuthService.redirect]} />
+      <div className="p-6 max-w-[480px] w-full flex flex-col justify-center items-center">
         <Logo className="absolute top-6 left-6" width={120} />
         <p className="text-3xl mb-6 text-gray-900 text-center">
           Change your life Today!
