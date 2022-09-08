@@ -33,9 +33,7 @@ addHook(AuthService.login, () => {
 
   return useCallback(
     async ({ email }) => {
-      const did = await magic?.auth.loginWithMagicLink({
-        email,
-      });
+      const did = await magic?.auth.loginWithOpt({ email });
 
       localStorage.setItem(LOCAL_STORAGE_KEY, did);
 
@@ -53,7 +51,7 @@ addHook(AuthService.loginWithProvider, (provider) =>
       new Promise(() => {
         magic?.oauth.loginWithRedirect({
           provider,
-          redirectURI: `${window.location.origin}/callback`,
+          redirectURI: "http://localhost:3000/callback",
         });
       }),
     [provider]
