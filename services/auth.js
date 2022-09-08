@@ -35,7 +35,6 @@ addHook(AuthService.login, () => {
     async ({ email }) => {
       const did = await magic?.auth.loginWithMagicLink({
         email,
-        redirectURI: `${window.location.origin}`,
       });
 
       localStorage.setItem(LOCAL_STORAGE_KEY, did);
