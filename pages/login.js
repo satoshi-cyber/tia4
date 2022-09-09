@@ -30,7 +30,7 @@ export default function Home() {
           <InjectHook hookKey={[FormService.SubmitButton, control]}>
             <button
               type="submit"
-              className="bg-gray-800 bg-gradient-to-r from-purple-500 w-full p-3 text-sm  text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm disabled:bg-gray-800 disabled:from-gray-500"
+              className="bg-gray-800 bg-gradient-to-r from-purple-500 w-full p-3 text-sm  text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm transition-all ease-in-out disabled:opacity-80"
             >
               Login / Signup
             </button>
@@ -39,12 +39,12 @@ export default function Home() {
         <p className="text-gray-600 my-5">OR</p>
         <div className="grid grid-cols-2 grid-rows-1 gap-4 w-full">
           <Action hookKey={[AuthService.loginWithProvider, "facebook"]}>
-            <button className="p-4 text-xs bg-gray-800 text-gray-100 focus:outline-none rounded-full bg-[#1877F2] disabled:bg-gray-800">
+            <button className="p-4 text-xs bg-gray-800 text-gray-100 focus:outline-none rounded-full bg-[#1877F2] transition-all ease-in-out disabled:opacity-80 ">
               Continue with Facebook
             </button>
           </Action>
           <Action hookKey={[AuthService.loginWithProvider, "linkedin"]}>
-            <button className="p-4 text-xs bg-gray-800 text-gray-100 focus:outline-none rounded-full bg-[#2766C2] disabled:bg-gray-800">
+            <button className="p-4 text-xs bg-gray-800 text-gray-100 focus:outline-none rounded-full bg-[#2766C2]transition-all ease-in-out  disabled:opacity-80 ">
               Sign in with Linkedin
             </button>
           </Action>
@@ -58,7 +58,7 @@ export default function Home() {
         >
           {({ isSubmitting }) =>
             isSubmitting && (
-              <div className="absolute bottom-0 w-full bottom-0">
+              <div className="fixed bottom-0 w-full bottom-0">
                 <div className="progress-bar">
                   <div className="progress-bar-value" />
                 </div>
