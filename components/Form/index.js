@@ -1,6 +1,9 @@
 import React from "react";
 import * as Icons from "react-icons/hi";
 import clsx from "clsx";
+import { FormProvider, useForm } from "react-hook-form";
+import { InjectProps, useAction } from "../../lib";
+import { FormService } from "../../services";
 
 const VARIANT = {
   default: {
@@ -60,12 +63,9 @@ export const Input = React.forwardRef(
             })}
           </label>
         )}
-        <input
-          name={name}
-          {...restProps}
-          ref={ref}
-          className={classNames.input}
-        />
+        <InjectProps hookKey={[FormService.Register, "email", { ref }]}>
+          <input name={name} {...restProps} className={classNames.input} />
+        </InjectProps>
         {after && (
           <label htmlFor={name} className={classNames.appendContainer}>
             {React.cloneElement(after, {
@@ -164,3 +164,26 @@ export const Select = ({
     </div>
   );
 };
+
+export const Form = ({ hookKey, children, ...restProps }) => {
+  const action = useAction(hookKey);
+
+  const form = useForm();
+
+  const { handleSubmit } = form;
+
+  return (
+    <FormProvider {...form}>
+      <form onSubmit={handleSubmit(action)} {...restProps}>
+        {children}
+      </form>
+    </FormProvider>
+  );
+};
+
+export const InputField = ({ name, label, ...restProps }) => (
+  <>
+    {label && <p className="text-gray-600 mb-4">{label}</p>}
+    <Input name={name} {...restProps} />
+  </>
+);
