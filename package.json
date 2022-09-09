@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@magic-ext/oauth": "^3.0.0",
+    "@material-tailwind/react": "^1.2.4",
     "@tailwindcss/forms": "^0.5.2",
     "add": "^2.0.6",
     "autoprefixer": "^10.4.8",

@@ -62,9 +62,15 @@ addHook(AuthService.login, () => {
 addHook(AuthService.loginWithProvider, (provider) =>
   useCallback(
     () =>
-      magic?.oauth.loginWithRedirect({
-        provider,
-        redirectURI: `${window.location.origin}/oauth-callback`,
+      new Promise((resolve) => {
+        window.addEventListener("popstate", function (e) {
+          resolve(true);
+        });
+
+        magic?.oauth.loginWithRedirect({
+          provider,
+          redirectURI: `${window.location.origin}/oauth-callback`,
+        });
       }),
     [provider]
   )
@@ -87,7 +93,11 @@ addHook(AuthService.redirect, () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (router.pathname === "/login" || router.pathname === "/oauth-callback") {
+    if (router.pathname === "/login" && localStorage.getItem(AUTH_KEY)) {
+      router.push("/");
+    }
+
+    if (router.pathname === "/oauth-callback" || router.pathname === "/login") {
       return;
     }
 

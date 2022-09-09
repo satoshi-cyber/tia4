@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 
 import { Input, FormIcon } from "../components/Form";
-
-import Logo from "../public/logo.svg";
-import { Action, Inject, useAction } from "../lib";
+import { Action, InjectHook, MergedActionState, useAction } from "../lib";
 import { AuthService, FormService } from "../services";
+import Logo from "../public/logo.svg";
+
+export const Progres = () => {};
 
 export default function Home() {
-  const { action: login } = useAction([AuthService.login]);
+  const login = useAction([AuthService.login]);
 
   const { register, handleSubmit, control } = useForm();
 
@@ -26,14 +27,14 @@ export default function Home() {
             after={<FormIcon name="HiOutlineMail" size={20} />}
             {...register("email")}
           />
-          <Inject hookKey={[FormService.SubmitButton, control]}>
+          <InjectHook hookKey={[FormService.SubmitButton, control]}>
             <button
               type="submit"
-              className="bg-gradient-to-r from-purple-500 w-full p-3 text-sm bg-gray-800 text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm disabled:bg-gray-800 disabled:from-gray-500"
+              className="bg-gray-800 bg-gradient-to-r from-purple-500 w-full p-3 text-sm  text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm disabled:bg-gray-800 disabled:from-gray-500"
             >
               Login / Signup
             </button>
-          </Inject>
+          </InjectHook>
         </form>
         <p className="text-gray-600 my-5">OR</p>
         <div className="grid grid-cols-2 grid-rows-1 gap-4 w-full">
@@ -48,6 +49,23 @@ export default function Home() {
             </button>
           </Action>
         </div>
+        <MergedActionState
+          hookKeys={[
+            [AuthService.login],
+            [AuthService.loginWithProvider, "facebook"],
+            [AuthService.loginWithProvider, "linkedin"],
+          ]}
+        >
+          {({ isSubmitting }) =>
+            isSubmitting && (
+              <div className="absolute bottom-0 w-full bottom-0">
+                <div className="progress-bar">
+                  <div className="progress-bar-value" />
+                </div>
+              </div>
+            )
+          }
+        </MergedActionState>
       </div>
     </div>
   );

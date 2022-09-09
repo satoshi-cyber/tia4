@@ -3,7 +3,7 @@ import { useAction } from "../lib";
 import { AuthService } from "../services";
 
 export default function Home() {
-  const { action: logout } = useAction([AuthService.logout]);
+  const logout = useAction([AuthService.logout]);
 
   useEffect(() => {
     logout();
