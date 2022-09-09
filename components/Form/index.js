@@ -182,8 +182,15 @@ export const Form = ({ hookKey, children, ...restProps }) => {
 };
 
 export const InputField = ({ name, label, ...restProps }) => (
-  <>
-    {label && <p className="text-gray-600 mb-4">{label}</p>}
+  <div className="w-full">
+    {label && <p className="text-sm text-gray-600 mb-3 text-left">{label}</p>}
     <Input name={name} {...restProps} />
-  </>
+  </div>
+);
+
+export const SelectField = ({ name, label, ...restProps }) => (
+  <div className="w-full">
+    {label && <p className="text-sm text-gray-600 mb-3 text-left">{label}</p>}
+    <Select name={name} {...restProps} />
+  </div>
 );

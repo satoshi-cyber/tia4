@@ -2,13 +2,13 @@ import { InputField, FormIcon, Form } from "../components/Form";
 import { AuthService } from "../services";
 
 import SocialButton from "../components/SocialButton";
-import { Layout } from "../components/Layout";
+import { CenterLayout } from "../components/Layout";
 import { Title } from "../components/Title";
 import SubmitButton from "../components/SubmitButton";
 
 export default function Home() {
   return (
-    <Layout>
+    <CenterLayout hideMenu tight>
       <Title title="Change your life Today!" />
       <Form hookKey={[AuthService.login]} className="w-full">
         <InputField
@@ -24,6 +24,6 @@ export default function Home() {
         <SocialButton provider="facebook" title="Continue in with Linkedin" />
         <SocialButton provider="linkedin" title="Sign in with Linkedin" />
       </div>
-    </Layout>
+    </CenterLayout>
   );
 }
