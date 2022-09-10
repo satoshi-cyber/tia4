@@ -1,6 +1,6 @@
 import { Input, FormIcon, TextArea } from "../components/Form";
 import Menu from "../components/Menu";
-import { Title } from "../components/Title";
+import { Title } from "../components";
 
 const labelStyle = "text-sm text-gray-900 text-left w-full mb-2";
 
