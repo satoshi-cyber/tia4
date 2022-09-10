@@ -2,7 +2,7 @@ import React from "react";
 import * as Icons from "react-icons/hi";
 import clsx from "clsx";
 import { FormProvider, useForm } from "react-hook-form";
-import { InjectProps, useAction } from "../../lib";
+import { InjecHook, useAction, useHook } from "../../lib";
 import { FormService } from "../../services";
 
 const VARIANT = {
@@ -63,7 +63,12 @@ export const Input = React.forwardRef(
             })}
           </label>
         )}
-        <input name={name} {...restProps} className={classNames.input} />
+        <input
+          name={name}
+          {...restProps}
+          ref={ref}
+          className={classNames.input}
+        />
         {after && (
           <label htmlFor={name} className={classNames.appendContainer}>
             {React.cloneElement(after, {
@@ -163,10 +168,12 @@ export const Select = ({
   );
 };
 
-export const Form = ({ hookKey, children, ...restProps }) => {
-  const action = useAction(hookKey);
+export const Form = ({ actionKey, optionsHook, children, ...restProps }) => {
+  const action = useAction(actionKey);
 
-  const form = useForm();
+  const options = useHook(optionsHook) || {};
+
+  const form = useForm(options);
 
   const { handleSubmit } = form;
 
@@ -182,7 +189,9 @@ export const Form = ({ hookKey, children, ...restProps }) => {
 export const InputField = ({ name, label, ...restProps }) => (
   <div className="w-full">
     {label && <p className="text-sm text-gray-600 mb-3 text-left">{label}</p>}
-    <Input name={name} {...restProps} />
+    <InjecHook hookKey={[FormService.register, name]}>
+      <Input {...restProps} />
+    </InjecHook>
   </div>
 );
 

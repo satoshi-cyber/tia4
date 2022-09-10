@@ -1,14 +1,18 @@
 import { Form, FormIcon, InputField, SelectField } from "../components/Form";
 import Icon from "../components/Icon";
 import { Title } from "../components/Title";
-import SubmitButton from "../components/SubmitButton";
 import { Layout } from "../components/Layout";
+import { FormService, JobService } from "../services";
+import PrimaryButton from "../components/PrimaryButton";
+import { Action, Hook, InjecHook } from "../lib";
+import SecondaryButton from "../components/SecondaryButton";
 
 export default function CreateJob() {
   return (
     <Layout>
-      <Form className="w-full" hookKey={"asdasd"}>
+      <Form className="w-full" actionKey={[JobService.createAJob]}>
         <Title title="Create a job!" />
+        <Hook hookKey={[JobService.questions]} />
         <InputField
           label="Job title:"
           type="text"
@@ -19,9 +23,8 @@ export default function CreateJob() {
         <InputField
           label="Deadline:"
           type="date"
-          name="fullname"
+          name="deadline"
           placeholder="Senior software developer"
-          after={<FormIcon name="HiOutlineBriefcase" />}
         />
         <p className="text-sm text-gray-900 text-left w-full mb-2">
           Questions:
@@ -36,7 +39,7 @@ export default function CreateJob() {
             <InputField
               label="question:"
               type="text"
-              name="fullname"
+              name="question"
               placeholder="Senior software developer"
             />
           </div>
@@ -54,10 +57,12 @@ export default function CreateJob() {
             </SelectField>
           </div>
         </div>
-        <button className="border border-gray-300 sticky self-start top-0 bottom-6 w-full p-3 text-sm focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm mb-4">
-          Add a question
-        </button>
-        <SubmitButton title="Submit" />
+        <Action hookKey={[JobService.addQuestion]}>
+          <SecondaryButton title="Add a questions" />
+        </Action>
+        <InjecHook hookKey={[FormService.SubmitButton]}>
+          <PrimaryButton title="Submit" />
+        </InjecHook>
       </Form>
     </Layout>
   );

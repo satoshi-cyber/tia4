@@ -3,19 +3,20 @@ import { useFormContext, useFormState } from "react-hook-form";
 import { addHook } from "../lib";
 
 export const FormService = {
-  SubmitButton: "FormService-submitButton",
-  Register: "FormService-Register",
+  submitButton: "FormService-submitButton",
+  register: "FormService-Register",
 };
 
-addHook(FormService.SubmitButton, () => {
+addHook(FormService.submitButton, () => {
   const { isSubmitting, isDirty } = useFormState();
 
   return {
     disabled: !isDirty || isSubmitting,
+    type: "submit",
   };
 });
 
-addHook(FormService.Register, (name) => {
+addHook(FormService.register, (name) => {
   const form = useFormContext();
 
   if (!form) return {};
