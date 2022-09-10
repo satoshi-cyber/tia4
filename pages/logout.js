@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { useAction } from "../lib";
 import { AuthService } from "../services";
 
 export default function Home() {
   const logout = useAction([AuthService.logout]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     logout();
   }, [logout]);
 

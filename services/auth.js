@@ -1,6 +1,6 @@
 import { Magic } from "magic-sdk";
 import { useRouter } from "next/router";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useLayoutEffect } from "react";
 import { OAuthExtension } from "@magic-ext/oauth";
 
 import { addHook, useHook } from "../lib";
@@ -79,7 +79,7 @@ addHook(AuthService.loginWithProvider, (provider) =>
 addHook(AuthService.oAuthCallback, () => {
   const push = useHook([AuthService.push]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     magic.oauth
       .getRedirectResult()
       .then((res) => {

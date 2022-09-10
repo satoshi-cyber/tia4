@@ -28,7 +28,7 @@ const Login = () => (
     <p className="text-gray-600 my-5">OR</p>
     <div className="grid grid-cols-2 grid-rows-1 gap-4 w-full">
       <Action hookKey={[AuthService.loginWithProvider, "facebook"]}>
-        <SocialButton provider="facebook" title="Continue in with Linkedin" />
+        <SocialButton provider="facebook" title="Continue in with facebook" />
       </Action>
       <Action hookKey={[AuthService.loginWithProvider, "linkedin"]}>
         <SocialButton provider="linkedin" title="Sign in with Linkedin" />
