@@ -169,10 +169,10 @@ export const Select = ({
   );
 };
 
-export const Form = ({ actionKey, optionsHook, children, ...restProps }) => {
+export const Form = ({ actionKey, hookKey, children, ...restProps }) => {
   const action = useAction(actionKey);
 
-  const options = useHook(optionsHook) || {};
+  const options = useHook(hookKey) || {};
 
   const form = useForm(options);
 

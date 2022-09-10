@@ -4,17 +4,20 @@ import * as yup from "yup";
 
 export const JobService = {
   createAJob: "JobService-creatAJob",
-  formOptions: "JobService-formOptiosn",
+  form: "JobService-form",
 };
 
 const schema = yup.object().shape({
-  jobTitle: yup.string().email().required(),
+  jobTitle: yup.string().required(),
 });
 
-addHook(JobService.formOptions, () => {
+addHook(JobService.form, () => {
   return {
     mode: "onBlur",
     resolver: yupResolver(schema),
+    defaultValues: {
+      questions: [[], []],
+    },
   };
 });
 

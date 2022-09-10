@@ -14,8 +14,8 @@ const CreateAJob = () => (
   <Layout.Default>
     <Form
       className="w-full"
+      hookKey={[JobService.form]}
       actionKey={[JobService.createAJob]}
-      optionsHook={[JobService.formOptions]}
     >
       <Title title="Create a job!" />
       <InputField
