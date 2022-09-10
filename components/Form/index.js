@@ -63,9 +63,7 @@ export const Input = React.forwardRef(
             })}
           </label>
         )}
-        <InjectProps hookKey={[FormService.Register, "email", { ref }]}>
-          <input name={name} {...restProps} className={classNames.input} />
-        </InjectProps>
+        <input name={name} {...restProps} className={classNames.input} />
         {after && (
           <label htmlFor={name} className={classNames.appendContainer}>
             {React.cloneElement(after, {
