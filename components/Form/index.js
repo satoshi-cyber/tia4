@@ -1,9 +1,10 @@
 import React from "react";
 import * as Icons from "react-icons/hi";
 import clsx from "clsx";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { InjecHook, useAction, useHook } from "../../lib";
 import { FormService } from "../../services";
+import get from "lodash.get";
 
 const VARIANT = {
   default: {
@@ -186,14 +187,26 @@ export const Form = ({ actionKey, optionsHook, children, ...restProps }) => {
   );
 };
 
-export const InputField = ({ name, label, ...restProps }) => (
-  <div className="w-full">
-    {label && <p className="text-sm text-gray-600 mb-3 text-left">{label}</p>}
-    <InjecHook hookKey={[FormService.register, name]}>
-      <Input {...restProps} />
-    </InjecHook>
-  </div>
-);
+export const InputField = ({ name, label, ...restProps }) => {
+  console.log({ name });
+  const { errors } = useFormState({ name, exact: true });
+
+  const error = get(errors, name);
+
+  return (
+    <div className="w-full">
+      {label && <p className="text-sm text-gray-600 mb-3 text-left">{label}</p>}
+      <InjecHook hookKey={[FormService.register, name]}>
+        <Input {...restProps} error={error} />
+      </InjecHook>
+      {error && (
+        <p className="text-sm text-red-600 -mt-2 mb-6 text-left text">
+          {error.message}
+        </p>
+      )}
+    </div>
+  );
+};
 
 export const SelectField = ({ name, label, ...restProps }) => (
   <div className="w-full">
