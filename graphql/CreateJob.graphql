@@ -1,0 +1,6 @@
+mutation CreateJob($input: NewJob) {
+    createJob(input: $input){
+        id
+    }
+    
+}
