@@ -1,10 +1,5 @@
 import { useFieldArray } from "react-hook-form";
-import {
-  Icon,
-  InputField,
-  SecondaryButton,
-  SelectField,
-} from "../../../../components";
+import { Icon, Field, SecondaryButton } from "../../../../components";
 
 export const Questions: React.FC = () => {
   const { fields, append, remove } = useFieldArray({
@@ -28,25 +23,25 @@ export const Questions: React.FC = () => {
             />
           )}
           <div className="w-full mr-4">
-            <InputField
-              label="question:"
+            <Field.Input
+              label="Question:"
               type="text"
               name={`questions.${index}.question`}
-              placeholder="Senior software developer"
+              placeholder="Tell me about yourself"
             />
           </div>
           <div>
-            <SelectField
-              label="time:"
+            <Field.Select
+              label="Time:"
               type="text"
               name={`questions.${index}.time`}
-              placeholder="Senior software developer"
+              placeholder="2 min"
             >
               <option value={10000}>10 min</option>
               <option value={5000}>5 min</option>
               <option value={2000}>2 min</option>
               <option value={1000}>1 min</option>
-            </SelectField>
+            </Field.Select>
           </div>
         </div>
       ))}

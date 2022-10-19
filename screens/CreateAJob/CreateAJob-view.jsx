@@ -9,7 +9,7 @@ import {
   Title,
   FormIcon,
   PrimaryButton,
-  InputField,
+  Field,
 } from "../../components";
 import { useCreateJobMutation } from "../../graphql";
 import { InjecHook } from "../../lib";
@@ -22,34 +22,35 @@ const CreateAJob = () => {
 
   const form = useForm();
 
-  const handleSubmit = () => {
-    execute({
-      input: {
-        title: "loremIpsum",
-        deadline: "2020-05-04T14:05:23+00:00",
-        questions: [
-          {
-            id: "df109bac-2ad6-4c8d-9050-3a2137cdacf6",
-            question: "Tell me about yourself",
-            time: 120,
-          },
-        ],
-      },
-    });
+  const handleSubmit = (data) => {
+    console.log(data);
+    // execute({
+    //   input: {
+    //     title: "loremIpsum",
+    //     deadline: "2020-05-04T14:05:23+00:00",
+    //     questions: [
+    //       {
+    //         id: "df109bac-2ad6-4c8d-9050-3a2137cdacf6",
+    //         question: "Tell me about yourself",
+    //         time: 120,
+    //       },
+    //     ],
+    //   },
+    // });
   };
 
   return (
     <Layout.Default>
       <Form form={form} onSubmit={handleSubmit} className="w-full">
         <Title title="Create a job!" />
-        <InputField
-          name="jobTitle"
+        <Field.Input
+          name="title"
           label="Job title:"
           type="text"
           placeholder="Senior software developer"
           after={<FormIcon name="HiOutlineBriefcase" />}
         />
-        <InputField
+        <Field.Input
           label="Deadline:"
           type="date"
           name="deadline"
