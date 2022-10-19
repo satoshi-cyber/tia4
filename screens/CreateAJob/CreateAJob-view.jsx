@@ -16,11 +16,27 @@ import { InjecHook } from "../../lib";
 import { FormService } from "../../services";
 
 const CreateAJob = () => {
-  const [_, execute] = useCreateJobMutation();
+  const [state, execute] = useCreateJobMutation();
+
+  console.log(state.error);
 
   const form = useForm();
 
-  const handleSubmit = (input) => execute({ input });
+  const handleSubmit = () => {
+    execute({
+      input: {
+        title: "loremIpsum",
+        deadline: "2020-05-04T14:05:23+00:00",
+        questions: [
+          {
+            id: "df109bac-2ad6-4c8d-9050-3a2137cdacf6",
+            question: "Tell me about yourself",
+            time: 120,
+          },
+        ],
+      },
+    });
+  };
 
   return (
     <Layout.Default>
