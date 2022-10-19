@@ -6,7 +6,7 @@ import {
   SelectField,
 } from "../../../../components";
 
-export const Questions = () => {
+export const Questions: React.FC = () => {
   const { fields, append, remove } = useFieldArray({
     name: "questions",
   });

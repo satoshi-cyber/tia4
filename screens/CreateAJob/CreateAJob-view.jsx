@@ -1,6 +1,7 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
-import { Questions } from "./components/Questions";
+import { Questions } from "./components/Questions/Questions-view";
 
 import {
   Form,
@@ -13,7 +14,6 @@ import {
 import { useCreateJobMutation } from "../../graphql";
 import { InjecHook } from "../../lib";
 import { FormService } from "../../services";
-import { useForm } from "react-hook-form";
 
 const CreateAJob = () => {
   const [_, execute] = useCreateJobMutation();
