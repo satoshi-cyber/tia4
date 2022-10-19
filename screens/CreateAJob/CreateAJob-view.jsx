@@ -4,11 +4,11 @@ import { Questions } from "./components/Questions";
 
 import {
   Form,
-  InputField,
   Layout,
   Title,
   FormIcon,
   PrimaryButton,
+  InputField,
 } from "../../components";
 import { useCreateJobMutation } from "../../graphql";
 import { InjecHook } from "../../lib";
