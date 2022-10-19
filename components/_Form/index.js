@@ -169,18 +169,12 @@ export const Select = ({
   );
 };
 
-export const Form = ({ actionKey, hookKey, children, ...restProps }) => {
-  const action = useAction(actionKey);
-
-  const options = useHook(hookKey) || {};
-
-  const form = useForm(options);
-
+export const Form = ({ form, onSubmit }) => {
   const { handleSubmit } = form;
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={handleSubmit(action)} {...restProps}>
+      <form onSubmit={handleSubmit(onSubmit)} {...restProps}>
         {children}
       </form>
     </FormProvider>

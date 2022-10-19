@@ -1,7 +1,9 @@
+import React from "react";
+
 import { ShowLoader } from "../../lib";
 import Loader from "../Loader";
-import Logo from "../../public/logo.svg";
 import Menu from "../Menu";
+import Logo from "../../public/logo.svg";
 
 const CenterLayout = ({ children }) => (
   <div className={`flex flex-1 w-full justify-center items-center py-20`}>
