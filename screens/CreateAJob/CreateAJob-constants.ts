@@ -1,3 +1,7 @@
+export const CLASS_NAMES = {
+  form: "w-full"
+}
+
 export const ERROR_TOAST = "Error adding the job";
 
 export const SUCCESS_TOAST = "Job is added";
@@ -14,6 +18,8 @@ export const TITLE_FIELD_PROPS = {
   type: "text",
   placeholder: "Senior software developer",
 };
+
+export const TITLE_ICON = 'HiOutlineBriefcase'
 
 export const DEADLINE_FIELD_PROPS = {
   label: "Deadline:",

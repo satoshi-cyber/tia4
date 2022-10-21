@@ -7,6 +7,8 @@ import {
   DEADLINE_FIELD_PROPS,
   TITLE_FIELD_PROPS,
   SUBMIT_BUTTON_PROPS,
+  CLASS_NAMES,
+  TITLE_ICON,
 } from "./CreateAJob-constants";
 
 import {
@@ -21,16 +23,16 @@ import {
 import { InjecHook } from "../../lib";
 import { FormService } from "../../services";
 
-const CreateAJob = () => {
+const CreateAJob: React.FC = () => {
   const { handleSubmit, form, fetching } = useCreateAJob();
 
   return (
     <Layout.Default>
-      <Form form={form} onSubmit={handleSubmit} className="w-full">
+      <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
         <Title title={TITLE} />
         <Field.Input
           {...TITLE_FIELD_PROPS}
-          after={<FormIcon name="HiOutlineBriefcase" />}
+          after={<FormIcon name={TITLE_ICON} />}
         />
         <Field.Input {...DEADLINE_FIELD_PROPS} />
         <Questions />
