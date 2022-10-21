@@ -8,5 +8,5 @@ export interface SelectProps {
   className?: string;
   after?: React.ReactElement;
   placeholder?: string;
-  children: React.ReactNode
+  options: Array<{ value: string, label: string }>
 }

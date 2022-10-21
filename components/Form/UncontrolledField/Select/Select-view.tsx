@@ -7,7 +7,15 @@ import { FORM_THEME } from "../../Form-constants";
 
 export const Select: React.FC<SelectProps> = React.forwardRef(
   (
-    { variant = "default", before, className, after, name, ...restProps },
+    {
+      variant = "default",
+      before,
+      className,
+      after,
+      name,
+      options,
+      ...restProps
+    },
     ref
   ) => {
     const classNames = {
@@ -40,7 +48,11 @@ export const Select: React.FC<SelectProps> = React.forwardRef(
           name={name}
           className={classNames.input}
           ref={ref as any}
-        />
+        >
+          {options.map(({ value, label }) => (
+            <option value={value}>{label}</option>
+          ))}
+        </select>
         {after && (
           <label htmlFor={name} className={classNames.appendContainer}>
             {React.cloneElement(after, {

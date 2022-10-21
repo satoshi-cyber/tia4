@@ -1,54 +1,41 @@
-import { useFieldArray } from "react-hook-form";
-import { v4 as uuidv4 } from "uuid";
-
 import { Icon, Field, SecondaryButton } from "../../../../components";
 
-export const Questions: React.FC = () => {
-  const { fields, append, remove } = useFieldArray({
-    name: "questions",
-  });
+import { useQuestions } from "./Questions-hook";
+import {
+  TITLE,
+  CLASS_NAMES,
+  CLOSE_BUTTON_PROPS,
+  QUESTION_FIELD_PROPS,
+  TIME_FIELD_PROPS,
+  ADD_A_QUESTION_TITLE,
+} from "./Questions-constants";
 
-  const handleAppend = () => append({ id: uuidv4(), time: 2000 });
+export const Questions: React.FC = () => {
+  const { fields, handleAppend, remove } = useQuestions();
 
   return (
     <div>
-      <p className="text-sm text-gray-900 text-left w-full mb-2">Questions:</p>
+      <p className={CLASS_NAMES.title}>{TITLE}</p>
       {fields.map((field, index) => (
-        <div
-          key={field.id}
-          className="border border-gray-300 w-full p-4 rounded-lg mb-4 flex flex-row relative pt-6 shadow-sm"
-        >
+        <div key={field.id} className={CLASS_NAMES.container}>
           {fields.length > 1 && (
-            <Icon
-              name="HiXCircle"
-              size={24}
-              className="absolute right-2 top-2 text-gray-600 cursor-pointer"
-              onClick={() => remove(index)}
-            />
+            <Icon {...CLOSE_BUTTON_PROPS} onClick={() => remove(index)} />
           )}
-          <div className="w-full mr-4">
+          <div className={CLASS_NAMES.question}>
             <Field.Input
-              label="Question:"
-              type="text"
               name={`questions.${index}.question`}
-              placeholder="Tell me about yourself"
+              {...QUESTION_FIELD_PROPS}
             />
           </div>
           <div>
             <Field.Select
-              label="Time:"
               name={`questions.${index}.time`}
-              placeholder="2 min"
-            >
-              <option value="10000">10 min</option>
-              <option value="5000">5 min</option>
-              <option value="2000">2 min</option>
-              <option value="1000">1 min</option>
-            </Field.Select>
+              {...TIME_FIELD_PROPS}
+            />
           </div>
         </div>
       ))}
-      <SecondaryButton title="Add a questions" onClick={handleAppend} />
+      <SecondaryButton title={ADD_A_QUESTION_TITLE} onClick={handleAppend} />
     </div>
   );
 };
