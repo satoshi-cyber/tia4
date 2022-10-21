@@ -33,6 +33,7 @@
     "react-icons": "^4.4.0",
     "react-id-swiper": "^4.0.0",
     "react-media-recorder": "^1.6.6",
+    "react-toastify": "^9.0.8",
     "react-video-recorder": "^3.19.3",
     "styled-components": "^5.3.5",
     "swiper": "^8.3.2",

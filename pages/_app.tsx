@@ -1,5 +1,7 @@
 import { AppProps } from "next/app";
 import { Provider } from "urql";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "../styles/globals.css";
 import { useHook, client } from "../lib";
@@ -11,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider value={client}>
       <Component {...pageProps} />
+      <ToastContainer />
     </Provider>
   );
 }
