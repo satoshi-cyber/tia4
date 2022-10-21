@@ -22,7 +22,7 @@ export const Questions: React.FC = () => {
             <Icon
               name="HiXCircle"
               size={24}
-              className="absolute right-2 top-2 text-gray-600"
+              className="absolute right-2 top-2 text-gray-600 cursor-pointer"
               onClick={() => remove(index)}
             />
           )}

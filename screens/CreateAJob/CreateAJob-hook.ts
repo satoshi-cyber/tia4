@@ -6,8 +6,10 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 import { createAJobSchema } from "./CreateAJob-validations";
+import { ERROR_TOAST, SUCCESS_TOAST, TOAST_POSITION, DEFAULT_QUESTION_TIME } from './CreateAJob-constants';
 
 import { NewJob, useCreateJobMutation } from "../../graphql";
+import { URLS } from '../../config';
 
 export const useCreateAJob = () => {
   const [{ fetching }, execute] = useCreateJobMutation();
@@ -19,8 +21,8 @@ export const useCreateAJob = () => {
     resolver: yupResolver(createAJobSchema),
     defaultValues: {
       questions: [
-        { id: uuidv4(), time: 2000 },
-        { id: uuidv4(), time: 2000 }
+        { id: uuidv4(), time: DEFAULT_QUESTION_TIME },
+        { id: uuidv4(), time: DEFAULT_QUESTION_TIME }
       ]
     }
   });
@@ -29,18 +31,18 @@ export const useCreateAJob = () => {
     const { error } = await execute({ input })
 
     if (error) {
-      toast.error('Error adding the job', {
-        position: "top-right",
+      toast.error(ERROR_TOAST, {
+        position: TOAST_POSITION,
       })
 
       return
     }
 
-    toast.success('Job is added', {
-      position: "top-right",
+    toast.success(SUCCESS_TOAST, {
+      position: TOAST_POSITION,
     })
 
-    router.push('/jobs')
+    router.push(URLS.JOBS)
   };
 
   return {

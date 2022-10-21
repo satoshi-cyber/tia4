@@ -2,6 +2,12 @@ import React from "react";
 
 import { Questions } from "./components/Questions/Questions-view";
 import { useCreateAJob } from "./CreateAJob-hook";
+import {
+  TITLE,
+  DEADLINE_FIELD_PROPS,
+  TITLE_FIELD_PROPS,
+  SUBMIT_BUTTON_PROPS,
+} from "./CreateAJob-constants";
 
 import {
   Form,
@@ -21,23 +27,15 @@ const CreateAJob = () => {
   return (
     <Layout.Default>
       <Form form={form} onSubmit={handleSubmit} className="w-full">
-        <Title title="Create a job!" />
+        <Title title={TITLE} />
         <Field.Input
-          name="title"
-          label="Job title:"
-          type="text"
-          placeholder="Senior software developer"
+          {...TITLE_FIELD_PROPS}
           after={<FormIcon name="HiOutlineBriefcase" />}
         />
-        <Field.Input
-          label="Deadline:"
-          type="date"
-          name="deadline"
-          placeholder="Senior software developer"
-        />
+        <Field.Input {...DEADLINE_FIELD_PROPS} />
         <Questions />
         <InjecHook hookKey={[FormService.submitButton]}>
-          <PrimaryButton title="Submit" />
+          <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
         </InjecHook>
       </Form>
       {fetching && <Loader />}
