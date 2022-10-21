@@ -9,7 +9,6 @@ import { Select } from "../../UncontrolledField/Select";
 export const SelectField: React.FC<SelectFieldProps> = ({
   name,
   label,
-  children,
   ...restProps
 }) => {
   const { errors } = useFormState({ name, exact: true });
@@ -20,9 +19,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   return (
     <div className="w-full">
       {label && <p className="text-sm text-gray-600 mb-3 text-left">{label}</p>}
-      <Select {...restProps} {...register(name)}>
-        {children}
-      </Select>
+      <Select {...restProps} {...register(name)} />
       {error && (
         <p className="text-sm text-red-600 -mt-2 mb-6 text-left text">
           {error?.message?.toString()}
