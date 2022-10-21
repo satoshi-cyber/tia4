@@ -1,10 +1,14 @@
 import { useFieldArray } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
+
 import { Icon, Field, SecondaryButton } from "../../../../components";
 
 export const Questions: React.FC = () => {
   const { fields, append, remove } = useFieldArray({
     name: "questions",
   });
+
+  const handleAppend = () => append({ id: uuidv4() });
 
   return (
     <div>
@@ -33,19 +37,18 @@ export const Questions: React.FC = () => {
           <div>
             <Field.Select
               label="Time:"
-              type="text"
               name={`questions.${index}.time`}
               placeholder="2 min"
             >
-              <option value={10000}>10 min</option>
-              <option value={5000}>5 min</option>
-              <option value={2000}>2 min</option>
-              <option value={1000}>1 min</option>
+              <option value="10000">10 min</option>
+              <option value="5000">5 min</option>
+              <option value="2000">2 min</option>
+              <option value="1000">1 min</option>
             </Field.Select>
           </div>
         </div>
       ))}
-      <SecondaryButton title="Add a questions" onClick={() => append({})} />
+      <SecondaryButton title="Add a questions" onClick={handleAppend} />
     </div>
   );
 };

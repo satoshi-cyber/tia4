@@ -35,7 +35,12 @@ export const Select: React.FC<SelectProps> = React.forwardRef(
             })}
           </label>
         )}
-        <select {...restProps} className={classNames.input} ref={ref as any} />
+        <select
+          {...restProps}
+          name={name}
+          className={classNames.input}
+          ref={ref as any}
+        />
         {after && (
           <label htmlFor={name} className={classNames.appendContainer}>
             {React.cloneElement(after, {

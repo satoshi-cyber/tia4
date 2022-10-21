@@ -1,6 +1,6 @@
 import React from "react";
 import { get } from "lodash";
-import { useFormState } from "react-hook-form";
+import { useFormContext, useFormState } from "react-hook-form";
 
 import { SelectFieldProps } from "./SelectField-types";
 
@@ -13,13 +13,14 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   ...restProps
 }) => {
   const { errors } = useFormState({ name, exact: true });
+  const { register } = useFormContext();
 
   const error = get(errors, name);
 
   return (
     <div className="w-full">
       {label && <p className="text-sm text-gray-600 mb-3 text-left">{label}</p>}
-      <Select {...restProps} name={name}>
+      <Select {...restProps} {...register(name)}>
         {children}
       </Select>
       {error && (
