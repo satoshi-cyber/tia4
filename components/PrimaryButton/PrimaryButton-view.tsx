@@ -1,4 +1,11 @@
-const PrimaryButton = ({ title, provider, ...restProps }) => (
+import React from "react";
+
+import { PrimaryButtonProps } from "./PrimaryButton-types";
+
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({
+  title,
+  ...restProps
+}) => (
   <button
     type="button"
     {...restProps}

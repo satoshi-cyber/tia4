@@ -1,7 +1,8 @@
 import { UseFormReturn } from "react-hook-form";
 
 export interface FormProps {
-  onSubmit: () => {};
+  onSubmit: (data: any) => void;
   form: UseFormReturn;
   children: React.ReactNode;
+  className?: string;
 }

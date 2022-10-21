@@ -1,10 +1,11 @@
+import { AppProps } from "next/app";
 import { Provider } from "urql";
 
 import "../styles/globals.css";
 import { useHook, client } from "../lib";
 import { AuthService } from "../services";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   useHook([AuthService.redirect]);
 
   return (
