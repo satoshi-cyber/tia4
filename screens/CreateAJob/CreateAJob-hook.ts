@@ -8,9 +8,7 @@ import { createAJobSchema } from "./CreateAJob-validations";
 import { NewJob, useCreateJobMutation } from "../../graphql";
 
 export const useCreateAJob = () => {
-  const [state, execute] = useCreateJobMutation();
-
-  console.log(state.error);
+  const [{ fetching }, execute] = useCreateJobMutation();
 
   const form = useForm<NewJob>({
     mode: "onBlur",
@@ -18,31 +16,19 @@ export const useCreateAJob = () => {
     resolver: yupResolver(createAJobSchema),
     defaultValues: {
       questions: [
-        { id: uuidv4() },
-        { id: uuidv4() }
+        { id: uuidv4(), time: 2000 },
+        { id: uuidv4(), time: 2000 }
       ]
     }
   });
 
-  const handleSubmit = (data: NewJob) => {
-    console.log(data);
-    // execute({
-    //   input: {
-    //     title: "loremIpsum",
-    //     deadline: "2020-05-04T14:05:23+00:00",
-    //     questions: [
-    //       {
-    //         id: "df109bac-2ad6-4c8d-9050-3a2137cdacf6",
-    //         question: "Tell me about yourself",
-    //         time: 120,
-    //       },
-    //     ],
-    //   },
-    // });
+  const handleSubmit = (input: NewJob) => {
+    execute({ input })
   };
 
   return {
     form,
     handleSubmit,
+    fetching
   };
 };

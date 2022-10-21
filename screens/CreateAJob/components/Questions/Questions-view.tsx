@@ -8,7 +8,7 @@ export const Questions: React.FC = () => {
     name: "questions",
   });
 
-  const handleAppend = () => append({ id: uuidv4() });
+  const handleAppend = () => append({ id: uuidv4(), time: 2000 });
 
   return (
     <div>

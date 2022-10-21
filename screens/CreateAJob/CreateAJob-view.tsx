@@ -10,12 +10,13 @@ import {
   FormIcon,
   PrimaryButton,
   Field,
+  Loader,
 } from "../../components";
 import { InjecHook } from "../../lib";
 import { FormService } from "../../services";
 
 const CreateAJob = () => {
-  const { handleSubmit, form } = useCreateAJob();
+  const { handleSubmit, form, fetching } = useCreateAJob();
 
   return (
     <Layout.Default>
@@ -39,6 +40,7 @@ const CreateAJob = () => {
           <PrimaryButton title="Submit" />
         </InjecHook>
       </Form>
+      {fetching && <Loader />}
     </Layout.Default>
   );
 };
