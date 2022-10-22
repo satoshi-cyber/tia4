@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 import { createAJobSchema } from "./CreateAJob-validations";
-import { ERROR_TOAST, SUCCESS_TOAST, TOAST_POSITION, DEFAULT_QUESTION_TIME } from './CreateAJob-constants';
+import { ERROR_TOAST, SUCCESS_TOAST, TOAST_OPTIONS, DEFAULT_QUESTION_TIME } from './CreateAJob-constants';
 
 import { NewJob, useCreateJobMutation } from "../../graphql";
 import { URLS } from '../../config';
@@ -30,16 +30,12 @@ export const useCreateAJob = () => {
     const { error } = await execute({ input })
 
     if (error) {
-      toast.error(ERROR_TOAST, {
-        position: TOAST_POSITION,
-      })
+      toast.error(ERROR_TOAST, TOAST_OPTIONS)
 
       return
     }
 
-    toast.success(SUCCESS_TOAST, {
-      position: TOAST_POSITION,
-    })
+    toast.success(SUCCESS_TOAST, TOAST_OPTIONS)
 
     router.push(URLS.JOBS)
   };

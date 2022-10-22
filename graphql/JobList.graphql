@@ -1,0 +1,7 @@
+query JobsList {
+    jobs{
+        id
+        title
+    }
+    
+}

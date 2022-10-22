@@ -1,3 +1,5 @@
+import { ToastPosition, Theme } from "react-toastify";
+
 export const CLASS_NAMES = {
   form: "w-full"
 }
@@ -6,7 +8,10 @@ export const ERROR_TOAST = "Error adding the job";
 
 export const SUCCESS_TOAST = "Job is added";
 
-export const TOAST_POSITION = "top-right";
+export const TOAST_OPTIONS = {
+  position: "top-right" as ToastPosition,
+  theme: "colored" as Theme
+}
 
 export const DEFAULT_QUESTION_TIME = 2000
 
