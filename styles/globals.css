@@ -10,7 +10,11 @@
 
 html,
 body {
-  @apply min-h-screen overflow-x-hidden
+  @apply min-h-screen overflow-x-hidden 
+}
+
+html {
+  @apply overflow-y-scroll
 }
 
 #__next {
