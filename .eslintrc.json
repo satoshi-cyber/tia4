@@ -13,6 +13,21 @@
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@/components", "./components"],
+          ["@/graphql", "./graphql"],
+          ["@/config", "./config"]
+        ],
+        "extensions": [".ts", ".js", ".jsx", ".json"]
+      },
+      "node": {
+        "paths": ["./"]
+      }
+    }
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {

@@ -1,10 +1,9 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link'
+import React from 'react'
+import { URLS } from '@/config'
 
-import { CLASS_NAMES, TITLE, SUB_TITLE } from "./Header-constants";
-import { CreateJobButton } from "./components";
-
-import { URLS } from "../../../../config";
+import { CLASS_NAMES, TITLE, SUB_TITLE } from './Header-constants'
+import { CreateJobButton } from './components'
 
 const Header: React.FC = () => (
   <div className={CLASS_NAMES.container}>
@@ -16,6 +15,6 @@ const Header: React.FC = () => (
       </Link>
     </div>
   </div>
-);
+)
 
-export default Header;
+export default Header

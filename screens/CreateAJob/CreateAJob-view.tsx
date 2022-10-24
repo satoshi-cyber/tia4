@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-import { Questions } from "./components/Questions/Questions-view";
-import { useCreateAJob } from "./CreateAJob-hook";
+import { Questions } from './components/Questions/Questions-view'
+import { useCreateAJob } from './CreateAJob-hook'
 import {
   TITLE,
   DEADLINE_FIELD_PROPS,
@@ -9,7 +9,7 @@ import {
   SUBMIT_BUTTON_PROPS,
   CLASS_NAMES,
   TITLE_ICON,
-} from "./CreateAJob-constants";
+} from './CreateAJob-constants'
 
 import {
   Form,
@@ -19,12 +19,12 @@ import {
   PrimaryButton,
   Field,
   Loader,
-} from "../../components";
-import { InjecHook } from "../../lib";
-import { FormService } from "../../services";
+} from '../../components'
+import { InjecHook } from '../../lib'
+import { FormService } from '../../services'
 
 const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, fetching } = useCreateAJob();
+  const { handleSubmit, form, fetching } = useCreateAJob()
 
   return (
     <Layout.Default>
@@ -42,7 +42,7 @@ const CreateAJob: React.FC = () => {
       </Form>
       {fetching && <Loader />}
     </Layout.Default>
-  );
-};
+  )
+}
 
-export default CreateAJob;
+export default CreateAJob

@@ -1,8 +1,7 @@
 import React from 'react'
+import { Icon } from '@/components'
 
 import { CLASS_NAMES } from './Item-constants'
-
-import { Icon } from '../../../../../../components'
 
 const Item: React.FC = () => (
   <div className={CLASS_NAMES.container}>
