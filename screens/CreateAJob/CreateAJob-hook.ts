@@ -27,7 +27,7 @@ export const useCreateAJob = () => {
   });
 
   const handleSubmit = async (input: NewJob) => {
-    const { error } = await execute({ input })
+    const { error } = await execute({ input }, { additionalTypenames: ['Job'] })
 
     if (error) {
       toast.error(ERROR_TOAST, TOAST_OPTIONS)

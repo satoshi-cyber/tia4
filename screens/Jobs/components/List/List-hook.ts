@@ -1,9 +1,12 @@
 import { useJobsListQuery } from "@/graphql"
+import { useMemo } from "react"
 
 import { SKELETON_JOBS } from "./List-constants"
 
 export const useJobs = () => {
-  const [results] = useJobsListQuery()
+  const context = useMemo(() => ({ additionalTypenames: ['Job'] }), [])
+
+  const [results] = useJobsListQuery({ context })
 
   const { data, fetching } = results
 
