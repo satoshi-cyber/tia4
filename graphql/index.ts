@@ -178,7 +178,7 @@ export type CreateJobMutation = { __typename?: 'Mutation', createJob: { __typena
 export type JobsListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string }> };
+export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
 
 
 export const CreateJobDocument = gql`
@@ -197,6 +197,7 @@ export const JobsListDocument = gql`
   jobs {
     id
     title
+    deadline
   }
 }
     `;
