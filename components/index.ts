@@ -1,5 +1,5 @@
 export * from "./Form";
-export { default as Icon } from "./Icon";
+export { default as Icon } from "./Icon/Icon-view";
 export { default as Layout } from "./Layout";
 export { default as Menu } from "./Menu";
 export { default as Loader } from "./Loader";

@@ -21,8 +21,18 @@ const Item: React.FC<ItemProps> = ({ title, deadline, isLoading }) => (
       />
     </div>
     <div className="grid grid-cols-2 gap-4 ml-4">
-      <Icon name="HiPencil" size={30} className="text-black" />
-      <Icon name="HiExternalLink" size={30} className="text-black" />
+      <Icon
+        isLoading={isLoading}
+        name="HiPencil"
+        size={30}
+        className="text-black"
+      />
+      <Icon
+        isLoading={isLoading}
+        name="HiExternalLink"
+        size={30}
+        className="text-black"
+      />
     </div>
   </div>
 )

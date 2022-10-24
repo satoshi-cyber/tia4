@@ -1,7 +1,8 @@
 import React from 'react'
-import { Icon } from '@/components'
 
 import { CLASS_NAMES, TITLE, ICON_PROPS } from './CreateJobButton-constants'
+
+import { Icon } from '@/components'
 
 const CreateJobButton: React.FC = (props) => (
   <button className={CLASS_NAMES.button} {...props}>

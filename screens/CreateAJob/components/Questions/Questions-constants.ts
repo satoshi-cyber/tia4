@@ -10,7 +10,7 @@ export const CLOSE_BUTTON_PROPS = {
   name: "HiXCircle",
   size: 24,
   className: "absolute right-2 top-2 text-gray-600 cursor-pointer"
-}
+} as const
 
 export const QUESTION_FIELD_PROPS = {
   label: "Question:",
