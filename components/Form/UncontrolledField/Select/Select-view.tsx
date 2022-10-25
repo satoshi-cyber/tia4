@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
+import SkeletonLoader from '@/components/SkeletonLoader'
 
 import { SelectProps } from './Select-types'
 
@@ -43,18 +44,27 @@ export const Select: React.FC<SelectProps> = React.forwardRef(
             })}
           </label>
         )}
-        <select
-          {...restProps}
-          name={name}
-          className={classNames.input}
-          ref={ref as any}
-        >
-          {options.map(({ value, label }) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
+        <SkeletonLoader
+          wrapper={({ children }: { children?: React.ReactElement }) => (
+            <div {...restProps} className={classNames.input}>
+              {children}
+            </div>
+          )}
+          after={
+            <select
+              {...restProps}
+              name={name}
+              className={classNames.input}
+              ref={ref as any}
+            >
+              {options.map(({ value, label }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          }
+        />
         {after && (
           <label htmlFor={name} className={classNames.appendContainer}>
             {React.cloneElement(after, {

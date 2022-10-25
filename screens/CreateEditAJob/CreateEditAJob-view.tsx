@@ -28,8 +28,8 @@ const CreateAJob: React.FC = () => {
     useCreateUpdateAJob()
 
   return (
-    <LoadingProvider isLoading={fetching}>
-      <Layout.Default>
+    <Layout.Default>
+      <LoadingProvider isLoading={fetching}>
         <Form
           form={form}
           onSubmit={handleSubmit}
@@ -52,8 +52,8 @@ const CreateAJob: React.FC = () => {
           </InjecHook>
         </Form>
         {submitting && <Loader />}
-      </Layout.Default>
-    </LoadingProvider>
+      </LoadingProvider>
+    </Layout.Default>
   )
 }
 

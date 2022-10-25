@@ -19,6 +19,7 @@ export const QUESTION_FIELD_PROPS = {
 }
 
 export const TIME_FIELD_PROPS = {
+  className: 'min-w-[100px]',
   label: "Time:",
   placeholder: "2 min",
   options: [
