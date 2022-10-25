@@ -10,7 +10,7 @@ import {
 } from '@/components'
 
 import { Questions } from './components/Questions/Questions-view'
-import { useCreateAJob } from './CreateEditAJob-hook'
+import { useCreateUpdateAJob } from './CreateEditAJob-hook'
 import {
   TITLE,
   DEADLINE_FIELD_PROPS,
@@ -19,13 +19,12 @@ import {
   CLASS_NAMES,
   TITLE_ICON,
 } from './CreateEditAJob-constants'
-import { CreateEditAJobProps } from './CreateEditAJob-types'
 
 import { InjecHook } from '../../lib'
 import { FormService } from '../../services'
 
-const CreateAJob: React.FC<CreateEditAJobProps> = ({ jobId }) => {
-  const { handleSubmit, form, fetching } = useCreateAJob({ jobId })
+const CreateAJob: React.FC = () => {
+  const { handleSubmit, form, fetching } = useCreateUpdateAJob()
 
   return (
     <Layout.Default>

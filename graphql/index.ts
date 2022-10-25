@@ -180,6 +180,13 @@ export type JobsListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
 
+export type UpdateJobMutationVariables = Exact<{
+  input?: InputMaybe<UpdateJob>;
+}>;
+
+
+export type UpdateJobMutation = { __typename?: 'Mutation', updateJob: { __typename?: 'Job', id: string } };
+
 
 export const CreateJobDocument = gql`
     mutation CreateJob($input: NewJob) {
@@ -204,4 +211,15 @@ export const JobsListDocument = gql`
 
 export function useJobsListQuery(options?: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
   return Urql.useQuery<JobsListQuery, JobsListQueryVariables>({ query: JobsListDocument, ...options });
+};
+export const UpdateJobDocument = gql`
+    mutation UpdateJob($input: UpdateJob) {
+  updateJob(input: $input) {
+    id
+  }
+}
+    `;
+
+export function useUpdateJobMutation() {
+  return Urql.useMutation<UpdateJobMutation, UpdateJobMutationVariables>(UpdateJobDocument);
 };

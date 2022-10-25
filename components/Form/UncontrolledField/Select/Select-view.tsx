@@ -1,14 +1,14 @@
-import clsx from "clsx";
-import React from "react";
+import clsx from 'clsx'
+import React from 'react'
 
-import { SelectProps } from "./Select-types";
+import { SelectProps } from './Select-types'
 
-import { FORM_THEME } from "../../Form-constants";
+import { FORM_THEME } from '../../Form-constants'
 
 export const Select: React.FC<SelectProps> = React.forwardRef(
   (
     {
-      variant = "default",
+      variant = 'default',
       before,
       className,
       after,
@@ -22,7 +22,7 @@ export const Select: React.FC<SelectProps> = React.forwardRef(
       input: clsx(
         FORM_THEME[variant].padding,
         FORM_THEME[variant].style,
-        "pr-10",
+        'pr-10',
         className
       ),
       container: clsx(
@@ -32,7 +32,7 @@ export const Select: React.FC<SelectProps> = React.forwardRef(
       appendContainer: FORM_THEME[variant].appendContainer,
       appendLeft: FORM_THEME[variant].appendLeft,
       appendRight: FORM_THEME[variant].appendRight,
-    };
+    }
 
     return (
       <div className={classNames.container}>
@@ -50,7 +50,9 @@ export const Select: React.FC<SelectProps> = React.forwardRef(
           ref={ref as any}
         >
           {options.map(({ value, label }) => (
-            <option value={value}>{label}</option>
+            <option key={value} value={value}>
+              {label}
+            </option>
           ))}
         </select>
         {after && (
@@ -61,8 +63,8 @@ export const Select: React.FC<SelectProps> = React.forwardRef(
           </label>
         )}
       </div>
-    );
+    )
   }
-);
+)
 
-Select.displayName = "Select";
+Select.displayName = 'Select'

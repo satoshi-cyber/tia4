@@ -1,0 +1,6 @@
+mutation UpdateJob($input: UpdateJob) {
+    updateJob(input: $input){
+        id
+    }
+    
+}
