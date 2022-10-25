@@ -1,5 +1,3 @@
-import { ToastPosition, Theme } from "react-toastify";
-
 export const CLASS_NAMES = {
   form: "w-full"
 }
@@ -16,9 +14,9 @@ export const TOAST_MESSAGE = {
 }
 
 export const TOAST_OPTIONS = {
-  position: "top-right" as ToastPosition,
-  theme: "colored" as Theme
-}
+  position: "top-right",
+  theme: "colored"
+} as const
 
 export const DEFAULT_QUESTION_TIME = 2000
 
