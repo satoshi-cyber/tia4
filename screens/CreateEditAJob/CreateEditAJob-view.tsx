@@ -28,7 +28,12 @@ const CreateAJob: React.FC = () => {
 
   return (
     <Layout.Default>
-      <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
+      <Form
+        form={form}
+        onSubmit={handleSubmit}
+        className={CLASS_NAMES.form}
+        isLoading={fetching}
+      >
         <Title
           title={title}
           isLoading={fetching}

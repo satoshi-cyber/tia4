@@ -1,6 +1,7 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 
+import SkeletonLoader from '../SkeletonLoader'
 import { TitleProps } from './Title-types'
 
 const Text: React.FC<TitleProps> = ({
@@ -13,7 +14,7 @@ const Text: React.FC<TitleProps> = ({
     className="text-3xl text-normal mb-10 text-gray-900 text-center"
     {...restProps}
   >
-    {isLoading ? <Skeleton {...skeletonProps} /> : title}
+    <SkeletonLoader isLoading={isLoading} {...skeletonProps} after={title} />
   </h1>
 )
 

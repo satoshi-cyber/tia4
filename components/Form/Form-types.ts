@@ -5,4 +5,5 @@ export interface FormProps {
   form: UseFormReturn<any>;
   children: React.ReactNode;
   className?: string;
+  isLoading?: boolean
 }

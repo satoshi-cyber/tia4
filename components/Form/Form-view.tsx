@@ -1,21 +1,22 @@
-import React from "react";
-import { FormProvider } from "react-hook-form";
+import React from 'react'
+import { FormProvider } from 'react-hook-form'
 
-import { FormProps } from "./Form-types";
+import { FormProps } from './Form-types'
 
 export const Form: React.FC<FormProps> = ({
   form,
   onSubmit,
   children,
+  isLoading,
   ...restProps
 }) => {
-  const { handleSubmit } = form;
+  const { handleSubmit } = form
 
   return (
-    <FormProvider {...form}>
+    <FormProvider {...{ ...form, isLoading }}>
       <form onSubmit={handleSubmit(onSubmit)} {...restProps}>
         {children}
       </form>
     </FormProvider>
-  );
-};
+  )
+}

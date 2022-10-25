@@ -1,7 +1,8 @@
 import React from 'react'
-import Skeleton from 'react-loading-skeleton'
 
 import { TextProps } from './Text-types'
+
+import SkeletonLoader from '../SkeletonLoader'
 
 const Text: React.FC<TextProps> = ({
   as: Component = 'p',
@@ -11,7 +12,7 @@ const Text: React.FC<TextProps> = ({
   ...restProps
 }) => (
   <Component {...restProps}>
-    {isLoading ? <Skeleton {...skeletonProps} /> : text}
+    <SkeletonLoader isLoading={isLoading} {...skeletonProps} after={text} />
   </Component>
 )
 
