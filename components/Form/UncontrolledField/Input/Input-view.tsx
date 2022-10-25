@@ -1,13 +1,15 @@
-import clsx from "clsx";
-import React from "react";
+import clsx from 'clsx'
+import React from 'react'
+import { Text } from '@/components'
 
-import { InputProps } from "./Input-types";
+import { InputProps } from './Input-types'
 
-import { FORM_THEME } from "../../Form-constants";
+import { FORM_THEME } from '../../Form-constants'
+import SkeletonLoader from '@/components/SkeletonLoader'
 
 export const Input: React.FC<InputProps> = React.forwardRef(
   (
-    { variant = "default", before, className, after, name, ...restProps },
+    { variant = 'default', before, className, after, name, ...restProps },
     ref
   ) => {
     const classNames = {
@@ -23,33 +25,48 @@ export const Input: React.FC<InputProps> = React.forwardRef(
       appendContainer: FORM_THEME[variant].appendContainer,
       appendLeft: FORM_THEME[variant].appendLeft,
       appendRight: FORM_THEME[variant].appendRight,
-    };
+    }
 
     return (
       <div className={classNames.container}>
         {before && (
-          <label htmlFor={name} className={classNames.appendContainer}>
-            {React.cloneElement(before, {
+          <Text
+            as="label"
+            htmlFor={name}
+            className={classNames.appendContainer}
+            text={React.cloneElement(before, {
               className: classNames.appendLeft,
             })}
-          </label>
+          />
         )}
-        <input
-          name={name}
-          {...restProps}
-          ref={ref as any}
-          className={classNames.input}
+        <SkeletonLoader
+          wrapper={({ children }: { children?: React.ReactElement }) => (
+            <div {...restProps} className={classNames.input}>
+              {children}
+            </div>
+          )}
+          after={
+            <input
+              name={name}
+              {...restProps}
+              ref={ref as any}
+              className={classNames.input}
+            />
+          }
         />
         {after && (
-          <label htmlFor={name} className={classNames.appendContainer}>
-            {React.cloneElement(after, {
+          <Text
+            as="label"
+            htmlFor={name}
+            className={classNames.appendContainer}
+            text={React.cloneElement(after, {
               className: classNames.appendRight,
             })}
-          </label>
+          />
         )}
       </div>
-    );
+    )
   }
-);
+)
 
-Input.displayName = "Input";
+Input.displayName = 'Input'

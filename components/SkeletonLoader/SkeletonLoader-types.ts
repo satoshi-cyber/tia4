@@ -5,4 +5,5 @@ export interface SkeletonLoaderProps extends SkeletonStyleProps {
   isLoading?: boolean
   after?: React.ReactNode
   className?: string
+  wrapper?: React.ComponentType
 }

@@ -8,12 +8,15 @@ import { SkeletonLoaderProps } from './SkeletonLoader-types'
 const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   after = null,
   isLoading,
+  wrapper: Wrapper = React.Fragment,
   ...skeletonProps
 }) => {
   const isProviderLoading = useContext(LoadingProvider.Context)
 
   return isProviderLoading || isLoading ? (
-    <Skeleton {...skeletonProps} />
+    <Wrapper>
+      <Skeleton {...skeletonProps} />
+    </Wrapper>
   ) : (
     <>{after}</>
   )

@@ -2,9 +2,10 @@ import React from "react";
 import { SkeletonStyleProps } from "react-loading-skeleton";
 
 export interface TextProps {
-  text?: string;
+  text?: React.ReactNode;
   isLoading?: boolean
   skeletonProps?: SkeletonStyleProps
-  className?: String
-  as?: React.ComponentType<TextProps>
+  className?: string
+  htmlFor?: string
+  as?: React.ComponentType<TextProps> | string
 }
