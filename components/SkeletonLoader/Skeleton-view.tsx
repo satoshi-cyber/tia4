@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Skeleton from 'react-loading-skeleton'
+
+import LoadingProvider from '../LoadingProvider'
 
 import { SkeletonLoaderProps } from './SkeletonLoader-types'
 
@@ -8,7 +10,13 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   isLoading,
   ...skeletonProps
 }) => {
-  return isLoading ? <Skeleton {...skeletonProps} /> : <>{after}</>
+  const isProviderLoading = useContext(LoadingProvider.Context)
+
+  return isProviderLoading || isLoading ? (
+    <Skeleton {...skeletonProps} />
+  ) : (
+    <>{after}</>
+  )
 }
 
 export default SkeletonLoader

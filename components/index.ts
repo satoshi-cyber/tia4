@@ -9,3 +9,4 @@ export { default as SocialButton } from "./SocialButton";
 export { default as Title } from "./Title";
 export { default as Text } from './Text'
 export { default as ButtonIcon } from './ButtonIcon'
+export { default as LoadingProvider } from './LoadingProvider'
