@@ -4,9 +4,16 @@ export const CLASS_NAMES = {
   form: "w-full"
 }
 
-export const ERROR_TOAST = "Error adding the job";
-
-export const SUCCESS_TOAST = "Job is added";
+export const TOAST_MESSAGE = {
+  ADD_JOB: {
+    success: "Job is added",
+    error: "Error adding the job"
+  },
+  EDIT_JOB: {
+    success: "Job is edited",
+    error: "Error editing the job"
+  },
+}
 
 export const TOAST_OPTIONS = {
   position: "top-right" as ToastPosition,

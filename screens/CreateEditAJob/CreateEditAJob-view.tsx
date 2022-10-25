@@ -24,11 +24,12 @@ import { InjecHook } from '../../lib'
 import { FormService } from '../../services'
 
 const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, fetching } = useCreateUpdateAJob()
+  const { handleSubmit, form, submitting, fetching } = useCreateUpdateAJob()
 
   return (
     <Layout.Default>
       <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
+        {fetching && 'is loading'}
         <Title title={TITLE} />
         <Field.Input
           {...TITLE_FIELD_PROPS}
@@ -40,7 +41,7 @@ const CreateAJob: React.FC = () => {
           <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
         </InjecHook>
       </Form>
-      {fetching && <Loader />}
+      {submitting && <Loader />}
     </Layout.Default>
   )
 }

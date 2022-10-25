@@ -123,8 +123,14 @@ export type NewUser = {
 export type Query = {
   __typename?: 'Query';
   interviews: Array<Interview>;
+  job: Job;
   jobs: Array<Job>;
   users: Array<User>;
+};
+
+
+export type QueryJobArgs = {
+  id: Scalars['ID'];
 };
 
 export type Question = {
@@ -175,6 +181,13 @@ export type CreateJobMutationVariables = Exact<{
 
 export type CreateJobMutation = { __typename?: 'Mutation', createJob: { __typename?: 'Job', id: string } };
 
+export type JobQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type JobQuery = { __typename?: 'Query', job: { __typename?: 'Job', id: string, title: string, deadline: any, questions: Array<{ __typename?: 'Question', id: string, question: string, time: number }> } };
+
 export type JobsListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -198,6 +211,24 @@ export const CreateJobDocument = gql`
 
 export function useCreateJobMutation() {
   return Urql.useMutation<CreateJobMutation, CreateJobMutationVariables>(CreateJobDocument);
+};
+export const JobDocument = gql`
+    query Job($id: ID!) {
+  job(id: $id) {
+    id
+    title
+    deadline
+    questions {
+      id
+      question
+      time
+    }
+  }
+}
+    `;
+
+export function useJobQuery(options: Omit<Urql.UseQueryArgs<JobQueryVariables>, 'query'>) {
+  return Urql.useQuery<JobQuery, JobQueryVariables>({ query: JobDocument, ...options });
 };
 export const JobsListDocument = gql`
     query JobsList {

@@ -1,0 +1,13 @@
+query Job($id: ID!) {
+    job(id: $id){
+        id
+        title
+        deadline
+        questions{
+            id
+            question
+            time
+        }
+    }
+    
+}
