@@ -1,8 +1,9 @@
 import React from 'react'
 import * as Icons from 'react-icons/hi'
-import Skeleton from 'react-loading-skeleton'
 
 import { IconProps } from './ButtonIcon-types'
+
+import SkeletonLoader from '../SkeletonLoader'
 
 const ButtonIcon: React.FC<IconProps> = ({
   name,
@@ -13,12 +14,17 @@ const ButtonIcon: React.FC<IconProps> = ({
 }) => {
   const IconComponent = Icons[name]
 
-  return isLoading ? (
-    <Skeleton width={size} height={size} />
-  ) : (
-    <button {...props}>
-      <IconComponent size={size} className={className} />
-    </button>
+  return (
+    <SkeletonLoader
+      isLoading={isLoading}
+      width={size}
+      height={size}
+      after={
+        <button {...props}>
+          <IconComponent size={size} className={className} />
+        </button>
+      }
+    />
   )
 }
 
