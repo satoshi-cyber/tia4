@@ -22,7 +22,10 @@ export const TOAST_OPTIONS = {
 
 export const DEFAULT_QUESTION_TIME = 2000
 
-export const TITLE = "Create a job!"
+export const TITLE = {
+  ADD_JOB: "Create a job!",
+  EDIT_JOB: "Edit job!"
+}
 
 export const TITLE_FIELD_PROPS = {
   name: "title",

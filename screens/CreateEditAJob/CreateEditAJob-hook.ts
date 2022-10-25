@@ -7,20 +7,19 @@ import { NewJob, useCreateJobMutation, useJobQuery, useUpdateJobMutation } from 
 import { URLS } from '@/config';
 
 import { createAJobSchema } from "./CreateEditAJob-validations";
-import { TOAST_MESSAGE, TOAST_OPTIONS, DEFAULT_QUESTION_TIME } from './CreateEditAJob-constants';
+import { TOAST_MESSAGE, TOAST_OPTIONS, DEFAULT_QUESTION_TIME, TITLE } from './CreateEditAJob-constants';
 import { useEffect } from 'react';
 import { formatDefaultValues } from './CreateEditAJob-functions';
 
 export const useCreateUpdateAJob = () => {
+  const router = useRouter()
+  const { jobId } = router.query
+
+  const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !Boolean(jobId) })
   const [{ fetching: createJobSubmitting }, createJob] = useCreateJobMutation();
   const [{ fetching: updateJobSubmitting }, updateJob] = useUpdateJobMutation()
 
   const submitting = createJobSubmitting || updateJobSubmitting
-  const router = useRouter()
-
-  const { jobId } = router.query
-
-  const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !Boolean(jobId) })
 
   const form = useForm<NewJob>({
     mode: "onBlur",
@@ -58,10 +57,13 @@ export const useCreateUpdateAJob = () => {
     router.push(URLS.JOBS)
   };
 
+  const title = jobId ? TITLE.EDIT_JOB : TITLE.ADD_JOB
+
   return {
     form,
     handleSubmit,
     fetching,
-    submitting
+    submitting,
+    title
   };
 };

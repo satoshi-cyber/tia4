@@ -24,13 +24,14 @@ import { InjecHook } from '../../lib'
 import { FormService } from '../../services'
 
 const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, submitting, fetching } = useCreateUpdateAJob()
+  const { handleSubmit, form, submitting, fetching, title } =
+    useCreateUpdateAJob()
 
   return (
     <Layout.Default>
       <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
         {fetching && 'is loading'}
-        <Title title={TITLE} />
+        <Title title={title} />
         <Field.Input
           {...TITLE_FIELD_PROPS}
           after={<FormIcon name={TITLE_ICON} />}
