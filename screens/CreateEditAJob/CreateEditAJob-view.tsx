@@ -1,16 +1,4 @@
 import React from 'react'
-
-import { Questions } from './components/Questions/Questions-view'
-import { useCreateAJob } from './CreateAJob-hook'
-import {
-  TITLE,
-  DEADLINE_FIELD_PROPS,
-  TITLE_FIELD_PROPS,
-  SUBMIT_BUTTON_PROPS,
-  CLASS_NAMES,
-  TITLE_ICON,
-} from './CreateAJob-constants'
-
 import {
   Form,
   Layout,
@@ -19,12 +7,25 @@ import {
   PrimaryButton,
   Field,
   Loader,
-} from '../../components'
+} from '@/components'
+
+import { Questions } from './components/Questions/Questions-view'
+import { useCreateAJob } from './CreateEditAJob-hook'
+import {
+  TITLE,
+  DEADLINE_FIELD_PROPS,
+  TITLE_FIELD_PROPS,
+  SUBMIT_BUTTON_PROPS,
+  CLASS_NAMES,
+  TITLE_ICON,
+} from './CreateEditAJob-constants'
+import { CreateEditAJobProps } from './CreateEditAJob-types'
+
 import { InjecHook } from '../../lib'
 import { FormService } from '../../services'
 
-const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, fetching } = useCreateAJob()
+const CreateAJob: React.FC<CreateEditAJobProps> = ({ jobId }) => {
+  const { handleSubmit, form, fetching } = useCreateAJob({ jobId })
 
   return (
     <Layout.Default>

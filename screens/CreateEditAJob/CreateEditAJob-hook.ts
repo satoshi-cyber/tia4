@@ -6,11 +6,11 @@ import { useRouter } from 'next/router';
 import { NewJob, useCreateJobMutation } from "@/graphql";
 import { URLS } from '@/config';
 
-import { createAJobSchema } from "./CreateAJob-validations";
-import { ERROR_TOAST, SUCCESS_TOAST, TOAST_OPTIONS, DEFAULT_QUESTION_TIME } from './CreateAJob-constants';
+import { createAJobSchema } from "./CreateEditAJob-validations";
+import { ERROR_TOAST, SUCCESS_TOAST, TOAST_OPTIONS, DEFAULT_QUESTION_TIME } from './CreateEditAJob-constants';
+import { CreateEditAJobProps } from './CreateEditAJob-types';
 
-
-export const useCreateAJob = () => {
+export const useCreateAJob = ({ jobId }: CreateEditAJobProps) => {
   const [{ fetching }, execute] = useCreateJobMutation();
   const router = useRouter()
 

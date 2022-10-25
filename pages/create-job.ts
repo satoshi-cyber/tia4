@@ -1,3 +1,3 @@
-import CreateAJob from "../screens/CreateAJob";
+import CreateEditAJob from "../screens/CreateEditAJob";
 
-export default CreateAJob;
+export default CreateEditAJob;

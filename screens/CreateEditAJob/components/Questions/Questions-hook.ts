@@ -1,7 +1,7 @@
 import { useFieldArray } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
-import { DEFAULT_QUESTION_TIME } from "../../CreateAJob-constants";
+import { DEFAULT_QUESTION_TIME } from "../../CreateEditAJob-constants";
 
 export const useQuestions = () => {
   const { fields, append, remove } = useFieldArray({
