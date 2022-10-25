@@ -19,6 +19,7 @@
     "autoprefixer": "^10.4.8",
     "can-autoplay": "^3.0.2",
     "clsx": "^1.2.1",
+    "date-fns": "^2.29.3",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "idb-keyval": "^6.2.0",
