@@ -17,6 +17,7 @@ const ButtonIcon: React.FC<IconProps> = ({
   return (
     <SkeletonLoader
       isLoading={isLoading}
+      className={className}
       width={size}
       height={size}
       after={

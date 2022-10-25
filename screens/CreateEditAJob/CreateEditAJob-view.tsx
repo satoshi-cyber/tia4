@@ -7,6 +7,7 @@ import {
   PrimaryButton,
   Field,
   Loader,
+  LoadingProvider,
 } from '@/components'
 
 import { Questions } from './components/Questions/Questions-view'
@@ -27,30 +28,32 @@ const CreateAJob: React.FC = () => {
     useCreateUpdateAJob()
 
   return (
-    <Layout.Default>
-      <Form
-        form={form}
-        onSubmit={handleSubmit}
-        className={CLASS_NAMES.form}
-        isLoading={fetching}
-      >
-        <Title
-          title={title}
+    <LoadingProvider isLoading={fetching}>
+      <Layout.Default>
+        <Form
+          form={form}
+          onSubmit={handleSubmit}
+          className={CLASS_NAMES.form}
           isLoading={fetching}
-          skeletonProps={{ width: 200 }}
-        />
-        <Field.Input
-          {...TITLE_FIELD_PROPS}
-          after={<FormIcon name={TITLE_ICON} />}
-        />
-        <Field.Input {...DEADLINE_FIELD_PROPS} />
-        <Questions />
-        <InjecHook hookKey={[FormService.submitButton]}>
-          <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
-        </InjecHook>
-      </Form>
-      {submitting && <Loader />}
-    </Layout.Default>
+        >
+          <Title
+            title={title}
+            isLoading={fetching}
+            skeletonProps={{ width: 200 }}
+          />
+          <Field.Input
+            {...TITLE_FIELD_PROPS}
+            after={<FormIcon name={TITLE_ICON} />}
+          />
+          <Field.Input {...DEADLINE_FIELD_PROPS} />
+          <Questions />
+          <InjecHook hookKey={[FormService.submitButton]}>
+            <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
+          </InjecHook>
+        </Form>
+        {submitting && <Loader />}
+      </Layout.Default>
+    </LoadingProvider>
   )
 }
 

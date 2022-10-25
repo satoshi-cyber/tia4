@@ -23,7 +23,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         <Text
           className="text-sm text-gray-600 mb-3 text-left"
           text={label}
-          skeletonProps={{ width: 120 }}
+          skeletonProps={{ width: 80 }}
         />
       )}
       <Input {...restProps} {...register(name)} />
