@@ -26,8 +26,15 @@ import { InjecHook } from '../../lib'
 import { FormService } from '../../services'
 
 const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, submitting, fetching, title, editJob } =
-    useCreateUpdateAJob()
+  const {
+    handleSubmit,
+    form,
+    submitting,
+    fetching,
+    title,
+    editJob,
+    handleDeleteJob,
+  } = useCreateUpdateAJob()
 
   return (
     <Layout.Default>
@@ -53,7 +60,12 @@ const CreateAJob: React.FC = () => {
             <InjecHook hookKey={[FormService.submitButton]}>
               <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
             </InjecHook>
-            {editJob && <SecondaryButton {...DELETE_JOB_BUTTON_PROPS} />}
+            {editJob && (
+              <SecondaryButton
+                {...DELETE_JOB_BUTTON_PROPS}
+                onClick={handleDeleteJob}
+              />
+            )}
           </div>
         </Form>
         {submitting && <Loader />}

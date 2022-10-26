@@ -11,6 +11,10 @@ export const TOAST_MESSAGE = {
     success: "Job is edited",
     error: "Error editing the job"
   },
+  DELETE_JOB: {
+    success: "Job is deleted",
+    error: "Error deleting the job"
+  },
 }
 
 export const TOAST_OPTIONS = {

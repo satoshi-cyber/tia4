@@ -181,6 +181,13 @@ export type CreateJobMutationVariables = Exact<{
 
 export type CreateJobMutation = { __typename?: 'Mutation', createJob: { __typename?: 'Job', id: string } };
 
+export type DeleteJobMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteJobMutation = { __typename?: 'Mutation', deleteJob?: { __typename?: 'Job', id: string } | null };
+
 export type JobQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -211,6 +218,17 @@ export const CreateJobDocument = gql`
 
 export function useCreateJobMutation() {
   return Urql.useMutation<CreateJobMutation, CreateJobMutationVariables>(CreateJobDocument);
+};
+export const DeleteJobDocument = gql`
+    mutation DeleteJob($id: ID!) {
+  deleteJob(id: $id) {
+    id
+  }
+}
+    `;
+
+export function useDeleteJobMutation() {
+  return Urql.useMutation<DeleteJobMutation, DeleteJobMutationVariables>(DeleteJobDocument);
 };
 export const JobDocument = gql`
     query Job($id: ID!) {
