@@ -45,3 +45,12 @@ export const SUBMIT_BUTTON_PROPS = {
   title: 'Submit'
 }
 
+export const DELETE_JOB_BUTTON_PROPS = {
+  title: 'Delete job',
+  variant: 'delete',
+  className: 'mt-8',
+  skeletonProps: {
+    width: 80
+  }
+} as const
+

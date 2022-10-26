@@ -1,13 +1,13 @@
-import { Icon, Field, SecondaryButton } from '@/components'
+import { Icon, Field, SecondaryButton, Text } from '@/components'
 
 import { useQuestions } from './Questions-hook'
 import {
-  TITLE,
   CLASS_NAMES,
+  TITLE_PROPS,
   CLOSE_BUTTON_PROPS,
   QUESTION_FIELD_PROPS,
   TIME_FIELD_PROPS,
-  ADD_A_QUESTION_TITLE,
+  ADD_QUESTION_BUTTON_PROPS,
 } from './Questions-constants'
 
 export const Questions: React.FC = () => {
@@ -15,7 +15,7 @@ export const Questions: React.FC = () => {
 
   return (
     <div>
-      <p className={CLASS_NAMES.title}>{TITLE}</p>
+      <Text className={CLASS_NAMES.title} {...TITLE_PROPS} />
       {fields.map((field, index) => (
         <div key={field.id} className={CLASS_NAMES.container}>
           {fields.length > 1 && (
@@ -35,7 +35,7 @@ export const Questions: React.FC = () => {
           </div>
         </div>
       ))}
-      <SecondaryButton title={ADD_A_QUESTION_TITLE} onClick={handleAppend} />
+      <SecondaryButton {...ADD_QUESTION_BUTTON_PROPS} onClick={handleAppend} />
     </div>
   )
 }

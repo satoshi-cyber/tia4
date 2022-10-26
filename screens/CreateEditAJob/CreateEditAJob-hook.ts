@@ -15,7 +15,9 @@ export const useCreateUpdateAJob = () => {
   const router = useRouter()
   const { jobId } = router.query
 
-  const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !Boolean(jobId) })
+  const editJob = Boolean(jobId)
+
+  const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !editJob })
   const [{ fetching: createJobSubmitting }, createJob] = useCreateJobMutation();
   const [{ fetching: updateJobSubmitting }, updateJob] = useUpdateJobMutation()
 
@@ -42,9 +44,9 @@ export const useCreateUpdateAJob = () => {
   }, [fetching, reset])
 
   const handleSubmit = async (input: NewJob) => {
-    const { error } = jobId ? await updateJob({ input: { ...input, id: String(jobId) } }, { additionalTypenames: ['Job'] }) : await createJob({ input }, { additionalTypenames: ['Job'] })
+    const { error } = editJob ? await updateJob({ input: { ...input, id: String(jobId) } }, { additionalTypenames: ['Job'] }) : await createJob({ input }, { additionalTypenames: ['Job'] })
 
-    const toastMessage = jobId ? TOAST_MESSAGE.EDIT_JOB : TOAST_MESSAGE.ADD_JOB
+    const toastMessage = editJob ? TOAST_MESSAGE.EDIT_JOB : TOAST_MESSAGE.ADD_JOB
 
     if (error) {
       toast.error(toastMessage.error, TOAST_OPTIONS)
@@ -57,9 +59,10 @@ export const useCreateUpdateAJob = () => {
     router.push(URLS.JOBS)
   };
 
-  const title = jobId ? TITLE.EDIT_JOB : TITLE.ADD_JOB
+  const title = editJob ? TITLE.EDIT_JOB : TITLE.ADD_JOB
 
   return {
+    editJob,
     form,
     handleSubmit,
     fetching,

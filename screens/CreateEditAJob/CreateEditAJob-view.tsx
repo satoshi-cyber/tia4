@@ -8,6 +8,7 @@ import {
   Field,
   Loader,
   LoadingProvider,
+  SecondaryButton,
 } from '@/components'
 
 import { Questions } from './components/Questions/Questions-view'
@@ -16,6 +17,7 @@ import {
   DEADLINE_FIELD_PROPS,
   TITLE_FIELD_PROPS,
   SUBMIT_BUTTON_PROPS,
+  DELETE_JOB_BUTTON_PROPS,
   CLASS_NAMES,
   TITLE_ICON,
 } from './CreateEditAJob-constants'
@@ -24,7 +26,7 @@ import { InjecHook } from '../../lib'
 import { FormService } from '../../services'
 
 const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, submitting, fetching, title } =
+  const { handleSubmit, form, submitting, fetching, title, editJob } =
     useCreateUpdateAJob()
 
   return (
@@ -47,9 +49,12 @@ const CreateAJob: React.FC = () => {
           />
           <Field.Input {...DEADLINE_FIELD_PROPS} />
           <Questions />
-          <InjecHook hookKey={[FormService.submitButton]}>
-            <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
-          </InjecHook>
+          <div className="flex justify-center flex-col">
+            <InjecHook hookKey={[FormService.submitButton]}>
+              <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
+            </InjecHook>
+            {editJob && <SecondaryButton {...DELETE_JOB_BUTTON_PROPS} />}
+          </div>
         </Form>
         {submitting && <Loader />}
       </LoadingProvider>
