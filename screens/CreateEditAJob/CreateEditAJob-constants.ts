@@ -19,7 +19,6 @@ export const TOAST_MESSAGE = {
 
 export const TOAST_OPTIONS = {
   position: "top-right",
-  theme: "colored"
 } as const
 
 export const DEFAULT_QUESTION_TIME = 2000
