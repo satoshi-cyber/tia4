@@ -1,7 +1,7 @@
 import React from 'react'
 import { LoadingProvider } from '@/components'
 
-import Item from './components/Item/Item-view'
+import { Item, EmptyScreen } from './components'
 import { CLASS_NAMES } from './List-constants'
 import { useJobs } from './List-hook'
 
@@ -11,14 +11,18 @@ const List: React.FC = () => {
   return (
     <LoadingProvider isLoading={fetching}>
       <div className={CLASS_NAMES.container}>
-        {jobs?.map((item) => (
-          <Item
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            deadline={item.deadline}
-          />
-        ))}
+        {jobs?.length === 0 ? (
+          <EmptyScreen />
+        ) : (
+          jobs?.map((item) => (
+            <Item
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              deadline={item.deadline}
+            />
+          ))
+        )}
       </div>
     </LoadingProvider>
   )
