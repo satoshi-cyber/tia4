@@ -1,4 +1,5 @@
 import { URLS } from "@/config"
+import { format } from "date-fns";
 import { useRouter } from "next/router"
 import { toast } from 'react-toastify';
 
@@ -6,9 +7,10 @@ import { TOAST_MESSAGE, TOAST_OPTIONS } from "./Item-constants";
 
 interface ItemOptions {
   jobId: string | number
+  deadline: Date | undefined
 }
 
-export const useItem = ({ jobId }: ItemOptions) => {
+export const useItem = ({ jobId, deadline }: ItemOptions) => {
   const router = useRouter()
 
   const handleEditJob = () => {
@@ -32,5 +34,7 @@ export const useItem = ({ jobId }: ItemOptions) => {
     }
   }
 
-  return { handleEditJob, handleCopyLink }
+  const deadlineLabel = deadline && `Deadline: ${format(new Date(deadline), 'MM/dd/yyyy')}`
+
+  return { handleEditJob, handleCopyLink, deadlineLabel }
 }

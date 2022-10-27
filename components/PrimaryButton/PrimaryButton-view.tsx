@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import { PrimaryButtonProps } from "./PrimaryButton-types";
+import { PrimaryButtonProps } from './PrimaryButton-types'
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   title,
@@ -13,6 +13,6 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   >
     {title}
   </button>
-);
+)
 
-export default PrimaryButton;
+export default PrimaryButton
