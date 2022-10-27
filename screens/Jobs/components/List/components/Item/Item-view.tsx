@@ -6,7 +6,7 @@ import { ItemProps } from './Item-types'
 import { useItem } from './Item-hook'
 
 const Item: React.FC<ItemProps> = ({ title, deadline, id }) => {
-  const { handleEditJob } = useItem({ jobId: id })
+  const { handleEditJob, handleCopyLink } = useItem({ jobId: id })
 
   return (
     <div className={CLASS_NAMES.container}>
@@ -29,7 +29,12 @@ const Item: React.FC<ItemProps> = ({ title, deadline, id }) => {
           size={30}
           className="text-black"
         />
-        <ButtonIcon name="HiExternalLink" size={30} className="text-black" />
+        <ButtonIcon
+          onClick={handleCopyLink}
+          name="HiExternalLink"
+          size={30}
+          className="text-black"
+        />
       </div>
     </div>
   )

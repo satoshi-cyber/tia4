@@ -4,3 +4,13 @@ export const CLASS_NAMES = {
   deadline: "text-xs",
   options: 'grid grid-cols-2 gap-4 ml-4'
 };
+
+export const TOAST_MESSAGE = {
+  success: "Link copied to clipboard!",
+  error: "Error copying link to the clipboard!"
+}
+
+export const TOAST_OPTIONS = {
+  position: "top-right",
+  theme: "colored"
+} as const
