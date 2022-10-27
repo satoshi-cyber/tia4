@@ -57,3 +57,4 @@ export const DELETE_JOB_BUTTON_PROPS = {
   }
 } as const
 
+export const PUSH_DELAY = 300

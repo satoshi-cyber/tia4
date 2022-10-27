@@ -7,7 +7,7 @@ import { NewJob, useCreateJobMutation, useDeleteJobMutation, useJobQuery, useUpd
 import { URLS } from '@/config';
 
 import { createAJobSchema } from "./CreateEditAJob-validations";
-import { TOAST_MESSAGE, TOAST_OPTIONS, DEFAULT_QUESTION_TIME, TITLE } from './CreateEditAJob-constants';
+import { TOAST_MESSAGE, TOAST_OPTIONS, DEFAULT_QUESTION_TIME, TITLE, PUSH_DELAY } from './CreateEditAJob-constants';
 import { useEffect } from 'react';
 import { formatDefaultValues } from './CreateEditAJob-functions';
 
@@ -57,7 +57,8 @@ export const useCreateUpdateAJob = () => {
 
     toast.success(toastMessage.success, TOAST_OPTIONS)
 
-    router.push(URLS.JOBS)
+    setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY)
+
   };
 
   const handleDeleteJob = async () => {
@@ -73,10 +74,8 @@ export const useCreateUpdateAJob = () => {
 
     toast.success(toastMessage.success, TOAST_OPTIONS)
 
-    router.push(URLS.JOBS)
+    setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY)
   };
-
-
 
   const title = editJob ? TITLE.EDIT_JOB : TITLE.ADD_JOB
 
