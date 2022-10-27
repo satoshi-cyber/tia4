@@ -1,1 +1,1 @@
-export * from './Questions-view'
+export { default } from './Questions-view'

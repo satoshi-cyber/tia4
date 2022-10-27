@@ -13,7 +13,7 @@ export const Form: React.FC<FormProps> = ({
   const { handleSubmit } = form
 
   return (
-    <FormProvider {...{ ...form, isLoading }}>
+    <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} {...restProps}>
         {children}
       </form>

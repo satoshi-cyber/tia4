@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@graphql-codegen/cli": "^2.13.7",
+    "@headlessui/react": "^1.7.3",
     "@hookform/resolvers": "^2.9.10",
     "@magic-ext/oauth": "^3.0.0",
     "@material-tailwind/react": "^1.2.4",
+    "@mpth/react-no-ssr": "^1.0.1",
     "@tailwindcss/forms": "^0.5.2",
     "add": "^2.0.6",
     "autoprefixer": "^10.4.8",

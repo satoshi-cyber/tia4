@@ -21,7 +21,7 @@ const ButtonIcon: React.FC<IconProps> = ({
       width={size}
       height={size}
       after={
-        <button {...props}>
+        <button type="button" {...props}>
           <IconComponent size={size} className={className} />
         </button>
       }

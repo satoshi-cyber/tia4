@@ -10,7 +10,7 @@ import {
   ADD_QUESTION_BUTTON_PROPS,
 } from './Questions-constants'
 
-export const Questions: React.FC = () => {
+const Questions: React.FC = () => {
   const { fields, handleAppend, remove } = useQuestions()
 
   return (
@@ -39,3 +39,5 @@ export const Questions: React.FC = () => {
     </div>
   )
 }
+
+export default Questions
