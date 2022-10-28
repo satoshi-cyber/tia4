@@ -1,16 +1,16 @@
 import { useRef, useEffect, useState } from 'react'
+import { Icon } from '@/components'
 import { useReactMediaRecorder } from './media'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import * as Icons from 'react-icons/hi'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, EffectCreative } from 'swiper'
 import useLocalStorage from 'use-local-storage'
-import { get, set, del } from 'idb-keyval'
+import { set, del } from 'idb-keyval'
+import { VideoPreview, VideoPlayer } from './components'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-creative'
-import { VideoPreview } from './components'
 
 const QUESTIONS = [
   'Tell Me About Yourself',
@@ -27,12 +27,6 @@ const QUESTIONS_IDS = [
   'a4495041-b0de-4d96-8de8-cb8f4287ff7b',
   '3d5ff433-2918-43a0-98f6-e09ef3f940e8',
 ]
-
-const Icon = ({ name, ...props }) => {
-  const IconComponent = Icons[name]
-
-  return <IconComponent {...props} />
-}
 
 const Buttons = ({
   status,
@@ -78,90 +72,6 @@ const Buttons = ({
         </>
       )}
     </div>
-  )
-}
-
-const VidePlayer = ({ id, index }) => {
-  const [url, setUrl] = useState(undefined)
-
-  useEffect(() => {
-    get(id).then((u) => setUrl(URL.createObjectURL(u)))
-  }, [id])
-
-  const swiper = useSwiper()
-
-  const video = useRef()
-  const [playing, setPlaying] = useState(false)
-
-  useEffect(() => {
-    if (!swiper) {
-      return
-    }
-
-    swiper.on('slideChange', () => {
-      if (!video.current) {
-        return
-      }
-
-      setPlaying(false)
-
-      if (index === swiper.realIndex) {
-        video.current.play()
-      } else {
-        video.current.pause()
-      }
-    })
-  }, [index, swiper])
-
-  // useLayoutEffect(() => {
-  //   if (!url) return;
-
-  //   if (index === swiper.realIndex) {
-  //     canAutoPlay.video().then(({ result }) => {
-  //       if (result) {
-  //         handlePlay();
-  //       }
-  //     });
-  //   } else {
-  //     video.current.pause();
-  //     setPlaying(false);
-  //   }
-  // }, [index, swiper.realIndex, url]);
-
-  const handlePlay = () => {
-    video.current.play()
-    setPlaying(true)
-  }
-
-  useEffect(() => {
-    if (!url || !video.current) return
-
-    video.current.currentTime = 0.01
-  }, [url])
-
-  if (!url) return null
-
-  return (
-    <>
-      <video
-        ref={video}
-        src={url}
-        className={videoClassName}
-        playsInline
-        controls={false}
-        loop
-        muted={!playing}
-        autoPlay
-      />
-      {!playing && (
-        <button
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 flex items-center justify-center"
-          onClick={handlePlay}
-        >
-          <Icon name="HiVolumeUp" size={100} className="text-gray-100" />
-        </button>
-      )}
-    </>
   )
 }
 
@@ -246,7 +156,7 @@ const RecordView = () => {
             {
               <div className="flex flex-1 w-full h-screen relative justify-center bg-gray-900">
                 {mediaUrls[index] && status !== 'recording' ? (
-                  <VidePlayer id={QUESTIONS_IDS[index]} index={index} />
+                  <VideoPlayer id={QUESTIONS_IDS[index]} index={index} />
                 ) : (
                   <VideoPreview
                     key={previewStream?.id}
