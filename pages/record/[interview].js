@@ -1,6 +1,7 @@
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic'
 
-const Video = dynamic(() => import("../../components/Video"), { ssr: false });
+const Video = dynamic(() => import('../../screens/Record'), { ssr: false })
 
-const RecordView = () => <Video />;
-export default RecordView;
+const RecordView = () => <Video />
+
+export default RecordView

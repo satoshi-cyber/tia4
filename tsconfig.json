@@ -19,6 +19,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "screens/Record/components/VideoPreview/VideoPreview-types.tx",
+    "screens/Record/index.js",
+    "screens/Record/Record-view.jsx"
+  ],
   "exclude": ["node_modules"]
 }
