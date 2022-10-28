@@ -23,8 +23,6 @@ export const TOAST_OPTIONS = {
 
 export const DEFAULT_QUESTION_TIME = 2000
 
-
-
 export const TITLE_FIELD_PROPS = {
   name: "title",
   label: "Job title:",
