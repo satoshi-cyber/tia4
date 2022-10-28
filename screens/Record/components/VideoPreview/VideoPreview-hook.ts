@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 
 interface ViewPreviewOptions {
-  stream?: MediaProvider
+  stream: MediaProvider | null
 }
 
 export const useVideoPreview = ({ stream }: ViewPreviewOptions) => {
