@@ -26,7 +26,7 @@ export const useRecord = () => {
   const questions = QUESTIONS
   const questionIds = QUESTIONS_IDS
 
-  const swipeRef = useRef<{ swiper: Swiper }>()
+  const swipeRef = useRef<Swiper>()
 
   const [isRecorded, setIsRecorded] = useLocalStorage<boolean[]>(
     INTERVIEW_ID,
@@ -35,15 +35,15 @@ export const useRecord = () => {
 
   const onStop = async (_: string, blob: Blob) => {
 
-    if (!swipeRef.current?.swiper) {
+    if (!swipeRef.current) {
       return
     }
 
     const newRecoded = isRecorded.map((value, index) =>
-      swipeRef.current?.swiper?.realIndex === index ? true : value
+      swipeRef.current?.realIndex === index ? true : value
     )
 
-    set(QUESTIONS_IDS[swipeRef.current?.swiper?.realIndex], blob)
+    set(QUESTIONS_IDS[swipeRef.current?.realIndex], blob)
 
     setIsRecorded(newRecoded)
   }
@@ -57,37 +57,39 @@ export const useRecord = () => {
     })
 
   const handleStartRecording = () => {
-    swipeRef.current?.swiper?.disable()
+    swipeRef.current?.disable()
     startRecording()
   }
 
   const handleStopRecording = () => {
-    swipeRef.current?.swiper?.enable()
+    swipeRef.current?.enable()
     stopRecording()
   }
 
   const handleClearRecording = () => {
-    if (!swipeRef.current?.swiper) {
+    if (!swipeRef.current) {
       return
     }
 
-    const realIndex = swipeRef.current?.swiper?.realIndex
+    const realIndex = swipeRef.current?.realIndex
 
     const newRecoded = isRecorded.map((value, i) =>
       i === realIndex ? false : value
     )
 
-    del(QUESTIONS_IDS[swipeRef.current?.swiper?.realIndex])
+    del(QUESTIONS_IDS[swipeRef.current?.realIndex])
 
     setIsRecorded(newRecoded)
   }
 
   const handleHandleNext = () => {
-    swipeRef.current?.swiper.slideNext()
+    swipeRef.current?.slideNext()
   }
 
+  const setSwiper = (swiper: Swiper) => swipeRef.current = swiper
+
   const buttonProps = {
-    swiper: swipeRef.current?.swiper,
+    swiper: swipeRef.current,
     status: status,
     isRecorded: isRecorded,
     handleStartRecording,
@@ -100,7 +102,7 @@ export const useRecord = () => {
     questions,
     questionIds,
     previewStream,
-    swipeRef,
+    setSwiper,
     status,
     buttonProps,
     isRecorded

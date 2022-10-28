@@ -10,7 +10,7 @@ import { useRecord } from './Record-hook'
 
 const RecordView = () => {
   const {
-    swipeRef,
+    setSwiper,
     questions,
     status,
     buttonProps,
@@ -21,7 +21,7 @@ const RecordView = () => {
 
   return (
     <>
-      <Swiper {...SWIPER_OPTIONS} ref={swipeRef as any}>
+      <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
         {questions.map((question, index) => (
           <SwiperSlide key={index}>
             {
