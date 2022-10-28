@@ -1,8 +1,7 @@
 import React from 'react'
+import { Icon } from '@/components'
 
 import { CLASS_NAMES, TITLE, ICON_PROPS } from './CreateJobButton-constants'
-
-import { Icon } from '@/components'
 
 const CreateJobButton: React.FC = React.forwardRef((props, ref) => (
   <button ref={ref as any} className={CLASS_NAMES.button} {...props}>
