@@ -1,11 +1,10 @@
-import { useRef, useEffect, useState } from 'react'
-import { Icon } from '@/components'
+import { useRef } from 'react'
 import { useReactMediaRecorder } from './media'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, EffectCreative } from 'swiper'
 import useLocalStorage from 'use-local-storage'
 import { set, del } from 'idb-keyval'
-import { VideoPreview, VideoPlayer } from './components'
+import { VideoPreview, VideoPlayer, Buttons } from './components'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -28,71 +27,24 @@ const QUESTIONS_IDS = [
   '3d5ff433-2918-43a0-98f6-e09ef3f940e8',
 ]
 
-const Buttons = ({
-  status,
-  mediaUrls,
-  handleStartRecording,
-  handleStopRecording,
-  handleClearRecording,
-  handleHandleNext,
-  swiper,
-}) => {
-  const [realIndex, setRealIndex] = useState(swiper?.realIndex || 0)
-
-  useEffect(() => {
-    swiper?.on('slideChange', () => {
-      setRealIndex(swiper.realIndex)
-    })
-  }, [swiper])
-
-  return (
-    <div className="bg-gray-100 p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center justif">
-      {!mediaUrls[realIndex] && status !== 'recording' && (
-        <button
-          onClick={handleStartRecording}
-          className="bg-red-600 w-[50px] h-[50px] rounded-full"
-        />
-      )}
-
-      {status == 'recording' && (
-        <button
-          onClick={handleStopRecording}
-          className="bg-red-600 w-[40px] h-[40px] rounded-md shadow-full m-[5px]"
-        />
-      )}
-
-      {mediaUrls[realIndex] && (
-        <>
-          <button onClick={handleClearRecording}>
-            <Icon name="HiTrash" size={40} className="m-[5px] " />
-          </button>
-          <button onClick={handleHandleNext} className="ml-[10px] m-[5px] ">
-            <Icon name="HiCheck" size={40} />
-          </button>
-        </>
-      )}
-    </div>
-  )
-}
-
 const INTERVIEW_ID = 'c0fbb368-cbca-4673-bef9-48af98e3b556'
 
 const RecordView = () => {
   const swipeRef = useRef()
   const questions = QUESTIONS
-  const [mediaUrls, setMediaUrls] = useLocalStorage(
+  const [isRecorded, setIsRecorded] = useLocalStorage(
     INTERVIEW_ID,
-    [...QUESTIONS].fill(undefined)
+    [...QUESTIONS].fill(false)
   )
 
   const onStop = async (_, blob) => {
-    const newMediaUrls = mediaUrls.map((value, index) =>
+    const newRecoded = isRecorded.map((value, index) =>
       swipeRef.current?.swiper?.realIndex === index ? true : value
     )
 
     set(QUESTIONS_IDS[swipeRef.current?.swiper?.realIndex], blob)
 
-    setMediaUrls(newMediaUrls)
+    setIsRecorded(newRecoded)
   }
 
   const { status, startRecording, stopRecording, previewStream } =
@@ -116,13 +68,13 @@ const RecordView = () => {
   const handleClearRecording = () => {
     const realIndex = swipeRef.current?.swiper?.realIndex
 
-    const newMediaUrls = mediaUrls.map((value, i) =>
-      i === realIndex ? null : value
+    const newRecoded = isRecorded.map((value, i) =>
+      i === realIndex ? false : value
     )
 
     del(QUESTIONS_IDS[swipeRef.current?.swiper?.realIndex])
 
-    setMediaUrls(newMediaUrls)
+    setIsRecorded(newRecoded)
   }
 
   const handleHandleNext = () => {
@@ -155,7 +107,7 @@ const RecordView = () => {
           <SwiperSlide key={index}>
             {
               <div className="flex flex-1 w-full h-screen relative justify-center bg-gray-900">
-                {mediaUrls[index] && status !== 'recording' ? (
+                {isRecorded[index] && status !== 'recording' ? (
                   <VideoPlayer id={QUESTIONS_IDS[index]} index={index} />
                 ) : (
                   <VideoPreview
@@ -174,14 +126,14 @@ const RecordView = () => {
       <Buttons
         swiper={swipeRef.current?.swiper}
         status={status}
-        mediaUrls={mediaUrls}
+        isRecorded={isRecorded}
         handleStartRecording={handleStartRecording}
         handleStopRecording={handleStopRecording}
         handleClearRecording={handleClearRecording}
         handleHandleNext={handleHandleNext}
       />
       <div className="fixed bg-red-200 z-20 right-0">
-        {JSON.stringify(mediaUrls)}
+        {JSON.stringify(isRecorded)}
       </div>
     </>
   )
