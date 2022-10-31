@@ -4,8 +4,12 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-creative'
 
-import { VideoPreview, VideoPlayer, Buttons } from './components'
-import { CLASS_NAMES, RECORING_STATUS, SWIPER_OPTIONS } from './Record-constants'
+import { VideoPreview, VideoPlayer, Buttons, Loading } from './components'
+import {
+  CLASS_NAMES,
+  RECORING_STATUS,
+  SWIPER_OPTIONS,
+} from './Record-constants'
 import { useRecord } from './Record-hook'
 
 const RecordView = () => {
@@ -20,8 +24,8 @@ const RecordView = () => {
     questionIds,
   } = useRecord()
 
-  if(fetching){
-    return "loading"
+  if (fetching) {
+    return <Loading />
   }
 
   return (
@@ -31,7 +35,8 @@ const RecordView = () => {
           <SwiperSlide key={index}>
             {
               <div className={CLASS_NAMES.slide}>
-                {isRecorded[questionIds[index]] && status !== RECORING_STATUS ? (
+                {isRecorded[questionIds[index]] &&
+                status !== RECORING_STATUS ? (
                   <VideoPlayer id={questionIds[index]} index={index} />
                 ) : (
                   <VideoPreview
@@ -39,9 +44,7 @@ const RecordView = () => {
                     stream={previewStream}
                   />
                 )}
-                <p className={CLASS_NAMES.question}>
-                  {question}
-                </p>
+                <p className={CLASS_NAMES.question}>{question}</p>
               </div>
             }
           </SwiperSlide>

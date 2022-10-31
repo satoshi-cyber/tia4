@@ -10,7 +10,6 @@ import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
 
 export const useRecord = () => {
-
   const router = useRouter()
 
   const { jobId } = router.query
@@ -76,7 +75,7 @@ export const useRecord = () => {
 
   const buttonProps = {
     swiper,
-    status: status,
+    status,
     questionIds,
     isRecorded,
     handleStartRecording,
@@ -90,10 +89,10 @@ export const useRecord = () => {
     questions,
     questionIds,
     previewStream,
-    setSwiper,
     status,
     buttonProps,
-    isRecorded
+    isRecorded,
+    setSwiper,
   }
 
 }

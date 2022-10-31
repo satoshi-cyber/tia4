@@ -21,7 +21,7 @@
           ["@/graphql", "./graphql"],
           ["@/config", "./config"]
         ],
-        "extensions": [".ts", ".js", ".jsx", ".json"]
+        "extensions": [".ts", ".tsx", ".json"]
       },
       "node": {
         "paths": ["./"]
@@ -33,7 +33,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "project": "./src/tsconfig.json",
+    "project": "./tsconfig.json",
     "ecmaVersion": 2018,
     "sourceType": "module"
   },

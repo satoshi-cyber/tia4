@@ -10,7 +10,7 @@ const config: CodegenConfig = {
       plugins: [
         'typescript',
         'typescript-operations',
-        'typescript-urql'], 
+        'typescript-urql'],
       config: {
         withHooks: true
       }
