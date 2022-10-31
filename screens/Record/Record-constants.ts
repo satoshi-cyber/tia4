@@ -27,3 +27,5 @@ export const SWIPER_OPTIONS = {
   modules: [Pagination, Navigation, EffectCreative],
   className: 'absolute flex flex-1 w-full z-10 bg-gray-800',
 } as SwiperProps
+
+export const EMPTY_STATE = []

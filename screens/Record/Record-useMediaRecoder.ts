@@ -2,6 +2,8 @@ import { register, MediaRecorder as ExtendableMediaRecorder, IMediaRecorder } fr
 import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { connect } from 'extendable-media-recorder-wav-encoder';
 
+import { StatusMessages } from "./Record-types";
+
 export type ReactMediaRecorderRenderProps = {
   error: string;
   muteAudio: () => void;
@@ -33,22 +35,6 @@ export type ReactMediaRecorderHookProps = {
 export type ReactMediaRecorderProps = ReactMediaRecorderHookProps & {
   render: (props: ReactMediaRecorderRenderProps) => ReactElement;
 };
-
-export type StatusMessages =
-  | "media_aborted"
-  | "permission_denied"
-  | "no_specified_media_found"
-  | "media_in_use"
-  | "invalid_media_constraints"
-  | "no_constraints"
-  | "recorder_error"
-  | "idle"
-  | "acquiring_media"
-  | "delayed_start"
-  | "recording"
-  | "stopping"
-  | "stopped"
-  | "paused";
 
 export enum RecorderErrors {
   AbortError = "media_aborted",

@@ -10,6 +10,7 @@ import { useRecord } from './Record-hook'
 
 const RecordView = () => {
   const {
+    fetching,
     setSwiper,
     questions,
     status,
@@ -19,6 +20,10 @@ const RecordView = () => {
     questionIds,
   } = useRecord()
 
+  if(fetching){
+    return "loading"
+  }
+
   return (
     <>
       <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
@@ -26,7 +31,7 @@ const RecordView = () => {
           <SwiperSlide key={index}>
             {
               <div className={CLASS_NAMES.slide}>
-                {isRecorded[index] && status !== RECORING_STATUS ? (
+                {isRecorded[questionIds[index]] && status !== RECORING_STATUS ? (
                   <VideoPlayer id={questionIds[index]} index={index} />
                 ) : (
                   <VideoPreview

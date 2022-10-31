@@ -1,51 +1,43 @@
+import { useJobQuery } from "@/graphql"
 import { del, set } from "idb-keyval"
-import { useRef } from "react"
+import { useRouter } from "next/router"
+import { useState } from "react"
 import Swiper from "swiper"
 import useLocalStorage from "use-local-storage"
+import { IsRecorded } from "./Record-types"
+
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
-const QUESTIONS = [
-  'Tell Me About Yourself',
-  'Why Are You the Best Person for the Job?',
-  'Why Do You Want This Job?',
-  'How Has Your Experience Prepared You for This Role?',
-  'Why Are You Leaving (or Have Left) Your Job?',
-]
-
-const QUESTIONS_IDS = [
-  'ce82c314-656a-469a-acd8-5d0da3a32b3f',
-  'eb8ca117-57ff-4d46-9c28-6c9b64506d98',
-  '600795a7-bcf8-4bda-bd94-7b2025d0f2aa',
-  'a4495041-b0de-4d96-8de8-cb8f4287ff7b',
-  '3d5ff433-2918-43a0-98f6-e09ef3f940e8',
-]
-
-const INTERVIEW_ID = 'c0fbb368-cbca-4673-bef9-48af98e3b556'
 
 export const useRecord = () => {
-  const questions = QUESTIONS
-  const questionIds = QUESTIONS_IDS
 
-  const swipeRef = useRef<Swiper>()
+  const router = useRouter()
 
-  const [isRecorded, setIsRecorded] = useLocalStorage<boolean[]>(
-    INTERVIEW_ID,
-    questions.map(() => false)
+  const { jobId } = router.query
+
+  const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !Boolean(jobId) })
+
+  const questions = data?.job.questions.map(question => question.question) || []
+  const questionIds = data?.job.questions.map(question => question.id) || []
+
+  const [swiper, setSwiper] = useState<Swiper>()
+
+  const [isRecorded, setIsRecorded] = useLocalStorage<IsRecorded>(
+    String(jobId),
+    {}
   )
 
   const onStop = async (_: string, blob: Blob) => {
 
-    if (!swipeRef.current) {
+    if (!swiper || !questionIds || !questionIds[swiper.realIndex]) {
       return
     }
 
-    const newRecoded = isRecorded.map((value, index) =>
-      swipeRef.current?.realIndex === index ? true : value
-    )
+    isRecorded[questionIds[swiper.realIndex]] = true
 
-    set(QUESTIONS_IDS[swipeRef.current?.realIndex], blob)
+    set(questionIds[swiper.realIndex], blob)
 
-    setIsRecorded(newRecoded)
+    setIsRecorded({ ...isRecorded })
   }
 
   const { status, startRecording, stopRecording, previewStream } =
@@ -57,41 +49,36 @@ export const useRecord = () => {
     })
 
   const handleStartRecording = () => {
-    swipeRef.current?.disable()
+    swiper?.disable()
     startRecording()
   }
 
   const handleStopRecording = () => {
-    swipeRef.current?.enable()
+    swiper?.enable()
     stopRecording()
   }
 
   const handleClearRecording = () => {
-    if (!swipeRef.current) {
+    if (!swiper || !questionIds || !questionIds[swiper.realIndex]) {
       return
     }
 
-    const realIndex = swipeRef.current?.realIndex
+    delete isRecorded[questionIds[swiper.realIndex]]
 
-    const newRecoded = isRecorded.map((value, i) =>
-      i === realIndex ? false : value
-    )
+    del(questionIds[swiper.realIndex])
 
-    del(QUESTIONS_IDS[swipeRef.current?.realIndex])
-
-    setIsRecorded(newRecoded)
+    setIsRecorded({ ...isRecorded })
   }
 
   const handleHandleNext = () => {
-    swipeRef.current?.slideNext()
+    swiper?.slideNext()
   }
 
-  const setSwiper = (swiper: Swiper) => swipeRef.current = swiper
-
   const buttonProps = {
-    swiper: swipeRef.current,
+    swiper,
     status: status,
-    isRecorded: isRecorded,
+    questionIds,
+    isRecorded,
     handleStartRecording,
     handleStopRecording,
     handleClearRecording,
@@ -99,6 +86,7 @@ export const useRecord = () => {
   }
 
   return {
+    fetching,
     questions,
     questionIds,
     previewStream,

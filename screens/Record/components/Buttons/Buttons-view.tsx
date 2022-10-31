@@ -17,6 +17,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   handleStopRecording,
   handleClearRecording,
   handleHandleNext,
+  questionIds,
   isRecorded,
   status,
 }) => {
@@ -24,7 +25,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
 
   return (
     <div className={CLASS_NAMES.container}>
-      {!isRecorded[realIndex] && status !== RECORDING_STATUS && (
+      {!isRecorded[questionIds[realIndex]] && status !== RECORDING_STATUS && (
         <button {...RECORD_BUTTON_PROPS} onClick={handleStartRecording} />
       )}
 
@@ -35,7 +36,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
         />
       )}
 
-      {isRecorded[realIndex] && (
+      {isRecorded[questionIds[realIndex]] && (
         <>
           <button onClick={handleClearRecording}>
             <Icon {...CLEAR_RECORDING_ICON_PROPS} />
