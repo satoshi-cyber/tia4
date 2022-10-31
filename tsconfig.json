@@ -22,10 +22,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "screens/Record/components/VideoPreview/VideoPreview-types.tx",
-    "screens/Record/index.js",
-    "screens/Record/Record-view.jsx"
+    "**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
