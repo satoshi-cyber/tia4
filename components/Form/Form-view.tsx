@@ -14,7 +14,7 @@ export const Form: React.FC<FormProps> = ({
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} {...restProps}>
+      <form onSubmit={handleSubmit(onSubmit)} {...restProps} noValidate>
         {children}
       </form>
     </FormProvider>
