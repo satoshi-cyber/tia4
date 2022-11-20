@@ -25,7 +25,6 @@ export const useLogin = () => {
       router.push(URLS.JOBS)
     })
 
-
   useEffect(() => {
     if (isUserLoggedin) {
       router.replace(URLS.JOBS)

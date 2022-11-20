@@ -1,8 +1,8 @@
-import { Input, FormIcon, TextArea } from "../components/Form";
+import { FormIcon, UncontrolledField } from '../components/Form'
 
-import Logo from "../public/logo.svg";
+import Logo from '../public/logo.svg'
 
-const labelStyle = "text-sm text-gray-900 text-left w-full mb-2";
+const labelStyle = 'text-sm text-gray-900 text-left w-full mb-2'
 
 export default function Submit() {
   return (
@@ -19,27 +19,35 @@ export default function Submit() {
           </p>
         </div>
         <p className={labelStyle}>Fullname:</p>
-        <Input
+        <UncontrolledField.Input
           type="text"
           name="fullname"
           placeholder="Lorem Ipsum"
           after={<FormIcon name="HiOutlineUser" size={20} />}
         />
         <p className={labelStyle}>Linkedin:</p>
-        <Input
+        <UncontrolledField.Input
           type="email"
           name="email"
           placeholder="lorem@ipsum.com"
           after={<FormIcon name="HiOutlineLink" size={20} />}
         />
         <p className={labelStyle}>Description:</p>
-        <TextArea type="email" name="email" placeholder="lorem@ipsum.com" />
+        <UncontrolledField.TextArea
+          type="email"
+          name="email"
+          placeholder="lorem@ipsum.com"
+        />
         <p className={labelStyle}>Cv:</p>
-        <TextArea type="email" name="email" placeholder="lorem@ipsum.com" />
+        <UncontrolledField.TextArea
+          type="email"
+          name="email"
+          placeholder="lorem@ipsum.com"
+        />
         <button className="sticky bottom-6 mt-4 bg-gradient-to-r from-purple-500 w-full p-3 text-sm bg-gray-800 text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm">
           Submit
         </button>
       </div>
     </div>
-  );
+  )
 }

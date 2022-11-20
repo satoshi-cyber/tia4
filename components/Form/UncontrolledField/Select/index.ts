@@ -1,2 +1,2 @@
-export * from './Select-view'
+export { default } from './Select-view'
 export * from './Select-types'

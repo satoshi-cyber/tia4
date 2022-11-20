@@ -1,1 +1,1 @@
-export * from './InputField-view'
+export { default } from './InputField-view'

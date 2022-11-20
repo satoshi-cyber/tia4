@@ -5,9 +5,9 @@ import { Text } from '@/components'
 
 import { SelectFieldProps } from './SelectField-types'
 
-import { Select } from '../../UncontrolledField/Select'
+import Select from '../../UncontrolledField/Select'
 
-export const SelectField: React.FC<SelectFieldProps> = ({
+const SelectField: React.FC<SelectFieldProps> = ({
   name,
   label,
   ...restProps
@@ -35,3 +35,5 @@ export const SelectField: React.FC<SelectFieldProps> = ({
     </div>
   )
 }
+
+export default SelectField

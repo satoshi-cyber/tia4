@@ -7,7 +7,7 @@ import { InputProps } from './Input-types'
 import { FORM_THEME } from '../../Form-constants'
 import SkeletonLoader from '@/components/SkeletonLoader'
 
-export const Input: React.FC<InputProps> = React.forwardRef(
+const Input: React.FC<InputProps> = React.forwardRef(
   (
     { variant = 'default', before, className, after, name, ...restProps },
     ref
@@ -69,4 +69,4 @@ export const Input: React.FC<InputProps> = React.forwardRef(
   }
 )
 
-Input.displayName = 'Input'
+export default Input

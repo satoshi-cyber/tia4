@@ -1,29 +1,21 @@
 import clsx from 'clsx'
 import React from 'react'
-import SkeletonLoader from '@/components/SkeletonLoader'
+import { Text } from '@/components'
 
-import { SelectProps } from './Select-types'
+import { TextAreaProps } from './TextArea-types'
 
 import { FORM_THEME } from '../../Form-constants'
+import SkeletonLoader from '@/components/SkeletonLoader'
 
-const Select: React.FC<SelectProps> = React.forwardRef(
+const TextArea: React.FC<TextAreaProps> = React.forwardRef(
   (
-    {
-      variant = 'default',
-      before,
-      className,
-      after,
-      name,
-      options,
-      ...restProps
-    },
+    { variant = 'default', before, className, after, name, ...restProps },
     ref
   ) => {
     const classNames = {
       input: clsx(
         FORM_THEME[variant].padding,
         FORM_THEME[variant].style,
-        'pr-10',
         className
       ),
       container: clsx(
@@ -38,11 +30,14 @@ const Select: React.FC<SelectProps> = React.forwardRef(
     return (
       <div className={classNames.container}>
         {before && (
-          <label htmlFor={name} className={classNames.appendContainer}>
-            {React.cloneElement(before, {
+          <Text
+            as="label"
+            htmlFor={name}
+            className={classNames.appendContainer}
+            text={React.cloneElement(before, {
               className: classNames.appendLeft,
             })}
-          </label>
+          />
         )}
         <SkeletonLoader
           wrapper={({ children }: { children?: React.ReactElement }) => (
@@ -51,30 +46,27 @@ const Select: React.FC<SelectProps> = React.forwardRef(
             </div>
           )}
           after={
-            <select
-              {...restProps}
+            <textarea
               name={name}
-              className={classNames.input}
+              {...restProps}
               ref={ref as any}
-            >
-              {options.map(({ value, label }) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
+              className={classNames.input}
+            />
           }
         />
         {after && (
-          <label htmlFor={name} className={classNames.appendContainer}>
-            {React.cloneElement(after, {
+          <Text
+            as="label"
+            htmlFor={name}
+            className={classNames.appendContainer}
+            text={React.cloneElement(after, {
               className: classNames.appendRight,
             })}
-          </label>
+          />
         )}
       </div>
     )
   }
 )
 
-export default Select
+export default TextArea

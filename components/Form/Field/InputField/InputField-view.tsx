@@ -5,9 +5,9 @@ import { Text } from '@/components'
 
 import { InputFieldProps } from './InputField-types'
 
-import { Input } from '../../UncontrolledField/Input'
+import Input from '../../UncontrolledField/Input'
 
-export const InputField: React.FC<InputFieldProps> = ({
+const InputField: React.FC<InputFieldProps> = ({
   name,
   label,
   ...restProps
@@ -35,3 +35,5 @@ export const InputField: React.FC<InputFieldProps> = ({
     </div>
   )
 }
+
+export default InputField

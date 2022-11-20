@@ -1,1 +1,1 @@
-export * from './SelectField-view'
+export { default } from './SelectField-view'
