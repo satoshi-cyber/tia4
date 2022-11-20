@@ -5,7 +5,7 @@ import Logo from '../../public/logo.svg'
 import Icon from '../Icon/Icon-view'
 
 const Menu = () => (
-  <div className="fixed left-0 top-0 min-h-full w-[70px] border-r border-r-gray-200 pt-28 flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-10 bg-white hover:shadow-lg">
+  <div className="fixed left-0 top-0 min-h-full w-[70px] border-r border-r-gray-200  flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-10 bg-white hover:shadow-lg">
     <LogoSmall
       className="absolute top-6 left-6 z-20 group-hover:opacity-0"
       width={120}
@@ -14,7 +14,7 @@ const Menu = () => (
       className="absolute top-6 left-6 z-20 opacity-0 group-hover:opacity-100"
       width={120}
     />
-    <div className="absolute w-[240px]">
+    <div className="absolute w-[240px] flex flex-1 flex-col pt-28 h-full">
       <Link href="/jobs" shallow>
         <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
           <Icon
@@ -81,6 +81,20 @@ const Menu = () => (
           Settings
         </span>
       </a>
+      <div className="flex flex-1" />
+      <hr className="mb-4" />
+      <Link href="/logout">
+        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
+          <Icon
+            name="HiLogout"
+            size={30}
+            className="text-gray-500 group-one-hover:text-purple-800"
+          />
+          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            logout
+          </span>
+        </a>
+      </Link>
     </div>
   </div>
 )

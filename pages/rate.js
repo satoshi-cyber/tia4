@@ -1,17 +1,34 @@
-import { Player } from "video-react";
-import React from "react";
-import Icon from "../components/Icon";
-import Menu from "../components/Menu";
-import "video-react/dist/video-react.css";
+import { Player } from 'video-react'
+import React, { useState } from 'react'
+import { Document, Page, pdfjs } from 'react-pdf'
+import 'react-pdf/dist/esm/Page/TextLayer.css'
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
+import 'video-react/dist/video-react.css'
+import dynamic from 'next/dynamic'
 
-import Linkedin from "../public/linkedin.svg";
+import Icon from '../components/Icon'
+import Menu from '../components/Menu'
 
-export default function Home() {
+import Linkedin from '../public/linkedin.svg'
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+
+function Home() {
+  const [pages, setPages] = useState([])
+
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setPages(
+      Array(numPages)
+        .fill(0)
+        .map((_, index) => index + 1)
+    )
+  }
+
   return (
-    <div className="flex flex-1 w-full justify-center items-center pt-28 md:pt-16">
+    <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
       <Menu />
       <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
-        <div className="flex flex-col max-w-[600px] w-full px-4">
+        <div className="flex flex-col max-w-[600px] w-full mx-4">
           <div className="flex flex-row mb-4 items-center">
             <Icon
               name="HiOutlineBriefcase"
@@ -23,7 +40,7 @@ export default function Home() {
           <Player
             className="flex-none rounded-2xl shadow-sm overflow-hidden w-full"
             width="100%"
-            height={400}
+            height={450}
             fluid={false}
             playsInline
             autoPlay={true}
@@ -67,14 +84,18 @@ export default function Home() {
             </div>
           </div>
           <div className="border">
-            <iframe
-              src="https://docs.google.com/gview?url=http://infolab.stanford.edu/pub/papers/google.pdf&amp;embedded=true"
-              width="100%"
-              className="h-[500px] md:h-[700px]"
-            ></iframe>
+            <Document file="/cv.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+              {pages.map((index) => (
+                <Page pageNumber={index} width={598} />
+              ))}
+            </Document>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default dynamic(() => Promise.resolve(Home), {
+  ssr: false,
+})
