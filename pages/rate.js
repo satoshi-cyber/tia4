@@ -39,7 +39,7 @@ function Home() {
           <div className="flex flex-col max-w-[600px] w-full mx-4">
             <motion.div
               style={{ marginLeft, marginRight, scale }}
-              className="sticky top-28 z-20"
+              className="sticky top-28 md:top-16 z-20 origin-top"
             >
               <div>
                 <div className="flex flex-row mb-4 items-center">
@@ -106,7 +106,7 @@ function Home() {
                 </div>
               </div>
             </motion.div>
-            <div className="border mt-28">
+            <div className="border mt-20">
               <Document file="/cv.pdf" onLoadSuccess={onDocumentLoadSuccess}>
                 {pages.map((index) => (
                   <Page pageNumber={index} width={598} />
