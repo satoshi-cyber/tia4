@@ -10,12 +10,10 @@
 
 html,
 body {
-  @apply min-h-screen overflow-x-hidden 
+  @apply h-full w-screen
 }
 
-html {
-  @apply overflow-y-scroll
-}
+html { overflow-x: hidden }
 
 #__next {
   @apply min-h-screen flex flex-1;
