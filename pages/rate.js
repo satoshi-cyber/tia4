@@ -11,6 +11,7 @@ import Icon from '../components/Icon'
 import Menu from '../components/Menu'
 
 import Linkedin from '../public/linkedin.svg'
+import Skeleton from 'react-loading-skeleton'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
@@ -56,7 +57,8 @@ function Home() {
                   height={450}
                   fluid={false}
                   playsInline
-                  autoPlay={true}
+                  controls
+                  autoPlay
                   src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
                 />
                 <div className="flex justify-between mt-4 mb-4 md:mb-10">
@@ -107,7 +109,15 @@ function Home() {
               </div>
             </motion.div>
             <div className="border mt-20">
-              <Document file="/cv.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+              <Document
+                file="/cv.pdf"
+                onLoadSuccess={onDocumentLoadSuccess}
+                loading={
+                  <div className="p-20">
+                    <Skeleton count={100} />
+                  </div>
+                }
+              >
                 {pages.map((index) => (
                   <Page pageNumber={index} width={598} />
                 ))}
