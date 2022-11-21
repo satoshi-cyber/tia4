@@ -1,7 +1,7 @@
 import Avatar from 'react-avatar'
 
 import MainMenu from '../components/Menu'
-import { Title, Icon } from '../components'
+import { Text, Icon } from '../components'
 import { Player, ControlBar } from 'video-react'
 import 'video-react/dist/video-react.css'
 
@@ -11,7 +11,14 @@ export default function Submit() {
       <MainMenu />
       <div className="flex flex-col sm:max-w-[600px] lg:max-w-[900px] xl:max-w-[1200px]  w-full px-4 items-center">
         <div className="mb-20 flex flex-col w-full items-center">
-          <Title title="Video archive" />
+          <Text
+            text="Video archive"
+            className="text-3xl flex-1 text-center ml-[30px] mb-3"
+          />
+          <Text
+            className="text-lg text-gray-500 mb-3"
+            text="Watch video archives, and re-rate them if you want!"
+          />
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
           <div>
@@ -33,19 +40,14 @@ export default function Submit() {
                 className="hidden"
               ></ControlBar>
             </Player>
+
             <div className="flex justify-between mt-4 mb-4 md:mb-10">
               <div className="flex">
                 <div className="mr-4">
-                  <img
-                    alt="avatar"
-                    src="/avatar.jpeg"
-                    width={40}
-                    height={40}
-                    className="rounded-full border"
-                  />
+                  <Avatar name="Aliquam gravida" size={40} round />
                 </div>
                 <div>
-                  <p className="text-lg">Lorem ipsum</p>
+                  <p className="text-lg">Aliquam gravida</p>
                   <div>
                     <p className="text-xs mb-2">score: N/A</p>
                   </div>
@@ -76,16 +78,10 @@ export default function Submit() {
             <div className="flex justify-between mt-4 mb-4 md:mb-10">
               <div className="flex">
                 <div className="mr-4">
-                  <img
-                    alt="avatar"
-                    src="/avatar.jpeg"
-                    width={40}
-                    height={40}
-                    className="rounded-full border"
-                  />
+                  <Avatar name="Mauris egestas" size={40} round />
                 </div>
                 <div>
-                  <p className="text-lg">Lorem ipsum</p>
+                  <p className="text-lg">Mauris egestas</p>
                   <div>
                     <p className="text-xs mb-2">score: 1/4</p>
                     <span className="text-[10px] border p-1 rounded-full px-2 -mr-2">
@@ -119,16 +115,10 @@ export default function Submit() {
             <div className="flex justify-between mt-4 mb-4 md:mb-10">
               <div className="flex">
                 <div className="mr-4">
-                  <img
-                    alt="avatar"
-                    src="/avatar.jpeg"
-                    width={40}
-                    height={40}
-                    className="rounded-full border"
-                  />
+                  <Avatar src="/avatar.jpeg" size={40} round />
                 </div>
                 <div>
-                  <p className="text-lg">Lorem ipsum</p>
+                  <p className="text-lg">Phasellus tincidunt</p>
                   <div>
                     <p className="text-xs mb-2">score: 3/4</p>
                   </div>
@@ -159,16 +149,10 @@ export default function Submit() {
             <div className="flex justify-between mt-4 mb-4 md:mb-10">
               <div className="flex">
                 <div className="mr-4">
-                  <img
-                    alt="avatar"
-                    src="/avatar.jpeg"
-                    width={40}
-                    height={40}
-                    className="rounded-full border"
-                  />
+                  <Avatar name="Nam semper" size={40} round />
                 </div>
                 <div>
-                  <p className="text-lg">Lorem ipsum</p>
+                  <p className="text-lg">Nam semper</p>
                   <div>
                     <p className="text-xs mb-2">score: 3/4</p>
                     <span className="text-[10px] border p-1 rounded-full px-2 -mr-2">
@@ -202,16 +186,10 @@ export default function Submit() {
             <div className="flex justify-between mt-4 mb-4 md:mb-10">
               <div className="flex">
                 <div className="mr-4">
-                  <img
-                    alt="avatar"
-                    src="/avatar.jpeg"
-                    width={40}
-                    height={40}
-                    className="rounded-full border"
-                  />
+                  <Avatar name="Posuere Neque" size={40} round />
                 </div>
                 <div>
-                  <p className="text-lg">Lorem ipsum</p>
+                  <p className="text-lg">Posuere Neque</p>
                   <div>
                     <p className="text-xs mb-2">score: 3/4</p>
                     <span className="text-[10px] border p-1 rounded-full px-2 -mr-2">
