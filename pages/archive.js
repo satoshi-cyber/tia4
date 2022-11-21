@@ -23,7 +23,7 @@ export default function Submit() {
           className="text-lg text-gray-500 mb-10"
           text="Search, watch video archives, and re-rate them if you want!"
         />
-        <div className="sticky top-0 pt-4 mb-20 w-full bg-white z-20">
+        <div className="sticky top-0 pt-4 mb-20 w-full bg-white z-10">
           <Form
             form={form}
             onSubmit={onSubmit}

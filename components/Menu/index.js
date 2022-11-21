@@ -5,7 +5,7 @@ import Logo from '../../public/logo.svg'
 import Icon from '../Icon/Icon-view'
 
 const Menu = () => (
-  <div className="fixed left-0 top-0 min-h-full w-[70px] border-r border-r-gray-200  flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-10 bg-white hover:shadow-lg">
+  <div className="fixed left-0 top-0 min-h-full w-[70px] border-r border-r-gray-200  flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-lg">
     <LogoSmall
       className="absolute top-6 left-6 z-20 group-hover:opacity-0"
       width={120}
