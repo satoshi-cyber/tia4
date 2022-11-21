@@ -20,6 +20,9 @@ export const initialNodes = [
       label: 'Video uploaded',
     },
     position: { x: 400, y: 0 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '1b',
@@ -36,6 +39,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 400, y: 130 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '2',
@@ -53,6 +59,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 100, y: 300 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '3',
@@ -70,6 +79,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 400, y: 300 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '4',
@@ -83,6 +95,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 700, y: 300 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '5',
@@ -99,6 +114,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 100, y: 450 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '6a',
@@ -115,6 +133,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 0, y: 600 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '6b',
@@ -122,6 +143,9 @@ export const initialNodes = [
       label: 'Member clicked "re rate"',
     },
     position: { x: 200, y: 600 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '7',
@@ -138,6 +162,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 100, y: 750 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '8',
@@ -154,6 +181,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 400, y: 450 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '9',
@@ -171,6 +201,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 400, y: 600 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
   {
     id: '10',
@@ -187,6 +220,9 @@ export const initialNodes = [
       ),
     },
     position: { x: 700, y: 450 },
+    style: {
+      borderColor: '#bb86fc',
+    },
   },
 ]
 
