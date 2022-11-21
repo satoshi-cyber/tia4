@@ -62,16 +62,18 @@ const Menu = () => (
           </span>
         </a>
       </Link>
-      <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
-        <Icon
-          name="HiBriefcase"
-          size={30}
-          className="text-gray-500 group-one-hover:text-purple-800"
-        />
-        <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-          Company
-        </span>
-      </a>
+      <Link href="/company" shallow>
+        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
+          <Icon
+            name="HiOfficeBuilding"
+            size={30}
+            className="text-gray-500 group-one-hover:text-purple-800"
+          />
+          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            Company
+          </span>
+        </a>
+      </Link>
       <hr className="mb-4" />
       <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
         <Icon

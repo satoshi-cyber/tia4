@@ -108,7 +108,7 @@ function Home() {
                 </div>
               </div>
             </motion.div>
-            <div className="border mt-20">
+            <div className="border mt-12">
               <Document
                 file="/cv.pdf"
                 onLoadSuccess={onDocumentLoadSuccess}

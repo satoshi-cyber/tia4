@@ -6,12 +6,12 @@ const labelStyle = 'text-sm text-gray-900 text-left w-full mb-2'
 
 export default function Submit() {
   return (
-    <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px] ">
+    <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
       <Menu />
       <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
         <Title title="Update your profile!" />
-        <p className="text-3xl mb-4 text-gray-900 text-center"></p>
-        <div className="my-4 w-[100px] h-[100px] border border-gray-200 shadow-sm block flex items-center justify-center text-center rounded-full">
+        <p className="text-3xl text-gray-900 text-center"></p>
+        <div className="mb-4 w-[100px] h-[100px] border border-gray-200 shadow-sm block flex items-center justify-center text-center rounded-full">
           <p className="text-sm text-gray-600">
             Upload
             <br /> picture
