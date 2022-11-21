@@ -10,7 +10,7 @@ import ReactFlow, {
 import Zapier from '../public/zapier.svg'
 
 import 'reactflow/dist/style.css'
-import { Icon, Menu } from '../components'
+import { ButtonIcon, Icon, Menu } from '../components'
 
 export const initialNodes = [
   {
@@ -24,7 +24,16 @@ export const initialNodes = [
   {
     id: '1b',
     data: {
-      label: 'Send "Application to rate!" to team members',
+      label: (
+        <p>
+          Send "Application to rate!" to team members
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
+        </p>
+      ),
     },
     position: { x: 400, y: 130 },
   },
@@ -32,7 +41,12 @@ export const initialNodes = [
     id: '2',
     data: {
       label: (
-        <p className="flex">
+        <p className="flex items-center">
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
           <span>Most of team members voted</span>
           <Icon name="HiThumbDown" size={50} className="text-black" />,
         </p>
@@ -44,7 +58,12 @@ export const initialNodes = [
     id: '3',
     data: {
       label: (
-        <p className="flex">
+        <p className="flex items-center">
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
           <span>Most of team members voted</span>
           <Icon name="HiThumbUp" size={50} className="text-black" />,
         </p>
@@ -56,8 +75,8 @@ export const initialNodes = [
     id: '4',
     data: {
       label: (
-        <p className="flex">
-          <span>Same Votes</span>
+        <p className="flex items-center">
+          <span>Stale votes</span>
           <Icon name="HiThumbDown" size={50} className="text-black" />,
           <Icon name="HiThumbUp" size={50} className="text-black" />,
         </p>
@@ -68,14 +87,32 @@ export const initialNodes = [
   {
     id: '5',
     data: {
-      label: 'Notify team members "the candidate is disqualified"',
+      label: (
+        <p>
+          Notify team members "the candidate is disqualified"
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
+        </p>
+      ),
     },
     position: { x: 100, y: 450 },
   },
   {
     id: '6a',
     data: {
-      label: 'Wait 2 days',
+      label: (
+        <p>
+          Wait 2 days
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
+        </p>
+      ),
     },
     position: { x: 0, y: 600 },
   },
@@ -89,15 +126,32 @@ export const initialNodes = [
   {
     id: '7',
     data: {
-      label:
-        'Send email "Thank you for your application to the ..." to candidate',
+      label: (
+        <p>
+          Send email "Thank you for your application to the ..." to candidate
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
+        </p>
+      ),
     },
     position: { x: 100, y: 750 },
   },
   {
     id: '8',
     data: {
-      label: 'Notify team members "New qualified candidate!"',
+      label: (
+        <p>
+          Notify team members "New qualified candidate!"
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
+        </p>
+      ),
     },
     position: { x: 400, y: 450 },
   },
@@ -107,6 +161,11 @@ export const initialNodes = [
       label: (
         <div className="flex flex-col justify-center items-center">
           <p className="mb-2">Configure this step</p>
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
           <Zapier width={60} height={30} />
         </div>
       ),
@@ -116,7 +175,16 @@ export const initialNodes = [
   {
     id: '10',
     data: {
-      label: 'Notify team members "the candidate has to be revoted"',
+      label: (
+        <p>
+          Notify team members "the candidate has to be revoted"
+          <ButtonIcon
+            name="HiCog"
+            size={30}
+            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+          />
+        </p>
+      ),
     },
     position: { x: 700, y: 450 },
   },
