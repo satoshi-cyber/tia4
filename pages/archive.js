@@ -1,24 +1,71 @@
 import Avatar from 'react-avatar'
 
 import MainMenu from '../components/Menu'
-import { Text, Icon } from '../components'
+import { Text, Icon, Field, FormIcon, Form } from '../components'
 import { Player, ControlBar } from 'video-react'
 import 'video-react/dist/video-react.css'
+import { useForm } from 'react-hook-form'
 
 export default function Submit() {
+  const form = useForm()
+
+  const onSubmit = () => {}
+
   return (
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
       <MainMenu />
       <div className="flex flex-col sm:max-w-[600px] lg:max-w-[900px] xl:max-w-[1200px]  w-full px-4 items-center">
-        <div className="mb-20 flex flex-col w-full items-center">
-          <Text
-            text="Video archive"
-            className="text-3xl flex-1 text-center ml-[30px] mb-3"
-          />
-          <Text
-            className="text-lg text-gray-500 mb-3"
-            text="Watch video archives, and re-rate them if you want!"
-          />
+        <Text
+          text="Video archive"
+          className="text-3xl flex-1 text-center ml-[30px] mb-3"
+        />
+        <Text
+          className="text-lg text-gray-500 mb-10"
+          text="Search, watch video archives, and re-rate them if you want!"
+        />
+        <div className="sticky top-0 pt-4 mb-20 w-full bg-white z-20">
+          <Form
+            form={form}
+            onSubmit={onSubmit}
+            className="w-full border-b pb-3"
+          >
+            <div className="flex flex-row justify-between w-full">
+              <div className="w-[400px]">
+                <Field.Input
+                  label="Search"
+                  placeholder="Search"
+                  type="search"
+                  name="search"
+                  after={<FormIcon name="HiSearch" />}
+                />
+              </div>
+              <div className="flex flex-row">
+                <div className="mr-8">
+                  <Field.Select
+                    label="Score"
+                    name="score"
+                    options={[
+                      { label: 'All', value: 1 },
+                      { label: '4/4', value: 1 },
+                      { label: '3/4', value: 1 },
+                      { label: '2/4', value: 1 },
+                      { label: '1/4', value: 1 },
+                    ]}
+                    after={<FormIcon name="HiStar" />}
+                  />
+                </div>
+                <Field.Select
+                  label="Label"
+                  name="label"
+                  after={<FormIcon name="HiBookmark" />}
+                  options={[
+                    { label: 'All', value: 1 },
+                    { label: 'future consider', value: 1 },
+                  ]}
+                />
+              </div>
+            </div>
+          </Form>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
           <div>
@@ -84,8 +131,11 @@ export default function Submit() {
                   <p className="text-lg">Mauris egestas</p>
                   <div>
                     <p className="text-xs mb-2">score: 1/4</p>
-                    <span className="text-[10px] border p-1 rounded-full px-2 -mr-2">
+                    <span className="text-[10px] border p-1 rounded-full px-2 mr-2">
                       future consider
+                    </span>
+                    <span className="text-[10px] border p-1 rounded-full px-2">
+                      another label
                     </span>
                   </div>
                 </div>
