@@ -50,6 +50,29 @@ const Menu = () => (
         </span>
       </a>
       <hr className="mb-4" />
+      <Link href="/flow" shallow>
+        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
+          <Icon
+            name="HiFilter"
+            size={30}
+            className="text-gray-500 group-one-hover:text-purple-800"
+          />
+          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            Flow
+          </span>
+        </a>
+      </Link>
+      <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
+        <Icon
+          name="HiBriefcase"
+          size={30}
+          className="text-gray-500 group-one-hover:text-purple-800"
+        />
+        <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+          Company
+        </span>
+      </a>
+      <hr className="mb-4" />
       <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
         <Icon
           name="HiUserCircle"
@@ -60,29 +83,21 @@ const Menu = () => (
           My Videos
         </span>
       </a>
-      <hr className="mb-4" />
-      <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
-        <Icon
-          name="HiUser"
-          size={30}
-          className="text-gray-500 group-one-hover:text-purple-800"
-        />
-        <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-          Profile
-        </span>
-      </a>
-      <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
-        <Icon
-          name="HiCog"
-          size={30}
-          className="text-gray-500 group-one-hover:text-purple-800"
-        />
-        <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-          Settings
-        </span>
-      </a>
+      <Link href="/profile" shallow>
+        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
+          <Icon
+            name="HiUser"
+            size={30}
+            className="text-gray-500 group-one-hover:text-purple-800"
+          />
+          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            Profile
+          </span>
+        </a>
+      </Link>
       <div className="flex flex-1" />
       <hr className="mb-4" />
+
       <Link href="/logout">
         <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
           <Icon
