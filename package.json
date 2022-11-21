@@ -52,7 +52,7 @@
     "urql": "^3.0.3",
     "use-local-storage": "^2.3.6",
     "uuid": "^9.0.0",
-    "video-react": "^0.15.0",
+    "video-react": "^0.16.0",
     "yarn": "^1.22.19",
     "yup": "^0.32.11"
   },

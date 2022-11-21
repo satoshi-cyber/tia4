@@ -20,9 +20,9 @@ function Home() {
 
   const { scrollY } = useScroll()
 
-  const marginLeft = useTransform(scrollY, [0, 600], [0, 550])
-  const marginRight = useTransform(scrollY, [0, 600], [0, -550])
-  const scale = useTransform(scrollY, [0, 600], [1, 0.7])
+  const marginLeft = useTransform(scrollY, [0, 700], [0, 600])
+  const marginRight = useTransform(scrollY, [0, 700], [0, -600])
+  const scale = useTransform(scrollY, [0, 700], [1, 0.6])
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setPages(
@@ -37,7 +37,7 @@ function Home() {
       <Menu />
       <motion.div style={{ marginLeft: marginRight }}>
         <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
-          <div className="flex flex-col max-w-[600px] w-full mx-4">
+          <div className="flex flex-col max-w-[700px] w-full mx-4">
             <motion.div
               style={{ marginLeft, marginRight, scale }}
               className="sticky top-28 md:top-16 z-20 origin-top"
@@ -59,7 +59,7 @@ function Home() {
                   playsInline
                   controls
                   autoPlay
-                  src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                  src="/videoplayback.mp4"
                 />
                 <div className="flex justify-between mt-4 mb-4 md:mb-10">
                   <div className="flex">
@@ -110,7 +110,7 @@ function Home() {
             </motion.div>
             <div className="border mt-12">
               <Document
-                file="/cv.pdf"
+                file="/awesome-cv.pdf"
                 onLoadSuccess={onDocumentLoadSuccess}
                 loading={
                   <div className="p-20">

@@ -39,16 +39,18 @@ const Menu = () => (
           </span>
         </a>
       </Link>
-      <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
-        <Icon
-          name="HiArchive"
-          size={30}
-          className="text-gray-500 group-one-hover:text-purple-800"
-        />
-        <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-          Archive
-        </span>
-      </a>
+      <Link href="/archive" shallow>
+        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
+          <Icon
+            name="HiArchive"
+            size={30}
+            className="text-gray-500 group-one-hover:text-purple-800"
+          />
+          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            Archive
+          </span>
+        </a>
+      </Link>
       <hr className="mb-4" />
       <Link href="/flow" shallow>
         <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
