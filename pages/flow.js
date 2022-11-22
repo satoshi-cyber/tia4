@@ -27,16 +27,7 @@ export const initialNodes = [
   {
     id: '1b',
     data: {
-      label: (
-        <p>
-          Send "Application to rate!" to team members
-          <ButtonIcon
-            name="HiCog"
-            size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
-          />
-        </p>
-      ),
+      label: 'Start rating',
     },
     position: { x: 400, y: 130 },
     style: {
@@ -53,7 +44,7 @@ export const initialNodes = [
             size={30}
             className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
           />
-          <span>Most of team members voted</span>
+          <span>Most of team members downvoted</span>
           <Icon name="HiThumbDown" size={50} className="text-black" />,
         </p>
       ),
@@ -73,7 +64,7 @@ export const initialNodes = [
             size={30}
             className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
           />
-          <span>Most of team members voted</span>
+          <span>Most of team members upvoted</span>
           <Icon name="HiThumbUp" size={50} className="text-black" />,
         </p>
       ),
@@ -100,25 +91,6 @@ export const initialNodes = [
     },
   },
   {
-    id: '5',
-    data: {
-      label: (
-        <p>
-          Notify team members "the candidate is disqualified"
-          <ButtonIcon
-            name="HiCog"
-            size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
-          />
-        </p>
-      ),
-    },
-    position: { x: 100, y: 450 },
-    style: {
-      borderColor: '#bb86fc',
-    },
-  },
-  {
     id: '6a',
     data: {
       label: (
@@ -132,7 +104,7 @@ export const initialNodes = [
         </p>
       ),
     },
-    position: { x: 0, y: 600 },
+    position: { x: 0, y: 450 },
     style: {
       borderColor: '#bb86fc',
     },
@@ -142,7 +114,7 @@ export const initialNodes = [
     data: {
       label: 'Member clicked "re rate"',
     },
-    position: { x: 200, y: 600 },
+    position: { x: 200, y: 450 },
     style: {
       borderColor: '#bb86fc',
     },
@@ -161,26 +133,7 @@ export const initialNodes = [
         </p>
       ),
     },
-    position: { x: 100, y: 750 },
-    style: {
-      borderColor: '#bb86fc',
-    },
-  },
-  {
-    id: '8',
-    data: {
-      label: (
-        <p>
-          Notify team members "New qualified candidate!"
-          <ButtonIcon
-            name="HiCog"
-            size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
-          />
-        </p>
-      ),
-    },
-    position: { x: 400, y: 450 },
+    position: { x: 100, y: 600 },
     style: {
       borderColor: '#bb86fc',
     },
@@ -200,26 +153,7 @@ export const initialNodes = [
         </div>
       ),
     },
-    position: { x: 400, y: 600 },
-    style: {
-      borderColor: '#bb86fc',
-    },
-  },
-  {
-    id: '10',
-    data: {
-      label: (
-        <p>
-          Notify team members "the candidate has to be revoted"
-          <ButtonIcon
-            name="HiCog"
-            size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
-          />
-        </p>
-      ),
-    },
-    position: { x: 700, y: 450 },
+    position: { x: 400, y: 450 },
     style: {
       borderColor: '#bb86fc',
     },
@@ -231,15 +165,12 @@ export const initialEdges = [
   { id: 'e1-2', source: '1b', target: '2', animated: true },
   { id: 'e1-3', source: '1b', target: '3', animated: true },
   { id: 'e1-4', source: '1b', target: '4', animated: true },
-  { id: 'e1-5', source: '2', target: '5', animated: true },
-  { id: 'e1-6', source: '5', target: '6a', animated: true },
-  { id: 'e1-7', source: '5', target: '6b', animated: true },
+  { id: 'e1-6', source: '2', target: '6a', animated: true },
+  { id: 'e1-6', source: '2', target: '6b', animated: true },
   { id: 'e1-8', source: '6b', target: '1b', animated: true },
   { id: 'e1-9', source: '6a', target: '7', animated: true },
-  { id: 'e1-10', source: '10', target: '1b', animated: true },
-  { id: 'e1-11', source: '3', target: '8', animated: true },
-  { id: 'e1-12', source: '8', target: '9', animated: true },
-  { id: 'e1-13', source: '4', target: '10', animated: true },
+  { id: 'e1-10', source: '4', target: '1b', animated: true },
+  { id: 'e1-12', source: '3', target: '9', animated: true },
 ]
 
 const onInit = (reactFlowInstance) =>
