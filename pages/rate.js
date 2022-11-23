@@ -137,7 +137,7 @@ function Home() {
                   <Page
                     pageNumber={index}
                     width={820}
-                    className="border mt-10 -ml-[60px]"
+                    className="border my-10 -ml-[60px]"
                   />
                 ))}
               </Document>
