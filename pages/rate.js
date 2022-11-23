@@ -20,9 +20,13 @@ function Home() {
 
   const { scrollY } = useScroll()
 
-  const marginLeft = useTransform(scrollY, [0, 700], [0, 600])
-  const marginRight = useTransform(scrollY, [0, 700], [0, -600])
+  const marginLeft = useTransform(scrollY, [0, 700], [0, 650])
+  const marginRight = useTransform(scrollY, [0, 700], [0, -650])
   const scale = useTransform(scrollY, [0, 700], [1, 0.6])
+  const docScale = useTransform(scrollY, [0, 700], [0.8, 1])
+  const containerMarginRight = useTransform(scrollY, [0, 700], [0, -500])
+  const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200])
+  const opacity = useTransform(scrollY, [0, 100], [1, 0])
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setPages(
@@ -35,7 +39,12 @@ function Home() {
   return (
     <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
       <Menu />
-      <motion.div style={{ marginLeft: marginRight }}>
+      <motion.div
+        style={{
+          marginLeft: containerMarginRight,
+          marginTop: containerMarginTop,
+        }}
+      >
         <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
           <div className="flex flex-col max-w-[700px] w-full mx-4">
             <motion.div
@@ -43,14 +52,17 @@ function Home() {
               className="sticky top-28 md:top-16 z-20 origin-top"
             >
               <div>
-                <div className="flex flex-row mb-4 items-center">
+                <motion.div
+                  className="flex flex-row mb-4 items-center"
+                  style={{ opacity }}
+                >
                   <Icon
                     name="HiOutlineBriefcase"
                     size={20}
                     className="text-black mr-3"
                   />
                   Senior software developer
-                </div>
+                </motion.div>
                 <Player
                   className="flex-none rounded-2xl shadow-sm overflow-hidden w-full"
                   width="100%"
@@ -61,7 +73,10 @@ function Home() {
                   autoPlay
                   src="/videoplayback.mp4"
                 />
-                <div className="flex justify-between mt-4 mb-4 md:mb-10">
+                <motion.div
+                  className="flex justify-between mt-4 mb-4 md:mb-10"
+                  style={{ opacity }}
+                >
                   <div className="flex">
                     <div className="mr-4">
                       <img
@@ -99,7 +114,7 @@ function Home() {
                     </div>
                   </div>
                   <Icon name="HiBookmark" size={40} className="text-black" />
-                </div>
+                </motion.div>
                 <div className="block md:hidden flex justify-center mb-6">
                   <div className="grid grid-cols-2 grid-rows-1 gap-4 border-2 p-2 rounded-full">
                     <Icon name="HiThumbDown" size={50} className="text-black" />
@@ -108,7 +123,7 @@ function Home() {
                 </div>
               </div>
             </motion.div>
-            <div className="border mt-12">
+            <motion.div className="origin-top" style={{ scale: docScale }}>
               <Document
                 file="/awesome-cv.pdf"
                 onLoadSuccess={onDocumentLoadSuccess}
@@ -119,10 +134,14 @@ function Home() {
                 }
               >
                 {pages.map((index) => (
-                  <Page pageNumber={index} width={598} />
+                  <Page
+                    pageNumber={index}
+                    width={820}
+                    className="border mt-10 -ml-[60px]"
+                  />
                 ))}
               </Document>
-            </div>
+            </motion.div>
           </div>
         </div>
       </motion.div>
