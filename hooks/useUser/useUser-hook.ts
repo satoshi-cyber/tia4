@@ -17,7 +17,7 @@ export const useUser = () => {
   const login = useCallback(
     async (email: string) => {
       const did = await magic?.auth.loginWithMagicLink({ email });
-
+      console.log("did", did)
       setToken(did || undefined)
     },
     [setToken]
