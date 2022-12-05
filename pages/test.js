@@ -1,60 +1,50 @@
-import { useRouter } from "next/router";
-import { addHook, useLoadData, useGet } from "../lib/service";
-import { Magic } from "magic-sdk";
-
-const magic =
-  typeof window !== "undefined" &&
-  new Magic(process.env.NEXT_PUBLIC_MAGIC_PUB_KEY);
-
-const Anime = {
-  Quotes: "quotes",
-  NewAnime: "new-anime",
-};
-
-addHook(Anime.Quotes, (name) =>
-  useGet(`https://animechan.vercel.app/api/quotes/character?name=${name}`)
-);
-
-addHook(Anime.NewAnime, (data) => {
-  const post = usePost(data);
-  const router = useRouter();
-
-  return async () => {
-    const res = await post();
-
-    router.push("/login");
-
-    return res;
-  };
-});
-
-//////////////////////////
-///////////////////////////
-///////////////////////////
-///////////////////////////
-///////////////////////////
-///////////////////////////
-
-// const Action = ({ children, action }) => {
-//   const method = useHook(action);
-
-//   return React.cloneElement(children, { onClick: method });
-// };
-
-// const ActionFlags = ({ children, action }) => {
-//   const method = useHook(action);
-
-//   return React.cloneElement(children, { onClick: method });
-// };
-
-export default function Submit() {
-  const { data } = useLoadData([Anime.Quotes, "saitama"]);
-
-  if (!data) return "is loading";
-
+const Test = () => {
   return (
-    <div className="flex flex-1 w-full justify-center items-center py-20">
-      {JSON.stringify(data)}
-    </div>
-  );
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm">
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="username"
+        >
+          Username
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="username"
+          type="text"
+          required
+        />
+      </div>
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="password"
+          type="password"
+          required
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+        >
+          Sign In
+        </button>
+        <a
+          class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+          href="#"
+        >
+          Forgot Password?
+        </a>
+      </div>
+    </form>
+  )
 }
+
+export default Test

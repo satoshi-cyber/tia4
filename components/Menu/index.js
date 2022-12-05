@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Avatar from 'react-avatar'
 import LogoSmall from '../../public/logo-small.svg'
 import Logo from '../../public/logo.svg'
 
@@ -51,7 +52,6 @@ const Menu = () => (
           </span>
         </a>
       </Link>
-      <hr className="mb-4" />
       <Link href="/flow" shallow>
         <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
           <Icon
@@ -65,14 +65,10 @@ const Menu = () => (
         </a>
       </Link>
       <Link href="/company" shallow>
-        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
-          <Icon
-            name="HiOfficeBuilding"
-            size={30}
-            className="text-gray-500 group-one-hover:text-purple-800"
-          />
+        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
+          <Avatar src="/twiter.png" size={30} round />
           <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-            Company
+            My company
           </span>
         </a>
       </Link>
@@ -89,30 +85,37 @@ const Menu = () => (
           </span>
         </a>
       </Link>
-      <Link href="/profile" shallow>
+      <Link href="/record-an-interview" shallow>
         <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
           <Icon
-            name="HiUser"
+            name="HiVideoCamera"
             size={30}
             className="text-gray-500 group-one-hover:text-purple-800"
           />
           <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-            Profile
+            Record
+          </span>
+        </a>
+      </Link>
+      <Link href="/info" shallow>
+        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
+          <Icon
+            name="HiInformationCircle"
+            size={30}
+            className="text-gray-500 group-one-hover:text-purple-800"
+          />
+          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            Help and support
           </span>
         </a>
       </Link>
       <div className="flex flex-1" />
-      <hr className="mb-4" />
 
-      <Link href="/logout">
-        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
-          <Icon
-            name="HiLogout"
-            size={30}
-            className="text-gray-500 group-one-hover:text-purple-800"
-          />
+      <Link href="/profile">
+        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
+          <Avatar name="Lorem ipsum" size={30} round />
           <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-            logout
+            Lorem ipsum
           </span>
         </a>
       </Link>
