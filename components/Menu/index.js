@@ -67,9 +67,12 @@ const Menu = () => (
       <Link href="/company" shallow>
         <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
           <Avatar src="/twiter.png" size={30} round />
-          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
-            My company
+          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1">
+            Lorem LLC
           </span>
+          <a className="border rounded-full mr-2 p-2 text-gray-500 hover:text-purple-800">
+            <Icon name="HiSwitchVertical" size={14} />
+          </a>
         </a>
       </Link>
       <hr className="mb-4" />
@@ -114,9 +117,12 @@ const Menu = () => (
       <Link href="/profile">
         <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
           <Avatar name="Lorem ipsum" size={30} round />
-          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+          <span className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1">
             Lorem ipsum
           </span>
+          <a className="border rounded-full mx-2 p-2 text-gray-500 hover:text-purple-800">
+            <Icon name="HiOutlineLogout" size={14} />
+          </a>
         </a>
       </Link>
     </div>
