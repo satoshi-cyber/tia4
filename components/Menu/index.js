@@ -70,7 +70,7 @@ const Menu = () => (
           <span className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1">
             Lorem LLC
           </span>
-          <a className="border rounded-full mr-2 p-2 text-gray-500 hover:text-purple-800">
+          <a className="border-l rounded-full mr-2 p-2 text-gray-500 hover:text-purple-800">
             <Icon name="HiSwitchVertical" size={14} />
           </a>
         </a>
@@ -120,7 +120,7 @@ const Menu = () => (
           <span className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1">
             Lorem ipsum
           </span>
-          <a className="border rounded-full mx-2 p-2 text-gray-500 hover:text-purple-800">
+          <a className="border-l rounded-full mx-2 p-2 text-gray-500 hover:text-purple-800">
             <Icon name="HiOutlineLogout" size={14} />
           </a>
         </a>
