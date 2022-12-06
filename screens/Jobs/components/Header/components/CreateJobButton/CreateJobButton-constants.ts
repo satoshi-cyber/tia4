@@ -4,7 +4,7 @@ export const CLASS_NAMES = {
   title: "text-lg text-white",
 };
 
-export const TITLE = "Create new job";
+export const TITLE = "Post a job";
 
 export const ICON_PROPS = {
   name: "HiPlusCircle",
