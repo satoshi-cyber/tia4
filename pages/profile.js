@@ -1,10 +1,12 @@
+import { withAuth } from '@/hocs'
+
 import { FormIcon, UncontrolledField } from '../components/Form'
 import Menu from '../components/Menu'
 import { Title } from '../components'
 
 const labelStyle = 'text-sm text-gray-900 text-left w-full mb-2'
 
-export default function Submit() {
+const Profile = () => {
   return (
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
       <Menu />
@@ -50,3 +52,5 @@ export default function Submit() {
     </div>
   )
 }
+
+export default withAuth(Profile)

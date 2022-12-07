@@ -18,20 +18,63 @@ export type Scalars = {
 
 export type Answer = {
   __typename?: 'Answer';
-  downloadUrl?: Maybe<Scalars['String']>;
   question: Question;
-  uploadUrl?: Maybe<Scalars['String']>;
+  thumbnail: Scalars['String'];
+  thumbnailUploadUrl: Scalars['String'];
+  uploadUrl: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export type AnswerInput = {
   question: QuestionInput;
 };
 
+export type Auth = {
+  __typename?: 'Auth';
+  token: Scalars['String'];
+};
+
+export type AuthInput = {
+  did: Scalars['String'];
+};
+
+export type Company = {
+  __typename?: 'Company';
+  avatarUploadUrl: Scalars['String'];
+  avatarUrl: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
+};
+
+export type CompanyInvite = {
+  __typename?: 'CompanyInvite';
+  recipientEmail: Scalars['String'];
+  role: CompanyMemberRole;
+};
+
+export type CompanyMember = {
+  __typename?: 'CompanyMember';
+  role: CompanyMemberRole;
+  user: User;
+};
+
+export enum CompanyMemberRole {
+  AdminMember = 'adminMember',
+  Member = 'member'
+}
+
 export type Interview = {
   __typename?: 'Interview';
   answers: Array<Answer>;
   id: Scalars['ID'];
   jobId: Scalars['String'];
+};
+
+export type InviteMember = {
+  recipientEmail?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<CompanyMemberRole>;
 };
 
 export type Job = {
@@ -43,17 +86,35 @@ export type Job = {
   title: Scalars['String'];
 };
 
+export type Member = CompanyInvite | CompanyMember;
+
 export type Mutation = {
   __typename?: 'Mutation';
+  authenticateUser: Auth;
   createJob: Job;
-  createUser: User;
-  deleteInterview?: Maybe<Interview>;
-  deleteJob?: Maybe<Job>;
+  deleteCompany: Company;
+  deleteInterview: Interview;
+  deleteInvite: CompanyInvite;
+  deleteJob: Job;
+  deleteMember: CompanyMember;
   deleteUser: User;
+  interviews: Array<Interview>;
+  inviteMember: CompanyInvite;
+  members: Array<Member>;
+  rateInterview: Interview;
+  setupCompany: Company;
   submitInterview: Interview;
+  suspendUser: User;
+  updateCompany: Company;
   updateInterview: Interview;
   updateJob: Job;
-  updateUser: User;
+  updateMember: CompanyMember;
+  updateProfile: User;
+};
+
+
+export type MutationAuthenticateUserArgs = {
+  input?: InputMaybe<AuthInput>;
 };
 
 
@@ -62,12 +123,18 @@ export type MutationCreateJobArgs = {
 };
 
 
-export type MutationCreateUserArgs = {
-  input?: InputMaybe<NewUser>;
+export type MutationDeleteCompanyArgs = {
+  companyId: Scalars['ID'];
 };
 
 
 export type MutationDeleteInterviewArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteInviteArgs = {
+  companyId: Scalars['ID'];
   id: Scalars['ID'];
 };
 
@@ -77,13 +144,53 @@ export type MutationDeleteJobArgs = {
 };
 
 
-export type MutationDeleteUserArgs = {
+export type MutationDeleteMemberArgs = {
+  companyId: Scalars['ID'];
   id: Scalars['ID'];
+};
+
+
+export type MutationInterviewsArgs = {
+  companyId: Scalars['ID'];
+};
+
+
+export type MutationInviteMemberArgs = {
+  companyId: Scalars['ID'];
+  input: InviteMember;
+};
+
+
+export type MutationMembersArgs = {
+  companyId: Scalars['ID'];
+};
+
+
+export type MutationRateInterviewArgs = {
+  companyId: Scalars['ID'];
+  id: Scalars['ID'];
+  value: Scalars['ID'];
+};
+
+
+export type MutationSetupCompanyArgs = {
+  input: SetupCompany;
 };
 
 
 export type MutationSubmitInterviewArgs = {
   input?: InputMaybe<NewInterview>;
+};
+
+
+export type MutationSuspendUserArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateCompanyArgs = {
+  companyId: Scalars['ID'];
+  input: UpdateProfile;
 };
 
 
@@ -97,8 +204,14 @@ export type MutationUpdateJobArgs = {
 };
 
 
-export type MutationUpdateUserArgs = {
-  input?: InputMaybe<UpdateUser>;
+export type MutationUpdateMemberArgs = {
+  companyId: Scalars['ID'];
+  input: UpdateMember;
+};
+
+
+export type MutationUpdateProfileArgs = {
+  input: UpdateProfile;
 };
 
 export type NewInterview = {
@@ -117,15 +230,25 @@ export type NewJob = {
 export type NewUser = {
   email: Scalars['String'];
   firstName: Scalars['String'];
+  issuer: Scalars['String'];
   lastName: Scalars['String'];
+  publicAddress: Scalars['String'];
 };
 
 export type Query = {
   __typename?: 'Query';
+  companies: Array<Company>;
+  company: Company;
   interviews: Array<Interview>;
   job: Job;
   jobs: Array<Job>;
+  profile: User;
   users: Array<User>;
+};
+
+
+export type QueryCompanyArgs = {
+  companyId: Scalars['ID'];
 };
 
 
@@ -146,6 +269,18 @@ export type QuestionInput = {
   time: Scalars['Int'];
 };
 
+export type SetupCompany = {
+  description?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  website?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateCompany = {
+  description?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  website?: InputMaybe<Scalars['String']>;
+};
+
 export type UpdateInterview = {
   answers: Array<AnswerInput>;
   id: Scalars['ID'];
@@ -160,19 +295,36 @@ export type UpdateJob = {
   title?: InputMaybe<Scalars['String']>;
 };
 
-export type UpdateUser = {
-  firstName?: InputMaybe<Scalars['String']>;
+export type UpdateMember = {
   id: Scalars['ID'];
+  role?: InputMaybe<CompanyMemberRole>;
+};
+
+export type UpdateProfile = {
+  bio?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
+  linkedInProfile?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
+  avatarUploadUrl: Scalars['String'];
+  avatarUrl: Scalars['String'];
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['ID'];
   lastName: Scalars['String'];
+  resumeUploadUrl: Scalars['String'];
+  resumeUrl: Scalars['String'];
 };
+
+export type AuthenticateUserMutationVariables = Exact<{
+  input?: InputMaybe<AuthInput>;
+}>;
+
+
+export type AuthenticateUserMutation = { __typename?: 'Mutation', authenticateUser: { __typename?: 'Auth', token: string } };
 
 export type CreateJobMutationVariables = Exact<{
   input?: InputMaybe<NewJob>;
@@ -186,7 +338,7 @@ export type DeleteJobMutationVariables = Exact<{
 }>;
 
 
-export type DeleteJobMutation = { __typename?: 'Mutation', deleteJob?: { __typename?: 'Job', id: string } | null };
+export type DeleteJobMutation = { __typename?: 'Mutation', deleteJob: { __typename?: 'Job', id: string } };
 
 export type JobQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -208,6 +360,17 @@ export type UpdateJobMutationVariables = Exact<{
 export type UpdateJobMutation = { __typename?: 'Mutation', updateJob: { __typename?: 'Job', id: string } };
 
 
+export const AuthenticateUserDocument = gql`
+    mutation AuthenticateUser($input: AuthInput) {
+  authenticateUser(input: $input) {
+    token
+  }
+}
+    `;
+
+export function useAuthenticateUserMutation() {
+  return Urql.useMutation<AuthenticateUserMutation, AuthenticateUserMutationVariables>(AuthenticateUserDocument);
+};
 export const CreateJobDocument = gql`
     mutation CreateJob($input: NewJob) {
   createJob(input: $input) {

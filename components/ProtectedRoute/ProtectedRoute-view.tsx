@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Router from 'next/router'
 
 import { ProtectedRouteProps } from './ProtectedRoute-types'
 
-import { useUser } from '../../hooks'
 import { URLS } from '@/config'
+import { AuthContext } from '../AuthProvider'
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { isUserLoggedin } = useUser()
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
-    if (!isUserLoggedin) {
-      Router.replace(URLS.CREATE_A_JOB)
+    if (!token) {
+      Router.replace(URLS.LOGIN)
     }
-  }, [isUserLoggedin])
+  }, [token])
 
   return <>{children}</>
 }

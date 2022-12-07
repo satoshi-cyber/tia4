@@ -19,7 +19,8 @@
         "map": [
           ["@/components", "./components"],
           ["@/graphql", "./graphql"],
-          ["@/config", "./config"]
+          ["@/config", "./config"],
+          ["@/hocs", "./hocs"]
         ],
         "extensions": [".ts", ".tsx", ".json"]
       },

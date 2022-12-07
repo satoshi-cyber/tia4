@@ -19,7 +19,6 @@ export const useLogin = () => {
     resolver: yupResolver(loginSchema),
   });
 
-
   const handleSubmit = async ({ email }: LoginData) =>
     login(email).then(() => {
       router.push(URLS.JOBS)
