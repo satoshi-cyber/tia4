@@ -38,7 +38,7 @@ export const useUser = () => {
   }, [setToken])
 
   const isUserLoggedin = useMemo(
-    () => Boolean(undefined),
+    () => Boolean(token),
     [token]
   )
 

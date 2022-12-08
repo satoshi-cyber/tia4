@@ -1,21 +1,11 @@
-import React, { useCallback } from 'react'
-import { useCookies } from 'react-cookie'
+import React from 'react'
 
 import { AuthContext } from './AuthProvider-context'
+import { useAuthProvider } from './AuthProvider-hook'
 import { AuthProviderProps } from './AuthProvider-types'
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [{ token }, setCookie, removeCookie] = useCookies(['token'])
-
-  const setToken = useCallback((token?: string) => {
-    if (!token) {
-      removeCookie('token')
-
-      return
-    }
-
-    setCookie('token', token)
-  }, [])
+  const { token, setToken } = useAuthProvider()
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>

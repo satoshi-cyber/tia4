@@ -79,7 +79,7 @@ const Menu = () => {
         </Link>
         <Link href="/company" shallow>
           <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
-            <Avatar src="/twiter.png" size={30} round />
+            <Avatar src="/twiter.png" size="30" round />
             <span className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1">
               Lorem LLC
             </span>
@@ -141,7 +141,7 @@ const Menu = () => {
 
         <Link href="/profile">
           <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
-            <Avatar name="Lorem ipsum" size={30} round />
+            <Avatar name="Lorem ipsum" size="30" round />
             <span className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1">
               Lorem ipsum
             </span>
