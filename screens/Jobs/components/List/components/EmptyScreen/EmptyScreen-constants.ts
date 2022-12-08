@@ -6,4 +6,4 @@ export const CLASS_NAMES = {
 
 export const TITLE = "No jobs yet?";
 
-export const SUB_TITLE = "Start creating a new one!";
+export const SUB_TITLE = "Post a new jobs now!";
