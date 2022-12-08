@@ -309,14 +309,15 @@ export type UpdateProfile = {
 
 export type User = {
   __typename?: 'User';
-  avatarUploadUrl: Scalars['String'];
-  avatarUrl: Scalars['String'];
+  avatarUploadUrl?: Maybe<Scalars['String']>;
+  avatarUrl?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  firstName: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  lastName: Scalars['String'];
-  resumeUploadUrl: Scalars['String'];
-  resumeUrl: Scalars['String'];
+  lastName?: Maybe<Scalars['String']>;
+  resumeUploadUrl?: Maybe<Scalars['String']>;
+  resumeUrl?: Maybe<Scalars['String']>;
 };
 
 export type AuthenticateUserMutationVariables = Exact<{
@@ -352,12 +353,24 @@ export type JobsListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
 
+export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null } };
+
 export type UpdateJobMutationVariables = Exact<{
   input?: InputMaybe<UpdateJob>;
 }>;
 
 
 export type UpdateJobMutation = { __typename?: 'Mutation', updateJob: { __typename?: 'Job', id: string } };
+
+export type UpdateProfileMutationVariables = Exact<{
+  input: UpdateProfile;
+}>;
+
+
+export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null } };
 
 
 export const AuthenticateUserDocument = gql`
@@ -424,6 +437,24 @@ export const JobsListDocument = gql`
 export function useJobsListQuery(options?: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
   return Urql.useQuery<JobsListQuery, JobsListQueryVariables>({ query: JobsListDocument, ...options });
 };
+export const ProfileDocument = gql`
+    query Profile {
+  profile {
+    id
+    bio
+    firstName
+    lastName
+    resumeUrl
+    avatarUrl
+    resumeUploadUrl
+    avatarUploadUrl
+  }
+}
+    `;
+
+export function useProfileQuery(options?: Omit<Urql.UseQueryArgs<ProfileQueryVariables>, 'query'>) {
+  return Urql.useQuery<ProfileQuery, ProfileQueryVariables>({ query: ProfileDocument, ...options });
+};
 export const UpdateJobDocument = gql`
     mutation UpdateJob($input: UpdateJob) {
   updateJob(input: $input) {
@@ -434,4 +465,22 @@ export const UpdateJobDocument = gql`
 
 export function useUpdateJobMutation() {
   return Urql.useMutation<UpdateJobMutation, UpdateJobMutationVariables>(UpdateJobDocument);
+};
+export const UpdateProfileDocument = gql`
+    mutation UpdateProfile($input: UpdateProfile!) {
+  updateProfile(input: $input) {
+    id
+    bio
+    firstName
+    lastName
+    resumeUrl
+    avatarUrl
+    resumeUploadUrl
+    avatarUploadUrl
+  }
+}
+    `;
+
+export function useUpdateProfileMutation() {
+  return Urql.useMutation<UpdateProfileMutation, UpdateProfileMutationVariables>(UpdateProfileDocument);
 };

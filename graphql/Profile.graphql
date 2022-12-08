@@ -1,0 +1,12 @@
+query Profile {
+  profile {
+    id
+    bio
+    firstName
+    lastName
+    resumeUrl
+    avatarUrl
+    resumeUploadUrl
+    avatarUploadUrl
+  }
+}
