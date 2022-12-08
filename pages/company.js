@@ -1,9 +1,10 @@
 import Avatar from 'react-avatar'
+import { withAuth } from '@/hocs'
 
 import MainMenu from '../components/Menu'
 import { ButtonIcon, Text, Icon } from '../components'
 
-export default function Submit() {
+export const Company = () => {
   return (
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
       <MainMenu />
@@ -88,3 +89,5 @@ export default function Submit() {
     </div>
   )
 }
+
+export default withAuth(Company)

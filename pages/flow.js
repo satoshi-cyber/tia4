@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { withAuth } from '@/hocs'
 import ReactFlow, {
   addEdge,
   Controls,
@@ -217,4 +218,4 @@ const Settings = () => {
   )
 }
 
-export default Settings
+export default withAuth(Settings)

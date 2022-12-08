@@ -1,3 +1,5 @@
+import { withAuth } from '@/hocs'
+
 import CreateEditAJob from "../screens/CreateEditAJob";
 
-export default CreateEditAJob;
+export default withAuth(CreateEditAJob);

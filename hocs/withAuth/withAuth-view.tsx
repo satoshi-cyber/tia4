@@ -28,6 +28,8 @@ const withAuth = <P extends object>(WrappedComponent: NextPage<P>) => {
           Location: URLS.LOGIN,
         })
         ctx.res.end()
+
+        return
       }
     }
 

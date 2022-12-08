@@ -1,4 +1,5 @@
 import { Player } from 'video-react'
+import { withAuth } from '@/hocs'
 import React, { useState } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
@@ -15,7 +16,7 @@ import Skeleton from 'react-loading-skeleton'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
-function Home() {
+const Rate = () => {
   const [pages, setPages] = useState([])
 
   const { scrollY } = useScroll()
@@ -149,6 +150,8 @@ function Home() {
   )
 }
 
-export default dynamic(() => Promise.resolve(Home), {
-  ssr: false,
-})
+export default withAuth(
+  dynamic(() => Promise.resolve(Rate), {
+    ssr: false,
+  })
+)

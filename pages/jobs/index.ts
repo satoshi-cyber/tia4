@@ -1,3 +1,4 @@
+import { withAuth } from '@/hocs'
 import Jobs from "../../screens/Jobs/Jobs-view";
 
-export default Jobs;
+export default withAuth(Jobs);

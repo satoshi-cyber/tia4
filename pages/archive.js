@@ -1,12 +1,13 @@
 import Avatar from 'react-avatar'
-
-import MainMenu from '../components/Menu'
-import { Text, Icon, Field, FormIcon, Form } from '../components'
+import { withAuth } from '@/hocs'
 import { Player, ControlBar } from 'video-react'
 import 'video-react/dist/video-react.css'
 import { useForm } from 'react-hook-form'
 
-export default function Submit() {
+import MainMenu from '../components/Menu'
+import { Text, Icon, Field, FormIcon, Form } from '../components'
+
+const Archive = () => {
   const form = useForm()
 
   const onSubmit = () => {}
@@ -256,3 +257,5 @@ export default function Submit() {
     </div>
   )
 }
+
+export default withAuth(Archive)
