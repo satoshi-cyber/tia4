@@ -2,10 +2,10 @@ import React from 'react'
 import {
   Form,
   Layout,
-  PrimaryButton,
   Field,
   Loader,
   LoadingProvider,
+  SubmitButton,
 } from '@/components'
 
 import {
@@ -15,8 +15,6 @@ import {
   CLASS_NAMES,
 } from './Profile-constants'
 
-import { InjecHook } from '../../lib'
-import { FormService } from '../../services'
 import { useProfile } from './Profile-hook'
 
 const CreateAJob: React.FC = () => {
@@ -28,11 +26,7 @@ const CreateAJob: React.FC = () => {
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Field.Input {...FIRST_NAME_FIELD_PROPS} />
           <Field.Input {...LAST_NAME_FIELD_PROPS} />
-          <div className="flex justify-center flex-col">
-            <InjecHook hookKey={[FormService.submitButton]}>
-              <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
-            </InjecHook>
-          </div>
+          <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
         {submitting && <Loader />}
       </LoadingProvider>

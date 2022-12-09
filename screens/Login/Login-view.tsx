@@ -6,11 +6,9 @@ import {
   Layout,
   Title,
   FormIcon,
-  PrimaryButton,
   SocialButton,
+  SubmitButton,
 } from '../../components'
-import { InjecHook } from '../../lib'
-import { FormService } from '../../services'
 
 const Login = () => {
   const { form, handleSubmit } = useLogin()
@@ -26,9 +24,7 @@ const Login = () => {
           placeholder="your@email.com"
           after={<FormIcon name="HiOutlineMail" />}
         />
-        <InjecHook hookKey={[FormService.submitButton]}>
-          <PrimaryButton title="Login / Signup" />
-        </InjecHook>
+        <SubmitButton title="Login / Signup" />
       </Form>
       <p className="text-gray-600 my-5">OR</p>
       <div className="grid grid-cols-2 grid-rows-1 gap-4 w-full">

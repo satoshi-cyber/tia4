@@ -26,5 +26,6 @@ export const LAST_NAME_FIELD_PROPS = {
 };
 
 export const SUBMIT_BUTTON_PROPS = {
-  title: 'Update'
+  title: 'Update',
+  className: 'mt-4'
 }

@@ -1,4 +1,5 @@
 export const URLS = {
+    HOME: '/',
     LOGIN: '/login',
     JOBS: '/jobs',
     JOB: '/jobs/[jobId]',

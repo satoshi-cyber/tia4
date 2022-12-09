@@ -21,12 +21,12 @@ export const useLogin = () => {
 
   const handleSubmit = async ({ email }: LoginData) =>
     login(email).then(() => {
-      router.push(URLS.JOBS)
+      router.push(URLS.HOME)
     })
 
   useEffect(() => {
     if (isUserLoggedin) {
-      router.replace(URLS.JOBS)
+      router.replace(URLS.HOME)
     }
   }, [isUserLoggedin])
 
