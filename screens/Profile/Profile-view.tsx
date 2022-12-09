@@ -6,6 +6,7 @@ import {
   Loader,
   LoadingProvider,
   SubmitButton,
+  Title,
 } from '@/components'
 
 import {
@@ -13,6 +14,7 @@ import {
   LAST_NAME_FIELD_PROPS,
   SUBMIT_BUTTON_PROPS,
   CLASS_NAMES,
+  TITLE_PROPS,
 } from './Profile-constants'
 
 import { useProfile } from './Profile-hook'
@@ -22,6 +24,7 @@ const CreateAJob: React.FC = () => {
 
   return (
     <Layout.Default>
+      <Title {...TITLE_PROPS} />
       <LoadingProvider isLoading={fetching}>
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Field.Input {...FIRST_NAME_FIELD_PROPS} />

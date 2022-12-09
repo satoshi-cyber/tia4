@@ -2,6 +2,11 @@ export const CLASS_NAMES = {
   form: "w-full"
 }
 
+export const TITLE_PROPS = {
+  title: 'Update your profile',
+  subTitle: 'Update your info!'
+}
+
 export const TOAST_MESSAGE = {
   success: "Your Profile is updated",
   error: "Error updating your profile"

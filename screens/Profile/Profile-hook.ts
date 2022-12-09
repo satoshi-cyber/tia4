@@ -27,7 +27,7 @@ export const useProfile = () => {
   }, [fetching, reset])
 
   const handleSubmit = async (input: UpdateProfile) => {
-    const { error } = await updateProfile({ input }, { additionalTypenames: ['User'] })
+    const { error, data } = await updateProfile({ input }, { additionalTypenames: ['User'] })
 
     if (error) {
       toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS)
@@ -36,6 +36,10 @@ export const useProfile = () => {
     }
 
     toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
+
+    if (data) {
+      reset(formatDefaultValues(data?.updateProfile))
+    }
 
   };
 

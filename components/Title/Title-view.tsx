@@ -1,26 +1,33 @@
-import clsx from 'clsx'
 import React from 'react'
-import Skeleton from 'react-loading-skeleton'
 
-import SkeletonLoader from '../SkeletonLoader'
 import { TitleProps } from './Title-types'
 
-const Text: React.FC<TitleProps> = ({
+import Text from '../Text'
+
+const Title: React.FC<TitleProps> = ({
   title,
-  isLoading,
+  subTitle,
   skeletonProps,
-  className,
-  ...restProps
+  subTitleskeletonProps,
+  isLoading,
 }) => (
-  <h1
-    className={clsx(
-      'text-3xl text-normal mb-10 text-gray-900 text-center',
-      className
+  <div className="flex flex-col items-center mb-10">
+    <Text
+      as="h1"
+      isLoading={isLoading}
+      className="text-3xl text-normal text-gray-900 text-center"
+      text={title}
+      skeletonProps={skeletonProps}
+    />
+    {subTitle && (
+      <Text
+        isLoading={isLoading}
+        className="text-lg text-gray-500 mt-2 whitespace-pre-line text-center"
+        text={subTitle}
+        skeletonProps={subTitleskeletonProps}
+      />
     )}
-    {...restProps}
-  >
-    <SkeletonLoader isLoading={isLoading} {...skeletonProps} after={title} />
-  </h1>
+  </div>
 )
 
-export default Text
+export default Title
