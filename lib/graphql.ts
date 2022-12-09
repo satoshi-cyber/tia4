@@ -60,8 +60,6 @@ export const client = createClient({
         }
       },
       addAuthToOperation({ authState, operation }) {
-        console.log({ authState })
-
         if (!authState || !authState.token) {
           return operation;
         }

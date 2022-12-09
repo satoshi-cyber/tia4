@@ -1,20 +1,23 @@
 import { URLS } from '@/config'
 import { withAuth } from '@/hocs'
-import { NextPageContext } from 'next'
+import { useUser } from '@/hooks'
+import Router from 'next/router'
+import { useEffect } from 'react'
 
 const Home = () => {
+  const { hasCompany } = useUser()
+
+  useEffect(() => {
+    if (hasCompany) {
+      Router.replace(URLS.JOB)
+
+      return
+    }
+
+    Router.replace(URLS.MY_VIDEOS)
+  }, [])
+
   return null
-}
-
-Home.getInitialProps = async (ctx: NextPageContext) => {
-  if (ctx.res) {
-    ctx.res.writeHead(302, {
-      Location: URLS.JOBS,
-    })
-    ctx.res.end()
-  }
-
-  return {}
 }
 
 export default withAuth(Home)
