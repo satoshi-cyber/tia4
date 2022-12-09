@@ -1,13 +1,10 @@
-export type User = {
-  id: string
-  smeId: string
-  name: string
-  email: string
-  profileImage: string
-}
-
-export type ParsedToken = {
-  userData: User
+export type JWTClaims = {
   iat: number
   exp: number
+  userId: string;
+  userRole: string;
+  companyRoles: Array<{
+    companyId: string;
+    role: string;
+  }>;
 }

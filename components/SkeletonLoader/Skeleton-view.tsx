@@ -15,11 +15,14 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
 }) => {
   const isProviderLoading = useContext(LoadingProvider.Context)
 
-  return isProviderLoading || isLoading ? (
+  const loading =
+    typeof isLoading === 'undefined' ? isProviderLoading : isLoading
+
+  return loading ? (
     <Wrapper>
       <Skeleton
         {...skeletonProps}
-        className={clsx(className, 'leading-none')}
+        className={clsx(className, skeletonProps.height && 'leading-[unset]')}
       />
     </Wrapper>
   ) : (

@@ -2,6 +2,9 @@ import { Magic } from "magic-sdk";
 import { useCallback, useContext, useMemo } from "react";
 import { OAuthExtension } from "@magic-ext/oauth";
 import { useAuthenticateUserMutation } from "@/graphql";
+import jwtDecode from 'jwt-decode'
+
+import { JWTClaims } from "./useUser-types";
 
 import { AuthContext } from '../../components/AuthProvider'
 
@@ -42,5 +45,9 @@ export const useUser = () => {
     [token]
   )
 
-  return { login, logout, isUserLoggedin, token }
+  const claims = useMemo(() => token ? jwtDecode<JWTClaims>(token) : undefined, [token])
+
+  const hasCompany = claims && claims?.companyRoles.length > 0
+
+  return { login, logout, hasCompany, isUserLoggedin, token }
 }
