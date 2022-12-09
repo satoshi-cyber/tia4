@@ -20,7 +20,8 @@
           ["@/components", "./components"],
           ["@/graphql", "./graphql"],
           ["@/config", "./config"],
-          ["@/hocs", "./hocs"]
+          ["@/hocs", "./hocs"],
+          ["@/lib", "./lib"]
         ],
         "extensions": [".ts", ".tsx", ".json"]
       },

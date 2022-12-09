@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from 'react';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { UpdateProfile, useProfileQuery, useUpdateProfileMutation } from "@/graphql";
 
 import { updateProfileSchema } from "./Profile-validations";
 import { TOAST_MESSAGE, TOAST_OPTIONS } from './Profile-constants';
-import { useEffect } from 'react';
+import { formatDefaultValues } from "./Profile-functions";
 
 export const useProfile = () => {
   const [{ fetching, data }] = useProfileQuery()
@@ -21,7 +22,7 @@ export const useProfile = () => {
 
   useEffect(() => {
     if (!fetching && data) {
-      reset(data?.profile)
+      reset(formatDefaultValues(data?.profile))
     }
   }, [fetching, reset])
 

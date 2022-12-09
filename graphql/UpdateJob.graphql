@@ -1,6 +1,5 @@
 mutation UpdateJob($input: UpdateJob) {
-    updateJob(input: $input){
-        id
-    }
-    
+  updateJob(input: $input) {
+    id
+  }
 }
