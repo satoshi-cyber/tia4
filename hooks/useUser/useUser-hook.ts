@@ -43,7 +43,6 @@ export const useUser = () => {
       magic?.oauth.loginWithRedirect({
         provider,
         redirectURI: `${window.location.origin}/oauth-callback`,
-        scope: ['user:email', 'ua']
       });
     })
     , [])
