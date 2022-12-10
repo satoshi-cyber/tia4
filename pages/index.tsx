@@ -9,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     if (hasCompany) {
-      Router.replace(URLS.JOB)
+      Router.replace(URLS.JOBS)
 
       return
     }

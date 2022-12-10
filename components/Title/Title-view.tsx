@@ -11,7 +11,7 @@ const Title: React.FC<TitleProps> = ({
   subTitleSkeletonProps,
   isLoading,
 }) => (
-  <div className="flex flex-col items-center mb-10">
+  <div className="flex flex-col w-full items-center mb-10">
     <Text
       as="h1"
       isLoading={isLoading}
