@@ -71,8 +71,9 @@ export const useUser = () => {
 
     const firstName = magicRes?.oauth.userInfo.givenName
     const lastName = magicRes?.oauth.userInfo.familyName
-
     const avatarUrl = await getAvatar(magicRes)
+
+    console.log({ magicRes })
 
     const res = await authenticateUser({ input: { did, firstName, lastName, avatarUrl } })
 
