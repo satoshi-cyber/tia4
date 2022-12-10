@@ -1,6 +1,6 @@
 import { Magic } from "magic-sdk";
 import { useCallback, useContext, useMemo } from "react";
-import { OAuthExtension, OAuthProvider } from "@magic-ext/oauth";
+import { OAuthExtension, OAuthProvider, OAuthRedirectResult } from "@magic-ext/oauth";
 import { useAuthenticateUserMutation } from "@/graphql";
 import jwtDecode from 'jwt-decode'
 
@@ -43,9 +43,23 @@ export const useUser = () => {
       magic?.oauth.loginWithRedirect({
         provider,
         redirectURI: `${window.location.origin}/oauth-callback`,
+        scope: ['user:email', 'ua']
       });
     })
     , [])
+
+
+  const getAvatar = useCallback(async (response: OAuthRedirectResult) => {
+    if (response.oauth.provider === 'facebook') {
+      const res = await fetch(`https://graph.facebook.com/${response.oauth.userInfo.sub}?fields=picture.width(1080).height(1080)&access_token=${response.oauth.accessToken}`)
+
+      const data = await res.json()
+
+      return data?.picture.data.url
+    }
+
+    return response.oauth.userInfo.profile
+  }, [])
 
   const authenticateUserFromOAuth = useCallback(async () => {
     const magicRes = await magic?.oauth.getRedirectResult()
@@ -58,9 +72,8 @@ export const useUser = () => {
 
     const firstName = magicRes?.oauth.userInfo.givenName
     const lastName = magicRes?.oauth.userInfo.familyName
-    const avatarUrl = magicRes?.oauth.userInfo.profile
 
-    console.log(magicRes?.oauth)
+    const avatarUrl = await getAvatar(magicRes)
 
     const res = await authenticateUser({ input: { did, firstName, lastName, avatarUrl } })
 
