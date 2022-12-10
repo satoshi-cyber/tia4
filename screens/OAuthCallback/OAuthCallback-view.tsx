@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 
-import { Hook } from "../lib";
-import { AuthService } from "../services";
+import { useOAuthCallback } from './OAuthCallback-hook'
 
-export default function Callback() {
+const OAuthCallback: React.FC = () => {
+  useOAuthCallback()
+
   return (
     <div className="flex flex-row w-full justify-center items-center">
-      <Hook hookKey={[AuthService.oAuthCallback]} />
       <div
         className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-purple-600 rounded-full"
         role="status"
@@ -15,5 +15,7 @@ export default function Callback() {
         <span className="sr-only">Loading...</span>
       </div>
     </div>
-  );
+  )
 }
+
+export default OAuthCallback

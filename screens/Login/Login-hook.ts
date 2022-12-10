@@ -5,13 +5,13 @@ import { LoginData } from './Login-types';
 import { loginSchema } from './Login-validations';
 import { useUser } from "@/hooks";
 import { URLS } from "@/config";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 
 export const useLogin = () => {
   const router = useRouter()
 
-  const { login, isUserLoggedin } = useUser()
+  const { login, isUserLoggedin, loginWithProvider } = useUser()
 
   const form = useForm<LoginData>({
     mode: "onBlur",
@@ -30,8 +30,15 @@ export const useLogin = () => {
     }
   }, [isUserLoggedin])
 
+
+  const loginWithLinkedin = useCallback(() => loginWithProvider('linkedin'), [])
+
+  const loginWithFacebook = useCallback(() => loginWithProvider('facebook'), [])
+
   return {
     form,
     handleSubmit,
+    loginWithLinkedin,
+    loginWithFacebook
   };
 };

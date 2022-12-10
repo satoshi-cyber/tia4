@@ -8,10 +8,12 @@ import {
   FormIcon,
   SocialButton,
   SubmitButton,
+  Action,
 } from '../../components'
 
 const Login = () => {
-  const { form, handleSubmit } = useLogin()
+  const { form, handleSubmit, loginWithFacebook, loginWithLinkedin } =
+    useLogin()
 
   return (
     <Layout.CenterLayout>
@@ -28,8 +30,12 @@ const Login = () => {
       </Form>
       <p className="text-gray-600 my-5">OR</p>
       <div className="grid grid-cols-2 grid-rows-1 gap-4 w-full">
-        <SocialButton provider="facebook" title="Continue in with facebook" />
-        <SocialButton provider="linkedin" title="Sign in with Linkedin" />
+        <Action action={loginWithFacebook}>
+          <SocialButton provider="facebook" title="Continue in with facebook" />
+        </Action>
+        <Action action={loginWithLinkedin}>
+          <SocialButton provider="linkedin" title="Sign in with Linkedin" />
+        </Action>
       </div>
     </Layout.CenterLayout>
   )

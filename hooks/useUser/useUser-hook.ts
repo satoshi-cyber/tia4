@@ -1,6 +1,6 @@
 import { Magic } from "magic-sdk";
 import { useCallback, useContext, useMemo } from "react";
-import { OAuthExtension } from "@magic-ext/oauth";
+import { OAuthExtension, OAuthProvider } from "@magic-ext/oauth";
 import { useAuthenticateUserMutation } from "@/graphql";
 import jwtDecode from 'jwt-decode'
 
@@ -8,16 +8,16 @@ import { JWTClaims } from "./useUser-types";
 
 import { AuthContext } from '../../components/AuthProvider'
 
+const magic =
+  typeof window !== 'undefined' ?
+    new Magic(process.env.NEXT_PUBLIC_MAGIC_PUB_KEY!, {
+      extensions: [new OAuthExtension()],
+    }) : undefined
+
 export const useUser = () => {
   const { token, setToken } = useContext(AuthContext)
 
   const [_, authenticateUser] = useAuthenticateUserMutation()
-
-  const magic =
-    typeof window !== 'undefined' ?
-      new Magic(process.env.NEXT_PUBLIC_MAGIC_PUB_KEY!, {
-        extensions: [new OAuthExtension()],
-      }) : undefined
 
   const login = useCallback(
     async (email: string) => {
@@ -33,6 +33,39 @@ export const useUser = () => {
     },
     [setToken]
   )
+
+  const loginWithProvider = useCallback((provider: OAuthProvider) =>
+    new Promise((resolve) => {
+      window.addEventListener("popstate", () => {
+        resolve(true);
+      });
+
+      magic?.oauth.loginWithRedirect({
+        provider,
+        redirectURI: `${window.location.origin}/oauth-callback`,
+      });
+    })
+    , [])
+
+  const authenticateUserFromOAuth = useCallback(async () => {
+    const magicRes = await magic?.oauth.getRedirectResult()
+
+    const did = magicRes?.magic.idToken
+
+    if (!did) {
+      return
+    }
+
+    const provider = magicRes?.oauth.provider
+    const accessToken = magicRes?.oauth.accessToken
+
+    console.log({ magicRes, provider, accessToken })
+
+    const res = await authenticateUser({ input: { did } })
+
+    setToken(res.data?.authenticateUser.token)
+  }, [])
+
 
   const refreshToken = useCallback(
     async () => {
@@ -66,5 +99,5 @@ export const useUser = () => {
 
   const hasCompany = Boolean(companyId)
 
-  return { login, logout, hasCompany, companyId, isUserLoggedin, token, refreshToken }
+  return { login, logout, hasCompany, companyId, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, loginWithProvider }
 }
