@@ -1,19 +1,14 @@
 import React from 'react'
 
+import { CLASS_NAMES } from './OAuthCallback-constants'
 import { useOAuthCallback } from './OAuthCallback-hook'
 
 const OAuthCallback: React.FC = () => {
   useOAuthCallback()
 
   return (
-    <div className="flex flex-row w-full justify-center items-center">
-      <div
-        className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-purple-600 rounded-full"
-        role="status"
-        aria-label="loading"
-      >
-        <span className="sr-only">Loading...</span>
-      </div>
+    <div className={CLASS_NAMES.container}>
+      <div className={CLASS_NAMES.spiner} />
     </div>
   )
 }

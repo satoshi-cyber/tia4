@@ -1,6 +1,17 @@
 import { useLogin } from './Login-hook'
 
 import {
+  CLASS_NAMES,
+  EMAIL_FIELD_ICON,
+  EMAIL_FIELD_PROPS,
+  FACEBOOK_BUTTON_PROPS,
+  LINKEDIN_BUTTON_PROPS,
+  SEPERATOR_TEXT,
+  SUBMIT_BUTTON_PROPS,
+  TITLE_PROPS,
+} from './Login-constants'
+
+import {
   Form,
   Field,
   Layout,
@@ -17,24 +28,21 @@ const Login = () => {
 
   return (
     <Layout.CenterLayout>
-      <Title title="Change your life Today!" />
-      <Form form={form} onSubmit={handleSubmit} className="w-full">
+      <Title title={TITLE_PROPS.title} />
+      <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
         <Field.Input
-          name="email"
-          type="email"
-          label="Continue with email"
-          placeholder="your@email.com"
-          after={<FormIcon name="HiOutlineMail" />}
+          {...EMAIL_FIELD_PROPS}
+          after={<FormIcon name={EMAIL_FIELD_ICON} />}
         />
-        <SubmitButton title="Login / Signup" />
+        <SubmitButton {...SUBMIT_BUTTON_PROPS} />
       </Form>
-      <p className="text-gray-600 my-5">OR</p>
-      <div className="grid grid-cols-2 grid-rows-1 gap-4 w-full">
+      <p className={CLASS_NAMES.seperator}>{SEPERATOR_TEXT}</p>
+      <div className={CLASS_NAMES.socialButtonsContainer}>
         <Action action={loginWithFacebook}>
-          <SocialButton provider="facebook" title="Continue in with facebook" />
+          <SocialButton {...FACEBOOK_BUTTON_PROPS} />
         </Action>
         <Action action={loginWithLinkedin}>
-          <SocialButton provider="linkedin" title="Sign in with Linkedin" />
+          <SocialButton {...LINKEDIN_BUTTON_PROPS} />
         </Action>
       </div>
     </Layout.CenterLayout>
