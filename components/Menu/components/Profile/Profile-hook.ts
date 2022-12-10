@@ -9,6 +9,8 @@ export const useProfile = () => {
 
   const label = data?.profile.firstName ? `${data?.profile.firstName} ${data?.profile.lastName}` : 'Profile'
 
+  const avatarUrl = data?.profile.avatarUrl || undefined
+
   const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     e.stopPropagation()
@@ -16,5 +18,5 @@ export const useProfile = () => {
     logout()
   }
 
-  return { loading, handleLogout, label }
+  return { loading, handleLogout, label, avatarUrl }
 }

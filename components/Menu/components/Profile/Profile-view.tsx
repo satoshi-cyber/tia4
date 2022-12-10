@@ -5,13 +5,13 @@ import { Text, Icon, Avatar, LoadingProvider } from '@/components'
 import { useProfile } from './Profile-hook'
 
 const Profile = () => {
-  const { handleLogout, label, loading } = useProfile()
+  const { handleLogout, label, loading, avatarUrl } = useProfile()
 
   return (
     <LoadingProvider isLoading={loading}>
       <Link href="/profile">
         <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
-          <Avatar name={label} size="30" />
+          <Avatar name={label} size="30" src={avatarUrl} />
           <Text
             skeletonProps={{ width: '100' }}
             className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1 truncate"
