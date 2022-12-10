@@ -1,5 +1,5 @@
 import React from "react"
 
-export interface LoadingProviderProps {
+export interface LayoutProps {
   children?: React.ReactNode
 }
