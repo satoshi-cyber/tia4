@@ -50,14 +50,22 @@ export const useUser = () => {
 
   const getAvatar = useCallback(async (response: OAuthRedirectResult) => {
     if (response.oauth.provider === 'facebook') {
-      const res = await fetch(`https://graph.facebook.com/${response.oauth.userInfo.sub}?fields=picture.width(1080).height(1080)&access_token=${response.oauth.accessToken}`)
+      const res = await fetch(`https://graph.facebook.com/${response.oauth.userInfo.sub}?fields=picture.width(800).height(800)&access_token=${response.oauth.accessToken}`)
 
       const data = await res.json()
 
       return data?.picture.data.url
     }
 
-    return response.oauth.userInfo.profile
+    if (response.oauth.provider === 'linkedin') {
+      const res = await fetch(`https://api.linkedin.com/v2/me?projection=(profilePicture(displayImage~:playableStreams))&oauth2_access_token=${response.oauth.accessToken}`)
+
+      const data = await res.json()
+
+      return data.profilePicture["displayImage~"].elements.at(-1).identifiers[0].identifier
+    }
+
+    return null
   }, [])
 
   const authenticateUserFromOAuth = useCallback(async () => {
@@ -71,9 +79,10 @@ export const useUser = () => {
 
     const firstName = magicRes?.oauth.userInfo.givenName
     const lastName = magicRes?.oauth.userInfo.familyName
+
     const avatarUrl = await getAvatar(magicRes)
 
-    console.log({ magicRes })
+    console.log({ magicRes, avatarUrl })
 
     const res = await authenticateUser({ input: { did, firstName, lastName, avatarUrl } })
 
