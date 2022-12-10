@@ -1,5 +1,5 @@
-mutation UpdateJob($input: UpdateJob) {
-  updateJob(input: $input) {
+mutation UpdateJob($companyId: ID!, $input: UpdateJob!) {
+  updateJob(companyId: $companyId, input: $input) {
     id
   }
 }

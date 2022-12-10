@@ -119,7 +119,8 @@ export type MutationAuthenticateUserArgs = {
 
 
 export type MutationCreateJobArgs = {
-  input?: InputMaybe<NewJob>;
+  companyId: Scalars['ID'];
+  input: NewJob;
 };
 
 
@@ -140,6 +141,7 @@ export type MutationDeleteInviteArgs = {
 
 
 export type MutationDeleteJobArgs = {
+  companyId: Scalars['ID'];
   id: Scalars['ID'];
 };
 
@@ -200,7 +202,8 @@ export type MutationUpdateInterviewArgs = {
 
 
 export type MutationUpdateJobArgs = {
-  input?: InputMaybe<UpdateJob>;
+  companyId: Scalars['ID'];
+  input: UpdateJob;
 };
 
 
@@ -254,6 +257,11 @@ export type QueryCompanyArgs = {
 
 export type QueryJobArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryJobsArgs = {
+  companyId: Scalars['ID'];
 };
 
 export type Question = {
@@ -327,13 +335,15 @@ export type AuthenticateUserMutationVariables = Exact<{
 export type AuthenticateUserMutation = { __typename?: 'Mutation', authenticateUser: { __typename?: 'Auth', token: string } };
 
 export type CreateJobMutationVariables = Exact<{
-  input?: InputMaybe<NewJob>;
+  companyId: Scalars['ID'];
+  input: NewJob;
 }>;
 
 
 export type CreateJobMutation = { __typename?: 'Mutation', createJob: { __typename?: 'Job', id: string } };
 
 export type DeleteJobMutationVariables = Exact<{
+  companyId: Scalars['ID'];
   id: Scalars['ID'];
 }>;
 
@@ -347,7 +357,9 @@ export type JobQueryVariables = Exact<{
 
 export type JobQuery = { __typename?: 'Query', job: { __typename?: 'Job', id: string, title: string, deadline: any, questions: Array<{ __typename?: 'Question', id: string, question: string, time: number }> } };
 
-export type JobsListQueryVariables = Exact<{ [key: string]: never; }>;
+export type JobsListQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+}>;
 
 
 export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
@@ -365,7 +377,8 @@ export type SetupCompanyMutationVariables = Exact<{
 export type SetupCompanyMutation = { __typename?: 'Mutation', setupCompany: { __typename?: 'Company', id: string } };
 
 export type UpdateJobMutationVariables = Exact<{
-  input?: InputMaybe<UpdateJob>;
+  companyId: Scalars['ID'];
+  input: UpdateJob;
 }>;
 
 
@@ -391,8 +404,8 @@ export function useAuthenticateUserMutation() {
   return Urql.useMutation<AuthenticateUserMutation, AuthenticateUserMutationVariables>(AuthenticateUserDocument);
 };
 export const CreateJobDocument = gql`
-    mutation CreateJob($input: NewJob) {
-  createJob(input: $input) {
+    mutation CreateJob($companyId: ID!, $input: NewJob!) {
+  createJob(companyId: $companyId, input: $input) {
     id
   }
 }
@@ -402,8 +415,8 @@ export function useCreateJobMutation() {
   return Urql.useMutation<CreateJobMutation, CreateJobMutationVariables>(CreateJobDocument);
 };
 export const DeleteJobDocument = gql`
-    mutation DeleteJob($id: ID!) {
-  deleteJob(id: $id) {
+    mutation DeleteJob($companyId: ID!, $id: ID!) {
+  deleteJob(companyId: $companyId, id: $id) {
     id
   }
 }
@@ -431,8 +444,8 @@ export function useJobQuery(options: Omit<Urql.UseQueryArgs<JobQueryVariables>, 
   return Urql.useQuery<JobQuery, JobQueryVariables>({ query: JobDocument, ...options });
 };
 export const JobsListDocument = gql`
-    query JobsList {
-  jobs {
+    query JobsList($companyId: ID!) {
+  jobs(companyId: $companyId) {
     id
     title
     deadline
@@ -440,7 +453,7 @@ export const JobsListDocument = gql`
 }
     `;
 
-export function useJobsListQuery(options?: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
+export function useJobsListQuery(options: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
   return Urql.useQuery<JobsListQuery, JobsListQueryVariables>({ query: JobsListDocument, ...options });
 };
 export const ProfileDocument = gql`
@@ -473,8 +486,8 @@ export function useSetupCompanyMutation() {
   return Urql.useMutation<SetupCompanyMutation, SetupCompanyMutationVariables>(SetupCompanyDocument);
 };
 export const UpdateJobDocument = gql`
-    mutation UpdateJob($input: UpdateJob) {
-  updateJob(input: $input) {
+    mutation UpdateJob($companyId: ID!, $input: UpdateJob!) {
+  updateJob(companyId: $companyId, input: $input) {
     id
   }
 }

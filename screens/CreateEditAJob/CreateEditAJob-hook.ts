@@ -2,17 +2,21 @@ import { v4 as uuidv4 } from 'uuid';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
+import { useEffect } from 'react';;
 import { NewJob, useCreateJobMutation, useDeleteJobMutation, useJobQuery, useUpdateJobMutation } from "@/graphql";
 import { URLS } from '@/config';
+import { useUser } from '@/hooks';
 
 import { createAJobSchema } from "./CreateEditAJob-validations";
 import { TOAST_MESSAGE, TOAST_OPTIONS, DEFAULT_QUESTION_TIME, PUSH_DELAY } from './CreateEditAJob-constants';
-import { useEffect } from 'react';
 import { formatDefaultValues } from './CreateEditAJob-functions';
+
 
 export const useCreateUpdateAJob = () => {
   const router = useRouter()
+  const { companyId } = useUser()
+
   const { jobId } = router.query
 
   const editJob = Boolean(jobId)
@@ -45,7 +49,7 @@ export const useCreateUpdateAJob = () => {
   }, [fetching, reset])
 
   const handleSubmit = async (input: NewJob) => {
-    const { error } = editJob ? await updateJob({ input: { ...input, id: String(jobId) } }, { additionalTypenames: ['Job'] }) : await createJob({ input }, { additionalTypenames: ['Job'] })
+    const { error } = editJob ? await updateJob({ input: { ...input, id: String(jobId) }, companyId: companyId! }, { additionalTypenames: ['Job'] }) : await createJob({ input, companyId: companyId! }, { additionalTypenames: ['Job'] })
 
     const toastMessage = editJob ? TOAST_MESSAGE.EDIT_JOB : TOAST_MESSAGE.ADD_JOB
 
@@ -62,7 +66,7 @@ export const useCreateUpdateAJob = () => {
   };
 
   const handleDeleteJob = async () => {
-    const { error } = await deleteJob({ id: String(jobId) })
+    const { error } = await deleteJob({ id: String(jobId), companyId: companyId! })
 
     const toastMessage = TOAST_MESSAGE.DELETE_JOB
 

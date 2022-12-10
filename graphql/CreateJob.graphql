@@ -1,5 +1,5 @@
-mutation CreateJob($input: NewJob) {
-  createJob(input: $input) {
+mutation CreateJob($companyId: ID!, $input: NewJob!) {
+  createJob(companyId: $companyId, input: $input) {
     id
   }
 }

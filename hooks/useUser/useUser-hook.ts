@@ -62,7 +62,9 @@ export const useUser = () => {
 
   const claims = useMemo(() => token ? jwtDecode<JWTClaims>(token) : undefined, [token])
 
-  const hasCompany = claims && claims?.companyRoles.length > 0
+  const companyId = claims && claims.companyRoles[0] && claims.companyRoles[0].companyId
 
-  return { login, logout, hasCompany, isUserLoggedin, token, refreshToken }
+  const hasCompany = Boolean(companyId)
+
+  return { login, logout, hasCompany, companyId, isUserLoggedin, token, refreshToken }
 }
