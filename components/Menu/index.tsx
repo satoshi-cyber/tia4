@@ -12,7 +12,7 @@ const Menu = () => {
   const { hasCompany } = useUser()
 
   return (
-    <div className="fixed left-0 top-0 min-h-full w-[70px] border-r border-r-gray-200  flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-lg">
+    <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-pixelHover">
       <LogoSmall
         className="absolute top-6 left-6 z-20 group-hover:opacity-0"
         width={120}
@@ -21,7 +21,7 @@ const Menu = () => {
         className="absolute top-6 left-6 z-20 opacity-0 group-hover:opacity-100"
         width={120}
       />
-      <div className="absolute w-[240px] flex flex-1 flex-col pt-28 h-full">
+      <div className="w-full flex flex-1 flex-col pt-28 h-full">
         {hasCompany ? (
           <>
             <Link href="/jobs" shallow>
@@ -31,7 +31,7 @@ const Menu = () => {
                   size={30}
                   className="text-gray-500 group-one-hover:text-purple-800"
                 />
-                <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+                <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px]">
                   Jobs
                 </span>
               </a>
@@ -43,7 +43,7 @@ const Menu = () => {
                   size={30}
                   className="text-gray-500 group-one-hover:text-purple-800"
                 />
-                <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+                <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px]">
                   Rate
                 </span>
               </a>
@@ -55,7 +55,7 @@ const Menu = () => {
                   size={30}
                   className="text-gray-500 group-one-hover:text-purple-800"
                 />
-                <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+                <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px]">
                   Archive
                 </span>
               </a>
@@ -67,7 +67,7 @@ const Menu = () => {
                   size={30}
                   className="text-gray-500 group-one-hover:text-purple-800"
                 />
-                <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+                <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px]">
                   Flow
                 </span>
               </a>
@@ -75,7 +75,7 @@ const Menu = () => {
             <Link href="/company" shallow>
               <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
                 <Avatar src="/twiter.png" size="30" round />
-                <span className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1">
+                <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px] flex-1">
                   Lorem LLC
                 </span>
                 <button className="border-l rounded-full mr-2 p-2 text-gray-500 hover:text-purple-800">
@@ -86,13 +86,13 @@ const Menu = () => {
           </>
         ) : (
           <Link href="/setup-company" shallow>
-            <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer">
+            <a className="pl-5 mb-3 py-2 flex flex-row items-center text-gray-500 group-one hover:text-purple-800 cursor-pointer relative border-r-2 border-r-purple-800">
               <Icon
                 name="HiBriefcase"
                 size={30}
-                className="text-gray-500 group-one-hover:text-purple-800"
+                className="text-gray-500 group-one-hover:text-purple-800 flex-none"
               />
-              <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+              <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px]">
                 Post a job
               </span>
             </a>
@@ -106,7 +106,7 @@ const Menu = () => {
               size={30}
               className="text-gray-500 group-one-hover:text-purple-800"
             />
-            <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px]">
               My Videos
             </span>
           </a>
@@ -118,7 +118,7 @@ const Menu = () => {
               size={30}
               className="text-gray-500 group-one-hover:text-purple-800"
             />
-            <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px]">
               Record
             </span>
           </a>
@@ -130,7 +130,7 @@ const Menu = () => {
               size={30}
               className="text-gray-500 group-one-hover:text-purple-800"
             />
-            <span className="ml-5 group-hover:ml-3 transition-all ease-in-out">
+            <span className="ml-5 transition-all ease-in-out absolute w-[240px] left-[69px] group-hover:left-[40px]">
               Help and support
             </span>
           </a>

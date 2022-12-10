@@ -10,19 +10,21 @@ const Profile = () => {
   return (
     <LoadingProvider isLoading={loading}>
       <Link href="/profile">
-        <a className="pl-5 mb-5 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
+        <a className="pl-5 py-2 mb-3 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer">
           <Avatar name={label} size="30" src={avatarUrl} />
-          <Text
-            skeletonProps={{ width: '100' }}
-            className="ml-5 group-hover:ml-3 transition-all ease-in-out flex-1 truncate"
-            text={label}
-          />
-          <button
-            className="border-l rounded-full mx-2 p-2 text-gray-500 hover:text-purple-800"
-            onClick={handleLogout}
-          >
-            <Icon name="HiOutlineLogout" size={14} isLoading={false} />
-          </button>
+          <span className="ml-5 transition-all ease-in-out absolute w-[190px] left-[69px] group-hover:left-[40px] flex flex-row items-center">
+            <Text
+              className="flex flex-1"
+              skeletonProps={{ width: '100' }}
+              text={label}
+            />
+            <button
+              className="border-l mx-4 p-2 text-gray-500 hover:text-purple-800"
+              onClick={handleLogout}
+            >
+              <Icon name="HiOutlineLogout" size={16} isLoading={false} />
+            </button>
+          </span>
         </a>
       </Link>
     </LoadingProvider>

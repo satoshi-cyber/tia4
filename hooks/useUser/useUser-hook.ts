@@ -63,8 +63,6 @@ export const useUser = () => {
     const fk = magicRes?.oauth.userHandle
     const provider = magicRes?.oauth.provider
 
-    console.log({ magicRes })
-
     const res = await authenticateUser({ input: { did, firstName, lastName, accessToken, fk, provider } })
 
     setToken(res.data?.authenticateUser.token)

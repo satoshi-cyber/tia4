@@ -9,7 +9,13 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        pixel: 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1)',
+        pixelHover:
+          'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.01), 0 35px 60px -15px rgba(0, 0, 0, 0.2)',
+      },
+    },
   },
   variants: {
     extend: {
