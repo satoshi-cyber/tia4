@@ -63,6 +63,8 @@ export const useUser = () => {
 
     const res = await authenticateUser({ input: { did } })
 
+    console.log({ res })
+
     setToken(res.data?.authenticateUser.token)
   }, [])
 
