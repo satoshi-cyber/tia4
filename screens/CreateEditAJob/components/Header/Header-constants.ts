@@ -3,7 +3,7 @@ export const CLASS_NAMES = {
 }
 
 export const TITLE = {
-  ADD_JOB: "Create a job!",
+  ADD_JOB: "Post a job!",
   EDIT_JOB: "Edit [jobTitle]!"
 }
 

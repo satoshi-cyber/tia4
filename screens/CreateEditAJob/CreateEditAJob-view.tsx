@@ -3,10 +3,10 @@ import {
   Form,
   Layout,
   FormIcon,
-  PrimaryButton,
   Field,
   Loader,
   LoadingProvider,
+  SubmitButton,
 } from '@/components'
 
 import { Questions, Header } from './components'
@@ -18,9 +18,6 @@ import {
   CLASS_NAMES,
   TITLE_ICON,
 } from './CreateEditAJob-constants'
-
-import { InjecHook } from '../../lib'
-import { FormService } from '../../services'
 
 const CreateAJob: React.FC = () => {
   const { handleSubmit, form, submitting, fetching, editJob, handleDeleteJob } =
@@ -38,9 +35,7 @@ const CreateAJob: React.FC = () => {
           <Field.Input {...DEADLINE_FIELD_PROPS} />
           <Questions />
           <div className="flex justify-center flex-col">
-            <InjecHook hookKey={[FormService.submitButton]}>
-              <PrimaryButton {...SUBMIT_BUTTON_PROPS} />
-            </InjecHook>
+            <SubmitButton {...SUBMIT_BUTTON_PROPS} />
           </div>
         </Form>
         {submitting && <Loader />}

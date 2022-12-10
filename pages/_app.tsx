@@ -2,7 +2,7 @@ import App, { AppContext, AppProps } from 'next/app'
 import { Cookies, CookiesProvider } from 'react-cookie'
 import { Provider } from 'urql'
 import { ToastContainer } from 'react-toastify'
-import AuthProvider from '@/components/AuthProvider'
+import { AuthProvider } from '@/components'
 
 import 'react-toastify/dist/ReactToastify.css'
 import 'react-loading-skeleton/dist/skeleton.css'
