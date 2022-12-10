@@ -190,7 +190,7 @@ export type MutationSuspendUserArgs = {
 
 export type MutationUpdateCompanyArgs = {
   companyId: Scalars['ID'];
-  input: UpdateProfile;
+  input: UpdateCompany;
 };
 
 
@@ -270,8 +270,7 @@ export type QuestionInput = {
 };
 
 export type SetupCompany = {
-  description?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
   website?: InputMaybe<Scalars['String']>;
 };
 
@@ -357,6 +356,13 @@ export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null } };
+
+export type SetupCompanyMutationVariables = Exact<{
+  input: SetupCompany;
+}>;
+
+
+export type SetupCompanyMutation = { __typename?: 'Mutation', setupCompany: { __typename?: 'Company', id: string } };
 
 export type UpdateJobMutationVariables = Exact<{
   input?: InputMaybe<UpdateJob>;
@@ -454,6 +460,17 @@ export const ProfileDocument = gql`
 
 export function useProfileQuery(options?: Omit<Urql.UseQueryArgs<ProfileQueryVariables>, 'query'>) {
   return Urql.useQuery<ProfileQuery, ProfileQueryVariables>({ query: ProfileDocument, ...options });
+};
+export const SetupCompanyDocument = gql`
+    mutation SetupCompany($input: SetupCompany!) {
+  setupCompany(input: $input) {
+    id
+  }
+}
+    `;
+
+export function useSetupCompanyMutation() {
+  return Urql.useMutation<SetupCompanyMutation, SetupCompanyMutationVariables>(SetupCompanyDocument);
 };
 export const UpdateJobDocument = gql`
     mutation UpdateJob($input: UpdateJob) {

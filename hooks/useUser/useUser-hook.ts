@@ -34,6 +34,21 @@ export const useUser = () => {
     [setToken]
   )
 
+  const refreshToken = useCallback(
+    async () => {
+      const did = await magic?.user.getIdToken();
+
+      if (!did) {
+        return
+      }
+
+      const res = await authenticateUser({ input: { did } })
+
+      setToken(res.data?.authenticateUser.token)
+    },
+    [setToken]
+  )
+
   const logout = useCallback(() => {
     setToken(undefined)
 
@@ -49,5 +64,5 @@ export const useUser = () => {
 
   const hasCompany = claims && claims?.companyRoles.length > 0
 
-  return { login, logout, hasCompany, isUserLoggedin, token }
+  return { login, logout, hasCompany, isUserLoggedin, token, refreshToken }
 }

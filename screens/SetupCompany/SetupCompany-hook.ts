@@ -1,22 +1,30 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
-import { UpdateProfile, useAuthenticateUserMutation, useProfileQuery, useUpdateProfileMutation } from "@/graphql";
+import { useRouter } from "next/router";
+import { SetupCompany, useSetupCompanyMutation, } from "@/graphql";
+import { useUser } from "@/hooks";
 
-import { updateProfileSchema } from "./SetupCompany-validations";
-import { TOAST_MESSAGE, TOAST_OPTIONS } from './SetupCompany-constants';
+import { setupCompanySchema } from "./SetupCompany-validations";
+import { PUSH_DELAY, TOAST_MESSAGE, TOAST_OPTIONS } from './SetupCompany-constants';
+
+import { URLS } from "@/config";
 
 export const useSetupCompany = () => {
-  const [{ fetching: submitting }, updateProfile] = useUpdateProfileMutation();
+  const router = useRouter()
+  const { refreshToken } = useUser()
+  const [{ fetching: submitting }, setupCompany] = useSetupCompanyMutation();
 
-  const form = useForm<UpdateProfile>({
+  const form = useForm<SetupCompany>({
     mode: "onBlur",
     reValidateMode: "onBlur",
-    resolver: yupResolver(updateProfileSchema),
+    resolver: yupResolver(setupCompanySchema),
   });
 
-  const handleSubmit = async (input: UpdateProfile) => {
-    const { error, data } = await updateProfile({ input }, { additionalTypenames: ['Company'] })
+  const handleSubmit = async (input: SetupCompany) => {
+    const { error } = await setupCompany({ input }, { additionalTypenames: ['Company'] })
+
+    await refreshToken()
 
     if (error) {
       toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS)
@@ -25,6 +33,8 @@ export const useSetupCompany = () => {
     }
 
     toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
+
+    setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY)
   };
 
   return {

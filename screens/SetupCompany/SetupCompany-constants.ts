@@ -39,3 +39,5 @@ export const INFO_PROPS = {
   className: 'text-sm text-gray-500 mt-4 whitespace-pre-line text-center',
   text: 'Ask an company admin to send you an invite if company exits!'
 }
+
+export const PUSH_DELAY = 300

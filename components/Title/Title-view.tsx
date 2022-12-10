@@ -8,7 +8,7 @@ const Title: React.FC<TitleProps> = ({
   title,
   subTitle,
   skeletonProps,
-  subTitleskeletonProps,
+  subTitleSkeletonProps,
   isLoading,
 }) => (
   <div className="flex flex-col items-center mb-10">
@@ -24,7 +24,7 @@ const Title: React.FC<TitleProps> = ({
         isLoading={isLoading}
         className="text-lg text-gray-500 mt-2 whitespace-pre-line text-center"
         text={subTitle}
-        skeletonProps={subTitleskeletonProps}
+        skeletonProps={subTitleSkeletonProps}
       />
     )}
   </div>
