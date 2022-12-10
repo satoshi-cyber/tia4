@@ -35,10 +35,12 @@ export type Auth = {
 };
 
 export type AuthInput = {
-  avatarUrl?: InputMaybe<Scalars['String']>;
+  accessToken?: InputMaybe<Scalars['String']>;
   did: Scalars['String'];
   firstName?: InputMaybe<Scalars['String']>;
+  fk?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
 };
 
 export type Company = {
