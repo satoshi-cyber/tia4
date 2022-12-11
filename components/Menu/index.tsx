@@ -17,6 +17,8 @@ const Menu = () => {
 
   const { hasCompany } = useUser()
 
+  console.log({ asPath })
+
   if (HIDE_MENU.includes(asPath)) return null
 
   if (asPath.includes('/record/')) return null
