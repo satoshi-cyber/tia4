@@ -9,19 +9,14 @@ import Icon from '../Icon/Icon-view'
 import ActiveLink from '../ActiveLink'
 import { useRouter } from 'next/router'
 
-// TODO: fix with app dir update
-const HIDE_MENU = ['/login', '/oauth-callback']
-
 const Menu = () => {
   const { asPath } = useRouter()
-
   const { hasCompany } = useUser()
 
-  console.log({ asPath })
-
-  if (HIDE_MENU.includes(asPath)) return null
-
+  // TODO: fix with app dir update
+  if (asPath.includes('/login')) return null
   if (asPath.includes('/record/')) return null
+  if (asPath.includes('/oauth-callback')) return null
 
   return (
     <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all ease-in-out hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-pixelHover">
