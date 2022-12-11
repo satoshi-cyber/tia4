@@ -10,17 +10,12 @@ import {
   SUBMIT_BUTTON_PROPS,
   TITLE_PROPS,
 } from './Login-constants'
-
-import {
-  Form,
-  Field,
-  Layout,
-  Title,
-  FormIcon,
-  SocialButton,
-  SubmitButton,
-  Action,
-} from '../../components'
+import Layout from '@/components/Layout'
+import Title from '@/components/Title'
+import { Field, Form, FormIcon } from '@/components/Form'
+import SubmitButton from '@/components/SubmitButton'
+import Action from '@/components/Action'
+import SocialButton from '@/components/SocialButton'
 
 const Login = () => {
   const { form, handleSubmit, loginWithFacebook, loginWithLinkedin } =
