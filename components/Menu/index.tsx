@@ -45,7 +45,7 @@ const Menu = () => {
                 <Icon
                   name="HiPlay"
                   size={30}
-                  className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 transition-all"
+                  className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
                 />
                 <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
                   Rate
@@ -57,7 +57,7 @@ const Menu = () => {
                 <Icon
                   name="HiArchive"
                   size={30}
-                  className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 transition-all"
+                  className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
                 />
                 <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
                   Archive
@@ -69,7 +69,7 @@ const Menu = () => {
                 <Icon
                   name="HiFilter"
                   size={30}
-                  className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 transition-all"
+                  className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
                 />
                 <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
                   Flow

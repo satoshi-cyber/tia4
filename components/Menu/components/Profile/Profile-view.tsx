@@ -17,7 +17,7 @@ const Profile = () => {
               text={label}
             />
             <button
-              className="border-l mx-4 px-3 text-gray-500 hover:text-purple-800"
+              className="border-l mx-4 px-3 py-1 text-gray-500 hover:text-purple-800"
               onClick={handleLogout}
             >
               <Icon name="HiOutlineLogout" size={16} isLoading={false} />
