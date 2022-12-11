@@ -87,9 +87,9 @@ const Menu = () => {
                 <Avatar src="/twiter.png" size="30" round />
                 <span className="ml-5 transition-all ease-in-out absolute w-[190px] left-[69px] group-hover:left-[40px] flex flex-row items-center">
                   <span className="flex flex-1">Lorem LLC</span>
-                  <button className="border-l mx-4 p-2 text-gray-500 hover:text-purple-800">
+                  {/* <button className="border-l mx-4 p-2 text-gray-500 hover:text-purple-800">
                     <Icon name="HiSwitchVertical" size={16} />
-                  </button>
+                  </button> */}
                 </span>
               </a>
             </ActiveLink>
