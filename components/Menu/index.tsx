@@ -8,6 +8,7 @@ import LogoText from '../../public/logo-text.svg'
 import Icon from '../Icon/Icon-view'
 import ActiveLink from '../ActiveLink'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const Menu = () => {
   const { asPath } = useRouter()
@@ -20,11 +21,13 @@ const Menu = () => {
 
   return (
     <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-pixelHover">
-      <LogoSmall className="absolute top-6 left-6 z-20" width={120} />
-      <LogoText
-        className="transition-all absolute top-6 left-6 z-20 left-[70px] group-hover:left-[24px]"
-        width={120}
-      />
+      <Link href="/">
+        <LogoSmall className="absolute top-6 left-6 z-20" width={120} />
+        <LogoText
+          className="transition-all absolute top-6 left-6 z-20 left-[70px] group-hover:left-[24px]"
+          width={120}
+        />
+      </Link>
       <div className="w-full flex flex-1 flex-col pt-28 h-full">
         {hasCompany ? (
           <>

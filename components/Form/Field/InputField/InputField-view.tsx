@@ -18,7 +18,7 @@ const InputField: React.FC<InputFieldProps> = ({
   const error = get(errors, name)
 
   return (
-    <div className="w-full">
+    <div className="w-full group/wrapper" data-error={Boolean(error)}>
       {label && (
         <Text
           className="text-sm text-gray-600 mb-3 text-left"

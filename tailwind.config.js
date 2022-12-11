@@ -11,9 +11,9 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        pixel: 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1)',
+        pixel: 'inset -7px 0 1px -7px rgba(0,0,0,0.7)',
         pixelHover:
-          'inset 0px 2px 0px 1px rgba(0, 0, 0, 0.01), 0 35px 60px -15px rgba(0, 0, 0, 0.2)',
+          'inset -7px 0 1px -7px rgba(0,0,0,0.1), 0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       },
     },
   },
