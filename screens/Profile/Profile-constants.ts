@@ -4,7 +4,7 @@ export const CLASS_NAMES = {
 
 export const TITLE_PROPS = {
   title: 'Update your profile',
-  subTitle: 'and change your profile picture'
+  subTitle: 'Update your info!'
 }
 
 export const TOAST_MESSAGE = {
@@ -43,7 +43,6 @@ export const FIELDS = {
 }
 
 export const LINKEDIN_PROFILE_ICON = 'HiOutlineLink'
-
 
 export const SUBMIT_BUTTON_PROPS = {
   title: 'Update',

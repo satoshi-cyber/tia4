@@ -1,7 +1,6 @@
 import React from "react";
-import { SkeletonStyleProps } from "react-loading-skeleton";
-
-export interface SkeletonLoaderProps extends SkeletonStyleProps {
+import { SkeletonProps } from "react-loading-skeleton";
+export interface SkeletonLoaderProps extends Omit<SkeletonProps, 'wrapper'> {
   isLoading?: boolean
   after?: React.ReactNode
   className?: string

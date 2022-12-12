@@ -22,6 +22,7 @@ const TextArea: React.FC<TextAreaProps> = React.forwardRef(
           />
         )}
         <SkeletonLoader
+          count={2}
           wrapper={({ children }: { children?: React.ReactElement }) => (
             <div {...restProps} className={classNames.input}>
               {children}
