@@ -4,7 +4,6 @@ import {
   Layout,
   FormIcon,
   Field,
-  Loader,
   LoadingProvider,
   SubmitButton,
 } from '@/components'
@@ -18,9 +17,10 @@ import {
   CLASS_NAMES,
   TITLE_ICON,
 } from './CreateEditAJob-constants'
+import dynamic from 'next/dynamic'
 
 const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, submitting, fetching, editJob, handleDeleteJob } =
+  const { handleSubmit, form, fetching, editJob, handleDeleteJob } =
     useCreateUpdateAJob()
 
   return (
@@ -38,10 +38,11 @@ const CreateAJob: React.FC = () => {
             <SubmitButton {...SUBMIT_BUTTON_PROPS} />
           </div>
         </Form>
-        {submitting && <Loader />}
       </LoadingProvider>
     </Layout.Default>
   )
 }
 
-export default CreateAJob
+export default dynamic(() => Promise.resolve(CreateAJob), {
+  ssr: false,
+})

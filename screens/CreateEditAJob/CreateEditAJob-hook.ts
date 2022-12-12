@@ -12,7 +12,6 @@ import { createAJobSchema } from "./CreateEditAJob-validations";
 import { TOAST_MESSAGE, TOAST_OPTIONS, DEFAULT_QUESTION_TIME, PUSH_DELAY } from './CreateEditAJob-constants';
 import { formatDefaultValues } from './CreateEditAJob-functions';
 
-
 export const useCreateUpdateAJob = () => {
   const router = useRouter()
   const { companyId } = useUser()
@@ -22,11 +21,9 @@ export const useCreateUpdateAJob = () => {
   const editJob = Boolean(jobId)
 
   const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !editJob })
-  const [{ fetching: createJobSubmitting }, createJob] = useCreateJobMutation();
-  const [{ fetching: updateJobSubmitting }, updateJob] = useUpdateJobMutation()
-  const [{ fetching: deleteJobSubmitting }, deleteJob] = useDeleteJobMutation()
-
-  const submitting = createJobSubmitting || updateJobSubmitting || deleteJobSubmitting
+  const [, createJob] = useCreateJobMutation();
+  const [, updateJob] = useUpdateJobMutation()
+  const [, deleteJob] = useDeleteJobMutation()
 
   const form = useForm<NewJob>({
     mode: "onBlur",
@@ -88,6 +85,5 @@ export const useCreateUpdateAJob = () => {
     handleSubmit,
     handleDeleteJob,
     fetching,
-    submitting,
   };
 };

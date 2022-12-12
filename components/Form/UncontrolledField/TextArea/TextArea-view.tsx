@@ -3,12 +3,11 @@ import { Text } from '@/components'
 import SkeletonLoader from '@/components/SkeletonLoader'
 
 import { TextAreaProps } from './TextArea-types'
-
-import { useSelect } from '../Select/Select-hook'
+import { useTextArea } from './TextArea-hook'
 
 const TextArea: React.FC<TextAreaProps> = React.forwardRef(
   ({ variant, before, className, after, name, ...restProps }, ref) => {
-    const { classNames } = useSelect({ variant, className })
+    const { classNames } = useTextArea({ variant, className })
 
     return (
       <div className={classNames.container}>
