@@ -8,5 +8,6 @@ query Profile {
     avatarUrl
     resumeUploadUrl
     avatarUploadUrl
+    linkedInProfile
   }
 }

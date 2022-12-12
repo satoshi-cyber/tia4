@@ -8,5 +8,6 @@ mutation UpdateProfile($input: UpdateProfile!) {
     avatarUrl
     resumeUploadUrl
     avatarUploadUrl
+    linkedInProfile
   }
 }

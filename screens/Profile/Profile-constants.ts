@@ -16,19 +16,34 @@ export const TOAST_OPTIONS = {
   position: "top-right",
 } as const
 
-export const FIRST_NAME_FIELD_PROPS = {
-  name: "firstName",
-  label: "First name:",
-  type: "text",
-  placeholder: "Your name",
-};
+export const FIELDS = {
+  firstName: {
+    name: "firstName",
+    label: "First name:",
+    type: "text",
+    placeholder: "Your name",
+  },
+  lastName: {
+    name: "lastName",
+    label: "Last name:",
+    type: "text",
+    placeholder: "Your lastname",
+  },
+  linkedInProfile: {
+    name: "linkedInProfile",
+    label: "LinkedIn profile url:",
+    type: "text",
+    placeholder: "https://www.linkedin.com/in/yourid",
+  },
+  bio: {
+    name: "bio",
+    label: "Bio:",
+    placeholder: "Your bio",
+  }
+}
 
-export const LAST_NAME_FIELD_PROPS = {
-  name: "lastName",
-  label: "Last name:",
-  type: "text",
-  placeholder: "Your lastname",
-};
+export const LINKEDIN_PROFILE_ICON = 'HiOutlineLink'
+
 
 export const SUBMIT_BUTTON_PROPS = {
   title: 'Update',

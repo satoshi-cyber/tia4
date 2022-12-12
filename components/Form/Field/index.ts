@@ -1,7 +1,9 @@
-import InputField from './InputField'
-import SelectField from './SelectField'
+import Input from './InputField'
+import Select from './SelectField'
+import TextArea from './TextAreaField'
 
 export const Field = {
-    Input: InputField,
-    Select: SelectField,
+    Input,
+    Select,
+    TextArea,
 }

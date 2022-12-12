@@ -1,4 +1,4 @@
 import { ProfileQuery } from "@/graphql";
 
-export const formatDefaultValues = ({ firstName, lastName }: ProfileQuery['profile']) =>
-  ({ firstName, lastName })
+export const formatDefaultValues = ({ firstName, lastName, linkedInProfile, bio }: ProfileQuery['profile']) =>
+  ({ firstName, lastName, linkedInProfile, bio })

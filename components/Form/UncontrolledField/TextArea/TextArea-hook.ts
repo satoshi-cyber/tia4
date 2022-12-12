@@ -7,7 +7,7 @@ interface Options {
   variant?: keyof typeof FORM_THEME;
 }
 
-export const useSelect = ({ variant = 'default', className }: Options) => {
+export const useTextArea = ({ variant = 'default', className }: Options) => {
   const classNames = {
     input: clsx(
       FORM_THEME[variant].padding,

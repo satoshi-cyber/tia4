@@ -328,6 +328,7 @@ export type User = {
   firstName?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lastName?: Maybe<Scalars['String']>;
+  linkedInProfile?: Maybe<Scalars['String']>;
   resumeUploadUrl?: Maybe<Scalars['String']>;
   resumeUrl?: Maybe<Scalars['String']>;
 };
@@ -372,7 +373,7 @@ export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: '
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null } };
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null, linkedInProfile?: string | null } };
 
 export type SetupCompanyMutationVariables = Exact<{
   input: SetupCompany;
@@ -394,7 +395,7 @@ export type UpdateProfileMutationVariables = Exact<{
 }>;
 
 
-export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null } };
+export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null, linkedInProfile?: string | null } };
 
 
 export const AuthenticateUserDocument = gql`
@@ -472,6 +473,7 @@ export const ProfileDocument = gql`
     avatarUrl
     resumeUploadUrl
     avatarUploadUrl
+    linkedInProfile
   }
 }
     `;
@@ -512,6 +514,7 @@ export const UpdateProfileDocument = gql`
     avatarUrl
     resumeUploadUrl
     avatarUploadUrl
+    linkedInProfile
   }
 }
     `;

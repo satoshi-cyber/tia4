@@ -8,14 +8,15 @@ import {
   SubmitButton,
   Title,
   EditAvatar,
+  FormIcon,
 } from '@/components'
 
 import {
-  FIRST_NAME_FIELD_PROPS,
-  LAST_NAME_FIELD_PROPS,
   SUBMIT_BUTTON_PROPS,
   CLASS_NAMES,
   TITLE_PROPS,
+  FIELDS,
+  LINKEDIN_PROFILE_ICON,
 } from './Profile-constants'
 
 import { useProfile } from './Profile-hook'
@@ -35,8 +36,13 @@ const Profile: React.FC = () => {
       />
       <LoadingProvider isLoading={fetching}>
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
-          <Field.Input {...FIRST_NAME_FIELD_PROPS} />
-          <Field.Input {...LAST_NAME_FIELD_PROPS} />
+          <Field.Input {...FIELDS.firstName} />
+          <Field.Input {...FIELDS.lastName} />
+          <Field.Input
+            {...FIELDS.linkedInProfile}
+            after={<FormIcon name={LINKEDIN_PROFILE_ICON} />}
+          />
+          <Field.TextArea {...FIELDS.bio} />
           <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
       </LoadingProvider>
