@@ -1,39 +1,12 @@
-import clsx from 'clsx'
 import React from 'react'
 import SkeletonLoader from '@/components/SkeletonLoader'
 
 import { SelectProps } from './Select-types'
-
-import { FORM_THEME } from '../../Form-constants'
+import { useSelect } from './Select-hook'
 
 const Select: React.FC<SelectProps> = React.forwardRef(
-  (
-    {
-      variant = 'default',
-      before,
-      className,
-      after,
-      name,
-      options,
-      ...restProps
-    },
-    ref
-  ) => {
-    const classNames = {
-      input: clsx(
-        FORM_THEME[variant].padding,
-        FORM_THEME[variant].style,
-        'pr-10',
-        className
-      ),
-      container: clsx(
-        FORM_THEME[variant].container,
-        FORM_THEME[variant].containerWidth
-      ),
-      appendContainer: FORM_THEME[variant].appendContainer,
-      appendLeft: FORM_THEME[variant].appendLeft,
-      appendRight: FORM_THEME[variant].appendRight,
-    }
+  ({ variant, before, className, after, name, options, ...restProps }, ref) => {
+    const { classNames } = useSelect({ variant, className })
 
     return (
       <div className={classNames.container}>
