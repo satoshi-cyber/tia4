@@ -4,7 +4,7 @@ export const CLASS_NAMES = {
 
 export const TITLE_PROPS = {
   title: 'Update your profile',
-  subTitle: 'Update your info!'
+  subTitle: 'and change your profile picture'
 }
 
 export const TOAST_MESSAGE = {

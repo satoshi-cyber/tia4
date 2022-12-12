@@ -1,12 +1,13 @@
 import React from 'react'
+
 import {
   Form,
   Layout,
   Field,
-  Loader,
   LoadingProvider,
   SubmitButton,
   Title,
+  EditAvatar,
 } from '@/components'
 
 import {
@@ -19,22 +20,28 @@ import {
 
 import { useProfile } from './Profile-hook'
 
-const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, submitting, fetching } = useProfile()
+const Profile: React.FC = () => {
+  const { handleSubmit, form, avatar, fetching, avatarUploadUrl, onUpload } =
+    useProfile()
 
   return (
     <Layout.Default>
       <Title {...TITLE_PROPS} />
+      <EditAvatar
+        src={avatar}
+        uploadUrl={avatarUploadUrl}
+        onUpload={onUpload}
+        className="mb-6"
+      />
       <LoadingProvider isLoading={fetching}>
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Field.Input {...FIRST_NAME_FIELD_PROPS} />
           <Field.Input {...LAST_NAME_FIELD_PROPS} />
           <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
-        {submitting && <Loader />}
       </LoadingProvider>
     </Layout.Default>
   )
 }
 
-export default CreateAJob
+export default Profile

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useEffect } from 'react';
+import { useEffect, } from 'react';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { UpdateProfile, useProfileQuery, useUpdateProfileMutation } from "@/graphql";
@@ -9,8 +9,9 @@ import { TOAST_MESSAGE, TOAST_OPTIONS } from './Profile-constants';
 import { formatDefaultValues } from "./Profile-functions";
 
 export const useProfile = () => {
-  const [{ fetching, data }] = useProfileQuery()
-  const [{ fetching: submitting }, updateProfile] = useUpdateProfileMutation();
+  const [{ fetching, data }, onUpload] = useProfileQuery({ requestPolicy: 'network-only' })
+
+  const [, updateProfile] = useUpdateProfileMutation();
 
   const form = useForm<UpdateProfile>({
     mode: "onBlur",
@@ -24,7 +25,7 @@ export const useProfile = () => {
     if (!fetching && data) {
       reset(formatDefaultValues(data?.profile))
     }
-  }, [fetching, reset])
+  }, [fetching, reset, data])
 
   const handleSubmit = async (input: UpdateProfile) => {
     const { error, data } = await updateProfile({ input }, { additionalTypenames: ['User'] })
@@ -43,10 +44,15 @@ export const useProfile = () => {
 
   };
 
+  const avatar = data?.profile?.avatarUrl || undefined
+  const avatarUploadUrl = data?.profile?.avatarUploadUrl || undefined
+
   return {
     form,
-    handleSubmit,
     fetching,
-    submitting,
+    onUpload,
+    handleSubmit,
+    avatarUploadUrl,
+    avatar,
   };
 };
