@@ -18,7 +18,7 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
               className={`${
                 open
                   ? 'text-purple-800'
-                  : 'text-gray-600 hover:text-black transition-all ease-in-out'
+                  : 'text-gray-600 hover:text-purple-800 transition-all ease-in-out'
               } active:text-purple-800 `}
             />
           )}
@@ -29,7 +29,7 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
               <a
                 className={`${
                   active && 'text-red-800'
-                } group flex w-full items-center rounded-md px-2 py-2 text-sm cursor-pointer transition-all ease-in-out`}
+                } group flex w-full items-center rounded-md px-2 py-2 text-sm cursor-pointer transition-all`}
                 onClick={handleDeleteJob}
               >
                 Delete job

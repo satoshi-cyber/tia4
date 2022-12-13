@@ -34,9 +34,7 @@ const CreateAJob: React.FC = () => {
           />
           <Field.Input {...DEADLINE_FIELD_PROPS} />
           <Questions />
-          <div className="flex justify-center flex-col">
-            <SubmitButton {...SUBMIT_BUTTON_PROPS} />
-          </div>
+          <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
       </LoadingProvider>
     </Layout.Default>

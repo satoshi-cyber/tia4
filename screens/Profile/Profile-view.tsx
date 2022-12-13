@@ -9,6 +9,7 @@ import {
   Title,
   EditAvatar,
   FormIcon,
+  Resume,
 } from '@/components'
 
 import {
@@ -43,6 +44,7 @@ const Profile: React.FC = () => {
             after={<FormIcon name={LINKEDIN_PROFILE_ICON} />}
           />
           <Field.TextArea {...FIELDS.bio} />
+          <Resume isLoading={fetching} />
           <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
       </LoadingProvider>
