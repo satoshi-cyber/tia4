@@ -16,7 +16,7 @@ const CenterLayout: React.FC<LayoutProps> = ({ children }) => (
 )
 
 const Default: React.FC<LayoutProps> = ({ children }) => (
-  <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
+  <div className="flex flex-1 flex-col w-full items-center py-8 pt-28 md:py-16 md:pl-[70px]">
     <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
       {children}
     </div>
