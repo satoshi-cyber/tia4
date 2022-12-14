@@ -1,19 +1,19 @@
 import clsx from 'clsx'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { CLASS_NAMES } from './Resume-constants'
-import { EditAvatarProps } from './Resume-types'
+import { ResumeProps } from './Resume-types'
 
-export const useEditAvatar = ({
+export const useResume = ({
+  fileName,
   uploadUrl,
   onUpload,
-  src,
   className,
-}: EditAvatarProps) => {
-  const [editMode, setEditMode] = useState(false)
-  const [url, setUrl] = useState<string | undefined>(undefined)
-  const [uploading, setIsUploading] = useState(false)
+  onRemove,
+}: ResumeProps) => {
+  const [file, setFile] = useState<File | undefined>(undefined)
+  const [isUploading, setIsUploading] = useState(false)
 
   const uploadFile = useCallback(
     (file: File) => {
@@ -24,9 +24,8 @@ export const useEditAvatar = ({
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            setUrl(URL.createObjectURL(file))
             if (onUpload) {
-              onUpload()
+              onUpload(file.name)
             }
           }
           setIsUploading(false)
@@ -34,7 +33,7 @@ export const useEditAvatar = ({
       }
       xhr.send(file)
       setIsUploading(true)
-      setUrl(undefined)
+      setFile(file)
     },
     [uploadUrl]
   )
@@ -62,28 +61,22 @@ export const useEditAvatar = ({
     },
   })
 
-  useEffect(() => {
-    setEditMode(false)
-  }, [src])
+  const currentFileName = file ? file.name : fileName
 
-  const onError = () => setEditMode(true)
-
-  const loading = !src || uploading
-
-  const imageSrc = url || src
+  const handleRemove = () => {
+    setFile(undefined)
+    onRemove && onRemove()
+  }
 
   const classNames = {
+    ...CLASS_NAMES,
     container: clsx(CLASS_NAMES.container, className),
-    root: CLASS_NAMES.root,
-    image: clsx(
-      CLASS_NAMES.image.base,
-      (isDragActive || editMode) && CLASS_NAMES.image.editMode
+    fileLink: clsx(isUploading && CLASS_NAMES.fileLinkLoading),
+    root: clsx(
+      CLASS_NAMES.root.base,
+      isDragReject && CLASS_NAMES.root.isDragReject,
+      isDragAccept && CLASS_NAMES.root.isDragAccept
     ),
-    upload: clsx(
-      CLASS_NAMES.upload.base,
-      !(isDragActive || editMode) && CLASS_NAMES.upload.editMode
-    ),
-    label: CLASS_NAMES.label,
   }
 
   return {
@@ -93,8 +86,9 @@ export const useEditAvatar = ({
     classNames,
     getRootProps,
     getInputProps,
-    onError,
-    loading,
-    imageSrc,
+    file,
+    isUploading,
+    currentFileName,
+    handleRemove,
   }
 }

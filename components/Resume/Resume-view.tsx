@@ -1,84 +1,103 @@
 import React from 'react'
-import { Icon, Text, ButtonIcon } from '@/components'
-
-import { EditAvatarProps } from './Resume-types'
-import { useEditAvatar } from './Resume-hook'
-
-import clsx from 'clsx'
+import { Icon, Text, ButtonIcon, LoadingProvider } from '@/components'
 import Link from 'next/link'
 
-const InputField: React.FC<EditAvatarProps> = ({
+import { ResumeProps } from './Resume-types'
+import { useResume } from './Resume-hook'
+import {
+  FILE_ICON_PROPS,
+  FILE_LABEL_PROPS,
+  LABEL_PROPS,
+  REMOVE_BUTTON_PROPS,
+  UPLOAD_LABEL_PROPS,
+  FILE_LABEL_APPEND,
+} from './Resume-constants'
+
+const Resume: React.FC<ResumeProps> = ({
   src,
   className,
   uploadUrl,
   onUpload,
+  fileName,
+  isLoading,
+  onRemove,
 }) => {
   const {
-    loading,
     getRootProps,
     getInputProps,
     isDragAccept,
     isDragReject,
     isDragActive,
-    onError,
-    imageSrc,
     classNames,
-  } = useEditAvatar({
+    currentFileName,
+    isUploading,
+    handleRemove,
+  } = useResume({
+    src,
     className,
     uploadUrl,
     onUpload,
-    src,
+    fileName,
+    isLoading,
+    onRemove,
   })
 
   return (
-    <div className="mb-4">
-      <Text
-        className="text-sm text-gray-600 mb-3 text-left"
-        text="Resume / CV:"
-        skeletonProps={{ width: 80 }}
-      />
-      <div className="flex flex-row w-full items-center justify-between mb-5">
-        <Link href="lorem.com/">
-          <div className="flex flex-row items-center transition-all  hover:text-purple-800">
-            <Icon name="HiOutlineDocument" size={30} className="mr-2" />
-            <Text
-              text={
-                <p>
-                  BersenPajaziti.pdf <span className="text-xs">(View)</span>
-                </p>
-              }
-              skeletonProps={{ width: 200 }}
+    <div className={classNames.container}>
+      <Text className={classNames.label} {...LABEL_PROPS} />
+      {(currentFileName || isLoading) && (
+        <LoadingProvider isLoading={isUploading || isLoading}>
+          <div className={classNames.fileContainer}>
+            <Link
+              href={src || ''}
+              target="_blank"
+              className={classNames.fileLink}
+            >
+              <div className={classNames.file}>
+                <Icon {...FILE_ICON_PROPS} className={classNames.fileIcon} />
+                <Text
+                  text={
+                    <span>
+                      {currentFileName}{' '}
+                      <span className={classNames.fileLabel}>
+                        {FILE_LABEL_APPEND}
+                      </span>
+                    </span>
+                  }
+                  {...FILE_LABEL_PROPS}
+                />
+              </div>
+            </Link>
+            <ButtonIcon
+              {...REMOVE_BUTTON_PROPS}
+              className={classNames.removeButton}
+              onClick={handleRemove}
             />
           </div>
-        </Link>
-        <ButtonIcon
-          name="HiXCircle"
-          className="text-gray-600 transition-all hover:text-purple-800"
-          size={25}
-        />
-      </div>
+        </LoadingProvider>
+      )}
       <div
         {...getRootProps({
-          className: clsx(
-            'w-full flex transition-all justify-center h-[100px] border border-gray-300 shadow-sm rounded-lg items-center justify-center',
-            isDragReject && 'border-red-600',
-            isDragAccept && 'border-purple-800'
-          ),
+          className: classNames.root,
         })}
       >
         <input {...getInputProps()} />
-        {isDragAccept && <Text className="text-sm" text="Drop your cv!" />}
+        {isDragAccept && (
+          <Text
+            className={classNames.uploadLabel.isDragAccept}
+            {...UPLOAD_LABEL_PROPS.isDragAccept}
+          />
+        )}
         {isDragReject && (
           <Text
-            className="text-sm text-red-600"
-            text="File format is not supported!"
+            className={classNames.uploadLabel.isDragReject}
+            {...UPLOAD_LABEL_PROPS.isDragReject}
           />
         )}
         {!isDragActive && (
           <Text
-            className="text-sm"
-            skeletonProps={{ width: 260 }}
-            text="Drag 'n' drop your cv here, or click to select file"
+            className={classNames.uploadLabel.default}
+            {...UPLOAD_LABEL_PROPS.default}
           />
         )}
       </div>
@@ -86,4 +105,4 @@ const InputField: React.FC<EditAvatarProps> = ({
   )
 }
 
-export default InputField
+export default Resume

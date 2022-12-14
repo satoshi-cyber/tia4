@@ -23,8 +23,15 @@ import {
 import { useProfile } from './Profile-hook'
 
 const Profile: React.FC = () => {
-  const { handleSubmit, form, avatar, fetching, avatarUploadUrl, onUpload } =
-    useProfile()
+  const {
+    handleSubmit,
+    form,
+    avatar,
+    fetching,
+    avatarUploadUrl,
+    onUpload,
+    resumeProps,
+  } = useProfile()
 
   return (
     <Layout.Default>
@@ -44,7 +51,7 @@ const Profile: React.FC = () => {
             after={<FormIcon name={LINKEDIN_PROFILE_ICON} />}
           />
           <Field.TextArea {...FIELDS.bio} />
-          <Resume isLoading={fetching} />
+          <Resume {...resumeProps} />
           <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
       </LoadingProvider>

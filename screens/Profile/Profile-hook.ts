@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, } from 'react';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
-import { UpdateProfile, useProfileQuery, useUpdateProfileMutation } from "@/graphql";
+import { UpdateProfile, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
 
 import { updateProfileSchema } from "./Profile-validations";
 import { TOAST_MESSAGE, TOAST_OPTIONS } from './Profile-constants';
@@ -10,6 +10,7 @@ import { formatDefaultValues } from "./Profile-functions";
 
 export const useProfile = () => {
   const [{ fetching, data }, onUpload] = useProfileQuery({ requestPolicy: 'network-only' })
+  const [{ fetching: removingResume }, removeResume] = useRemoveResumeMutation()
 
   const [, updateProfile] = useUpdateProfileMutation();
 
@@ -47,6 +48,23 @@ export const useProfile = () => {
   const avatar = data?.profile?.avatarUrl || undefined
   const avatarUploadUrl = data?.profile?.avatarUploadUrl || undefined
 
+  const resumeOnUpload = async (resumeFileName: string) => {
+    await updateProfile({ input: { resumeFileName } }, { additionalTypenames: ['User'] })
+  }
+
+  const onRemoveResume = async () => {
+    await removeResume({}, { additionalTypenames: ['User'] })
+  }
+
+  const resumeProps = {
+    src: data?.profile?.resumeUrl || undefined,
+    uploadUrl: data?.profile?.resumeUploadUrl || undefined,
+    fileName: data?.profile?.resumeFileName || undefined,
+    onUpload: resumeOnUpload,
+    onRemove: onRemoveResume,
+    isLoading: fetching || removingResume
+  }
+
   return {
     form,
     fetching,
@@ -54,5 +72,6 @@ export const useProfile = () => {
     handleSubmit,
     avatarUploadUrl,
     avatar,
+    resumeProps
   };
 };

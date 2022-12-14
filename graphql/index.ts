@@ -107,6 +107,7 @@ export type Mutation = {
   inviteMember: CompanyInvite;
   members: Array<Member>;
   rateInterview: Interview;
+  removeResume: User;
   setupCompany: Company;
   submitInterview: Interview;
   suspendUser: User;
@@ -317,6 +318,7 @@ export type UpdateProfile = {
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   linkedInProfile?: InputMaybe<Scalars['String']>;
+  resumeFileName?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
@@ -329,6 +331,7 @@ export type User = {
   id: Scalars['ID'];
   lastName?: Maybe<Scalars['String']>;
   linkedInProfile?: Maybe<Scalars['String']>;
+  resumeFileName?: Maybe<Scalars['String']>;
   resumeUploadUrl?: Maybe<Scalars['String']>;
   resumeUrl?: Maybe<Scalars['String']>;
 };
@@ -373,7 +376,12 @@ export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: '
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null, linkedInProfile?: string | null } };
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null, resumeFileName?: string | null, linkedInProfile?: string | null } };
+
+export type RemoveResumeMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RemoveResumeMutation = { __typename?: 'Mutation', removeResume: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null, resumeFileName?: string | null, linkedInProfile?: string | null } };
 
 export type SetupCompanyMutationVariables = Exact<{
   input: SetupCompany;
@@ -473,6 +481,7 @@ export const ProfileDocument = gql`
     avatarUrl
     resumeUploadUrl
     avatarUploadUrl
+    resumeFileName
     linkedInProfile
   }
 }
@@ -480,6 +489,26 @@ export const ProfileDocument = gql`
 
 export function useProfileQuery(options?: Omit<Urql.UseQueryArgs<ProfileQueryVariables>, 'query'>) {
   return Urql.useQuery<ProfileQuery, ProfileQueryVariables>({ query: ProfileDocument, ...options });
+};
+export const RemoveResumeDocument = gql`
+    mutation RemoveResume {
+  removeResume {
+    id
+    bio
+    firstName
+    lastName
+    resumeUrl
+    avatarUrl
+    resumeUploadUrl
+    avatarUploadUrl
+    resumeFileName
+    linkedInProfile
+  }
+}
+    `;
+
+export function useRemoveResumeMutation() {
+  return Urql.useMutation<RemoveResumeMutation, RemoveResumeMutationVariables>(RemoveResumeDocument);
 };
 export const SetupCompanyDocument = gql`
     mutation SetupCompany($input: SetupCompany!) {
