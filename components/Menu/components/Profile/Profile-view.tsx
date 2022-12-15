@@ -13,7 +13,7 @@ const Profile = () => {
           <span className="ml-5 transition-all ease-in-out absolute w-[196px] left-[69px] group-hover:left-[40px] flex flex-row items-center">
             <Text
               className="flex flex-1"
-              skeletonProps={{ width: '100' }}
+              skeletonProps={{ width: 100 }}
               text={label}
             />
             <button
