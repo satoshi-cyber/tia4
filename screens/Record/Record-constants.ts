@@ -10,6 +10,7 @@ export const RECORING_STATUS = 'recording'
 
 export const SWIPER_OPTIONS = {
   preventClicks: true,
+  preventClicksPropagation: true,
   pagination: {
     type: 'progressbar',
   },
