@@ -1,1 +1,1 @@
-export { default } from './VideoPreview-view'
+export { default } from './VideoPlayer-view'

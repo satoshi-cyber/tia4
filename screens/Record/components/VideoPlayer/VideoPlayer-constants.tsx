@@ -5,6 +5,7 @@ export const VIDEO_PROPS = {
   controls: false,
   autoPlay: true,
   muted: true,
+  loop: true,
 }
 
 export const BUTTON_PROPS = {

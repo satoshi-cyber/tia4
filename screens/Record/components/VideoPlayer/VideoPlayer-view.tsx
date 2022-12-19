@@ -1,8 +1,8 @@
 import { Icon } from '@/components'
 
-import { VIDEO_PROPS, BUTTON_PROPS, ICON_PROPS } from './VideoPreview-constants'
-import { useVideoPreview } from './VideoPreview-hook'
-import { VideoPlayerProps } from './VideoPreview-types'
+import { VIDEO_PROPS, BUTTON_PROPS, ICON_PROPS } from './VideoPlayer-constants'
+import { useVideoPreview } from './VideoPlayer-hook'
+import { VideoPlayerProps } from './VideoPlayer-types'
 
 const VideoPreview: React.FC<VideoPlayerProps> = ({ id, index }) => {
   const { url, playing, handlePlay, video } = useVideoPreview({ id, index })
