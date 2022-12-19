@@ -50,6 +50,11 @@ video::-webkit-media-controls {
   transform-origin: 0% 50%;
 }
 
+.min-h-screen {
+  height: 100vh !important;
+  height: -webkit-fill-available !important;
+}
+
 @keyframes indeterminateAnimation {
   0% {
     transform:  translateX(0) scaleX(0);

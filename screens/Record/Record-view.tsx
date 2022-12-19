@@ -13,7 +13,6 @@ const RecordView = () => {
     fetching,
     setSwiper,
     questions,
-    status,
     buttonProps,
     isRecorded,
     previewStream,
