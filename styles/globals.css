@@ -51,8 +51,8 @@ video::-webkit-media-controls {
 }
 
 .min-h-screen {
-  height: 100vh !important;
-  height: -webkit-fill-available !important;
+  min-height: 100vh !important;
+  min-height: -webkit-fill-available !important;
 }
 
 @keyframes indeterminateAnimation {
