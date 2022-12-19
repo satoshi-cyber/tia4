@@ -5,11 +5,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/effect-creative'
 
 import { VideoPreview, VideoPlayer, Buttons, Loading } from './components'
-import {
-  CLASS_NAMES,
-  RECORING_STATUS,
-  SWIPER_OPTIONS,
-} from './Record-constants'
+import { CLASS_NAMES, SWIPER_OPTIONS } from './Record-constants'
 import { useRecord } from './Record-hook'
 
 const RecordView = () => {
@@ -22,6 +18,7 @@ const RecordView = () => {
     isRecorded,
     previewStream,
     questionIds,
+    isRecording,
   } = useRecord()
 
   if (fetching) {
@@ -35,8 +32,7 @@ const RecordView = () => {
           <SwiperSlide key={index}>
             {
               <div className={CLASS_NAMES.slide}>
-                {isRecorded[questionIds[index]] &&
-                status !== RECORING_STATUS ? (
+                {isRecorded[questionIds[index]] && !isRecording ? (
                   <VideoPlayer id={questionIds[index]} index={index} />
                 ) : (
                   <VideoPreview
@@ -51,9 +47,9 @@ const RecordView = () => {
         ))}
       </Swiper>
       <Buttons {...buttonProps} />
-      <div className="fixed bg-red-200 z-20 right-0">
-        {JSON.stringify(isRecorded)}
-      </div>
+      {isRecording && (
+        <div className="fixed bg-red-200 z-20 right-0">Recoding</div>
+      )}
     </>
   )
 }

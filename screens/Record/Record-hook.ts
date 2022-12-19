@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import Swiper from "swiper"
 import useLocalStorage from "use-local-storage"
+import { RECORING_STATUS } from "./Record-constants"
 import { IsRecorded } from "./Record-types"
 
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
@@ -84,6 +85,8 @@ export const useRecord = () => {
     handleHandleNext,
   }
 
+  const isRecording = status === RECORING_STATUS
+
   return {
     fetching,
     questions,
@@ -93,6 +96,7 @@ export const useRecord = () => {
     buttonProps,
     isRecorded,
     setSwiper,
+    isRecording
   }
 
 }
