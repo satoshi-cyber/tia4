@@ -27,6 +27,9 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   if (lastSlide) {
     return (
       <>
+        <p className="absolute w-[80vw] lg:w-[400px] z-10 text-3xl text-gray-100 text-center pointer-events-none drop-shadow-md transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          Good luck! click the button to upload the interview!
+        </p>
         <div
           className="swiper-button-prev"
           onClick={() => swiper?.slidePrev()}
