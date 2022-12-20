@@ -11,4 +11,5 @@ export interface ButtonsProps {
   isRecorded: IsRecorded
   questionIds: string[]
   status: StatusMessages
+  lastSlide: boolean
 }

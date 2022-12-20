@@ -19,7 +19,7 @@ const RecordView = () => {
     previewStream,
     questionIds,
     isRecording,
-    lastSide,
+    lastSlide,
   } = useRecord()
 
   if (fetching) {
@@ -27,11 +27,11 @@ const RecordView = () => {
   }
 
   return (
-    <div className="w-full h-full absolute overflow-hidden">
+    <div className="overflow-hidden">
       <div
         className={clsx(
           'w-full h-full absolute transition-all duration-700',
-          lastSide ? 'blur scale-125 transform-gpu' : 'blur-none'
+          lastSlide ? 'blur scale-125 transform-gpu' : 'blur-none'
         )}
       >
         <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>

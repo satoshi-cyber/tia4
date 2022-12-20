@@ -11,7 +11,7 @@ import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
 export const useRecord = () => {
   const [swiper, setSwiper] = useState<Swiper>()
-  const [lastSide, setLastSlide] = useState(false)
+  const [lastSlide, setLastSlide] = useState(false)
 
   const router = useRouter()
 
@@ -83,6 +83,7 @@ export const useRecord = () => {
     handleStopRecording,
     handleClearRecording,
     handleHandleNext,
+    lastSlide
   }
 
   const isRecording = status === RECORING_STATUS
@@ -112,7 +113,7 @@ export const useRecord = () => {
     isRecorded,
     setSwiper,
     isRecording,
-    lastSide
+    lastSlide
   }
 
 }
