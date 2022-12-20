@@ -2,7 +2,7 @@ import React from 'react'
 
 import { LayoutProps } from './Layout-types'
 
-import Logo from '../../public/logo.svg'
+import Logo from '../../public/logo-layout.svg'
 
 const CenterLayout: React.FC<LayoutProps> = ({ children }) => (
   <div className={`flex flex-1 w-full justify-center items-center py-20`}>
