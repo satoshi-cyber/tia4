@@ -7,6 +7,7 @@ import 'swiper/css/effect-creative'
 import { VideoPreview, VideoPlayer, Buttons, Loading } from './components'
 import { CLASS_NAMES, SWIPER_OPTIONS } from './Record-constants'
 import { useRecord } from './Record-hook'
+import clsx from 'clsx'
 
 const RecordView = () => {
   const {
@@ -18,6 +19,7 @@ const RecordView = () => {
     previewStream,
     questionIds,
     isRecording,
+    lastSide,
   } = useRecord()
 
   if (fetching) {
@@ -26,25 +28,34 @@ const RecordView = () => {
 
   return (
     <>
-      <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
-        {questions.map((question, index) => (
-          <SwiperSlide key={index}>
-            {
-              <div className={CLASS_NAMES.slide}>
-                {isRecorded[questionIds[index]] && !isRecording ? (
-                  <VideoPlayer id={questionIds[index]} index={index} />
-                ) : (
-                  <VideoPreview
-                    key={previewStream?.id}
-                    stream={previewStream}
-                  />
-                )}
-                <p className={CLASS_NAMES.question}>{question}</p>
-              </div>
-            }
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div
+        className={clsx(
+          'w-full h-full transition-all duration-700',
+          lastSide ? 'blur-xl scale-110' : 'blur-none'
+        )}
+      >
+        <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
+          {questions.map((question, index) => (
+            <SwiperSlide key={index}>
+              {
+                <div className={CLASS_NAMES.slide}>
+                  {isRecorded[questionIds[index]] && !isRecording ? (
+                    <VideoPlayer id={questionIds[index]} index={index} />
+                  ) : (
+                    <VideoPreview
+                      key={previewStream?.id}
+                      stream={previewStream}
+                    />
+                  )}
+                  {'question' in question && (
+                    <p className={CLASS_NAMES.question}>{question.question}</p>
+                  )}
+                </div>
+              }
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
       <Buttons {...buttonProps} />
       {isRecording && (
         <div className="fixed bg-red-200 z-20 right-0">Recoding</div>

@@ -1,7 +1,7 @@
 import { useJobQuery } from "@/graphql"
 import { del, set } from "idb-keyval"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Swiper from "swiper"
 import useLocalStorage from "use-local-storage"
 import { RECORING_STATUS } from "./Record-constants"
@@ -11,16 +11,19 @@ import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
 
 export const useRecord = () => {
+  const [swiper, setSwiper] = useState<Swiper>()
+  const [lastSide, setLastSlide] = useState(false)
+
   const router = useRouter()
 
   const { jobId } = router.query
 
   const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !Boolean(jobId) })
 
-  const questions = data?.job.questions.map(question => question.question) || []
-  const questionIds = data?.job.questions.map(question => question.id) || []
+  const questions = useMemo(() => [...data?.job.questions || [], { submit: true }], [data])
+  const questionIds = useMemo(() => data?.job.questions.map(question => question.id) || [], [data])
 
-  const [swiper, setSwiper] = useState<Swiper>()
+
 
   const [isRecorded, setIsRecorded] = useLocalStorage<IsRecorded>(
     String(jobId),
@@ -87,6 +90,21 @@ export const useRecord = () => {
 
   const isRecording = status === RECORING_STATUS
 
+  useEffect(() => {
+    if (!swiper) {
+      return
+    }
+
+    swiper.on('slideChange', () => {
+      if (swiper.realIndex === questions.length - 1) {
+        setLastSlide(true)
+      } else {
+        setLastSlide(false)
+      }
+    })
+
+  }, [swiper])
+
   return {
     fetching,
     questions,
@@ -96,7 +114,8 @@ export const useRecord = () => {
     buttonProps,
     isRecorded,
     setSwiper,
-    isRecording
+    isRecording,
+    lastSide
   }
 
 }
