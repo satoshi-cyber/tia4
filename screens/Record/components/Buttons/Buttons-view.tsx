@@ -11,6 +11,8 @@ import {
 import { useButtons } from './Buttons-hook'
 import { ButtonsProps } from './Buttons-types'
 
+import Logo from '../../../../public/logo.svg'
+
 const VideoPreview: React.FC<ButtonsProps> = ({
   swiper,
   handleStartRecording,
@@ -27,7 +29,8 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   if (lastSlide) {
     return (
       <>
-        <p className="absolute w-[80vw] lg:w-[400px] z-10 text-3xl text-gray-100 text-center pointer-events-none drop-shadow-md transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Logo className="absolute m-6" width={120} />
+        <p className="absolute w-[50vw] lg:w-[400px] z-10 text-lg md:text-3xl text-gray-100 text-center pointer-events-none drop-shadow-md transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           Good luck! click the button to upload the interview!
         </p>
         <div
