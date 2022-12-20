@@ -57,7 +57,7 @@ const LogoSmall = ({
     </svg>
   )
 }
-const Logo = ({ width, className }: { width: number; className: string }) => {
+const Logo = ({ width, className }: { width: number; className?: string }) => {
   const id = useId()
 
   return (
