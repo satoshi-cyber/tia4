@@ -3,7 +3,7 @@ import { SwiperProps } from 'swiper/react'
 
 export const CLASS_NAMES = {
   slide: "flex flex-1 w-full h-screen relative justify-center bg-gray-900",
-  question: "absolute w-[80vw] lg:w-[400px] z-10 text-3xl text-gray-100 text-center mt-10 pointer-events-none drop-shadow-md transform-gpu"
+  question: "absolute w-[80vw] lg:w-[400px] z-10 text-3xl text-white text-center mt-10 pointer-events-none drop-shadow-question transform-gpu"
 }
 
 export const RECORING_STATUS = 'recording'
