@@ -25,18 +25,17 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   const { realIndex } = useButtons({ swiper })
 
   if (lastSlide) {
-    return (
-      <>
-        <div
-          className="swiper-button-prev"
-          onClick={() => swiper?.slidePrev()}
-        />
-        <div className="swiper-button-next swiper-button-disabled" />
-        <div className={CLASS_NAMES.container}>
-          <PrimaryButton title="Submit" className="w-[80px] h-[80px]" />
-        </div>
-      </>
-    )
+    return null
+    // <>
+    //   <div
+    //     className="swiper-button-prev"
+    //     onClick={() => swiper?.slidePrev()}
+    //   />
+    //   <div className="swiper-button-next swiper-button-disabled" />
+    //   <div className={CLASS_NAMES.container}>
+    //     <PrimaryButton title="Submit" className="w-[80px] h-[80px]" />
+    //   </div>
+    // </>
   }
 
   return (
