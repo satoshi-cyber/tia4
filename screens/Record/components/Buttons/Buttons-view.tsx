@@ -33,7 +33,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
         />
         <div className="swiper-button-next swiper-button-disabled" />
         <div className={CLASS_NAMES.container}>
-          <PrimaryButton title="Submit" className="w-[80px] h-[80px]" />
+          <PrimaryButton title="Upload" className="w-[80px] h-[80px]" />
         </div>
       </>
     )
