@@ -9,7 +9,6 @@ import { IsRecorded } from "./Record-types"
 
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
-
 export const useRecord = () => {
   const [swiper, setSwiper] = useState<Swiper>()
   const [lastSide, setLastSlide] = useState(false)
@@ -22,8 +21,6 @@ export const useRecord = () => {
 
   const questions = useMemo(() => [...data?.job.questions || [], { submit: true }], [data])
   const questionIds = useMemo(() => data?.job.questions.map(question => question.id) || [], [data])
-
-
 
   const [isRecorded, setIsRecorded] = useLocalStorage<IsRecorded>(
     String(jobId),
