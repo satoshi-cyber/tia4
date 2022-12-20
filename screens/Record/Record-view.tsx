@@ -30,8 +30,8 @@ const RecordView = () => {
     <>
       <div
         className={clsx(
-          'w-full h-full transition-all duration-700',
-          lastSide ? 'blur-xl scale-110' : 'blur-none'
+          'w-full h-full absolute transition-all duration-700',
+          lastSide ? 'blur-2xl scale-110' : 'blur-none'
         )}
       >
         <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
