@@ -27,11 +27,11 @@ const RecordView = () => {
   }
 
   return (
-    <>
+    <div className="w-full h-full absolute overflow-hidden">
       <div
         className={clsx(
-          'w-full h-full absolute transition-all duration-700 translate-z-0',
-          lastSide ? 'blur scale-110' : 'blur-none'
+          'w-full h-full absolute transition-all duration-700',
+          lastSide ? 'blur scale-125 transform-gpu' : 'blur-none'
         )}
       >
         <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
@@ -60,7 +60,7 @@ const RecordView = () => {
       {isRecording && (
         <div className="fixed bg-red-200 z-20 right-0">Recoding</div>
       )}
-    </>
+    </div>
   )
 }
 

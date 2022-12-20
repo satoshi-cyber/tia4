@@ -1,4 +1,4 @@
-import { Pagination, Navigation, EffectCreative } from 'swiper'
+import { Pagination, Navigation, EffectCreative, Keyboard } from 'swiper'
 import { SwiperProps } from 'swiper/react'
 
 export const CLASS_NAMES = {
@@ -26,8 +26,9 @@ export const SWIPER_OPTIONS = {
       translate: ['100%', 0, 0],
     },
   },
-  modules: [Pagination, Navigation, EffectCreative],
+  modules: [Pagination, Navigation, EffectCreative, Keyboard],
   className: 'absolute flex flex-1 w-full z-10 bg-gray-800',
+  keyboard: { enabled: true },
 } as SwiperProps
 
 export const EMPTY_STATE = []
