@@ -166,10 +166,21 @@ const Menu = () => {
   const { hasCompany } = useUser()
 
   // TODO: fix with app dir update
-  if (asPath.includes('/login')) return null
-  if (asPath.includes('/record/')) return null
-  if (asPath.includes('/oauth-callback')) return null
-  if (asPath.includes('/apply/')) return null
+  if (
+    !(
+      asPath.includes('/jobs') ||
+      asPath.includes('/rate') ||
+      asPath.includes('/flow') ||
+      asPath.includes('/company') ||
+      asPath.includes('/my-videos') ||
+      asPath.includes('/record-an-interview') ||
+      asPath.includes('/info') ||
+      asPath.includes('/profile') ||
+      asPath.includes('/archive') ||
+      asPath.includes('/setup-company')
+    )
+  )
+    return null
 
   return (
     <>
