@@ -1,6 +1,6 @@
 export const CLASS_NAMES = {
   container:
-    'bg-gray-100 p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center',
+    'bg-gray-100 p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center drop-shadow-md',
   handleNextButton: 'ml-[10px] m-[5px]',
 }
 
