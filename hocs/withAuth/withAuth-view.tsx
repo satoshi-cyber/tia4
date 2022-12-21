@@ -22,6 +22,10 @@ const withAuth = <P extends object>(WrappedComponent: NextPage<P>) => {
   EnhancedComponent.getInitialProps = async (ctx: NextPageContext) => {
     const cookies = new Cookies(ctx.req?.headers.cookie)
 
+    const query = ctx.query
+
+    console.log({ query })
+
     if (!cookies || !cookies.get(TOKEN_COOKIE_KEY)) {
       if (ctx.res) {
         ctx.res.writeHead(302, {

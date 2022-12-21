@@ -16,11 +16,11 @@ export const useCreateUpdateAJob = () => {
   const router = useRouter()
   const { companyId } = useUser()
 
-  const { jobId } = router.query
+  const { id } = router.query
 
-  const editJob = Boolean(jobId)
+  const editJob = Boolean(id)
 
-  const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !editJob })
+  const [{ fetching, data }] = useJobQuery({ variables: { id: String(id) }, pause: !editJob })
   const [, createJob] = useCreateJobMutation();
   const [, updateJob] = useUpdateJobMutation()
   const [, deleteJob] = useDeleteJobMutation()
@@ -46,7 +46,7 @@ export const useCreateUpdateAJob = () => {
   }, [fetching, reset])
 
   const handleSubmit = async (input: NewJob) => {
-    const { error } = editJob ? await updateJob({ input: { ...input, id: String(jobId) }, companyId: companyId! }, { additionalTypenames: ['Job'] }) : await createJob({ input, companyId: companyId! }, { additionalTypenames: ['Job'] })
+    const { error } = editJob ? await updateJob({ input: { ...input, id: String(id) }, companyId: companyId! }, { additionalTypenames: ['Job'] }) : await createJob({ input, companyId: companyId! }, { additionalTypenames: ['Job'] })
 
     const toastMessage = editJob ? TOAST_MESSAGE.EDIT_JOB : TOAST_MESSAGE.ADD_JOB
 
@@ -63,7 +63,7 @@ export const useCreateUpdateAJob = () => {
   };
 
   const handleDeleteJob = async () => {
-    const { error } = await deleteJob({ id: String(jobId), companyId: companyId! })
+    const { error } = await deleteJob({ id: String(id), companyId: companyId! })
 
     const toastMessage = TOAST_MESSAGE.DELETE_JOB
 
