@@ -169,6 +169,7 @@ const Menu = () => {
   if (asPath.includes('/login')) return null
   if (asPath.includes('/record/')) return null
   if (asPath.includes('/oauth-callback')) return null
+  if (asPath.includes('/apply/')) return null
 
   return (
     <>

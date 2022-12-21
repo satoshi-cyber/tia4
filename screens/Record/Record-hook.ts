@@ -15,15 +15,15 @@ export const useRecord = () => {
 
   const router = useRouter()
 
-  const { jobId } = router.query
+  const { applyJobId } = router.query
 
-  const [{ fetching, data }] = useJobQuery({ variables: { id: String(jobId) }, pause: !Boolean(jobId) })
+  const [{ fetching, data }] = useJobQuery({ variables: { id: String(applyJobId) }, pause: !Boolean(applyJobId) })
 
   const questions = useMemo(() => [...data?.job.questions || [], { submit: true }], [data])
   const questionIds = useMemo(() => data?.job.questions.map(question => question.id) || [], [data])
 
   const [isRecorded, setIsRecorded] = useLocalStorage<IsRecorded>(
-    String(jobId),
+    String(applyJobId),
     {}
   )
 

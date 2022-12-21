@@ -3,7 +3,7 @@ export const URLS = {
     LOGIN: '/login',
     JOBS: '/jobs',
     JOB: '/jobs/[jobId]',
-    RECORD: '/record/[jobId]',
+    RECORD: '/apply/[applyJobId]/record',
     CREATE_A_JOB: "/create-job",
     MY_VIDEOS: '/my-videos'
 }
