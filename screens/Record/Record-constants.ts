@@ -11,7 +11,7 @@ export const CLASS_NAMES = {
   },
   slide: "flex flex-1 w-full h-screen relative justify-center bg-gray-900",
   questionWrapper: "absolute w-[80vw] lg:w-[400px] z-10 transform-gpu flex flex-col items-center",
-  question: 'text-3xl text-white text-center mt-10 mb-4 pointer-events-none drop-shadow-question',
+  question: 'text-3xl text-white text-center mt-10 mb-3 pointer-events-none drop-shadow-question',
 }
 
 export const RECORING_STATUS = 'recording'

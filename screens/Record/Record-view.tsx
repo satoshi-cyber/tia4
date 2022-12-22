@@ -10,7 +10,7 @@ import {
   Buttons,
   Loading,
   Error,
-  RecDot,
+  QuestionTime,
 } from './components';
 import { SWIPER_OPTIONS } from './Record-constants';
 import { useRecord } from './Record-hook';
@@ -59,7 +59,7 @@ const RecordView = () => {
                     <div className={classNames.questionWrapper}>
                       <p className={classNames.question}>{question.question}</p>
                       {isRecording && (
-                        <RecDot
+                        <QuestionTime
                           recordDate={recordDate}
                           onStopRecording={handleStopRecording}
                           time={question.time}

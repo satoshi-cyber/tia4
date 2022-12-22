@@ -2,7 +2,7 @@ export const CLASS_NAMES = {
   buttonContainer:
     'bg-gray-100 p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center drop-shadow-md',
   handleNextButton: 'ml-[10px] m-[5px]',
-  countDown: 'text-[150px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 drop-shadow-question'
+  countDown: 'text-[100px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 drop-shadow-question'
 }
 
 export const RECORDING_STATUS = 'recording'
