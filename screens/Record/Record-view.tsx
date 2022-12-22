@@ -26,6 +26,7 @@ const RecordView = () => {
     isRecording,
     lastSlide,
     loading,
+    countDown,
     error,
   } = useRecord()
 
@@ -67,6 +68,7 @@ const RecordView = () => {
           ))}
         </Swiper>
       </div>
+      {countDown > 0 && <p className={CLASS_NAMES.countDown}>{countDown}</p>}
       <Buttons {...buttonProps} />
       {isRecording && (
         <div className="fixed bg-red-200 z-20 right-0">Recoding</div>

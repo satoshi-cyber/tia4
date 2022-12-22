@@ -12,4 +12,5 @@ export interface ButtonsProps {
   questionIds: string[]
   status: StatusMessages
   lastSlide: boolean
+  countDown: number
 }
