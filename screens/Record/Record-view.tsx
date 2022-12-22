@@ -1,8 +1,8 @@
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import 'swiper/css/effect-creative'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-creative';
 
 import {
   VideoPreview,
@@ -10,10 +10,10 @@ import {
   Buttons,
   Loading,
   Error,
-} from './components'
-import { CLASS_NAMES, SWIPER_OPTIONS } from './Record-constants'
-import { useRecord } from './Record-hook'
-import clsx from 'clsx'
+} from './components';
+import { CLASS_NAMES, SWIPER_OPTIONS } from './Record-constants';
+import { useRecord } from './Record-hook';
+import clsx from 'clsx';
 
 const RecordView = () => {
   const {
@@ -26,16 +26,15 @@ const RecordView = () => {
     isRecording,
     lastSlide,
     loading,
-    countDown,
     error,
-  } = useRecord()
+  } = useRecord();
 
   if (error) {
-    return <Error error={error} />
+    return <Error error={error} />;
   }
 
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -68,13 +67,12 @@ const RecordView = () => {
           ))}
         </Swiper>
       </div>
-      {countDown > 0 && <p className={CLASS_NAMES.countDown}>{countDown}</p>}
       <Buttons {...buttonProps} />
       {isRecording && (
         <div className="fixed bg-red-200 z-20 right-0">Recoding</div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default RecordView
+export default RecordView;
