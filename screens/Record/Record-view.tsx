@@ -4,14 +4,19 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-creative'
 
-import { VideoPreview, VideoPlayer, Buttons, Loading } from './components'
+import {
+  VideoPreview,
+  VideoPlayer,
+  Buttons,
+  Loading,
+  Error,
+} from './components'
 import { CLASS_NAMES, SWIPER_OPTIONS } from './Record-constants'
 import { useRecord } from './Record-hook'
 import clsx from 'clsx'
 
 const RecordView = () => {
   const {
-    fetching,
     setSwiper,
     questions,
     buttonProps,
@@ -20,9 +25,15 @@ const RecordView = () => {
     questionIds,
     isRecording,
     lastSlide,
+    loading,
+    error,
   } = useRecord()
 
-  if (fetching) {
+  if (error) {
+    return <Error error={error} />
+  }
+
+  if (loading) {
     return <Loading />
   }
 

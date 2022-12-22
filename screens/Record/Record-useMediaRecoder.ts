@@ -37,14 +37,14 @@ export type ReactMediaRecorderProps = ReactMediaRecorderHookProps & {
 };
 
 export enum RecorderErrors {
-  AbortError = "media_aborted",
-  NotAllowedError = "permission_denied",
-  NotFoundError = "no_specified_media_found",
-  NotReadableError = "media_in_use",
-  OverconstrainedError = "invalid_media_constraints",
-  TypeError = "no_constraints",
+  AbortError = "Media aborted",
+  NotAllowedError = "Permission denied",
+  NotFoundError = "No specified media found",
+  NotReadableError = "Media in use",
+  OverconstrainedError = "Invalid media constraints",
+  TypeError = "No constraints",
   NONE = "",
-  NO_RECORDER = "recorder_error",
+  NO_RECORDER = "Recorder error",
 }
 
 export function useReactMediaRecorder({

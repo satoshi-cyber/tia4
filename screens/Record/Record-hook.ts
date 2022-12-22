@@ -40,7 +40,7 @@ export const useRecord = () => {
     setIsRecorded({ ...isRecorded })
   }
 
-  const { status, startRecording, stopRecording, previewStream } =
+  const { status, startRecording, stopRecording, previewStream, error } =
     useReactMediaRecorder({
       video: true,
       askPermissionOnMount: true,
@@ -103,6 +103,8 @@ export const useRecord = () => {
 
   }, [swiper])
 
+  const loading = fetching || status === 'acquiring_media'
+
   return {
     fetching,
     questions,
@@ -113,7 +115,9 @@ export const useRecord = () => {
     isRecorded,
     setSwiper,
     isRecording,
-    lastSlide
+    lastSlide,
+    loading,
+    error
   }
 
 }
