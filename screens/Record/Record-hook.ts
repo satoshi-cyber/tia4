@@ -154,6 +154,7 @@ export const useRecord = () => {
     buttonProps,
     isRecorded,
     setSwiper,
+    handleStopRecording,
     recordDate,
     classNames,
     isRecording,
