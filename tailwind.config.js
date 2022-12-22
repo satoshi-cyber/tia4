@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   darkMode: ['class'],
@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       dropShadow: {
-        question: ['0 0px 1px rgba(0,0,0,1)', '0 0px 2px rgba(0,0,0,0.7)'],
+        question: ['0 0px 1px rgba(0,0,0,1)', '0 0px 2px rgba(0,0,0,0.6)'],
+        countdown: ['0 0px 1px rgba(0,0,0,1)', '0 0px 2px rgba(0,0,0,0.1)'],
       },
       boxShadow: {
         pixel: 'inset -7px 0 1px -7px rgba(0,0,0,0.7)',
@@ -38,9 +39,9 @@ module.exports = {
         modifySelectors(({ className }) => {
           return `.group:focus-within .${e(
             `group-focus-within${separator}${className}`
-          )}`
-        })
-      })
+          )}`;
+        });
+      });
     }),
   ],
-}
+};

@@ -6,15 +6,15 @@ export const VIDEO_PROPS = {
   autoPlay: true,
   muted: true,
   loop: true,
-}
+};
 
 export const BUTTON_PROPS = {
   className:
     'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 flex items-center justify-center z-20 p-20',
-}
+};
 
 export const ICON_PROPS = {
   name: 'HiVolumeUp',
   size: 100,
-  className: 'text-gray-100',
-} as const
+  className: 'text-white drop-shadow-md',
+} as const;
