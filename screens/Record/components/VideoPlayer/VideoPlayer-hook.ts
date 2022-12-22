@@ -1,5 +1,5 @@
 import { get } from "idb-keyval"
-import { MouseEvent, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSwiper } from "swiper/react"
 
 interface ViewPlayerOptions {

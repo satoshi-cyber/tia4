@@ -21,7 +21,7 @@ export const TOAST_OPTIONS = {
   position: "top-right",
 } as const
 
-export const DEFAULT_QUESTION_TIME = 2000
+export const DEFAULT_QUESTION_TIME = 120
 
 export const TITLE_FIELD_PROPS = {
   name: "title",

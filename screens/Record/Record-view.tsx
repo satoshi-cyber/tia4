@@ -10,10 +10,10 @@ import {
   Buttons,
   Loading,
   Error,
+  RecDot,
 } from './components';
-import { CLASS_NAMES, SWIPER_OPTIONS } from './Record-constants';
+import { SWIPER_OPTIONS } from './Record-constants';
 import { useRecord } from './Record-hook';
-import clsx from 'clsx';
 
 const RecordView = () => {
   const {
@@ -22,9 +22,11 @@ const RecordView = () => {
     buttonProps,
     isRecorded,
     previewStream,
+    handleStopRecording,
     questionIds,
+    classNames,
     isRecording,
-    lastSlide,
+    recordDate,
     loading,
     error,
   } = useRecord();
@@ -38,18 +40,13 @@ const RecordView = () => {
   }
 
   return (
-    <div className="absolute w-full h-full overflow-hidden bg-gray-800">
-      <div
-        className={clsx(
-          'w-full h-full absolute transition-all duration-700 transform-gpu',
-          lastSlide ? 'blur-2xl' : 'blur-none'
-        )}
-      >
+    <div className={classNames.container}>
+      <div className={classNames.swiperContainer}>
         <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
           {questions.map((question, index) => (
             <SwiperSlide key={index}>
               {
-                <div className={CLASS_NAMES.slide}>
+                <div className={classNames.slide}>
                   {isRecorded[questionIds[index]] && !isRecording ? (
                     <VideoPlayer id={questionIds[index]} index={index} />
                   ) : (
@@ -59,7 +56,16 @@ const RecordView = () => {
                     />
                   )}
                   {'question' in question && (
-                    <p className={CLASS_NAMES.question}>{question.question}</p>
+                    <div className={classNames.questionWrapper}>
+                      <p className={classNames.question}>{question.question}</p>
+                      {isRecording && (
+                        <RecDot
+                          recordDate={recordDate}
+                          onStopRecording={handleStopRecording}
+                          time={question.time}
+                        />
+                      )}
+                    </div>
                   )}
                 </div>
               }
@@ -68,9 +74,6 @@ const RecordView = () => {
         </Swiper>
       </div>
       <Buttons {...buttonProps} />
-      {isRecording && (
-        <div className="fixed bg-red-200 z-20 right-0">Recoding</div>
-      )}
     </div>
   );
 };

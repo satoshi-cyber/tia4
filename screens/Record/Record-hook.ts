@@ -1,12 +1,13 @@
 import { useJobQuery } from "@/graphql"
+import clsx from "clsx"
 import { del, set } from "idb-keyval"
 import { useRouter } from "next/router"
 import { useEffect, useMemo, useRef, useState } from "react"
 import Swiper from "swiper"
 import useLocalStorage from "use-local-storage"
-import { RECORING_STATUS } from "./Record-constants"
-import { IsRecorded } from "./Record-types"
 
+import { ACQUIRING_MEDIA, CLASS_NAMES, RECORING_STATUS } from "./Record-constants"
+import { IsRecorded } from "./Record-types"
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
 export const useRecord = () => {
@@ -15,6 +16,7 @@ export const useRecord = () => {
 
   const countDownTimeout = useRef<ReturnType<typeof setTimeout> | undefined>()
   const [countDown, setCoundDown] = useState(-1)
+  const [recordDate, setRecordDate] = useState<Date | undefined>(undefined)
 
   const router = useRouter()
 
@@ -109,6 +111,7 @@ export const useRecord = () => {
 
     if (countDown === 0) {
       startRecording()
+      setRecordDate(new Date())
     }
 
     if (countDown > 0) {
@@ -117,7 +120,9 @@ export const useRecord = () => {
 
   }, [countDown])
 
-  const loading = fetching || status === 'acquiring_media'
+  const loading = fetching || status === ACQUIRING_MEDIA
+
+  const isRecording = status === RECORING_STATUS
 
   const buttonProps = {
     swiper,
@@ -132,7 +137,13 @@ export const useRecord = () => {
     countDown,
   }
 
-  const isRecording = status === RECORING_STATUS
+  const classNames = {
+    ...CLASS_NAMES,
+    swiperContainer: clsx(
+      CLASS_NAMES.swiperContainer.base,
+      lastSlide ? CLASS_NAMES.swiperContainer.lastSlideActive : CLASS_NAMES.swiperContainer.lastSlideDefault
+    )
+  }
 
   return {
     fetching,
@@ -143,8 +154,9 @@ export const useRecord = () => {
     buttonProps,
     isRecorded,
     setSwiper,
+    recordDate,
+    classNames,
     isRecording,
-    lastSlide,
     loading,
     error
   }

@@ -28,10 +28,10 @@ export const TIME_FIELD_PROPS = {
   label: "Time:",
   placeholder: "2 min",
   options: [
-    { value: "10000", label: '10 min' },
-    { value: "5000", label: '5 min' },
-    { value: "2000", label: '2 min' },
-    { value: "1000", label: '1 min' },
+    { value: "600", label: '10 min' },
+    { value: "300", label: '5 min' },
+    { value: "120", label: '2 min' },
+    { value: "60", label: '1 min' },
   ]
 }
 
