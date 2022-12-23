@@ -12,6 +12,7 @@ import {
   Error,
   QuestionTime,
   SlideBlur,
+  Question,
 } from './components';
 import { SWIPER_OPTIONS } from './Record-constants';
 import { useRecord } from './Record-hook';
@@ -58,7 +59,10 @@ const RecordView = () => {
                   )}
                   {'question' in question && (
                     <div className={classNames.questionWrapper}>
-                      <p className={classNames.question}>{question.question}</p>
+                      <Question
+                        question={question.question}
+                        isRecording={isRecording}
+                      />
                       {isRecording && (
                         <QuestionTime
                           recordDate={recordDate}
