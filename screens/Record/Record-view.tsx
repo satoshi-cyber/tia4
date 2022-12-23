@@ -49,13 +49,12 @@ const RecordView = () => {
               {
                 <div className={classNames.slide}>
                   <SlideBlur />
-                  {isRecorded[questionIds[index]] && !isRecording ? (
+                  <VideoPreview
+                    key={previewStream?.id}
+                    stream={previewStream}
+                  />
+                  {isRecorded[questionIds[index]] && !isRecording && (
                     <VideoPlayer id={questionIds[index]} index={index} />
-                  ) : (
-                    <VideoPreview
-                      key={previewStream?.id}
-                      stream={previewStream}
-                    />
                   )}
                   {'question' in question && (
                     <div className={classNames.questionWrapper}>
