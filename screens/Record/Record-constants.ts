@@ -8,7 +8,7 @@ export const CLASS_NAMES = {
   questionWrapper: "absolute z-10 transform-gpu flex flex-col items-center backdrop-blur-2xl bg-black/10 rounded-3xl p-4 mt-6",
   question: {
     base: 'text-white text-center pointer-events-none transition-all transform-gpu duration-300',
-    recording: 'scale-95',
+    recording: 'text-xl md:text-2xl',
     default: 'text-xl md:text-2xl'
   }
 }
