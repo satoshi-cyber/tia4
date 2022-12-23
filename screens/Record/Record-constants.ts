@@ -7,7 +7,7 @@ export const CLASS_NAMES = {
   slide: "flex flex-1 w-full h-screen relative justify-center bg-gray-900",
   questionWrapper: "absolute z-10 transform-gpu flex flex-col items-center backdrop-blur-2xl bg-black/10 rounded-3xl p-4 mt-6",
   question: {
-    base: 'text-white text-center pointer-events-none transition-all transform-gpu duration-700 antialiased',
+    base: 'text-white text-center pointer-events-none transition-all transform-gpu duration-300',
     recording: 'scale-95',
     default: 'text-xl md:text-3xl'
   }
