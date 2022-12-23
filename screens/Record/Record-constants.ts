@@ -9,7 +9,7 @@ export const CLASS_NAMES = {
   question: {
     base: 'text-white text-center pointer-events-none transition-all transform-gpu duration-300',
     recording: 'scale-95',
-    default: 'text-xl md:text-3xl'
+    default: 'text-xl md:text-2xl'
   }
 }
 
