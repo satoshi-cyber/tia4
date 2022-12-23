@@ -7,10 +7,15 @@ interface ViewPlayerOptions {
   index: number
 }
 
+interface Size {
+  width?: number
+  height?: number
+}
+
 export const useVideoPreview = ({ id, index }: ViewPlayerOptions) => {
   const [url, setUrl] = useState<string | undefined>()
   const [playing, setPlaying] = useState(false)
-  const [size, setSize] = useState({ width: undefined, height: undefined })
+  const [size, setSize] = useState<Size>({})
 
   const video = useRef<HTMLVideoElement>()
 
