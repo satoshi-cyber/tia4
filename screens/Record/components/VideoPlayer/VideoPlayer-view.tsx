@@ -21,7 +21,7 @@ const VideoPreview: React.FC<VideoPlayerProps> = ({ id, index }) => {
         ref={video as any}
         className={classNames.video}
         muted={!playing}
-        onLoadedData={handleOnLoad}
+        onLoadedMetadata={handleOnLoad}
       />
       {!playing && (
         <button {...BUTTON_PROPS} onClick={handlePlay}>
