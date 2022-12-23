@@ -29,16 +29,10 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   if (lastSlide) {
     return (
       <>
-        <div className="h-1 bg-white absolute top-0 left-0 w-full" />
         <Logo className="absolute m-4 md:m-6" width={120} />
         <p className="absolute w-[80vw] lg:w-[400px] z-10 text-2xl md:text-3xl text-gray-100 text-center pointer-events-none transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           Click the button to upload the interview! Good luck!
         </p>
-        <div
-          className="swiper-button-prev"
-          onClick={() => swiper?.slidePrev()}
-        />
-        <div className="swiper-button-next swiper-button-disabled" />
         <div className={CLASS_NAMES.buttonContainer}>
           <div className={CLASS_NAMES.uploadButton}>
             <ButtonIcon name="HiUpload" size={24} />
