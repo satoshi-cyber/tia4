@@ -1,8 +1,9 @@
 export const CLASS_NAMES = {
   buttonContainer:
-    'bg-gray-100 p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center drop-shadow-md',
+    'p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center backdrop-blur-2xl',
   handleNextButton: 'ml-[10px] m-[5px]',
-  countDown: 'text-[100px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 drop-shadow-countdown'
+  countDown: 'text-[100px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+  uploadButton: 'flex items-center justify-center h-[70px] w-[70px] bg-gray-800 bg-gradient-to-r from-purple-500 w-full text-sm  text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm transition-all ease-in-out disabled:opacity-80'
 }
 
 export const RECORDING_STATUS = 'recording'
@@ -12,16 +13,17 @@ export const RECORD_BUTTON_PROPS = {
 }
 
 export const STOP_RECORDING_BUTTON_PROPS = {
-  className: 'bg-red-600 w-[40px] h-[40px] rounded-md shadow-full m-[5px]',
+  className: 'bg-red-600 w-[40px] h-[40px] rounded-md m-[5px]',
 }
 
 export const CLEAR_RECORDING_ICON_PROPS = {
   name: 'HiTrash',
   size: 40,
-  className: 'm-[5px]',
+  className: 'm-[5px] text-white',
 } as const
 
 export const HANDLE_NEXT_ICON_PROPS = {
   name: 'HiCheck',
+  className: 'text-white',
   size: 40,
 } as const

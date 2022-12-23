@@ -11,6 +11,7 @@ import {
   Loading,
   Error,
   QuestionTime,
+  SlideBlur,
 } from './components';
 import { SWIPER_OPTIONS } from './Record-constants';
 import { useRecord } from './Record-hook';
@@ -47,6 +48,7 @@ const RecordView = () => {
             <SwiperSlide key={index}>
               {
                 <div className={classNames.slide}>
+                  <SlideBlur />
                   {isRecorded[questionIds[index]] && !isRecording ? (
                     <VideoPlayer id={questionIds[index]} index={index} />
                   ) : (

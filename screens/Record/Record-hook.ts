@@ -12,7 +12,6 @@ import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
 export const useRecord = () => {
   const [swiper, setSwiper] = useState<Swiper>()
-  const [lastSlide, setLastSlide] = useState(false)
 
   const countDownTimeout = useRef<ReturnType<typeof setTimeout> | undefined>()
   const [countDown, setCoundDown] = useState(-1)
@@ -88,22 +87,6 @@ export const useRecord = () => {
     swiper?.slideNext()
   }
 
-
-  useEffect(() => {
-    if (!swiper) {
-      return
-    }
-
-    swiper.on('slideChange', () => {
-      if (swiper.realIndex === questions.length - 1) {
-        setLastSlide(true)
-      } else {
-        setLastSlide(false)
-      }
-    })
-
-  }, [swiper])
-
   useEffect(() => {
     if (countDown === -1) {
       return
@@ -133,16 +116,12 @@ export const useRecord = () => {
     handleStopRecording,
     handleClearRecording,
     handleHandleNext,
-    lastSlide,
     countDown,
   }
 
   const classNames = {
     ...CLASS_NAMES,
-    swiperContainer: clsx(
-      CLASS_NAMES.swiperContainer.base,
-      lastSlide ? CLASS_NAMES.swiperContainer.lastSlideActive : CLASS_NAMES.swiperContainer.lastSlideDefault
-    )
+    question: clsx(CLASS_NAMES.question.base, isRecording ? CLASS_NAMES.question.recording : CLASS_NAMES.question.default)
   }
 
   return {

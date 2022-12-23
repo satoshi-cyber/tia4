@@ -3,15 +3,14 @@ import { SwiperProps } from 'swiper/react'
 
 export const CLASS_NAMES = {
   container: "absolute w-full h-full overflow-hidden bg-gray-800",
-  swiperContainer: {
-    base: 'w-full h-full absolute transition-all duration-700 transform-gpu',
-    lastSlideActive: 'blur-2xl',
-    lastSlideDefault: 'blur-none',
-
-  },
+  swiperContainer: 'w-full h-full absolute transition-all duration-700 transform-gpu',
   slide: "flex flex-1 w-full h-screen relative justify-center bg-gray-900",
-  questionWrapper: "absolute w-[80vw] lg:w-[400px] z-10 transform-gpu flex flex-col items-center",
-  question: 'text-3xl text-white text-center mt-10 mb-3 pointer-events-none drop-shadow-question',
+  questionWrapper: "absolute z-10 w-full transform-gpu flex flex-col items-center backdrop-blur-2xl p-4",
+  question: {
+    base: 'text-white text-center pointer-events-none transition-all duration-700',
+    recording: 'text-lg',
+    default: 'text-3xl'
+  }
 }
 
 export const RECORING_STATUS = 'recording'

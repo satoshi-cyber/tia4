@@ -1,4 +1,4 @@
-import { Icon, PrimaryButton } from '@/components';
+import { ButtonIcon, Icon, PrimaryButton } from '@/components';
 
 import {
   CLASS_NAMES,
@@ -22,16 +22,16 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   questionIds,
   isRecorded,
   status,
-  lastSlide,
   countDown,
 }) => {
-  const { realIndex } = useButtons({ swiper });
+  const { realIndex, lastSlide } = useButtons({ swiper });
 
   if (lastSlide) {
     return (
       <>
-        <Logo className="absolute m-4 md:m-6 drop-shadow-md" width={120} />
-        <p className="absolute w-[80vw] lg:w-[400px] z-10 text-2xl md:text-3xl text-gray-100 text-center pointer-events-none drop-shadow-question transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="h-1 bg-white absolute top-0 left-0 w-full" />
+        <Logo className="absolute m-4 md:m-6" width={120} />
+        <p className="absolute w-[80vw] lg:w-[400px] z-10 text-2xl md:text-3xl text-gray-100 text-center pointer-events-none transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           Click the button to upload the interview! Good luck!
         </p>
         <div
@@ -40,7 +40,9 @@ const VideoPreview: React.FC<ButtonsProps> = ({
         />
         <div className="swiper-button-next swiper-button-disabled" />
         <div className={CLASS_NAMES.buttonContainer}>
-          <PrimaryButton title="Upload" className="w-[80px] h-[80px]" />
+          <div className={CLASS_NAMES.uploadButton}>
+            <ButtonIcon name="HiUpload" size={24} />
+          </div>
         </div>
       </>
     );

@@ -16,5 +16,5 @@ export const BUTTON_PROPS = {
 export const ICON_PROPS = {
   name: 'HiVolumeUp',
   size: 100,
-  className: 'text-white drop-shadow-md',
+  className: 'text-white',
 } as const;
