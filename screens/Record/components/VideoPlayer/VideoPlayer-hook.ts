@@ -7,15 +7,9 @@ interface ViewPlayerOptions {
   index: number
 }
 
-interface Size {
-  width?: number
-  height?: number
-}
-
 export const useVideoPreview = ({ id, index }: ViewPlayerOptions) => {
   const [url, setUrl] = useState<string | undefined>()
   const [playing, setPlaying] = useState(false)
-  const [size, setSize] = useState<Size>({})
 
   const video = useRef<HTMLVideoElement>()
 
@@ -57,27 +51,7 @@ export const useVideoPreview = ({ id, index }: ViewPlayerOptions) => {
     setPlaying(true)
   }
 
-  useEffect(() => {
-    const getSize = async () => {
-      let display = await navigator.mediaDevices
-        .getUserMedia({ audio: false, video: true });
-
-      let settings = display.getVideoTracks()[0]
-        .getSettings();
-
-      const width = settings.width;
-      const height = settings.height;
-
-      setSize({ width, height })
-
-    }
-
-    getSize()
-  }, [])
-
-
   return {
-    size,
     video,
     handlePlay,
     playing,
