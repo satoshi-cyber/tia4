@@ -8,7 +8,7 @@ const Question: React.FC<QuestionProps> = ({ question, isRecording }) => {
     <div className="relative">
       <p
         className={clsx(
-          'text-2xl text-white text-center pointer-events-none transition-all transform-gpu duration-700',
+          'text-xl md:text-2xl text-white text-center pointer-events-none transition-all transform-gpu duration-700',
           isRecording && 'scale-75'
         )}
       >

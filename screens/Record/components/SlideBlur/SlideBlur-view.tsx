@@ -29,7 +29,7 @@ const SlideBlur: React.FC = () => {
     <div
       className={clsx(
         CLASS_NAMES.containerBase,
-        lastSlide ? 'backdrop-blur-2xl bg-black/10' : 'backdrop-blur-[0px]'
+        lastSlide ? 'backdrop-blur-2xl bg-black/20' : 'backdrop-blur-[0px]'
       )}
     />
   );

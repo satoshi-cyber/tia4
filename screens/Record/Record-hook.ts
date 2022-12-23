@@ -119,10 +119,7 @@ export const useRecord = () => {
     countDown,
   }
 
-  const classNames = {
-    ...CLASS_NAMES,
-    question: clsx(CLASS_NAMES.question.base, isRecording ? CLASS_NAMES.question.recording : CLASS_NAMES.question.default)
-  }
+  const classNames = CLASS_NAMES
 
   return {
     fetching,
