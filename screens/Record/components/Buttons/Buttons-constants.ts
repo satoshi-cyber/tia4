@@ -1,6 +1,6 @@
 export const CLASS_NAMES = {
   buttonContainer:
-    'p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center backdrop-blur-2xl',
+    'p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center backdrop-blur-2xl bg-black/10',
   handleNextButton: 'ml-[10px] m-[5px]',
   countDown: 'text-[100px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
   uploadButton: 'flex items-center justify-center h-[70px] w-[70px] bg-gray-800 bg-gradient-to-r from-purple-500 w-full text-sm  text-gray-100 active:bg-indigo-800 focus:outline-none rounded-full focus-within:ring-2 focus:ring-opacity-50 ring-purple-200 shadow-sm transition-all ease-in-out disabled:opacity-80'
