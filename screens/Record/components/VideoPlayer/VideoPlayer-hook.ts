@@ -1,8 +1,6 @@
-import clsx from "clsx"
 import { get } from "idb-keyval"
 import { useEffect, useRef, useState } from "react"
 import { useSwiper } from "swiper/react"
-import { CLASS_NAMES } from "./VideoPlayer-constants"
 
 interface ViewPlayerOptions {
   id: string
@@ -10,9 +8,9 @@ interface ViewPlayerOptions {
 }
 
 export const useVideoPreview = ({ id, index }: ViewPlayerOptions) => {
-  const [loaded, setLoaded] = useState<boolean>(false)
   const [url, setUrl] = useState<string | undefined>()
   const [playing, setPlaying] = useState(false)
+  const [size, setSize] = useState({ width: undefined, height: undefined })
 
   const video = useRef<HTMLVideoElement>()
 
@@ -54,16 +52,28 @@ export const useVideoPreview = ({ id, index }: ViewPlayerOptions) => {
     setPlaying(true)
   }
 
-  const classNames = {
-    video: clsx(CLASS_NAMES.video, loaded ? 'opacity-100' : 'opacity-0')
-  }
+  useEffect(() => {
+    const getSize = async () => {
+      let display = await navigator.mediaDevices
+        .getUserMedia({ audio: false, video: true });
 
-  const handleOnLoad = () => setLoaded(true)
+      let settings = display.getVideoTracks()[0]
+        .getSettings();
+
+      const width = settings.width;
+      const height = settings.height;
+
+      setSize({ width, height })
+
+    }
+
+    getSize()
+  }, [])
+
 
   return {
+    size,
     video,
-    classNames,
-    handleOnLoad,
     handlePlay,
     playing,
     url

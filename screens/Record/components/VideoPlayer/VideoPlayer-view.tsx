@@ -5,23 +5,21 @@ import { useVideoPreview } from './VideoPlayer-hook';
 import { VideoPlayerProps } from './VideoPlayer-types';
 
 const VideoPreview: React.FC<VideoPlayerProps> = ({ id, index }) => {
-  const { url, playing, handlePlay, video, classNames, handleOnLoad } =
-    useVideoPreview({
-      id,
-      index,
-    });
+  const { url, playing, handlePlay, video, size } = useVideoPreview({
+    id,
+    index,
+  });
 
-  if (!url) return null;
+  if (!url || !size.width) return null;
 
   return (
     <>
       <video
         {...VIDEO_PROPS}
+        {...size}
         src={url}
         ref={video as any}
-        className={classNames.video}
         muted={!playing}
-        onLoadedMetadata={handleOnLoad}
       />
       {!playing && (
         <button {...BUTTON_PROPS} onClick={handlePlay}>
