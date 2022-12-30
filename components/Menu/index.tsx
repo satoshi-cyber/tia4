@@ -1,22 +1,22 @@
-import { useUser } from '@/hooks'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { Profile } from './components'
+import { useUser } from '@/hooks';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Profile } from './components';
 
-import LogoText from '../../public/logo-text.svg'
+import LogoText from '../../public/logo-text.svg';
 
-import Icon from '../Icon/Icon-view'
-import ActiveLink from '../ActiveLink'
-import { useId } from 'react'
+import Icon from '../Icon/Icon-view';
+import ActiveLink from '../ActiveLink';
+import { useId } from 'react';
 
 const LogoSmall = ({
   width,
   className,
 }: {
-  width: number
-  className?: string
+  width: number;
+  className?: string;
 }) => {
-  const id = useId()
+  const id = useId();
 
   return (
     <svg
@@ -55,10 +55,10 @@ const LogoSmall = ({
         </g>
       </g>
     </svg>
-  )
-}
+  );
+};
 const Logo = ({ width, className }: { width: number; className?: string }) => {
-  const id = useId()
+  const id = useId();
 
   return (
     <svg
@@ -158,12 +158,12 @@ const Logo = ({ width, className }: { width: number; className?: string }) => {
         </g>
       </g>
     </svg>
-  )
-}
+  );
+};
 
 const Menu = () => {
-  const { asPath } = useRouter()
-  const { hasCompany } = useUser()
+  const { asPath } = useRouter();
+  const { hasCompany } = useUser();
 
   // TODO: fix with app dir update
   if (
@@ -177,10 +177,11 @@ const Menu = () => {
       asPath.includes('/info') ||
       asPath.includes('/profile') ||
       asPath.includes('/archive') ||
-      asPath.includes('/setup-company')
+      asPath.includes('/setup-company') ||
+      asPath.includes('/create-job')
     )
   )
-    return null
+    return null;
 
   return (
     <>
@@ -318,7 +319,7 @@ const Menu = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

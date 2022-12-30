@@ -1,4 +1,4 @@
-import { ButtonIcon, Icon, PrimaryButton } from '@/components';
+import { ButtonIcon, Icon } from '@/components';
 
 import {
   CLASS_NAMES,
