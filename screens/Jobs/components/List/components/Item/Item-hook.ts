@@ -21,7 +21,7 @@ export const useItem = ({ jobId, deadline }: ItemOptions) => {
     try {
       const baseUrl = window.location.href.split(window.location.pathname)[0]
 
-      const pathname = URLS.RECORD.replace('[applyJobId]', String(jobId))
+      const pathname = URLS.PUBLIC_JOB.replace('[applyJobId]', String(jobId))
 
       await navigator.clipboard.writeText(`${baseUrl}${pathname}`)
 

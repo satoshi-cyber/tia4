@@ -23,8 +23,6 @@ const SlideBlur: React.FC = () => {
     });
   }, [swiper]);
 
-  console.log({ lastSlide });
-
   return (
     <div
       className={clsx(

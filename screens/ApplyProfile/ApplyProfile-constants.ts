@@ -3,7 +3,7 @@ export const CLASS_NAMES = {
 }
 
 export const TITLE_PROPS = {
-  title: 'Update your profile',
+  title: 'Your application',
   subTitle: 'Update your info!'
 }
 

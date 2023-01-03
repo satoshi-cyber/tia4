@@ -34,7 +34,7 @@ const Profile: React.FC = () => {
   } = useProfile();
 
   return (
-    <Layout.Default>
+    <Layout.Apply>
       <Title {...TITLE_PROPS} />
       <EditAvatar
         src={avatar}
@@ -55,7 +55,7 @@ const Profile: React.FC = () => {
           <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
       </LoadingProvider>
-    </Layout.Default>
+    </Layout.Apply>
   );
 };
 

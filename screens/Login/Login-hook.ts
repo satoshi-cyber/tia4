@@ -26,7 +26,7 @@ export const useLogin = () => {
 
   useEffect(() => {
     if (isUserLoggedin) {
-      router.push(jobId ? URLS.RECORD.replace('[applyJobId]', jobId) : URLS.HOME)
+      router.push(jobId ? URLS.APPLY.replace('[applyJobId]', jobId) : URLS.HOME)
     }
   }, [isUserLoggedin])
 

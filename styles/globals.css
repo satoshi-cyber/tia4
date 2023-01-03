@@ -80,3 +80,24 @@ video::-webkit-media-controls {
   fill: white !important;
   @apply pointer-events-none
 }
+
+.job-apply ul { 
+  list-style-type: disc; 
+  list-style-position: inside; 
+}
+.job-apply ol { 
+  list-style-type: decimal; 
+  list-style-position: inside; 
+}
+.job-apply ul ul, ol ul { 
+  list-style-type: circle; 
+  list-style-position: inside; 
+  margin-left: 15px; 
+}
+.job-apply ol ol, ul ol { 
+  list-style-type: lower-latin; 
+  list-style-position: inside; 
+  margin-left: 15px; 
+}
+
+.job-apply li { margin-bottom: 10px }
