@@ -10,7 +10,6 @@ import {
   Buttons,
   Loading,
   Error,
-  QuestionTime,
   SlideBlur,
   Question,
 } from './components';
@@ -58,19 +57,12 @@ const RecordView = () => {
                     <VideoPlayer id={questionIds[index]} index={index} />
                   )}
                   {'question' in question && (
-                    <div className={classNames.questionWrapper}>
-                      <Question
-                        question={question.question}
-                        isRecording={isRecording}
-                      />
-                      {isRecording && (
-                        <QuestionTime
-                          recordDate={recordDate}
-                          onStopRecording={handleStopRecording}
-                          time={question.time}
-                        />
-                      )}
-                    </div>
+                    <Question
+                      onStopRecording={handleStopRecording}
+                      question={question}
+                      isRecording={isRecording}
+                      recordDate={recordDate}
+                    />
                   )}
                 </div>
               }

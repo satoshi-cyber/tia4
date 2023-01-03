@@ -1,19 +1,22 @@
-import clsx from 'clsx';
 import React from 'react';
 
+import { QuestionTime } from './components';
+import { useQuestion } from './Question-hook';
 import { QuestionProps } from './Question-types';
 
-const Question: React.FC<QuestionProps> = ({ question, isRecording }) => {
+const Question: React.FC<QuestionProps> = ({
+  question,
+  isRecording,
+  onStopRecording,
+}) => {
+  const { classNames } = useQuestion({ isRecording });
+
   return (
-    <div className="relative">
-      <p
-        className={clsx(
-          'text-xl md:text-2xl text-white text-center pointer-events-none transition-all transform-gpu duration-700',
-          isRecording && 'scale-75'
-        )}
-      >
-        {question}
-      </p>
+    <div className={classNames.container}>
+      <p className={classNames.question}>{question.question}</p>
+      {isRecording && (
+        <QuestionTime time={question.time} onStopRecording={onStopRecording} />
+      )}
     </div>
   );
 };
