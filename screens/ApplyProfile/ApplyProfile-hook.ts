@@ -42,7 +42,7 @@ export const useProfile = () => {
     }
 
     if (data) {
-      router.push(URLS.APPLY_PROFILE.replace('[applyJobId]', router.query.applyJobId as string))
+      router.push(URLS.RECORD.replace('[applyJobId]', router.query.applyJobId as string))
     }
 
   };
