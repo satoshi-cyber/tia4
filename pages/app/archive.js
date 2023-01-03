@@ -1,16 +1,16 @@
-import Avatar from 'react-avatar'
-import { withAuth } from '@/hocs'
-import { Player, ControlBar } from 'video-react'
-import 'video-react/dist/video-react.css'
-import { useForm } from 'react-hook-form'
+import Avatar from 'react-avatar';
+import { withAuth } from '@/hocs';
+import { Player, ControlBar } from 'video-react';
+import 'video-react/dist/video-react.css';
+import { useForm } from 'react-hook-form';
 
-import MainMenu from '../components/Menu'
-import { Text, Icon, Field, FormIcon, Form } from '../components'
+import MainMenu from '../../components/Menu';
+import { Text, Icon, Field, FormIcon, Form } from '../../components';
 
 const Archive = () => {
-  const form = useForm()
+  const form = useForm();
 
-  const onSubmit = () => {}
+  const onSubmit = () => {};
 
   return (
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
@@ -255,7 +255,7 @@ const Archive = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default withAuth(Archive)
+export default withAuth(Archive);

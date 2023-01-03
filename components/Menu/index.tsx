@@ -8,6 +8,7 @@ import LogoText from '../../public/logo-text.svg';
 import Icon from '../Icon/Icon-view';
 import ActiveLink from '../ActiveLink';
 import { useId } from 'react';
+import { URLS } from '@/config';
 
 const LogoSmall = ({
   width,
@@ -166,22 +167,7 @@ const Menu = () => {
   const { hasCompany } = useUser();
 
   // TODO: fix with app dir update
-  if (
-    !(
-      asPath.includes('/jobs') ||
-      asPath.includes('/rate') ||
-      asPath.includes('/flow') ||
-      asPath.includes('/company') ||
-      asPath.includes('/my-videos') ||
-      asPath.includes('/record-an-interview') ||
-      asPath.includes('/info') ||
-      asPath.includes('/profile') ||
-      asPath.includes('/archive') ||
-      asPath.includes('/setup-company') ||
-      asPath.includes('/create-job')
-    )
-  )
-    return null;
+  if (!asPath.startsWith('/app/')) return null;
 
   return (
     <>
@@ -189,7 +175,7 @@ const Menu = () => {
         <Logo width={120} />
       </div>
       <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-pixelHover hidden md:flex">
-        <Link href="/">
+        <Link href={URLS.HOME}>
           <LogoSmall className="absolute top-6 left-6 z-20" width={120} />
           <LogoText
             className="transition-all absolute top-6 left-6 z-20 left-[70px] group-hover:left-[24px]"
@@ -199,7 +185,7 @@ const Menu = () => {
         <div className="w-full flex flex-1 flex-col pt-28 h-full">
           {hasCompany ? (
             <>
-              <ActiveLink href="/jobs" shallow>
+              <ActiveLink href={URLS.JOBS} shallow>
                 <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
                   <Icon
                     name="HiPlusCircle"
@@ -211,7 +197,7 @@ const Menu = () => {
                   </span>
                 </a>
               </ActiveLink>
-              <ActiveLink href="/rate" shallow>
+              <ActiveLink href={URLS.RATE} shallow>
                 <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
                   <Icon
                     name="HiPlay"
@@ -223,7 +209,7 @@ const Menu = () => {
                   </span>
                 </a>
               </ActiveLink>
-              <ActiveLink href="/archive" shallow>
+              <ActiveLink href={URLS.ARCHIVE} shallow>
                 <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
                   <Icon
                     name="HiArchive"
@@ -235,7 +221,7 @@ const Menu = () => {
                   </span>
                 </a>
               </ActiveLink>
-              <ActiveLink href="/flow" shallow>
+              <ActiveLink href={URLS.FLOW} shallow>
                 <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
                   <Icon
                     name="HiFilter"
@@ -247,7 +233,7 @@ const Menu = () => {
                   </span>
                 </a>
               </ActiveLink>
-              <ActiveLink href="/company" shallow>
+              <ActiveLink href={URLS.COMPANY} shallow>
                 <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
                   <Icon
                     name="HiOfficeBuilding"
@@ -264,7 +250,7 @@ const Menu = () => {
               </ActiveLink>
             </>
           ) : (
-            <ActiveLink href="/setup-company" shallow>
+            <ActiveLink href={URLS.SETUP_COMPANY} shallow>
               <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
                 <Icon
                   name="HiBriefcase"
@@ -278,7 +264,7 @@ const Menu = () => {
             </ActiveLink>
           )}
           <hr className="mb-4" />
-          <ActiveLink href="/my-videos" shallow>
+          <ActiveLink href={URLS.MY_VIDEOS} shallow>
             <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiUserCircle"
@@ -290,7 +276,7 @@ const Menu = () => {
               </span>
             </a>
           </ActiveLink>
-          <ActiveLink href="/record-an-interview" shallow>
+          <ActiveLink href={URLS.RECORD_AN_INTERVIEW} shallow>
             <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiVideoCamera"
@@ -302,7 +288,7 @@ const Menu = () => {
               </span>
             </a>
           </ActiveLink>
-          <ActiveLink href="/info" shallow>
+          <ActiveLink href={URLS.SUPPORT} shallow>
             <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiInformationCircle"

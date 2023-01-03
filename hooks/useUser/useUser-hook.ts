@@ -1,6 +1,6 @@
 import { Magic } from "magic-sdk";
 import { useCallback, useContext, useMemo } from "react";
-import { OAuthExtension, OAuthProvider, OAuthRedirectResult } from "@magic-ext/oauth";
+import { OAuthExtension, OAuthProvider } from "@magic-ext/oauth";
 import { useAuthenticateUserMutation } from "@/graphql";
 import jwtDecode from 'jwt-decode'
 

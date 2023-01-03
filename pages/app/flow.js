@@ -1,17 +1,17 @@
-import React, { useCallback } from 'react'
-import { withAuth } from '@/hocs'
+import React, { useCallback } from 'react';
+import { withAuth } from '@/hocs';
 import ReactFlow, {
   addEdge,
   Controls,
   Background,
   useNodesState,
   useEdgesState,
-} from 'reactflow'
+} from 'reactflow';
+import 'reactflow/dist/style.css';
 
-import Zapier from '../public/zapier.svg'
+import { ButtonIcon, Icon, Menu } from '../../components';
 
-import 'reactflow/dist/style.css'
-import { ButtonIcon, Icon, Menu } from '../components'
+import Zapier from '../../public/zapier.svg';
 
 export const initialNodes = [
   {
@@ -159,7 +159,7 @@ export const initialNodes = [
       borderColor: '#bb86fc',
     },
   },
-]
+];
 
 export const initialEdges = [
   { id: 'e1-2', source: '1', target: '1b', animated: true },
@@ -172,30 +172,30 @@ export const initialEdges = [
   { id: 'e1-9', source: '6a', target: '7', animated: true },
   { id: 'e1-10', source: '4', target: '1b', animated: true },
   { id: 'e1-12', source: '3', target: '9', animated: true },
-]
+];
 
 const onInit = (reactFlowInstance) =>
-  console.log('flow loaded:', reactFlowInstance)
+  console.log('flow loaded:', reactFlowInstance);
 
 const Settings = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     []
-  )
+  );
 
   // we are using a bit of a shortcut here to adjust the edge type
   // this could also be done with a custom edge for example
   const edgesWithUpdatedTypes = edges.map((edge) => {
     if (edge.sourceHandle) {
       const edgeType = nodes.find((node) => node.type === 'custom').data
-        .selects[edge.sourceHandle]
-      edge.type = edgeType
+        .selects[edge.sourceHandle];
+      edge.type = edgeType;
     }
 
-    return edge
-  })
+    return edge;
+  });
 
   return (
     <div className="flex flex-1 flex-col w-full items-center md:pl-[70px]">
@@ -215,7 +215,7 @@ const Settings = () => {
         <Background color="#aaa" gap={16} />
       </ReactFlow>
     </div>
-  )
-}
+  );
+};
 
-export default withAuth(Settings)
+export default withAuth(Settings);

@@ -1,8 +1,8 @@
-import Avatar from 'react-avatar'
-import { withAuth } from '@/hocs'
+import Avatar from 'react-avatar';
+import { withAuth } from '@/hocs';
 
-import MainMenu from '../components/Menu'
-import { ButtonIcon, Text, Icon } from '../components'
+import MainMenu from '../../components/Menu';
+import { ButtonIcon, Text, Icon } from '../../components';
 
 export const Company = () => {
   return (
@@ -87,7 +87,7 @@ export const Company = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default withAuth(Company)
+export default withAuth(Company);

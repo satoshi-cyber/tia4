@@ -1,41 +1,41 @@
-import { Player } from 'video-react'
-import { withAuth } from '@/hocs'
-import React, { useState } from 'react'
-import { Document, Page, pdfjs } from 'react-pdf'
-import 'react-pdf/dist/esm/Page/TextLayer.css'
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
-import 'video-react/dist/video-react.css'
-import dynamic from 'next/dynamic'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { Player } from 'video-react';
+import { withAuth } from '@/hocs';
+import React, { useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'video-react/dist/video-react.css';
+import dynamic from 'next/dynamic';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-import Icon from '../components/Icon'
-import Menu from '../components/Menu'
+import Icon from '../../components/Icon';
+import Menu from '../../components/Menu';
 
-import Linkedin from '../public/linkedin.svg'
-import Skeleton from 'react-loading-skeleton'
+import Linkedin from '../../public/linkedin.svg';
+import Skeleton from 'react-loading-skeleton';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const Rate = () => {
-  const [pages, setPages] = useState([])
+  const [pages, setPages] = useState([]);
 
-  const { scrollY } = useScroll()
+  const { scrollY } = useScroll();
 
-  const marginLeft = useTransform(scrollY, [0, 700], [0, 650])
-  const marginRight = useTransform(scrollY, [0, 700], [0, -650])
-  const scale = useTransform(scrollY, [0, 700], [1, 0.6])
-  const docScale = useTransform(scrollY, [0, 700], [0.8, 1])
-  const containerMarginRight = useTransform(scrollY, [0, 700], [0, -500])
-  const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200])
-  const opacity = useTransform(scrollY, [0, 100], [1, 0])
+  const marginLeft = useTransform(scrollY, [0, 700], [0, 650]);
+  const marginRight = useTransform(scrollY, [0, 700], [0, -650]);
+  const scale = useTransform(scrollY, [0, 700], [1, 0.6]);
+  const docScale = useTransform(scrollY, [0, 700], [0.8, 1]);
+  const containerMarginRight = useTransform(scrollY, [0, 700], [0, -500]);
+  const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 100], [1, 0]);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setPages(
       Array(numPages)
         .fill(0)
         .map((_, index) => index + 1)
-    )
-  }
+    );
+  };
 
   return (
     <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
@@ -147,11 +147,11 @@ const Rate = () => {
         </div>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
 export default withAuth(
   dynamic(() => Promise.resolve(Rate), {
     ssr: false,
   })
-)
+);

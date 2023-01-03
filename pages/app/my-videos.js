@@ -1,10 +1,10 @@
-import Avatar from 'react-avatar'
-import { withAuth } from '@/hocs'
-import { Player, ControlBar } from 'video-react'
-import 'video-react/dist/video-react.css'
+import Avatar from 'react-avatar';
+import { withAuth } from '@/hocs';
+import { Player, ControlBar } from 'video-react';
+import 'video-react/dist/video-react.css';
 
-import MainMenu from '../components/Menu'
-import { Text, Icon } from '../components'
+import MainMenu from '../../components/Menu';
+import { Text, Icon } from '../../components';
 
 const MyVideos = () => {
   return (
@@ -93,7 +93,7 @@ const MyVideos = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default withAuth(MyVideos)
+export default withAuth(MyVideos);

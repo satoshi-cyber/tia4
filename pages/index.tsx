@@ -1,23 +1,23 @@
-import { URLS } from '@/config'
-import { withAuth } from '@/hocs'
-import { useUser } from '@/hooks'
-import Router from 'next/router'
-import { useEffect } from 'react'
+import { URLS } from '@/config';
+import { withAuth } from '@/hocs';
+import { useUser } from '@/hooks';
+import Router from 'next/router';
+import { useEffect } from 'react';
 
 const Home = () => {
-  const { hasCompany } = useUser()
+  const { hasCompany } = useUser();
 
   useEffect(() => {
     if (hasCompany) {
-      Router.replace(URLS.JOBS)
+      Router.replace(URLS.JOBS);
 
-      return
+      return;
     }
 
-    Router.replace(URLS.MY_VIDEOS)
-  }, [])
+    Router.replace(URLS.MY_VIDEOS);
+  }, []);
 
-  return null
-}
+  return null;
+};
 
-export default withAuth(Home)
+export default withAuth(Home);

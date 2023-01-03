@@ -1,6 +1,6 @@
 import { withAuth } from '@/hocs'
 
-import SetupCompany from '../screens/SetupCompany'
+import SetupCompany from '../../screens/SetupCompany'
 
 // const Profile = () => {
 //   return (
