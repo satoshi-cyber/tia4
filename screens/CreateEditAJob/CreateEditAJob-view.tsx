@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Form,
   Layout,
@@ -6,22 +6,22 @@ import {
   Field,
   LoadingProvider,
   SubmitButton,
-} from '@/components'
+} from '@/components';
 
-import { Questions, Header } from './components'
-import { useCreateUpdateAJob } from './CreateEditAJob-hook'
+import { Questions, Header } from './components';
+import { useCreateUpdateAJob } from './CreateEditAJob-hook';
 import {
   DEADLINE_FIELD_PROPS,
   TITLE_FIELD_PROPS,
   SUBMIT_BUTTON_PROPS,
   CLASS_NAMES,
   TITLE_ICON,
-} from './CreateEditAJob-constants'
-import dynamic from 'next/dynamic'
+} from './CreateEditAJob-constants';
+import dynamic from 'next/dynamic';
 
 const CreateAJob: React.FC = () => {
   const { handleSubmit, form, fetching, editJob, handleDeleteJob } =
-    useCreateUpdateAJob()
+    useCreateUpdateAJob();
 
   return (
     <Layout.Default>
@@ -38,9 +38,9 @@ const CreateAJob: React.FC = () => {
         </Form>
       </LoadingProvider>
     </Layout.Default>
-  )
-}
+  );
+};
 
 export default dynamic(() => Promise.resolve(CreateAJob), {
   ssr: false,
-})
+});
