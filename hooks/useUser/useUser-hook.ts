@@ -8,6 +8,7 @@ import { JWTClaims } from "./useUser-types";
 
 import { AuthContext } from '../../components/AuthProvider'
 
+
 const magic =
   typeof window !== 'undefined' ?
     new Magic(process.env.NEXT_PUBLIC_MAGIC_PUB_KEY!, {
@@ -34,7 +35,7 @@ export const useUser = () => {
     [setToken]
   )
 
-  const loginWithProvider = useCallback((provider: OAuthProvider) =>
+  const loginWithProvider = useCallback((provider: OAuthProvider, jobId?: string) =>
     new Promise((resolve) => {
       window.addEventListener("popstate", () => {
         resolve(true);
@@ -42,7 +43,7 @@ export const useUser = () => {
 
       magic?.oauth.loginWithRedirect({
         provider,
-        redirectURI: `${window.location.origin}/oauth-callback`,
+        redirectURI: jobId ? `${window.location.origin}/oauth-callback?jobId=${jobId}` : `${window.location.origin}/oauth-callback`,
       });
     })
     , [])

@@ -8,9 +8,11 @@ export const useOAuthCallback = () => {
 
   const { authenticateUserFromOAuth } = useUser()
 
+  const jobId = router.query.jobId as string
+
   useLayoutEffect(() => {
     authenticateUserFromOAuth().then(() => {
-      router.replace(URLS.HOME)
+      router.replace(jobId ? URLS.RECORD.replace('[applyJobId]', jobId) : URLS.HOME)
     })
   }, [])
 };

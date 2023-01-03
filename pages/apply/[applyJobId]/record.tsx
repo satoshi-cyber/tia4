@@ -1,3 +1,6 @@
-import dynamic from 'next/dynamic'
+import { withAuth } from '@/hocs';
+import dynamic from 'next/dynamic';
 
-export default dynamic(() => import('../../../screens/Record'), { ssr: false })
+export default withAuth(
+  dynamic(() => import('../../../screens/Record'), { ssr: false })
+);

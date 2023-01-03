@@ -19,21 +19,21 @@ export const useLogin = () => {
     resolver: yupResolver(loginSchema),
   });
 
+  const jobId = router.query.jobId as string
+
   const handleSubmit = async ({ email }: LoginData) =>
-    login(email).then(() => {
-      router.push(URLS.HOME)
-    })
+    login(email)
 
   useEffect(() => {
     if (isUserLoggedin) {
-      router.replace(URLS.HOME)
+      router.push(jobId ? URLS.RECORD.replace('[applyJobId]', jobId) : URLS.HOME)
     }
   }, [isUserLoggedin])
 
 
-  const loginWithLinkedin = useCallback(() => loginWithProvider('linkedin'), [])
+  const loginWithLinkedin = useCallback(() => loginWithProvider('linkedin', jobId), [])
 
-  const loginWithFacebook = useCallback(() => loginWithProvider('facebook'), [])
+  const loginWithFacebook = useCallback(() => loginWithProvider('facebook', jobId), [])
 
   return {
     form,
