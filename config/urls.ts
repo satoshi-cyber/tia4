@@ -13,6 +13,7 @@ export const URLS = {
     RECORD_AN_INTERVIEW: '/app/record-an-interview',
     SUPPORT: '/app/support',
     PROFILE: '/app/profile',
+    APPLY_PROFILE: '/apply/[applyJobId]/profile',
     RECORD: '/apply/[applyJobId]/record',
 }
 

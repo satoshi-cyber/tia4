@@ -12,7 +12,7 @@ export const useOAuthCallback = () => {
 
   useLayoutEffect(() => {
     authenticateUserFromOAuth().then(() => {
-      router.replace(jobId ? URLS.RECORD.replace('[applyJobId]', jobId) : URLS.HOME)
+      router.replace(jobId ? URLS.APPLY_PROFILE.replace('[applyJobId]', jobId) : URLS.HOME)
     })
   }, [])
 };

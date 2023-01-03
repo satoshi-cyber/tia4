@@ -1,16 +1,17 @@
-import clsx from 'clsx'
-import React from 'react'
+import clsx from 'clsx';
+import React from 'react';
 
-import { CLASS_NAMES } from './SubmitButton-constants'
-import { useSubmitButton } from './SubmitButton-hook'
-import { SubmitButtonProps } from './SubmitButton-types'
+import { CLASS_NAMES } from './SubmitButton-constants';
+import { useSubmitButton } from './SubmitButton-hook';
+import { SubmitButtonProps } from './SubmitButton-types';
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({
   title,
   className,
+  allowEmptySubmit,
   ...restProps
 }) => {
-  const { disabled } = useSubmitButton()
+  const { disabled } = useSubmitButton({ allowEmptySubmit });
 
   return (
     <button
@@ -21,7 +22,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
     >
       {title}
     </button>
-  )
-}
+  );
+};
 
-export default SubmitButton
+export default SubmitButton;
