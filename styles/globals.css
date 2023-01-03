@@ -67,3 +67,16 @@ video::-webkit-media-controls {
   }
 }
 
+
+.CircularProgressbar-path {
+  stroke: white !important; 
+  @apply pointer-events-none
+}
+.CircularProgressbar-trail {
+  stroke:transparent !important;
+  @apply pointer-events-none
+}
+.CircularProgressbar-text {
+  fill: white !important;
+  @apply pointer-events-none
+}
