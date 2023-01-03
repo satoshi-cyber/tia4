@@ -1,4 +1,4 @@
-import { ButtonIcon, Icon } from '@/components';
+import { Icon } from '@/components';
 
 import {
   CLASS_NAMES,
@@ -10,8 +10,7 @@ import {
 } from './Buttons-constants';
 import { useButtons } from './Buttons-hook';
 import { ButtonsProps } from './Buttons-types';
-
-import Logo from '../../../../public/logo-white.svg';
+import { LastSlide } from './components';
 
 const VideoPreview: React.FC<ButtonsProps> = ({
   swiper,
@@ -27,19 +26,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   const { realIndex, lastSlide } = useButtons({ swiper });
 
   if (lastSlide) {
-    return (
-      <>
-        <Logo className="absolute m-4 md:m-6" width={120} />
-        <p className="absolute w-[80vw] lg:w-[400px] z-10 text-xl md:text-3xl text-gray-100 text-center pointer-events-none transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          Click the button to upload the interview! Good luck!
-        </p>
-        <div className={CLASS_NAMES.buttonContainer}>
-          <div className={CLASS_NAMES.uploadButton}>
-            <ButtonIcon name="HiUpload" size={24} />
-          </div>
-        </div>
-      </>
-    );
+    return <LastSlide />;
   }
 
   return (
