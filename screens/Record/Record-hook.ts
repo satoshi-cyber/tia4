@@ -1,5 +1,4 @@
 import { useJobQuery } from "@/graphql"
-import clsx from "clsx"
 import { del, set } from "idb-keyval"
 import { useRouter } from "next/router"
 import { useEffect, useMemo, useRef, useState } from "react"
@@ -12,7 +11,6 @@ import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
 export const useRecord = () => {
   const [swiper, setSwiper] = useState<Swiper>()
-
   const countDownTimeout = useRef<ReturnType<typeof setTimeout> | undefined>()
   const [countDown, setCoundDown] = useState(-1)
   const [recordDate, setRecordDate] = useState<Date | undefined>(undefined)
@@ -99,6 +97,10 @@ export const useRecord = () => {
 
     if (countDown > 0) {
       countDownTimeout.current = setTimeout(() => setCoundDown(countDown - 1), 1000)
+    }
+
+    return () => {
+      clearTimeout(countDownTimeout.current)
     }
 
   }, [countDown])
