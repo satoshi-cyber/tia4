@@ -46,6 +46,8 @@ export const useRecord = () => {
 
     setConverting(true)
 
+    swiper?.disable()
+
     if (!ffmpeg.isLoaded())
       await ffmpeg.load()
 
@@ -74,6 +76,7 @@ export const useRecord = () => {
     setIsRecorded({ ...isRecorded })
 
     swiper?.enable()
+
   }
 
   const { status, startRecording, stopRecording, previewStream, error } =
@@ -100,6 +103,8 @@ export const useRecord = () => {
     }
 
     stopRecording()
+
+    swiper?.enable()
   }
 
   const handleClearRecording = () => {
