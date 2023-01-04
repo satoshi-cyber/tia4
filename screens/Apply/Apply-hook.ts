@@ -4,9 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { UpdateProfile, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
 
-import { updateProfileSchema } from "./ApplyProfile-validations";
-import { TOAST_MESSAGE, TOAST_OPTIONS } from './ApplyProfile-constants';
-import { formatDefaultValues } from "./ApplyProfile-functions";
+import { updateProfileSchema } from "./Apply-validations";
+import { TOAST_MESSAGE, TOAST_OPTIONS } from './Apply-constants';
+import { formatDefaultValues } from "./Apply-functions";
 import { useRouter } from "next/router";
 import { URLS } from "@/config";
 

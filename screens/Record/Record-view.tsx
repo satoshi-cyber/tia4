@@ -19,7 +19,7 @@ import { useRecord } from './Record-hook';
 const RecordView = () => {
   const {
     setSwiper,
-    questions,
+    slides,
     buttonProps,
     isRecorded,
     previewStream,
@@ -44,7 +44,7 @@ const RecordView = () => {
     <div className={classNames.container}>
       <div className={classNames.swiperContainer}>
         <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
-          {questions.map((question, index) => (
+          {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               {
                 <div className={classNames.slide}>
@@ -56,10 +56,10 @@ const RecordView = () => {
                   {isRecorded[questionIds[index]] && !isRecording && (
                     <VideoPlayer id={questionIds[index]} index={index} />
                   )}
-                  {'question' in question && (
+                  {'question' in slide && (
                     <Question
                       onStopRecording={handleStopRecording}
-                      question={question}
+                      question={slide}
                       isRecording={isRecording}
                       recordDate={recordDate}
                     />

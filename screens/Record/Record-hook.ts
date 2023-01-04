@@ -18,19 +18,20 @@ export const useRecord = () => {
 
   const router = useRouter()
 
-  const { applyJobId } = router.query
+  const applyJobId = String(router.query.applyJobId)
 
-  const [{ fetching, data }] = useJobQuery({ variables: { id: String(applyJobId) }, pause: !Boolean(applyJobId) })
+  const [{ fetching, data }] = useJobQuery({ variables: { id: applyJobId }, pause: !Boolean(applyJobId) })
 
-  const questions = useMemo(() => [...data?.job.questions || [], { submit: true }], [data])
+  const questions = useMemo(() => data?.job.questions.map(({ __typename, ...question }) => question) || [], [data])
+  const slides = useMemo(() => [...questions, { submit: true }], [questions])
   const questionIds = useMemo(() => data?.job.questions.map(question => question.id) || [], [data])
 
   const [isRecorded, setIsRecorded] = useLocalStorage<IsRecorded>(
-    String(applyJobId),
+    applyJobId,
     {}
   )
 
-  const { submitInterview } = useSubmitInterview({ isRecorded, swiper })
+  const { submitInterview } = useSubmitInterview({ isRecorded, swiper, applyJobId, questions })
 
   const onStop = async (_: string, blob: Blob) => {
 
@@ -129,7 +130,7 @@ export const useRecord = () => {
 
   return {
     fetching,
-    questions,
+    slides,
     questionIds,
     previewStream,
     status,

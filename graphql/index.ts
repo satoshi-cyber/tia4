@@ -226,7 +226,6 @@ export type MutationUpdateProfileArgs = {
 export type NewInterview = {
   answers: Array<AnswerInput>;
   jobId: Scalars['String'];
-  userId: Scalars['String'];
 };
 
 export type NewJob = {

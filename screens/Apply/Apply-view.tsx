@@ -18,9 +18,9 @@ import {
   TITLE_PROPS,
   FIELDS,
   LINKEDIN_PROFILE_ICON,
-} from './ApplyProfile-constants';
+} from './Apply-constants';
 
-import { useProfile } from './ApplyProfile-hook';
+import { useProfile } from './Apply-hook';
 
 const Profile: React.FC = () => {
   const {

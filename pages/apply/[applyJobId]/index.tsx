@@ -1,5 +1,5 @@
 import { withAuth } from '@/hocs';
 
-import ApplyProfile from '../../../screens/ApplyProfile';
+import Apply from '../../../screens/Apply';
 
-export default withAuth(ApplyProfile);
+export default withAuth(Apply);
