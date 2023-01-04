@@ -94,6 +94,8 @@ export const useRecord = () => {
 
   const handleStopRecording = () => {
 
+    swiper?.enable()
+
     if (countDown > 0) {
       setCoundDown(-1)
       if (countDownTimeout.current) {
@@ -104,7 +106,7 @@ export const useRecord = () => {
 
     stopRecording()
 
-    swiper?.enable()
+
   }
 
   const handleClearRecording = () => {
