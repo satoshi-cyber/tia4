@@ -17,7 +17,7 @@ const ffmpeg = createFFmpeg({
 });
 
 export const useRecord = () => {
-  const [ffmpegLoading, setFfmpegLoading] = useState(true)
+  const [ffmpegLoading, setFfmpegLoading] = useState(!MediaRecorder.isTypeSupported('video/mp4'))
   const [converting, setConverting] = useState(false)
   const [swiper, setSwiper] = useState<Swiper>()
   const countDownTimeout = useRef<ReturnType<typeof setTimeout> | undefined>()
@@ -39,8 +39,25 @@ export const useRecord = () => {
     {}
   )
 
+  const updateVideo = (blob: Blob) => {
+    if (!swiper)
+      return
+
+    set(questionIds[swiper.realIndex], blob)
+
+    isRecorded[questionIds[swiper.realIndex]] = true
+
+    setIsRecorded({ ...isRecorded })
+  }
+
   const onStop = async (_: string, blob: Blob) => {
     if (!swiper || !questionIds || !questionIds[swiper.realIndex]) {
+      return
+    }
+
+    if (MediaRecorder.isTypeSupported('video/mp4')) {
+      updateVideo(blob)
+
       return
     }
 
@@ -48,39 +65,34 @@ export const useRecord = () => {
 
     swiper?.disable()
 
-    setTimeout(async () => {
+    if (!ffmpeg.isLoaded())
+      await ffmpeg.load()
 
-      if (!ffmpeg.isLoaded())
-        await ffmpeg.load()
+    const inputFile = `${uuidv4()}.webm`
+    const outputFile = `${uuidv4()}.mp4`
 
-      const inputFile = `${uuidv4()}.webm`
-      const outputFile = `${uuidv4()}.mp4`
+    ffmpeg.FS('writeFile', inputFile, await fetchFile(blob));
 
-      ffmpeg.FS('writeFile', inputFile, await fetchFile(blob));
-
+    if (MediaRecorder.isTypeSupported('video/webm;codecs=h264')) {
+      await ffmpeg.run('-i', inputFile, '-c:v', 'copy', outputFile);
+    } else {
       await ffmpeg.run('-i', inputFile, '-c:v', 'libx264', '-preset', 'ultrafast', outputFile);
+    }
 
-      const data = ffmpeg.FS('readFile', outputFile);
+    const data = ffmpeg.FS('readFile', outputFile);
 
-      set(questionIds[swiper.realIndex], new Blob([data], {
-        type: 'video/mp4'
-      }))
+    ffmpeg.FS('unlink', inputFile)
+    ffmpeg.FS('unlink', outputFile)
 
-      ffmpeg.FS('unlink', inputFile)
-      ffmpeg.FS('unlink', outputFile)
+    await ffmpeg.exit()
 
-      await ffmpeg.exit()
+    updateVideo(new Blob([data], {
+      type: 'video/mp4'
+    }))
 
-      setConverting(false)
+    setConverting(false)
 
-      isRecorded[questionIds[swiper.realIndex]] = true
-
-      setIsRecorded({ ...isRecorded })
-
-      swiper?.enable()
-
-    }, 50)
-
+    swiper?.enable()
 
   }
 
@@ -110,8 +122,6 @@ export const useRecord = () => {
     }
 
     stopRecording()
-
-
   }
 
   const handleClearRecording = () => {
@@ -151,7 +161,11 @@ export const useRecord = () => {
   }, [countDown])
 
   useEffect(() => {
-    ffmpeg.load().then(() => setFfmpegLoading(false))
+
+    if (!MediaRecorder.isTypeSupported('video/mp4')) {
+      ffmpeg.load().then(() => setFfmpegLoading(false))
+    }
+
   }, [])
 
   const loading = fetching || status === ACQUIRING_MEDIA || ffmpegLoading
