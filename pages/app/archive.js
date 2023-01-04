@@ -4,7 +4,6 @@ import { Player, ControlBar } from 'video-react';
 import 'video-react/dist/video-react.css';
 import { useForm } from 'react-hook-form';
 
-import MainMenu from '../../components/Menu';
 import { Text, Icon, Field, FormIcon, Form } from '../../components';
 
 const Archive = () => {
@@ -14,7 +13,6 @@ const Archive = () => {
 
   return (
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
-      <MainMenu />
       <div className="flex flex-col sm:max-w-[600px] lg:max-w-[900px] xl:max-w-[1200px]  w-full px-4 items-center">
         <Text
           text="Video archive"

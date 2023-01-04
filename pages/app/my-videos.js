@@ -3,13 +3,11 @@ import { withAuth } from '@/hocs';
 import { Player, ControlBar } from 'video-react';
 import 'video-react/dist/video-react.css';
 
-import MainMenu from '../../components/Menu';
 import { Text, Icon } from '../../components';
 
 const MyVideos = () => {
   return (
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
-      <MainMenu />
       <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
         <div className="mb-20 flex flex-col w-full items-center">
           <Text
@@ -21,12 +19,11 @@ const MyVideos = () => {
             text="Watch and delete your videos!"
           />
         </div>
-        <div className="grid grid-cols-2 gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
           <div>
             <Player
-              className="flex-none rounded-xl shadow-sm overflow-hidden w-full"
+              className="flex-none rounded-xl shadow-sm overflow-hidden w-full h-[300px] md:h-[200px]"
               width="100%"
-              height={200}
               fluid={false}
               controls={false}
               muted
@@ -58,9 +55,8 @@ const MyVideos = () => {
           </div>
           <div>
             <Player
-              className="flex-none rounded-xl shadow-sm overflow-hidden w-full"
+              className="flex-none rounded-xl shadow-sm overflow-hidden w-full h-[300px] md:h-[200px]"
               width="100%"
-              height={200}
               fluid={false}
               controls={false}
               muted

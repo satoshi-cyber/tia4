@@ -1,13 +1,11 @@
 import Avatar from 'react-avatar';
 import { withAuth } from '@/hocs';
 
-import MainMenu from '../../components/Menu';
 import { ButtonIcon, Text, Icon } from '../../components';
 
 export const Company = () => {
   return (
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
-      <MainMenu />
       <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
         <div className="mb-20 flex flex-col w-full items-center">
           <Avatar src="/twiter.png" size={60} className="mb-4" round />

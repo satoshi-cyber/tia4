@@ -9,7 +9,8 @@ export default function Submit() {
     if (window.MediaRecorder == undefined) {
       console.error('MediaRecorder not supported, boo');
     } else {
-      var contentTypes = ['video/webm'];
+      MediaRecorder.isTypeSupported('');
+      var contentTypes = ['video/webm;codecs=opus'];
       contentTypes.forEach((contentType) => {
         console.log(
           contentType +

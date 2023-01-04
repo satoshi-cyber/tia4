@@ -48,34 +48,39 @@ export const useRecord = () => {
 
     swiper?.disable()
 
-    if (!ffmpeg.isLoaded())
-      await ffmpeg.load()
+    setTimeout(async () => {
 
-    const inputFile = `${uuidv4()}.webm`
-    const outputFile = `${uuidv4()}.mp4`
+      if (!ffmpeg.isLoaded())
+        await ffmpeg.load()
 
-    ffmpeg.FS('writeFile', inputFile, await fetchFile(blob));
+      const inputFile = `${uuidv4()}.webm`
+      const outputFile = `${uuidv4()}.mp4`
 
-    await ffmpeg.run('-i', inputFile, '-c', 'copy', outputFile);
+      ffmpeg.FS('writeFile', inputFile, await fetchFile(blob));
 
-    const data = ffmpeg.FS('readFile', outputFile);
+      await ffmpeg.run('-i', inputFile, '-c:v', 'libx264', '-preset', 'ultrafast', outputFile);
 
-    set(questionIds[swiper.realIndex], new Blob([data], {
-      type: 'video/mp4'
-    }))
+      const data = ffmpeg.FS('readFile', outputFile);
 
-    ffmpeg.FS('unlink', inputFile)
-    ffmpeg.FS('unlink', outputFile)
+      set(questionIds[swiper.realIndex], new Blob([data], {
+        type: 'video/mp4'
+      }))
 
-    await ffmpeg.exit()
+      ffmpeg.FS('unlink', inputFile)
+      ffmpeg.FS('unlink', outputFile)
 
-    setConverting(false)
+      await ffmpeg.exit()
 
-    isRecorded[questionIds[swiper.realIndex]] = true
+      setConverting(false)
 
-    setIsRecorded({ ...isRecorded })
+      isRecorded[questionIds[swiper.realIndex]] = true
 
-    swiper?.enable()
+      setIsRecorded({ ...isRecorded })
+
+      swiper?.enable()
+
+    }, 50)
+
 
   }
 

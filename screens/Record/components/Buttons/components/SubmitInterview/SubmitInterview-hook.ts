@@ -11,7 +11,7 @@ import { URLS } from "@/config"
 
 export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: SubmitInterviewProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [uploadProgres, setUploadProgres] = useState(100);
+  const [uploadProgres, setUploadProgres] = useState(-1);
 
   const uploadingIds = useRef<Record<string, number>>({})
 
@@ -21,7 +21,7 @@ export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: Sub
 
   const [{ fetching: interviewIsSubmitting }, submitInterviewMutation] = useSubmitInterviewMutation()
 
-  const isUploading = interviewIsSubmitting || uploadProgres < 100
+  const isUploading = interviewIsSubmitting || uploadProgres !== -1
 
   const closeDialog = () => setIsDialogOpen(false)
 
@@ -40,7 +40,7 @@ export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: Sub
 
     if (res.error) {
       toast.error(TOAST_ERROR, TOAST_OPTIONS)
-      setUploadProgres(100)
+      setUploadProgres(-1)
 
       return
     }
@@ -61,7 +61,8 @@ export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: Sub
           setIsRecorded({})
           questions.map(question => del(question.id))
 
-          router.push(URLS.MY_VIDEOS)
+          setTimeout(() => router.push(URLS.MY_VIDEOS), 300)
+
         }
       });
 
@@ -70,9 +71,6 @@ export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: Sub
 
       xhr.send(new File([video], `${answer.question.id}.mp4`, { type: video.type }))
     })
-
-
-    console.log({ uploadProgres })
 
   }
 
