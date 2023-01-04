@@ -61,8 +61,7 @@ export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: Sub
           setIsRecorded({})
           questions.map(question => del(question.id))
 
-          setTimeout(() => router.push(URLS.MY_VIDEOS), 300)
-
+          setTimeout(() => router.push(URLS.MY_VIDEOS), 400)
         }
       });
 
