@@ -8,6 +8,7 @@ const Question: React.FC<QuestionProps> = ({
   question,
   isRecording,
   onStopRecording,
+  recordDate,
 }) => {
   const { classNames } = useQuestion({ isRecording });
 
@@ -15,7 +16,11 @@ const Question: React.FC<QuestionProps> = ({
     <div className={classNames.container}>
       <p className={classNames.question}>{question.question}</p>
       {isRecording && (
-        <QuestionTime time={question.time} onStopRecording={onStopRecording} />
+        <QuestionTime
+          time={question.time}
+          onStopRecording={onStopRecording}
+          recordDate={recordDate}
+        />
       )}
     </div>
   );
