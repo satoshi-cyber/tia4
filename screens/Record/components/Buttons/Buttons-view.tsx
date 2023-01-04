@@ -22,11 +22,12 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   isRecorded,
   status,
   countDown,
+  submitInterview,
 }) => {
   const { realIndex, lastSlide } = useButtons({ swiper });
 
   if (lastSlide) {
-    return <LastSlide />;
+    return <LastSlide submitInterview={submitInterview} />;
   }
 
   return (

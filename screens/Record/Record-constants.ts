@@ -35,3 +35,5 @@ export const SWIPER_OPTIONS = {
 } as SwiperProps
 
 export const EMPTY_STATE = []
+
+export const NOT_ENOUGH_VIDEOS_ERROR = new Error('Not enough videos!')

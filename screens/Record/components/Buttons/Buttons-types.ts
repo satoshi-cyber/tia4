@@ -12,4 +12,5 @@ export interface ButtonsProps {
   questionIds: string[]
   status: StatusMessages
   countDown: number
+  submitInterview: () => Promise<void>
 }

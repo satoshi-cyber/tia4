@@ -1,0 +1,8 @@
+mutation SubmitInterview($input: NewInterview!) {
+  submitInterview(input: $input) {
+    id
+    answers {
+      uploadUrl
+    }
+  }
+}

@@ -390,6 +390,13 @@ export type SetupCompanyMutationVariables = Exact<{
 
 export type SetupCompanyMutation = { __typename?: 'Mutation', setupCompany: { __typename?: 'Company', id: string } };
 
+export type SubmitInterviewMutationVariables = Exact<{
+  input: NewInterview;
+}>;
+
+
+export type SubmitInterviewMutation = { __typename?: 'Mutation', submitInterview: { __typename?: 'Interview', id: string, answers: Array<{ __typename?: 'Answer', uploadUrl: string }> } };
+
 export type UpdateJobMutationVariables = Exact<{
   companyId: Scalars['ID'];
   input: UpdateJob;
@@ -520,6 +527,20 @@ export const SetupCompanyDocument = gql`
 
 export function useSetupCompanyMutation() {
   return Urql.useMutation<SetupCompanyMutation, SetupCompanyMutationVariables>(SetupCompanyDocument);
+};
+export const SubmitInterviewDocument = gql`
+    mutation SubmitInterview($input: NewInterview!) {
+  submitInterview(input: $input) {
+    id
+    answers {
+      uploadUrl
+    }
+  }
+}
+    `;
+
+export function useSubmitInterviewMutation() {
+  return Urql.useMutation<SubmitInterviewMutation, SubmitInterviewMutationVariables>(SubmitInterviewDocument);
 };
 export const UpdateJobDocument = gql`
     mutation UpdateJob($companyId: ID!, $input: UpdateJob!) {

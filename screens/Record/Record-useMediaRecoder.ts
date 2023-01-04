@@ -47,7 +47,7 @@ export enum RecorderErrors {
   NO_RECORDER = "Recorder error",
 }
 
-export function useReactMediaRecorder({
+export const useReactMediaRecorder = ({
   audio = true,
   video = false,
   onStop = () => null,
@@ -58,7 +58,7 @@ export function useReactMediaRecorder({
   customMediaStream = null,
   stopStreamsOnStop = true,
   askPermissionOnMount = false,
-}: ReactMediaRecorderHookProps): ReactMediaRecorderRenderProps {
+}: ReactMediaRecorderHookProps): ReactMediaRecorderRenderProps => {
   const mediaRecorder = useRef<IMediaRecorder | null>(null);
   const mediaChunks = useRef<Blob[]>([]);
   const mediaStream = useRef<MediaStream | null>(null);
