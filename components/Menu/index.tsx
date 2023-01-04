@@ -276,7 +276,7 @@ const Menu = () => {
               </span>
             </a>
           </ActiveLink>
-          <ActiveLink href={URLS.RECORD_AN_INTERVIEW} shallow>
+          {/* <ActiveLink href={URLS.RECORD_AN_INTERVIEW} shallow>
             <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiVideoCamera"
@@ -287,7 +287,7 @@ const Menu = () => {
                 Record
               </span>
             </a>
-          </ActiveLink>
+          </ActiveLink> */}
           <ActiveLink href={URLS.SUPPORT} shallow>
             <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
