@@ -8,7 +8,6 @@ import useLocalStorage from "use-local-storage"
 import { ACQUIRING_MEDIA, CLASS_NAMES, RECORING_STATUS } from "./Record-constants"
 import { IsRecorded } from "./Record-types"
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
-import { useSubmitInterview } from "./Record-useSubmitInterview"
 
 export const useRecord = () => {
   const [swiper, setSwiper] = useState<Swiper>()
@@ -30,8 +29,6 @@ export const useRecord = () => {
     applyJobId,
     {}
   )
-
-  const { submitInterview } = useSubmitInterview({ isRecorded, swiper, applyJobId, questions })
 
   const onStop = async (_: string, blob: Blob) => {
 
@@ -118,12 +115,13 @@ export const useRecord = () => {
     status,
     questionIds,
     isRecorded,
+    setIsRecorded,
     handleStartRecording,
     handleStopRecording,
     handleClearRecording,
     handleHandleNext,
+    questions,
     countDown,
-    submitInterview
   }
 
   const classNames = CLASS_NAMES
@@ -142,7 +140,7 @@ export const useRecord = () => {
     classNames,
     isRecording,
     loading,
-    error
+    error,
   }
 
 }

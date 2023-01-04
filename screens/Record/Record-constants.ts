@@ -36,10 +36,3 @@ export const SWIPER_OPTIONS = {
 
 export const EMPTY_STATE = []
 
-export const NOT_ENOUGH_VIDEOS_ERROR = new Error('Not enough videos!')
-
-export const TOAST_OPTIONS = {
-  position: "top-right",
-} as const
-
-export const TOAST_ERROR = 'Error submitting the interview!'

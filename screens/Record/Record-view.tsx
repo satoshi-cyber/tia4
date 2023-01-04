@@ -15,6 +15,7 @@ import {
 } from './components';
 import { SWIPER_OPTIONS } from './Record-constants';
 import { useRecord } from './Record-hook';
+import { Loader } from '@/components';
 
 const RecordView = () => {
   const {

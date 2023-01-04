@@ -3,6 +3,9 @@ mutation SubmitInterview($input: NewInterview!) {
     id
     answers {
       uploadUrl
+      question {
+        id
+      }
     }
   }
 }

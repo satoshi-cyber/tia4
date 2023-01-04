@@ -394,7 +394,7 @@ export type SubmitInterviewMutationVariables = Exact<{
 }>;
 
 
-export type SubmitInterviewMutation = { __typename?: 'Mutation', submitInterview: { __typename?: 'Interview', id: string, answers: Array<{ __typename?: 'Answer', uploadUrl: string }> } };
+export type SubmitInterviewMutation = { __typename?: 'Mutation', submitInterview: { __typename?: 'Interview', id: string, answers: Array<{ __typename?: 'Answer', uploadUrl: string, question: { __typename?: 'Question', id: string } }> } };
 
 export type UpdateJobMutationVariables = Exact<{
   companyId: Scalars['ID'];
@@ -533,6 +533,9 @@ export const SubmitInterviewDocument = gql`
     id
     answers {
       uploadUrl
+      question {
+        id
+      }
     }
   }
 }

@@ -1,1 +1,1 @@
-export { default as LastSlide } from './LastSlide'
+export { default as SubmitInterview } from './SubmitInterview'

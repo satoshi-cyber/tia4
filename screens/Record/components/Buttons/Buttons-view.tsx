@@ -10,7 +10,7 @@ import {
 } from './Buttons-constants';
 import { useButtons } from './Buttons-hook';
 import { ButtonsProps } from './Buttons-types';
-import { LastSlide } from './components';
+import { SubmitInterview } from './components';
 
 const VideoPreview: React.FC<ButtonsProps> = ({
   swiper,
@@ -19,15 +19,22 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   handleClearRecording,
   handleHandleNext,
   questionIds,
+  questions,
   isRecorded,
+  setIsRecorded,
   status,
   countDown,
-  submitInterview,
 }) => {
   const { realIndex, lastSlide } = useButtons({ swiper });
 
   if (lastSlide) {
-    return <LastSlide submitInterview={submitInterview} />;
+    return (
+      <SubmitInterview
+        isRecorded={isRecorded}
+        questions={questions}
+        setIsRecorded={setIsRecorded}
+      />
+    );
   }
 
   return (
