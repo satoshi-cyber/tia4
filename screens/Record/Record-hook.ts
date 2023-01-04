@@ -1,15 +1,24 @@
 import { useJobQuery } from "@/graphql"
+import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import { del, set } from "idb-keyval"
 import { useRouter } from "next/router"
 import { useEffect, useMemo, useRef, useState } from "react"
 import Swiper from "swiper"
 import useLocalStorage from "use-local-storage"
+import { v4 as uuidv4 } from 'uuid';
 
 import { ACQUIRING_MEDIA, CLASS_NAMES, RECORING_STATUS } from "./Record-constants"
 import { IsRecorded } from "./Record-types"
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 
+const ffmpeg = createFFmpeg({
+  mainName: 'main',
+  corePath: 'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
+});
+
 export const useRecord = () => {
+  const [ffmpegLoading, setFfmpegLoading] = useState(true)
+  const [converting, setConverting] = useState(false)
   const [swiper, setSwiper] = useState<Swiper>()
   const countDownTimeout = useRef<ReturnType<typeof setTimeout> | undefined>()
   const [countDown, setCoundDown] = useState(-1)
@@ -31,16 +40,40 @@ export const useRecord = () => {
   )
 
   const onStop = async (_: string, blob: Blob) => {
-
     if (!swiper || !questionIds || !questionIds[swiper.realIndex]) {
       return
     }
 
+    setConverting(true)
+
+    if (!ffmpeg.isLoaded())
+      await ffmpeg.load()
+
+    const inputFile = `${uuidv4()}.webm`
+    const outputFile = `${uuidv4()}.mp4`
+
+    ffmpeg.FS('writeFile', inputFile, await fetchFile(blob));
+
+    await ffmpeg.run('-i', inputFile, '-c', 'copy', outputFile);
+
+    const data = ffmpeg.FS('readFile', outputFile);
+
+    set(questionIds[swiper.realIndex], new Blob([data], {
+      type: 'video/mp4'
+    }))
+
+    ffmpeg.FS('unlink', inputFile)
+    ffmpeg.FS('unlink', outputFile)
+
+    await ffmpeg.exit()
+
+    setConverting(false)
+
     isRecorded[questionIds[swiper.realIndex]] = true
 
-    set(questionIds[swiper.realIndex], blob)
-
     setIsRecorded({ ...isRecorded })
+
+    swiper?.enable()
   }
 
   const { status, startRecording, stopRecording, previewStream, error } =
@@ -57,7 +90,6 @@ export const useRecord = () => {
   }
 
   const handleStopRecording = () => {
-    swiper?.enable()
 
     if (countDown > 0) {
       setCoundDown(-1)
@@ -106,7 +138,11 @@ export const useRecord = () => {
 
   }, [countDown])
 
-  const loading = fetching || status === ACQUIRING_MEDIA
+  useEffect(() => {
+    ffmpeg.load().then(() => setFfmpegLoading(false))
+  }, [])
+
+  const loading = fetching || status === ACQUIRING_MEDIA || ffmpegLoading
 
   const isRecording = status === RECORING_STATUS
 
@@ -122,6 +158,7 @@ export const useRecord = () => {
     handleHandleNext,
     questions,
     countDown,
+    converting
   }
 
   const classNames = CLASS_NAMES

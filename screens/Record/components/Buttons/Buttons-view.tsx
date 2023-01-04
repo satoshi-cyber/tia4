@@ -1,4 +1,4 @@
-import { Icon } from '@/components';
+import { Icon, Spinner } from '@/components';
 
 import {
   CLASS_NAMES,
@@ -24,6 +24,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   setIsRecorded,
   status,
   countDown,
+  converting,
 }) => {
   const { realIndex, lastSlide } = useButtons({ swiper });
 
@@ -34,6 +35,14 @@ const VideoPreview: React.FC<ButtonsProps> = ({
         questions={questions}
         setIsRecorded={setIsRecorded}
       />
+    );
+  }
+
+  if (converting) {
+    return (
+      <div className={CLASS_NAMES.buttonContainer}>
+        <Spinner size={50} />
+      </div>
     );
   }
 

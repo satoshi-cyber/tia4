@@ -19,4 +19,5 @@ export interface ButtonsProps {
   }[],
   status: StatusMessages
   countDown: number
+  converting: boolean
 }

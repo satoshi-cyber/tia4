@@ -1,10 +1,27 @@
-import { FormIcon, UncontrolledField } from '../components/Form'
+import { FormIcon, UncontrolledField } from '../components/Form';
 
-import Logo from '../public/logo.svg'
+import Logo from '../public/logo.svg';
 
-const labelStyle = 'text-sm text-gray-900 text-left w-full mb-2'
+const labelStyle = 'text-sm text-gray-900 text-left w-full mb-2';
 
 export default function Submit() {
+  if (typeof window !== 'undefined') {
+    if (window.MediaRecorder == undefined) {
+      console.error('MediaRecorder not supported, boo');
+    } else {
+      var contentTypes = ['video/webm'];
+      contentTypes.forEach((contentType) => {
+        console.log(
+          contentType +
+            ' is ' +
+            (MediaRecorder.isTypeSupported(contentType)
+              ? 'supported'
+              : 'NOT supported ')
+        );
+      });
+    }
+  }
+
   return (
     <div className="flex flex-1 w-full justify-center items-center py-20">
       <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
@@ -49,5 +66,5 @@ export default function Submit() {
         </button>
       </div>
     </div>
-  )
+  );
 }

@@ -67,7 +67,8 @@ export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: Sub
 
       uploadingIds.current[answer.question.id] = 0
       const video = await get(answer.question.id)
-      xhr.send(video)
+
+      xhr.send(new File([video], `${answer.question.id}.mp4`, { type: video.type }))
     })
 
 
