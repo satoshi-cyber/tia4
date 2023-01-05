@@ -45,8 +45,8 @@ export type AuthInput = {
 
 export type Company = {
   __typename?: 'Company';
-  avatarUploadUrl: Scalars['String'];
-  avatarUrl: Scalars['String'];
+  avatarUploadUrl?: Maybe<Scalars['String']>;
+  avatarUrl?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
@@ -364,7 +364,7 @@ export type JobQueryVariables = Exact<{
 }>;
 
 
-export type JobQuery = { __typename?: 'Query', job: { __typename?: 'Job', id: string, title: string, deadline: any, questions: Array<{ __typename?: 'Question', id: string, question: string, time: number }>, company?: { __typename?: 'Company', name?: string | null } | null } };
+export type JobQuery = { __typename?: 'Query', job: { __typename?: 'Job', id: string, title: string, deadline: any, questions: Array<{ __typename?: 'Question', id: string, question: string, time: number }>, company?: { __typename?: 'Company', id: string, name?: string | null } | null } };
 
 export type JobsListQueryVariables = Exact<{
   companyId: Scalars['ID'];
@@ -458,6 +458,7 @@ export const JobDocument = gql`
       time
     }
     company {
+      id
       name
     }
   }

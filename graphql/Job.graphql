@@ -9,6 +9,7 @@ query Job($id: ID!) {
       time
     }
     company {
+      id
       name
     }
   }

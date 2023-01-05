@@ -10,7 +10,7 @@ const Profile = () => {
     <LoadingProvider isLoading={loading}>
       <ActiveLink href={URLS.PROFILE}>
         <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer transition-all ease-in-out border-r-2 border-r-transparent data-[active=true]:border-purple-800">
-          <Avatar name={label} size="30" src={avatarUrl} />
+          <Avatar name={label} size={30} src={avatarUrl} />
           <span className="ml-5 transition-all ease-in-out absolute w-[196px] left-[69px] group-hover:left-[40px] flex flex-row items-center">
             <Text
               className="flex flex-1"
