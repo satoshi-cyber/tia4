@@ -17,7 +17,7 @@ const ffmpeg = createFFmpeg({
 });
 
 export const useRecord = () => {
-  const [ffmpegLoading, setFfmpegLoading] = useState(!MediaRecorder.isTypeSupported('video/mp4') && !ffmpeg.isLoaded())
+  const [ffmpegLoading, setFfmpegLoading] = useState(!MediaRecorder.isTypeSupported('video/mp4'))
   const [converting, setConverting] = useState(false)
   const [swiper, setSwiper] = useState<Swiper>()
   const countDownTimeout = useRef<ReturnType<typeof setTimeout> | undefined>()
@@ -161,8 +161,12 @@ export const useRecord = () => {
   }, [countDown])
 
   useEffect(() => {
-    if (!MediaRecorder.isTypeSupported('video/mp4') && !ffmpeg.isLoaded()) {
-      ffmpeg.load().then(() => setFfmpegLoading(false))
+    if (!MediaRecorder.isTypeSupported('video/mp4')) {
+      if (!ffmpeg.isLoaded()) {
+        ffmpeg.load().then(() => setFfmpegLoading(false))
+      } else {
+        setFfmpegLoading(false)
+      }
     }
   }, [])
 
