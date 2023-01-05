@@ -1,13 +1,15 @@
 query Job($id: ID!) {
-    job(id: $id){
-        id
-        title
-        deadline
-        questions{
-            id
-            question
-            time
-        }
+  job(id: $id) {
+    id
+    title
+    deadline
+    questions {
+      id
+      question
+      time
     }
-    
+    company {
+      name
+    }
+  }
 }

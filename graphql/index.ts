@@ -84,6 +84,7 @@ export type InviteMember = {
 
 export type Job = {
   __typename?: 'Job';
+  company?: Maybe<Company>;
   deadline: Scalars['Date'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -363,7 +364,7 @@ export type JobQueryVariables = Exact<{
 }>;
 
 
-export type JobQuery = { __typename?: 'Query', job: { __typename?: 'Job', id: string, title: string, deadline: any, questions: Array<{ __typename?: 'Question', id: string, question: string, time: number }> } };
+export type JobQuery = { __typename?: 'Query', job: { __typename?: 'Job', id: string, title: string, deadline: any, questions: Array<{ __typename?: 'Question', id: string, question: string, time: number }>, company?: { __typename?: 'Company', name?: string | null } | null } };
 
 export type JobsListQueryVariables = Exact<{
   companyId: Scalars['ID'];
@@ -455,6 +456,9 @@ export const JobDocument = gql`
       id
       question
       time
+    }
+    company {
+      name
     }
   }
 }

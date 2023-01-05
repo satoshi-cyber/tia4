@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, } from 'react';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
-import { UpdateProfile, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
+import { UpdateProfile, useJobQuery, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
 
 import { updateProfileSchema } from "./Apply-validations";
 import { TOAST_MESSAGE, TOAST_OPTIONS } from './Apply-constants';
@@ -10,9 +10,12 @@ import { formatDefaultValues } from "./Apply-functions";
 import { useRouter } from "next/router";
 import { URLS } from "@/config";
 
-export const useProfile = () => {
+export const useApply = () => {
   const router = useRouter()
 
+  const [{ fetching: fetchingJob, data: jobData }] = useJobQuery({
+    variables: { id: String(router.query.applyJobId) }
+  })
   const [{ fetching, data }, onUpload] = useProfileQuery({ requestPolicy: 'network-only' })
   const [{ fetching: removingResume }, removeResume] = useRemoveResumeMutation()
 
@@ -67,7 +70,14 @@ export const useProfile = () => {
     isLoading: fetching || removingResume
   }
 
+  const jobTitle = jobData?.job.title || 'placeholder'
+
+  const title = `Apply to ${jobData?.job.company?.name}`
+
   return {
+    title,
+    jobTitle,
+    fetchingJob,
     form,
     fetching,
     onUpload,

@@ -9,8 +9,11 @@ import {
   Title,
   EditAvatar,
   FormIcon,
+  Avatar,
   Resume,
+  Icon,
 } from '@/components';
+import dynamic from 'next/dynamic';
 
 import {
   SUBMIT_BUTTON_PROPS,
@@ -20,9 +23,9 @@ import {
   LINKEDIN_PROFILE_ICON,
 } from './Apply-constants';
 
-import { useProfile } from './Apply-hook';
+import { useApply } from './Apply-hook';
 
-const Profile: React.FC = () => {
+const Apply: React.FC = () => {
   const {
     handleSubmit,
     form,
@@ -31,17 +34,28 @@ const Profile: React.FC = () => {
     avatarUploadUrl,
     onUpload,
     resumeProps,
-  } = useProfile();
+    fetchingJob,
+    title,
+    jobTitle,
+  } = useApply();
 
   return (
     <Layout.Apply>
-      <Title {...TITLE_PROPS} />
-      <EditAvatar
-        src={avatar}
-        uploadUrl={avatarUploadUrl}
-        onUpload={onUpload}
-        className="mb-6"
+      <Title
+        {...TITLE_PROPS}
+        title={title}
+        subTitle={jobTitle}
+        isLoading={fetchingJob}
       />
+      <div className="flex flex-row items-center mb-6">
+        <EditAvatar
+          src={avatar}
+          uploadUrl={avatarUploadUrl}
+          onUpload={onUpload}
+        />
+        <Icon name="HiChevronRight" size={60} className="mr-2" />
+        <Avatar src="/company.png" size={60} className="border" />
+      </div>
       <LoadingProvider isLoading={fetching}>
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Field.Input {...FIELDS.firstName} />
@@ -59,4 +73,6 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default dynamic(() => Promise.resolve(Apply), {
+  ssr: false,
+});

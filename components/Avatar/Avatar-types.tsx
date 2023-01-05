@@ -1,6 +1,7 @@
-import { ReactAvatarProps } from 'react-avatar'
+import { ReactAvatarProps } from 'react-avatar';
 
-export interface AvatarProps extends ReactAvatarProps {
-  text?: React.ReactNode
-  isLoading?: boolean
+export interface AvatarProps extends Omit<ReactAvatarProps, 'size'> {
+  text?: React.ReactNode;
+  isLoading?: boolean;
+  size: number;
 }

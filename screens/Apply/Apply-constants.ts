@@ -3,8 +3,8 @@ export const CLASS_NAMES = {
 }
 
 export const TITLE_PROPS = {
-  title: 'Your basic information',
-  subTitle: 'Update your info!'
+  skeletonProps: { width: 280 },
+  subTitleSkeletonProps: { width: 200 }
 }
 
 export const TOAST_MESSAGE = {

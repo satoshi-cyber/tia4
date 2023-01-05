@@ -1,18 +1,27 @@
-import React from 'react'
-import ReactAvatar from 'react-avatar'
+import React from 'react';
+import ReactAvatar from 'react-avatar';
 
-import { AvatarProps } from './Avatar-types'
+import { AvatarProps } from './Avatar-types';
 
-import SkeletonLoader from '../SkeletonLoader'
+import SkeletonLoader from '../SkeletonLoader';
 
-const Avatar: React.FC<AvatarProps> = ({ isLoading, size, ...restProps }) => (
+const Avatar: React.FC<AvatarProps> = ({
+  isLoading,
+  size,
+  className,
+  ...restProps
+}) => (
   <SkeletonLoader
     isLoading={isLoading}
-    width={size && parseInt(size, 10)}
-    height={size && parseInt(size, 10)}
+    width={size}
+    height={size}
     borderRadius={'100%'}
-    after={<ReactAvatar round {...restProps} size={size} />}
+    after={
+      <div style={{ flex: 'none', borderRadius: '100%' }} className={className}>
+        <ReactAvatar round {...restProps} size={`${size}`} />
+      </div>
+    }
   />
-)
+);
 
-export default Avatar
+export default Avatar;
