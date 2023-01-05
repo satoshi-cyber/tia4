@@ -101,3 +101,11 @@ video::-webkit-media-controls {
 }
 
 .job-apply li { margin-bottom: 10px }
+
+.markdown svg {
+  top: 11px !important;
+  left: 7px !important;
+}
+
+.markdown .wm-reset-3 .--focused { border-color: red !important; box-shadow: none !important; }
+
