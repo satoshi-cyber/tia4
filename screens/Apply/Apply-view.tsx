@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import {
   Form,
@@ -41,22 +41,27 @@ const Apply: React.FC = () => {
 
   return (
     <Layout.Apply>
-      <Title
-        {...TITLE_PROPS}
-        title={title}
-        subTitle={jobTitle}
-        isLoading={fetchingJob}
-      />
-      <div className="flex flex-row items-center mb-6">
-        <EditAvatar
-          src={avatar}
-          uploadUrl={avatarUploadUrl}
-          onUpload={onUpload}
-        />
-        <Icon name="HiChevronRight" size={60} className="mr-2" />
-        <Avatar src="/company.png" size={60} className="border" />
-      </div>
       <LoadingProvider isLoading={fetching}>
+        <Title
+          {...TITLE_PROPS}
+          title={title}
+          subTitle={jobTitle}
+          isLoading={fetchingJob}
+        />
+        <div className="flex flex-row items-center mb-6">
+          <EditAvatar
+            src={avatar}
+            uploadUrl={avatarUploadUrl}
+            onUpload={onUpload}
+          />
+          <Icon
+            name="HiChevronRight"
+            size={60}
+            className="m-2 flex-none"
+            isLoading={false}
+          />
+          <Avatar src="/company.png" size={60} className="border" />
+        </div>
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Field.Input {...FIELDS.firstName} />
           <Field.Input {...FIELDS.lastName} />
