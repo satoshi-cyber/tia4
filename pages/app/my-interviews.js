@@ -11,12 +11,12 @@ const MyVideos = () => {
       <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
         <div className="mb-20 flex flex-col w-full items-center">
           <Text
-            text="My videos"
+            text="My interviews"
             className="text-3xl flex-1 text-center ml-[30px] mb-3"
           />
           <Text
             className="text-lg text-gray-500 mb-3"
-            text="Watch and delete your videos!"
+            text="Watch and delete your applications!"
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">

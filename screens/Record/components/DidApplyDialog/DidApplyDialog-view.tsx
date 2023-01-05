@@ -36,7 +36,7 @@ const DidApplyDialog: React.FC = () => {
               <Dialog.Panel className="w-full max-w-[80vw] md:max-w-[400px] transform rounded-2xl backdrop-blur-2xl bg-black/10 p-6 text-left align-middle transition-all p-6 relative">
                 <div className={CLASS_NAMES.container}>
                   <Text className={CLASS_NAMES.text} text={TITLE} />
-                  <Link href={URLS.MY_VIDEOS}>
+                  <Link href={URLS.MY_INTERVIEWS}>
                     <PrimaryButton {...BUTTON_PROPS} />
                   </Link>
                 </div>

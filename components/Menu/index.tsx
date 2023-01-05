@@ -264,7 +264,7 @@ const Menu = () => {
             </ActiveLink>
           )}
           <hr className="mb-4" />
-          <ActiveLink href={URLS.MY_VIDEOS} shallow>
+          <ActiveLink href={URLS.MY_INTERVIEWS} shallow>
             <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiUserCircle"
@@ -272,7 +272,7 @@ const Menu = () => {
                 className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
               />
               <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
-                My Videos
+                My Interviews
               </span>
             </a>
           </ActiveLink>

@@ -14,7 +14,7 @@ const Home = () => {
       return;
     }
 
-    Router.replace(URLS.MY_VIDEOS);
+    Router.replace(URLS.MY_INTERVIEWS);
   }, []);
 
   return null;

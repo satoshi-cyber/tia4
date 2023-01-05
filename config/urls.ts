@@ -9,7 +9,7 @@ export const URLS = {
     SETUP_COMPANY: '/app/setup-company',
     JOB: '/app/jobs/[jobId]',
     CREATE_A_JOB: "/app/create-job",
-    MY_VIDEOS: '/app/my-videos',
+    MY_INTERVIEWS: '/app/my-interviews',
     RECORD_AN_INTERVIEW: '/app/record-an-interview',
     SUPPORT: '/app/support',
     PROFILE: '/app/profile',
