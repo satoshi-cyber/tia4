@@ -65,34 +65,38 @@ export const useRecord = () => {
 
     swiper?.disable()
 
-    if (!ffmpeg.isLoaded())
-      await ffmpeg.load()
+    setTimeout(async () => {
 
-    const inputFile = `${uuidv4()}.webm`
-    const outputFile = `${uuidv4()}.mp4`
+      if (!ffmpeg.isLoaded())
+        await ffmpeg.load()
 
-    ffmpeg.FS('writeFile', inputFile, await fetchFile(blob));
+      const inputFile = `${uuidv4()}.webm`
+      const outputFile = `${uuidv4()}.mp4`
 
-    if (MediaRecorder.isTypeSupported('video/webm;codecs=h264')) {
-      await ffmpeg.run('-i', inputFile, '-c:v', 'copy', outputFile);
-    } else {
-      await ffmpeg.run('-i', inputFile, '-c:v', 'libx264', '-preset', 'ultrafast', outputFile);
-    }
+      ffmpeg.FS('writeFile', inputFile, await fetchFile(blob));
 
-    const data = ffmpeg.FS('readFile', outputFile);
+      if (MediaRecorder.isTypeSupported('video/webm;codecs=h264')) {
+        await ffmpeg.run('-i', inputFile, '-c:v', 'copy', outputFile);
+      } else {
+        await ffmpeg.run('-i', inputFile, '-c:v', 'libx264', '-preset', 'ultrafast', outputFile);
+      }
 
-    ffmpeg.FS('unlink', inputFile)
-    ffmpeg.FS('unlink', outputFile)
+      const data = ffmpeg.FS('readFile', outputFile);
 
-    await ffmpeg.exit()
+      ffmpeg.FS('unlink', inputFile)
+      ffmpeg.FS('unlink', outputFile)
 
-    updateVideo(new Blob([data], {
-      type: 'video/mp4'
-    }))
+      await ffmpeg.exit()
 
-    setConverting(false)
+      updateVideo(new Blob([data], {
+        type: 'video/mp4'
+      }))
 
-    swiper?.enable()
+      setConverting(false)
+
+      swiper?.enable()
+
+    }, 300)
 
   }
 
