@@ -118,10 +118,13 @@ export const useRecord = () => {
     swiper?.enable()
 
     if (countDown > 0) {
+
       setCoundDown(-1)
+
       if (countDownTimeout.current) {
         clearTimeout(countDownTimeout.current)
       }
+
       return
     }
 
