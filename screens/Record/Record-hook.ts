@@ -1,4 +1,4 @@
-import { useJobQuery } from "@/graphql"
+import { useDidApplyQuery, useJobQuery } from "@/graphql"
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import { del, set } from "idb-keyval"
 import { useRouter } from "next/router"
@@ -26,16 +26,18 @@ export const useRecord = () => {
 
   const router = useRouter()
 
-  const applyJobId = String(router.query.applyJobId)
+  const jobId = String(router.query.applyJobId)
 
-  const [{ fetching, data }] = useJobQuery({ variables: { id: applyJobId }, pause: !Boolean(applyJobId) })
+  const [{ fetching, data }] = useJobQuery({ variables: { id: jobId } })
+  const [{ fetching: didApplyFetching, data: didApplyData }] = useDidApplyQuery({ variables: { jobId } })
+
 
   const questions = useMemo(() => data?.job.questions.map(({ __typename, ...question }) => question) || [], [data])
   const slides = useMemo(() => [...questions, { submit: true }], [questions])
   const questionIds = useMemo(() => data?.job.questions.map(question => question.id) || [], [data])
 
   const [isRecorded, setIsRecorded] = useLocalStorage<IsRecorded>(
-    applyJobId,
+    jobId,
     {}
   )
 
@@ -177,9 +179,11 @@ export const useRecord = () => {
     }
   }, [])
 
-  const loading = fetching || status === ACQUIRING_MEDIA || ffmpegLoading
+  const loading = fetching || status === ACQUIRING_MEDIA || ffmpegLoading || didApplyFetching
 
   const isRecording = status === RECORING_STATUS
+
+  const didApply = didApplyData?.didApply
 
   const buttonProps = {
     swiper,
@@ -212,6 +216,7 @@ export const useRecord = () => {
     classNames,
     isRecording,
     loading,
+    didApply,
     error,
   }
 

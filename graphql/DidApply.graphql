@@ -1,0 +1,3 @@
+query DidApply($jobId: ID!) {
+  didApply(jobId: $jobId)
+}

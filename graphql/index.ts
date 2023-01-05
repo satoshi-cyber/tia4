@@ -248,6 +248,7 @@ export type Query = {
   __typename?: 'Query';
   companies: Array<Company>;
   company: Company;
+  didApply: Scalars['Boolean'];
   interviews: Array<Interview>;
   job: Job;
   jobs: Array<Job>;
@@ -258,6 +259,11 @@ export type Query = {
 
 export type QueryCompanyArgs = {
   companyId: Scalars['ID'];
+};
+
+
+export type QueryDidApplyArgs = {
+  jobId: Scalars['ID'];
 };
 
 
@@ -359,6 +365,13 @@ export type DeleteJobMutationVariables = Exact<{
 
 export type DeleteJobMutation = { __typename?: 'Mutation', deleteJob: { __typename?: 'Job', id: string } };
 
+export type DidApplyQueryVariables = Exact<{
+  jobId: Scalars['ID'];
+}>;
+
+
+export type DidApplyQuery = { __typename?: 'Query', didApply: boolean };
+
 export type JobQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -445,6 +458,15 @@ export const DeleteJobDocument = gql`
 
 export function useDeleteJobMutation() {
   return Urql.useMutation<DeleteJobMutation, DeleteJobMutationVariables>(DeleteJobDocument);
+};
+export const DidApplyDocument = gql`
+    query DidApply($jobId: ID!) {
+  didApply(jobId: $jobId)
+}
+    `;
+
+export function useDidApplyQuery(options: Omit<Urql.UseQueryArgs<DidApplyQueryVariables>, 'query'>) {
+  return Urql.useQuery<DidApplyQuery, DidApplyQueryVariables>({ query: DidApplyDocument, ...options });
 };
 export const JobDocument = gql`
     query Job($id: ID!) {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import {
   Form,
@@ -22,26 +22,27 @@ import {
   FIELDS,
   LINKEDIN_PROFILE_ICON,
 } from './Apply-constants';
-
 import { useApply } from './Apply-hook';
+import { DidApply } from './components';
 
 const Apply: React.FC = () => {
   const {
     handleSubmit,
     form,
     avatar,
-    fetching,
+    loading,
     avatarUploadUrl,
     onUpload,
     resumeProps,
     fetchingJob,
     title,
     jobTitle,
+    didApply,
   } = useApply();
 
   return (
     <Layout.Apply>
-      <LoadingProvider isLoading={fetching}>
+      <LoadingProvider isLoading={loading}>
         <Title
           {...TITLE_PROPS}
           title={title}
@@ -62,17 +63,25 @@ const Apply: React.FC = () => {
           />
           <Avatar src="/company.png" size={60} className="border" />
         </div>
-        <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
-          <Field.Input {...FIELDS.firstName} />
-          <Field.Input {...FIELDS.lastName} />
-          <Field.Input
-            {...FIELDS.linkedInProfile}
-            after={<FormIcon name={LINKEDIN_PROFILE_ICON} />}
-          />
-          <Field.TextArea {...FIELDS.bio} />
-          <Resume {...resumeProps} />
-          <SubmitButton {...SUBMIT_BUTTON_PROPS} />
-        </Form>
+        {didApply ? (
+          <DidApply />
+        ) : (
+          <Form
+            form={form}
+            onSubmit={handleSubmit}
+            className={CLASS_NAMES.form}
+          >
+            <Field.Input {...FIELDS.firstName} />
+            <Field.Input {...FIELDS.lastName} />
+            <Field.Input
+              {...FIELDS.linkedInProfile}
+              after={<FormIcon name={LINKEDIN_PROFILE_ICON} />}
+            />
+            <Field.TextArea {...FIELDS.bio} />
+            <Resume {...resumeProps} />
+            <SubmitButton {...SUBMIT_BUTTON_PROPS} />
+          </Form>
+        )}
       </LoadingProvider>
     </Layout.Apply>
   );

@@ -1,13 +1,15 @@
-import { PrimaryButton } from '@/components';
+import { PrimaryButton, Text } from '@/components';
+import { URLS } from '@/config';
 import { Dialog, Transition } from '@headlessui/react';
+import Link from 'next/link';
 import { Fragment } from 'react';
 
-import { ErrorDialogProps } from './ErrorDialog-types';
+import { BUTTON_PROPS, CLASS_NAMES, TITLE } from './DidApplyDialog-constants';
 
-const ErrorDialog: React.FC<ErrorDialogProps> = ({ isOpen, closeModal }) => {
+const DidApplyDialog: React.FC = () => {
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-20" onClose={closeModal}>
+    <Transition appear as={Fragment} show>
+      <Dialog as="div" className="relative z-20" onClose={() => {}}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -17,7 +19,7 @@ const ErrorDialog: React.FC<ErrorDialogProps> = ({ isOpen, closeModal }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-2xl" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -32,14 +34,12 @@ const ErrorDialog: React.FC<ErrorDialogProps> = ({ isOpen, closeModal }) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-[80vw] md:max-w-[400px] transform rounded-2xl backdrop-blur-2xl bg-black/10 p-6 text-left align-middle transition-all p-6 relative">
-                <p className="text-xl md:text-2xl text-center text-white">
-                  Please record some videos before you submit the interview
-                </p>
-                <PrimaryButton
-                  title="OK"
-                  onClick={closeModal}
-                  className="mt-8"
-                />
+                <div className={CLASS_NAMES.container}>
+                  <Text className={CLASS_NAMES.text} text={TITLE} />
+                  <Link href={URLS.MY_VIDEOS}>
+                    <PrimaryButton {...BUTTON_PROPS} />
+                  </Link>
+                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -49,4 +49,4 @@ const ErrorDialog: React.FC<ErrorDialogProps> = ({ isOpen, closeModal }) => {
   );
 };
 
-export default ErrorDialog;
+export default DidApplyDialog;

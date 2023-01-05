@@ -12,10 +12,10 @@ import {
   Error,
   SlideBlur,
   Question,
+  DidApplyDialog,
 } from './components';
 import { SWIPER_OPTIONS } from './Record-constants';
 import { useRecord } from './Record-hook';
-import { Loader } from '@/components';
 
 const RecordView = () => {
   const {
@@ -31,6 +31,7 @@ const RecordView = () => {
     recordDate,
     loading,
     error,
+    didApply,
   } = useRecord();
 
   if (error) {
@@ -43,6 +44,7 @@ const RecordView = () => {
 
   return (
     <div className={classNames.container}>
+      {didApply && <DidApplyDialog />}
       <div className={classNames.swiperContainer}>
         <Swiper {...SWIPER_OPTIONS} onSwiper={setSwiper}>
           {slides.map((slide, index) => (

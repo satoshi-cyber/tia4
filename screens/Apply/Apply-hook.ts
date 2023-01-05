@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, } from 'react';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
-import { UpdateProfile, useJobQuery, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
+import { UpdateProfile, useDidApplyQuery, useJobQuery, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
 
 import { updateProfileSchema } from "./Apply-validations";
 import { TOAST_MESSAGE, TOAST_OPTIONS } from './Apply-constants';
@@ -13,11 +13,16 @@ import { URLS } from "@/config";
 export const useApply = () => {
   const router = useRouter()
 
+  const jobId = String(router.query.applyJobId)
+
+  const [{ fetching: didApplyFetching, data: didApplyData }] = useDidApplyQuery({ variables: { jobId } })
   const [{ fetching: fetchingJob, data: jobData }] = useJobQuery({
-    variables: { id: String(router.query.applyJobId) }
+    variables: { id: jobId }
   })
-  const [{ fetching, data }, onUpload] = useProfileQuery({ requestPolicy: 'network-only' })
+  const [{ fetching: fetchingUser, data: userData }, onUpload] = useProfileQuery({ requestPolicy: 'network-only' })
   const [{ fetching: removingResume }, removeResume] = useRemoveResumeMutation()
+
+  const loading = fetchingUser || didApplyFetching
 
   const [, updateProfile] = useUpdateProfileMutation();
 
@@ -30,10 +35,10 @@ export const useApply = () => {
   const { reset } = form
 
   useEffect(() => {
-    if (!fetching && data) {
-      reset(formatDefaultValues(data?.profile))
+    if (!fetchingUser && userData) {
+      reset(formatDefaultValues(userData?.profile))
     }
-  }, [fetching, reset, data])
+  }, [fetchingUser, reset, userData])
 
   const handleSubmit = async (input: UpdateProfile) => {
     const { error, data } = await updateProfile({ input }, { additionalTypenames: ['User'] })
@@ -50,8 +55,8 @@ export const useApply = () => {
 
   };
 
-  const avatar = data?.profile?.avatarUrl || undefined
-  const avatarUploadUrl = data?.profile?.avatarUploadUrl || undefined
+  const avatar = userData?.profile?.avatarUrl || undefined
+  const avatarUploadUrl = userData?.profile?.avatarUploadUrl || undefined
 
   const resumeOnUpload = async (resumeFileName: string) => {
     await updateProfile({ input: { resumeFileName } }, { additionalTypenames: ['User'] })
@@ -62,24 +67,28 @@ export const useApply = () => {
   }
 
   const resumeProps = {
-    src: data?.profile?.resumeUrl || undefined,
-    uploadUrl: data?.profile?.resumeUploadUrl || undefined,
-    fileName: data?.profile?.resumeFileName || undefined,
+    src: userData?.profile?.resumeUrl || undefined,
+    uploadUrl: userData?.profile?.resumeUploadUrl || undefined,
+    fileName: userData?.profile?.resumeFileName || undefined,
     onUpload: resumeOnUpload,
     onRemove: onRemoveResume,
-    isLoading: fetching || removingResume
+    isLoading: loading || removingResume
   }
 
   const jobTitle = jobData?.job.title || 'placeholder'
 
+  const didApply = didApplyData?.didApply
+
   const title = `Apply to ${jobData?.job.company?.name}`
+
 
   return {
     title,
     jobTitle,
     fetchingJob,
     form,
-    fetching,
+    loading,
+    didApply,
     onUpload,
     handleSubmit,
     avatarUploadUrl,
