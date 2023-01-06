@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
     require('tailwindcss-scoped-groups')({
       groups: ['one', 'two'],
     }),

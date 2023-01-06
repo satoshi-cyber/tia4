@@ -3,7 +3,6 @@ import { Cookies, CookiesProvider } from 'react-cookie';
 import { Provider } from 'urql';
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider, Menu } from '@/components';
-
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
