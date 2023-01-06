@@ -6,7 +6,6 @@ import { Text } from '@/components';
 import { Wysimark, useEditor } from '@wysimark/react';
 
 import { MardownFieldProps } from './MardownField-types';
-import dynamic from 'next/dynamic';
 
 const MarkdownField: React.FC<MardownFieldProps> = ({
   name,
@@ -34,7 +33,7 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
         />
       )}
       <div className="markdown mb-4 shadow-sm">
-        <Wysimark editor={editor} maxHeight={200} onChange={handleChange} />
+        <Wysimark editor={editor} maxHeight={250} onChange={handleChange} />
       </div>
       {error && (
         <p className="text-sm text-red-600 -mt-2 mb-6 text-left text">
@@ -45,6 +44,4 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
   );
 };
 
-export default dynamic(() => Promise.resolve(MarkdownField), {
-  ssr: false,
-});
+export default MarkdownField;
