@@ -1,6 +1,6 @@
-import { Icon, Field, SecondaryButton, Text } from '@/components'
+import { Icon, Field, SecondaryButton, Text } from '@/components';
 
-import { useQuestions } from './Questions-hook'
+import { useQuestions } from './Questions-hook';
 import {
   CLASS_NAMES,
   TITLE_PROPS,
@@ -8,10 +8,10 @@ import {
   QUESTION_FIELD_PROPS,
   TIME_FIELD_PROPS,
   ADD_QUESTION_BUTTON_PROPS,
-} from './Questions-constants'
+} from './Questions-constants';
 
 const Questions: React.FC = () => {
-  const { fields, handleAppend, remove } = useQuestions()
+  const { fields, handleAppend, remove } = useQuestions();
 
   return (
     <div>
@@ -35,9 +35,13 @@ const Questions: React.FC = () => {
           </div>
         </div>
       ))}
-      <SecondaryButton {...ADD_QUESTION_BUTTON_PROPS} onClick={handleAppend} />
+      <SecondaryButton
+        {...ADD_QUESTION_BUTTON_PROPS}
+        onClick={handleAppend}
+        className="mb-8"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Questions
+export default Questions;

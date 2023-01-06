@@ -1,11 +1,11 @@
 export const CLASS_NAMES = {
-  title: "text-sm text-gray-900 text-left w-full mb-2",
+  title: "text-xl text-gray-900 text-center w-full my-8 mb-6",
   container: "border border-gray-300 w-full p-4 rounded-lg mb-4 flex flex-row relative pt-6 shadow-sm",
   question: "w-full mr-4"
 }
 
 export const TITLE_PROPS = {
-  text: "Questions:",
+  text: "Questions",
   skeletonProps: {
     width: 100
   }

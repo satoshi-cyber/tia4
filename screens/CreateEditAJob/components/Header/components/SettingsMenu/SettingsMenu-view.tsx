@@ -1,15 +1,18 @@
-import { ButtonIcon } from '@/components'
-import { Menu } from '@headlessui/react'
-import NoSSR from '@mpth/react-no-ssr'
+import { ButtonIcon } from '@/components';
+import { Menu } from '@headlessui/react';
+import NoSSR from '@mpth/react-no-ssr';
 
-import { SettingsMenuProps } from './SettingsMenu-types'
+import { SettingsMenuProps } from './SettingsMenu-types';
 
 export const SettingsMenu: React.FC<SettingsMenuProps> = ({
   handleDeleteJob,
 }) => {
   return (
     <NoSSR>
-      <Menu as="div" className="relative inline-block text-left mb-8">
+      <Menu
+        as="div"
+        className="relative inline-block text-left mb-8 -mr-[30px]"
+      >
         <Menu.Button>
           {({ open }) => (
             <ButtonIcon
@@ -39,7 +42,7 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
         </Menu.Items>
       </Menu>
     </NoSSR>
-  )
-}
+  );
+};
 
-export default SettingsMenu
+export default SettingsMenu;
