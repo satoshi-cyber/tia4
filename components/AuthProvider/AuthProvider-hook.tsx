@@ -8,8 +8,11 @@ export const useAuthProvider = () => {
   ]);
 
   const setToken = useCallback((cookieToken?: string) => {
+    console.log({ cookieToken });
+
     if (!cookieToken) {
       removeCookie(TOKEN_COOKIE_KEY);
+      console.log('cookie removed');
 
       return;
     }
