@@ -18,6 +18,7 @@ export const useProfile = () => {
     mode: "onBlur",
     reValidateMode: "onBlur",
     resolver: yupResolver(updateProfileSchema),
+    defaultValues: data && formatDefaultValues(data?.profile)
   });
 
   const { reset } = form
