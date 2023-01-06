@@ -11,7 +11,7 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
     <NoSSR>
       <Menu
         as="div"
-        className="relative inline-block text-left mb-8 -mr-[30px]"
+        className="relative inline-block text-left mb-8 absolute top-0 left-0"
       >
         <Menu.Button>
           {({ open }) => (

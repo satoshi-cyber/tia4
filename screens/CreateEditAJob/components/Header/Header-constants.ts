@@ -1,5 +1,5 @@
 export const CLASS_NAMES = {
-  container: "flex flex-row w-full justify-between items-center"
+  container: "flex flex-row w-full justify-between items-center relative"
 }
 
 export const TITLE = {
