@@ -39,6 +39,12 @@ export const DEADLINE_FIELD_PROPS = {
   placeholder: "Senior software developer"
 };
 
+export const DESCRIPTION_FIELD_PROPS = {
+  label: "Description:",
+  name: "description",
+  placeholder: "Senior software developer"
+}
+
 export const SUBMIT_BUTTON_PROPS = {
   title: 'Submit'
 }

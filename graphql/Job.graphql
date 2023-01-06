@@ -3,6 +3,7 @@ query Job($id: ID!) {
     id
     title
     deadline
+    description
     questions {
       id
       question

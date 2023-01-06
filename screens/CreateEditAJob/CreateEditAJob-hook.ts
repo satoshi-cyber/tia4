@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router'
-import { useEffect } from 'react';;
+import { useEffect, useState } from 'react';;
 import { NewJob, useCreateJobMutation, useDeleteJobMutation, useJobQuery, useUpdateJobMutation } from "@/graphql";
 import { URLS } from '@/config';
 import { useUser } from '@/hooks';
@@ -15,6 +15,7 @@ import { formatDefaultValues } from './CreateEditAJob-functions';
 export const useCreateUpdateAJob = () => {
   const router = useRouter()
   const { companyId } = useUser()
+  const [refresh, setRefresh] = useState('')
 
   const { jobId } = router.query
 
@@ -42,6 +43,7 @@ export const useCreateUpdateAJob = () => {
   useEffect(() => {
     if (!fetching && data) {
       reset(formatDefaultValues(data?.job))
+      setRefresh(data?.job.description || '')
     }
   }, [fetching, reset])
 
@@ -85,5 +87,6 @@ export const useCreateUpdateAJob = () => {
     handleSubmit,
     handleDeleteJob,
     fetching,
+    refresh
   };
 };

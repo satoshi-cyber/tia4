@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { get } from 'lodash';
-import { useFormContext, useFormState } from 'react-hook-form';
+import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 import { Text } from '@/components';
-import { Controller } from 'react-hook-form';
-import { useCallback } from 'react';
+
 import { Wysimark, useEditor } from '@wysimark/react';
 
 import { MardownFieldProps } from './MardownField-types';
+import dynamic from 'next/dynamic';
 
-const MarkdownField: React.FC<MardownFieldProps> = ({
-  name,
-  label,
-  ...restProps
-}) => {
+const MarkdownField: React.FC<MardownFieldProps> = ({ name, label }) => {
   const { errors } = useFormState({ name, exact: true });
-  const { control } = useFormContext();
+
+  const value = useWatch({ name });
 
   const error = get(errors, name);
 
-  const editor = useEditor({ initialMarkdown: '# Hamburgers' });
-  const onClick = useCallback(() => alert(editor.getMarkdown()), []);
+  const editor = useEditor({ initialMarkdown: value });
+
+  const { setValue, register } = useFormContext();
+
+  const handleChange = (e: any) =>
+    setValue(name, e.getMarkdown(), { shouldDirty: true });
+
+  useEffect(() => {
+    register(name);
+  }, [name, register]);
 
   return (
     <div className="w-full group/wrapper" data-error={Boolean(error)}>
@@ -30,10 +35,9 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
           skeletonProps={{ width: 80 }}
         />
       )}
-      <div className="markdown mb-6">
-        <Wysimark editor={editor} maxHeight={200} />
+      <div className="markdown mb-4 shadow-sm">
+        <Wysimark editor={editor} maxHeight={200} onChange={handleChange} />
       </div>
-
       {error && (
         <p className="text-sm text-red-600 -mt-2 mb-6 text-left text">
           {error?.message?.toString()}
@@ -43,4 +47,6 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
   );
 };
 
-export default MarkdownField;
+export default dynamic(() => Promise.resolve(MarkdownField), {
+  ssr: false,
+});

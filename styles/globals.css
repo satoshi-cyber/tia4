@@ -107,5 +107,10 @@ video::-webkit-media-controls {
   left: 7px !important;
 }
 
-.markdown .wm-reset-3 .--focused { border-color: red !important; box-shadow: none !important; }
+.markdown .wm-reset-3 > .--focused { 
+  @apply border-purple-900 !important; 
+  box-shadow: none !important; 
+}
+
+
 

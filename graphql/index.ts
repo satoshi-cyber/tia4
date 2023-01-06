@@ -377,7 +377,7 @@ export type JobQueryVariables = Exact<{
 }>;
 
 
-export type JobQuery = { __typename?: 'Query', job: { __typename?: 'Job', id: string, title: string, deadline: any, questions: Array<{ __typename?: 'Question', id: string, question: string, time: number }>, company?: { __typename?: 'Company', id: string, name?: string | null } | null } };
+export type JobQuery = { __typename?: 'Query', job: { __typename?: 'Job', id: string, title: string, deadline: any, description?: string | null, questions: Array<{ __typename?: 'Question', id: string, question: string, time: number }>, company?: { __typename?: 'Company', id: string, name?: string | null } | null } };
 
 export type JobsListQueryVariables = Exact<{
   companyId: Scalars['ID'];
@@ -474,6 +474,7 @@ export const JobDocument = gql`
     id
     title
     deadline
+    description
     questions {
       id
       question

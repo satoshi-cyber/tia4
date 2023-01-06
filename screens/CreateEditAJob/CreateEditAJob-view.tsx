@@ -16,11 +16,12 @@ import {
   SUBMIT_BUTTON_PROPS,
   CLASS_NAMES,
   TITLE_ICON,
+  DESCRIPTION_FIELD_PROPS,
 } from './CreateEditAJob-constants';
 import dynamic from 'next/dynamic';
 
 const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, fetching, editJob, handleDeleteJob } =
+  const { handleSubmit, form, fetching, refresh, editJob, handleDeleteJob } =
     useCreateUpdateAJob();
 
   return (
@@ -33,7 +34,7 @@ const CreateAJob: React.FC = () => {
             after={<FormIcon name={TITLE_ICON} />}
           />
           <Field.Input {...DEADLINE_FIELD_PROPS} />
-          <Field.MarkdownField name="description" label="description" />
+          <Field.MarkdownField {...DESCRIPTION_FIELD_PROPS} />
           <Questions />
           <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
