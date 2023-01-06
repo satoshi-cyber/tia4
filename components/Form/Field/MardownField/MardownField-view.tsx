@@ -8,23 +8,21 @@ import { Wysimark, useEditor } from '@wysimark/react';
 import { MardownFieldProps } from './MardownField-types';
 import dynamic from 'next/dynamic';
 
-const MarkdownField: React.FC<MardownFieldProps> = ({ name, label }) => {
+const MarkdownField: React.FC<MardownFieldProps> = ({
+  name,
+  label,
+  initialValue,
+}) => {
   const { errors } = useFormState({ name, exact: true });
-
-  const value = useWatch({ name });
 
   const error = get(errors, name);
 
-  const editor = useEditor({ initialMarkdown: value });
+  const editor = useEditor({ initialMarkdown: initialValue || '' });
 
-  const { setValue, register } = useFormContext();
+  const { setValue } = useFormContext();
 
   const handleChange = (e: any) =>
     setValue(name, e.getMarkdown(), { shouldDirty: true });
-
-  useEffect(() => {
-    register(name);
-  }, [name, register]);
 
   return (
     <div className="w-full group/wrapper" data-error={Boolean(error)}>

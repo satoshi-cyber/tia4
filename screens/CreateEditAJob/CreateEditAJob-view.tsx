@@ -21,8 +21,14 @@ import {
 import dynamic from 'next/dynamic';
 
 const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, fetching, refresh, editJob, handleDeleteJob } =
-    useCreateUpdateAJob();
+  const {
+    handleSubmit,
+    form,
+    fetching,
+    editJob,
+    handleDeleteJob,
+    description,
+  } = useCreateUpdateAJob();
 
   return (
     <Layout.Default>
@@ -34,7 +40,11 @@ const CreateAJob: React.FC = () => {
             after={<FormIcon name={TITLE_ICON} />}
           />
           <Field.Input {...DEADLINE_FIELD_PROPS} />
-          <Field.MarkdownField {...DESCRIPTION_FIELD_PROPS} />
+          <Field.MarkdownField
+            {...DESCRIPTION_FIELD_PROPS}
+            key={description}
+            initialValue={description}
+          />
           <Questions />
           <SubmitButton {...SUBMIT_BUTTON_PROPS} />
         </Form>
