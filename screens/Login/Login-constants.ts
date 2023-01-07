@@ -25,7 +25,7 @@ export const SUBMIT_BUTTON_PROPS = {
 
 export const FACEBOOK_BUTTON_PROPS = {
   provider: "facebook",
-  title: "Continue in with facebook"
+  title: "Continue with Facebook"
 }
 
 export const LINKEDIN_BUTTON_PROPS = {
