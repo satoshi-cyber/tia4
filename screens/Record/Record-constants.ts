@@ -3,7 +3,7 @@ import { SwiperProps } from 'swiper/react'
 
 export const CLASS_NAMES = {
   container: "absolute w-screen h-screen overflow-hidden bg-gray-800",
-  swiperContainer: 'absolute w-screen h-screen transition-all duration-700 flex',
+  swiperContainer: 'fixed top-0 bottom-0 left-0 right-0 flex',
   slide: "flex flex-1 relative w-screen h-screen justify-center bg-gray-900",
 }
 
