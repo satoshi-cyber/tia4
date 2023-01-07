@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@supports (-webkit-touch-callout: none) {
-  .h-screen {
-    height: -webkit-fill-available;
-  }
-}
-
 html,
 body {
   @apply h-full w-screen
@@ -53,6 +47,11 @@ video::-webkit-media-controls {
 .min-h-screen {
   min-height: 100vh !important;
   min-height: -webkit-fill-available !important;
+}
+
+.h-screen {
+  height: 100vh !important;
+  height: -webkit-fill-available !important;
 }
 
 @keyframes indeterminateAnimation {
