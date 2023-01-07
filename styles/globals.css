@@ -115,4 +115,6 @@ video::-webkit-media-controls {
   display: none !important;
 }
 
+.backdrop-blur-2xl { backdrop-filter: none !important}
+.backdrop-blur { backdrop-filter: none !important}
 
