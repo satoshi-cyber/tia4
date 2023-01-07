@@ -20,16 +20,16 @@ export const SWIPER_OPTIONS = {
   },
   navigation: true,
   effect: 'creative',
-  creativeEffect: {
-    prev: {
-      shadow: true,
-      translate: [0, 0, -400],
-    },
-    next: {
-      translate: ['100%', 0, 0],
-    },
-  },
-  modules: [Pagination, Navigation, EffectCreative, Keyboard],
+  // creativeEffect: {
+  //   prev: {
+  //     shadow: true,
+  //     translate: [0, 0, -400],
+  //   },
+  //   next: {
+  //     translate: ['100%', 0, 0],
+  //   },
+  // },
+  modules: [Pagination, Navigation, Keyboard],
   className: 'flex flex-1 z-10 bg-gray-800',
   keyboard: { enabled: true },
 } as SwiperProps
