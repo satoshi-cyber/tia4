@@ -6,10 +6,12 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import Swiper from "swiper"
 import useLocalStorage from "use-local-storage"
 import { v4 as uuidv4 } from 'uuid';
+import { isAndroid } from 'react-device-detect';
 
-import { ACQUIRING_MEDIA, CLASS_NAMES, RECORING_STATUS } from "./Record-constants"
+import { ACQUIRING_MEDIA, CLASS_NAMES, RECORING_STATUS, SWIPER_OPTIONS, SWIPER_OPTIONS_ANDROID } from "./Record-constants"
 import { IsRecorded } from "./Record-types"
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
+import clsx from "clsx";
 
 const ffmpeg = createFFmpeg({
   mainName: 'main',
@@ -200,7 +202,9 @@ export const useRecord = () => {
     converting
   }
 
-  const classNames = CLASS_NAMES
+  const classNames = { ...CLASS_NAMES, container: clsx(CLASS_NAMES.container, isAndroid && 'android') }
+
+  const swiperOptions = isAndroid ? SWIPER_OPTIONS_ANDROID : SWIPER_OPTIONS
 
   return {
     fetching,
@@ -218,6 +222,7 @@ export const useRecord = () => {
     loading,
     didApply,
     error,
+    swiperOptions
   }
 
 }

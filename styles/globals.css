@@ -115,6 +115,6 @@ video::-webkit-media-controls {
   display: none !important;
 }
 
-.backdrop-blur-2xl { backdrop-filter: none !important}
-.backdrop-blur { backdrop-filter: none !important}
-.bg-black\/20 { background: rgb(0 0 0 / 0.4) }
+.android .backdrop-blur-2xl { backdrop-filter: none !important}
+.android .backdrop-blur { backdrop-filter: none !important}
+.android .bg-black\/20 { background: rgb(0 0 0 / 0.4) }

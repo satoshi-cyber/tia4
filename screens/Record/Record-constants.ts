@@ -11,6 +11,19 @@ export const RECORING_STATUS = 'recording'
 
 export const ACQUIRING_MEDIA = 'acquiring_media'
 
+export const SWIPER_OPTIONS_ANDROID = {
+  preventClicks: true,
+  preventClicksPropagation: true,
+  allowTouchMove: true,
+  pagination: {
+    type: 'progressbar',
+  },
+  navigation: true,
+  modules: [Pagination, Navigation, Keyboard],
+  className: 'flex flex-1 z-10 bg-gray-800',
+  keyboard: { enabled: true },
+} as SwiperProps
+
 export const SWIPER_OPTIONS = {
   preventClicks: true,
   preventClicksPropagation: true,
