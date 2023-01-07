@@ -117,4 +117,4 @@ video::-webkit-media-controls {
 
 .backdrop-blur-2xl { backdrop-filter: none !important}
 .backdrop-blur { backdrop-filter: none !important}
-
+.bg-black\/20 { background: rgb(0 0 0 / 0.4) }
