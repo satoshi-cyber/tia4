@@ -46,12 +46,16 @@ video::-webkit-media-controls {
 
 .min-h-screen {
   min-height: 100vh !important;
-  min-height: -webkit-fill-available !important;
+  min-height: -moz-available !important; /* WebKit-based browsers will ignore this. */
+  min-height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+  min-height: fill-available !important;
 }
 
 .h-screen {
   height: 100vh !important;
-  height: -webkit-fill-available !important;
+  height: -moz-available !important; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+  height: fill-available !important;
 }
 
 @keyframes indeterminateAnimation {

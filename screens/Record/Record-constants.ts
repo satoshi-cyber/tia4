@@ -2,9 +2,9 @@ import { Pagination, Navigation, EffectCreative, Keyboard } from 'swiper'
 import { SwiperProps } from 'swiper/react'
 
 export const CLASS_NAMES = {
-  container: "fixed top-0 left-0 bottom-0 right-0 overflow-hidden bg-gray-800",
-  swiperContainer: 'fixed top-0 left-0 bottom-0 right-0 transition-all duration-700',
-  slide: "flex flex-1 w-full h-full relative justify-center bg-gray-900",
+  container: "absolute w-screen h-screen overflow-hidden bg-gray-800",
+  swiperContainer: 'absolute w-screen h-screen transition-all duration-700 flex',
+  slide: "flex flex-1 relative w-screen h-screen justify-center bg-gray-900",
 }
 
 export const RECORING_STATUS = 'recording'
@@ -30,7 +30,7 @@ export const SWIPER_OPTIONS = {
     },
   },
   modules: [Pagination, Navigation, EffectCreative, Keyboard],
-  className: 'absolute flex flex-1 w-full h-full z-10 bg-gray-800',
+  className: 'flex flex-1 z-10 bg-gray-800',
   keyboard: { enabled: true },
 } as SwiperProps
 
