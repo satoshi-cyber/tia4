@@ -3,6 +3,7 @@ import { Cookies, CookiesProvider } from 'react-cookie';
 import { Provider } from 'urql';
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider, Menu } from '@/components';
+import Head from 'next/head';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -19,6 +20,12 @@ function MyApp({
   return (
     <CookiesProvider cookies={isBrowser ? undefined : new Cookies(cookies)}>
       <Provider value={client}>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no"
+          />
+        </Head>
         <AuthProvider>
           <Component {...pageProps} />
           <Menu />
