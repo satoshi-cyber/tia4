@@ -29,7 +29,7 @@ export const SWIPER_OPTIONS = {
       translate: ['100%', 0, 0],
     },
   },
-  modules: [Pagination, Navigation, Keyboard],
+  modules: [Pagination, Navigation, Keyboard, EffectCreative],
   className: 'flex flex-1 z-10 bg-gray-800',
   keyboard: { enabled: true },
 } as SwiperProps
