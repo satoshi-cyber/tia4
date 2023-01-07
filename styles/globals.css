@@ -119,9 +119,3 @@ video::-webkit-media-controls {
 .android .backdrop-blur { backdrop-filter: none !important}
 .android .bg-black\/20 { background: rgb(0 0 0 / 0.4) }
 
-
-video::-webkit-media-controls-panel {
-  display: none!important;
-  -webkit-appearance: none;
-}
-
