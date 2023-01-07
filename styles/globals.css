@@ -53,7 +53,6 @@ video::-webkit-media-controls {
 .h-screen {
   height: 100vh !important;
   height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
-  height: stretch;
   /* height: fill-available !important; */
 }
 
