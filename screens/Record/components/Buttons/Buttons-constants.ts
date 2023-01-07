@@ -1,6 +1,6 @@
 export const CLASS_NAMES = {
   buttonContainer:
-    'p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center backdrop-blur-2xl bg-black/10',
+    'p-2 rounded-full fixed z-20 bottom-6 left-1/2 -translate-x-1/2 flex items-center backdrop-blur-2xl bg-black/20',
   handleNextButton: 'ml-[10px] m-[5px]',
   countDown: 'text-[100px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20',
 }

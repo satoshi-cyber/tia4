@@ -31,7 +31,7 @@ const ErrorDialog: React.FC<ErrorDialogProps> = ({ isOpen, closeModal }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-[80vw] md:max-w-[400px] transform rounded-2xl backdrop-blur-2xl bg-black/10 p-6 text-left align-middle transition-all p-6 relative">
+              <Dialog.Panel className="w-full max-w-[80vw] md:max-w-[400px] transform rounded-2xl backdrop-blur-2xl bg-black/20 p-6 text-left align-middle transition-all p-6 relative">
                 <p className="text-xl md:text-2xl text-center text-white">
                   Please record some videos before you submit the interview
                 </p>
