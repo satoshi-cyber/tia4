@@ -112,5 +112,8 @@ video::-webkit-media-controls {
   box-shadow: none !important; 
 }
 
+.markdown .wm-reset-3 > div > div > div > div > div:first-child { 
+  display: none !important;
+}
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { get } from 'lodash';
-import { useFormContext, useFormState, useWatch } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 import { Text } from '@/components';
 
 import { Wysimark, useEditor } from '@wysimark/react';
