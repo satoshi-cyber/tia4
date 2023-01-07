@@ -2,8 +2,8 @@ import { Pagination, Navigation, EffectCreative, Keyboard } from 'swiper'
 import { SwiperProps } from 'swiper/react'
 
 export const CLASS_NAMES = {
-  container: "absolute top-0 left-0 bottom-0 right-0 overflow-hidden bg-gray-800",
-  swiperContainer: 'absolute top-0 left-0 bottom-0 right-0 transition-all duration-700',
+  container: "fixed top-0 left-0 bottom-0 right-0 overflow-hidden bg-gray-800",
+  swiperContainer: 'fixed top-0 left-0 bottom-0 right-0 transition-all duration-700',
   slide: "flex flex-1 w-full h-full relative justify-center bg-gray-900",
 }
 
