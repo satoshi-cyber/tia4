@@ -4,7 +4,7 @@ import { SwiperProps } from 'swiper/react'
 export const CLASS_NAMES = {
   container: "absolute w-full h-full overflow-hidden bg-gray-800",
   swiperContainer: 'w-full h-full absolute transition-all duration-700',
-  slide: "flex flex-1 w-full h-screen relative justify-center bg-gray-900",
+  slide: "flex flex-1 w-full h-full relative justify-center bg-gray-900",
 }
 
 export const RECORING_STATUS = 'recording'
@@ -30,7 +30,7 @@ export const SWIPER_OPTIONS = {
     },
   },
   modules: [Pagination, Navigation, EffectCreative, Keyboard],
-  className: 'absolute flex flex-1 w-full z-10 bg-gray-800',
+  className: 'absolute flex flex-1 w-full h-full z-10 bg-gray-800',
   keyboard: { enabled: true },
 } as SwiperProps
 
