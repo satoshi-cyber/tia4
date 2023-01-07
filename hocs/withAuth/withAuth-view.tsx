@@ -20,7 +20,7 @@ const withAuth = <P extends object>(WrappedComponent: NextPage<P>) => {
 
     useEffect(() => {
       if (!isUserLoggedin) {
-        Router.push(url);
+        Router.replace(url);
       }
     }, [isUserLoggedin]);
 
@@ -42,7 +42,6 @@ const withAuth = <P extends object>(WrappedComponent: NextPage<P>) => {
           Location: url,
         });
         ctx.res.end();
-        return;
       }
     }
 

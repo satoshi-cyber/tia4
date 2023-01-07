@@ -1,19 +1,17 @@
 import { cacheExchange, createClient, dedupExchange, fetchExchange, makeOperation } from 'urql'
 import { authExchange } from '@urql/exchange-auth';
 import { TOKEN_COOKIE_KEY } from '@/config/auth'
-import { URLS } from '@/config';
+import { GRAPHQL_URL, URLS } from '@/config';
 import { AuthenticateUserDocument, AuthenticateUserMutation, AuthenticateUserMutationVariables } from '@/graphql';
 import { Magic } from 'magic-sdk';
 import { Cookies } from 'react-cookie';
-
-const url = 'https://tia4-backend.vercel.app/graphql'
 
 const magic =
   typeof window !== 'undefined' ?
     new Magic(process.env.NEXT_PUBLIC_MAGIC_PUB_KEY!) : undefined
 
 export const client = createClient({
-  url,
+  url: GRAPHQL_URL,
   exchanges: [
     dedupExchange,
     cacheExchange,

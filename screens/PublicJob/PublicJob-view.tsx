@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withUrqlClient } from 'next-urql';
 import {
   Layout,
   LoadingProvider,
@@ -7,10 +7,10 @@ import {
   PrimaryButton,
   Title,
 } from '@/components';
+import { GRAPHQL_URL } from '@/config';
 
 import { TITLE_PROPS } from './PublicJob-constants';
 import { usePublicJob } from './PublicJob-hook';
-import dynamic from 'next/dynamic';
 
 const PublicJob: React.FC = () => {
   const { jobTitle, companyName, fetching, handleApply, jobDescription } =
@@ -35,6 +35,9 @@ const PublicJob: React.FC = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(PublicJob), {
-  ssr: false,
-});
+export default withUrqlClient(
+  () => ({
+    url: GRAPHQL_URL,
+  }),
+  { ssr: true }
+)(PublicJob);
