@@ -171,7 +171,7 @@ const Menu = () => {
 
   return (
     <>
-      <div className="bg-white md:hidden fixed w-full p-4 border-b border-gray">
+      <div className="bg-white md:hidden fixed w-full p-4 border-b border-gray z-20">
         <Logo width={120} />
       </div>
       <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-pixelHover hidden md:flex">
