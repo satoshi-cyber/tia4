@@ -1,6 +1,7 @@
-import { get } from "idb-keyval"
 import { useEffect, useRef, useState } from "react"
 import { useSwiper } from "swiper/react"
+
+import { getVideo } from "../../Record-functions"
 
 interface ViewPlayerOptions {
   id: string
@@ -14,7 +15,7 @@ export const useVideoPreview = ({ id, index }: ViewPlayerOptions) => {
   const video = useRef<HTMLVideoElement>()
 
   useEffect(() => {
-    get(id).then((url) => setUrl(URL.createObjectURL(url)))
+    getVideo(id).then((url) => setUrl(URL.createObjectURL(url)))
   }, [id])
 
   useEffect(() => {

@@ -1,13 +1,13 @@
 import { useSubmitInterviewMutation } from "@/graphql"
 import { useRef, useState } from "react"
 import { toast } from "react-toastify"
-import { del, get } from "idb-keyval"
-
+import { delVideo, getVideo } from "@/screens/Record/Record-functions"
 import { SubmitInterviewProps } from "./SubmitInterview-types"
 import { useRouter } from "next/router"
 
 import { TOAST_ERROR, TOAST_OPTIONS } from "./SubmitInterview-constants"
 import { URLS } from "@/config"
+
 
 export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: SubmitInterviewProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -59,14 +59,14 @@ export const useSubmitInterview = ({ isRecorded, questions, setIsRecorded }: Sub
 
         if (totalProgress === 100) {
           setIsRecorded({})
-          questions.map(question => del(question.id))
+          questions.map(question => delVideo(question.id))
 
           setTimeout(() => router.push(URLS.MY_INTERVIEWS), 400)
         }
       });
 
       uploadingIds.current[answer.question.id] = 0
-      const video = await get(answer.question.id)
+      const video = await getVideo(answer.question.id)
 
       xhr.send(new File([video], `${answer.question.id}.mp4`, { type: video.type }))
     })
