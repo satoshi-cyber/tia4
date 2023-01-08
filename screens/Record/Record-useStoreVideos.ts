@@ -3,11 +3,9 @@ import { set, get, del } from 'idb-keyval'
 import { useCallback, useEffect, useState } from "react";
 
 export const useStoreVideos = (questionsIds: string[]) => {
-
   const [videos, setVideos] = useState<Record<string, Blob>>({})
 
   const storeVideo = useCallback((id: string, blob: Blob) => {
-
     const newVideos = { ...videos, [id]: blob }
 
     setVideos(newVideos)
@@ -18,6 +16,7 @@ export const useStoreVideos = (questionsIds: string[]) => {
   const deleteVideo = useCallback((id: string) => {
     const newVideos = { ...videos }
     delete newVideos[id]
+
     setVideos(newVideos)
     del(id)
 
