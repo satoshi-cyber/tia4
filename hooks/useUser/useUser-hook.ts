@@ -21,8 +21,8 @@ export const useUser = () => {
   const [_, authenticateUser] = useAuthenticateUserMutation()
 
   const login = useCallback(
-    async (email: string) => {
-      const did = await magic?.auth.loginWithMagicLink({ email });
+    async (email: string, jobId?: string) => {
+      const did = await magic?.auth.loginWithMagicLink({ email, redirectURI: jobId ? `${window.location.origin}/redirect-callback?jobId=${jobId}` : `${window.location.origin}/redirect-callback` });
 
       if (!did) {
         return
@@ -69,6 +69,18 @@ export const useUser = () => {
     setToken(res.data?.authenticateUser.token)
   }, [])
 
+  const authenticateUserFromRedirect = useCallback(async () => {
+    const did = await magic?.auth.loginWithCredential();
+
+    if (!did) {
+      return
+    }
+
+    const res = await authenticateUser({ input: { did } })
+
+    setToken(res.data?.authenticateUser.token)
+  }, [])
+
 
   const refreshToken = useCallback(
     async () => {
@@ -102,5 +114,5 @@ export const useUser = () => {
 
   const hasCompany = Boolean(companyId)
 
-  return { login, logout, hasCompany, companyId, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, loginWithProvider }
+  return { login, logout, hasCompany, companyId, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, authenticateUserFromRedirect, loginWithProvider }
 }

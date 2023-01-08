@@ -22,7 +22,7 @@ export const useLogin = () => {
   const jobId = router.query.jobId as string
 
   const handleSubmit = async ({ email }: LoginData) =>
-    login(email)
+    login(email, jobId)
 
   useEffect(() => {
     if (isUserLoggedin) {
