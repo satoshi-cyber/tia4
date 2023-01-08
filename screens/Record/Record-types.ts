@@ -1,6 +1,3 @@
-export interface IsRecorded {
-  [key: string]: boolean;
-}
 
 export type StatusMessages =
   | "media_aborted"

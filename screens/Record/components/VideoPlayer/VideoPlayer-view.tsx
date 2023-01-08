@@ -4,9 +4,10 @@ import { VIDEO_PROPS, BUTTON_PROPS, ICON_PROPS } from './VideoPlayer-constants';
 import { useVideoPreview } from './VideoPlayer-hook';
 import { VideoPlayerProps } from './VideoPlayer-types';
 
-const VideoPreview: React.FC<VideoPlayerProps> = ({ id, index }) => {
+const VideoPreview: React.FC<VideoPlayerProps> = ({ id, blob, index }) => {
   const { url, playing, handlePlay, video } = useVideoPreview({
     id,
+    blob,
     index,
   });
 

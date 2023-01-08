@@ -1,17 +1,16 @@
 import { useDidApplyQuery, useJobQuery } from "@/graphql"
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
-import { del, set } from "idb-keyval"
 import { useRouter } from "next/router"
 import { useEffect, useMemo, useRef, useState } from "react"
 import Swiper from "swiper"
-import useLocalStorage from "use-local-storage"
 import { v4 as uuidv4 } from 'uuid';
 import { isAndroid } from 'react-device-detect';
 
 import { ACQUIRING_MEDIA, CLASS_NAMES, RECORING_STATUS, SWIPER_OPTIONS, SWIPER_OPTIONS_ANDROID } from "./Record-constants"
-import { IsRecorded } from "./Record-types"
+
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 import clsx from "clsx";
+import { useStoreVideos } from "./Record-useStoreVideos";
 
 const ffmpeg = createFFmpeg({
   mainName: 'main',
@@ -33,26 +32,12 @@ export const useRecord = () => {
   const [{ fetching, data }] = useJobQuery({ variables: { id: jobId } })
   const [{ fetching: didApplyFetching, data: didApplyData }] = useDidApplyQuery({ variables: { jobId } })
 
-
   const questions = useMemo(() => data?.job.questions.map(({ __typename, ...question }) => question) || [], [data])
-  const slides = useMemo(() => [...questions, { submit: true }], [questions])
   const questionIds = useMemo(() => data?.job.questions.map(question => question.id) || [], [data])
 
-  const [isRecorded, setIsRecorded] = useLocalStorage<IsRecorded>(
-    jobId,
-    {}
-  )
+  const slides = useMemo(() => [...questions, { submit: true }], [questions])
 
-  const updateVideo = (blob: Blob) => {
-    if (!swiper)
-      return
-
-    set(questionIds[swiper.realIndex], blob)
-
-    isRecorded[questionIds[swiper.realIndex]] = true
-
-    setIsRecorded({ ...isRecorded })
-  }
+  const { videos, storeVideo, deleteVideo } = useStoreVideos(questionIds)
 
   const onStop = async (_: string, blob: Blob) => {
     if (!swiper || !questionIds || !questionIds[swiper.realIndex]) {
@@ -60,7 +45,7 @@ export const useRecord = () => {
     }
 
     if (MediaRecorder.isTypeSupported('video/mp4')) {
-      updateVideo(blob)
+      storeVideo(questionIds[swiper.realIndex], blob)
 
       return
     }
@@ -92,7 +77,7 @@ export const useRecord = () => {
 
       await ffmpeg.exit()
 
-      updateVideo(new Blob([data], {
+      storeVideo(questionIds[swiper.realIndex], new Blob([data], {
         type: 'video/mp4'
       }))
 
@@ -140,11 +125,7 @@ export const useRecord = () => {
       return
     }
 
-    delete isRecorded[questionIds[swiper.realIndex]]
-
-    del(questionIds[swiper.realIndex])
-
-    setIsRecorded({ ...isRecorded })
+    deleteVideo(questionIds[swiper.realIndex])
   }
 
   const handleHandleNext = () => {
@@ -191,8 +172,8 @@ export const useRecord = () => {
     swiper,
     status,
     questionIds,
-    isRecorded,
-    setIsRecorded,
+    videos,
+    deleteVideo,
     handleStartRecording,
     handleStopRecording,
     handleClearRecording,
@@ -213,7 +194,7 @@ export const useRecord = () => {
     previewStream,
     status,
     buttonProps,
-    isRecorded,
+    videos,
     setSwiper,
     handleStopRecording,
     recordDate,

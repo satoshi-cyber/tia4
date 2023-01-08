@@ -20,8 +20,8 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   handleHandleNext,
   questionIds,
   questions,
-  isRecorded,
-  setIsRecorded,
+  videos,
+  deleteVideo,
   status,
   countDown,
   converting,
@@ -31,9 +31,9 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   if (lastSlide) {
     return (
       <SubmitInterview
-        isRecorded={isRecorded}
+        videos={videos}
         questions={questions}
-        setIsRecorded={setIsRecorded}
+        deleteVideo={deleteVideo}
       />
     );
   }
@@ -50,7 +50,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
     <>
       {countDown > 0 && <p className={CLASS_NAMES.countDown}>{countDown}</p>}
       <div className={CLASS_NAMES.buttonContainer}>
-        {!isRecorded[questionIds[realIndex]] &&
+        {!videos[questionIds[realIndex]] &&
           status !== RECORDING_STATUS &&
           countDown < 1 && (
             <button {...RECORD_BUTTON_PROPS} onClick={handleStartRecording} />
@@ -63,7 +63,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
           />
         )}
 
-        {isRecorded[questionIds[realIndex]] && (
+        {videos[questionIds[realIndex]] && (
           <>
             <button onClick={handleClearRecording}>
               <Icon {...CLEAR_RECORDING_ICON_PROPS} />

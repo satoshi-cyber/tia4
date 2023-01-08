@@ -1,21 +1,16 @@
 import { useEffect, useRef, useState } from "react"
 import { useSwiper } from "swiper/react"
 
-import { getVideo } from "../../Record-functions"
+import { VideoPlayerProps } from "./VideoPlayer-types"
 
-interface ViewPlayerOptions {
-  id: string
-  index: number
-}
-
-export const useVideoPreview = ({ id, index }: ViewPlayerOptions) => {
+export const useVideoPreview = ({ id, blob, index }: VideoPlayerProps) => {
   const [url, setUrl] = useState<string | undefined>()
   const [playing, setPlaying] = useState(false)
 
   const video = useRef<HTMLVideoElement>()
 
   useEffect(() => {
-    getVideo(id).then((url) => setUrl(URL.createObjectURL(url)))
+    setUrl(URL.createObjectURL(blob))
   }, [id])
 
   useEffect(() => {

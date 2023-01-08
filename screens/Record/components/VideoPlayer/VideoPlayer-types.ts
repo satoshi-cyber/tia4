@@ -1,4 +1,5 @@
 export interface VideoPlayerProps {
-  id: string
   index: number
+  id: string
+  blob: Blob
 }

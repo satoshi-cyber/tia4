@@ -22,7 +22,7 @@ const RecordView = () => {
     setSwiper,
     slides,
     buttonProps,
-    isRecorded,
+    videos,
     previewStream,
     handleStopRecording,
     questionIds,
@@ -57,8 +57,12 @@ const RecordView = () => {
                     key={previewStream?.id}
                     stream={previewStream}
                   />
-                  {isRecorded[questionIds[index]] && !isRecording && (
-                    <VideoPlayer id={questionIds[index]} index={index} />
+                  {videos[questionIds[index]] && !isRecording && (
+                    <VideoPlayer
+                      blob={videos[questionIds[index]]}
+                      id={questionIds[index]}
+                      index={index}
+                    />
                   )}
                   {'question' in slide && (
                     <Question

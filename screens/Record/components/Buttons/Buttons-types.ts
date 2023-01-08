@@ -1,7 +1,6 @@
-import { SetStateAction } from "react";
 import Swiper from "swiper";
 
-import { IsRecorded, StatusMessages } from "../../Record-types";
+import { StatusMessages } from "../../Record-types";
 
 export interface ButtonsProps {
   swiper?: Swiper
@@ -9,8 +8,8 @@ export interface ButtonsProps {
   handleStopRecording: () => void
   handleClearRecording: () => void
   handleHandleNext: () => void
-  isRecorded: IsRecorded
-  setIsRecorded: (value: SetStateAction<IsRecorded | undefined>) => void
+  videos: Record<string, Blob>
+  deleteVideo: (id: string) => void
   questionIds: string[]
   questions: {
     id: string;
