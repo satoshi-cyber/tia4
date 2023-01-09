@@ -8,7 +8,7 @@ import { TOAST_ERROR, TOAST_OPTIONS } from "./SubmitInterview-constants"
 import { URLS } from "@/config"
 
 
-export const useSubmitInterview = ({ videos, questions, deleteVideo.swiper }: SubmitInterviewProps) => {
+export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: SubmitInterviewProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [uploadProgres, setUploadProgres] = useState(-1);
 
