@@ -30,6 +30,7 @@ const VideoPreview: React.FC<ButtonsProps> = ({
   if (lastSlide) {
     return (
       <SubmitInterview
+        swiper={swiper}
         videos={videos}
         questions={questions}
         deleteVideo={deleteVideo}

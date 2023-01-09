@@ -8,7 +8,7 @@ import { TOAST_ERROR, TOAST_OPTIONS } from "./SubmitInterview-constants"
 import { URLS } from "@/config"
 
 
-export const useSubmitInterview = ({ videos, questions, deleteVideo }: SubmitInterviewProps) => {
+export const useSubmitInterview = ({ videos, questions, deleteVideo.swiper }: SubmitInterviewProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [uploadProgres, setUploadProgres] = useState(-1);
 
@@ -31,6 +31,8 @@ export const useSubmitInterview = ({ videos, questions, deleteVideo }: SubmitInt
       return
     }
 
+    swiper?.disable()
+
     setUploadProgres(0)
 
     const answers = questions.filter(question => videos[question.id]).map(question => ({ question }))
@@ -40,6 +42,7 @@ export const useSubmitInterview = ({ videos, questions, deleteVideo }: SubmitInt
     if (res.error) {
       toast.error(TOAST_ERROR, TOAST_OPTIONS)
       setUploadProgres(-1)
+      swiper?.enable()
 
       return
     }
