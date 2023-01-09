@@ -1,9 +1,7 @@
 import { useDidApplyQuery, useJobQuery } from "@/graphql"
-import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import { useRouter } from "next/router"
 import { useEffect, useMemo, useRef, useState } from "react"
 import Swiper from "swiper"
-import { v4 as uuidv4 } from 'uuid';
 import { isAndroid } from 'react-device-detect';
 
 import { ACQUIRING_MEDIA, CLASS_NAMES, RECORING_STATUS, SWIPER_OPTIONS, SWIPER_OPTIONS_ANDROID } from "./Record-constants"
@@ -12,14 +10,7 @@ import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 import clsx from "clsx";
 import { useStoreVideos } from "./Record-useStoreVideos";
 
-const ffmpeg = createFFmpeg({
-  mainName: 'main',
-  corePath: 'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
-});
-
 export const useRecord = () => {
-  const [ffmpegLoading, setFfmpegLoading] = useState(!MediaRecorder.isTypeSupported('video/mp4'))
-  const [converting, setConverting] = useState(false)
   const [swiper, setSwiper] = useState<Swiper>()
   const countDownTimeout = useRef<ReturnType<typeof setTimeout> | undefined>()
   const [countDown, setCoundDown] = useState(-1)
@@ -44,49 +35,7 @@ export const useRecord = () => {
       return
     }
 
-    if (MediaRecorder.isTypeSupported('video/mp4')) {
-      storeVideo(questionIds[swiper.realIndex], blob)
-
-      return
-    }
-
-    setConverting(true)
-
-    swiper?.disable()
-
-    setTimeout(async () => {
-
-      if (!ffmpeg.isLoaded())
-        await ffmpeg.load()
-
-      const inputFile = `${uuidv4()}.webm`
-      const outputFile = `${uuidv4()}.mp4`
-
-      ffmpeg.FS('writeFile', inputFile, await fetchFile(blob));
-
-      if (MediaRecorder.isTypeSupported('video/webm;codecs=h264')) {
-        await ffmpeg.run('-i', inputFile, '-c:v', 'copy', outputFile);
-      } else {
-        await ffmpeg.run('-i', inputFile, '-c:v', 'libx264', '-preset', 'ultrafast', outputFile);
-      }
-
-      const data = ffmpeg.FS('readFile', outputFile);
-
-      ffmpeg.FS('unlink', inputFile)
-      ffmpeg.FS('unlink', outputFile)
-
-      await ffmpeg.exit()
-
-      storeVideo(questionIds[swiper.realIndex], new Blob([data], {
-        type: 'video/mp4'
-      }))
-
-      setConverting(false)
-
-      swiper?.enable()
-
-    }, 300)
-
+    storeVideo(questionIds[swiper.realIndex], blob)
   }
 
   const { status, startRecording, stopRecording, previewStream, error } =
@@ -152,17 +101,7 @@ export const useRecord = () => {
 
   }, [countDown])
 
-  useEffect(() => {
-    if (!MediaRecorder.isTypeSupported('video/mp4')) {
-      if (!ffmpeg.isLoaded()) {
-        ffmpeg.load().then(() => setFfmpegLoading(false))
-      } else {
-        setFfmpegLoading(false)
-      }
-    }
-  }, [])
-
-  const loading = fetching || status === ACQUIRING_MEDIA || ffmpegLoading || didApplyFetching
+  const loading = fetching || status === ACQUIRING_MEDIA || didApplyFetching
 
   const isRecording = status === RECORING_STATUS
 
@@ -180,7 +119,6 @@ export const useRecord = () => {
     handleHandleNext,
     questions,
     countDown,
-    converting
   }
 
   const classNames = { ...CLASS_NAMES, container: clsx(CLASS_NAMES.container, isAndroid && 'android') }
