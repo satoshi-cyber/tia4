@@ -11,9 +11,11 @@ export const usePublicJob = () => {
     variables: { id: jobId }
   })
 
-  const afl = encodeURIComponent(`https://theinterview.page.link/?link=https://tia4.vercel.app${URLS.APPLY.replace('[applyJobId]', jobId)}`)
+  // const afl = encodeURIComponent(`https://theinterview.page.link/?link=https://tia4.vercel.app${URLS.APPLY.replace('[applyJobId]', jobId)}`)
 
-  const href = `https://theinterview.page.link/?link=https://tia4.vercel.app${URLS.APPLY.replace('[applyJobId]', jobId)}&apn=com.android.chrome&afl=${afl}`
+  const url = encodeURIComponent(`https://tia4.vercel.app${URLS.APPLY.replace('[applyJobId]', jobId)}`)
+
+  const href = `https://theinterview.page.link/?link=${url}&apn=com.android.chrome`
 
   const jobTitle = data?.job.title
 
