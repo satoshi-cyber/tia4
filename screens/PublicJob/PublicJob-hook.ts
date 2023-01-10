@@ -11,9 +11,7 @@ export const usePublicJob = () => {
     variables: { id: jobId }
   })
 
-  const handleApply = () => {
-    window.open(URLS.APPLY.replace('[applyJobId]', jobId), '_system')
-  };
+  const href = `https://theinterview.page.link/?link=https://tia4.vercel.app${URLS.APPLY.replace('[applyJobId]', jobId)}`
 
   const jobTitle = data?.job.title
 
@@ -23,7 +21,7 @@ export const usePublicJob = () => {
 
   return {
     fetching,
-    handleApply,
+    href,
     jobTitle,
     jobDescription,
     companyName

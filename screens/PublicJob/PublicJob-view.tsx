@@ -1,5 +1,6 @@
 import React from 'react';
 import { withUrqlClient } from 'next-urql';
+import Link from 'next/link';
 import {
   Layout,
   LoadingProvider,
@@ -13,7 +14,7 @@ import { TITLE_PROPS } from './PublicJob-constants';
 import { usePublicJob } from './PublicJob-hook';
 
 const PublicJob: React.FC = () => {
-  const { jobTitle, companyName, fetching, handleApply, jobDescription } =
+  const { jobTitle, companyName, fetching, href, jobDescription } =
     usePublicJob();
 
   return (
@@ -25,11 +26,12 @@ const PublicJob: React.FC = () => {
           text={jobDescription}
           skeletonProps={{ count: 20 }}
         />
-        <PrimaryButton
-          title="Apply now"
-          className="w-full mt-10 sticky bottom-6"
-          onClick={handleApply}
-        />
+        <Link href={href} className="w-full">
+          <PrimaryButton
+            title="Apply now"
+            className="w-full mt-10 sticky bottom-6"
+          />
+        </Link>
       </LoadingProvider>
     </Layout.Apply>
   );
