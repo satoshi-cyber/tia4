@@ -18,3 +18,4 @@ export const URLS = {
     PUBLIC_JOB: '/jobs/[applyJobId]',
 }
 
+export const DOMAIN = 'https://tia4.vercel.app'

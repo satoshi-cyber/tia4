@@ -22,7 +22,12 @@ export const useUser = () => {
 
   const login = useCallback(
     async (email: string, jobId?: string) => {
-      const did = await magic?.auth.loginWithMagicLink({ email, redirectURI: jobId ? `${window.location.origin}/redirect-callback?jobId=${jobId}` : `${window.location.origin}/redirect-callback` });
+
+      const url = encodeURIComponent(jobId ? `${window.location.origin}/redirect-callback?jobId=${jobId}` : `${window.location.origin}/redirect-callback`)
+
+      const redirectURI = `https://theinterview.page.link/?link=${url}`
+
+      const did = await magic?.auth.loginWithMagicLink({ email, redirectURI });
 
       if (!did) {
         return

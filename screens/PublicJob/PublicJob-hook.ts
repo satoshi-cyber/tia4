@@ -1,6 +1,6 @@
 import { useJobQuery, } from "@/graphql";
 import { useRouter } from "next/router";
-import { URLS } from "@/config";
+import { URLS, DOMAIN } from "@/config";
 
 export const usePublicJob = () => {
   const router = useRouter()
@@ -11,7 +11,7 @@ export const usePublicJob = () => {
     variables: { id: jobId }
   })
 
-  const url = encodeURIComponent(`https://tia4.vercel.app${URLS.APPLY.replace('[applyJobId]', jobId)}`)
+  const url = encodeURIComponent(`${DOMAIN}${URLS.APPLY.replace('[applyJobId]', jobId)}`)
 
   const href = `https://theinterview.page.link/?link=${url}`
 
