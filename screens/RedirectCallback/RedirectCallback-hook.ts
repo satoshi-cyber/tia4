@@ -1,4 +1,4 @@
-import { URLS } from "@/config";
+import { DOMAIN, URLS } from "@/config";
 import { useUser } from "@/hooks";
 import { useRouter } from "next/router";
 import { useLayoutEffect } from "react";
@@ -14,7 +14,7 @@ export const useRedirectCallback = () => {
     authenticateUserFromRedirect().then(() => {
       const url = encodeURIComponent(jobId ? URLS.APPLY.replace('[applyJobId]', jobId) : URLS.HOME)
 
-      const href = `https://theinterview.page.link/?link=${url}`
+      const href = `https://theinterview.page.link/?link=${DOMAIN}${url}`
 
       router.replace(href)
     })
