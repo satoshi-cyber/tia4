@@ -12,9 +12,9 @@ export const useRedirectCallback = () => {
 
   useLayoutEffect(() => {
     authenticateUserFromRedirect().then(() => {
-      const url = encodeURIComponent(jobId ? URLS.APPLY.replace('[applyJobId]', jobId) : URLS.HOME)
+      const url = encodeURIComponent(`${DOMAIN}${jobId ? URLS.APPLY.replace('[applyJobId]', jobId) : URLS.HOME}`)
 
-      const href = `https://theinterview.page.link/?link=${DOMAIN}${url}`
+      const href = `https://theinterview.page.link/?link=${url}`
 
       router.replace(href)
     })
