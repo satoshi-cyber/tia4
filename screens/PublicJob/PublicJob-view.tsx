@@ -26,11 +26,8 @@ const PublicJob: React.FC = () => {
           text={jobDescription}
           skeletonProps={{ count: 20 }}
         />
-        <Link href={href} className="w-full">
-          <PrimaryButton
-            title="Apply now"
-            className="w-full mt-10 sticky bottom-6"
-          />
+        <Link href={href} className="w-full mt-10 sticky bottom-6">
+          <PrimaryButton title="Apply now" />
         </Link>
       </LoadingProvider>
     </Layout.Apply>
