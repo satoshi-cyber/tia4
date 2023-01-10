@@ -12,9 +12,7 @@ export const usePublicJob = () => {
   })
 
   const handleApply = () => {
-    router.push(
-      URLS.APPLY.replace('[applyJobId]', jobId)
-    );
+    window.open(URLS.APPLY.replace('[applyJobId]', jobId), '_system')
   };
 
   const jobTitle = data?.job.title
