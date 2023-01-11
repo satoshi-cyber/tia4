@@ -2,6 +2,8 @@ import { TOKEN_COOKIE_KEY } from '@/config/auth';
 import { useCallback } from 'react';
 import { useCookies } from 'react-cookie';
 
+import { COOKIE_EXPIRE } from './AuthProvider-constants';
+
 export const useAuthProvider = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
 
@@ -16,7 +18,10 @@ export const useAuthProvider = () => {
       return;
     }
 
-    setCookie(TOKEN_COOKIE_KEY, cookieToken);
+    setCookie(TOKEN_COOKIE_KEY, cookieToken, {
+      path: '/',
+      expires: new Date(Date.now() + COOKIE_EXPIRE),
+    });
   }, []);
 
   return { token, setToken };
