@@ -44,6 +44,7 @@ export const useRecord = () => {
       askPermissionOnMount: true,
       stopStreamsOnStop: false,
       onStop,
+      mediaRecorderOptions: { audioBitsPerSecond: 128000, videoBitsPerSecond: 250000 },
     })
 
   const handleStartRecording = () => {

@@ -86,9 +86,11 @@ export const useReactMediaRecorder = ({
         const stream = (await window.navigator.mediaDevices.getDisplayMedia({
           video: video || true,
         })) as MediaStream;
+
         stream.getVideoTracks()[0].addEventListener("ended", () => {
           stopRecording();
         });
+
         if (audio) {
           const audioStream = await window.navigator.mediaDevices.getUserMedia({
             audio,
