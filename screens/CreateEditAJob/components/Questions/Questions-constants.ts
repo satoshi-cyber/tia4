@@ -28,6 +28,7 @@ export const TIME_FIELD_PROPS = {
   label: "Time:",
   placeholder: "2 min",
   options: [
+    { value: "180", label: '3 min' },
     { value: "120", label: '2 min' },
     { value: "60", label: '1 min' },
     { value: "30", label: '30 sec' },
