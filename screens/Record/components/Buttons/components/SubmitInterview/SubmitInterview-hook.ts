@@ -1,4 +1,4 @@
-import { useSubmitInterviewMutation } from "@/graphql"
+import { useProcessInterviewMutation, useSubmitInterviewMutation } from "@/graphql"
 import { useRef, useState } from "react"
 import { toast } from "react-toastify"
 import { SubmitInterviewProps } from "./SubmitInterview-types"
@@ -20,7 +20,9 @@ export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: S
 
   const [{ fetching: interviewIsSubmitting }, submitInterviewMutation] = useSubmitInterviewMutation()
 
-  const isUploading = interviewIsSubmitting || uploadProgres !== -1
+  const [{ fetching: interviewIsProcessing }, progressInterview] = useProcessInterviewMutation()
+
+  const isUploading = interviewIsSubmitting || uploadProgres !== -1 || interviewIsProcessing
 
   const closeDialog = () => setIsDialogOpen(false)
 
@@ -63,7 +65,8 @@ export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: S
 
           questions.map(question => deleteVideo(question.id))
 
-          setTimeout(() => router.push(URLS.MY_INTERVIEWS), 400)
+          progressInterview({ id: String(res.data?.submitInterview.id) }).then(() => router.push(URLS.MY_INTERVIEWS))
+
         }
       });
 

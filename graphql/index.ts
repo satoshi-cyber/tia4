@@ -107,6 +107,7 @@ export type Mutation = {
   interviews: Array<Interview>;
   inviteMember: CompanyInvite;
   members: Array<Member>;
+  processInterview: Scalars['Boolean'];
   rateInterview: Interview;
   removeResume: User;
   setupCompany: Company;
@@ -172,6 +173,11 @@ export type MutationInviteMemberArgs = {
 
 export type MutationMembersArgs = {
   companyId: Scalars['ID'];
+};
+
+
+export type MutationProcessInterviewArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -386,6 +392,13 @@ export type JobsListQueryVariables = Exact<{
 
 export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
 
+export type ProcessInterviewMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type ProcessInterviewMutation = { __typename?: 'Mutation', processInterview: boolean };
+
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -503,6 +516,15 @@ export const JobsListDocument = gql`
 
 export function useJobsListQuery(options: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
   return Urql.useQuery<JobsListQuery, JobsListQueryVariables>({ query: JobsListDocument, ...options });
+};
+export const ProcessInterviewDocument = gql`
+    mutation ProcessInterview($id: ID!) {
+  processInterview(id: $id)
+}
+    `;
+
+export function useProcessInterviewMutation() {
+  return Urql.useMutation<ProcessInterviewMutation, ProcessInterviewMutationVariables>(ProcessInterviewDocument);
 };
 export const ProfileDocument = gql`
     query Profile {
