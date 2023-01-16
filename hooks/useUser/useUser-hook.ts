@@ -72,10 +72,10 @@ export const useUser = () => {
   const authenticateUserFromRedirect = useCallback(async () => {
     const did = await magic?.auth.loginWithCredential();
 
-    if (!did) {
-      return
-    }
+    return did
+  }, [])
 
+  const authenticateUserFromDid = useCallback(async (did: string) => {
     const res = await authenticateUser({ input: { did } })
 
     setToken(res.data?.authenticateUser.token)
@@ -114,5 +114,5 @@ export const useUser = () => {
 
   const hasCompany = Boolean(companyId)
 
-  return { login, logout, hasCompany, companyId, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, authenticateUserFromRedirect, loginWithProvider }
+  return { login, logout, setToken, hasCompany, companyId, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, authenticateUserFromRedirect, loginWithProvider, authenticateUserFromDid }
 }

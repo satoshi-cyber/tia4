@@ -11,8 +11,8 @@ export const useRedirectCallback = () => {
   const jobId = router.query.jobId as string
 
   useLayoutEffect(() => {
-    authenticateUserFromRedirect().then(() => {
-      const url = encodeURIComponent(`${DOMAIN}${jobId ? URLS.APPLY.replace('[applyJobId]', jobId) : URLS.HOME}`)
+    authenticateUserFromRedirect().then((did) => {
+      const url = encodeURIComponent(`${DOMAIN}${URLS.DID_CALLBACK}?did=${did}&jobId=${jobId}`)
 
       const href = `https://theinterview.page.link/?link=${url}`
 

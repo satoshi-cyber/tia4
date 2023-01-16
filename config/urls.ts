@@ -16,6 +16,7 @@ export const URLS = {
     APPLY: '/apply/[applyJobId]',
     RECORD: '/apply/[applyJobId]/record',
     PUBLIC_JOB: '/jobs/[applyJobId]',
+    DID_CALLBACK: '/did-callback',
 }
 
 export const DOMAIN = 'https://theinterview.io'
