@@ -13,7 +13,7 @@ export const useDidCallback = () => {
 
   useLayoutEffect(() => {
     authenticateUserFromDid(did).then(() => {
-      const url = `${DOMAIN}${jobId ? URLS.DID_CALLBACK.replace('[applyJobId]', jobId) : URLS.HOME}`
+      const url = `${DOMAIN}${jobId ? URLS.APPLY.replace('[applyJobId]', jobId) : URLS.HOME}`
       router.replace(url)
     })
   }, [jobId])
