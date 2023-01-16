@@ -12,7 +12,7 @@ export const useRedirectCallback = () => {
 
   useLayoutEffect(() => {
     authenticateUserFromRedirect().then((did) => {
-      const url = encodeURIComponent(`${DOMAIN}${URLS.DID_CALLBACK}?did=${did}&jobId=${jobId}`)
+      const url = encodeURIComponent(jobId ? `${DOMAIN}${URLS.DID_CALLBACK}?did=${did}&jobId=${jobId}` : `${DOMAIN}${URLS.DID_CALLBACK}?did=${did}`)
 
       const href = `https://theinterview.page.link/?link=${url}`
 
