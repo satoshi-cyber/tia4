@@ -53,12 +53,12 @@ export const VIDEO_CONSTRAINS = {
   width: { ideal: 640 },
   height: { ideal: 480 },
   encodingParameters: {
-    maxBitrate: 3000000,
+    maxBitrate: 2000000,
   }
 }
 
 export const MEDIA_RECORDER_OPTIONS = {
-  bitsPerSecond: 3000000
+  bitsPerSecond: 2000000
 }
 
 
