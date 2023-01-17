@@ -57,3 +57,10 @@ export const VIDEO_CONSTRAINS = {
   }
 }
 
+export const MEDIA_RECORDER_OPTIONS = {
+  bitsPerSecond: 3000000
+}
+
+
+
+

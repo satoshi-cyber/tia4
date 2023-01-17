@@ -5,7 +5,7 @@ import Swiper from "swiper"
 import { isAndroid } from 'react-device-detect';
 import clsx from "clsx";
 
-import { ACQUIRING_MEDIA, CLASS_NAMES, RECORING_STATUS, SWIPER_OPTIONS, SWIPER_OPTIONS_ANDROID, VIDEO_CONSTRAINS } from "./Record-constants"
+import { ACQUIRING_MEDIA, CLASS_NAMES, MEDIA_RECORDER_OPTIONS, RECORING_STATUS, SWIPER_OPTIONS, SWIPER_OPTIONS_ANDROID, VIDEO_CONSTRAINS } from "./Record-constants"
 import { useReactMediaRecorder } from "./Record-useMediaRecoder"
 import { useStoreVideos } from "./Record-useStoreVideos";
 
@@ -39,6 +39,7 @@ export const useRecord = () => {
 
   const { status, startRecording, stopRecording, previewStream, error } =
     useReactMediaRecorder({
+      mediaRecorderOptions: MEDIA_RECORDER_OPTIONS,
       video: VIDEO_CONSTRAINS,
       askPermissionOnMount: true,
       stopStreamsOnStop: false,
