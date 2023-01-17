@@ -49,3 +49,11 @@ export const SWIPER_OPTIONS = {
 
 export const EMPTY_STATE = []
 
+export const VIDEO_CONSTRAINS = {
+  width: { ideal: 1280 },
+  height: { ideal: 720 },
+  encodingParameters: {
+    maxBitrate: 3000000,
+  }
+}
+
