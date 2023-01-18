@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { useFormState } from 'react-hook-form'
+
 import LoadingProvider from '../LoadingProvider'
 
 interface SubmitButtonOptions {
@@ -12,7 +13,7 @@ export const useSubmitButton = ({ allowEmptySubmit }: SubmitButtonOptions) => {
   const { isSubmitting, isDirty } = useFormState()
 
   if (allowEmptySubmit) {
-    return { disabled: isSubmitting }
+    return { disabled: isSubmitting || isProviderLoading }
   }
 
   return {
