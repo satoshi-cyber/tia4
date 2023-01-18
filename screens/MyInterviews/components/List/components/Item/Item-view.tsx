@@ -5,7 +5,7 @@ import { ItemProps } from './Item-types';
 
 const Item: React.FC<ItemProps> = ({ thumbnail }) => (
   <div>
-    <div className="flex-none rounded-xl shadow-sm overflow-hidden w-full h-[300px] md:h-[230px] bg-gray-200 relative">
+    <div className="flex-none rounded-xl shadow-sm overflow-hidden w-full h-[300px] md:h-[200px] bg-gray-200 relative">
       <SkeletonLoader
         height={300}
         after={
@@ -42,12 +42,16 @@ const Item: React.FC<ItemProps> = ({ thumbnail }) => (
               text="Lorem LLC"
               skeletonProps={{ width: 100 }}
             />
-            <Text className="text-xs mb-2 text-gray-600" text="02/03/2021" />
+            <Text
+              className="text-xs mb-2 text-gray-600"
+              text="02/03/2021"
+              skeletonProps={{ width: 60 }}
+            />
           </div>
           <Text
             className="text-sm mb-1 text-gray-800"
             text="lorem ipsum job"
-            skeletonProps={{ width: 100 }}
+            skeletonProps={{ width: 160 }}
           />
         </div>
       </div>
