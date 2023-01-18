@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { get } from 'lodash';
 import { useFormContext, useFormState } from 'react-hook-form';
-import { Text } from '@/components';
+import { SkeletonLoader, Text } from '@/components';
 
 import { Wysimark, useEditor } from '@wysimark/react';
 
@@ -33,7 +33,12 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
         />
       )}
       <div className="markdown mb-4 shadow-sm">
-        <Wysimark editor={editor} maxHeight={250} onChange={handleChange} />
+        <SkeletonLoader
+          height={285}
+          after={
+            <Wysimark editor={editor} maxHeight={250} onChange={handleChange} />
+          }
+        />
       </div>
       {error && (
         <p className="text-sm text-red-600 -mt-2 mb-6 text-left text">
