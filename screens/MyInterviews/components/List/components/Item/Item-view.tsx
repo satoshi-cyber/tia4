@@ -11,7 +11,7 @@ const Item: React.FC<ItemProps> = ({ thumbnail }) => (
         after={
           <>
             <video
-              className="absolute w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover scale-x-flip"
+              className="absolute w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover scale-x-flip rounded-xl"
               width="100%"
               height="100%"
               playsInline
