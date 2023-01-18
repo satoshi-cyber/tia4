@@ -15,12 +15,12 @@ const Archive = () => {
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
       <div className="flex flex-col sm:max-w-[600px] lg:max-w-[900px] xl:max-w-[1200px]  w-full px-4 items-center">
         <Text
-          text="Video archive"
+          text="Candidates"
           className="text-3xl flex-1 text-center ml-[30px] mb-3"
         />
         <Text
           className="text-lg text-gray-500 mb-10"
-          text="Search, watch video archives, and re-rate them if you want!"
+          text="Search, watch interviews, and re-rate candidates them if you want!"
         />
         <div className="sticky top-0 pt-4 mb-20 w-full bg-white z-10">
           <Form

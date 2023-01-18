@@ -3,7 +3,7 @@ export const URLS = {
     LOGIN: '/login',
     JOBS: '/app/jobs',
     RATE: '/app/rate',
-    ARCHIVE: '/app/archive',
+    CANDIDATES: '/app/candidates',
     FLOW: '/app/flow',
     COMPANY: '/app/company',
     SETUP_COMPANY: '/app/setup-company',
