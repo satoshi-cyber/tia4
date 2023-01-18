@@ -75,6 +75,7 @@ export type Interview = {
   answers: Array<Answer>;
   id: Scalars['ID'];
   jobId: Scalars['String'];
+  thumbnail: Scalars['String'];
 };
 
 export type InviteMember = {
@@ -104,6 +105,7 @@ export type Mutation = {
   deleteJob: Job;
   deleteMember: CompanyMember;
   deleteUser: User;
+  finalizeInterview: Scalars['Boolean'];
   interviews: Array<Interview>;
   inviteMember: CompanyInvite;
   members: Array<Member>;
@@ -114,7 +116,6 @@ export type Mutation = {
   submitInterview: Interview;
   suspendUser: User;
   updateCompany: Company;
-  updateInterview: Interview;
   updateJob: Job;
   updateMember: CompanyMember;
   updateProfile: User;
@@ -157,6 +158,12 @@ export type MutationDeleteJobArgs = {
 export type MutationDeleteMemberArgs = {
   companyId: Scalars['ID'];
   id: Scalars['ID'];
+};
+
+
+export type MutationFinalizeInterviewArgs = {
+  id: Scalars['ID'];
+  secret: Scalars['String'];
 };
 
 
@@ -209,11 +216,6 @@ export type MutationUpdateCompanyArgs = {
 };
 
 
-export type MutationUpdateInterviewArgs = {
-  input?: InputMaybe<UpdateInterview>;
-};
-
-
 export type MutationUpdateJobArgs = {
   companyId: Scalars['ID'];
   input: UpdateJob;
@@ -255,9 +257,9 @@ export type Query = {
   companies: Array<Company>;
   company: Company;
   didApply: Scalars['Boolean'];
-  interviews: Array<Interview>;
   job: Job;
   jobs: Array<Job>;
+  myInterviews: Array<Interview>;
   profile: User;
   users: Array<User>;
 };
@@ -304,12 +306,6 @@ export type UpdateCompany = {
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   website?: InputMaybe<Scalars['String']>;
-};
-
-export type UpdateInterview = {
-  answers: Array<AnswerInput>;
-  id: Scalars['ID'];
-  jobId: Scalars['String'];
 };
 
 export type UpdateJob = {
@@ -391,6 +387,11 @@ export type JobsListQueryVariables = Exact<{
 
 
 export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
+
+export type MyInterviewsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyInterviewsQuery = { __typename?: 'Query', myInterviews: Array<{ __typename?: 'Interview', id: string, jobId: string, thumbnail: string }> };
 
 export type ProcessInterviewMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -516,6 +517,19 @@ export const JobsListDocument = gql`
 
 export function useJobsListQuery(options: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
   return Urql.useQuery<JobsListQuery, JobsListQueryVariables>({ query: JobsListDocument, ...options });
+};
+export const MyInterviewsDocument = gql`
+    query MyInterviews {
+  myInterviews {
+    id
+    jobId
+    thumbnail
+  }
+}
+    `;
+
+export function useMyInterviewsQuery(options?: Omit<Urql.UseQueryArgs<MyInterviewsQueryVariables>, 'query'>) {
+  return Urql.useQuery<MyInterviewsQuery, MyInterviewsQueryVariables>({ query: MyInterviewsDocument, ...options });
 };
 export const ProcessInterviewDocument = gql`
     mutation ProcessInterview($id: ID!) {
