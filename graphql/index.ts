@@ -21,7 +21,7 @@ export type Answer = {
   question: Question;
   thumbnail: Scalars['String'];
   thumbnailUploadUrl: Scalars['String'];
-  uploadUrl: Scalars['String'];
+  uploadUrl?: Maybe<Scalars['String']>;
   url: Scalars['String'];
 };
 
@@ -73,7 +73,9 @@ export enum CompanyMemberRole {
 export type Interview = {
   __typename?: 'Interview';
   answers: Array<Answer>;
+  createdAt: Scalars['Date'];
   id: Scalars['ID'];
+  job?: Maybe<Job>;
   jobId: Scalars['String'];
   thumbnail: Scalars['String'];
 };
@@ -391,7 +393,7 @@ export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: '
 export type MyInterviewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MyInterviewsQuery = { __typename?: 'Query', myInterviews: Array<{ __typename?: 'Interview', id: string, jobId: string, thumbnail: string }> };
+export type MyInterviewsQuery = { __typename?: 'Query', myInterviews: Array<{ __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null }> };
 
 export type ProcessInterviewMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -422,7 +424,7 @@ export type SubmitInterviewMutationVariables = Exact<{
 }>;
 
 
-export type SubmitInterviewMutation = { __typename?: 'Mutation', submitInterview: { __typename?: 'Interview', id: string, answers: Array<{ __typename?: 'Answer', uploadUrl: string, question: { __typename?: 'Question', id: string } }> } };
+export type SubmitInterviewMutation = { __typename?: 'Mutation', submitInterview: { __typename?: 'Interview', id: string, answers: Array<{ __typename?: 'Answer', uploadUrl?: string | null, question: { __typename?: 'Question', id: string } }> } };
 
 export type UpdateJobMutationVariables = Exact<{
   companyId: Scalars['ID'];
@@ -522,8 +524,18 @@ export const MyInterviewsDocument = gql`
     query MyInterviews {
   myInterviews {
     id
-    jobId
     thumbnail
+    createdAt
+    job {
+      id
+      title
+      deadline
+      company {
+        id
+        name
+        avatarUrl
+      }
+    }
   }
 }
     `;

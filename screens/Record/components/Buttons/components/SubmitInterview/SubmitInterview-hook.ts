@@ -39,7 +39,7 @@ export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: S
 
     const answers = questions.filter(question => videos[question.id]).map(question => ({ question }))
 
-    const res = await submitInterviewMutation({ input: { jobId, answers } })
+    const res = await submitInterviewMutation({ input: { jobId, answers } }, { additionalTypenames: ['Interview'] })
 
     if (res.error) {
       toast.error(TOAST_ERROR, TOAST_OPTIONS)
@@ -52,7 +52,7 @@ export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: S
 
     res.data?.submitInterview.answers.forEach(async (answer) => {
       const xhr = new XMLHttpRequest()
-      xhr.open('PUT', answer.uploadUrl)
+      xhr.open('PUT', answer.uploadUrl!)
 
       xhr.upload.addEventListener("progress", (e) => {
 

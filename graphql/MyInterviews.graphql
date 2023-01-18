@@ -1,7 +1,17 @@
 query MyInterviews {
   myInterviews {
     id
-    jobId
     thumbnail
+    createdAt
+    job {
+      id
+      title
+      deadline
+      company {
+        id
+        name
+        avatarUrl
+      }
+    }
   }
 }
