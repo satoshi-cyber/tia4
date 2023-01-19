@@ -1,7 +1,7 @@
 import Avatar from 'react-avatar';
 import { withAuth } from '@/hocs';
 
-import { ButtonIcon, Text, Icon } from '../../components';
+import { ButtonIcon, Text, Icon, PrimaryButton } from '../../components';
 
 export const Company = () => {
   return (
@@ -24,10 +24,13 @@ export const Company = () => {
             className="text-lg text-gray-500 mb-10"
             text="Edit your company, and invite new members!"
           />
-          <button className="flex flex-row rounded-full items-center p-2 pr-4 bg-gradient-to-r from-purple-500 bg-purple-800 active:bg-purple-900 transition-all ease-in-out">
-            <Icon className="mr-2 text-white" size={30} name="HiPlusCircle" />
-            <Text className="text-lg text-white" text="Invite a team member" />
-          </button>
+          <PrimaryButton
+            className="w-auto"
+            title="Invite a team member"
+            before={
+              <Icon className="mr-2 text-white" size={30} name="HiPlusCircle" />
+            }
+          />
         </div>
         <div className="grid grid-cols-1 gap-4 w-full">
           <div class="flex w-full flex-row justify-between items-center border p-4 rounded-full shadow-sm">

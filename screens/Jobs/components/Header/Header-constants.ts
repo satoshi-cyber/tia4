@@ -8,3 +8,12 @@ export const CLASS_NAMES = {
 export const TITLE = "Get more interviews Today!";
 
 export const SUB_TITLE = "Get better candidates";
+
+export const BUTTON_TITLE = "Post a job";
+
+export const ICON_PROPS = {
+  name: "HiPlusCircle",
+  size: 30,
+  className: "mr-2 text-white",
+} as const;
+
