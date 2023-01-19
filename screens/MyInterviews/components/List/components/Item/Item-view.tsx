@@ -6,13 +6,13 @@ import { ItemProps } from './Item-types';
 
 const Item: React.FC<ItemProps> = ({ thumbnail }) => (
   <div>
-    <div className="flex-none rounded-xl shadow-sm overflow-hidden w-full h-[300px] md:h-[200px] bg-gray-200 relative group">
+    <div className="flex-none rounded-xl shadow-sm overflow-hidden w-full h-[300px] md:h-[200px] bg-gray-200 relative group hover:shadow-hover">
       <SkeletonLoader
         height={300}
         after={
           <Link href="/app/my-interviews">
             <video
-              className="absolute w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover scale-x-flip rounded-xl drop-shadow-md"
+              className="absolute w-full h-full top-1/2 left-1/2 transition-all transform -translate-x-1/2 -translate-y-1/2 object-cover scale-x-flip rounded-xl drop-shadow-md group-hover:scale-y-110 group-hover:-scale-x-110"
               width="100%"
               height="100%"
               playsInline
