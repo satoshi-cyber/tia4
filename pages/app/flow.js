@@ -24,6 +24,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
   {
     id: '1b',
@@ -34,6 +35,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
   {
     id: '2',
@@ -54,6 +56,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
   {
     id: '3',
@@ -74,6 +77,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
   {
     id: '4',
@@ -90,6 +94,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
   {
     id: '6a',
@@ -109,6 +114,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
   {
     id: '6b',
@@ -119,6 +125,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
   {
     id: '7',
@@ -138,6 +145,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
   {
     id: '9',
@@ -158,6 +166,7 @@ export const initialNodes = [
     style: {
       borderColor: '#bb86fc',
     },
+    connectable: false,
   },
 ];
 
