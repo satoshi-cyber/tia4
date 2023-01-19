@@ -1,17 +1,18 @@
 import React from 'react';
 import { Avatar, Text, SkeletonLoader, Icon } from '@/components';
+import Link from 'next/link';
 
 import { ItemProps } from './Item-types';
 
 const Item: React.FC<ItemProps> = ({ thumbnail }) => (
   <div>
-    <div className="flex-none rounded-xl shadow-sm overflow-hidden w-full h-[300px] md:h-[200px] bg-gray-200 relative">
+    <div className="flex-none rounded-xl shadow-sm overflow-hidden w-full h-[300px] md:h-[200px] bg-gray-200 relative group">
       <SkeletonLoader
         height={300}
         after={
-          <>
+          <Link href="/app/my-interviews">
             <video
-              className="absolute w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover scale-x-flip rounded-xl"
+              className="absolute w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover scale-x-flip rounded-xl drop-shadow-md"
               width="100%"
               height="100%"
               playsInline
@@ -23,10 +24,9 @@ const Item: React.FC<ItemProps> = ({ thumbnail }) => (
             ></video>
             <Icon
               name="HiPlay"
-              size={80}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white "
+              className="transition-all w-[80px] h-[80px] group-hover:w-[100px] group-hover:h-[100px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white"
             />
-          </>
+          </Link>
         }
       />
     </div>
