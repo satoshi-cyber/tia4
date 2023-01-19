@@ -15,7 +15,15 @@ const List: React.FC = () => {
           <EmptyScreen />
         ) : (
           myInterviews?.map((item) => (
-            <Item key={item.id} id={item.id} thumbnail={item.thumbnail} />
+            <Item
+              key={item.id}
+              id={item.id}
+              thumbnail={item.thumbnail}
+              date={item.createdAt}
+              avatar={item.job?.company?.avatarUrl}
+              companyName={item.job?.company?.name}
+              jobTitle={item.job?.title}
+            />
           ))
         )}
       </div>
