@@ -3,6 +3,9 @@ const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   darkMode: ['class'],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './screens/**/*.{js,ts,jsx,tsx}',
