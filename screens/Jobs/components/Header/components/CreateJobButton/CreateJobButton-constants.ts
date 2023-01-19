@@ -1,6 +1,6 @@
 export const CLASS_NAMES = {
   button:
-    "flex flex-row rounded-full items-center p-2 pr-4 bg-gradient-to-r from-purple-500 bg-purple-800 active:bg-purple-900 transition-all",
+    "flex flex-row rounded-full items-center p-2 pr-4 bg-gradient-to-r from-purple-500 bg-purple-800 active:bg-purple-900 transition-all hover:shadow-button",
   title: "text-lg text-white",
 };
 

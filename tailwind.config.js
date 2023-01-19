@@ -15,6 +15,7 @@ module.exports = {
     extend: {
       boxShadow: {
         hover: '0px 0px 69px -4px rgb(0, 0, 0,0.15)',
+        button: '0px 0px 40px -4px rgb(0, 0, 0,0.3)',
         pixel: 'inset -7px 0 1px -7px rgba(0,0,0,0.7)',
         pixelHover:
           'inset -7px 0 1px -7px rgba(0,0,0,0.1), 0 35px 60px -15px rgba(0, 0, 0, 0.3)',
