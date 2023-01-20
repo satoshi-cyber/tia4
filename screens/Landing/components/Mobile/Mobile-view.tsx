@@ -22,7 +22,7 @@ const SLIDES: Slide[] = [
   {
     title: 'For companies',
     description: `The Interview mobile feature allows them to review candidate responses and make informed hiring decisions from their mobile device, even when they're away from their office. This means that you can keep the hiring process moving and make decisions quickly, without the need to wait for candidates to finish the process.`,
-    src: '/images/screen2.png',
+    src: '/images/screen2.jpg',
   },
 ];
 
@@ -58,13 +58,13 @@ const Mobile: FC = () => {
             controller={secondSwiper ? { control: secondSwiper } : undefined}
             loop
           >
-            {SLIDES.map(({ src }, i) => (
+            {SLIDES.map(({ src, title }, i) => (
               <SwiperSlide className="w-full">
                 <img
                   key={i}
                   src={src}
                   className="w-full h-full object-cover"
-                  alt={`Slide ${i + 1}`}
+                  alt={title}
                 />
               </SwiperSlide>
             ))}
