@@ -1,4 +1,4 @@
-import { withCookies } from 'react-cookie'
+import withCookies from "@/hocs/withCookies";
 
 import DidCallback from '../screens/DidCallback'
 

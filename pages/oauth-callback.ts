@@ -1,4 +1,4 @@
-import { withCookies } from 'react-cookie'
+import withCookies from "@/hocs/withCookies";
 
 import OAuthCallback from '../screens/OAuthCallback'
 
