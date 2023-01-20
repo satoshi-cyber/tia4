@@ -58,6 +58,31 @@ const Landing: React.FC<LayoutProps> = ({ children }) => (
       </Link>
     </div>
     <div className="max-w-[1024px] p-4 md:p-6">{children}</div>
+    <footer className="bg-gray-100 py-0 w-full">
+      <div className="container">
+        <div className="flex flex-row justify-between items-center min-h-[60px]">
+          <div className="w-1/2 p-4 md:p-6">
+            <a
+              className="text-black text-md no-underline mr-3"
+              href="/privacy"
+              target="_blank"
+            >
+              Privacy
+            </a>
+            <a
+              className="text-black text-md no-underline"
+              href="/terms"
+              target="_blank"
+            >
+              Terms
+            </a>
+          </div>
+          <p className="text-right text-xs absolute right-4 md:right-6">
+            © All right's Reserved. The Interview 2023
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 );
 

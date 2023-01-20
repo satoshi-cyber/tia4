@@ -1,6 +1,12 @@
 import { Layout } from '@/components';
 
-import { Header, Description, Mobile, Security } from './components';
+import {
+  Header,
+  Description,
+  Mobile,
+  Security,
+  Testimonials,
+} from './components';
 
 const Landing: React.FC = () => (
   <Layout.Landing>
@@ -9,6 +15,7 @@ const Landing: React.FC = () => (
       <Description />
       <Mobile />
       <Security />
+      <Testimonials />
     </div>
   </Layout.Landing>
 );
