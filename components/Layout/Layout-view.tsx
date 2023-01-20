@@ -10,6 +10,8 @@ import { LayoutProps } from './Layout-types';
 
 import Logo from '../../public/logo.svg';
 import SecondaryButton from '../SecondaryButton';
+import { URLS } from '@/config';
+import Link from 'next/link';
 
 const CenterLayout: React.FC<LayoutProps> = ({ children }) => (
   <div
@@ -51,9 +53,9 @@ const Landing: React.FC<LayoutProps> = ({ children }) => (
   >
     <div className="absolute top-0 left-0 p-4 md:p-6 flex flex-row justify-between w-full">
       <Logo className="" width={120} />
-      <div>
+      <Link href={URLS.HOME}>
         <SecondaryButton title="Login / Signup" />
-      </div>
+      </Link>
     </div>
     <div className="max-w-[1024px] p-4 md:p-6">{children}</div>
   </div>

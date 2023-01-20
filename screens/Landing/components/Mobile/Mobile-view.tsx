@@ -44,15 +44,10 @@ const Mobile: FC = () => {
       <div className="text-left text-2xl font-light leading-tight">
         <p>
           Effortlessly manage your recruitment process{' '}
-          <span className="text-3xl font-medium py-2 text-purple-800">
+          <span className="text-2xl md:text-3xl font-medium py-2 text-purple-800">
             on-the-go
           </span>{' '}
-          with mobile-friendly feature.{' '}
-        </p>
-        <p className="mt-10">
-          Simplify your recruitment process with{' '}
-          <span className="text-3xl font-medium py-2">all-in-one</span>{' '}
-          web-based platform
+          with mobile-friendly web-based platform{' '}
         </p>
       </div>
       <div className="overflow-hidden relative col-span-2 mx-16">
