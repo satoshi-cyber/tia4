@@ -47,7 +47,7 @@ const Mobile: FC = () => {
           <span className="text-3xl font-medium py-2 text-purple-800">
             on-the-go
           </span>{' '}
-          with The Interview's mobile-friendly feature.{' '}
+          with mobile-friendly feature.{' '}
         </p>
         <p className="mt-10">
           Simplify your recruitment process with{' '}
