@@ -15,6 +15,7 @@ const Landing: React.FC = () => (
     <div className="grid grid-cols-1 gap-20">
       <Head>
         <title>The Interview</title>
+        <meta>Revolutionize the way you hire</meta>
       </Head>
       <Header />
       <Description />
