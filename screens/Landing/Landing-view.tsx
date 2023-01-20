@@ -6,6 +6,7 @@ import {
   Mobile,
   Security,
   Testimonials,
+  Cta,
 } from './components';
 
 const Landing: React.FC = () => (
@@ -16,6 +17,7 @@ const Landing: React.FC = () => (
       <Mobile />
       <Security />
       <Testimonials />
+      <Cta />
     </div>
   </Layout.Landing>
 );
