@@ -19,7 +19,7 @@ const Landing: React.FC<LayoutProps> = ({ children }) => (
   >
     <div className="absolute top-0 left-0 p-4 md:p-6 flex flex-row justify-between w-full">
       <Logo className="" width={120} />
-      <Link href={URLS.HOME}>
+      <Link href={URLS.LOGIN}>
         <SecondaryButton title="Login / Signup" />
       </Link>
     </div>
