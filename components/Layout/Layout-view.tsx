@@ -4,6 +4,7 @@ import { Gothic_A1 } from '@next/font/google';
 const gothic = Gothic_A1({
   subsets: ['latin'],
   weight: ['100', '400'],
+  display: 'swap',
 });
 
 import { LayoutProps } from './Layout-types';
