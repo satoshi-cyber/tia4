@@ -102,7 +102,7 @@ const Mobile: FC = () => {
         <SwiperContainer
           className="w-full rounded-xl"
           modules={[Controller, EffectFade]}
-          onSwiper={(swiper) => (swiper1Ref.current = swiper)}
+          onSwiper={(swiper) => (swiper2Ref.current = swiper)}
           effect="fade"
           fadeEffect={{
             crossFade: true, // enables slides to cross fade
