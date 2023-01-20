@@ -1,4 +1,4 @@
-import { Layout } from '@/components';
+import Layout from '@/components/Layout/Landing';
 
 import {
   Header,
@@ -10,7 +10,7 @@ import {
 } from './components';
 
 const Landing: React.FC = () => (
-  <Layout.Landing>
+  <Layout>
     <div className="grid grid-cols-1 gap-20">
       <Header />
       <Description />
@@ -19,13 +19,7 @@ const Landing: React.FC = () => (
       <Testimonials />
       <Cta />
     </div>
-  </Layout.Landing>
+  </Layout>
 );
 
 export default Landing;
-
-export async function getStaticProps() {
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}

@@ -1,3 +1,4 @@
+'use client';
 import { FC, useState } from 'react';
 import { SwiperSlide, Swiper as SwiperContainer } from 'swiper/react';
 import Swiper, { Controller, EffectFade } from 'swiper';

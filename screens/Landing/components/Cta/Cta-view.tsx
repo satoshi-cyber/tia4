@@ -1,4 +1,4 @@
-import { PrimaryButton } from '@/components';
+// import PrimaryButton from '@/components/PrimaryButton';
 import { URLS } from '@/config';
 import Link from 'next/link';
 
@@ -11,7 +11,7 @@ const Cta: React.FC = () => (
     </div>
     <div>
       <Link href={URLS.LOGIN}>
-        <PrimaryButton title="Signup now" />
+        {/* <PrimaryButton title="Signup now" /> */}
       </Link>
     </div>
   </div>
