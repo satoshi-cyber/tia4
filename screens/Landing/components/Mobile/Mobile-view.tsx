@@ -106,7 +106,7 @@ const Mobile: FC = () => {
             <SwiperSlide>
               <div key={title} className="text-left bg-white">
                 <p className="text-xl font-thin py-2">{title}</p>
-                <p className="text-base leading-relaxed py-2 text-gray-600">
+                <p className="leading-relaxed py-2 text-gray-600 text-sm ">
                   {description}
                 </p>
               </div>
