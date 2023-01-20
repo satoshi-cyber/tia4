@@ -38,6 +38,12 @@ export const Header: React.FC = () => (
                 />
               }
             />
+            <p className="absolute -top-14 left-0 text-sm text-gray-600">
+              Business
+            </p>
+            <p className="absolute -top-14 right-0 text-sm text-gray-600">
+              Cadidate
+            </p>
           </div>
         </div>
         <img
