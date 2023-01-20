@@ -9,7 +9,6 @@ const gothic = Gothic_A1({
 import { LayoutProps } from './Layout-types';
 
 import Logo from '../../public/logo.svg';
-import PrimaryButton from '../PrimaryButton';
 import SecondaryButton from '../SecondaryButton';
 
 const CenterLayout: React.FC<LayoutProps> = ({ children }) => (
@@ -48,7 +47,7 @@ const Default: React.FC<LayoutProps> = ({ children }) => (
 
 const Landing: React.FC<LayoutProps> = ({ children }) => (
   <div
-    className={`flex flex-1 flex-col w-full items-center py-10 pt-28 ${gothic.className}`}
+    className={`flex flex-1 flex-col w-full items-center pt-36 ${gothic.className}`}
   >
     <div className="absolute top-0 left-0 p-4 md:p-6 flex flex-row justify-between w-full">
       <Logo className="" width={120} />
