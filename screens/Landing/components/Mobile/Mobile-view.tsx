@@ -80,6 +80,7 @@ const Mobile: FC = () => {
         <img
           width="100%"
           src="/images/phone.svg"
+          loading="lazy"
           alt="phone"
           className="relative z-20 pointer-events-none"
         />

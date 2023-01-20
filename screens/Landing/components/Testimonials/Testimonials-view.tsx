@@ -3,7 +3,7 @@ const Testimonials: React.FC = () => (
     <div className="w-full md:w-1/2 mb-3 md:mb-4">
       <div className="flex flex-col justify-start items-start md:pr-5">
         <div className="text-left mb-4">
-          <h5 className="text-4xl">Business owners love The Interview</h5>
+          <p className="text-4xl">Business owners love The Interview</p>
         </div>
         <p className="text-lg font-thin text-left mb-4">
           “The interview's async video feature is a game-changer, it saves time

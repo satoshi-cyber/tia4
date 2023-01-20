@@ -9,7 +9,12 @@ const Security: React.FC = () => (
           </h2>
         </div>
         <div className="flex items-center justify-center">
-          <img className="max-w-[400px] p-2 mt-5" src="/images/privacy.png" />
+          <img
+            className="max-w-[400px] p-2 mt-5"
+            alt="Security"
+            loading="lazy"
+            src="/images/privacy.png"
+          />
         </div>
       </div>
       <div className="w-full sm:w-1/3 mb-3 sm:mb-4 grid gap-8">
