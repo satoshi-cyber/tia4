@@ -1,5 +1,5 @@
 'use client';
-import { FC, useState } from 'react';
+import { FC, useLayoutEffect, useRef } from 'react';
 import { SwiperSlide, Swiper as SwiperContainer } from 'swiper/react';
 import Swiper, { Controller, EffectFade } from 'swiper';
 import 'swiper/css';
@@ -33,12 +33,20 @@ interface Slick {
 }
 
 const Mobile: FC = () => {
-  const [firstSwiper, setFirstSwiper] = useState<Swiper | null>(null);
-  const [secondSwiper, setSecondSwiper] = useState<Swiper | null>(null);
+  const swiper1Ref = useRef<Swiper | undefined>();
+  const swiper2Ref = useRef<Swiper | undefined>();
 
-  const handleNext = () => firstSwiper?.slideNext();
+  useLayoutEffect(() => {
+    if (!swiper1Ref.current || !swiper2Ref.current) {
+      return;
+    }
 
-  const handlePrev = () => firstSwiper?.slidePrev();
+    swiper1Ref.current.controller.control = swiper2Ref.current;
+    swiper2Ref.current.controller.control = swiper1Ref.current;
+  }, []);
+
+  const handleNext = () => swiper1Ref.current?.slideNext();
+  const handlePrev = () => swiper1Ref.current?.slidePrev();
 
   return (
     <div className="flex w-full flex-col grid w-full grid-cols-1 md:grid-cols-4 gap-10">
@@ -54,8 +62,7 @@ const Mobile: FC = () => {
           <SwiperContainer
             className="w-full rounded-xl"
             modules={[Controller]}
-            onSwiper={setFirstSwiper}
-            controller={secondSwiper ? { control: secondSwiper } : undefined}
+            onSwiper={(swiper) => (swiper1Ref.current = swiper)}
             loop
           >
             {SLIDES.map(({ src, title }, i) => (
@@ -95,12 +102,11 @@ const Mobile: FC = () => {
         <SwiperContainer
           className="w-full rounded-xl"
           modules={[Controller, EffectFade]}
-          onSwiper={setSecondSwiper}
+          onSwiper={(swiper) => (swiper1Ref.current = swiper)}
           effect="fade"
           fadeEffect={{
             crossFade: true, // enables slides to cross fade
           }}
-          controller={firstSwiper ? { control: firstSwiper } : undefined}
           loop
         >
           {SLIDES.map(({ title, description }) => (
