@@ -86,13 +86,13 @@ const Mobile: FC = () => {
       <div className="">
         <div className="flex items-center mb-4">
           <div
-            className="flex w-10 h-10 mr-3 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-200 hover:shadow-button items-center justify-center"
+            className="flex w-10 h-10 mr-3 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-button items-center justify-center"
             onClick={handlePrev}
           >
             <Icon name="HiArrowLeft" />
           </div>
           <div
-            className="flex w-10 h-10 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-200 hover:shadow-button items-center justify-center"
+            className="flex w-10 h-10 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-button items-center justify-center"
             onClick={handleNext}
           >
             <Icon name="HiArrowRight" />
@@ -112,8 +112,10 @@ const Mobile: FC = () => {
           {SLIDES.map(({ title, description }) => (
             <SwiperSlide>
               <div key={title} className="text-left bg-white">
-                <h2 className="text-xl font-thin py-2">{title}</h2>
-                <p className="text-base leading-relaxed py-2">{description}</p>
+                <p className="text-xl font-thin py-2">{title}</p>
+                <p className="text-base leading-relaxed py-2 text-gray-600">
+                  {description}
+                </p>
               </div>
             </SwiperSlide>
           ))}
