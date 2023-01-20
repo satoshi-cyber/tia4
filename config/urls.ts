@@ -1,6 +1,7 @@
 export const URLS = {
-    HOME: '/',
+    LANDING: '/',
     LOGIN: '/login',
+    HOME: '/app',
     JOBS: '/app/jobs',
     RATE: '/app/rate',
     CANDIDATES: '/app/candidates',

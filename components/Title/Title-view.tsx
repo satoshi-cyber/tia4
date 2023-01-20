@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import { TitleProps } from './Title-types'
+import { TitleProps } from './Title-types';
 
-import Text from '../Text'
+import Text from '../Text';
 
 const Title: React.FC<TitleProps> = ({
   title,
@@ -28,6 +28,6 @@ const Title: React.FC<TitleProps> = ({
       />
     )}
   </div>
-)
+);
 
-export default Title
+export default Title;
