@@ -1,4 +1,4 @@
-// import PrimaryButton from '@/components/PrimaryButton';
+import PrimaryButton from '@/components/PrimaryButton';
 import { URLS } from '@/config';
 import Link from 'next/link';
 
@@ -10,9 +10,9 @@ const Cta: React.FC = () => (
       </h5>
     </div>
     <div>
-      {/* <Link href={URLS.LOGIN} prefetch={false}>
+      <Link href={URLS.LOGIN} prefetch={false}>
         <PrimaryButton title="Signup now" />
-      </Link> */}
+      </Link>
     </div>
   </div>
 );
