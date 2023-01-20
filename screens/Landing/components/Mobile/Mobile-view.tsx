@@ -48,7 +48,7 @@ const Mobile: FC = () => {
           mobile-friendly web-based platform{' '}
         </p>
       </div>
-      <div className="overflow-hidden relative col-span-2 mx-16">
+      <div className="overflow-hidden relative col-span-2 mx-16 drop-shadow-md">
         <div className="w-full absolute w-[72%] ml-[13%] pt-[4.8%] rounded-xl overflow-hidden">
           <SwiperContainer
             className="w-full rounded-xl"
