@@ -1,3 +1,5 @@
+import withCookies from "@/hocs/withCookies";
+
 import Login from "../screens/Login";
 
-export default Login;
+export default withCookies(Login);

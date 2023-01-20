@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import { NextPage, NextPageContext } from 'next';
-import { Cookies } from 'react-cookie';
+import { Cookies, CookiesProvider } from 'react-cookie';
 import { URLS } from '@/config';
 import { TOKEN_COOKIE_KEY } from '@/config/auth';
 import { useUser } from '@/hooks';
 import { useRouter } from 'next/router';
 import Router from 'next/router';
 
-const withAuth = <P extends object>(WrappedComponent: NextPage<P>) => {
-  const EnhancedComponent = (props: P) => {
+const withAuth = <P extends Object>(WrappedComponent: NextPage<P>) => {
+  const EnhancedComponent = ({ cookies, ...restProps }: any) => {
     const router = useRouter();
     const { isUserLoggedin } = useUser();
+    const isBrowser = typeof window !== 'undefined';
 
     const query = router.query;
 
@@ -24,7 +25,11 @@ const withAuth = <P extends object>(WrappedComponent: NextPage<P>) => {
       }
     }, [isUserLoggedin]);
 
-    return <WrappedComponent {...(props as P)} />;
+    return (
+      <CookiesProvider cookies={isBrowser ? undefined : new Cookies(cookies)}>
+        <WrappedComponent {...(restProps as P)} />
+      </CookiesProvider>
+    );
   };
 
   EnhancedComponent.getInitialProps = async (ctx: NextPageContext) => {
