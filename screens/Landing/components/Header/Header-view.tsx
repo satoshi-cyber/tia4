@@ -1,11 +1,8 @@
-import {
-  ReactCompareSlider,
-  ReactCompareSliderImage,
-} from 'react-compare-slider';
+import { ReactCompareSlider } from 'react-compare-slider';
 
 export const Header: React.FC = () => (
   <div className={`flex flex-col md:flex-row `}>
-    <h2 className={`text-left text-2xl font-thin pb-2 md:w-1/6`}>
+    <h2 className={`text-left text-2xl font-thin pb-8 md:pb-0 md:w-1/6`}>
       Say <span className={`font-normal`}>goodbye</span> to endless resumes and
       in-person interviews, and{' '}
       <span className={`font-normal text-purple-800`}>hello</span> to a smarter,
