@@ -5,6 +5,7 @@ import Swiper, { Controller, EffectFade } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import { Icon } from '@/components';
+import dynamic from 'next/dynamic';
 
 interface Slide {
   title: string;
@@ -126,4 +127,6 @@ const Mobile: FC = () => {
   );
 };
 
-export default Mobile;
+export default dynamic(() => Promise.resolve(Mobile), {
+  ssr: false,
+});

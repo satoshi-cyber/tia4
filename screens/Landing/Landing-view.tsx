@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout/Landing';
-import { Head } from 'next/document';
+import Head from 'next/head';
 
 import {
   Header,
@@ -14,8 +14,9 @@ const Landing: React.FC = () => (
   <Layout>
     <div className="grid grid-cols-1 gap-20">
       <Head>
+        <header lang="en" />
         <title>The Interview</title>
-        <meta>Revolutionize the way you hire</meta>
+        <meta name="description" content="Revolutionize the way you hire" />
       </Head>
       <Header />
       <Description />

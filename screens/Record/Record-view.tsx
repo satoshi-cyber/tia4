@@ -49,7 +49,7 @@ const RecordView = () => {
       <div className={classNames.swiperContainer}>
         <Swiper {...swiperOptions} onSwiper={setSwiper}>
           {slides.map((slide, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={`${index}`}>
               {
                 <div className={classNames.slide}>
                   <SlideBlur />
