@@ -11,7 +11,7 @@ const Testimonials: React.FC = () => (
         </p>
         <p className="text-left mb-3">Uranik Begu, Executive director</p>
         <img
-          src="/images/ick-logo.svg"
+          src="https://tia-cdn.onrender.com/images/ick-logo.svg"
           className="max-w-[120px]"
           alt="ick-logo"
         />
@@ -20,7 +20,7 @@ const Testimonials: React.FC = () => (
     <div className="w-full md:w-1/2 mb-3 md:mb-4">
       <div className="flex items-center justify-center">
         <img
-          src="/images/uranik-begu.jpg"
+          src="https://tia-cdn.onrender.com/images/uranik-begu.jpg"
           className="rounded-md"
           alt="Uranik Begu"
         />
