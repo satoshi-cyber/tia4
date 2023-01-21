@@ -1,7 +1,7 @@
 import { useUser } from '@/hooks';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Profile } from './components';
+import Profile from './components/Profile';
 
 import LogoText from '../../public/logo-text.svg';
 

@@ -1,4 +1,9 @@
-import { Text, Icon, Avatar, LoadingProvider, ActiveLink } from '@/components';
+import Text from '@/components/Text';
+import Icon from '@/components/Icon';
+import Avatar from '@/components/Avatar';
+import LoadingProvider from '@/components/LoadingProvider';
+import ActiveLink from '@/components/ActiveLink';
+
 import { URLS } from '@/config';
 
 import { useProfile } from './Profile-hook';

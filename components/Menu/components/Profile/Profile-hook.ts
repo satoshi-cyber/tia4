@@ -1,5 +1,5 @@
 import { useProfileQuery } from "@/graphql"
-import { useUser } from "@/hooks"
+import { useUser } from "@/hooks/useUser"
 import { MouseEvent } from 'react'
 
 export const useProfile = () => {
