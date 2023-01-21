@@ -10,7 +10,7 @@ const Slider = () => {
           <video
             muted
             autoPlay
-            src="https://s3.tebi.io/tia/business.mp4"
+            src="https://tia-cdn.onrender.com/business.mp4"
             className="absolute w-full h-full top-1/2 left-1/2 transition-all transform -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
           />
         }
@@ -18,7 +18,7 @@ const Slider = () => {
           <video
             muted
             autoPlay
-            src="https://s3.tebi.io/tia/videoplayback.mp4"
+            src="https://tia-cdn.onrender.com/videoplayback.mp4"
             className="absolute w-full h-full top-1/2 left-1/2 transition-all transform -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
           />
         }
