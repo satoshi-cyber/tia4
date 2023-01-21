@@ -18,6 +18,7 @@
     "@mpth/react-no-ssr": "^1.0.1",
     "@next/bundle-analyzer": "^13.1.4",
     "@next/font": "^13.1.2",
+    "@react-icons/all-files": "^4.1.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.8",
     "@urql/exchange-auth": "^1.0.0",

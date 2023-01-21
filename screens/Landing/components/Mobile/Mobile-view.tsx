@@ -6,7 +6,8 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 
 import dynamic from 'next/dynamic';
-import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
+import { HiArrowLeft } from '@react-icons/all-files/hi/HiArrowLeft';
+import { HiArrowRight } from '@react-icons/all-files/hi/HiArrowRight';
 
 interface Slide {
   title: string;
