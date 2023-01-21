@@ -13,7 +13,7 @@ const Security: React.FC = () => (
             className="max-w-[400px] p-2 mt-5"
             alt="Security"
             loading="lazy"
-            src="/images/privacy.png"
+            src="https://tia-cdn.onrender.com/images/privacy.png"
           />
         </div>
       </div>
