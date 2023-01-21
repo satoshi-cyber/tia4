@@ -9,7 +9,6 @@ import Icon from '../Icon/Icon-view';
 import ActiveLink from '../ActiveLink';
 import { useId } from 'react';
 import { URLS } from '@/config';
-import { withCookies } from '@/hocs';
 import dynamic from 'next/dynamic';
 
 const LogoSmall = ({

@@ -1,11 +1,9 @@
 import { Player } from 'video-react';
-import { withAuth } from '@/hocs';
 import React, { useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'video-react/dist/video-react.css';
-import dynamic from 'next/dynamic';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 import Icon from '../../components/Icon';
@@ -14,10 +12,12 @@ import Menu from '../../components/Menu';
 import Linkedin from '../../public/linkedin.svg';
 import Skeleton from 'react-loading-skeleton';
 
+const PlayerTypes = Player as any;
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const Rate = () => {
-  const [pages, setPages] = useState([]);
+  const [pages, setPages] = useState<any>([]);
 
   const { scrollY } = useScroll();
 
@@ -29,7 +29,7 @@ const Rate = () => {
   const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200]);
   const opacity = useTransform(scrollY, [0, 100], [1, 0]);
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
+  const onDocumentLoadSuccess = ({ numPages }: any) => {
     setPages(
       Array(numPages)
         .fill(0)
@@ -64,9 +64,9 @@ const Rate = () => {
                   />
                   Senior software developer
                 </motion.div>
-                <Player
-                  className="flex-none rounded-2xl shadow-sm overflow-hidden w-full"
+                <PlayerTypes
                   width="100%"
+                  className="flex-none rounded-2xl shadow-sm overflow-hidden w-full"
                   height={450}
                   fluid={false}
                   playsInline
@@ -129,12 +129,12 @@ const Rate = () => {
                 file="/awesome-cv.pdf"
                 onLoadSuccess={onDocumentLoadSuccess}
                 loading={
-                  <div className="p-20">
-                    <Skeleton count={100} />
+                  <div className="border my-10 -ml-[60px] w-[820px] p-16">
+                    <Skeleton count={50} />
                   </div>
                 }
               >
-                {pages.map((index) => (
+                {pages.map((index: number) => (
                   <Page
                     pageNumber={index}
                     width={820}
@@ -150,8 +150,4 @@ const Rate = () => {
   );
 };
 
-export default withAuth(
-  dynamic(() => Promise.resolve(Rate), {
-    ssr: false,
-  })
-);
+export default Rate;
