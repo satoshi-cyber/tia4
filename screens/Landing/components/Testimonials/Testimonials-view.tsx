@@ -18,7 +18,7 @@ const Testimonials: React.FC = () => (
       </div>
     </div>
     <div className="w-full md:w-1/2 mb-3 md:mb-4">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center m-8 md:m-0">
         <img
           src="https://tia-cdn.onrender.com/images/uranik-begu.jpg"
           className="rounded-md"

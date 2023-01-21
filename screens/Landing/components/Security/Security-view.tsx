@@ -10,7 +10,7 @@ const Security: React.FC = () => (
         </div>
         <div className="flex items-center justify-center">
           <img
-            className="max-w-[400px] p-2 mt-5"
+            className="max-w-[400px] py-2 px-20 md:p-2 mt-5 "
             alt="Security"
             loading="lazy"
             src="https://tia-cdn.onrender.com/images/privacy.png"
