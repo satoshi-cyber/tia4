@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import '../styles/globals.css';
-import { client } from '../lib/graphql';
+import { client } from '../lib';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
