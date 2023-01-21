@@ -17,9 +17,9 @@ const Landing: React.FC = () => (
         <title>The Interview</title>
         <meta name="description" content="Revolutionize the way you hire" />
       </Head>
-      {/* <Header /> */}
+      <Header />
       <Description />
-      {/* <Mobile /> */}
+      <Mobile />
       <Security />
       <Testimonials />
       <Cta />
