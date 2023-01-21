@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   darkMode: ['class'],
@@ -14,8 +15,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['var(--display-font)'],
-        body: ['var(--body-font)'],
+        sans: ['Gothic A1', ...defaultTheme.fontFamily.sans],
       },
       boxShadow: {
         hover: '0px 0px 60px -4px rgb(0, 0, 0, 0.1)',
