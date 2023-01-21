@@ -127,6 +127,6 @@ const Mobile: FC = () => {
   );
 };
 
-dynamic(() => Promise.resolve(Mobile), {
+export default dynamic(() => Promise.resolve(Mobile), {
   ssr: false,
 });
