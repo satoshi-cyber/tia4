@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { get } from 'lodash';
+import React from 'react';
+import get from 'lodash.get';
 import { useFormContext, useFormState } from 'react-hook-form';
 import { SkeletonLoader, Text } from '@/components';
 

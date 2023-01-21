@@ -1,21 +1,21 @@
-import React from 'react'
-import { get } from 'lodash'
-import { useFormContext, useFormState } from 'react-hook-form'
-import { Text } from '@/components'
+import React from 'react';
+import get from 'lodash.get';
+import { useFormContext, useFormState } from 'react-hook-form';
+import { Text } from '@/components';
 
-import { SelectFieldProps } from './SelectField-types'
+import { SelectFieldProps } from './SelectField-types';
 
-import Select from '../../UncontrolledField/Select'
+import Select from '../../UncontrolledField/Select';
 
 const SelectField: React.FC<SelectFieldProps> = ({
   name,
   label,
   ...restProps
 }) => {
-  const { errors } = useFormState({ name, exact: true })
-  const { register } = useFormContext()
+  const { errors } = useFormState({ name, exact: true });
+  const { register } = useFormContext();
 
-  const error = get(errors, name)
+  const error = get(errors, name);
 
   return (
     <div className="w-full">
@@ -33,7 +33,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
         </p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default SelectField
+export default SelectField;

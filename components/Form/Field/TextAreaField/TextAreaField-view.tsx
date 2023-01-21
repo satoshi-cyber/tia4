@@ -1,21 +1,21 @@
-import React from 'react'
-import { get } from 'lodash'
-import { useFormContext, useFormState } from 'react-hook-form'
-import { Text } from '@/components'
+import React from 'react';
+import get from 'lodash.get';
+import { useFormContext, useFormState } from 'react-hook-form';
+import { Text } from '@/components';
 
-import { TextAreaFieldProps } from './TextAreaField-types'
+import { TextAreaFieldProps } from './TextAreaField-types';
 
-import TextArea from '../../UncontrolledField/TextArea'
+import TextArea from '../../UncontrolledField/TextArea';
 
 const TextAreaField: React.FC<TextAreaFieldProps> = ({
   name,
   label,
   ...restProps
 }) => {
-  const { errors } = useFormState({ name, exact: true })
-  const { register } = useFormContext()
+  const { errors } = useFormState({ name, exact: true });
+  const { register } = useFormContext();
 
-  const error = get(errors, name)
+  const error = get(errors, name);
 
   return (
     <div className="w-full">
@@ -33,7 +33,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
         </p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default TextAreaField
+export default TextAreaField;

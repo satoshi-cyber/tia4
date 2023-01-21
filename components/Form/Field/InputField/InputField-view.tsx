@@ -1,21 +1,21 @@
-import React from 'react'
-import { get } from 'lodash'
-import { useFormContext, useFormState } from 'react-hook-form'
-import { Text } from '@/components'
+import React from 'react';
+import get from 'lodash.get';
+import { useFormContext, useFormState } from 'react-hook-form';
+import { Text } from '@/components';
 
-import { InputFieldProps } from './InputField-types'
+import { InputFieldProps } from './InputField-types';
 
-import Input from '../../UncontrolledField/Input'
+import Input from '../../UncontrolledField/Input';
 
 const InputField: React.FC<InputFieldProps> = ({
   name,
   label,
   ...restProps
 }) => {
-  const { errors } = useFormState({ name, exact: true })
-  const { register } = useFormContext()
+  const { errors } = useFormState({ name, exact: true });
+  const { register } = useFormContext();
 
-  const error = get(errors, name)
+  const error = get(errors, name);
 
   return (
     <div className="w-full group/wrapper" data-error={Boolean(error)}>
@@ -33,7 +33,7 @@ const InputField: React.FC<InputFieldProps> = ({
         </p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default InputField
+export default InputField;
