@@ -26,7 +26,7 @@ const withAuth = <P extends Object>(WrappedComponent: NextPage<P>) => {
     }, [isUserLoggedin]);
 
     return (
-      <CookiesProvider cookies={isBrowser ? undefined : new Cookies(cookies)}>
+      <CookiesProvider cookies={isBrowser ? undefined : cookies}>
         <WrappedComponent {...(restProps as P)} />
       </CookiesProvider>
     );

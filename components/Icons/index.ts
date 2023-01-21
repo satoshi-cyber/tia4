@@ -25,7 +25,10 @@ import { HiExternalLink } from '@react-icons/all-files/hi/HiExternalLink';
 import { HiOutlineMail } from '@react-icons/all-files/hi/HiOutlineMail';
 import { HiCheck } from '@react-icons/all-files/hi/HiCheck';
 import { HiVolumeUp } from '@react-icons/all-files/hi/HiVolumeUp';
-
+import { HiMail } from '@react-icons/all-files/hi/HiMail';
+import { HiStar } from '@react-icons/all-files/hi/HiStar';
+import { HiOutlineRefresh } from '@react-icons/all-files/hi/HiOutlineRefresh'
+import { HiSearch } from '@react-icons/all-files/hi/HiSearch'
 
 const Icons = {
     HiPlusCircle,
@@ -54,7 +57,11 @@ const Icons = {
     HiExternalLink,
     HiOutlineMail,
     HiCheck,
-    HiVolumeUp
+    HiVolumeUp,
+    HiMail,
+    HiStar,
+    HiOutlineRefresh,
+    HiSearch
 };
 
 export default Icons

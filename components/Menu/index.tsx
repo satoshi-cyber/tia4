@@ -9,6 +9,8 @@ import Icon from '../Icon/Icon-view';
 import ActiveLink from '../ActiveLink';
 import { useId } from 'react';
 import { URLS } from '@/config';
+import { withCookies } from '@/hocs';
+import dynamic from 'next/dynamic';
 
 const LogoSmall = ({
   width,
@@ -308,4 +310,6 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default dynamic(() => Promise.resolve(Menu), {
+  ssr: false,
+});

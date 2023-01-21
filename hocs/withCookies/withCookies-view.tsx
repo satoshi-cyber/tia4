@@ -9,7 +9,7 @@ const withCookies = <P extends { cookies: any }>(
     const isBrowser = typeof window !== 'undefined';
 
     return (
-      <CookiesProvider cookies={isBrowser ? undefined : new Cookies(cookies)}>
+      <CookiesProvider cookies={isBrowser ? undefined : cookies}>
         <WrappedComponent {...(restProps as P)} />
       </CookiesProvider>
     );
