@@ -1,6 +1,6 @@
-import * as Icons from "react-icons/hi";
+import Icons from '@/components/Icons';
 
-import { FormIconProps } from "./FormIcon-types";
+import { FormIconProps } from './FormIcon-types';
 
 export const FormIcon: React.FC<FormIconProps> = ({ name, className }) => {
   const IconComponent = Icons[name];

@@ -1,4 +1,5 @@
-import * as Icons from "react-icons/hi";
+import Icons from "@/components/Icons";
+
 
 export interface FormIconProps {
   className?: string;

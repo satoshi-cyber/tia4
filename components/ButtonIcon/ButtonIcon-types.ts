@@ -1,4 +1,5 @@
-import * as Icons from 'react-icons/hi'
+import Icons from "../Icons";
+
 
 export interface IconProps {
   name: keyof typeof Icons;
