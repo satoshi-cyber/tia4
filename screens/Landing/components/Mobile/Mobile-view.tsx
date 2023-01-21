@@ -4,8 +4,9 @@ import { SwiperSlide, Swiper as SwiperContainer } from 'swiper/react';
 import Swiper, { Controller, EffectFade } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import { Icon } from '@/components';
+
 import dynamic from 'next/dynamic';
+import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 
 interface Slide {
   title: string;
@@ -92,13 +93,13 @@ const Mobile: FC = () => {
             className="flex w-10 h-10 mr-3 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-button items-center justify-center"
             onClick={handlePrev}
           >
-            <Icon name="HiArrowLeft" />
+            <HiArrowLeft />
           </div>
           <div
             className="flex w-10 h-10 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-button items-center justify-center"
             onClick={handleNext}
           >
-            <Icon name="HiArrowRight" />
+            <HiArrowRight />
           </div>
         </div>
         <SwiperContainer
