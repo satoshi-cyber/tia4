@@ -6,7 +6,7 @@ const Testimonials: React.FC = () => (
           <p className="text-4xl">Business owners love The Interview</p>
         </div>
         <p className="text-lg font-thin text-left mb-4">
-          “The interview's async video feature is a game-changer, it saves time
+          “The Interview's async video feature is a game-changer, it saves time
           and allows for thorough evaluations of candidates. Highly recommend.”
         </p>
         <p className="text-left mb-3">Uranik Begu, Executive director</p>
