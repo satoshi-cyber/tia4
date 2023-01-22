@@ -14,6 +14,6 @@ export const BUTTON_TITLE = "Post a job";
 export const ICON_PROPS = {
   name: "HiPlusCircle",
   size: 30,
-  className: "mr-2 text-white",
+  className: "text-white",
 } as const;
 

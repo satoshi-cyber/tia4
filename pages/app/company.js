@@ -28,7 +28,7 @@ export const Company = () => {
             className="w-auto"
             title="Invite a team member"
             before={
-              <Icon className="mr-2 text-white" size={30} name="HiPlusCircle" />
+              <Icon className="text-white" size={30} name="HiPlusCircle" />
             }
           />
         </div>

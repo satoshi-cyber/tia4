@@ -7,5 +7,4 @@ export const TITLE = 'You already applied for this position!'
 
 export const BUTTON_PROPS = {
   title: "Check my interview",
-
 }
