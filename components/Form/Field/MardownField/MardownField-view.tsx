@@ -2,7 +2,7 @@ import React from 'react';
 import get from 'lodash.get';
 import { useFormContext, useFormState } from 'react-hook-form';
 import { SkeletonLoader, Text } from '@/components';
-
+import clsx from 'clsx';
 import { Wysimark, useEditor } from '@wysimark/react';
 
 import { MardownFieldProps } from './MardownField-types';
@@ -40,11 +40,14 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
           }
         />
       </div>
-      {error && (
-        <p className="text-sm text-red-600 -mt-2 mb-6 text-left text">
-          {error?.message?.toString()}
-        </p>
-      )}
+      <p
+        className={clsx(
+          'transition-all text-sm text-red-600 -mt-2 mb-6 text-left text overflow-hidden',
+          error?.message ? 'max-h-[20px]' : 'max-h-[0px]'
+        )}
+      >
+        {error?.message?.toString()}
+      </p>
     </div>
   );
 };

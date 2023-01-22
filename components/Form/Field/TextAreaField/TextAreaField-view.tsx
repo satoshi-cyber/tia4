@@ -2,6 +2,7 @@ import React from 'react';
 import get from 'lodash.get';
 import { useFormContext, useFormState } from 'react-hook-form';
 import { Text } from '@/components';
+import clsx from 'clsx';
 
 import { TextAreaFieldProps } from './TextAreaField-types';
 
@@ -27,11 +28,14 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
         />
       )}
       <TextArea {...restProps} {...register(name)} />
-      {error && (
-        <p className="text-sm text-red-600 -mt-2 mb-6 text-left text">
-          {error?.message?.toString()}
-        </p>
-      )}
+      <p
+        className={clsx(
+          'transition-all text-sm text-red-600 -mt-2 mb-6 text-left text overflow-hidden',
+          error?.message ? 'max-h-[20px]' : 'max-h-[0px]'
+        )}
+      >
+        {error?.message?.toString()}
+      </p>
     </div>
   );
 };
