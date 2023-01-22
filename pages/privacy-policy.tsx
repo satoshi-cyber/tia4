@@ -1,58 +1,64 @@
-import { Layout, Markdown } from '@/components';
+import Layout from '@/components/Layout/Landing';
+import Markdown from '@/components/Markdown';
+
+const POLICY = `## Privacy Policy
+At The Interview, we understand the importance of protecting your personal information and are committed to maintaining the privacy and security of your data. This Privacy Policy explains how we collect, use, and share your personal information.
+
+Collection of Information
+
+*   We collect information that you voluntarily provide to us, such as your name, contact information, and employment history.
+*   We also collect information about your use of our platform, such as the pages you visit and the actions you take.
+
+Use of Information
+
+*   We use the information we collect to provide and improve our platform, to communicate with you, and to comply with legal obligations.
+*   We may also use your information to send you marketing and promotional materials, but only if you have given us permission to do so.
+
+Sharing of Information
+
+*   We may share your information with our service providers and partners who perform services on our behalf.
+*   We may also share your information as required by law, such as in response to a subpoena or court order.
+*   We will not sell or rent your personal information to third parties.
+
+Data Security
+
+*   We take the security of your personal information seriously and have implemented appropriate measures to protect it from unauthorized access, use, or disclosure.
+*   However, please note that no method of data transmission over the internet is 100% secure, so we cannot guarantee the security of your information.
+
+Data Retention
+
+*   We retain your personal information for as long as necessary to provide our services or as required by law.
+
+Changes to This Policy
+
+*   We may update this Privacy Policy from time to time. If we make changes, we will notify you by revising the date at the top of the policy, and in some cases, we may provide you with additional notice (such as adding a statement to our homepage or sending you a notification).
+
+Contact Us
+
+*   If you have any questions about this Privacy Policy or our treatment of your personal information, please contact us by email at dataprotection@theinterview.io.
+
+Your Choices
+
+*   You can always choose not to provide us with your personal information, however, this may limit your use of some features of our platform.
+*   You may also opt out of receiving marketing and promotional materials from us by following the unsubscribe instructions included in those emails or by contacting us directly.
+
+Data Subject Rights
+
+*   Depending on your jurisdiction you may have certain rights related to your personal information, such as the right to access, correct, or delete your personal information. If you would like to exercise any of these rights, please contact us.
+
+Children's Privacy
+
+*   Our platform is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and you believe that your child under 13 has provided us with personal information, please contact us.
+
+By using our platform, you consent to our collection, use, and sharing of your personal information as described in this Privacy Policy.
+
+This Privacy Policy is subject to change, so please check back periodically for updates.
+  `;
 
 const Policy = () => (
-  <Layout.Apply>
-    <Markdown
-      text={`## Privacy Policy
-
-Last updated: 10/01/2023
-
-At "The Interview", we are committed to protecting the privacy of our users and their personal information. This privacy policy (the "Policy") explains how we collect, use, and share personal information that we obtain through our mobile application and website (collectively, the "Service"). By using the Service, you consent to the collection, use, and sharing of your personal information as described in this Policy.
-
-Information We Collect
-
-When you use the Service, we may collect the following types of information:
-
-*   Personal information, such as your name, email address, and phone number, that you provide to us when you create an account or contact us for support.
-*   Information about your device, such as the device type, operating system, and unique device ID, as well as information about your use of the Service, such as the pages you visit and the features you use.
-*   Information about your location, such as your IP address and device location, if you use the Service's location-enabled features.
-*   Audio and video recording of the interview conducted through the app.
-
-How We Use Your Information
-
-We use the information we collect from you to provide and improve the Service, and for the following purposes:
-
-*   To provide you with the features and services that you request, such as the ability to record and store interview recordings.
-*   To respond to your requests for support and to provide customer service.
-*   To personalize your experience on the Service and to send you notifications about your account or activity on the Service that may be of interest to you.
-*   To improve the Service and develop new features.
-
-Sharing of Your Information
-
-We do not sell or share your personal information with third parties for their own marketing or advertising purposes without your consent. However, we may share your information as described below:
-
-*   With service providers that perform functions on our behalf, such as hosting the Service, conducting quality assurance testing, or providing customer service.
-*   With third parties in connection with a merger, acquisition, or sale of all or a portion of our assets.
-*   If we believe in good faith that disclosure is necessary to protect our rights, protect your safety or the safety of others, investigate fraud, or respond to a government request.
-*   If we are required by law to disclose information or if we have a good faith belief that such action is necessary to comply with legal requirements or with legal process served on us.
-
-Security
-
-We take reasonable precautions to protect your personal information from loss, misuse, unauthorized access, disclosure, alteration and destruction. However, no internet or e-mail transmission is ever fully secure or error free. In particular, e-mail sent to or from the Service may not be secure. Therefore, you should take special care in deciding what information you send to us via e-mail.
-
-Accessing and Changing Your Personal Information
-
-You can review and change your personal information at any time by logging into your account and updating your profile. If you want to delete your account, please contact us.
-
-International Transfer of Information
-
-The Service is operated in the United States and intended for users in the United States. If you are using the Service from outside the United States, please be aware that your information may be transferred to, stored, and processed in the United States, where our servers are located and our central database is operated. By using the Service, you consent to the transfer of your information to the United States.
-
-Changes to this Policy
-
-We may change this Policy from time to time. If we make any changes, we will update the "Last Updated" date`}
-    />
-  </Layout.Apply>
+  <Layout>
+    <Markdown text={POLICY} />
+  </Layout>
 );
 
 export default Policy;
