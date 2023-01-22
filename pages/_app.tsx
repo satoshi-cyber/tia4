@@ -16,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider value={client}>
       <Head>
         <meta property="og:title" content="The Interview" />
+        <title>The Interview</title>
         <meta
           property="og:description"
           content="Revolutionize the way you hire."
@@ -52,7 +53,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff"></meta>
       </Head>
-
       <AuthProvider>
         <Component {...pageProps} />
         <Menu />
