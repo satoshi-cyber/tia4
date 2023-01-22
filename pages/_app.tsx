@@ -15,6 +15,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider value={client}>
       <Head>
+        <meta property="og:title" content="The Interview" />
+        <meta
+          property="og:description"
+          content="Revolutionize the way you hire."
+        />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:image" content="/og.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="627" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
