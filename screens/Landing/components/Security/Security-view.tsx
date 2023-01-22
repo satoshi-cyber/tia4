@@ -23,7 +23,7 @@ const Security: React.FC = () => (
             GDPR compliant
           </h3>
           <p className="text-left text-md text-gray-600">
-            The interview prides itself on competing aggressively while holding
+            The Interview prides itself on competing aggressively while holding
             ourselves to the highest ethical standards, including conduct of our
             data handling practices. While many businesses are still unaware of
             the impact the GDPR will have on their business, dedicated teams at
