@@ -315,6 +315,10 @@ const MobileMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    return () => enableBodyScroll(document as any);
+  }, []);
+
   return (
     <div
       onClick={() => setIsOpen(false)}

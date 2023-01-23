@@ -15,14 +15,14 @@ const Title: React.FC<TitleProps> = ({
     <Text
       as="h1"
       isLoading={isLoading}
-      className="text-3xl text-normal text-gray-900 text-center"
+      className="text-2xl md:text-3xl text-normal text-gray-900 text-center"
       text={title}
       skeletonProps={skeletonProps}
     />
     {subTitle && (
       <Text
         isLoading={isLoading}
-        className="text-lg text-gray-500 mt-2 whitespace-pre-line text-center"
+        className="text-md md:text-lg text-gray-500 mt-2 whitespace-pre-line text-center"
         text={subTitle}
         skeletonProps={subTitleSkeletonProps}
       />
