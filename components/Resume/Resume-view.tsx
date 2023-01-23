@@ -1,9 +1,9 @@
-import React from 'react'
-import { Icon, Text, ButtonIcon, LoadingProvider } from '@/components'
-import Link from 'next/link'
+import React from 'react';
+import { Icon, Text, ButtonIcon, LoadingProvider } from '@/components';
+import Link from 'next/link';
 
-import { ResumeProps } from './Resume-types'
-import { useResume } from './Resume-hook'
+import { ResumeProps } from './Resume-types';
+import { useResume } from './Resume-hook';
 import {
   FILE_ICON_PROPS,
   FILE_LABEL_PROPS,
@@ -11,7 +11,7 @@ import {
   REMOVE_BUTTON_PROPS,
   UPLOAD_LABEL_PROPS,
   FILE_LABEL_APPEND,
-} from './Resume-constants'
+} from './Resume-constants';
 
 const Resume: React.FC<ResumeProps> = ({
   src,
@@ -40,7 +40,7 @@ const Resume: React.FC<ResumeProps> = ({
     fileName,
     isLoading,
     onRemove,
-  })
+  });
 
   return (
     <div className={classNames.container}>
@@ -68,11 +68,9 @@ const Resume: React.FC<ResumeProps> = ({
                 />
               </div>
             </Link>
-            <ButtonIcon
-              {...REMOVE_BUTTON_PROPS}
-              className={classNames.removeButton}
-              onClick={handleRemove}
-            />
+            <button className={classNames.removeButton} onClick={handleRemove}>
+              <Icon {...REMOVE_BUTTON_PROPS} />
+            </button>
           </div>
         </LoadingProvider>
       )}
@@ -102,7 +100,7 @@ const Resume: React.FC<ResumeProps> = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Resume
+export default Resume;

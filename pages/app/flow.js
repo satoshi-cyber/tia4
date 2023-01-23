@@ -42,11 +42,7 @@ export const initialNodes = [
     data: {
       label: (
         <p className="flex items-center">
-          <ButtonIcon
-            name="HiCog"
-            size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
-          />
+          <ButtonIcon name="HiCog" className="absolute -top-8 -right-8" />
           <span>Most of team members downvoted</span>
           <Icon name="HiThumbDown" size={50} className="text-black" />,
         </p>
@@ -63,11 +59,7 @@ export const initialNodes = [
     data: {
       label: (
         <p className="flex items-center">
-          <ButtonIcon
-            name="HiCog"
-            size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
-          />
+          <ButtonIcon name="HiCog" className="absolute -top-8 -right-8" />
           <span>Most of team members upvoted</span>
           <Icon name="HiThumbUp" size={50} className="text-black" />,
         </p>
@@ -102,11 +94,7 @@ export const initialNodes = [
       label: (
         <p>
           Wait 2 days
-          <ButtonIcon
-            name="HiCog"
-            size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
-          />
+          <ButtonIcon name="HiCog" className="absolute -top-8 -right-8" />
         </p>
       ),
     },
@@ -136,7 +124,7 @@ export const initialNodes = [
           <ButtonIcon
             name="HiCog"
             size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
+            className="absolute -top-8 -right-8"
           />
         </p>
       ),
@@ -153,11 +141,7 @@ export const initialNodes = [
       label: (
         <div className="flex flex-col justify-center items-center">
           <p className="mb-2">Configure this step</p>
-          <ButtonIcon
-            name="HiCog"
-            size={30}
-            className="absolute -top-8 -right-8 text-gray-600 hover:text-black active:text-purple-900 transition-all ease-in-out"
-          />
+          <ButtonIcon name="HiCog" className="absolute -top-8 -right-8" />
           <Zapier width={60} height={30} />
         </div>
       ),

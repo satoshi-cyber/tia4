@@ -14,17 +14,7 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
         className="relative inline-block text-left mb-8 absolute top-0 left-0"
       >
         <Menu.Button>
-          {({ open }) => (
-            <ButtonIcon
-              name="HiCog"
-              size={30}
-              className={`${
-                open
-                  ? 'text-purple-800'
-                  : 'text-gray-600 hover:text-purple-800 transition-all ease-in-out'
-              } active:text-purple-800 `}
-            />
-          )}
+          {({ open }) => <ButtonIcon name="HiCog" active={open} />}
         </Menu.Button>
         <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <Menu.Item>

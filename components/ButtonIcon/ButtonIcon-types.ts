@@ -4,7 +4,7 @@ import Icons from "../Icons";
 export interface IconProps {
   name: keyof typeof Icons;
   isLoading?: boolean
-  size?: number
+  active?: boolean
   onClick?: () => void
   className?: string
 }

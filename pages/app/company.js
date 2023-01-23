@@ -14,11 +14,7 @@ export const Company = () => {
               text="Lorem LLC"
               className="text-3xl  flex-1 text-center ml-[30px]"
             />
-            <ButtonIcon
-              name="HiCog"
-              size={30}
-              className="text-gray-600 hover:text-black transition-all ease-in-out"
-            />
+            <ButtonIcon name="HiCog" />
           </div>
           <Text
             className="text-lg text-gray-500 mb-10"
@@ -46,11 +42,7 @@ export const Company = () => {
               <p class="text-sm text-gray-800">(admin)</p>
             </div>
             <div class="grid grid-cols-2 gap-4 ml-4"></div>
-            <ButtonIcon
-              name="HiPencil"
-              size={30}
-              className="text-gray-600 hover:text-black transition-all ease-in-out"
-            />
+            <ButtonIcon name="HiPencil" />
           </div>
           <div class="flex w-full flex-row justify-between items-center border p-4 rounded-full shadow-sm">
             <div className="flex flex-row items-center">
@@ -59,11 +51,7 @@ export const Company = () => {
               <p class="text-sm text-gray-800">(member)</p>
             </div>
             <div class="grid grid-cols-2 gap-4 ml-4"></div>
-            <ButtonIcon
-              name="HiPencil"
-              size={30}
-              className="text-gray-600 hover:text-black transition-all ease-in-out"
-            />
+            <ButtonIcon name="HiPencil" />
           </div>
           <div class="flex w-full flex-row justify-between items-center border p-4 rounded-full shadow-sm">
             <div className="flex flex-row items-center">
@@ -79,11 +67,7 @@ export const Company = () => {
               <p class="text-sm text-gray-800">(invited)</p>
             </div>
             <div class="grid grid-cols-2 gap-4 ml-4"></div>
-            <ButtonIcon
-              name="HiTrash"
-              size={30}
-              className="text-gray-600 hover:text-black transition-all ease-in-out"
-            />
+            <ButtonIcon name="HiTrash" />
           </div>
         </div>
       </div>
