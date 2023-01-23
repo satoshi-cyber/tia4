@@ -4,10 +4,11 @@ import Link from 'next/link';
 import Profile from './components/Profile';
 
 import LogoText from '../../public/logo-text.svg';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 import Icon from '../Icon/Icon-view';
 import ActiveLink from '../ActiveLink';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { URLS } from '@/config';
 import dynamic from 'next/dynamic';
 import ButtonIcon from '../ButtonIcon';
@@ -295,6 +296,17 @@ const MenuItems = () => {
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (!document) return;
+
+    if (isOpen) {
+      enableBodyScroll(document as any);
+      return;
+    }
+
+    disableBodyScroll(document as any);
+  }, [isOpen]);
 
   const toggleOpen = (e: any) => {
     e.preventDefault();
