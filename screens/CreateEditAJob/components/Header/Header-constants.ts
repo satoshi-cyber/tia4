@@ -8,8 +8,14 @@ export const TITLE = {
 }
 
 export const TITLE_PROPS = {
-  skeletonProps: { width: 200 },
-  className: "w-full"
+  ADD_JOB: {
+    skeletonProps: { width: 200 },
+    className: "w-full"
+  },
+  EDIT_JOB: {
+    skeletonProps: { width: 200 },
+    className: "w-full ml-[42px]"
+  }
 }
 
 export const TITLE_FIELD_NAME = 'title'

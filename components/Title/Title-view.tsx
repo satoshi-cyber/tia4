@@ -3,6 +3,7 @@ import React from 'react';
 import { TitleProps } from './Title-types';
 
 import Text from '../Text';
+import clsx from 'clsx';
 
 const Title: React.FC<TitleProps> = ({
   title,
@@ -10,8 +11,9 @@ const Title: React.FC<TitleProps> = ({
   skeletonProps,
   subTitleSkeletonProps,
   isLoading,
+  className,
 }) => (
-  <div className="flex flex-col w-full items-center mb-10">
+  <div className={clsx('flex flex-col w-full items-center mb-10', className)}>
     <Text
       as="h1"
       isLoading={isLoading}

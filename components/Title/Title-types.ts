@@ -6,4 +6,5 @@ export interface TitleProps {
   isLoading?: boolean
   skeletonProps?: SkeletonStyleProps
   subTitleSkeletonProps?: SkeletonStyleProps
+  className?: string
 }
