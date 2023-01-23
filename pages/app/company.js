@@ -12,7 +12,7 @@ export const Company = () => {
           <div className="flex flex-row w-full items-center mb-2">
             <Text
               text="Lorem LLC"
-              className="text-3xl  flex-1 text-center ml-[30px]"
+              className="text-3xl  flex-1 text-center ml-[42px]"
             />
             <ButtonIcon name="HiCog" />
           </div>

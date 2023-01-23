@@ -1,13 +1,13 @@
-import React from 'react'
-import { Text } from '@/components'
-import SkeletonLoader from '@/components/SkeletonLoader'
+import React from 'react';
+import { Text } from '@/components';
+import SkeletonLoader from '@/components/SkeletonLoader';
 
-import { InputProps } from './Input-types'
-import { useInput } from './Input-hook'
+import { InputProps } from './Input-types';
+import { useInput } from './Input-hook';
 
 const Input: React.FC<InputProps> = React.forwardRef(
   ({ variant, before, className, after, name, ...restProps }, ref) => {
-    const { classNames } = useInput({ variant, className })
+    const { classNames } = useInput({ variant, className });
 
     return (
       <div className={classNames.container}>
@@ -22,6 +22,7 @@ const Input: React.FC<InputProps> = React.forwardRef(
           />
         )}
         <SkeletonLoader
+          width="30%"
           wrapper={({ children }: { children?: React.ReactElement }) => (
             <div {...restProps} className={classNames.input}>
               {children}
@@ -47,8 +48,8 @@ const Input: React.FC<InputProps> = React.forwardRef(
           />
         )}
       </div>
-    )
+    );
   }
-)
+);
 
-export default Input
+export default Input;

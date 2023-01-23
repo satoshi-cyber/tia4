@@ -12,7 +12,7 @@ const MyVideos = () => {
         <div className="mb-20 flex flex-col w-full items-center">
           <Text
             text="My interviews"
-            className="text-3xl flex-1 text-center ml-[30px] mb-3"
+            className="text-3xl flex-1 text-center ml-[42px] mb-3"
           />
           <Text
             className="text-lg text-gray-500 mb-3"

@@ -16,7 +16,7 @@ const Archive = () => {
       <div className="flex flex-col sm:max-w-[600px] lg:max-w-[900px] xl:max-w-[1200px]  w-full px-4 items-center">
         <Text
           text="Candidates"
-          className="text-3xl flex-1 text-center ml-[30px] mb-3"
+          className="text-3xl flex-1 text-center ml-[42px] mb-3"
         />
         <Text
           className="text-lg text-gray-500 mb-10"

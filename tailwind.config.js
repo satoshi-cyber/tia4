@@ -19,6 +19,7 @@ module.exports = {
       },
       boxShadow: {
         hover: '0px 0px 60px -4px rgb(0, 0, 0, 0.1)',
+        secondary: '0px 0px 30px -4px rgba(85,60,154,0.5)',
         button: '0px 0px 30px -4px rgb(0, 0, 0, 0.3)',
         pixel: 'inset -7px 0 1px -7px rgba(0,0,0,0.7)',
         pixelHover:
