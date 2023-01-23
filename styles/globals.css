@@ -119,3 +119,6 @@ video::-webkit-media-controls {
 .android .backdrop-blur { backdrop-filter: none !important}
 .android .bg-black\/20 { background: rgb(0 0 0 / 0.4) }
 
+input::-webkit-date-and-time-value {
+  text-align: left;
+}
