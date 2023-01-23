@@ -1,5 +1,7 @@
+import dynamic from 'next/dynamic'
 import { withAuth } from '@/hocs'
 
-import Jobs from "../../../screens/Jobs/Jobs-view";
+export default withAuth(
+    dynamic(() => import('../../../screens/Jobs'), { ssr: false })
+)
 
-export default withAuth(Jobs);
