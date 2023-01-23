@@ -319,8 +319,8 @@ const MobileMenu = () => {
     <div
       onClick={() => setIsOpen(false)}
       className={clsx(
-        'transform-all duration-300 overflow-hidden fixed w-full bg-white md:hidden border-b border-gray z-20',
-        isOpen ? 'h-[100vh] max-h-screen' : 'h-[80px]'
+        'transform-all h-screen duration-300 overflow-hidden fixed w-full bg-white md:hidden border-b border-gray z-20',
+        isOpen ? 'max-h-[100vh]' : 'max-h-[80px]'
       )}
     >
       <div className="flex absolute top-0 left-0 w-full flex-row justify-between p-4 ">
