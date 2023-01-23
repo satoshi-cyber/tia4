@@ -14,16 +14,16 @@ const Profile = () => {
   return (
     <LoadingProvider isLoading={loading}>
       <ActiveLink href={URLS.PROFILE}>
-        <a className="pl-4 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer transition-all ease-in-out border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+        <a className="pl-3.5 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer transition-all ease-in-out border-r-2 border-r-transparent data-[active=true]:border-purple-800">
           <Avatar name={label} size={30} src={avatarUrl} />
-          <span className="ml-5 transition-all ease-in-out absolute w-[88vw] md:w-[196px] left-10 md:left-[69px] group-hover:left-[40px] flex flex-row items-center">
+          <span className="ml-5 transition-all ease-in-out absolute w-full md:w-[196px] left-0 md:left-[69px] group-hover:left-[40px] flex flex-row items-center">
             <Text
-              className="flex flex-1"
+              className="flex flex-1 pl-9 md:pl-0"
               skeletonProps={{ width: 100 }}
               text={label}
             />
             <button
-              className="border-l mx-4 px-3 py-1 text-gray-500 hover:text-purple-800"
+              className="border-l mx-8 md:mx-4 px-3 py-1 text-gray-500 hover:text-purple-800"
               onClick={handleLogout}
             >
               <Icon name="HiOutlineLogout" size={16} isLoading={false} />
