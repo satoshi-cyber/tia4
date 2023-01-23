@@ -1,11 +1,12 @@
 import { Icon, Layout, Markdown, Title } from '@/components';
 import { Disclosure } from '@headlessui/react';
 import clsx from 'clsx';
-import { cs } from 'date-fns/locale';
+import { withAuth } from '@/hocs';
+
 import { POLICY_BODY } from '../privacy-policy';
 import { TERMS_BODY } from '../terms';
 
-const recordDemo = () => (
+const Support = () => (
   <Layout.Default>
     <Title
       title="Help and support"
@@ -76,4 +77,4 @@ const recordDemo = () => (
   </Layout.Default>
 );
 
-export default recordDemo;
+export default withAuth(Support);
