@@ -1,8 +1,7 @@
 import Layout from '@/components/Layout/Landing';
 import Markdown from '@/components/Markdown';
 
-const POLICY = `## Terms and conditions
-Welcome to The Interview, a web-based platform that allows companies to create jobs and add questions for candidates to answer as part of the application process. By accessing or using our services, you agree to be bound by the following terms and conditions ("Terms").
+export const TERMS_BODY = `Welcome to The Interview, a web-based platform that allows companies to create jobs and add questions for candidates to answer as part of the application process. By accessing or using our services, you agree to be bound by the following terms and conditions ("Terms").
 
 1.  Eligibility: You must be at least 18 years old to use our services. If you are under 18, you may use our services only with the involvement of a parent or guardian.
     
@@ -25,12 +24,13 @@ Welcome to The Interview, a web-based platform that allows companies to create j
 10.  Governing Law: These Terms will be governed by and construed in accordance with the laws of the country in which our company is headquartered, without giving effect to any principles of conflicts of law.
     
 
-By using our services, you agree to be bound by these Terms. If you do not agree to these Terms, you may not use our services.
-  `;
+By using our services, you agree to be bound by these Terms. If you do not agree to these Terms, you may not use our services.`;
+export const TERMS = `## Terms and conditions
+${TERMS_BODY}`;
 
 const Trems = () => (
   <Layout>
-    <Markdown text={POLICY} />
+    <Markdown text={TERMS} />
   </Layout>
 );
 
