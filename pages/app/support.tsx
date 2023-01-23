@@ -13,7 +13,7 @@ const Support = () => (
       subTitle="Learn how to manage and control your privacy"
     />
     <div className="w-full pt-8">
-      <div className="mx-auto w-full rounded-2xl bg-white p-2">
+      <div className="mx-auto w-full rounded-2xl">
         <Disclosure>
           {({ open }) => (
             <>
