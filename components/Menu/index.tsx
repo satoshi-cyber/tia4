@@ -7,9 +7,11 @@ import LogoText from '../../public/logo-text.svg';
 
 import Icon from '../Icon/Icon-view';
 import ActiveLink from '../ActiveLink';
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import { URLS } from '@/config';
 import dynamic from 'next/dynamic';
+import ButtonIcon from '../ButtonIcon';
+import clsx from 'clsx';
 
 const LogoSmall = ({
   width,
@@ -163,66 +165,50 @@ const Logo = ({ width, className }: { width: number; className?: string }) => {
   );
 };
 
-const Menu = () => {
-  const { asPath } = useRouter();
+const MenuItems = () => {
   const { hasCompany } = useUser();
 
-  // TODO: fix with app dir update
-  if (!asPath.startsWith('/app/')) return null;
-
   return (
-    <>
-      <div className="bg-white md:hidden fixed w-full p-4 border-b border-gray z-20">
-        <Logo width={120} />
-      </div>
-      <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-pixelHover hidden md:flex">
-        <Link href={URLS.HOME}>
-          <LogoSmall className="absolute top-6 left-6 z-20" width={120} />
-          <LogoText
-            className="transition-all absolute top-6 left-6 z-20 left-[70px] group-hover:left-[24px]"
-            width={120}
-          />
-        </Link>
-        <div className="w-full flex flex-1 flex-col pt-28 h-full">
-          {hasCompany ? (
-            <>
-              <ActiveLink href={URLS.JOBS} shallow>
-                <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
-                  <Icon
-                    name="HiPlusCircle"
-                    size={30}
-                    className="group-data-[active=true]/link:text-purple-800 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
-                  />
-                  <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
-                    Jobs
-                  </span>
-                </a>
-              </ActiveLink>
-              <ActiveLink href={URLS.RATE} shallow>
-                <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
-                  <Icon
-                    name="HiPlay"
-                    size={30}
-                    className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
-                  />
-                  <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
-                    Rate
-                  </span>
-                </a>
-              </ActiveLink>
-              <ActiveLink href={URLS.CANDIDATES} shallow>
-                <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
-                  <Icon
-                    name="HiUsers"
-                    size={30}
-                    className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
-                  />
-                  <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
-                    Candidates
-                  </span>
-                </a>
-              </ActiveLink>
-              {/* <ActiveLink href={URLS.FLOW} shallow>
+    <div className="w-full flex flex-1 flex-col pt-28 h-full">
+      {hasCompany ? (
+        <>
+          <ActiveLink href={URLS.JOBS} shallow>
+            <a className="pl-4 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+              <Icon
+                name="HiPlusCircle"
+                size={30}
+                className="group-data-[active=true]/link:text-purple-800 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
+              />
+              <span className="ml-5 transition-all absolute w-[240px] left-10 md:left-[69px] group-hover:left-[40px]">
+                Jobs
+              </span>
+            </a>
+          </ActiveLink>
+          <ActiveLink href={URLS.RATE} shallow>
+            <a className="pl-4 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+              <Icon
+                name="HiPlay"
+                size={30}
+                className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
+              />
+              <span className="ml-5 transition-all absolute w-[240px] left-10 md:left-[69px] group-hover:left-[40px]">
+                Rate
+              </span>
+            </a>
+          </ActiveLink>
+          <ActiveLink href={URLS.CANDIDATES} shallow>
+            <a className="pl-4 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+              <Icon
+                name="HiUsers"
+                size={30}
+                className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
+              />
+              <span className="ml-5 transition-all absolute w-[240px] left-10 md:left-[69px] group-hover:left-[40px]">
+                Candidates
+              </span>
+            </a>
+          </ActiveLink>
+          {/* <ActiveLink href={URLS.FLOW} shallow>
                 <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
                   <Icon
                     name="HiFilter"
@@ -234,50 +220,50 @@ const Menu = () => {
                   </span>
                 </a>
               </ActiveLink> */}
-              <ActiveLink href={URLS.COMPANY} shallow>
-                <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
-                  <Icon
-                    name="HiOfficeBuilding"
-                    size={30}
-                    className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
-                  />
-                  <span className="ml-5 transition-all absolute w-[190px] left-[69px] group-hover:left-[40px] flex flex-row items-center">
-                    <span className="flex flex-1">Lorem LLC</span>
-                    {/* <button className="border-l mx-4 p-2 text-gray-500 hover:text-purple-800">
-                    <Icon name="HiSwitchVertical" size={16} />
-                  </button> */}
-                  </span>
-                </a>
-              </ActiveLink>
-            </>
-          ) : (
-            <ActiveLink href={URLS.SETUP_COMPANY} shallow>
-              <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
-                <Icon
-                  name="HiBriefcase"
-                  size={30}
-                  className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
-                />
-                <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
-                  Post a job
-                </span>
-              </a>
-            </ActiveLink>
-          )}
-          <hr className="mb-4" />
-          <ActiveLink href={URLS.MY_INTERVIEWS} shallow>
-            <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+          <ActiveLink href={URLS.COMPANY} shallow>
+            <a className="pl-4 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
-                name="HiUserCircle"
+                name="HiOfficeBuilding"
                 size={30}
                 className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
               />
-              <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
-                My Interviews
+              <span className="ml-5 transition-all absolute w-[190px] left-10 md:left-[69px] group-hover:left-[40px] flex flex-row items-center">
+                <span className="flex flex-1">Lorem LLC</span>
+                {/* <button className="border-l mx-4 p-2 text-gray-500 hover:text-purple-800">
+                    <Icon name="HiSwitchVertical" size={16} />
+                  </button> */}
               </span>
             </a>
           </ActiveLink>
-          {/* <ActiveLink href={URLS.RECORD_AN_INTERVIEW} shallow>
+        </>
+      ) : (
+        <ActiveLink href={URLS.SETUP_COMPANY} shallow>
+          <a className="pl-4 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+            <Icon
+              name="HiBriefcase"
+              size={30}
+              className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
+            />
+            <span className="ml-5 transition-all absolute w-[240px] left-10 md:left-[69px] group-hover:left-[40px]">
+              Post a job
+            </span>
+          </a>
+        </ActiveLink>
+      )}
+      <hr className="mb-4" />
+      <ActiveLink href={URLS.MY_INTERVIEWS} shallow>
+        <a className="pl-4 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+          <Icon
+            name="HiUserCircle"
+            size={30}
+            className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
+          />
+          <span className="ml-5 transition-all absolute w-[240px] left-10 md:left-[69px] group-hover:left-[40px]">
+            My Interviews
+          </span>
+        </a>
+      </ActiveLink>
+      {/* <ActiveLink href={URLS.RECORD_AN_INTERVIEW} shallow>
             <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiVideoCamera"
@@ -289,21 +275,71 @@ const Menu = () => {
               </span>
             </a>
           </ActiveLink> */}
-          <ActiveLink href={URLS.SUPPORT} shallow>
-            <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
-              <Icon
-                name="HiInformationCircle"
-                size={30}
-                className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
-              />
-              <span className="ml-5 transition-all absolute w-[240px] left-[69px] group-hover:left-[40px]">
-                Help and support
-              </span>
-            </a>
-          </ActiveLink>
-          <div className="flex flex-1" />
-          <Profile />
-        </div>
+      <ActiveLink href={URLS.SUPPORT} shallow>
+        <a className="pl-4 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+          <Icon
+            name="HiInformationCircle"
+            size={30}
+            className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
+          />
+          <span className="ml-5 transition-all absolute w-[240px] left-10 md:left-[69px] group-hover:left-[40px]">
+            Help and support
+          </span>
+        </a>
+      </ActiveLink>
+      <div className="flex flex-1" />
+      <Profile />
+    </div>
+  );
+};
+
+const MobileMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div
+      onClick={() => setIsOpen(false)}
+      className={clsx(
+        'transform-all duration-300 overflow-hidden fixed w-full bg-white md:hidden border-b border-gray z-20',
+        isOpen ? 'h-[100vh]' : 'h-[80px]'
+      )}
+    >
+      <div className="flex absolute top-0 left-0 w-full flex-row justify-between p-4 ">
+        <Link href={URLS.HOME}>
+          <Logo width={120} />
+        </Link>
+        <ButtonIcon name={isOpen ? 'HiX' : 'HiMenu'} onClick={toggleOpen} />
+      </div>
+      <MenuItems />
+    </div>
+  );
+};
+
+const Menu = () => {
+  const { asPath } = useRouter();
+
+  // TODO: fix with app dir update
+  if (!asPath.startsWith('/app/')) return null;
+
+  return (
+    <>
+      <MobileMenu />
+      <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all hover:w-[240px] group overflow-hidden z-20 bg-white hover:shadow-pixelHover hidden md:flex">
+        <Link href={URLS.HOME}>
+          <LogoSmall className="absolute top-6 left-6 z-20" width={120} />
+          <LogoText
+            className="transition-all absolute top-6 left-6 z-20 left-[70px] group-hover:left-[24px]"
+            width={120}
+          />
+        </Link>
+        <MenuItems />
       </div>
     </>
   );
