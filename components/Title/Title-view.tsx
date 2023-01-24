@@ -12,15 +12,26 @@ const Title: React.FC<TitleProps> = ({
   subTitleSkeletonProps,
   isLoading,
   className,
+  before,
+  after,
 }) => (
-  <div className={clsx('flex flex-col w-full items-center mb-10', className)}>
-    <Text
-      as="h1"
-      isLoading={isLoading}
-      className="text-2xl md:text-3xl text-normal text-gray-900 text-center"
-      text={title}
-      skeletonProps={skeletonProps}
-    />
+  <div
+    className={clsx(
+      'flex flex-col w-full items-center mb-10 relative px-[50px]',
+      className
+    )}
+  >
+    <div className="flex flex-row w-full items-center text-center">
+      {before && <div className="absolute left-0 h-[42px]">{before}</div>}
+      <Text
+        as="h1"
+        isLoading={isLoading}
+        className="w-full text-2xl md:text-3xl text-normal text-gray-900 text-center break-all"
+        text={title}
+        skeletonProps={skeletonProps}
+      />
+      {after && <div className="absolute right-0 h-[42px]">{after}</div>}
+    </div>
     {subTitle && (
       <Text
         isLoading={isLoading}

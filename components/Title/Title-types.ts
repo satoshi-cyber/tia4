@@ -1,3 +1,4 @@
+import React from "react";
 import { SkeletonStyleProps } from "react-loading-skeleton";
 
 export interface TitleProps {
@@ -7,4 +8,5 @@ export interface TitleProps {
   skeletonProps?: SkeletonStyleProps
   subTitleSkeletonProps?: SkeletonStyleProps
   className?: string
+  after?: React.ReactNode
 }
