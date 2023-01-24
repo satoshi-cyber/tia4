@@ -1,10 +1,9 @@
 import { Icon, Layout, Markdown, Title } from '@/components';
 import { Disclosure } from '@headlessui/react';
 import clsx from 'clsx';
-import { withAuth } from '@/hocs';
 
-import { POLICY_BODY } from '../privacy-policy';
-import { TERMS_BODY } from '../terms';
+import { PRIVACY_POLICY } from '../PrivacyPolicy/PrivacyPolicy-constants';
+import { TERMS_AND_CONDITIONS } from '../TermsAndConditions/TermsAndConditions-constants';
 
 const Support = () => (
   <Layout.Default>
@@ -36,7 +35,7 @@ const Support = () => (
               >
                 <Disclosure.Panel static>
                   <div className="p-4">
-                    <Markdown text={POLICY_BODY} />
+                    <Markdown text={PRIVACY_POLICY} />
                   </div>
                 </Disclosure.Panel>
               </div>
@@ -65,7 +64,7 @@ const Support = () => (
               >
                 <Disclosure.Panel static>
                   <div className="p-4">
-                    <Markdown text={TERMS_BODY} />
+                    <Markdown text={TERMS_AND_CONDITIONS} />
                   </div>
                 </Disclosure.Panel>
               </div>
@@ -77,4 +76,4 @@ const Support = () => (
   </Layout.Default>
 );
 
-export default withAuth(Support);
+export default Support;

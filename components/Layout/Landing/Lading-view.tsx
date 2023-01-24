@@ -23,14 +23,14 @@ const Landing: React.FC<LayoutProps> = ({ children }) => (
           <div className="w-1/2 p-4 md:p-6">
             <Link
               className="text-black text-md no-underline mr-3"
-              href="/privacy-policy"
+              href={URLS.PRIVACY_POLICY}
               prefetch={false}
             >
               Privacy
             </Link>
             <Link
               className="text-black text-md no-underline mr-3"
-              href="/terms"
+              href={URLS.TERMS_AND_CONDITIONS}
               prefetch={false}
             >
               Terms

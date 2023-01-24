@@ -1,7 +1,4 @@
-import Layout from '@/components/Layout/Landing';
-import Markdown from '@/components/Markdown';
-
-export const TERMS_BODY = `Welcome to The Interview, a web-based platform that allows companies to create jobs and add questions for candidates to answer as part of the application process. By accessing or using our services, you agree to be bound by the following terms and conditions ("Terms").
+export const TERMS_AND_CONDITIONS = `Welcome to The Interview, a web-based platform that allows companies to create jobs and add questions for candidates to answer as part of the application process. By accessing or using our services, you agree to be bound by the following terms and conditions ("Terms").
 
 1.  Eligibility: You must be at least 18 years old to use our services. If you are under 18, you may use our services only with the involvement of a parent or guardian.
     
@@ -25,19 +22,6 @@ export const TERMS_BODY = `Welcome to The Interview, a web-based platform that a
     
 
 By using our services, you agree to be bound by these Terms. If you do not agree to these Terms, you may not use our services.`;
-export const TERMS = `## Terms and conditions
-${TERMS_BODY}`;
 
-const Trems = () => (
-  <Layout>
-    <Markdown text={TERMS} />
-  </Layout>
-);
-
-export default Trems;
-
-export async function getStaticProps() {
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}
+export const MARKDOWN = `## Terms and conditions
+${TERMS_AND_CONDITIONS}`;

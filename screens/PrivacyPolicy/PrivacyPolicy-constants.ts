@@ -1,7 +1,4 @@
-import Layout from '@/components/Layout/Landing';
-import Markdown from '@/components/Markdown';
-
-export const POLICY_BODY = `At The Interview, we understand the importance of protecting your personal information and are committed to maintaining the privacy and security of your data. This Privacy Policy explains how we collect, use, and share your personal information.
+export const PRIVACY_POLICY = `At The Interview, we understand the importance of protecting your personal information and are committed to maintaining the privacy and security of your data. This Privacy Policy explains how we collect, use, and share your personal information.
 
 Collection of Information
 
@@ -54,20 +51,6 @@ By using our platform, you consent to our collection, use, and sharing of your p
 This Privacy Policy is subject to change, so please check back periodically for updates.
   `;
 
-export const POLICY = `## Privacy Policy
-  ${POLICY_BODY}
+export const MARKDOWN = `## Privacy Policy
+  ${PRIVACY_POLICY}
   `;
-
-const Policy = () => (
-  <Layout>
-    <Markdown text={POLICY} />
-  </Layout>
-);
-
-export default Policy;
-
-export async function getStaticProps() {
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}
