@@ -9,4 +9,5 @@ export interface TitleProps {
   subTitleSkeletonProps?: SkeletonStyleProps
   className?: string
   after?: React.ReactNode
+  before?: React.ReactNode
 }

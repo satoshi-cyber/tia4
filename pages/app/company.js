@@ -1,7 +1,7 @@
 import Avatar from 'react-avatar';
 import { withAuth } from '@/hocs';
 
-import { ButtonIcon, Text, Icon, PrimaryButton } from '../../components';
+import { ButtonIcon, Text, Icon, PrimaryButton, Title } from '../../components';
 
 export const Company = () => {
   return (
@@ -9,16 +9,10 @@ export const Company = () => {
       <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
         <div className="mb-20 flex flex-col w-full items-center">
           <Avatar src="/twiter.png" size={60} className="mb-4" round />
-          <div className="flex flex-row w-full items-center mb-2">
-            <Text
-              text="Lorem LLC"
-              className="text-3xl  flex-1 text-center ml-[42px]"
-            />
-            <ButtonIcon name="HiCog" />
-          </div>
-          <Text
-            className="text-lg text-gray-500 mb-10"
-            text="Edit your company, and invite new members!"
+          <Title
+            title="Lorem LLC"
+            subTitle="Edit your company, and invite new members!"
+            after={<ButtonIcon name="HiCog" />}
           />
           <PrimaryButton
             className="w-auto"
