@@ -32,8 +32,9 @@ export const Company = () => {
                 className="mr-2"
                 round
               />
-              <p class="text-xl text-gray-800 mr-2">Lorem ipsum</p>
-              <p class="text-sm text-gray-800">(admin)</p>
+              <p class="text-md md:text-lg text-gray-800 mr-2 break-all">
+                Lorem ipsum <span class="text-sm">(admin)</span>
+              </p>
             </div>
             <div class="grid grid-cols-2 gap-4 ml-4"></div>
             <ButtonIcon name="HiPencil" />
@@ -41,8 +42,9 @@ export const Company = () => {
           <div class="flex w-full flex-row justify-between items-center border p-4 rounded-full shadow-sm">
             <div className="flex flex-row items-center">
               <Avatar name="Dorlor sit" size={40} className="mr-2" round />
-              <p class="text-xl text-gray-800 mr-2">Dorlor sit</p>
-              <p class="text-sm text-gray-800">(member)</p>
+              <p class="text-md md:text-lg text-gray-800 mr-2 break-all">
+                Dorlor sit <span class="text-sm">(member)</span>
+              </p>
             </div>
             <div class="grid grid-cols-2 gap-4 ml-4"></div>
             <ButtonIcon name="HiPencil" />
@@ -52,13 +54,13 @@ export const Company = () => {
               <Avatar
                 email="maecenas.blandit@hotmail.com"
                 size={40}
-                className="mr-2"
+                className="mr-2 flex-none"
                 round
               />
-              <p class="text-xl text-gray-800 mr-2">
-                maecenas.blandit@hotmail.com
+              <p class="text-md md:text-lg text-gray-800 mr-2 break-all">
+                maeceasd.blandit@hotmail.com{' '}
+                <span className="text-sm">(invited)</span>
               </p>
-              <p class="text-sm text-gray-800">(invited)</p>
             </div>
             <div class="grid grid-cols-2 gap-4 ml-4"></div>
             <ButtonIcon name="HiTrash" />
