@@ -353,6 +353,13 @@ export type AuthenticateUserMutationVariables = Exact<{
 
 export type AuthenticateUserMutation = { __typename?: 'Mutation', authenticateUser: { __typename?: 'Auth', token: string } };
 
+export type CompanyInfoQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+}>;
+
+
+export type CompanyInfoQuery = { __typename?: 'Query', company: { __typename?: 'Company', id: string, name?: string | null, website?: string | null, description?: string | null, avatarUrl?: string | null } };
+
 export type CreateJobMutationVariables = Exact<{
   companyId: Scalars['ID'];
   input: NewJob;
@@ -467,6 +474,21 @@ export const AuthenticateUserDocument = gql`
 
 export function useAuthenticateUserMutation() {
   return Urql.useMutation<AuthenticateUserMutation, AuthenticateUserMutationVariables>(AuthenticateUserDocument);
+};
+export const CompanyInfoDocument = gql`
+    query CompanyInfo($companyId: ID!) {
+  company(companyId: $companyId) {
+    id
+    name
+    website
+    description
+    avatarUrl
+  }
+}
+    `;
+
+export function useCompanyInfoQuery(options: Omit<Urql.UseQueryArgs<CompanyInfoQueryVariables>, 'query'>) {
+  return Urql.useQuery<CompanyInfoQuery, CompanyInfoQueryVariables>({ query: CompanyInfoDocument, ...options });
 };
 export const CreateJobDocument = gql`
     mutation CreateJob($companyId: ID!, $input: NewJob!) {

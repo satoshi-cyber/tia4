@@ -1,0 +1,9 @@
+query CompanyInfo($companyId: ID!) {
+  company(companyId: $companyId) {
+    id
+    name
+    website
+    description
+    avatarUrl
+  }
+}

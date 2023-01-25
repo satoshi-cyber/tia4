@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useRouter } from "next/router";
-import { UpdateCompany, useEditCompanyQuery, useUpdateCompanyMutation, } from "@/graphql";
+import { UpdateCompany, useCompanyInfoQuery, useEditCompanyQuery, useUpdateCompanyMutation, } from "@/graphql";
 import { useUser } from "@/hooks";
 import { URLS } from "@/config";
 import { useEffect, useMemo } from "react";
@@ -17,12 +17,19 @@ export const useEditCompany = () => {
   const { companyId } = useUser()
 
   const context = useMemo(() => ({ additionalTypenames: ['Company'] }), [])
+  const [, refetchInfo] = useCompanyInfoQuery({ context, variables: { companyId: companyId || '' }, pause: !companyId })
 
-  const [{ fetching, data }, onUpload] = useEditCompanyQuery({ context, variables: { companyId: companyId || '' }, pause: !companyId, requestPolicy: 'network-only' })
+  const [{ fetching, data }, refetchEditInfo] = useEditCompanyQuery({ context, variables: { companyId: companyId || '' }, pause: !companyId, requestPolicy: 'cache-first' })
   const [{ fetching: submitting }, updateCompany] = useUpdateCompanyMutation();
 
   const avatar = data?.company?.avatarUrl || undefined
   const avatarUploadUrl = data?.company?.avatarUploadUrl || undefined
+
+  const onUpload = () => {
+    refetchInfo()
+    refetchEditInfo()
+
+  }
 
   const form = useForm<UpdateCompany>({
     mode: "onBlur",

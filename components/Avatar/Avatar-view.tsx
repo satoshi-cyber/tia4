@@ -11,17 +11,15 @@ const Avatar: React.FC<AvatarProps> = ({
   className,
   ...restProps
 }) => (
-  <SkeletonLoader
-    isLoading={isLoading}
-    width={size}
-    height={size}
-    borderRadius={'100%'}
-    after={
-      <div style={{ flex: 'none', borderRadius: '100%' }} className={className}>
-        <ReactAvatar round {...restProps} size={`${size}`} />
-      </div>
-    }
-  />
+  <div style={{ flex: 'none', borderRadius: '100%' }} className={className}>
+    <SkeletonLoader
+      isLoading={isLoading}
+      width={size}
+      height={size}
+      borderRadius={'100%'}
+      after={<ReactAvatar round {...restProps} size={`${size}`} />}
+    />
+  </div>
 );
 
 export default Avatar;
