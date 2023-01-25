@@ -7,6 +7,7 @@ export const URLS = {
     CANDIDATES: '/app/candidates',
     FLOW: '/app/flow',
     COMPANY: '/app/company',
+    EDIT_COMPANY: '/app/company/edit',
     SETUP_COMPANY: '/app/setup-company',
     JOB: '/app/jobs/[jobId]',
     CREATE_A_JOB: "/app/create-job",

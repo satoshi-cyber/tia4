@@ -353,6 +353,13 @@ export type AuthenticateUserMutationVariables = Exact<{
 
 export type AuthenticateUserMutation = { __typename?: 'Mutation', authenticateUser: { __typename?: 'Auth', token: string } };
 
+export type CompanyQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+}>;
+
+
+export type CompanyQuery = { __typename?: 'Query', company: { __typename?: 'Company', id: string, name?: string | null, website?: string | null, description?: string | null } };
+
 export type CreateJobMutationVariables = Exact<{
   companyId: Scalars['ID'];
   input: NewJob;
@@ -426,6 +433,14 @@ export type SubmitInterviewMutationVariables = Exact<{
 
 export type SubmitInterviewMutation = { __typename?: 'Mutation', submitInterview: { __typename?: 'Interview', id: string, answers: Array<{ __typename?: 'Answer', uploadUrl?: string | null, question: { __typename?: 'Question', id: string } }> } };
 
+export type UpdateCompanyMutationVariables = Exact<{
+  companyId: Scalars['ID'];
+  input: UpdateCompany;
+}>;
+
+
+export type UpdateCompanyMutation = { __typename?: 'Mutation', updateCompany: { __typename?: 'Company', id: string, name?: string | null, website?: string | null, description?: string | null } };
+
 export type UpdateJobMutationVariables = Exact<{
   companyId: Scalars['ID'];
   input: UpdateJob;
@@ -452,6 +467,20 @@ export const AuthenticateUserDocument = gql`
 
 export function useAuthenticateUserMutation() {
   return Urql.useMutation<AuthenticateUserMutation, AuthenticateUserMutationVariables>(AuthenticateUserDocument);
+};
+export const CompanyDocument = gql`
+    query Company($companyId: ID!) {
+  company(companyId: $companyId) {
+    id
+    name
+    website
+    description
+  }
+}
+    `;
+
+export function useCompanyQuery(options: Omit<Urql.UseQueryArgs<CompanyQueryVariables>, 'query'>) {
+  return Urql.useQuery<CompanyQuery, CompanyQueryVariables>({ query: CompanyDocument, ...options });
 };
 export const CreateJobDocument = gql`
     mutation CreateJob($companyId: ID!, $input: NewJob!) {
@@ -619,6 +648,20 @@ export const SubmitInterviewDocument = gql`
 
 export function useSubmitInterviewMutation() {
   return Urql.useMutation<SubmitInterviewMutation, SubmitInterviewMutationVariables>(SubmitInterviewDocument);
+};
+export const UpdateCompanyDocument = gql`
+    mutation UpdateCompany($companyId: ID!, $input: UpdateCompany!) {
+  updateCompany(companyId: $companyId, input: $input) {
+    id
+    name
+    website
+    description
+  }
+}
+    `;
+
+export function useUpdateCompanyMutation() {
+  return Urql.useMutation<UpdateCompanyMutation, UpdateCompanyMutationVariables>(UpdateCompanyDocument);
 };
 export const UpdateJobDocument = gql`
     mutation UpdateJob($companyId: ID!, $input: UpdateJob!) {

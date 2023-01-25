@@ -1,7 +1,9 @@
 import Avatar from 'react-avatar';
 import { withAuth } from '@/hocs';
+import Link from 'next/link';
+import { URLS } from '@/config';
 
-import { ButtonIcon, Text, Icon, PrimaryButton, Title } from '../../components';
+import { ButtonIcon, Icon, PrimaryButton, Title } from '../../../components';
 
 export const Company = () => {
   return (
@@ -12,7 +14,11 @@ export const Company = () => {
           <Title
             title="Lorem LLC"
             subTitle="Edit your company, and invite new members!"
-            after={<ButtonIcon name="HiCog" />}
+            after={
+              <Link href={URLS.EDIT_COMPANY}>
+                <ButtonIcon name="HiCog" />
+              </Link>
+            }
           />
           <PrimaryButton
             className="w-auto"
