@@ -12,6 +12,7 @@ query Job($id: ID!) {
     company {
       id
       name
+      avatarUrl
     }
   }
 }

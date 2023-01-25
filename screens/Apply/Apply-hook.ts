@@ -81,6 +81,8 @@ export const useApply = () => {
 
   const title = `Apply to ${jobData?.job.company?.name}`
 
+  const companyLogo = jobData?.job?.company?.avatarUrl || undefined
+
 
   return {
     title,
@@ -92,6 +94,7 @@ export const useApply = () => {
     onUpload,
     handleSubmit,
     avatarUploadUrl,
+    companyLogo,
     avatar,
     resumeProps
   };

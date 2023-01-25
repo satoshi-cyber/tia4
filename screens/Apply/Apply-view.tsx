@@ -38,6 +38,7 @@ const Apply: React.FC = () => {
     title,
     jobTitle,
     didApply,
+    companyLogo,
   } = useApply();
 
   return (
@@ -61,7 +62,12 @@ const Apply: React.FC = () => {
             className="m-2 flex-none"
             isLoading={false}
           />
-          <Avatar src="/company.png" size={60} className="border" />
+          <Avatar
+            src={companyLogo}
+            size={60}
+            className="border"
+            isLoading={loading}
+          />
         </div>
         {didApply ? (
           <DidApply />
