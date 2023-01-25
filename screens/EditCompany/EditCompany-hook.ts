@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useRouter } from "next/router";
-import { UpdateCompany, useCompanyQuery, useUpdateCompanyMutation, } from "@/graphql";
+import { UpdateCompany, useEditCompanyQuery, useUpdateCompanyMutation, } from "@/graphql";
 import { useUser } from "@/hooks";
 import { URLS } from "@/config";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { setupCompanySchema } from "./EditCompany-validations";
 import { PUSH_DELAY, TOAST_MESSAGE, TOAST_OPTIONS } from './EditCompany-constants';
@@ -16,8 +16,13 @@ export const useEditCompany = () => {
   const router = useRouter()
   const { companyId } = useUser()
 
-  const [{ fetching, data }] = useCompanyQuery({ variables: { companyId: companyId || '' }, pause: !companyId })
+  const context = useMemo(() => ({ additionalTypenames: ['Company'] }), [])
+
+  const [{ fetching, data }, onUpload] = useEditCompanyQuery({ context, variables: { companyId: companyId || '' }, pause: !companyId, requestPolicy: 'network-only' })
   const [{ fetching: submitting }, updateCompany] = useUpdateCompanyMutation();
+
+  const avatar = data?.company?.avatarUrl || undefined
+  const avatarUploadUrl = data?.company?.avatarUploadUrl || undefined
 
   const form = useForm<UpdateCompany>({
     mode: "onBlur",
@@ -55,6 +60,9 @@ export const useEditCompany = () => {
     form,
     handleSubmit,
     submitting,
-    fetching
+    fetching,
+    avatar,
+    avatarUploadUrl,
+    onUpload
   };
 };

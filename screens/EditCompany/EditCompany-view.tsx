@@ -7,8 +7,8 @@ import {
   SubmitButton,
   FormIcon,
   Title,
-  Text,
   LoadingProvider,
+  EditAvatar,
 } from '@/components';
 
 import {
@@ -23,12 +23,26 @@ import {
 import { useEditCompany } from './EditCompany-hook';
 
 const EditCompany: React.FC = () => {
-  const { handleSubmit, form, submitting, fetching } = useEditCompany();
+  const {
+    handleSubmit,
+    form,
+    submitting,
+    fetching,
+    avatar,
+    avatarUploadUrl,
+    onUpload,
+  } = useEditCompany();
 
   return (
     <Layout.Default>
       <Title {...TITLE_PROPS} />
       <LoadingProvider isLoading={fetching}>
+        <EditAvatar
+          src={avatar}
+          uploadUrl={avatarUploadUrl}
+          onUpload={onUpload}
+          className="mb-6"
+        />
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Field.Input {...COMPANY_NAME_FIELD_PROPS} />
           <Field.Input

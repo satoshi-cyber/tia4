@@ -1,8 +1,10 @@
-query Company($companyId: ID!) {
+query EditCompany($companyId: ID!) {
   company(companyId: $companyId) {
     id
     name
     website
     description
+    avatarUrl
+    avatarUploadUrl
   }
 }

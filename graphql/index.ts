@@ -353,13 +353,6 @@ export type AuthenticateUserMutationVariables = Exact<{
 
 export type AuthenticateUserMutation = { __typename?: 'Mutation', authenticateUser: { __typename?: 'Auth', token: string } };
 
-export type CompanyQueryVariables = Exact<{
-  companyId: Scalars['ID'];
-}>;
-
-
-export type CompanyQuery = { __typename?: 'Query', company: { __typename?: 'Company', id: string, name?: string | null, website?: string | null, description?: string | null } };
-
 export type CreateJobMutationVariables = Exact<{
   companyId: Scalars['ID'];
   input: NewJob;
@@ -382,6 +375,13 @@ export type DidApplyQueryVariables = Exact<{
 
 
 export type DidApplyQuery = { __typename?: 'Query', didApply: boolean };
+
+export type EditCompanyQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+}>;
+
+
+export type EditCompanyQuery = { __typename?: 'Query', company: { __typename?: 'Company', id: string, name?: string | null, website?: string | null, description?: string | null, avatarUrl?: string | null, avatarUploadUrl?: string | null } };
 
 export type JobQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -468,20 +468,6 @@ export const AuthenticateUserDocument = gql`
 export function useAuthenticateUserMutation() {
   return Urql.useMutation<AuthenticateUserMutation, AuthenticateUserMutationVariables>(AuthenticateUserDocument);
 };
-export const CompanyDocument = gql`
-    query Company($companyId: ID!) {
-  company(companyId: $companyId) {
-    id
-    name
-    website
-    description
-  }
-}
-    `;
-
-export function useCompanyQuery(options: Omit<Urql.UseQueryArgs<CompanyQueryVariables>, 'query'>) {
-  return Urql.useQuery<CompanyQuery, CompanyQueryVariables>({ query: CompanyDocument, ...options });
-};
 export const CreateJobDocument = gql`
     mutation CreateJob($companyId: ID!, $input: NewJob!) {
   createJob(companyId: $companyId, input: $input) {
@@ -512,6 +498,22 @@ export const DidApplyDocument = gql`
 
 export function useDidApplyQuery(options: Omit<Urql.UseQueryArgs<DidApplyQueryVariables>, 'query'>) {
   return Urql.useQuery<DidApplyQuery, DidApplyQueryVariables>({ query: DidApplyDocument, ...options });
+};
+export const EditCompanyDocument = gql`
+    query EditCompany($companyId: ID!) {
+  company(companyId: $companyId) {
+    id
+    name
+    website
+    description
+    avatarUrl
+    avatarUploadUrl
+  }
+}
+    `;
+
+export function useEditCompanyQuery(options: Omit<Urql.UseQueryArgs<EditCompanyQueryVariables>, 'query'>) {
+  return Urql.useQuery<EditCompanyQuery, EditCompanyQueryVariables>({ query: EditCompanyDocument, ...options });
 };
 export const JobDocument = gql`
     query Job($id: ID!) {

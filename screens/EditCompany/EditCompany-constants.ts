@@ -33,7 +33,7 @@ export const COMPANY_WEBSITE_FIELD_PROPS = {
 export const COMPANY_DESCRIPTION_PROPS = {
   name: "description",
   label: "Description:",
-  placeholder: "Your company's description....",
+  placeholder: "Company description....",
 };
 
 export const SUBMIT_BUTTON_PROPS = {
