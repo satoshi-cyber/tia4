@@ -1,4 +1,5 @@
 import ActiveLink from '@/components/ActiveLink';
+import Text from '@/components/Text';
 import Icon from '@/components/Icon';
 import LoadingProvider from '@/components/LoadingProvider';
 import { URLS } from '@/config';
@@ -18,7 +19,11 @@ const Company = () => {
             className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
           />
           <span className="ml-5 transition-all absolute w-[190px] left-9 md:left-[69px] group-hover:left-[40px] flex flex-row items-center">
-            <span className="flex flex-1">{title}</span>
+            <Text
+              className="flex flex-1"
+              text={title}
+              skeletonProps={{ width: 90 }}
+            />
             {/* <button className="border-l mx-4 p-2 text-gray-500 hover:text-purple-800">
                     <Icon name="HiSwitchVertical" size={16} />
                   </button> */}
