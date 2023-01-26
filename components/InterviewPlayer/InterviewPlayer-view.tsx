@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ControlBar, Player, Shortcut } from 'video-react';
+import { ControlBar, Player, Shortcut, BigPlayButton } from 'video-react';
 import { SwiperSlide, Swiper as SwiperContainer } from 'swiper/react';
 import Swiper from 'swiper';
 import 'swiper/css';
@@ -68,7 +68,7 @@ const InterviewPlayer: React.FC<InterviewPlayerProps> = ({
       className={clsx(
         fullScreen
           ? 'fixed w-screen h-screen top-0 bottom-0 left-0 right-0 z-50 bg-black'
-          : 'w-full h-[350px] md:h-[400px] relative rounded-2xl overflow-hidden bg-black',
+          : 'w-full h-[400px] md:h-[489px] relative rounded-2xl overflow-hidden bg-black',
         className
       )}
     >
@@ -78,30 +78,42 @@ const InterviewPlayer: React.FC<InterviewPlayerProps> = ({
         after={
           <SwiperContainer
             {...SWIPER_OPTIONS}
-            height={400}
             onSwiper={setSwiper}
             className="w-full h-full"
           >
             {answers?.map((answer, i) => (
               <SwiperSlide>
-                <PlayerWithWidth
-                  ref={(player: any) => (players.current[i] = player)}
-                  dblclickable={false}
-                  width="100%"
-                  height="100%"
-                  className=" shadow-sm overflow-hidden z-10"
-                  fluid={false}
-                  playsInline
-                  controls
-                  autoPlay
-                  src={answer.url}
-                  onEnded={onEnded}
-                >
-                  <Shortcut dblclickable={false} />
-                  <ControlBar>
-                    <FullScreen order={7} onClick={toggleFullScreen} />
-                  </ControlBar>
-                </PlayerWithWidth>
+                <div className="relative w-full h-full">
+                  <div className="w-full absolute z-20 transform-gpu flex flex-col items-center backdrop-blur-2xl bg-black/20 rounded-xl p-3  max-w-full md:max-w-[400px] left-1/2 transform -translate-x-1/2 md:mt-3">
+                    <p
+                      className={clsx(
+                        'text-white text-center pointer-events-none w-auto',
+                        fullScreen ? 'text-lg' : 'text-sm'
+                      )}
+                    >
+                      {answer.question.question}
+                    </p>
+                  </div>
+                  <PlayerWithWidth
+                    ref={(player: any) => (players.current[i] = player)}
+                    dblclickable={false}
+                    width="100%"
+                    height="100%"
+                    className="shadow-sm overflow-hidden z-10"
+                    fluid={false}
+                    playsInline
+                    controls
+                    autoPlay
+                    src={answer.url}
+                    onEnded={onEnded}
+                  >
+                    <BigPlayButton position="center" />
+                    <Shortcut dblclickable={false} />
+                    <ControlBar>
+                      <FullScreen order={7} onClick={toggleFullScreen} />
+                    </ControlBar>
+                  </PlayerWithWidth>
+                </div>
               </SwiperSlide>
             ))}
           </SwiperContainer>
