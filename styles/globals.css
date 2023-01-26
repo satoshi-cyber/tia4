@@ -122,3 +122,7 @@ video::-webkit-media-controls {
 input::-webkit-date-and-time-value {
   text-align: left;
 }
+
+.video-react-icon-fullscreen {
+  display: none !important;
+}

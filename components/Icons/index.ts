@@ -69,7 +69,7 @@ const Icons = {
     HiChevronDown,
     HiMenu,
     HiX,
-    HiChevronLeft
+    HiChevronLeft,
 };
 
 export default Icons

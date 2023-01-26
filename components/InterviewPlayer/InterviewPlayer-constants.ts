@@ -1,4 +1,4 @@
-import { EffectCreative, Navigation, } from "swiper";
+import { EffectCreative, Navigation } from "swiper";
 import { SwiperProps } from "swiper/react";
 
 export const SWIPER_OPTIONS = {
@@ -15,5 +15,5 @@ export const SWIPER_OPTIONS = {
         },
     },
     modules: [Navigation, EffectCreative],
-    className: 'w-full h-full rounded-2xl'
+    className: 'w-full h-full'
 } as SwiperProps
