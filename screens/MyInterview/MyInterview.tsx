@@ -1,13 +1,14 @@
 import React from 'react';
 import { ButtonIcon, Layout, LoadingProvider, Title } from '@/components/';
+import Link from 'next/link';
+import { URLS } from '@/config';
+import InterviewPlayer from '@/components/InterviewPlayer';
 
 import { TITLE_PROPS } from './MyInterview-constants';
 import { useMyInterview } from './MyInterview-hook';
-import Link from 'next/link';
-import { URLS } from '@/config';
 
 const MyInterviews = () => {
-  const { data, fetching, title, subTitle } = useMyInterview();
+  const { fetching, title, subTitle, answers } = useMyInterview();
 
   return (
     <Layout.Default>
@@ -22,8 +23,7 @@ const MyInterviews = () => {
             </Link>
           }
         />
-        <pre>{JSON.stringify(fetching)}</pre>
-        <pre>{JSON.stringify(data)}</pre>
+        <InterviewPlayer answers={answers} />
       </LoadingProvider>
     </Layout.Default>
   );

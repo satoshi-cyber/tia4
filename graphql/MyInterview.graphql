@@ -17,6 +17,7 @@ query MyInterview($id: ID!) {
       question {
         id
         question
+        time
       }
       url
     }

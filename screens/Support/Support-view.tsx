@@ -11,7 +11,7 @@ const Support = () => (
       title="Help and support"
       subTitle="Learn how to manage and control your privacy"
     />
-    <div className="w-full pt-8">
+    <div className="w-full">
       <div className="mx-auto w-full rounded-2xl">
         <Disclosure>
           {({ open }) => (

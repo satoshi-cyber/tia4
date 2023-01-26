@@ -29,12 +29,6 @@ const SLIDES: Slide[] = [
   },
 ];
 
-interface Slick {
-  slickGoTo: (slide: number) => void;
-  slickPrev: () => void;
-  slickNext: () => void;
-}
-
 const Mobile: FC = () => {
   const swiper1Ref = useRef<Swiper | undefined>();
   const swiper2Ref = useRef<Swiper | undefined>();

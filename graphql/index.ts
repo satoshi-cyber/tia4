@@ -415,7 +415,7 @@ export type MyInterviewQueryVariables = Exact<{
 }>;
 
 
-export type MyInterviewQuery = { __typename?: 'Query', myInterview: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null, answers: Array<{ __typename?: 'Answer', url: string, question: { __typename?: 'Question', id: string, question: string } }> } };
+export type MyInterviewQuery = { __typename?: 'Query', myInterview: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null, answers: Array<{ __typename?: 'Answer', url: string, question: { __typename?: 'Question', id: string, question: string, time: number } }> } };
 
 export type MyInterviewsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -607,6 +607,7 @@ export const MyInterviewDocument = gql`
       question {
         id
         question
+        time
       }
       url
     }
