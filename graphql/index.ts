@@ -261,6 +261,7 @@ export type Query = {
   didApply: Scalars['Boolean'];
   job: Job;
   jobs: Array<Job>;
+  myInterview: Interview;
   myInterviews: Array<Interview>;
   profile: User;
   users: Array<User>;
@@ -284,6 +285,11 @@ export type QueryJobArgs = {
 
 export type QueryJobsArgs = {
   companyId: Scalars['ID'];
+};
+
+
+export type QueryMyInterviewArgs = {
+  id: Scalars['ID'];
 };
 
 export type Question = {
@@ -403,6 +409,13 @@ export type JobsListQueryVariables = Exact<{
 
 
 export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
+
+export type MyInterviewQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type MyInterviewQuery = { __typename?: 'Query', myInterview: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null, answers: Array<{ __typename?: 'Answer', url: string, question: { __typename?: 'Question', id: string, question: string } }> } };
 
 export type MyInterviewsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -573,6 +586,36 @@ export const JobsListDocument = gql`
 
 export function useJobsListQuery(options: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
   return Urql.useQuery<JobsListQuery, JobsListQueryVariables>({ query: JobsListDocument, ...options });
+};
+export const MyInterviewDocument = gql`
+    query MyInterview($id: ID!) {
+  myInterview(id: $id) {
+    id
+    thumbnail
+    createdAt
+    job {
+      id
+      title
+      deadline
+      company {
+        id
+        name
+        avatarUrl
+      }
+    }
+    answers {
+      question {
+        id
+        question
+      }
+      url
+    }
+  }
+}
+    `;
+
+export function useMyInterviewQuery(options: Omit<Urql.UseQueryArgs<MyInterviewQueryVariables>, 'query'>) {
+  return Urql.useQuery<MyInterviewQuery, MyInterviewQueryVariables>({ query: MyInterviewDocument, ...options });
 };
 export const MyInterviewsDocument = gql`
     query MyInterviews {

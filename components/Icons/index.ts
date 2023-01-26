@@ -32,6 +32,7 @@ import { HiSearch } from '@react-icons/all-files/hi/HiSearch'
 import { HiChevronDown } from '@react-icons/all-files/hi/HiChevronDown'
 import { HiMenu } from '@react-icons/all-files/hi/HiMenu'
 import { HiX } from '@react-icons/all-files/hi/HiX'
+import { HiChevronLeft } from '@react-icons/all-files/hi/HiChevronLeft'
 
 const Icons = {
     HiPlusCircle,
@@ -67,7 +68,8 @@ const Icons = {
     HiSearch,
     HiChevronDown,
     HiMenu,
-    HiX
+    HiX,
+    HiChevronLeft
 };
 
 export default Icons

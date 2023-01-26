@@ -1,19 +1,20 @@
 import React from 'react';
 import { Avatar, Text, SkeletonLoader, Icon } from '@/components';
 import Link from 'next/link';
-import { useTimeAgo } from '@/hooks';
 
 import { ItemProps } from './Item-types';
 import { CLASS_NAMES, VIDEO_PROPS, ICON_PROPS } from './Item-constants';
+import { useItem } from './Item-hook';
 
 const Item: React.FC<ItemProps> = ({
+  id,
   thumbnail,
   date,
   avatar,
   companyName,
   jobTitle,
 }) => {
-  const timeAgo = useTimeAgo(date);
+  const { timeAgo, href } = useItem({ date, id });
 
   return (
     <div>
@@ -21,7 +22,7 @@ const Item: React.FC<ItemProps> = ({
         <SkeletonLoader
           height={300}
           after={
-            <Link href="/app/my-interviews">
+            <Link href={href}>
               <video
                 className={CLASS_NAMES.video}
                 {...VIDEO_PROPS}

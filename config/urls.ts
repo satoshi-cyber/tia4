@@ -12,6 +12,7 @@ export const URLS = {
     JOB: '/app/jobs/[jobId]',
     CREATE_A_JOB: "/app/create-job",
     MY_INTERVIEWS: '/app/my-interviews',
+    MY_INTERVIEW: '/app/my-interviews/[interviewId]',
     RECORD_AN_INTERVIEW: '/app/record-an-interview',
     SUPPORT: '/app/support',
     PROFILE: '/app/profile',

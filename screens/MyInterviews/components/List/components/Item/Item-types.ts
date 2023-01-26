@@ -1,5 +1,5 @@
 export interface ItemProps {
-  id: string | number
+  id: string
   title?: string
   thumbnail?: string
   date?: string

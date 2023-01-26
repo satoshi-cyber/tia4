@@ -1,0 +1,24 @@
+query MyInterview($id: ID!) {
+  myInterview(id: $id) {
+    id
+    thumbnail
+    createdAt
+    job {
+      id
+      title
+      deadline
+      company {
+        id
+        name
+        avatarUrl
+      }
+    }
+    answers {
+      question {
+        id
+        question
+      }
+      url
+    }
+  }
+}
