@@ -83,14 +83,9 @@ const InterviewPlayer: React.FC<InterviewPlayerProps> = ({
           >
             {answers?.map((answer, i) => (
               <SwiperSlide>
-                <div className="relative w-full h-full">
-                  <div className="w-full absolute z-20 transform-gpu flex flex-col items-center backdrop-blur-2xl bg-black/20 rounded-xl p-3  max-w-full md:max-w-[400px] left-1/2 transform -translate-x-1/2 md:mt-3">
-                    <p
-                      className={clsx(
-                        'text-white text-center pointer-events-none w-auto',
-                        fullScreen ? 'text-lg' : 'text-sm'
-                      )}
-                    >
+                <div className="flex flex-1 justify-center relative w-full h-full">
+                  <div className="absolute z-20 transform-gpu flex flex-col items-center backdrop-blur-2xl bg-black/20 rounded-lg p-3 m-3 md:max-w-[500px]">
+                    <p className="text-md text-white text-center pointer-events-none transition-all transform-gpu duration-700">
                       {answer.question.question}
                     </p>
                   </div>
