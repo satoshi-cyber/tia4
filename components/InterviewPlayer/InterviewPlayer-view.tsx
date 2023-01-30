@@ -68,7 +68,7 @@ const InterviewPlayer: React.FC<InterviewPlayerProps> = ({
       className={clsx(
         fullScreen
           ? 'fixed w-screen h-screen top-0 bottom-0 left-0 right-0 z-50 bg-black'
-          : 'w-full h-[400px] md:h-[489px] relative rounded-2xl overflow-hidden bg-black',
+          : 'w-full h-[400px] md:h-[489px] relative rounded-2xl overflow-hidden bg-black transform-gpu',
         className
       )}
     >
