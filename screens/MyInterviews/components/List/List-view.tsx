@@ -10,11 +10,11 @@ const List: React.FC = () => {
 
   return (
     <LoadingProvider isLoading={fetching}>
-      <div className={CLASS_NAMES.container}>
-        {myInterviews?.length === 0 ? (
-          <EmptyScreen />
-        ) : (
-          myInterviews?.map((item) => (
+      {myInterviews?.length === 0 ? (
+        <EmptyScreen />
+      ) : (
+        <div className={CLASS_NAMES.container}>
+          {myInterviews?.map((item) => (
             <Item
               key={item.id}
               id={item.id}
@@ -24,9 +24,9 @@ const List: React.FC = () => {
               companyName={item.job?.company?.name}
               jobTitle={item.job?.title}
             />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </LoadingProvider>
   );
 };

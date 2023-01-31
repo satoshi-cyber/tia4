@@ -21,7 +21,8 @@ export const URLS = {
     PUBLIC_JOB: '/jobs/[applyJobId]',
     DID_CALLBACK: '/did-callback',
     TERMS_AND_CONDITIONS: '/terms-and-conditions',
-    PRIVACY_POLICY: '/privacy-policy'
+    PRIVACY_POLICY: '/privacy-policy',
+    DEMO_INTERVIEW: '/jobs/bd1f9940-eccf-4a59-8de4-d0179a298e34'
 }
 
 export const DOMAIN = 'https://theinterview.io'
