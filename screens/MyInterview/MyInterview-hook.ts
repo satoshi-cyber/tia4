@@ -10,14 +10,11 @@ export const useMyInterview = () => {
 
   const title = data?.myInterview.job?.title || undefined
 
-  const subTitle = data?.myInterview.job?.company?.name || 'placeholder'
-
   const answers = data?.myInterview.answers || undefined
 
   return {
     fetching,
     title,
-    subTitle,
     answers,
     data
   }

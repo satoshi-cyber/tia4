@@ -1,6 +1,14 @@
 import { EffectCreative, Navigation } from "swiper";
 import { SwiperProps } from "swiper/react";
 
+export const CLASS_NAMES = {
+    container: {
+        fullScreen: 'fixed w-screen h-screen top-0 bottom-0 left-0 right-0 z-50 bg-black',
+        inline: 'w-full h-[400px] md:h-[489px] relative rounded-2xl overflow-hidden bg-black transform-gpu'
+    },
+    swiper: "w-full h-full"
+}
+
 export const SWIPER_OPTIONS = {
     allowTouchMove: false,
     navigation: true,
@@ -17,3 +25,8 @@ export const SWIPER_OPTIONS = {
     modules: [Navigation, EffectCreative],
     className: 'w-full h-full'
 } as SwiperProps
+
+export const SKELETON_PROPS = {
+    width: "100%",
+    height: "100%"
+}

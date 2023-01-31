@@ -8,7 +8,7 @@ import { TITLE_PROPS } from './MyInterview-constants';
 import { useMyInterview } from './MyInterview-hook';
 
 const MyInterviews = () => {
-  const { fetching, title, subTitle, answers } = useMyInterview();
+  const { fetching, title, answers } = useMyInterview();
 
   return (
     <Layout.Default>
@@ -16,7 +16,6 @@ const MyInterviews = () => {
         <Title
           {...TITLE_PROPS}
           title={title}
-          subTitle={subTitle}
           before={
             <Link href={URLS.MY_INTERVIEWS}>
               <ButtonIcon name="HiChevronLeft" />
