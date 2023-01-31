@@ -6,9 +6,11 @@ import InterviewPlayer from '@/components/InterviewPlayer';
 
 import { TITLE_PROPS } from './MyInterview-constants';
 import { useMyInterview } from './MyInterview-hook';
+import Footer from './components/Footer';
 
 const MyInterviews = () => {
-  const { fetching, title, answers } = useMyInterview();
+  const { fetching, title, answers, companyLogo, companyName, appliedDate } =
+    useMyInterview();
 
   return (
     <Layout.Default>
@@ -23,6 +25,11 @@ const MyInterviews = () => {
           }
         />
         <InterviewPlayer answers={answers} />
+        <Footer
+          companyLogo={companyLogo}
+          companyName={companyName}
+          appliedDate={appliedDate}
+        />
       </LoadingProvider>
     </Layout.Default>
   );
