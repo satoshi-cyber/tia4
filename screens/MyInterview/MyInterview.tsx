@@ -7,6 +7,7 @@ import InterviewPlayer from '@/components/InterviewPlayer';
 import { TITLE_PROPS } from './MyInterview-constants';
 import { useMyInterview } from './MyInterview-hook';
 import Footer from './components/Footer';
+import SettingsMenu from './components/SettingsMenu';
 
 const MyInterviews = () => {
   const { fetching, title, answers, companyLogo, companyName, appliedDate } =
@@ -23,6 +24,7 @@ const MyInterviews = () => {
               <ButtonIcon name="HiChevronLeft" />
             </Link>
           }
+          after={<SettingsMenu />}
         />
         <InterviewPlayer answers={answers} />
         <Footer
