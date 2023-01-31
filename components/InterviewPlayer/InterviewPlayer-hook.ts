@@ -33,7 +33,7 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
 
     players.current.forEach((player, index) => {
       if (swiper.realIndex === index) {
-        return player.video.play();
+        return
       }
 
       player.video.pause();
