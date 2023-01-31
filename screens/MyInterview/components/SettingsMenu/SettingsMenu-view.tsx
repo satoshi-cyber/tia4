@@ -2,10 +2,9 @@ import { ButtonIcon } from '@/components';
 import { Menu } from '@headlessui/react';
 import dynamic from 'next/dynamic';
 
-import { SettingsMenuProps } from './SettingsMenu-types';
 import { useSettingsMenu } from './SettingsMenu-hook';
 
-export const SettingsMenu: React.FC<SettingsMenuProps> = () => {
+export const SettingsMenu: React.FC = () => {
   const { handleDeleteInterview } = useSettingsMenu();
 
   return (
