@@ -22,7 +22,7 @@ const Item: React.FC<ItemProps> = ({
         <SkeletonLoader
           height={300}
           after={
-            <Link href={href}>
+            <Link href={href} shallow>
               <video
                 className={CLASS_NAMES.video}
                 {...VIDEO_PROPS}
