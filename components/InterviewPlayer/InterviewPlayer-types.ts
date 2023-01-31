@@ -5,4 +5,3 @@ export interface InterviewPlayerProps {
   className?: string
 }
 
-export type PlayerWithWidth = Player as any;
