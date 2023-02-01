@@ -27,7 +27,6 @@ const LogoSmall = ({
   return (
     <svg
       width={width}
-      height="44px"
       viewBox="0 0 147 44"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +68,6 @@ const Logo = ({ width, className }: { width: number; className?: string }) => {
   return (
     <svg
       width={width}
-      height="44px"
       viewBox="0 0 147 44"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
