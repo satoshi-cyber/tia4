@@ -5,4 +5,7 @@ export const CLASS_NAMES = {
 
 export const TITLE = "No applications yet?";
 
-
+export const BUTTON_PROPS = {
+  title: "Record a demo interview",
+  className: "w-auto mt-4"
+}
