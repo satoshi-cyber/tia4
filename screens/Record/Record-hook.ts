@@ -2,7 +2,7 @@ import { useDidApplyQuery, useJobQuery } from "@/graphql"
 import { useRouter } from "next/router"
 import { useEffect, useMemo, useRef, useState } from "react"
 import Swiper from "swiper"
-import { isAndroid } from 'react-device-detect';
+import { isAndroid, isFirefox } from 'react-device-detect';
 import clsx from "clsx";
 
 import { ACQUIRING_MEDIA, CLASS_NAMES, MEDIA_RECORDER_OPTIONS, RECORING_STATUS, SWIPER_OPTIONS, SWIPER_OPTIONS_ANDROID, VIDEO_CONSTRAINS } from "./Record-constants"
@@ -121,9 +121,9 @@ export const useRecord = () => {
     countDown,
   }
 
-  const classNames = { ...CLASS_NAMES, container: clsx(CLASS_NAMES.container, isAndroid && 'android') }
+  const classNames = { ...CLASS_NAMES, container: clsx(CLASS_NAMES.container, (isAndroid || isFirefox) && 'android') }
 
-  const swiperOptions = isAndroid ? SWIPER_OPTIONS_ANDROID : SWIPER_OPTIONS
+  const swiperOptions = (isAndroid || isFirefox) ? SWIPER_OPTIONS_ANDROID : SWIPER_OPTIONS
 
   return {
     fetching,
