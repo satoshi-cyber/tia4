@@ -1,6 +1,6 @@
 export const CLASS_NAMES = {
   container: "flex flex-col items-center",
-  ctaWrapper: "flex flex-row items-center mb-20",
+  ctaWrapper: "flex flex-row items-center mb-14",
 };
 
 export const TITLE = "Get more interviews!";
