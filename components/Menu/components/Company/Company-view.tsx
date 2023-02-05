@@ -19,7 +19,7 @@ const Company = () => {
             size={30}
             className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
           />
-          <span className="ml-5 transition-all absolute w-[190px] left-9 md:left-[69px] group-hover:left-[40px] flex flex-row items-center">
+          <span className="ml-5 transition-all absolute w-[190px] left-[40px] md:left-[69px] group-hover:left-[40px] flex flex-row items-center">
             <Text
               className="flex flex-1"
               text={title}

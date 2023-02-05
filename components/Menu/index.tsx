@@ -179,7 +179,7 @@ const MenuItems = () => {
                 size={30}
                 className="group-data-[active=true]/link:text-purple-800 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
               />
-              <span className="ml-5 transition-all absolute w-[240px] left-9 md:left-[69px] group-hover:left-[40px]">
+              <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
                 Jobs
               </span>
             </a>
@@ -191,7 +191,7 @@ const MenuItems = () => {
                 size={30}
                 className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
               />
-              <span className="ml-5 transition-all absolute w-[240px] left-9 md:left-[69px] group-hover:left-[40px]">
+              <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
                 Rate
               </span>
             </a>
@@ -203,7 +203,7 @@ const MenuItems = () => {
                 size={30}
                 className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
               />
-              <span className="ml-5 transition-all absolute w-[240px] left-9 md:left-[69px] group-hover:left-[40px]">
+              <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
                 Candidates
               </span>
             </a>
@@ -230,7 +230,7 @@ const MenuItems = () => {
               size={30}
               className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
             />
-            <span className="ml-5 transition-all absolute w-[240px] left-9 md:left-[69px] group-hover:left-[40px]">
+            <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
               Post a job
             </span>
           </a>
@@ -244,7 +244,7 @@ const MenuItems = () => {
             size={30}
             className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
           />
-          <span className="ml-5 transition-all absolute w-[240px] left-9 md:left-[69px] group-hover:left-[40px]">
+          <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
             My Interviews
           </span>
         </a>
@@ -268,7 +268,7 @@ const MenuItems = () => {
             size={30}
             className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
           />
-          <span className="ml-5 transition-all absolute w-[240px] left-9 md:left-[69px] group-hover:left-[40px]">
+          <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
             Help and support
           </span>
         </a>
