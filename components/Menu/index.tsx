@@ -173,7 +173,7 @@ const MenuItems = () => {
       {hasCompany ? (
         <>
           <ActiveLink href={URLS.JOBS} shallow>
-            <a className="pl-3.5 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+            <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiPlusCircle"
                 size={30}
@@ -185,7 +185,7 @@ const MenuItems = () => {
             </a>
           </ActiveLink>
           <ActiveLink href={URLS.RATE} shallow>
-            <a className="pl-3.5 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+            <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiPlay"
                 size={30}
@@ -197,7 +197,7 @@ const MenuItems = () => {
             </a>
           </ActiveLink>
           <ActiveLink href={URLS.CANDIDATES} shallow>
-            <a className="pl-3.5 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+            <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiUsers"
                 size={30}
@@ -224,7 +224,7 @@ const MenuItems = () => {
         </>
       ) : (
         <ActiveLink href={URLS.SETUP_COMPANY} shallow>
-          <a className="pl-3.5 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+          <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
             <Icon
               name="HiBriefcase"
               size={30}
@@ -238,7 +238,7 @@ const MenuItems = () => {
       )}
       <hr className="mb-4" />
       <ActiveLink href={URLS.MY_INTERVIEWS} shallow>
-        <a className="pl-3.5 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+        <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
           <Icon
             name="HiUserCircle"
             size={30}
@@ -262,7 +262,7 @@ const MenuItems = () => {
             </a>
           </ActiveLink> */}
       <ActiveLink href={URLS.SUPPORT} shallow>
-        <a className="pl-3.5 md:pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+        <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
           <Icon
             name="HiInformationCircle"
             size={30}
@@ -309,10 +309,10 @@ const MobileMenu = () => {
       onClick={() => setIsOpen(false)}
       className={clsx(
         'transform-all h-screen duration-300 overflow-hidden fixed w-full bg-white md:hidden border-b border-gray z-20',
-        isOpen ? 'max-h-[100vh]' : 'max-h-[80px]'
+        isOpen ? 'max-h-[100vh]' : 'max-h-[90px]'
       )}
     >
-      <div className="flex absolute top-0 left-0 w-full flex-row justify-between p-4 ">
+      <div className="flex absolute top-0 left-0 w-full flex-row justify-between p-6">
         <Link href={URLS.HOME}>
           <Logo width={120} />
         </Link>

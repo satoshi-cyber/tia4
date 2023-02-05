@@ -8,7 +8,7 @@ import Logo from '../../../public/logo.svg';
 
 const Landing: React.FC<LayoutProps> = ({ children }) => (
   <div className={`flex flex-1 flex-col w-full items-center pt-40`}>
-    <div className="absolute top-0 left-0 p-4 md:p-6 flex flex-row justify-between w-full">
+    <div className="absolute top-0 left-0 p-6 flex flex-row justify-between w-full">
       <Link href={URLS.LANDING} prefetch={false}>
         <Logo className="" width={120} />
       </Link>
@@ -16,11 +16,11 @@ const Landing: React.FC<LayoutProps> = ({ children }) => (
         <SecondaryButton title="Login / Signup" />
       </Link>
     </div>
-    <div className="max-w-[1024px] p-4 md:p-6">{children}</div>
+    <div className="max-w-[1024px] p-6">{children}</div>
     <footer className="bg-gray-100 py-0 w-full mt-20">
       <div className="container">
         <div className="flex flex-row justify-between items-center min-h-[60px]">
-          <div className="w-1/2 p-4 md:p-6">
+          <div className="w-1/2 p-6">
             <Link
               className="text-black text-md no-underline mr-3"
               href={URLS.PRIVACY_POLICY}

@@ -4,7 +4,7 @@ import Header from './components/Header';
 const Company = () => {
   return (
     <div className="flex flex-1 flex-col w-full items-center py-28 md:py-16 md:pl-[70px]">
-      <div className="flex flex-col max-w-[600px] w-full px-4 items-center">
+      <div className="flex flex-col max-w-[600px] w-full px-6 items-center">
         <div className="mb-20 flex flex-col w-full items-center">
           <Header />
           <PrimaryButton
