@@ -3,7 +3,7 @@ export const CLASS_NAMES = {
   ctaWrapper: "flex flex-row items-center mb-20",
 };
 
-export const TITLE = "Get more interviews Today!";
+export const TITLE = "Get more interviews!";
 
 export const SUB_TITLE = "Get better candidates";
 
