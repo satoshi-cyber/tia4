@@ -12,7 +12,7 @@ const Company = () => {
   return (
     <LoadingProvider isLoading={fetching}>
       <ActiveLink href={URLS.COMPANY} shallow>
-        <a className="text-sm font-medium pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+        <a className="text-md pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
           <Icon
             isLoading={false}
             name="HiOfficeBuilding"
