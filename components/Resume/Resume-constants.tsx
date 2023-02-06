@@ -1,6 +1,6 @@
 export const CLASS_NAMES = {
   container: 'w-full mb-4',
-  label: 'text-sm text-gray-600 mb-3 text-left',
+  label: 'text-sm text-gray-600 mb-2 text-left font-medium',
   fileContainer: 'flex flex-row w-full items-center justify-between mb-5',
   fileLinkLoading: 'pointer-events-none',
   file: 'flex flex-row items-center transition-all hover:text-purple-800',
@@ -20,7 +20,7 @@ export const CLASS_NAMES = {
 };
 
 export const LABEL_PROPS = {
-  text: 'Resume / CV:',
+  text: 'Resume / CV',
   skeletonProps: { width: 80 },
 };
 

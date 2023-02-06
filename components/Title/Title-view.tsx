@@ -22,7 +22,7 @@ const Title: React.FC<TitleProps> = ({
     )}
   >
     <div className="flex flex-row w-full items-center text-center">
-      {before && <div className="absolute left-0 h-[42px]">{before}</div>}
+      {before && <div className="absolute left-0 h-[38px]">{before}</div>}
       <Text
         as="h1"
         isLoading={isLoading}
@@ -30,7 +30,7 @@ const Title: React.FC<TitleProps> = ({
         text={title}
         skeletonProps={skeletonProps}
       />
-      {after && <div className="absolute right-0 h-[42px]">{after}</div>}
+      {after && <div className="absolute right-0 h-[38px]">{after}</div>}
     </div>
     {subTitle && (
       <Text

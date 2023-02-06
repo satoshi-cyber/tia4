@@ -19,8 +19,8 @@ const ButtonIcon: React.FC<IconProps> = ({
     <SkeletonLoader
       isLoading={isLoading}
       className={className}
-      width={42}
-      height={42}
+      width={38}
+      height={38}
       circle
       after={
         <button
@@ -32,7 +32,7 @@ const ButtonIcon: React.FC<IconProps> = ({
           )}
           {...props}
         >
-          <IconComponent size={24} />
+          <IconComponent size={20} />
         </button>
       }
     />

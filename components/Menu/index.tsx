@@ -173,11 +173,11 @@ const MenuItems = () => {
       {hasCompany ? (
         <>
           <ActiveLink href={URLS.JOBS} shallow>
-            <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+            <a className="text-sm font-medium pl-5 py-1 mb-1 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiPlusCircle"
-                size={30}
-                className="group-data-[active=true]/link:text-purple-800 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
+                size={28}
+                className="m-0.5  group-data-[active=true]/link:text-purple-800 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
               />
               <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
                 Jobs
@@ -185,11 +185,11 @@ const MenuItems = () => {
             </a>
           </ActiveLink>
           <ActiveLink href={URLS.RATE} shallow>
-            <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+            <a className="text-sm font-medium pl-5 py-1 mb-1 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiPlay"
-                size={30}
-                className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
+                size={28}
+                className="m-0.5 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
               />
               <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
                 Rate
@@ -197,11 +197,11 @@ const MenuItems = () => {
             </a>
           </ActiveLink>
           <ActiveLink href={URLS.CANDIDATES} shallow>
-            <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+            <a className="text-sm font-medium pl-5 py-1 mb-1 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
               <Icon
                 name="HiUsers"
-                size={30}
-                className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
+                size={28}
+                className="m-0.5 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800"
               />
               <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
                 Candidates
@@ -224,11 +224,11 @@ const MenuItems = () => {
         </>
       ) : (
         <ActiveLink href={URLS.SETUP_COMPANY} shallow>
-          <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+          <a className="text-sm font-medium pl-5 py-1 mb-1 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
             <Icon
               name="HiBriefcase"
-              size={30}
-              className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
+              size={28}
+              className="m-0.5 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
             />
             <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
               Post a job
@@ -238,11 +238,11 @@ const MenuItems = () => {
       )}
       <hr className="mb-4" />
       <ActiveLink href={URLS.MY_INTERVIEWS} shallow>
-        <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+        <a className="text-sm font-medium pl-5 py-1 mb-1 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
           <Icon
             name="HiUserCircle"
-            size={30}
-            className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
+            size={28}
+            className="m-0.5 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
           />
           <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
             My Interviews
@@ -262,11 +262,11 @@ const MenuItems = () => {
             </a>
           </ActiveLink> */}
       <ActiveLink href={URLS.SUPPORT} shallow>
-        <a className="pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
+        <a className="text-sm font-medium pl-5 py-1 mb-1 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
           <Icon
             name="HiInformationCircle"
-            size={30}
-            className="group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
+            size={28}
+            className="m-0.5 group-data-[active=true]/link:text-purple-800 text-gray-500 group-hover/link:text-purple-800 flex-none transition-all"
           />
           <span className="ml-5 transition-all absolute w-[240px] left-[40px] md:left-[69px] group-hover:left-[40px]">
             Help and support
