@@ -13,7 +13,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     type="button"
     {...restProps}
     className={clsx(
-      'transition-all p-[10px] bg-purple-800 bg-gradient-to-r from-purple-500 w-full text-lg text-gray-100 hover:bg-indigo-800 focus:outline-none rounded-full ease-in-out disabled:from-purple-400 z-50 hover:shadow-button',
+      'transition-all p-[10px] bg-purple-800 bg-gradient-to-r from-purple-500 w-full text-lg text-gray-100 hover:bg-indigo-800 focus:outline-none rounded-full ease-in-out disabled:from-purple-400 hover:shadow-button',
       className
     )}
   >
