@@ -5,7 +5,7 @@ const Testimonials: React.FC = () => (
         <div className="text-left mb-4">
           <p className="text-4xl">Business owners love The Interview</p>
         </div>
-        <p className="text-lg font-thin text-left mb-4">
+        <p className="text-xl font-thin text-left mb-4">
           “The Interview's async video feature is a game-changer, it saves time
           and allows for thorough evaluations of candidates. Highly recommend.”
         </p>

@@ -13,7 +13,7 @@ const Cta: React.FC = () => (
       <Link href={URLS.LOGIN} prefetch={false}>
         <PrimaryButton title="Signup now" className="mb-4" />
       </Link>
-      <p className=" text-md mb-8">No credit card required.</p>
+      <p className="text-gray-800 text-md mb-8">No credit card required.</p>
     </div>
   </div>
 );

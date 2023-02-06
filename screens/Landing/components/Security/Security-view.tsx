@@ -22,7 +22,7 @@ const Security: React.FC = () => (
           <h3 className="font-thin text-lg sm:text-xl text-left mb-2 sm:mb-3">
             GDPR compliant
           </h3>
-          <p className="text-left text-md text-gray-600">
+          <p className="text-left text-md text-gray-800">
             The Interview prides itself on competing aggressively while holding
             ourselves to the highest ethical standards, including conduct of our
             data handling practices. While many businesses are still unaware of
@@ -34,7 +34,7 @@ const Security: React.FC = () => (
           <h3 className="font-thin text-lg sm:text-xl text-left mb-2 sm:mb-3 ">
             Passwordless
           </h3>
-          <p className="text-left text-md text-gray-600">
+          <p className="text-left text-md text-gray-800">
             We understand the importance of security and the need to protect
             your sensitive information. That's why we have implemented a unique
             method of authentication that eliminates the need for passwords.
@@ -46,7 +46,7 @@ const Security: React.FC = () => (
           <h3 className="font-thin text-lg sm:text-xl text-left mb-2 sm:mb-3">
             Secure file storage
           </h3>
-          <p className="text-left text-sm text-gray-600">
+          <p className="text-left text-md text-gray-800">
             Our platform uses decentralized storage which ensures that your
             sensitive files are not stored in a single location, reducing the
             risk of data breaches and unauthorized access. This method of
