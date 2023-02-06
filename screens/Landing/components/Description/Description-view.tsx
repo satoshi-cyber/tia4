@@ -1,6 +1,6 @@
 export const Description: React.FC = () => (
   <div className="flex flex-col ">
-    <div className="text-left font-light py-2">Why choose the interview?</div>
+    <div className="text-left font-thin py-2">Why choose the interview?</div>
     <h1 className="text-left font-medium text-4xl py-2">
       Revolutionize the way you hire.
     </h1>

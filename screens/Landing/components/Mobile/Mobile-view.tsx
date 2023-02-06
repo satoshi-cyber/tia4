@@ -47,7 +47,7 @@ const Mobile: FC = () => {
 
   return (
     <div className="flex w-full flex-col grid w-full grid-cols-1 md:grid-cols-4 gap-10">
-      <div className="text-left text-2xl font-light leading-tight">
+      <div className="text-left text-2xl font-thin leading-tight">
         <p>
           Effortlessly manage your recruitment process{' '}
           <span className="font-medium text-purple-800">on-the-go</span> with
