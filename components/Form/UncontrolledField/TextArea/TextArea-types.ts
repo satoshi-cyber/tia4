@@ -7,4 +7,5 @@ export interface TextAreaProps {
   className?: string;
   after?: React.ReactElement;
   placeholder?: string;
+  minRows?: number
 }

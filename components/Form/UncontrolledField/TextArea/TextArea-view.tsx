@@ -7,7 +7,10 @@ import { TextAreaProps } from './TextArea-types';
 import { useTextArea } from './TextArea-hook';
 
 const TextArea: React.FC<TextAreaProps> = React.forwardRef(
-  ({ variant, before, className, after, name, ...restProps }, ref) => {
+  (
+    { variant, before, className, after, name, minRows = 2, ...restProps },
+    ref
+  ) => {
     const { classNames } = useTextArea({ variant, className });
 
     return (
@@ -23,7 +26,7 @@ const TextArea: React.FC<TextAreaProps> = React.forwardRef(
           />
         )}
         <SkeletonLoader
-          count={2}
+          count={minRows}
           wrapper={({ children }: { children?: React.ReactElement }) => (
             <div {...restProps} className={classNames.input}>
               {children}
@@ -31,7 +34,7 @@ const TextArea: React.FC<TextAreaProps> = React.forwardRef(
           )}
           after={
             <TextareaAutosize
-              minRows={2}
+              minRows={minRows}
               name={name}
               {...restProps}
               ref={ref as any}

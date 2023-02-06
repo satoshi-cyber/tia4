@@ -20,7 +20,8 @@ export const CLOSE_BUTTON_PROPS = {
 export const QUESTION_FIELD_PROPS = {
   label: "Question",
   type: "text",
-  placeholder: "Tell me about yourself"
+  placeholder: "Tell me about yourself",
+  minRows: 1
 }
 
 export const TIME_FIELD_PROPS = {

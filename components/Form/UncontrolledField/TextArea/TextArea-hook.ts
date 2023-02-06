@@ -12,7 +12,8 @@ export const useTextArea = ({ variant = 'default', className }: Options) => {
     input: clsx(
       FORM_THEME[variant].padding,
       FORM_THEME[variant].style,
-      className
+      className,
+      'resize-none'
     ),
     container: clsx(
       FORM_THEME[variant].container,
