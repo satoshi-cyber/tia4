@@ -19,7 +19,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   const error = get(errors, name);
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-4">
       {label && (
         <Text
           className="text-sm text-gray-700 mb-2 text-left font-medium"
@@ -30,7 +30,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
       <Select {...restProps} {...register(name)} />
       <p
         className={clsx(
-          'transition-all text-sm text-red-600 -mt-2 mb-6 text-left text overflow-hidden',
+          'transition-all text-sm text-red-600 -mt-2 text-left text overflow-hidden',
           error?.message ? 'max-h-[20px]' : 'max-h-[0px]'
         )}
       >

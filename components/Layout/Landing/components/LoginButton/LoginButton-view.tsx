@@ -8,7 +8,7 @@ const LoginButton: React.FC = () => {
 
   return isUserLoggedin ? (
     <Link href={URLS.HOME} prefetch={false}>
-      <SecondaryButton title="Go to App" />
+      <SecondaryButton title="Go to app" />
     </Link>
   ) : (
     <Link href={URLS.LOGIN} prefetch={false}>
