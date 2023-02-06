@@ -1,12 +1,12 @@
-import React from 'react'
-import { LoadingProvider } from '@/components'
+import React from 'react';
+import { LoadingProvider } from '@/components';
 
-import { Item, EmptyScreen } from './components'
-import { CLASS_NAMES } from './List-constants'
-import { useJobs } from './List-hook'
+import { Item, EmptyScreen } from './components';
+import { CLASS_NAMES } from './List-constants';
+import { useJobs } from './List-hook';
 
 const List: React.FC = () => {
-  const { jobs, fetching } = useJobs()
+  const { jobs, fetching } = useJobs();
 
   return (
     <LoadingProvider isLoading={fetching}>
@@ -25,7 +25,7 @@ const List: React.FC = () => {
         )}
       </div>
     </LoadingProvider>
-  )
-}
+  );
+};
 
-export default List
+export default List;
