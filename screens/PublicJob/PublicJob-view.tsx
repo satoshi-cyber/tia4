@@ -24,7 +24,7 @@ const PublicJob: React.FC = () => {
         <Markdown
           className="w-full"
           text={jobDescription}
-          skeletonProps={{ count: 20 }}
+          skeletonProps={{ count: 40 }}
         />
         <Link href={href} className="w-full mt-10 sticky bottom-6 z-20">
           <PrimaryButton title="Apply now" />

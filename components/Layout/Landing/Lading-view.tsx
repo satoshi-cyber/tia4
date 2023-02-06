@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { LayoutProps } from '../Layout-types';
 
 import Logo from '../../../public/logo.svg';
+import LoginButton from './components/LoginButton';
 
 const Landing: React.FC<LayoutProps> = ({ children }) => (
   <div className={`flex flex-1 flex-col w-full items-center pt-40`}>
@@ -12,9 +13,7 @@ const Landing: React.FC<LayoutProps> = ({ children }) => (
       <Link href={URLS.LANDING} prefetch={false}>
         <Logo className="" width={120} />
       </Link>
-      <Link href={URLS.HOME} prefetch={false}>
-        <SecondaryButton title="Login / Signup" />
-      </Link>
+      <LoginButton />
     </div>
     <div className="max-w-[1024px] p-6">{children}</div>
     <footer className="bg-gray-100 py-0 w-full mt-20">

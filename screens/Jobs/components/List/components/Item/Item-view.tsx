@@ -21,12 +21,12 @@ const Item: React.FC<ItemProps> = ({ title, deadline, id }) => {
         <Text
           className={CLASS_NAMES.title}
           text={title}
-          skeletonProps={{ width: 100 }}
+          skeletonProps={{ width: 200 }}
         />
         <Text
           className={CLASS_NAMES.deadline}
           text={deadlineLabel}
-          skeletonProps={{ width: 200 }}
+          skeletonProps={{ width: 150 }}
         />
       </div>
       <div className={CLASS_NAMES.options}>
