@@ -34,7 +34,7 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
       )}
       <div className="markdown mb-4">
         <SkeletonLoader
-          height={285}
+          height={295}
           after={
             <Wysimark editor={editor} maxHeight={250} onChange={handleChange} />
           }
