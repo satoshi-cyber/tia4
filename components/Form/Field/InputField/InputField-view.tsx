@@ -30,8 +30,8 @@ const InputField: React.FC<InputFieldProps> = ({
       <Input {...restProps} {...register(name)} />
       <p
         className={clsx(
-          'transition-all text-sm text-red-600 -mt-2 mb-6 text-left text overflow-hidden',
-          error?.message ? 'max-h-[20px]' : 'max-h-[0px]'
+          'transition-all text-xs text-red-600 -mt-2 mb-6 text-left text overflow-hidden',
+          error?.message ? 'max-h-[16px]' : 'max-h-[0px]'
         )}
       >
         {error?.message?.toString()}
