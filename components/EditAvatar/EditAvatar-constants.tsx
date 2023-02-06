@@ -16,7 +16,7 @@ export const LABEL = 'Upload picture';
 
 export const SKELETON_PROPS = {
   isLoading: true,
-  width: 100,
-  height: 100,
+  width: 80,
+  height: 80,
   borderRadius: '100%',
 };
