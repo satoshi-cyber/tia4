@@ -31,6 +31,7 @@ const TextArea: React.FC<TextAreaProps> = React.forwardRef(
           )}
           after={
             <TextareaAutosize
+              minRows={2}
               name={name}
               {...restProps}
               ref={ref as any}
