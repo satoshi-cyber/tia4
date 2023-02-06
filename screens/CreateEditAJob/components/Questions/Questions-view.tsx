@@ -22,7 +22,7 @@ const Questions: React.FC = () => {
             <Icon {...CLOSE_BUTTON_PROPS} onClick={() => remove(index)} />
           )}
           <div className={CLASS_NAMES.question}>
-            <Field.Input
+            <Field.TextArea
               name={`questions.${index}.question`}
               {...QUESTION_FIELD_PROPS}
             />
