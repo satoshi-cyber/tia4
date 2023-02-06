@@ -32,7 +32,7 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
           skeletonProps={{ width: 80 }}
         />
       )}
-      <div className="markdown mb-4 shadow-sm">
+      <div className="markdown mb-4">
         <SkeletonLoader
           height={285}
           after={

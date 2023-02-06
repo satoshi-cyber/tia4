@@ -66,7 +66,7 @@ const Rate = () => {
                 </motion.div>
                 <PlayerTypes
                   width="100%"
-                  className="flex-none rounded-2xl shadow-sm overflow-hidden w-full"
+                  className="flex-none rounded-2xl overflow-hidden w-full"
                   height={450}
                   fluid={false}
                   playsInline

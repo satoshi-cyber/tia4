@@ -69,7 +69,7 @@ const Archive = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
           <div>
             <Player
-              className="flex-none rounded-xl shadow-sm overflow-hidden w-full"
+              className="flex-none rounded-xl overflow-hidden w-full"
               width="100%"
               height={200}
               fluid={false}
@@ -104,7 +104,7 @@ const Archive = () => {
           </div>
           <div>
             <Player
-              className="flex-none rounded-xl shadow-sm overflow-hidden w-full"
+              className="flex-none rounded-xl overflow-hidden w-full"
               width="100%"
               height={200}
               fluid={false}
@@ -144,7 +144,7 @@ const Archive = () => {
           </div>
           <div>
             <Player
-              className="flex-none rounded-xl shadow-sm overflow-hidden w-full"
+              className="flex-none rounded-xl overflow-hidden w-full"
               width="100%"
               height={200}
               fluid={false}
@@ -178,7 +178,7 @@ const Archive = () => {
           </div>
           <div>
             <Player
-              className="flex-none rounded-xl shadow-sm overflow-hidden w-full"
+              className="flex-none rounded-xl overflow-hidden w-full"
               width="100%"
               height={200}
               fluid={false}
@@ -215,7 +215,7 @@ const Archive = () => {
           </div>
           <div>
             <Player
-              className="flex-none rounded-xl shadow-sm overflow-hidden w-full"
+              className="flex-none rounded-xl overflow-hidden w-full"
               width="100%"
               height={200}
               fluid={false}

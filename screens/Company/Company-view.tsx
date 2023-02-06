@@ -16,7 +16,7 @@ const Company = () => {
           />
         </div>
         <div className="grid grid-cols-1 gap-4 w-full">
-          <div className="flex w-full flex-row justify-between items-center border p-4 rounded-full shadow-sm">
+          <div className="flex w-full flex-row justify-between items-center border p-4 rounded-full">
             <div className="flex flex-row items-center">
               <Avatar
                 src="/avatar.jpg"
@@ -32,7 +32,7 @@ const Company = () => {
             <div className="grid grid-cols-2 gap-4 ml-4"></div>
             <ButtonIcon name="HiPencil" />
           </div>
-          <div className="flex w-full flex-row justify-between items-center border p-4 rounded-full shadow-sm">
+          <div className="flex w-full flex-row justify-between items-center border p-4 rounded-full">
             <div className="flex flex-row items-center">
               <Avatar name="Dorlor sit" size={40} className="mr-2" />
               <p className="text-md md:text-lg text-gray-800 mr-2 break-all">
@@ -42,7 +42,7 @@ const Company = () => {
             <div className="grid grid-cols-2 gap-4 ml-4"></div>
             <ButtonIcon name="HiPencil" />
           </div>
-          <div className="flex w-full flex-row justify-between items-center border p-4 rounded-full shadow-sm">
+          <div className="flex w-full flex-row justify-between items-center border p-4 rounded-full">
             <div className="flex flex-row items-center">
               <Avatar
                 email="maecenas.blandit@hotmail.com"
