@@ -1,13 +1,14 @@
-import React from 'react'
-import { Text } from '@/components'
-import SkeletonLoader from '@/components/SkeletonLoader'
+import React from 'react';
+import { Text } from '@/components';
+import SkeletonLoader from '@/components/SkeletonLoader';
+import TextareaAutosize from 'react-textarea-autosize';
 
-import { TextAreaProps } from './TextArea-types'
-import { useTextArea } from './TextArea-hook'
+import { TextAreaProps } from './TextArea-types';
+import { useTextArea } from './TextArea-hook';
 
 const TextArea: React.FC<TextAreaProps> = React.forwardRef(
   ({ variant, before, className, after, name, ...restProps }, ref) => {
-    const { classNames } = useTextArea({ variant, className })
+    const { classNames } = useTextArea({ variant, className });
 
     return (
       <div className={classNames.container}>
@@ -29,7 +30,7 @@ const TextArea: React.FC<TextAreaProps> = React.forwardRef(
             </div>
           )}
           after={
-            <textarea
+            <TextareaAutosize
               name={name}
               {...restProps}
               ref={ref as any}
@@ -48,8 +49,8 @@ const TextArea: React.FC<TextAreaProps> = React.forwardRef(
           />
         )}
       </div>
-    )
+    );
   }
-)
+);
 
-export default TextArea
+export default TextArea;
