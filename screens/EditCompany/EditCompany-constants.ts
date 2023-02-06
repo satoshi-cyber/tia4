@@ -18,21 +18,21 @@ export const TOAST_OPTIONS = {
 
 export const COMPANY_NAME_FIELD_PROPS = {
   name: "name",
-  label: "Company name:",
+  label: "Company name",
   type: "text",
   placeholder: "Your Company LLC",
 };
 
 export const COMPANY_WEBSITE_FIELD_PROPS = {
   name: "website",
-  label: "Company website:",
+  label: "Company website",
   type: "text",
   placeholder: "http://your-company-website.com",
 };
 
 export const COMPANY_DESCRIPTION_PROPS = {
   name: "description",
-  label: "Description:",
+  label: "Description",
   placeholder: "Company description....",
 };
 

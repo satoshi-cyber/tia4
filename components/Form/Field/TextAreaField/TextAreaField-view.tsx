@@ -22,7 +22,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
     <div className="w-full">
       {label && (
         <Text
-          className="text-sm text-gray-600 mb-3 text-left"
+          className="text-sm text-gray-700 mb-2 text-left font-medium"
           text={label}
           skeletonProps={{ width: 80 }}
         />

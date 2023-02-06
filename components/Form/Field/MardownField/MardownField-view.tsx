@@ -27,7 +27,7 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
     <div className="w-full group/wrapper" data-error={Boolean(error)}>
       {label && (
         <Text
-          className="text-sm text-gray-600 mb-3 text-left"
+          className="text-sm text-gray-700 mb-2 text-left font-medium"
           text={label}
           skeletonProps={{ width: 80 }}
         />

@@ -19,25 +19,25 @@ export const TOAST_OPTIONS = {
 export const FIELDS = {
   firstName: {
     name: "firstName",
-    label: "First name:",
+    label: "First name",
     type: "text",
     placeholder: "Your name",
   },
   lastName: {
     name: "lastName",
-    label: "Last name:",
+    label: "Last name",
     type: "text",
     placeholder: "Your lastname",
   },
   linkedInProfile: {
     name: "linkedInProfile",
-    label: "LinkedIn profile url:",
+    label: "LinkedIn profile url",
     type: "text",
     placeholder: "https://www.linkedin.com/in/yourid",
   },
   bio: {
     name: "bio",
-    label: "Bio:",
+    label: "Bio",
     placeholder: "Your bio",
   }
 }

@@ -1,6 +1,6 @@
 export const CLASS_NAMES = {
   container: 'w-full flex justify-center',
-  root: 'w-[100px] h-[100px] relative group cursor-pointer',
+  root: 'w-[80px] h-[80px] relative group cursor-pointer',
   image: {
     base: 'absolute rounded-full border border-gray-200 group-hover:opacity-0 transition-all w-full h-full',
     editMode: 'hidden',

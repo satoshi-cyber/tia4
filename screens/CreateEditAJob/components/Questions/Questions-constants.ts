@@ -18,14 +18,14 @@ export const CLOSE_BUTTON_PROPS = {
 } as const
 
 export const QUESTION_FIELD_PROPS = {
-  label: "Question:",
+  label: "Question",
   type: "text",
   placeholder: "Tell me about yourself"
 }
 
 export const TIME_FIELD_PROPS = {
   className: 'min-w-[100px]',
-  label: "Time:",
+  label: "Time",
   placeholder: "2 min",
   options: [
     { value: "300", label: '5 min' },

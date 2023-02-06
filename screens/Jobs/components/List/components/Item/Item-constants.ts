@@ -1,6 +1,6 @@
 export const CLASS_NAMES = {
   container: "flex w-full flex-row justify-between items-center border p-4 rounded-lg",
-  title: "text-2xl mb-2 text-gray-800",
+  title: "text-xl mb-1 text-gray-800",
   deadline: "text-xs text-gray-600",
   options: 'grid grid-cols-2 gap-4 ml-4 flex-none',
 

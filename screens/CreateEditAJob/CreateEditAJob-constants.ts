@@ -25,7 +25,7 @@ export const DEFAULT_QUESTION_TIME = 120
 
 export const TITLE_FIELD_PROPS = {
   name: "title",
-  label: "Job title:",
+  label: "Job title",
   type: "text",
   placeholder: "Senior software developer",
 };
@@ -33,14 +33,14 @@ export const TITLE_FIELD_PROPS = {
 export const TITLE_ICON = 'HiOutlineBriefcase'
 
 export const DEADLINE_FIELD_PROPS = {
-  label: "Deadline:",
+  label: "Deadline",
   type: "date",
   name: "deadline",
   placeholder: "Senior software developer"
 };
 
 export const DESCRIPTION_FIELD_PROPS = {
-  label: "Description:",
+  label: "Description",
   name: "description",
   placeholder: "Senior software developer"
 }

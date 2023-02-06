@@ -22,7 +22,7 @@ export const SettingsMenu: React.FC = () => {
             <a
               className={`${
                 active && 'text-red-800'
-              } group flex w-full items-center rounded-md py-2 px-4 text-sm cursor-pointer transition-all`}
+              } group flex w-full items-center rounded-md py-3 px-4 text-sm cursor-pointer transition-all`}
               onClick={handleDeleteInterview}
             >
               Delete interview
