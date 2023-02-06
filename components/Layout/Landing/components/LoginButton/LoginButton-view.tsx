@@ -6,13 +6,13 @@ import Link from 'next/link';
 const LoginButton: React.FC = () => {
   const { isUserLoggedin } = useUser();
 
-  return (
+  return isUserLoggedin ? (
     <Link href={URLS.HOME} prefetch={false}>
-      {isUserLoggedin ? (
-        <SecondaryButton title="Go to App" />
-      ) : (
-        <SecondaryButton title="Login / Signup" />
-      )}
+      <SecondaryButton title="Go to App" />
+    </Link>
+  ) : (
+    <Link href={URLS.LOGIN} prefetch={false}>
+      <SecondaryButton title="Login / Signup" />
     </Link>
   );
 };
