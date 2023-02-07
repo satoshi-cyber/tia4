@@ -6,6 +6,6 @@ export const CLASS_NAMES = {
 export const TITLE = "No applications yet?";
 
 export const BUTTON_PROPS = {
-  title: "Record a demo interview",
+  title: 'Record "Career highlight reel"',
   className: "w-auto"
 }
