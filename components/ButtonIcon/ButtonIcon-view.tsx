@@ -23,17 +23,19 @@ const ButtonIcon: React.FC<IconProps> = ({
       height={38}
       circle
       after={
-        <button
-          type="button"
-          className={clsx(
-            className,
-            'transition-all p-2 border border-gray-200 rounded-full text-gray-600 hover:text-purple-800 hover:border-gray-100 hover:shadow-button',
-            active ? 'text-purple-800 border-gray-100 shadow-button' : ''
-          )}
-          {...props}
-        >
-          <IconComponent size={20} />
-        </button>
+        <div>
+          <button
+            type="button"
+            className={clsx(
+              className,
+              'transition-all p-2 border border-gray-200 rounded-full text-gray-600 hover:text-purple-800 hover:border-gray-100 hover:shadow-button',
+              active ? 'text-purple-800 border-gray-100 shadow-button' : ''
+            )}
+            {...props}
+          >
+            <IconComponent size={20} />
+          </button>
+        </div>
       }
     />
   );
