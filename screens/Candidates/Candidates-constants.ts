@@ -9,3 +9,7 @@ export const TITLE_PROPS = {
   subTitleSkeletonProps: { width: 200 }
 }
 
+export const ALL_JOBS_OPTION = {
+  label: 'All jobs',
+  value: 'ALL'
+}

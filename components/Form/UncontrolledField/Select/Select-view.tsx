@@ -1,12 +1,12 @@
-import React from 'react'
-import SkeletonLoader from '@/components/SkeletonLoader'
+import React from 'react';
+import SkeletonLoader from '@/components/SkeletonLoader';
 
-import { SelectProps } from './Select-types'
-import { useSelect } from './Select-hook'
+import { SelectProps } from './Select-types';
+import { useSelect } from './Select-hook';
 
 const Select: React.FC<SelectProps> = React.forwardRef(
   ({ variant, before, className, after, name, options, ...restProps }, ref) => {
-    const { classNames } = useSelect({ variant, className })
+    const { classNames } = useSelect({ variant, className });
 
     return (
       <div className={classNames.container}>
@@ -46,8 +46,8 @@ const Select: React.FC<SelectProps> = React.forwardRef(
           </label>
         )}
       </div>
-    )
+    );
   }
-)
+);
 
-export default Select
+export default Select;

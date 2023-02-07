@@ -1,7 +1,12 @@
+import { LoadingProvider } from '@/components';
 import { Field, FormIcon } from '@/components/Form';
 import React from 'react';
 
+import { useFilters } from './Filters-hook';
+
 const Filters: React.FC = () => {
+  const { fetching, jobOptions } = useFilters();
+
   return (
     <div className="md:sticky md:top-0 md:pt-2 mb-20 w-full bg-white z-10">
       <div className="flex flex-col md:flex-row justify-between w-full border-b pb-3">
@@ -15,15 +20,15 @@ const Filters: React.FC = () => {
           />
         </div>
         <div className="flex -mb-4">
-          <Field.Select
-            label="Job"
-            name="job"
-            after={<FormIcon name="HiOutlineBriefcase" />}
-            options={[
-              { label: 'All', value: 'ALL' },
-              { label: 'Career Highlight Reel', value: '1' },
-            ]}
-          />
+          <LoadingProvider isLoading={fetching}>
+            <Field.Select
+              className="w-[200px]"
+              label="Job"
+              name="job"
+              after={<FormIcon name="HiOutlineBriefcase" />}
+              options={jobOptions}
+            />
+          </LoadingProvider>
         </div>
       </div>
     </div>

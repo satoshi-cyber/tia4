@@ -1,4 +1,5 @@
 import React from "react";
+import { SkeletonProps } from "react-loading-skeleton";
 import { FORM_THEME } from "../../Form-constants";
 
 export interface SelectProps {
@@ -9,4 +10,6 @@ export interface SelectProps {
   after?: React.ReactElement;
   placeholder?: string;
   options: Array<{ value: string, label: string }>
+  isLoading?: boolean
+  skeletonProps?: SkeletonProps
 }

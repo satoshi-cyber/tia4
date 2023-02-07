@@ -1,10 +1,10 @@
-import clsx from 'clsx'
-import React, { useContext } from 'react'
-import Skeleton from 'react-loading-skeleton'
+import clsx from 'clsx';
+import React, { useContext } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
-import LoadingProvider from '../LoadingProvider'
+import LoadingProvider from '../LoadingProvider';
 
-import { SkeletonLoaderProps } from './SkeletonLoader-types'
+import { SkeletonLoaderProps } from './SkeletonLoader-types';
 
 const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   after = null,
@@ -13,10 +13,10 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   className,
   ...skeletonProps
 }) => {
-  const isProviderLoading = useContext(LoadingProvider.Context)
+  const isProviderLoading = useContext(LoadingProvider.Context);
 
   const loading =
-    typeof isLoading === 'undefined' ? isProviderLoading : isLoading
+    typeof isLoading === 'undefined' ? isProviderLoading : isLoading;
 
   return loading ? (
     <Wrapper>
@@ -27,7 +27,7 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
     </Wrapper>
   ) : (
     <>{after}</>
-  )
-}
+  );
+};
 
-export default SkeletonLoader
+export default SkeletonLoader;
