@@ -8,11 +8,13 @@ export const useRedirectCallback = () => {
 
   const { authenticateUserFromRedirect } = useUser()
 
-  const jobId = router.query.jobId as string
-
-  console.log({ jobId })
-
   useLayoutEffect(() => {
+    if (!router.isReady) return;
+
+    const jobId = router.query.jobId as string
+
+    console.log({ jobId })
+
     authenticateUserFromRedirect().then((did) => {
       const url = encodeURIComponent(jobId ? `${DOMAIN}${URLS.DID_CALLBACK}/${jobId}?did=${did}` : `${DOMAIN}${URLS.DID_CALLBACK}?did=${did}`)
 
@@ -20,5 +22,5 @@ export const useRedirectCallback = () => {
 
       router.replace(href)
     })
-  }, [jobId])
+  }, [router])
 };

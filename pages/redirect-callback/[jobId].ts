@@ -1,3 +1,3 @@
-import RedirectCallback from '../../screens/RedirectCallback'
+import dynamic from 'next/dynamic';
 
-export default RedirectCallback
+export default dynamic(() => import('../../screens/RedirectCallback'), { ssr: false })

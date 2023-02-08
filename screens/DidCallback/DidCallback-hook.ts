@@ -8,15 +8,15 @@ export const useDidCallback = () => {
 
   const { authenticateUserFromDid } = useUser()
 
-  const jobId = router.query.jobId as string
-  const did = router.query.did as string
-
-  console.log('did', { jobId })
-
   useLayoutEffect(() => {
+    if (!router.isReady) return;
+
+    const jobId = router.query.jobId as string
+    const did = router.query.did as string
+
     authenticateUserFromDid(did).then(() => {
       const url = `${DOMAIN}${jobId ? URLS.APPLY.replace('[applyJobId]', jobId) : URLS.HOME}`
       router.replace(url)
     })
-  }, [jobId])
+  }, [router])
 };
