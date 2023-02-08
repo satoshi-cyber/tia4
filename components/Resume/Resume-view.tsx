@@ -68,7 +68,11 @@ const Resume: React.FC<ResumeProps> = ({
                 />
               </div>
             </Link>
-            <button className={classNames.removeButton} onClick={handleRemove}>
+            <button
+              type="button"
+              className={classNames.removeButton}
+              onClick={handleRemove}
+            >
               <Icon {...REMOVE_BUTTON_PROPS} />
             </button>
           </div>
