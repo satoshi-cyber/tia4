@@ -4,5 +4,5 @@ export interface ItemProps {
   date?: string
   avatar?: string | null
   candidateName: string | null
-  jobTitle?: string | null
+  score?: number | null
 }
