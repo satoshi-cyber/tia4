@@ -35,7 +35,7 @@ export const useApply = () => {
   const { reset } = form
 
   useEffect(() => {
-    if (!fetchingUser && userData) {
+    if (!fetchingUser && userData && !form.formState.isDirty) {
       reset(formatDefaultValues(userData?.profile))
     }
   }, [fetchingUser, reset, userData])

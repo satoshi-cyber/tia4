@@ -24,7 +24,7 @@ export const useProfile = () => {
   const { reset } = form
 
   useEffect(() => {
-    if (!fetching && data) {
+    if (!fetching && data && !form.formState.isDirty) {
       reset(formatDefaultValues(data?.profile))
     }
   }, [fetching, reset, data])
