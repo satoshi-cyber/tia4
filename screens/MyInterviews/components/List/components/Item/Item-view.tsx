@@ -1,9 +1,9 @@
 import React from 'react';
-import { Avatar, Text, SkeletonLoader, Icon } from '@/components';
+import { Avatar, Text, SkeletonLoader } from '@/components';
 import Link from 'next/link';
 
 import { ItemProps } from './Item-types';
-import { CLASS_NAMES, VIDEO_PROPS, ICON_PROPS } from './Item-constants';
+import { CLASS_NAMES, VIDEO_PROPS } from './Item-constants';
 import { useItem } from './Item-hook';
 
 const Item: React.FC<ItemProps> = ({
@@ -28,7 +28,6 @@ const Item: React.FC<ItemProps> = ({
                 {...VIDEO_PROPS}
                 src={thumbnail}
               ></video>
-              <Icon {...ICON_PROPS} className={CLASS_NAMES.icon} />
             </Link>
           }
         />
