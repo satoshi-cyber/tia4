@@ -22,7 +22,9 @@ export const useUser = () => {
 
   const login = useCallback(
     async (email: string, jobId?: string) => {
-      const did = await magic?.auth.loginWithMagicLink({ email, redirectURI: jobId ? `${window.location.origin}/redirect-callback?jobId=${jobId}` : `${window.location.origin}/redirect-callback` });
+      const redirectURI = jobId ? `${window.location.origin}/redirect-callback/${jobId}` : `${window.location.origin}/redirect-callback`
+
+      const did = await magic?.auth.loginWithMagicLink({ email, redirectURI });
 
       if (!did) {
         return
@@ -41,9 +43,11 @@ export const useUser = () => {
         resolve(true);
       });
 
+      const redirectURI = jobId ? `${window.location.origin}/oauth-callback/${jobId}` : `${window.location.origin}/oauth-callback`
+
       magic?.oauth.loginWithRedirect({
         provider,
-        redirectURI: jobId ? `${window.location.origin}/oauth-callback?jobId=${jobId}` : `${window.location.origin}/oauth-callback`,
+        redirectURI,
       });
     })
     , [])
