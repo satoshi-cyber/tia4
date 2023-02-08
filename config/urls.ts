@@ -4,6 +4,7 @@ export const URLS = {
     HOME: '/app',
     JOBS: '/app/jobs',
     RATE: '/app/rate',
+    RATE_INTERVIEW: '/app/rate/[interviewId]',
     CANDIDATES: '/app/candidates',
     FLOW: '/app/flow',
     COMPANY: '/app/company',

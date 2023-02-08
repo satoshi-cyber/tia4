@@ -1,0 +1,13 @@
+query Interviews($companyId: ID!, $filters: ListInterviewsFilters) {
+  interviews(companyId: $companyId, filters: $filters) {
+    id
+    thumbnail
+    createdAt
+    score
+    interviewee {
+      avatarUrl
+      firstName
+      lastName
+    }
+  }
+}

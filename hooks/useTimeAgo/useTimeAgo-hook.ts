@@ -1,16 +1,10 @@
-import TimeAgo from 'javascript-time-ago';
+import { timeAgo } from "@/utils"
 
-import en from 'javascript-time-ago/locale/en';
-
-TimeAgo.addDefaultLocale(en)
-
-const timeAgo = new TimeAgo('en-US')
 
 export const useTimeAgo = (date?: string) => {
   if (!date) {
     return undefined
   }
 
-  return timeAgo.format(new Date(date))
-
+  return timeAgo(date)
 }

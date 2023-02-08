@@ -43,6 +43,15 @@ export type AuthInput = {
   provider?: InputMaybe<Scalars['String']>;
 };
 
+export type Candidate = {
+  __typename?: 'Candidate';
+  avatarUrl?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  linkedinProfile?: Maybe<Scalars['String']>;
+};
+
 export type Company = {
   __typename?: 'Company';
   avatarUploadUrl?: Maybe<Scalars['String']>;
@@ -75,8 +84,10 @@ export type Interview = {
   answers: Array<Answer>;
   createdAt: Scalars['Date'];
   id: Scalars['ID'];
+  interviewee?: Maybe<Candidate>;
   job?: Maybe<Job>;
   jobId: Scalars['String'];
+  score?: Maybe<Scalars['Float']>;
   thumbnail: Scalars['String'];
 };
 
@@ -93,6 +104,11 @@ export type Job = {
   id: Scalars['ID'];
   questions: Array<Question>;
   title: Scalars['String'];
+};
+
+export type ListInterviewsFilters = {
+  jobId?: InputMaybe<Scalars['ID']>;
+  query?: InputMaybe<Scalars['String']>;
 };
 
 export type Member = CompanyInvite | CompanyMember;
@@ -259,6 +275,7 @@ export type Query = {
   companies: Array<Company>;
   company: Company;
   didApply: Scalars['Boolean'];
+  interviews: Array<Interview>;
   job: Job;
   jobs: Array<Job>;
   myInterview: Interview;
@@ -275,6 +292,12 @@ export type QueryCompanyArgs = {
 
 export type QueryDidApplyArgs = {
   jobId: Scalars['ID'];
+};
+
+
+export type QueryInterviewsArgs = {
+  companyId: Scalars['ID'];
+  filters?: InputMaybe<ListInterviewsFilters>;
 };
 
 
@@ -402,6 +425,14 @@ export type EditCompanyQueryVariables = Exact<{
 
 
 export type EditCompanyQuery = { __typename?: 'Query', company: { __typename?: 'Company', id: string, name?: string | null, website?: string | null, description?: string | null, avatarUrl?: string | null, avatarUploadUrl?: string | null } };
+
+export type InterviewsQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+  filters?: InputMaybe<ListInterviewsFilters>;
+}>;
+
+
+export type InterviewsQuery = { __typename?: 'Query', interviews: Array<{ __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null }> };
 
 export type JobQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -567,6 +598,25 @@ export const EditCompanyDocument = gql`
 
 export function useEditCompanyQuery(options: Omit<Urql.UseQueryArgs<EditCompanyQueryVariables>, 'query'>) {
   return Urql.useQuery<EditCompanyQuery, EditCompanyQueryVariables>({ query: EditCompanyDocument, ...options });
+};
+export const InterviewsDocument = gql`
+    query Interviews($companyId: ID!, $filters: ListInterviewsFilters) {
+  interviews(companyId: $companyId, filters: $filters) {
+    id
+    thumbnail
+    createdAt
+    score
+    interviewee {
+      avatarUrl
+      firstName
+      lastName
+    }
+  }
+}
+    `;
+
+export function useInterviewsQuery(options: Omit<Urql.UseQueryArgs<InterviewsQueryVariables>, 'query'>) {
+  return Urql.useQuery<InterviewsQuery, InterviewsQueryVariables>({ query: InterviewsDocument, ...options });
 };
 export const JobDocument = gql`
     query Job($id: ID!) {
