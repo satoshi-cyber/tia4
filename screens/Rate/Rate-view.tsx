@@ -79,7 +79,7 @@ const Rate = () => {
               <div className="flex flex-col max-w-[700px] w-full px-6 lg:px-0">
                 <motion.div
                   style={{ marginLeft, marginRight, scale }}
-                  className="xl:sticky xl:top-28 xl:top-16 z-20 origin-top pt-6"
+                  className="xl:sticky xl:top-28 xl:top-16 z-50 origin-top pt-6"
                 >
                   <div>
                     <motion.div

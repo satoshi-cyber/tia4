@@ -3,8 +3,8 @@ import { SwiperProps } from "swiper/react";
 
 export const CLASS_NAMES = {
     container: {
-        fullScreen: 'fixed w-screen h-screen top-0 bottom-0 left-0 right-0 z-50 bg-black',
-        inline: 'w-full h-[400px] md:h-[525px] relative rounded-xl overflow-hidden bg-black transform-gpu'
+        fullScreen: 'fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black',
+        inline: 'w-full h-[400px] md:h-[525px] relative rounded-2xl border border-gray-100 overflow-hidden bg-black transform-gpu'
     },
     swiper: "w-full h-full"
 }
