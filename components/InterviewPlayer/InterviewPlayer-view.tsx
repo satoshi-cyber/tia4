@@ -10,6 +10,7 @@ import { useInterviewPlayer } from './InterviewPlayer-hook';
 import Slide from './components/Slide';
 
 import SkeletonLoader from '../SkeletonLoader';
+import { ReactDOM } from '@wysimark/react';
 
 const InterviewPlayer: React.FC<InterviewPlayerProps> = ({
   answers,
@@ -26,7 +27,7 @@ const InterviewPlayer: React.FC<InterviewPlayerProps> = ({
     className,
   });
 
-  return (
+  const children = (
     <div className={classNames.container}>
       <SkeletonLoader
         {...SKELETON_PROPS}
@@ -53,6 +54,11 @@ const InterviewPlayer: React.FC<InterviewPlayerProps> = ({
       />
     </div>
   );
+
+  if (fullScreen)
+    return ReactDOM.createPortal(children, document.getElementById('popups'));
+
+  return children;
 };
 
 export default InterviewPlayer;

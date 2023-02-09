@@ -6,7 +6,6 @@ import { useMediaQuery } from 'react-responsive';
 
 import Icon from '../../components/Icon';
 
-import Linkedin from '../../public/linkedin.svg';
 import Pdf from './components/Pdf';
 import { useRouter } from 'next/router';
 import { Avatar, ButtonIcon, LoadingProvider, Text } from '@/components';
@@ -79,7 +78,7 @@ const Rate = () => {
               <div className="flex flex-col max-w-[700px] w-full px-6 lg:px-0">
                 <motion.div
                   style={{ marginLeft, marginRight, scale }}
-                  className="xl:sticky xl:top-28 xl:top-16 z-50 origin-top pt-6"
+                  className="xl:sticky xl:top-28 xl:top-16 z-10 origin-top pt-6"
                 >
                   <div>
                     <motion.div

@@ -140,3 +140,5 @@ input::-webkit-date-and-time-value {
 .video-react-icon-fullscreen {
   display: none !important;
 }
+
+#popups { @apply z-50 absolute }
