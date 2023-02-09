@@ -14,7 +14,7 @@ const MyInterviews = () => {
     useMyInterview();
 
   return (
-    <Layout.Default>
+    <Layout.Default width="max-w-[690px]">
       <LoadingProvider isLoading={fetching}>
         <Title
           {...TITLE_PROPS}

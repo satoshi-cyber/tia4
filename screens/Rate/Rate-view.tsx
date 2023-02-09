@@ -43,7 +43,7 @@ const Rate = () => {
     [0, 700],
     [0, isLargeScreen ? -650 : 0]
   );
-  const scale = useTransform(scrollY, [0, 700], [1, isLargeScreen ? 0.6 : 1]);
+  const scale = useTransform(scrollY, [0, 700], [1, isLargeScreen ? 0.7 : 1]);
   const docScale = useTransform(
     scrollY,
     [0, 700],
@@ -75,7 +75,7 @@ const Rate = () => {
         >
           <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
             {interviewId || isLoading ? (
-              <div className="flex flex-col max-w-[700px] w-full px-6 lg:px-0">
+              <div className="flex flex-col lg:max-w-[850px] xl:max-w-[642px] w-full px-6 lg:px-0">
                 <motion.div
                   style={{ marginLeft, marginRight, scale }}
                   className="xl:sticky xl:top-28 xl:top-16 z-10 origin-top pt-6"
@@ -113,7 +113,7 @@ const Rate = () => {
                         </div>
                         <div>
                           <Text
-                            className="text-2xl"
+                            className="text-xl"
                             text={candidateName}
                             skeletonProps={{ width: 130 }}
                           />
