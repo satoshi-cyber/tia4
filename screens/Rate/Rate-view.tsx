@@ -9,9 +9,9 @@ import Icon from '../../components/Icon';
 import Linkedin from '../../public/linkedin.svg';
 import Pdf from './components/Pdf';
 import { useRouter } from 'next/router';
-import { Avatar, LoadingProvider, Text } from '@/components';
+import { Avatar, ButtonIcon, LoadingProvider, Text } from '@/components';
 import { useInterviewQuery } from '@/graphql';
-import { useUser } from '@/hooks';
+import { useTimeAgo, useUser } from '@/hooks';
 import InterviewPlayer from '@/components/InterviewPlayer';
 
 const PlayerTypes = Player as any;
@@ -63,7 +63,7 @@ const Rate = () => {
   const answers = data?.interview?.answers;
   const avatarUrl = data?.interview?.interviewee?.avatarUrl;
   const candidateName = `${data?.interview?.interviewee?.firstName} ${data?.interview?.interviewee?.lastName}`;
-  const candidateBio = data?.interview?.interviewee?.bio;
+  const date = useTimeAgo(data?.interview?.createdAt);
 
   return (
     <LoadingProvider isLoading={isLoading}>
@@ -91,14 +91,18 @@ const Rate = () => {
                         size={20}
                         className="text-black mr-3"
                       />
-                      Senior software developer
+                      <Text
+                        text="Senior software developer"
+                        className="text-lg"
+                        skeletonProps={{ width: 180 }}
+                      />
                     </motion.div>
                     <InterviewPlayer answers={answers} />
                     <motion.div
                       className="flex justify-between mt-4 mb-4 md:mb-10"
                       style={{ opacity }}
                     >
-                      <div className="flex">
+                      <div className="flex flex-1">
                         <div className="mr-4">
                           <Avatar
                             size={50}
@@ -109,53 +113,43 @@ const Rate = () => {
                           />
                         </div>
                         <div>
-                          <div className="flex flex-row items-center">
-                            <Icon
-                              name="HiMail"
-                              size={30}
-                              className="text-black mr-3"
-                            />
-                            <Linkedin width={20} />
-                          </div>
-                          <Text className="text-2xl" text={candidateName} />
                           <Text
-                            className="text-xs text-gray-500 max-w-[300px]"
-                            text={candidateBio}
+                            className="text-2xl"
+                            text={candidateName}
+                            skeletonProps={{ width: 130 }}
+                          />
+                          <Text
+                            className="text-sm text-gray-500 max-w-[300px]"
+                            skeletonProps={{ width: 60 }}
+                            text={date}
                           />
                         </div>
                       </div>
                       <div className="flex-none hidden md:block">
-                        <div className="grid grid-cols-2 grid-rows-1 gap-4 border-2 p-2 rounded-full">
-                          <Icon
-                            name="HiThumbDown"
-                            size={50}
-                            className="text-black"
-                          />
-                          <Icon
-                            name="HiThumbUp"
-                            size={50}
-                            className="text-black"
-                          />
+                        <div className="grid grid-cols-2 grid-rows-1 gap-4">
+                          <ButtonIcon size={60} name="HiThumbDown" />
+                          <ButtonIcon size={60} name="HiThumbUp" />
                         </div>
                       </div>
-                      <Icon
-                        name="HiBookmark"
-                        size={40}
-                        className="text-black"
-                      />
+                      <div className="flex flex-1 flex-row justify-end mb-2">
+                        <ButtonIcon
+                          circle={false}
+                          name="HiMail"
+                          size={38}
+                          className="text-gray-800 mr-3"
+                        />
+                        <ButtonIcon
+                          circle={false}
+                          name="HiLinkedin"
+                          size={38}
+                          className="text-gray-800"
+                        />
+                      </div>
                     </motion.div>
                     <div className="block md:hidden flex justify-center mb-6">
-                      <div className="grid grid-cols-2 grid-rows-1 gap-4 border-2 p-2 rounded-full">
-                        <Icon
-                          name="HiThumbDown"
-                          size={50}
-                          className="text-black"
-                        />
-                        <Icon
-                          name="HiThumbUp"
-                          size={50}
-                          className="text-black"
-                        />
+                      <div className="grid grid-cols-2 grid-rows-1 gap-4">
+                        <ButtonIcon size={60} name="HiThumbDown" />
+                        <ButtonIcon size={60} name="HiThumbUp" />
                       </div>
                     </div>
                   </div>

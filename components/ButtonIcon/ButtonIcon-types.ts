@@ -7,4 +7,6 @@ export interface IconProps {
   active?: boolean
   onClick?: (e?: any) => void
   className?: string
+  size?: number
+  circle?: boolean
 }

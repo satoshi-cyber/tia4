@@ -27,49 +27,56 @@ import { HiCheck } from '@react-icons/all-files/hi/HiCheck';
 import { HiVolumeUp } from '@react-icons/all-files/hi/HiVolumeUp';
 import { HiMail } from '@react-icons/all-files/hi/HiMail';
 import { HiStar } from '@react-icons/all-files/hi/HiStar';
-import { HiOutlineRefresh } from '@react-icons/all-files/hi/HiOutlineRefresh'
-import { HiSearch } from '@react-icons/all-files/hi/HiSearch'
-import { HiChevronDown } from '@react-icons/all-files/hi/HiChevronDown'
-import { HiMenu } from '@react-icons/all-files/hi/HiMenu'
-import { HiX } from '@react-icons/all-files/hi/HiX'
-import { HiChevronLeft } from '@react-icons/all-files/hi/HiChevronLeft'
+import { HiOutlineRefresh } from '@react-icons/all-files/hi/HiOutlineRefresh';
+import { HiSearch } from '@react-icons/all-files/hi/HiSearch';
+import { HiChevronDown } from '@react-icons/all-files/hi/HiChevronDown';
+import { HiMenu } from '@react-icons/all-files/hi/HiMenu';
+import { HiX } from '@react-icons/all-files/hi/HiX';
+import { HiChevronLeft } from '@react-icons/all-files/hi/HiChevronLeft';
+
+import Linkedin from '../../public/linkedin.svg';
+
+const HiLinkedin = ({ size = 24 }: { size?: number }) => (
+  <Linkedin width={size} height={size} />
+);
 
 const Icons = {
-    HiPlusCircle,
-    HiPlay,
-    HiUsers,
-    HiFilter,
-    HiOfficeBuilding,
-    HiSwitchVertical,
-    HiBriefcase,
-    HiUserCircle,
-    HiInformationCircle,
-    HiOutlineLogout,
-    HiOutlineUser,
-    HiTrash,
-    HiBookmark,
-    HiThumbDown,
-    HiThumbUp,
-    HiChevronRight,
-    HiCog,
-    HiOutlineLink,
-    HiUpload,
-    HiOutlineDocument,
-    HiXCircle,
-    HiOutlineBriefcase,
-    HiPencil,
-    HiExternalLink,
-    HiOutlineMail,
-    HiCheck,
-    HiVolumeUp,
-    HiMail,
-    HiStar,
-    HiOutlineRefresh,
-    HiSearch,
-    HiChevronDown,
-    HiMenu,
-    HiX,
-    HiChevronLeft,
+  HiPlusCircle,
+  HiPlay,
+  HiUsers,
+  HiFilter,
+  HiOfficeBuilding,
+  HiSwitchVertical,
+  HiBriefcase,
+  HiUserCircle,
+  HiInformationCircle,
+  HiOutlineLogout,
+  HiOutlineUser,
+  HiTrash,
+  HiBookmark,
+  HiThumbDown,
+  HiThumbUp,
+  HiChevronRight,
+  HiCog,
+  HiOutlineLink,
+  HiUpload,
+  HiOutlineDocument,
+  HiXCircle,
+  HiOutlineBriefcase,
+  HiPencil,
+  HiExternalLink,
+  HiOutlineMail,
+  HiCheck,
+  HiVolumeUp,
+  HiMail,
+  HiStar,
+  HiOutlineRefresh,
+  HiSearch,
+  HiChevronDown,
+  HiMenu,
+  HiX,
+  HiChevronLeft,
+  HiLinkedin,
 };
 
-export default Icons
+export default Icons;
