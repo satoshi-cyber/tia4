@@ -8,7 +8,7 @@ import { URLS } from '@/config';
 import clsx from 'clsx';
 
 const CenterLayout: React.FC<LayoutProps> = ({ children }) => (
-  <div className={`flex flex-1 w-full justify-center items-center py-20 `}>
+  <div className={`flex flex-1 w-full justify-center items-center py-20`}>
     <div
       className={`p-6 max-w-[480px] w-full flex flex-col justify-center items-center`}
     >
@@ -33,16 +33,23 @@ const Apply: React.FC<LayoutProps> = ({ children }) => (
   </div>
 );
 
-const Default: React.FC<LayoutProps & { width?: string }> = ({ children, width = 'max-w-[700px]' }) => (
+const Default: React.FC<LayoutProps & { width?: string }> = ({
+  children,
+  width = 'max-w-[700px]',
+}) => (
   <div
     className={`flex flex-1 flex-col w-full items-center py-10 pt-28 md:py-16 md:pl-[70px]`}
   >
-    <div className={clsx(width, "flex flex-col max-w-[700px] w-full p-6 items-center")}>
+    <div
+      className={clsx(
+        width,
+        'flex flex-col max-w-[700px] w-full p-6 items-center'
+      )}
+    >
       {children}
     </div>
   </div>
 );
-
 
 const Layout = {
   Default,
