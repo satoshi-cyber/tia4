@@ -275,6 +275,7 @@ export type Query = {
   companies: Array<Company>;
   company: Company;
   didApply: Scalars['Boolean'];
+  interview: Interview;
   interviews: Array<Interview>;
   job: Job;
   jobs: Array<Job>;
@@ -292,6 +293,12 @@ export type QueryCompanyArgs = {
 
 export type QueryDidApplyArgs = {
   jobId: Scalars['ID'];
+};
+
+
+export type QueryInterviewArgs = {
+  companyId: Scalars['ID'];
+  id: Scalars['ID'];
 };
 
 
@@ -425,6 +432,14 @@ export type EditCompanyQueryVariables = Exact<{
 
 
 export type EditCompanyQuery = { __typename?: 'Query', company: { __typename?: 'Company', id: string, name?: string | null, website?: string | null, description?: string | null, avatarUrl?: string | null, avatarUploadUrl?: string | null } };
+
+export type InterviewQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+  id: Scalars['ID'];
+}>;
+
+
+export type InterviewQuery = { __typename?: 'Query', interview: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null, answers: Array<{ __typename?: 'Answer', url: string, question: { __typename?: 'Question', id: string, question: string, time: number } }>, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null, bio?: string | null } | null } };
 
 export type InterviewsQueryVariables = Exact<{
   companyId: Scalars['ID'];
@@ -598,6 +613,43 @@ export const EditCompanyDocument = gql`
 
 export function useEditCompanyQuery(options: Omit<Urql.UseQueryArgs<EditCompanyQueryVariables>, 'query'>) {
   return Urql.useQuery<EditCompanyQuery, EditCompanyQueryVariables>({ query: EditCompanyDocument, ...options });
+};
+export const InterviewDocument = gql`
+    query Interview($companyId: ID!, $id: ID!) {
+  interview(companyId: $companyId, id: $id) {
+    id
+    thumbnail
+    createdAt
+    job {
+      id
+      title
+      deadline
+      company {
+        id
+        name
+        avatarUrl
+      }
+    }
+    answers {
+      question {
+        id
+        question
+        time
+      }
+      url
+    }
+    interviewee {
+      avatarUrl
+      firstName
+      lastName
+      bio
+    }
+  }
+}
+    `;
+
+export function useInterviewQuery(options: Omit<Urql.UseQueryArgs<InterviewQueryVariables>, 'query'>) {
+  return Urql.useQuery<InterviewQuery, InterviewQueryVariables>({ query: InterviewDocument, ...options });
 };
 export const InterviewsDocument = gql`
     query Interviews($companyId: ID!, $filters: ListInterviewsFilters) {

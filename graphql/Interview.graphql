@@ -1,0 +1,31 @@
+query Interview($companyId: ID!, $id: ID!) {
+  interview(companyId: $companyId, id: $id) {
+    id
+    thumbnail
+    createdAt
+    job {
+      id
+      title
+      deadline
+      company {
+        id
+        name
+        avatarUrl
+      }
+    }
+    answers {
+      question {
+        id
+        question
+        time
+      }
+      url
+    }
+    interviewee {
+      avatarUrl
+      firstName
+      lastName
+      bio
+    }
+  }
+}

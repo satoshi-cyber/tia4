@@ -24,6 +24,7 @@ export const client = createClient({
   exchanges: [
     dedupExchange,
     cacheExchange,
+    retryExchange(retryOptions),
     authExchange<{ token: string }>({
       async getAuth({ authState, mutate }) {
         const cookies = new Cookies();
@@ -101,7 +102,6 @@ export const client = createClient({
         return false
       },
     }),
-    retryExchange(retryOptions),
     fetchExchange,
   ],
 })
