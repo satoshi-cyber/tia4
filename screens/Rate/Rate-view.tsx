@@ -1,8 +1,5 @@
 import { Player } from 'video-react';
-import React, { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import React from 'react';
 import 'video-react/dist/video-react.css';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
@@ -10,18 +7,14 @@ import { useMediaQuery } from 'react-responsive';
 import Icon from '../../components/Icon';
 
 import Linkedin from '../../public/linkedin.svg';
-import Skeleton from 'react-loading-skeleton';
+import Pdf from './components/Pdf';
 
 const PlayerTypes = Player as any;
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const Rate = () => {
   const isLargeScreen = useMediaQuery({
     query: '(min-width: 1280px)',
   });
-
-  const [pages, setPages] = useState<any>([]);
 
   const { scrollY } = useScroll();
 
@@ -50,14 +43,6 @@ const Rate = () => {
   const opacity = useTransform(scrollY, [0, 100], [1, isLargeScreen ? 0 : 1]);
 
   console.log({ containerMarginRight });
-
-  const onDocumentLoadSuccess = ({ numPages }: any) => {
-    setPages(
-      Array(numPages)
-        .fill(0)
-        .map((_, index) => index + 1)
-    );
-  };
 
   return (
     <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
@@ -148,23 +133,7 @@ const Rate = () => {
               className="origin-top hidden md:block"
               style={{ scale: docScale }}
             >
-              <Document
-                file="/awesome-cv.pdf"
-                onLoadSuccess={onDocumentLoadSuccess}
-                loading={
-                  <div className="border my-10 xl:-ml-[60px] xl:w-[820px] p-16">
-                    <Skeleton count={50} />
-                  </div>
-                }
-              >
-                {pages.map((index: number) => (
-                  <Page
-                    pageNumber={index}
-                    width={820}
-                    className="border my-10 -ml-[60px]"
-                  />
-                ))}
-              </Document>
+              <Pdf src="/awesome-cv.pdf" />
             </motion.div>
           </div>
         </div>
