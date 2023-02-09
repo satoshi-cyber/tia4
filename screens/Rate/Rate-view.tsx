@@ -5,9 +5,9 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'video-react/dist/video-react.css';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useMediaQuery } from 'react-responsive';
 
 import Icon from '../../components/Icon';
-import Menu from '../../components/Menu';
 
 import Linkedin from '../../public/linkedin.svg';
 import Skeleton from 'react-loading-skeleton';
@@ -17,17 +17,33 @@ const PlayerTypes = Player as any;
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const Rate = () => {
+  const isLargeScreen = useMediaQuery({
+    query: '(min-width: 1280px)',
+  });
+
   const [pages, setPages] = useState<any>([]);
 
   const { scrollY } = useScroll();
 
-  const marginLeft = useTransform(scrollY, [0, 700], [0, 650]);
-  const marginRight = useTransform(scrollY, [0, 700], [0, -650]);
-  const scale = useTransform(scrollY, [0, 700], [1, 0.6]);
-  const docScale = useTransform(scrollY, [0, 700], [0.8, 1]);
-  const containerMarginRight = useTransform(scrollY, [0, 700], [0, -500]);
-  const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 100], [1, 0]);
+  const marginLeftAnimated = useTransform(scrollY, [0, 700], [0, 650]);
+  const marginRightAnimated = useTransform(scrollY, [0, 700], [0, -650]);
+  const scaleAnimated = useTransform(scrollY, [0, 700], [1, 0.6]);
+  const docScaleAnimated = useTransform(scrollY, [0, 700], [0.8, 1]);
+  const containerMarginRightAnimated = useTransform(
+    scrollY,
+    [0, 700],
+    [0, -450]
+  );
+  const containerMarginTopAnimated = useTransform(scrollY, [0, 700], [0, 200]);
+  const opacityAnimated = useTransform(scrollY, [0, 100], [1, 0]);
+
+  const marginLeft = isLargeScreen ? marginLeftAnimated : 0;
+  const marginRight = isLargeScreen ? marginRightAnimated : 0;
+  const scale = isLargeScreen ? scaleAnimated : 1;
+  const docScale = isLargeScreen ? docScaleAnimated : 1;
+  const containerMarginRight = isLargeScreen ? containerMarginRightAnimated : 0;
+  const containerMarginTop = isLargeScreen ? containerMarginTopAnimated : 0;
+  const opacity = isLargeScreen ? opacityAnimated : 1;
 
   const onDocumentLoadSuccess = ({ numPages }: any) => {
     setPages(
@@ -39,7 +55,6 @@ const Rate = () => {
 
   return (
     <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
-      <Menu />
       <motion.div
         style={{
           marginLeft: containerMarginRight,
@@ -47,10 +62,10 @@ const Rate = () => {
         }}
       >
         <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
-          <div className="flex flex-col max-w-[700px] w-full mx-4">
+          <div className="flex flex-col max-w-[700px] w-full mx-6 md:mx-0">
             <motion.div
               style={{ marginLeft, marginRight, scale }}
-              className="sticky top-28 md:top-16 z-20 origin-top"
+              className="xl:sticky xl:top-28 xl:top-16 z-20 origin-top"
             >
               <div>
                 <motion.div
@@ -66,8 +81,7 @@ const Rate = () => {
                 </motion.div>
                 <PlayerTypes
                   width="100%"
-                  className="flex-none rounded-2xl overflow-hidden w-full"
-                  height={450}
+                  className="flex-none rounded-2xl overflow-hidden w-full h-[450px]"
                   fluid={false}
                   playsInline
                   controls
@@ -124,12 +138,15 @@ const Rate = () => {
                 </div>
               </div>
             </motion.div>
-            <motion.div className="origin-top" style={{ scale: docScale }}>
+            <motion.div
+              className="origin-top hidden md:block"
+              style={{ scale: docScale }}
+            >
               <Document
                 file="/awesome-cv.pdf"
                 onLoadSuccess={onDocumentLoadSuccess}
                 loading={
-                  <div className="border my-10 -ml-[60px] w-[820px] p-16">
+                  <div className="border my-10 xl:-ml-[60px] xl:w-[820px] p-16">
                     <Skeleton count={50} />
                   </div>
                 }
