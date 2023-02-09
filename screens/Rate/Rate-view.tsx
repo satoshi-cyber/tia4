@@ -25,25 +25,31 @@ const Rate = () => {
 
   const { scrollY } = useScroll();
 
-  const marginLeftAnimated = useTransform(scrollY, [0, 700], [0, 650]);
-  const marginRightAnimated = useTransform(scrollY, [0, 700], [0, -650]);
-  const scaleAnimated = useTransform(scrollY, [0, 700], [1, 0.6]);
-  const docScaleAnimated = useTransform(scrollY, [0, 700], [0.8, 1]);
-  const containerMarginRightAnimated = useTransform(
+  const marginLeft = useTransform(
     scrollY,
     [0, 700],
-    [0, -450]
+    [0, isLargeScreen ? 650 : 0]
   );
-  const containerMarginTopAnimated = useTransform(scrollY, [0, 700], [0, 200]);
-  const opacityAnimated = useTransform(scrollY, [0, 100], [1, 0]);
+  const marginRight = useTransform(
+    scrollY,
+    [0, 700],
+    [0, isLargeScreen ? -650 : 0]
+  );
+  const scale = useTransform(scrollY, [0, 700], [1, isLargeScreen ? 0.6 : 1]);
+  const docScale = useTransform(
+    scrollY,
+    [0, 700],
+    [isLargeScreen ? 0.8 : 1, 1]
+  );
+  const containerMarginRight = useTransform(
+    scrollY,
+    [0, isLargeScreen ? 700 : 0],
+    [0, isLargeScreen ? -450 : 0]
+  );
+  const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 100], [1, isLargeScreen ? 0 : 1]);
 
-  const marginLeft = isLargeScreen ? marginLeftAnimated : 0;
-  const marginRight = isLargeScreen ? marginRightAnimated : 0;
-  const scale = isLargeScreen ? scaleAnimated : 1;
-  const docScale = isLargeScreen ? docScaleAnimated : 1;
-  const containerMarginRight = isLargeScreen ? containerMarginRightAnimated : 0;
-  const containerMarginTop = isLargeScreen ? containerMarginTopAnimated : 0;
-  const opacity = isLargeScreen ? opacityAnimated : 1;
+  console.log({ containerMarginRight });
 
   const onDocumentLoadSuccess = ({ numPages }: any) => {
     setPages(
