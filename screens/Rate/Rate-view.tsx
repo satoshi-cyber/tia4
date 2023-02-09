@@ -42,8 +42,6 @@ const Rate = () => {
   const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200]);
   const opacity = useTransform(scrollY, [0, 100], [1, isLargeScreen ? 0 : 1]);
 
-  console.log({ containerMarginRight });
-
   return (
     <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
       <motion.div

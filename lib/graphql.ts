@@ -1,4 +1,5 @@
-import { cacheExchange, createClient, dedupExchange, fetchExchange, makeOperation } from 'urql'
+import { cacheExchange, CombinedError, createClient, dedupExchange, fetchExchange, makeOperation } from 'urql'
+import { retryExchange } from '@urql/exchange-retry';
 import { authExchange } from '@urql/exchange-auth';
 import { TOKEN_COOKIE_KEY } from '@/config/auth'
 import { GRAPHQL_URL, URLS } from '@/config';
@@ -9,6 +10,14 @@ import { Cookies } from 'react-cookie';
 const magic =
   typeof window !== 'undefined' ?
     new Magic(process.env.NEXT_PUBLIC_MAGIC_PUB_KEY!) : undefined
+
+const retryOptions = {
+  initialDelayMs: 1000,
+  maxDelayMs: 15000,
+  randomDelay: true,
+  maxNumberAttempts: 10,
+  retryIf: (err: CombinedError) => Boolean(err),
+};
 
 export const client = createClient({
   url: GRAPHQL_URL,
@@ -92,6 +101,7 @@ export const client = createClient({
         return false
       },
     }),
+    retryExchange(retryOptions),
     fetchExchange,
   ],
 })

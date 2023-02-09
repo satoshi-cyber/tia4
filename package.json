@@ -22,6 +22,7 @@
     "@tailwindcss/typography": "^0.5.8",
     "@types/lodash.get": "^4.4.7",
     "@urql/exchange-auth": "^1.0.0",
+    "@urql/exchange-retry": "^1.0.0",
     "@wysimark/react": "^1.0.55",
     "add": "^2.0.6",
     "autoprefixer": "^10.4.8",
