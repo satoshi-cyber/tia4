@@ -47,7 +47,7 @@ const Rate = () => {
   const docScale = useTransform(
     scrollY,
     [0, 700],
-    [isLargeScreen ? 0.8 : 1, 1]
+    [isLargeScreen ? 0.78 : 1, 1]
   );
   const containerMarginRight = useTransform(
     scrollY,
