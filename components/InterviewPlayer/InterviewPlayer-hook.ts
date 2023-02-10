@@ -56,7 +56,6 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
     }
 
     handle.exit()
-
   }, [fullScreen])
 
   useEffect(() => {
@@ -68,7 +67,7 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
 
   const classNames = {
     ...CLASS_NAMES,
-    container: clsx(className, fullScreen ? CLASS_NAMES.container.fullScreen : CLASS_NAMES.container.inline)
+    container: clsx(className, CLASS_NAMES.container)
   }
 
   return {

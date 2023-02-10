@@ -29,33 +29,35 @@ const InterviewPlayer: React.FC<InterviewPlayerProps> = ({
   });
 
   return (
-    <FullScreen handle={handle}>
-      <div className={classNames.container}>
-        <SkeletonLoader
-          {...SKELETON_PROPS}
-          after={
-            <SwiperContainer
-              {...SWIPER_OPTIONS}
-              onSwiper={setSwiper}
-              className={classNames.swiper}
-            >
-              {answers?.map((answer, index) => (
-                <SwiperSlide key={index}>
-                  <Slide
-                    answer={answer}
-                    index={index}
-                    players={players}
-                    onEnded={onEnded}
-                    fullScreen={fullScreen}
-                    toggleFullScreen={toggleFullScreen}
-                  />
-                </SwiperSlide>
-              ))}
-            </SwiperContainer>
-          }
-        />
-      </div>
-    </FullScreen>
+    <div className={classNames.container}>
+      <FullScreen handle={handle}>
+        <div className="absolute w-full h-full min-h-[400px] md:min-h-[482px]">
+          <SkeletonLoader
+            {...SKELETON_PROPS}
+            after={
+              <SwiperContainer
+                {...SWIPER_OPTIONS}
+                onSwiper={setSwiper}
+                className={classNames.swiper}
+              >
+                {answers?.map((answer, index) => (
+                  <SwiperSlide key={index}>
+                    <Slide
+                      answer={answer}
+                      index={index}
+                      players={players}
+                      onEnded={onEnded}
+                      fullScreen={fullScreen}
+                      toggleFullScreen={toggleFullScreen}
+                    />
+                  </SwiperSlide>
+                ))}
+              </SwiperContainer>
+            }
+          />
+        </div>
+      </FullScreen>
+    </div>
   );
 };
 
