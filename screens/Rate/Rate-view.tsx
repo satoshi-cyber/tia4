@@ -1,19 +1,27 @@
-import { Player } from 'video-react';
 import React from 'react';
-import 'video-react/dist/video-react.css';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
+import { useRouter } from 'next/router';
 
 import Icon from '../../components/Icon';
 
 import Pdf from './components/Pdf';
-import { useRouter } from 'next/router';
+
 import { Avatar, ButtonIcon, LoadingProvider, Text } from '@/components';
 import { useInterviewQuery } from '@/graphql';
 import { useTimeAgo, useUser } from '@/hooks';
 import InterviewPlayer from '@/components/InterviewPlayer';
+import { isMobile } from 'react-device-detect';
 
-const PlayerTypes = Player as any;
+const Div: React.FC<{
+  children: React.ReactNode;
+  style: object;
+  className?: string;
+}> = ({ children, ...restProps }) => {
+  if (isMobile) return <div {...restProps}>{children}</div>;
+
+  return <motion.div {...restProps}>{children}</motion.div>;
+};
 
 const Rate = () => {
   const router = useRouter();
@@ -67,7 +75,7 @@ const Rate = () => {
   return (
     <LoadingProvider isLoading={isLoading}>
       <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
-        <motion.div
+        <Div
           style={{
             marginLeft: containerMarginRight,
             marginTop: containerMarginTop,
@@ -76,12 +84,12 @@ const Rate = () => {
           <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
             {interviewId || isLoading ? (
               <div className="flex flex-col lg:max-w-[850px] xl:max-w-[642px] w-full px-6 lg:px-0">
-                <motion.div
+                <Div
                   style={{ marginLeft, marginRight, scale }}
                   className="xl:sticky xl:top-28 xl:top-16 z-10 origin-top pt-6"
                 >
                   <div>
-                    <motion.div
+                    <Div
                       className="flex flex-row mb-4 items-center"
                       style={{ opacity }}
                     >
@@ -95,9 +103,9 @@ const Rate = () => {
                         className="text-lg"
                         skeletonProps={{ width: 180 }}
                       />
-                    </motion.div>
+                    </Div>
                     <InterviewPlayer answers={answers} />
-                    <motion.div
+                    <Div
                       className="flex justify-between mt-4 mb-4 md:mb-10"
                       style={{ opacity }}
                     >
@@ -144,7 +152,7 @@ const Rate = () => {
                           className="text-gray-800"
                         />
                       </div>
-                    </motion.div>
+                    </Div>
                     <div className="block md:hidden flex justify-center mb-6">
                       <div className="grid grid-cols-2 grid-rows-1 gap-4">
                         <ButtonIcon size={60} name="HiThumbDown" />
@@ -152,20 +160,20 @@ const Rate = () => {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </Div>
 
-                <motion.div
+                <Div
                   className="origin-top hidden lg:block"
                   style={{ scale: docScale }}
                 >
                   <Pdf src="/awesome-cv.pdf" />
-                </motion.div>
+                </Div>
               </div>
             ) : (
               <div>empty screen</div>
             )}
           </div>
-        </motion.div>
+        </Div>
       </div>
     </LoadingProvider>
   );
