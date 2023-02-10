@@ -142,3 +142,5 @@ input::-webkit-date-and-time-value {
 }
 
 #popups { @apply z-50 absolute }
+
+.fullscreen .menu { @apply hidden }

@@ -1,6 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
-import { useFullScreenHandle } from "react-full-screen";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Swiper from "swiper";
 import { CLASS_NAMES } from "./InterviewPlayer-constants";
 
@@ -9,8 +8,6 @@ interface IntervewPlayerOptions {
 }
 
 export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
-  const handle = useFullScreenHandle()
-
   const players = useRef<any[]>([]);
 
   const [swiper, setSwiper] = useState<Swiper>();
@@ -50,28 +47,35 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
 
   useEffect(() => {
     if (fullScreen) {
-      handle.enter()
+      document.body.classList.add('fullscreen')
 
       return
     }
 
-    handle.exit()
+    document.body.classList.remove('fullscreen')
+
   }, [fullScreen])
 
-  useEffect(() => {
-    if (!handle.active) {
+  const escFunction = useCallback((event: KeyboardEvent) => {
+    if (event.key === "Escape") {
       setFullScreen(false)
     }
+  }, []);
 
-  }, [handle.active])
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, [escFunction]);
 
   const classNames = {
     ...CLASS_NAMES,
-    container: clsx(className, CLASS_NAMES.container)
+    container: clsx(className, fullScreen ? CLASS_NAMES.container.fullScreen : CLASS_NAMES.container.inline)
   }
 
   return {
-    handle,
     onEnded,
     toggleFullScreen,
     setSwiper,

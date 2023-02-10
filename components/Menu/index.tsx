@@ -308,7 +308,7 @@ const MobileMenu = () => {
     <div
       onClick={() => setIsOpen(false)}
       className={clsx(
-        'transition-all transform h-screen duration-300 overflow-hidden fixed w-full bg-white md:hidden border-b border-gray z-20',
+        'transition-all transform h-screen duration-300 overflow-hidden fixed w-full bg-white md:hidden border-b border-gray z-50 menu',
         isOpen ? 'max-h-[100vh]' : 'max-h-[90px]'
       )}
     >
@@ -332,7 +332,7 @@ const Menu = () => {
   return (
     <>
       <MobileMenu />
-      <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all hover:w-[240px] group overflow-hidden z-20 hover:z-50 bg-white hover:shadow-pixelHover hidden md:flex">
+      <div className="fixed left-0 top-0 min-h-full w-[70px] shadow-pixel flex flex-col transition-all hover:w-[240px] group overflow-hidden z-50 menu bg-white hover:shadow-pixelHover hidden md:flex">
         <Link href={URLS.HOME}>
           <LogoSmall className="absolute top-6 left-6 z-20" width={120} />
           <LogoText
