@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
+import { useFullScreenHandle } from "react-full-screen";
 import Swiper from "swiper";
 import { CLASS_NAMES } from "./InterviewPlayer-constants";
 
@@ -8,6 +9,8 @@ interface IntervewPlayerOptions {
 }
 
 export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
+  const handle = useFullScreenHandle()
+
   const players = useRef<any[]>([]);
 
   const [swiper, setSwiper] = useState<Swiper>();
@@ -41,7 +44,27 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
     });
   }, [swiper])
 
-  const toggleFullScreen = () => setFullScreen(!fullScreen);
+  const toggleFullScreen = () => {
+    setFullScreen(!fullScreen)
+  };
+
+  useEffect(() => {
+    if (fullScreen) {
+      handle.enter()
+
+      return
+    }
+
+    handle.exit()
+
+  }, [fullScreen])
+
+  useEffect(() => {
+    if (!handle.active) {
+      setFullScreen(false)
+    }
+
+  }, [handle.active])
 
   const classNames = {
     ...CLASS_NAMES,
@@ -49,6 +72,7 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
   }
 
   return {
+    handle,
     onEnded,
     toggleFullScreen,
     setSwiper,
