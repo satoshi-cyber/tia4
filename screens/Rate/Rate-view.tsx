@@ -145,13 +145,27 @@ const Rate = () => {
                             />
                           </div>
                         </div>
-                        <div className="flex flex-row ml-4">
+                        <div className="ml-3 grid gap-3 grid-flow-col auto-cols-max">
+                          {resume && (
+                            <Link
+                              href={resume}
+                              target="_blank"
+                              className="block lg:hidden"
+                            >
+                              <ButtonIcon
+                                circle={false}
+                                name="HiOutlineDocument"
+                                size={30}
+                                className="text-gray-800"
+                              />
+                            </Link>
+                          )}
                           <Link href={messageUrl} target="_blank">
                             <ButtonIcon
                               circle={false}
                               name="HiMail"
                               size={30}
-                              className="text-gray-800 mr-3"
+                              className="text-gray-800"
                             />
                           </Link>
                           {(isLoading || linkedinProfile) && (
