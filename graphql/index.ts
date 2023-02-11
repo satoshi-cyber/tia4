@@ -47,9 +47,13 @@ export type Candidate = {
   __typename?: 'Candidate';
   avatarUrl?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
   lastName?: Maybe<Scalars['String']>;
-  linkedinProfile?: Maybe<Scalars['String']>;
+  linkedInProfile?: Maybe<Scalars['String']>;
+  resumeFileName?: Maybe<Scalars['String']>;
+  resumeUrl?: Maybe<Scalars['String']>;
 };
 
 export type Company = {
@@ -439,7 +443,7 @@ export type InterviewQueryVariables = Exact<{
 }>;
 
 
-export type InterviewQuery = { __typename?: 'Query', interview: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null, answers: Array<{ __typename?: 'Answer', url: string, question: { __typename?: 'Question', id: string, question: string, time: number } }>, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null, bio?: string | null } | null } };
+export type InterviewQuery = { __typename?: 'Query', interview: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null, answers: Array<{ __typename?: 'Answer', url: string, question: { __typename?: 'Question', id: string, question: string, time: number } }>, interviewee?: { __typename?: 'Candidate', linkedInProfile?: string | null, resumeFileName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, email?: string | null, firstName?: string | null, lastName?: string | null, bio?: string | null } | null } };
 
 export type InterviewsQueryVariables = Exact<{
   companyId: Scalars['ID'];
@@ -639,7 +643,11 @@ export const InterviewDocument = gql`
       url
     }
     interviewee {
+      linkedInProfile
+      resumeFileName
+      resumeUrl
       avatarUrl
+      email
       firstName
       lastName
       bio

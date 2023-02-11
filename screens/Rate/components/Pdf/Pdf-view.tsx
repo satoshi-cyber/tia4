@@ -31,7 +31,12 @@ const Pdf: React.FC<PdfProps> = ({ src }) => {
       }
     >
       {pages.map((index: number) => (
-        <Page pageNumber={index} width={820} className={CLASS_NAMES.page} />
+        <Page
+          key={index}
+          pageNumber={index}
+          width={820}
+          className={CLASS_NAMES.page}
+        />
       ))}
     </Document>
   );

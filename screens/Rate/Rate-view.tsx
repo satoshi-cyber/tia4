@@ -12,6 +12,7 @@ import { useInterviewQuery } from '@/graphql';
 import { useTimeAgo, useUser } from '@/hooks';
 import InterviewPlayer from '@/components/InterviewPlayer';
 import { isMobile } from 'react-device-detect';
+import Link from 'next/link';
 
 const Div: React.FC<{
   children: React.ReactNode;
@@ -67,10 +68,21 @@ const Rate = () => {
 
   const isLoading = !router.isReady || fetching;
 
+  const date = useTimeAgo(data?.interview?.createdAt);
+
   const answers = data?.interview?.answers;
   const avatarUrl = data?.interview?.interviewee?.avatarUrl;
   const candidateName = `${data?.interview?.interviewee?.firstName} ${data?.interview?.interviewee?.lastName}`;
-  const date = useTimeAgo(data?.interview?.createdAt);
+  const linkedinProfile = data?.interview?.interviewee?.linkedInProfile;
+  const resume =
+    data?.interview?.interviewee?.resumeFileName &&
+    data?.interview?.interviewee?.resumeUrl;
+
+  const messageUrl = data?.interview?.interviewee?.email
+    ? `mailto:${data?.interview?.interviewee?.email}`
+    : '#';
+
+  console.log({ linkedinProfile });
 
   return (
     <LoadingProvider isLoading={isLoading}>
@@ -134,18 +146,24 @@ const Rate = () => {
                           </div>
                         </div>
                         <div className="flex flex-row ml-4">
-                          <ButtonIcon
-                            circle={false}
-                            name="HiMail"
-                            size={30}
-                            className="text-gray-800 mr-3"
-                          />
-                          <ButtonIcon
-                            circle={false}
-                            name="HiLinkedin"
-                            size={30}
-                            className="text-gray-800"
-                          />
+                          <Link href={messageUrl} target="_blank">
+                            <ButtonIcon
+                              circle={false}
+                              name="HiMail"
+                              size={30}
+                              className="text-gray-800 mr-3"
+                            />
+                          </Link>
+                          {(isLoading || linkedinProfile) && (
+                            <Link href={linkedinProfile || '#'} target="_blank">
+                              <ButtonIcon
+                                circle={false}
+                                name="HiLinkedin"
+                                size={30}
+                                className="text-gray-800"
+                              />
+                            </Link>
+                          )}
                         </div>
                       </div>
                       <div className="flex-none hidden md:block">
@@ -163,13 +181,14 @@ const Rate = () => {
                     </div>
                   </div>
                 </Div>
-
-                <Div
-                  className="origin-top hidden lg:block"
-                  style={{ scale: docScale }}
-                >
-                  <Pdf src="/awesome-cv.pdf" />
-                </Div>
+                {resume && (
+                  <Div
+                    className="origin-top hidden lg:block"
+                    style={{ scale: docScale }}
+                  >
+                    <Pdf src={resume} />
+                  </Div>
+                )}
               </div>
             ) : (
               <div>empty screen</div>

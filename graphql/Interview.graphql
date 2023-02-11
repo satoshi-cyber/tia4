@@ -22,7 +22,11 @@ query Interview($companyId: ID!, $id: ID!) {
       url
     }
     interviewee {
+      linkedInProfile
+      resumeFileName
+      resumeUrl
       avatarUrl
+      email
       firstName
       lastName
       bio
