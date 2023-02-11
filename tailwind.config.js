@@ -15,7 +15,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Gothic A1', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       boxShadow: {
         hover: '0px 0px 60px -4px rgb(0, 0, 0, 0.1)',

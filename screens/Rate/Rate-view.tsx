@@ -83,7 +83,7 @@ const Rate = () => {
         >
           <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
             {interviewId || isLoading ? (
-              <div className="flex flex-col lg:max-w-[850px] xl:max-w-[642px] w-full px-6 lg:px-0">
+              <div className="flex flex-col lg:max-w-[850px] xl:max-w-[640px] w-full px-6 lg:px-0">
                 <Div
                   style={{ marginLeft, marginRight, scale }}
                   className="xl:sticky xl:top-28 xl:top-16 z-10 origin-top pt-6"

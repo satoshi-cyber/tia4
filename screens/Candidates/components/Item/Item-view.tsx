@@ -50,15 +50,15 @@ const Item: React.FC<ItemProps> = ({
               skeletonProps={{ width: 100 }}
             />
             <Text
-              className={CLASS_NAMES.appliedDate}
-              text={timeAgo}
+              className={CLASS_NAMES.score}
+              text={scoreLabel}
               skeletonProps={{ width: 60 }}
             />
           </div>
           <Text
-            className={CLASS_NAMES.score}
-            text={scoreLabel}
-            skeletonProps={{ width: 160 }}
+            className={CLASS_NAMES.appliedDate}
+            text={timeAgo}
+            skeletonProps={{ width: 60 }}
           />
         </div>
       </div>

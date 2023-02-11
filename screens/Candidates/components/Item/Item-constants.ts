@@ -6,9 +6,9 @@ export const CLASS_NAMES = {
   avatar: "border",
   job: "flex flex-col w-full",
   firstLine: "flex flex-1 justify-between",
-  candidateName: "text-lg",
+  candidateName: "text-lg -mt-1",
   appliedDate: "text-xs mb-2 text-gray-600",
-  score: "text-sm mb-1 text-gray-800"
+  score: "text-xs mb-1 text-gray-800 flex-none"
 }
 
 export const VIDEO_PROPS = {

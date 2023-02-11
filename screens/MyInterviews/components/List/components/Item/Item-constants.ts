@@ -6,8 +6,8 @@ export const CLASS_NAMES = {
   avatar: "border",
   job: "flex flex-col w-full",
   firstLine: "flex flex-1 justify-between",
-  companyName: "text-lg",
-  appliedDate: "text-xs mb-2 text-gray-600",
+  companyName: "text-lg -mt-1",
+  appliedDate: "text-xs mb-2 text-gray-600 flex-none",
   jobTitle: "text-sm mb-1 text-gray-800"
 }
 
