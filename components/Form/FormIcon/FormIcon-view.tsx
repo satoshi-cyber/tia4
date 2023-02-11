@@ -7,7 +7,7 @@ export const FormIcon: React.FC<FormIconProps> = ({ name, className }) => {
 
   return (
     <div className={className}>
-      <IconComponent size={16} />
+      <IconComponent size={18} />
     </div>
   );
 };

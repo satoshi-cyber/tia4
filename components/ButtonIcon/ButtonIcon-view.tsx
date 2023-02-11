@@ -37,7 +37,7 @@ const ButtonIcon: React.FC<IconProps> = ({
             )}
             {...props}
           >
-            <IconComponent size={Math.max((size * 20) / 38, 24)} />
+            <IconComponent size={Math.max((size * 20) / 38, 22)} />
           </button>
         </div>
       }
