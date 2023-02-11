@@ -109,26 +109,42 @@ const Rate = () => {
                       className="flex justify-between mt-4 mb-4 md:mb-10"
                       style={{ opacity }}
                     >
-                      <div className="flex flex-1">
-                        <div className="mr-4">
-                          <Avatar
-                            size={50}
-                            alt={candidateName}
-                            name={candidateName}
-                            src={avatarUrl || ''}
-                            className="rounded-full border"
-                          />
+                      <div className="flex flex-1 md:flex-none">
+                        <div className="flex flex-row flex-1">
+                          <div className="mr-4">
+                            <Avatar
+                              size={50}
+                              alt={candidateName}
+                              name={candidateName}
+                              src={avatarUrl || ''}
+                              className="rounded-full border"
+                            />
+                          </div>
+                          <div>
+                            <Text
+                              className="text-xl"
+                              text={candidateName}
+                              skeletonProps={{ width: 130 }}
+                            />
+                            <Text
+                              className="text-sm text-gray-500 max-w-[300px] mb-2"
+                              skeletonProps={{ width: 60 }}
+                              text={date}
+                            />
+                          </div>
                         </div>
-                        <div>
-                          <Text
-                            className="text-xl"
-                            text={candidateName}
-                            skeletonProps={{ width: 130 }}
+                        <div className="flex flex-row ml-4">
+                          <ButtonIcon
+                            circle={false}
+                            name="HiMail"
+                            size={30}
+                            className="text-gray-800 mr-3"
                           />
-                          <Text
-                            className="text-sm text-gray-500 max-w-[300px]"
-                            skeletonProps={{ width: 60 }}
-                            text={date}
+                          <ButtonIcon
+                            circle={false}
+                            name="HiLinkedin"
+                            size={30}
+                            className="text-gray-800"
                           />
                         </div>
                       </div>
@@ -137,20 +153,6 @@ const Rate = () => {
                           <ButtonIcon size={60} name="HiThumbDown" />
                           <ButtonIcon size={60} name="HiThumbUp" />
                         </div>
-                      </div>
-                      <div className="flex flex-1 flex-row justify-end mb-2">
-                        <ButtonIcon
-                          circle={false}
-                          name="HiMail"
-                          size={38}
-                          className="text-gray-800 mr-3"
-                        />
-                        <ButtonIcon
-                          circle={false}
-                          name="HiLinkedin"
-                          size={38}
-                          className="text-gray-800"
-                        />
                       </div>
                     </Div>
                     <div className="block md:hidden flex justify-center mb-6">
