@@ -1,11 +1,14 @@
-import { cacheExchange, CombinedError, createClient, dedupExchange, fetchExchange, makeOperation } from 'urql'
+import { cacheExchange, CombinedError, createClient, dedupExchange, fetchExchange, makeOperation, Operation } from 'urql'
 import { retryExchange } from '@urql/exchange-retry';
 import { authExchange } from '@urql/exchange-auth';
+import { requestPolicyExchange } from '@urql/exchange-request-policy';
 import { TOKEN_COOKIE_KEY } from '@/config/auth'
 import { GRAPHQL_URL, URLS } from '@/config';
 import { AuthenticateUserDocument, AuthenticateUserMutation, AuthenticateUserMutationVariables } from '@/graphql';
 import { Magic } from 'magic-sdk';
 import { Cookies } from 'react-cookie';
+
+const ttl = 30 * 60 * 1000;
 
 const magic =
   typeof window !== 'undefined' ?
@@ -19,10 +22,14 @@ const retryOptions = {
   retryIf: (err: CombinedError) => Boolean(err),
 };
 
+
 export const client = createClient({
   url: GRAPHQL_URL,
   exchanges: [
     dedupExchange,
+    requestPolicyExchange({
+      ttl,
+    }),
     cacheExchange,
     retryExchange(retryOptions),
     authExchange<{ token: string }>({
