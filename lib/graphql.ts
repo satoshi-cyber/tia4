@@ -1,4 +1,4 @@
-import { cacheExchange, CombinedError, createClient, dedupExchange, fetchExchange, makeOperation, Operation } from 'urql'
+import { cacheExchange, CombinedError, createClient, dedupExchange, fetchExchange, makeOperation } from 'urql'
 import { retryExchange } from '@urql/exchange-retry';
 import { authExchange } from '@urql/exchange-auth';
 import { requestPolicyExchange } from '@urql/exchange-request-policy';
