@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Text, ButtonIcon, LoadingProvider } from '@/components';
+import { Icon, Text, LoadingProvider } from '@/components';
 import Link from 'next/link';
 
 import { ResumeProps } from './Resume-types';
