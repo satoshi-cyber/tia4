@@ -1,1 +1,0 @@
-export const COOKIE_EXPIRE = 2592000 * 1000

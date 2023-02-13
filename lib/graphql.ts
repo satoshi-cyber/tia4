@@ -8,6 +8,8 @@ import { AuthenticateUserDocument, AuthenticateUserMutation, AuthenticateUserMut
 import { Magic } from 'magic-sdk';
 import { Cookies } from 'react-cookie';
 
+import { getCookieOptions } from './cookie'
+
 const ttl = 30 * 60 * 1000;
 
 const magic =
@@ -58,7 +60,7 @@ export const client = createClient({
           });
 
           if (result.data?.authenticateUser.token) {
-            cookies.set(TOKEN_COOKIE_KEY, result.data?.authenticateUser.token)
+            cookies.set(TOKEN_COOKIE_KEY, result.data?.authenticateUser.token, getCookieOptions())
 
             return { token: result.data?.authenticateUser.token }
           }
