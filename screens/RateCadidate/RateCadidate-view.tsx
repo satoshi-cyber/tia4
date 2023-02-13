@@ -1,94 +1,37 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useMediaQuery } from 'react-responsive';
-import { useRouter } from 'next/router';
-
-import Icon from '../../components/Icon';
-
-import Pdf from './components/Pdf';
-
-import { Avatar, ButtonIcon, LoadingProvider, Text } from '@/components';
-import { useInterviewQuery } from '@/graphql';
-import { useTimeAgo, useUser } from '@/hooks';
 import InterviewPlayer from '@/components/InterviewPlayer';
-import { isMobile } from 'react-device-detect';
+import { Avatar, ButtonIcon, LoadingProvider, Text, Icon } from '@/components';
 import Link from 'next/link';
 
-const Div: React.FC<{
-  children: React.ReactNode;
-  style: object;
-  className?: string;
-}> = ({ children, ...restProps }) => {
-  if (isMobile) return <div {...restProps}>{children}</div>;
-
-  return <motion.div {...restProps}>{children}</motion.div>;
-};
+import Pdf from './components/Pdf';
+import { useRate } from './RateCadidate-hook';
+import AnimatedDiv from './components/AnimatedDiv';
 
 const Rate = () => {
-  const router = useRouter();
-
-  const { companyId } = useUser();
-
-  const interviewId = router.query.interviewId;
-
-  const isLargeScreen = useMediaQuery({
-    query: '(min-width: 1280px)',
-  });
-
-  const [{ data, fetching }] = useInterviewQuery({
-    variables: { companyId: companyId!, id: interviewId as string },
-    pause: !companyId || !interviewId,
-  });
-
-  const { scrollY } = useScroll();
-
-  const marginLeft = useTransform(
-    scrollY,
-    [0, 700],
-    [0, isLargeScreen ? 650 : 0]
-  );
-  const marginRight = useTransform(
-    scrollY,
-    [0, 700],
-    [0, isLargeScreen ? -650 : 0]
-  );
-  const scale = useTransform(scrollY, [0, 700], [1, isLargeScreen ? 0.7 : 1]);
-  const docScale = useTransform(
-    scrollY,
-    [0, 700],
-    [isLargeScreen ? 0.78 : 1, 1]
-  );
-  const containerMarginRight = useTransform(
-    scrollY,
-    [0, isLargeScreen ? 700 : 0],
-    [0, isLargeScreen ? -450 : 0]
-  );
-  const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 100], [1, isLargeScreen ? 0 : 1]);
-
-  const isLoading = !interviewId || !router.isReady || fetching;
-
-  const date = useTimeAgo(data?.interview?.createdAt);
-
-  const answers = data?.interview?.answers;
-  const avatarUrl = data?.interview?.interviewee?.avatarUrl;
-  const candidateName = `${data?.interview?.interviewee?.firstName} ${data?.interview?.interviewee?.lastName}`;
-  const linkedinProfile = data?.interview?.interviewee?.linkedInProfile;
-  const resume =
-    data?.interview?.interviewee?.resumeFileName &&
-    data?.interview?.interviewee?.resumeUrl &&
-    `https://docs.google.com/viewer?url=${encodeURIComponent(
-      data?.interview?.interviewee?.resumeUrl
-    )}`;
-
-  const messageUrl = data?.interview?.interviewee?.email
-    ? `mailto:${data?.interview?.interviewee?.email}`
-    : '#';
+  const {
+    isLoading,
+    transforms: {
+      containerMarginRight,
+      containerMarginTop,
+      marginLeft,
+      marginRight,
+      scale,
+      opacity,
+      docScale,
+    },
+    resume,
+    messageUrl,
+    answers,
+    candidateName,
+    linkedinProfile,
+    avatarUrl,
+    date,
+  } = useRate();
 
   return (
     <LoadingProvider isLoading={isLoading}>
       <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
-        <Div
+        <AnimatedDiv
           style={{
             marginLeft: containerMarginRight,
             marginTop: containerMarginTop,
@@ -96,12 +39,12 @@ const Rate = () => {
         >
           <div className="flex flex-1 w-screen md:pl-[70px] justify-evenly">
             <div className="flex flex-col lg:max-w-[850px] xl:max-w-[640px] w-full px-6 lg:px-0">
-              <Div
+              <AnimatedDiv
                 style={{ marginLeft, marginRight, scale }}
                 className="xl:sticky xl:top-28 xl:top-16 z-10 origin-top pt-6"
               >
                 <div>
-                  <Div
+                  <AnimatedDiv
                     className="flex flex-row mb-4 items-center"
                     style={{ opacity }}
                   >
@@ -115,9 +58,9 @@ const Rate = () => {
                       className="text-lg"
                       skeletonProps={{ width: 180 }}
                     />
-                  </Div>
+                  </AnimatedDiv>
                   <InterviewPlayer answers={answers} />
-                  <Div
+                  <AnimatedDiv
                     className="flex justify-between mt-4 mb-4 md:mb-10"
                     style={{ opacity }}
                   >
@@ -186,7 +129,7 @@ const Rate = () => {
                         <ButtonIcon size={60} name="HiThumbUp" />
                       </div>
                     </div>
-                  </Div>
+                  </AnimatedDiv>
                   <div className="block md:hidden flex justify-center mb-6">
                     <div className="grid grid-cols-2 grid-rows-1 gap-4">
                       <ButtonIcon size={60} name="HiThumbDown" />
@@ -194,18 +137,18 @@ const Rate = () => {
                     </div>
                   </div>
                 </div>
-              </Div>
+              </AnimatedDiv>
               {resume && (
-                <Div
+                <AnimatedDiv
                   className="origin-top hidden lg:block"
                   style={{ scale: docScale }}
                 >
                   <Pdf src={resume} />
-                </Div>
+                </AnimatedDiv>
               )}
             </div>
           </div>
-        </Div>
+        </AnimatedDiv>
       </div>
     </LoadingProvider>
   );
