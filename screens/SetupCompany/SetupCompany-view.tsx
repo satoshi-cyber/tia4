@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Form,
   Layout,
@@ -8,7 +8,9 @@ import {
   FormIcon,
   Title,
   Text,
-} from '@/components'
+  ButtonIcon,
+} from '@/components';
+import Link from 'next/link';
 
 import {
   COMPANY_NAME_FIELD_PROPS,
@@ -17,16 +19,27 @@ import {
   CLASS_NAMES,
   TITLE_PROPS,
   INFO_PROPS,
-} from './SetupCompany-constants'
+} from './SetupCompany-constants';
 
-import { useSetupCompany } from './SetupCompany-hook'
+import { useSetupCompany } from './SetupCompany-hook';
+import { URLS } from '@/config';
+import { SetupCompanyProps } from './SetupCompany-types';
 
-const CreateAJob: React.FC = () => {
-  const { handleSubmit, form, submitting } = useSetupCompany()
+const SetupCompany: React.FC<SetupCompanyProps> = ({ showSkip }) => {
+  const { handleSubmit, form, submitting } = useSetupCompany();
 
   return (
     <Layout.Default>
-      <Title {...TITLE_PROPS} />
+      <Title
+        {...TITLE_PROPS}
+        after={
+          showSkip && (
+            <Link href={URLS.HOME}>
+              <ButtonIcon name="HiX" />
+            </Link>
+          )
+        }
+      />
       <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
         <Field.Input {...COMPANY_NAME_FIELD_PROPS} />
         <Field.Input
@@ -38,7 +51,7 @@ const CreateAJob: React.FC = () => {
       </Form>
       {submitting && <Loader />}
     </Layout.Default>
-  )
-}
+  );
+};
 
-export default CreateAJob
+export default SetupCompany;
