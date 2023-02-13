@@ -21,6 +21,7 @@ const Rate = () => {
     },
     resume,
     resumeLink,
+    jobTitle,
     messageUrl,
     answers,
     candidateName,
@@ -55,7 +56,7 @@ const Rate = () => {
                       className="text-black mr-3"
                     />
                     <Text
-                      text="Senior software developer"
+                      text={jobTitle}
                       className="text-lg"
                       skeletonProps={{ width: 180 }}
                     />
@@ -131,7 +132,7 @@ const Rate = () => {
                       </div>
                     </div>
                   </AnimatedDiv>
-                  <div className="block md:hidden flex justify-center mb-6">
+                  <div className="block md:hidden flex justify-center mb-12">
                     <div className="grid grid-cols-2 grid-rows-1 gap-4">
                       <ButtonIcon size={60} name="HiThumbDown" />
                       <ButtonIcon size={60} name="HiThumbUp" />

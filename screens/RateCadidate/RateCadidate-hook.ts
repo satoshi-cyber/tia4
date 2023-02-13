@@ -24,7 +24,7 @@ export const useRate = () => {
 
   const isLoading = !interviewId || !router.isReady || fetching;
 
-  const date = useTimeAgo(data?.interview?.createdAt);
+  const date = useTimeAgo(isDemoInterview ? DEMO_INTERVIEW.date : data?.interview?.createdAt);
 
   const answers = isDemoInterview ? DEMO_INTERVIEW.answers : data?.interview?.answers;
   const avatarUrl = isDemoInterview ? DEMO_INTERVIEW.avatarUrl : data?.interview?.interviewee?.avatarUrl;
@@ -46,6 +46,8 @@ export const useRate = () => {
     ? `mailto:${data?.interview?.interviewee?.email}`
     : '#';
 
-  return { transforms, resumeLink, messageUrl, answers, date, avatarUrl, candidateName, linkedinProfile, resume, isLoading }
+  const jobTitle = isDemoInterview ? DEMO_INTERVIEW.jobTitle : data?.interview?.job?.title
+
+  return { jobTitle, transforms, resumeLink, messageUrl, answers, date, avatarUrl, candidateName, linkedinProfile, resume, isLoading }
 
 };
