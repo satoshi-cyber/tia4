@@ -1,3 +1,5 @@
+import { getAssetUrl } from '@/lib';
+
 const Testimonials: React.FC = () => (
   <div className="flex flex-col md:flex-row py-5 md:py-6">
     <div className="w-full md:w-1/2 mb-3 md:mb-4">
@@ -11,7 +13,7 @@ const Testimonials: React.FC = () => (
         </p>
         <p className="text-left mb-3">Uranik Begu, Executive director</p>
         <img
-          src="https://tia-cdn.onrender.com/images/ick-logo.svg"
+          src={getAssetUrl('/images/ick-logo.svg')}
           className="max-w-[120px]"
           alt="ick-logo"
         />
@@ -20,7 +22,7 @@ const Testimonials: React.FC = () => (
     <div className="w-full md:w-1/2 mb-3 md:mb-4">
       <div className="flex items-center justify-center my-4 md:m-0">
         <img
-          src="https://tia-cdn.onrender.com/images/uranik-begu.jpg"
+          src={getAssetUrl('/images/uranik-begu.jpg')}
           className="rounded-md"
           alt="Uranik Begu"
         />

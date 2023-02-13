@@ -4,7 +4,7 @@ import { SwiperSlide, Swiper as SwiperContainer } from 'swiper/react';
 import Swiper, { Controller, EffectFade } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-
+import { getAssetUrl } from '@/lib';
 import dynamic from 'next/dynamic';
 import { HiArrowLeft } from '@react-icons/all-files/hi/HiArrowLeft';
 import { HiArrowRight } from '@react-icons/all-files/hi/HiArrowRight';
@@ -20,12 +20,12 @@ const SLIDES: Slide[] = [
     title: 'For candidates',
     description:
       'One of the main advantages of The Interview is the ability for candidates to record asynchronous videos and complete the entire application process through their mobile device. This allows candidates to record their answers at their own pace and on their own time, making the process more convenient and efficient for them.',
-    src: 'https://tia-cdn.onrender.com/images/candidate.png',
+    src: getAssetUrl('/images/candidate.png'),
   },
   {
     title: 'For companies',
     description: `The Interview mobile feature allows them to review candidate responses and make informed hiring decisions from their mobile device, even when they're away from their office. This means that you can keep the hiring process moving and make decisions quickly, without the need to wait for candidates to finish the process.`,
-    src: 'https://tia-cdn.onrender.com/images/screen2.jpg',
+    src: getAssetUrl('/images/screen2.jpg'),
   },
 ];
 

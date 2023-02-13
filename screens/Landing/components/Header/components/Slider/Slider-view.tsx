@@ -1,4 +1,5 @@
 'use client';
+import { getAssetUrl } from '@/lib';
 import { ReactCompareSlider } from 'react-compare-slider';
 
 const Slider = () => {
@@ -12,7 +13,7 @@ const Slider = () => {
             autoPlay
             playsInline
             loop
-            src="https://tia-cdn.onrender.com/business.mp4"
+            src={getAssetUrl('/business.mp4')}
             className="bg-black absolute w-full h-full top-1/2 left-1/2 transition-all transform -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
           />
         }
@@ -22,7 +23,7 @@ const Slider = () => {
             loop
             autoPlay
             playsInline
-            src="https://tia-cdn.onrender.com/videoplayback.mp4"
+            src={getAssetUrl('/videoplayback.mp4')}
             className="bg-black absolute w-full h-full top-1/2 left-1/2 transition-all transform -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
           />
         }

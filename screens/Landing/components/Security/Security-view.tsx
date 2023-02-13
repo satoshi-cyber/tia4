@@ -1,3 +1,5 @@
+import { getAssetUrl } from '@/lib';
+
 const Security: React.FC = () => (
   <div className="py-5 sm:py-6">
     <div className="flex flex-col sm:flex-row">
@@ -13,7 +15,7 @@ const Security: React.FC = () => (
             className="max-w-[400px] py-2 px-20 md:p-2 mt-5 "
             alt="Security"
             loading="lazy"
-            src="https://tia-cdn.onrender.com/images/privacy.png"
+            src={getAssetUrl('/images/privacy.png')}
           />
         </div>
       </div>
