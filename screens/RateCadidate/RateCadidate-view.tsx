@@ -20,6 +20,7 @@ const Rate = () => {
       docScale,
     },
     resume,
+    resumeLink,
     messageUrl,
     answers,
     candidateName,
@@ -89,9 +90,9 @@ const Rate = () => {
                         </div>
                       </div>
                       <div className="ml-3 grid gap-3 grid-flow-col auto-cols-max">
-                        {resume && (
+                        {resumeLink && (
                           <Link
-                            href={resume}
+                            href={resumeLink}
                             target="_blank"
                             className="block lg:hidden"
                           >
