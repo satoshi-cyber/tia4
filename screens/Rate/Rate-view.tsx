@@ -76,7 +76,10 @@ const Rate = () => {
   const linkedinProfile = data?.interview?.interviewee?.linkedInProfile;
   const resume =
     data?.interview?.interviewee?.resumeFileName &&
-    data?.interview?.interviewee?.resumeUrl;
+    data?.interview?.interviewee?.resumeUrl &&
+    `https://docs.google.com/viewer?url=${encodeURIComponent(
+      data?.interview?.interviewee?.resumeUrl
+    )}`;
 
   const messageUrl = data?.interview?.interviewee?.email
     ? `mailto:${data?.interview?.interviewee?.email}`
