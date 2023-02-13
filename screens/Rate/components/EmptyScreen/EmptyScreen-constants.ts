@@ -9,5 +9,5 @@ export const TITLE = "No candidate interviews found!";
 export const SUB_TITLE = "Get a taste of the app by rating a demo interview.";
 
 export const BUTTON_PROPS = {
-  title: "Rate Demo Interview"
+  title: "Rate demo interview"
 } 
