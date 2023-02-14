@@ -151,7 +151,7 @@ input::-webkit-date-and-time-value {
 
 .video-react-big-play-button,  .video-react .video-react-control-bar { 
   background-color: transparent !important;
-  @apply backdrop-blur-2xl 
+  @apply backdrop-blur-2xl bg-black/20 
 }
 
 .video-react-big-play-button {
@@ -160,15 +160,18 @@ input::-webkit-date-and-time-value {
   width: 80px !important;
   height: 80px !important;
   border-radius: 9999px !important;
-  @apply overflow-hidden transition-all duration-300 hover:shadow-glow;
+  @apply overflow-hidden !transition-shadow !duration-300 shadow-noglow hover:shadow-glow ;
 }
 
 .video-react-big-play-button::before {
   top: 15px !important;
+  font-size: 40px
 }
 
 .video-react-load-progress { 
   background-color:black !important;
 }
 
-.video-react-duration-display { font-family: Inter !important;}
+.video-react-duration-display { font-family: Roboto !important;}
+
+.video-react .video-react-slider { background-color: blueviolet !important;}
