@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { isFirefox } from "react-device-detect";
 import Swiper from "swiper";
 import { CLASS_NAMES } from "./InterviewPlayer-constants";
 
@@ -72,7 +73,7 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
 
   const classNames = {
     ...CLASS_NAMES,
-    container: clsx(className, fullScreen ? CLASS_NAMES.container.fullScreen : CLASS_NAMES.container.inline)
+    container: clsx(className, fullScreen ? CLASS_NAMES.container.fullScreen : CLASS_NAMES.container.inline, isFirefox && 'disable-blur')
   }
 
   return {
