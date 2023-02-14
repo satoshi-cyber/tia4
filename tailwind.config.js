@@ -25,6 +25,7 @@ module.exports = {
         secondary: '0px 0px 30px -4px rgba(85,60,154,0.5)',
         button: '0px 0px 30px -4px rgb(0, 0, 0, 0.2)',
         icon: '0px 0px 30px -4px rgb(0, 0, 0, 0.15)',
+        player: '0px 0px 30px -4px rgb(0, 0, 0, 0.1)',
         glow: '0px 0px 20px rgba(255, 255, 255, 0.3)',
         pixel: 'inset -7px 0 1px -7px rgba(0,0,0,0.7)',
         pixelHover:
