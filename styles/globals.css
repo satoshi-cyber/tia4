@@ -160,11 +160,7 @@ input::-webkit-date-and-time-value {
   width: 80px !important;
   height: 80px !important;
   border-radius: 9999px !important;
-  @apply overflow-hidden transition-all duration-300;
-}
-
-.video-react-big-play-button:hover {
-  @apply shadow-glow;
+  @apply overflow-hidden transition-all duration-300 hover:shadow-glow;
 }
 
 .video-react-big-play-button::before {
