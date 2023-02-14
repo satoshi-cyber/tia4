@@ -12,9 +12,6 @@ export const TOAST_MESSAGE = {
   error: "Error updating your company"
 }
 
-export const TOAST_OPTIONS = {
-  position: "top-right",
-} as const
 
 export const COMPANY_NAME_FIELD_PROPS = {
   name: "name",

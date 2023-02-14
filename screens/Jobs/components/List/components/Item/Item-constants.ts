@@ -10,10 +10,6 @@ export const TOAST_MESSAGE = {
   error: "Error copying link to the clipboard!"
 }
 
-export const TOAST_OPTIONS = {
-  position: "top-right",
-} as const
-
 export const EDIT_BUTTON_PROPS = {
   name: "HiPencil",
 } as const

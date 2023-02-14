@@ -4,8 +4,8 @@ import { toast } from "react-toastify"
 import { SubmitInterviewProps } from "./SubmitInterview-types"
 import { useRouter } from "next/router"
 
-import { TOAST_ERROR, TOAST_OPTIONS } from "./SubmitInterview-constants"
-import { URLS } from "@/config"
+import { TOAST_ERROR } from "./SubmitInterview-constants"
+import { TOAST_OPTIONS, URLS } from "@/config"
 
 
 export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: SubmitInterviewProps) => {

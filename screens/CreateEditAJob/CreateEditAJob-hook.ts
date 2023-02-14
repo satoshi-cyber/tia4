@@ -5,11 +5,11 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router'
 import { useEffect } from 'react';;
 import { NewJob, useCreateJobMutation, useDeleteJobMutation, useJobQuery, useUpdateJobMutation } from "@/graphql";
-import { URLS } from '@/config';
+import { TOAST_OPTIONS, URLS } from '@/config';
 import { useUser } from '@/hooks';
 
 import { createAJobSchema } from "./CreateEditAJob-validations";
-import { TOAST_MESSAGE, TOAST_OPTIONS, DEFAULT_QUESTION_TIME, PUSH_DELAY } from './CreateEditAJob-constants';
+import { TOAST_MESSAGE, DEFAULT_QUESTION_TIME, PUSH_DELAY } from './CreateEditAJob-constants';
 import { formatDefaultValues } from './CreateEditAJob-functions';
 
 export const useCreateUpdateAJob = () => {

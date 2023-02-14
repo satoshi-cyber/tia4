@@ -5,8 +5,9 @@ import { toast } from 'react-toastify';
 import { UpdateProfile, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
 
 import { updateProfileSchema } from "./Profile-validations";
-import { TOAST_MESSAGE, TOAST_OPTIONS } from './Profile-constants';
+import { TOAST_MESSAGE } from './Profile-constants';
 import { formatDefaultValues } from "./Profile-functions";
+import { TOAST_OPTIONS } from "@/config";
 
 export const useProfile = () => {
   const [{ fetching, data }, onUpload] = useProfileQuery({ requestPolicy: 'network-only' })

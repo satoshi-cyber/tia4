@@ -6,9 +6,9 @@ import { SetupCompany, useSetupCompanyMutation, } from "@/graphql";
 import { useUser } from "@/hooks";
 
 import { setupCompanySchema } from "./SetupCompany-validations";
-import { PUSH_DELAY, TOAST_MESSAGE, TOAST_OPTIONS } from './SetupCompany-constants';
+import { PUSH_DELAY, TOAST_MESSAGE } from './SetupCompany-constants';
 
-import { URLS } from "@/config";
+import { TOAST_OPTIONS, URLS } from "@/config";
 
 export const useSetupCompany = () => {
   const router = useRouter()

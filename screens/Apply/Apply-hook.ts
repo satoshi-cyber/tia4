@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 import { UpdateProfile, useDidApplyQuery, useJobQuery, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
 
 import { updateProfileSchema } from "./Apply-validations";
-import { TOAST_MESSAGE, TOAST_OPTIONS } from './Apply-constants';
+import { TOAST_MESSAGE } from './Apply-constants';
 import { formatDefaultValues } from "./Apply-functions";
 import { useRouter } from "next/router";
-import { URLS } from "@/config";
+import { TOAST_OPTIONS, URLS } from "@/config";
 
 export const useApply = () => {
   const router = useRouter()

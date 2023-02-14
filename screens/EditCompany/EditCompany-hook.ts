@@ -4,11 +4,11 @@ import { toast } from 'react-toastify';
 import { useRouter } from "next/router";
 import { UpdateCompany, useEditCompanyQuery, useUpdateCompanyMutation } from "@/graphql";
 import { useUser } from "@/hooks";
-import { URLS } from "@/config";
+import { TOAST_OPTIONS, URLS } from "@/config";
 import { useEffect, useMemo } from "react";
 
 import { setupCompanySchema } from "./EditCompany-validations";
-import { PUSH_DELAY, TOAST_MESSAGE, TOAST_OPTIONS } from './EditCompany-constants';
+import { PUSH_DELAY, TOAST_MESSAGE } from './EditCompany-constants';
 import { formatDefaultValues } from "./EditCompany-functions";
 
 

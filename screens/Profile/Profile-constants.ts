@@ -12,10 +12,6 @@ export const TOAST_MESSAGE = {
   error: "Error updating your profile"
 }
 
-export const TOAST_OPTIONS = {
-  position: "top-right",
-} as const
-
 export const FIELDS = {
   firstName: {
     name: "firstName",

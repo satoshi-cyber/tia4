@@ -10,8 +10,4 @@ export const CLASS_NAMES = {
 
 export const DESCRIPTION = 'Click the button to upload the interview! Good luck!'
 
-export const TOAST_OPTIONS = {
-  position: "top-right",
-} as const
-
 export const TOAST_ERROR = 'Error submitting the interview!'

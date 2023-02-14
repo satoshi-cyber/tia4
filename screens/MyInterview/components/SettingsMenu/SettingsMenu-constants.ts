@@ -9,9 +9,4 @@ export const TOAST_MESSAGE = {
   },
 }
 
-export const TOAST_OPTIONS = {
-  position: "top-right",
-} as const
-
-
 export const PUSH_DELAY = 300

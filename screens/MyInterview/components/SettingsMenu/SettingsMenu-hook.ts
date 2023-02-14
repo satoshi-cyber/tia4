@@ -1,9 +1,9 @@
-import { URLS } from '@/config';
+import { TOAST_OPTIONS, URLS } from '@/config';
 import { useDeleteInterviewMutation } from '@/graphql';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
-import { PUSH_DELAY, TOAST_MESSAGE, TOAST_OPTIONS } from './SettingsMenu-constants';
+import { PUSH_DELAY, TOAST_MESSAGE } from './SettingsMenu-constants';
 
 export const useSettingsMenu = () => {
   const router = useRouter()

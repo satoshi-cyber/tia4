@@ -12,10 +12,6 @@ export const TOAST_MESSAGE = {
   error: "Error creating your company, it already exists!"
 }
 
-export const TOAST_OPTIONS = {
-  position: "top-right",
-} as const
-
 export const COMPANY_NAME_FIELD_PROPS = {
   name: "name",
   label: "Company name",
