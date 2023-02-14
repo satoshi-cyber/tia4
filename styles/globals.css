@@ -164,7 +164,7 @@ input::-webkit-date-and-time-value {
 }
 
 .video-react-big-play-button::before {
-  top: 15px !important;
+  top: 16px !important;
   font-size: 40px
 }
 
