@@ -21,8 +21,10 @@ export const usePublicJob = () => {
 
   const jobDescription = data?.job.description
 
+  const isLoading = fetching || !router.isReady
+
   return {
-    fetching,
+    isLoading,
     href,
     jobTitle,
     jobDescription,

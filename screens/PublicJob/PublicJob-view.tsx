@@ -14,12 +14,12 @@ import { TITLE_PROPS } from './PublicJob-constants';
 import { usePublicJob } from './PublicJob-hook';
 
 const PublicJob: React.FC = () => {
-  const { jobTitle, companyName, fetching, href, jobDescription } =
+  const { jobTitle, companyName, isLoading, href, jobDescription } =
     usePublicJob();
 
   return (
     <Layout.Apply>
-      <LoadingProvider isLoading={fetching}>
+      <LoadingProvider isLoading={isLoading}>
         <Title {...TITLE_PROPS} title={jobTitle} subTitle={companyName} />
         <Markdown
           className="w-full"

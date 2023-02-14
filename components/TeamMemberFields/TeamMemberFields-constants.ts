@@ -5,7 +5,7 @@ export const CLASS_NAMES = {
 }
 
 export const TITLE_PROPS = {
-  text: "Questions",
+  text: "Invite team members",
   skeletonProps: {
     width: 100
   }
@@ -17,27 +17,22 @@ export const CLOSE_BUTTON_PROPS = {
   className: "absolute right-2 top-2 text-gray-600 cursor-pointer transition-all hover:text-purple-800"
 } as const
 
-export const QUESTION_FIELD_PROPS = {
-  label: "Question",
+export const EMAIL_FIELD_PROPS = {
+  label: "Email",
   type: "text",
-  placeholder: "Tell me about yourself",
-  minRows: 1
+  placeholder: "john.smith@example.com",
 }
 
-export const TIME_FIELD_PROPS = {
-  label: "Time",
-  placeholder: "2 min",
+export const ROLE_FIELD_PROPS = {
+  label: "Role",
   options: [
-    { value: "300", label: '5 min' },
-    { value: "180", label: '3 min' },
-    { value: "120", label: '2 min' },
-    { value: "60", label: '1 min' },
-    { value: "30", label: '30 sec' },
+    { label: "Member", value: 'member' },
+    { label: "Admin member", value: 'adminMember' },
   ]
 }
 
 export const ADD_QUESTION_BUTTON_PROPS = {
-  title: "Add a questions",
+  title: "Add a team member",
   skeletonProps: {
     width: 100
   }
