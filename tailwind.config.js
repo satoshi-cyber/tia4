@@ -21,6 +21,7 @@ module.exports = {
         hover: '0px 0px 60px -4px rgb(0, 0, 0, 0.1)',
         secondary: '0px 0px 30px -4px rgba(85,60,154,0.5)',
         button: '0px 0px 30px -4px rgb(0, 0, 0, 0.2)',
+        icon: '0px 0px 30px -4px rgb(0, 0, 0, 0.15)',
         pixel: 'inset -7px 0 1px -7px rgba(0,0,0,0.7)',
         pixelHover:
           'inset -7px 0 1px -7px rgba(0,0,0,0.1), 0 35px 60px -15px rgba(0, 0, 0, 0.1)',

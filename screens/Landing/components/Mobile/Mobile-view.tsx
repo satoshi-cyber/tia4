@@ -85,13 +85,13 @@ const Mobile: FC = () => {
       <div className="">
         <div className="flex items-center mb-4">
           <div
-            className="flex w-10 h-10 mr-3 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-button items-center justify-center"
+            className="flex w-10 h-10 mr-3 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-icon items-center justify-center"
             onClick={handlePrev}
           >
             <HiArrowLeft />
           </div>
           <div
-            className="flex w-10 h-10 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-button items-center justify-center"
+            className="flex w-10 h-10 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-icon items-center justify-center"
             onClick={handleNext}
           >
             <HiArrowRight />
