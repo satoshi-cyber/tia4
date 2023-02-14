@@ -148,3 +148,31 @@ input::-webkit-date-and-time-value {
 .video-react { @apply bg-black p-[1px] }
 
 .swiper-wrapper { box-sizing: border-box !important; }
+
+.video-react-big-play-button,  .video-react .video-react-control-bar { 
+  background-color: transparent !important;
+  @apply backdrop-blur-2xl 
+}
+
+.video-react-big-play-button {
+  margin-top: -40px !important;
+  margin-left: -40px !important;
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 9999px !important;
+  @apply overflow-hidden transition-all duration-300;
+}
+
+.video-react-big-play-button:hover {
+  @apply shadow-glow;
+}
+
+.video-react-big-play-button::before {
+  top: 15px !important;
+}
+
+.video-react-load-progress { 
+  background-color:black !important;
+}
+
+.video-react-duration-display { font-family: Inter !important;}

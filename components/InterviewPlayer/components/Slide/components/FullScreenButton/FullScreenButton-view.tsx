@@ -4,17 +4,17 @@ const FullScreenButton: React.FC<FullScreenButtonProps> = ({
   onClick,
   fullScreen,
 }) => (
-  <button className="text-white px-4" onClick={onClick}>
+  <button className="text-white px-4 group" onClick={onClick}>
     {fullScreen ? (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
-        width={20}
-        height={20}
+        width={16}
+        height={16}
         viewBox="0 0 24 24"
-        strokeWidth={1.5}
+        strokeWidth={2}
         stroke="currentColor"
-        className="w-6 h-6"
+        className="group-hover:drop-shadow-glow"
       >
         <path
           strokeLinecap="round"
@@ -24,14 +24,15 @@ const FullScreenButton: React.FC<FullScreenButtonProps> = ({
       </svg>
     ) : (
       <svg
-        width={20}
-        height={20}
+        width={16}
+        height={16}
         fill="none"
         stroke="currentColor"
-        strokeWidth={1.5}
+        strokeWidth={2}
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
+        className="group-hover:drop-shadow-glow"
       >
         <path
           strokeLinecap="round"
