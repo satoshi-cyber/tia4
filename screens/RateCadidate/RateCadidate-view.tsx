@@ -43,7 +43,7 @@ const Rate = () => {
             <div className="flex flex-col lg:max-w-[850px] xl:max-w-[640px] w-full px-6 lg:px-0">
               <AnimatedDiv
                 style={{ marginLeft, marginRight, scale }}
-                className="xl:sticky xl:top-28 xl:top-16 z-10 origin-top pt-6"
+                className="xl:sticky xl:top-28 xl:top-16 z-10 origin-top"
               >
                 <div>
                   <AnimatedDiv
