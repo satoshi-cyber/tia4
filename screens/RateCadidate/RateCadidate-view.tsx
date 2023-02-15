@@ -32,7 +32,7 @@ const Rate = () => {
 
   return (
     <LoadingProvider isLoading={isLoading}>
-      <div className="flex flex-1 w-full justify-center pt-28 md:pt-16 xl:min-h-[2000px]">
+      <div className="flex flex-1 w-full justify-center pt-28 md:pt-16">
         <AnimatedDiv
           style={{
             marginLeft: containerMarginRight,
