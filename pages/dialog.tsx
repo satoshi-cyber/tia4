@@ -1,16 +1,16 @@
-import React, { Fragment, useState } from 'react'
-import { Layout } from '@/components'
-import { Dialog, Transition } from '@headlessui/react'
+import React, { Fragment, useState } from 'react';
+import { Layout } from '@/components';
+import { Dialog, Transition } from '@headlessui/react';
 
 const Profile: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(true);
 
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   return (
@@ -61,7 +61,7 @@ const Profile: React.FC = () => {
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

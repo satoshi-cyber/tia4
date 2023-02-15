@@ -8,7 +8,8 @@ import {
   SubmitButton,
 } from '@/components';
 import TeamMemberFields from '@/components/TeamMemberFields';
-import { useState } from 'react';
+import { Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Header from './components/Header';
 
@@ -35,10 +36,24 @@ const Company = () => {
       <Header onClose={inviteTeamMembers ? handleCloseForm : undefined} />
 
       {inviteTeamMembers ? (
-        <Form form={form} onSubmit={onSubmit} className="w-full">
-          <TeamMemberFields />
-          <SubmitButton title="Send invite" />
-        </Form>
+        <Transition
+          appear
+          show={inviteTeamMembers}
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          <div className="w-full">
+            <Form form={form} onSubmit={onSubmit} className="w-full">
+              <TeamMemberFields />
+              <SubmitButton title="Send invite" />
+            </Form>
+          </div>
+        </Transition>
       ) : (
         <>
           <PrimaryButton
