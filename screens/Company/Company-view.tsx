@@ -9,12 +9,15 @@ import {
 } from '@/components';
 import TeamMemberFields from '@/components/TeamMemberFields';
 import { Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useLayoutEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Header from './components/Header';
 
 const Company = () => {
   const [inviteTeamMembers, setInviteTeamMembers] = useState(false);
+
+  const [inviteTeamMembersVisible, setInviteTeamMembersVisible] =
+    useState(false);
 
   const form = useForm({
     defaultValues: {
@@ -31,6 +34,10 @@ const Company = () => {
 
   const onSubmit = () => {};
 
+  useLayoutEffect(() => {
+    setInviteTeamMembersVisible(inviteTeamMembers);
+  }, [inviteTeamMembers]);
+
   return (
     <Layout.Default>
       <Header onClose={inviteTeamMembers ? handleCloseForm : undefined} />
@@ -38,14 +45,11 @@ const Company = () => {
       {inviteTeamMembers ? (
         <Transition
           appear
-          show={inviteTeamMembers}
+          show={inviteTeamMembersVisible}
           as={Fragment}
           enter="ease-out duration-300"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
         >
           <div className="w-full">
             <Form form={form} onSubmit={onSubmit} className="w-full">
