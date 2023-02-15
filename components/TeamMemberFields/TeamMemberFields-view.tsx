@@ -1,9 +1,8 @@
-import { Icon, Field, SecondaryButton, Text } from '@/components';
+import { Icon, Field, SecondaryButton } from '@/components';
 
 import { useTeamMemberFields } from './TeamMemberFields-hook';
 import {
   CLASS_NAMES,
-  TITLE_PROPS,
   CLOSE_BUTTON_PROPS,
   EMAIL_FIELD_PROPS,
   ADD_QUESTION_BUTTON_PROPS,
@@ -14,14 +13,13 @@ const TeamMemberFields: React.FC = () => {
   const { fields, handleAppend, remove } = useTeamMemberFields();
 
   return (
-    <div>
-      <Text className={CLASS_NAMES.title} {...TITLE_PROPS} />
+    <>
       {fields.map((field, index) => (
         <div key={field.id} className={CLASS_NAMES.container}>
           {fields.length > 1 && (
             <Icon {...CLOSE_BUTTON_PROPS} onClick={() => remove(index)} />
           )}
-          <div className={CLASS_NAMES.question}>
+          <div className={CLASS_NAMES.email}>
             <Field.Input
               name={`teamMembers.${index}.email`}
               {...EMAIL_FIELD_PROPS}
@@ -40,7 +38,7 @@ const TeamMemberFields: React.FC = () => {
         onClick={handleAppend}
         className="mb-8"
       />
-    </div>
+    </>
   );
 };
 

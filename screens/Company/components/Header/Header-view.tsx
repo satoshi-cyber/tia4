@@ -3,7 +3,7 @@ import { URLS } from '@/config';
 import Link from 'next/link';
 import { useCompanyHeader } from './Header-hook';
 
-const Header = () => {
+const Header = ({ onClose }: { onClose?: () => void }) => {
   const { fetching, title, avatar } = useCompanyHeader();
 
   return (
@@ -13,7 +13,10 @@ const Header = () => {
         title={title}
         skeletonProps={{ width: 120 }}
         subTitleSkeletonProps={{ width: 280 }}
-        subTitle="Edit your company, and invite new members!"
+        subTitle="The Interview works better with a team!"
+        before={
+          onClose && <ButtonIcon name="HiChevronLeft" onClick={onClose} />
+        }
         after={
           <Link href={URLS.EDIT_COMPANY}>
             <ButtonIcon name="HiCog" />

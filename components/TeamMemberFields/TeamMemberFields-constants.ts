@@ -1,14 +1,6 @@
 export const CLASS_NAMES = {
-  title: "text-xl text-gray-900 text-center w-full my-8 mb-6",
-  container: "border border-gray-200 w-full p-4 rounded-lg mb-4 flex flex-col relative pt-6",
-  question: "w-full mr-4"
-}
-
-export const TITLE_PROPS = {
-  text: "Invite team members",
-  skeletonProps: {
-    width: 100
-  }
+  container: "border border-gray-200 w-full p-4 rounded-lg mb-4 flex flex-col md:flex-row relative pt-6",
+  email: "w-full md:mr-4"
 }
 
 export const CLOSE_BUTTON_PROPS = {
@@ -32,7 +24,7 @@ export const ROLE_FIELD_PROPS = {
 }
 
 export const ADD_QUESTION_BUTTON_PROPS = {
-  title: "Add a team member",
+  title: "Add another one",
   skeletonProps: {
     width: 100
   }
