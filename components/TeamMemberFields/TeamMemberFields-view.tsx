@@ -8,8 +8,9 @@ import {
   ADD_QUESTION_BUTTON_PROPS,
   ROLE_FIELD_PROPS,
 } from './TeamMemberFields-constants';
+import { TeamMemberFieldsProps } from './TeamMemberFields-types';
 
-const TeamMemberFields: React.FC = () => {
+const TeamMemberFields: React.FC<TeamMemberFieldsProps> = ({ autoFocus }) => {
   const { fields, handleAppend, remove } = useTeamMemberFields();
 
   return (
@@ -21,6 +22,7 @@ const TeamMemberFields: React.FC = () => {
           )}
           <div className={CLASS_NAMES.email}>
             <Field.Input
+              autoFocus={autoFocus && index === 0}
               name={`teamMembers.${index}.email`}
               {...EMAIL_FIELD_PROPS}
             />

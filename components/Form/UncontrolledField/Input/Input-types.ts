@@ -8,4 +8,5 @@ export interface InputProps {
   className?: string;
   after?: React.ReactElement;
   placeholder?: string;
+  autoFocus?: boolean;
 }
