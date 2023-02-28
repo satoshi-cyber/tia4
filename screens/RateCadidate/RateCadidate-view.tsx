@@ -1,6 +1,13 @@
 import React from 'react';
 import InterviewPlayer from '@/components/InterviewPlayer';
-import { Avatar, ButtonIcon, LoadingProvider, Text, Icon } from '@/components';
+import {
+  Avatar,
+  ButtonIcon,
+  LoadingProvider,
+  Text,
+  Icon,
+  SkeletonLoader,
+} from '@/components';
 import ReactStars from 'react-stars';
 import Link from 'next/link';
 
@@ -127,12 +134,38 @@ const Rate = () => {
                         )}
                       </div>
                     </div>
-                    <div className="flex-none hidden md:block">
-                      <ReactStars {...RATE_PROPS} />
+                    <div className="hidden md:flex flex-row items-center">
+                      <ButtonIcon
+                        size={50}
+                        name="HiThumbDown"
+                        className="mr-2"
+                      />
+                      <SkeletonLoader
+                        width={170}
+                        height={48}
+                        borderRadius={24}
+                        after={
+                          <ReactStars
+                            {...RATE_PROPS}
+                            className="border rounded-full px-2 hover:border-gray-100 hover:shadow-icon"
+                          />
+                        }
+                      />
                     </div>
                   </AnimatedDiv>
-                  <div className="block md:hidden flex justify-center mb-12">
-                    <ReactStars {...RATE_PROPS} />
+                  <div className="flex md:hidden flex justify-center mb-12 flex-row items-center">
+                    <ButtonIcon size={50} name="HiThumbDown" className="mr-2" />
+                    <SkeletonLoader
+                      width={170}
+                      height={48}
+                      borderRadius={24}
+                      after={
+                        <ReactStars
+                          {...RATE_PROPS}
+                          className="border rounded-full px-2 hover:border-gray-100 hover:shadow-icon"
+                        />
+                      }
+                    />
                   </div>
                 </div>
               </AnimatedDiv>
