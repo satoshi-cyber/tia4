@@ -1,4 +1,4 @@
-import { useScroll, useTransform } from 'framer-motion';
+import { useScroll, useSpring, useTransform } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 
 export const useTransforms = () => {

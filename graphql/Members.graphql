@@ -1,0 +1,18 @@
+query Members($companyId: ID!) {
+  members(companyId: $companyId) {
+    __typename
+    ... on CompanyMember {
+      role
+      user {
+        id
+        firstName
+        lastName
+        avatarUrl
+      }
+    }
+    ... on CompanyInvite {
+      role
+      recipientEmail
+    }
+  }
+}

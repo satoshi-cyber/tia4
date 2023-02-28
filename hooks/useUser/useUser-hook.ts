@@ -116,7 +116,9 @@ export const useUser = () => {
 
   const companyId = claims && claims.companyRoles[0] && claims.companyRoles[0].companyId
 
+  const companyRole = claims && claims.companyRoles[0] && claims.companyRoles[0].role
+
   const hasCompany = Boolean(companyId)
 
-  return { login, logout, setToken, hasCompany, companyId, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, authenticateUserFromRedirect, loginWithProvider, authenticateUserFromDid }
+  return { claims, login, logout, setToken, hasCompany, companyId, companyRole, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, authenticateUserFromRedirect, loginWithProvider, authenticateUserFromDid }
 }

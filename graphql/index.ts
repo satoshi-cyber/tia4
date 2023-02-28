@@ -130,7 +130,6 @@ export type Mutation = {
   finalizeInterview: Scalars['Boolean'];
   interviews: Array<Interview>;
   inviteMember: CompanyInvite;
-  members: Array<Member>;
   processInterview: Scalars['Boolean'];
   rateInterview: Interview;
   removeResume: User;
@@ -197,11 +196,6 @@ export type MutationInterviewsArgs = {
 export type MutationInviteMemberArgs = {
   companyId: Scalars['ID'];
   input: InviteMember;
-};
-
-
-export type MutationMembersArgs = {
-  companyId: Scalars['ID'];
 };
 
 
@@ -283,6 +277,7 @@ export type Query = {
   interviews: Array<Interview>;
   job: Job;
   jobs: Array<Job>;
+  members: Array<Member>;
   myInterview: Interview;
   myInterviews: Array<Interview>;
   profile: User;
@@ -318,6 +313,11 @@ export type QueryJobArgs = {
 
 
 export type QueryJobsArgs = {
+  companyId: Scalars['ID'];
+};
+
+
+export type QueryMembersArgs = {
   companyId: Scalars['ID'];
 };
 
@@ -466,6 +466,13 @@ export type JobsListQueryVariables = Exact<{
 
 
 export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
+
+export type MembersQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+}>;
+
+
+export type MembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'CompanyInvite', role: CompanyMemberRole, recipientEmail: string } | { __typename: 'CompanyMember', role: CompanyMemberRole, user: { __typename?: 'User', id: string, firstName?: string | null, lastName?: string | null, avatarUrl?: string | null } }> };
 
 export type MyInterviewQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -714,6 +721,30 @@ export const JobsListDocument = gql`
 
 export function useJobsListQuery(options: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
   return Urql.useQuery<JobsListQuery, JobsListQueryVariables>({ query: JobsListDocument, ...options });
+};
+export const MembersDocument = gql`
+    query Members($companyId: ID!) {
+  members(companyId: $companyId) {
+    __typename
+    ... on CompanyMember {
+      role
+      user {
+        id
+        firstName
+        lastName
+        avatarUrl
+      }
+    }
+    ... on CompanyInvite {
+      role
+      recipientEmail
+    }
+  }
+}
+    `;
+
+export function useMembersQuery(options: Omit<Urql.UseQueryArgs<MembersQueryVariables>, 'query'>) {
+  return Urql.useQuery<MembersQuery, MembersQueryVariables>({ query: MembersDocument, ...options });
 };
 export const MyInterviewDocument = gql`
     query MyInterview($id: ID!) {
