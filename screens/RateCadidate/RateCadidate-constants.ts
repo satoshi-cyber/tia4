@@ -10,3 +10,11 @@ export const DEMO_INTERVIEW = {
   answers: [{ question: { question: "Tell me about yourself" }, url: getAssetUrl('/videoplayback.mp4') }] as Answer[],
   emailLink: `mailto:info@theinterview.io`
 }
+
+export const RATE_PROPS = {
+  size: 30,
+  count: 5,
+  half: false,
+  color1: "#9ca3af",
+  color2: "#6b21a8",
+};

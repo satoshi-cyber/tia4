@@ -1,11 +1,13 @@
 import React from 'react';
 import InterviewPlayer from '@/components/InterviewPlayer';
 import { Avatar, ButtonIcon, LoadingProvider, Text, Icon } from '@/components';
+import ReactStars from 'react-stars';
 import Link from 'next/link';
 
 import Pdf from './components/Pdf';
 import { useRate } from './RateCadidate-hook';
 import AnimatedDiv from './components/AnimatedDiv';
+import { RATE_PROPS } from './RateCadidate-constants';
 
 const Rate = () => {
   const {
@@ -126,17 +128,11 @@ const Rate = () => {
                       </div>
                     </div>
                     <div className="flex-none hidden md:block">
-                      <div className="grid grid-cols-2 grid-rows-1 gap-4">
-                        <ButtonIcon size={60} name="HiThumbDown" />
-                        <ButtonIcon size={60} name="HiThumbUp" />
-                      </div>
+                      <ReactStars {...RATE_PROPS} />
                     </div>
                   </AnimatedDiv>
                   <div className="block md:hidden flex justify-center mb-12">
-                    <div className="grid grid-cols-2 grid-rows-1 gap-4">
-                      <ButtonIcon size={60} name="HiThumbDown" />
-                      <ButtonIcon size={60} name="HiThumbUp" />
-                    </div>
+                    <ReactStars {...RATE_PROPS} />
                   </div>
                 </div>
               </AnimatedDiv>
