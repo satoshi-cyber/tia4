@@ -1,3 +1,5 @@
+import { CompanyMemberRole } from "@/graphql"
+
 export const CLASS_NAMES = {
   container: 'flex w-full flex-row justify-between items-center border p-4 rounded-full',
   left: 'flex flex-row items-center mr-4',
@@ -19,5 +21,10 @@ export const ROLE_PROPS = {
   as: "span",
   className: "text-sm flex-none",
   skeletonProps: { width: 60 }
+}
+
+export const ROLE_LABEL = {
+  [CompanyMemberRole.AdminMember]: 'admin member',
+  [CompanyMemberRole.Member]: 'member',
 }
 

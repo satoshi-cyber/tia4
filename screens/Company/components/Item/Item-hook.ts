@@ -1,6 +1,7 @@
 import { CompanyMemberRole } from '@/graphql';
 import { useUser } from '@/hooks';
 
+import { ROLE_LABEL } from './Item-constants';
 import { ItemProps } from './Item-types';
 
 export const useItem = ({ member }: ItemProps) => {
@@ -13,7 +14,7 @@ export const useItem = ({ member }: ItemProps) => {
       ? member.recipientEmail
       : `${member.user.firstName} ${member.user.lastName}`;
 
-  const roleLabel = `(${'recipientEmail' in member ? 'invited' : member.role})`;
+  const roleLabel = `(${'recipientEmail' in member ? 'invited' : ROLE_LABEL[member.role]})`;
 
   const avatar = ('user' in member && member.user.avatarUrl) || '';
 
