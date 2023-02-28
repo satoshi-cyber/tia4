@@ -36,7 +36,6 @@ const Company = () => {
   return (
     <Layout.Default>
       <Header onClose={inviteTeamMembers ? handleCloseForm : undefined} />
-
       {inviteTeamMembers ? (
         <Transition
           {...TRANSITION_PROPS}
