@@ -18,7 +18,7 @@ const magic =
 export const useUser = () => {
   const { token, setToken } = useContext(AuthContext)
 
-  const [_, authenticateUser] = useAuthenticateUserMutation()
+  const [{ fetching }, authenticateUser] = useAuthenticateUserMutation()
 
   const login = useCallback(
     async (email: string, jobId?: string) => {
@@ -120,5 +120,5 @@ export const useUser = () => {
 
   const hasCompany = Boolean(companyId)
 
-  return { claims, login, logout, setToken, hasCompany, companyId, companyRole, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, authenticateUserFromRedirect, loginWithProvider, authenticateUserFromDid }
+  return { fetching, claims, login, logout, setToken, hasCompany, companyId, companyRole, isUserLoggedin, token, refreshToken, authenticateUserFromOAuth, authenticateUserFromRedirect, loginWithProvider, authenticateUserFromDid }
 }

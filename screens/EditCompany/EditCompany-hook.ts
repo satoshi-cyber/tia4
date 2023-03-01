@@ -14,7 +14,7 @@ import { formatDefaultValues } from "./EditCompany-functions";
 
 export const useEditCompany = () => {
   const router = useRouter()
-  const { companyId, refreshToken } = useUser()
+  const { companyId, refreshToken, fetching: refeshingToken } = useUser()
 
   const context = useMemo(() => ({ additionalTypenames: ['Company'] }), [])
 
@@ -22,7 +22,7 @@ export const useEditCompany = () => {
   const [{ fetching: updatingCompany }, updateCompany] = useUpdateCompanyMutation();
   const [{ fetching: deletingCompany }, deleteCompany] = useDeleteCompanyMutation()
 
-  const submitting = updatingCompany || deletingCompany
+  const submitting = updatingCompany || deletingCompany || refeshingToken
 
   const avatar = data?.company?.avatarUrl || undefined
   const avatarUploadUrl = data?.company?.avatarUploadUrl || undefined
