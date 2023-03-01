@@ -96,8 +96,8 @@ export type Interview = {
 };
 
 export type InviteMember = {
-  recipientEmail?: InputMaybe<Scalars['String']>;
-  role?: InputMaybe<CompanyMemberRole>;
+  recipientEmail: Scalars['String'];
+  role: CompanyMemberRole;
 };
 
 export type Job = {
@@ -121,7 +121,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   authenticateUser: Auth;
   createJob: Job;
-  deleteCompany: Company;
+  deleteCompany?: Maybe<Company>;
   deleteInterview: Interview;
   deleteInvite: CompanyInvite;
   deleteJob: Job;
@@ -413,7 +413,7 @@ export type DeleteCompanyMutationVariables = Exact<{
 }>;
 
 
-export type DeleteCompanyMutation = { __typename?: 'Mutation', deleteCompany: { __typename?: 'Company', id: string } };
+export type DeleteCompanyMutation = { __typename?: 'Mutation', deleteCompany?: { __typename?: 'Company', id: string } | null };
 
 export type DeleteInterviewMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -459,6 +459,14 @@ export type InterviewsQueryVariables = Exact<{
 
 
 export type InterviewsQuery = { __typename?: 'Query', interviews: Array<{ __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null }> };
+
+export type InviteMemberMutationVariables = Exact<{
+  companyId: Scalars['ID'];
+  input: InviteMember;
+}>;
+
+
+export type InviteMemberMutation = { __typename?: 'Mutation', inviteMember: { __typename?: 'CompanyInvite', recipientEmail: string } };
 
 export type JobQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -702,6 +710,17 @@ export const InterviewsDocument = gql`
 
 export function useInterviewsQuery(options: Omit<Urql.UseQueryArgs<InterviewsQueryVariables>, 'query'>) {
   return Urql.useQuery<InterviewsQuery, InterviewsQueryVariables>({ query: InterviewsDocument, ...options });
+};
+export const InviteMemberDocument = gql`
+    mutation InviteMember($companyId: ID!, $input: InviteMember!) {
+  inviteMember(companyId: $companyId, input: $input) {
+    recipientEmail
+  }
+}
+    `;
+
+export function useInviteMemberMutation() {
+  return Urql.useMutation<InviteMemberMutation, InviteMemberMutationVariables>(InviteMemberDocument);
 };
 export const JobDocument = gql`
     query Job($id: ID!) {

@@ -29,3 +29,8 @@ export const INVITE_TEAM_MEMBERS_ICON_PROPS = {
   size: 30,
   name: "HiPlusCircle"
 } as const
+
+export const TOAST_MESSAGE = {
+  success: "Invites send successfuly",
+  error: "Error sending invites"
+}

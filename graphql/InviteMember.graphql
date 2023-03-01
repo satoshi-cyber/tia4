@@ -1,0 +1,5 @@
+mutation InviteMember($companyId: ID!, $input: InviteMember!) {
+  inviteMember(companyId: $companyId, input: $input) {
+    recipientEmail
+  }
+}

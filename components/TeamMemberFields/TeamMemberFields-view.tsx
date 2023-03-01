@@ -23,7 +23,7 @@ const TeamMemberFields: React.FC<TeamMemberFieldsProps> = ({ autoFocus }) => {
           <div className={CLASS_NAMES.email}>
             <Field.Input
               autoFocus={autoFocus && index === 0}
-              name={`teamMembers.${index}.email`}
+              name={`teamMembers.${index}.recipientEmail`}
               {...EMAIL_FIELD_PROPS}
             />
           </div>
