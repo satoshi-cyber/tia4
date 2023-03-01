@@ -31,6 +31,12 @@ export const INVITE_TEAM_MEMBERS_ICON_PROPS = {
 } as const
 
 export const TOAST_MESSAGE = {
-  success: "Invites send successfuly",
-  error: "Error sending invites"
+  many: {
+    success: "Invites send successfuly",
+    error: "Error sending some invites"
+  },
+  one: {
+    success: "Invite send successfuly",
+    error: "Error sending an invite"
+  }
 }

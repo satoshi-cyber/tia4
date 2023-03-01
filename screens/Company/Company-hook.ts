@@ -33,7 +33,6 @@ export const useCompany = () => {
   const handleCloseForm = () => setInviteTeamMembers(false);
 
   const onSubmit = async (data: { teamMembers: CompanyInvite[] }) => {
-
     const invites = data.teamMembers.map(async (invite) => {
       const res =
         await inviteTeamMember({ companyId: companyId!, input: invite }, { additionalTypenames: ['CompanyInvite'] })
@@ -44,16 +43,17 @@ export const useCompany = () => {
 
     })
 
+    const toastMessage = invites.length === 1 ? TOAST_MESSAGE.one : TOAST_MESSAGE.many
+
     try {
       await Promise.all(invites)
 
-      toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
-
-      form.reset();
-
-      setInviteTeamMembers(false)
+      toast.success(toastMessage.success, TOAST_OPTIONS)
     } catch (e) {
-      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS)
+      toast.error(toastMessage.error, TOAST_OPTIONS)
+    } finally {
+      form.reset();
+      setInviteTeamMembers(false)
     }
   };
 
