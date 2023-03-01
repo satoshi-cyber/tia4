@@ -21,7 +21,7 @@ const retryOptions = {
   maxDelayMs: 15000,
   randomDelay: true,
   maxNumberAttempts: 10,
-  retryIf: (err: CombinedError) => Boolean(err),
+  retryIf: (err: CombinedError) => Boolean(err.networkError),
 };
 
 

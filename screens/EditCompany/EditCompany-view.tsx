@@ -21,6 +21,7 @@ import {
 } from './EditCompany-constants';
 
 import { useEditCompany } from './EditCompany-hook';
+import SettingsMenu from '@/components/SettingsMenu';
 
 const EditCompany: React.FC = () => {
   const {
@@ -31,11 +32,12 @@ const EditCompany: React.FC = () => {
     avatar,
     avatarUploadUrl,
     onUpload,
+    settingItems,
   } = useEditCompany();
 
   return (
     <Layout.Default>
-      <Title {...TITLE_PROPS} />
+      <Title {...TITLE_PROPS} after={<SettingsMenu items={settingItems} />} />
       <LoadingProvider isLoading={fetching}>
         <EditAvatar
           src={avatar}

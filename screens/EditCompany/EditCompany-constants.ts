@@ -8,8 +8,14 @@ export const TITLE_PROPS = {
 }
 
 export const TOAST_MESSAGE = {
-  success: "Company is updated!",
-  error: "Error updating your company"
+  updateCompany: {
+    success: "Company is updated!",
+    error: "Error updating your company"
+  },
+  deleteCompany: {
+    success: "Company is deleted!",
+    error: "Error deleting your company, Try to remove all the jobs!"
+  }
 }
 
 
