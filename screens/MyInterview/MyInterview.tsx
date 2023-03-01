@@ -3,15 +3,22 @@ import { ButtonIcon, Layout, LoadingProvider, Title } from '@/components/';
 import Link from 'next/link';
 import { URLS } from '@/config';
 import InterviewPlayer from '@/components/InterviewPlayer';
+import SettingsMenu from '@/components/SettingsMenu';
 
 import { TITLE_PROPS } from './MyInterview-constants';
 import { useMyInterview } from './MyInterview-hook';
 import Footer from './components/Footer';
-import SettingsMenu from './components/SettingsMenu';
 
 const MyInterviews = () => {
-  const { fetching, title, answers, companyLogo, companyName, appliedDate } =
-    useMyInterview();
+  const {
+    fetching,
+    title,
+    answers,
+    companyLogo,
+    companyName,
+    appliedDate,
+    settingItems,
+  } = useMyInterview();
 
   return (
     <Layout.Default width="max-w-[640px]">
@@ -24,7 +31,7 @@ const MyInterviews = () => {
               <ButtonIcon name="HiChevronLeft" />
             </Link>
           }
-          after={<SettingsMenu />}
+          after={<SettingsMenu items={settingItems} />}
         />
         <InterviewPlayer answers={answers} />
         <Footer
