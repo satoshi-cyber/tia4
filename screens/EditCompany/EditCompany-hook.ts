@@ -76,9 +76,9 @@ export const useEditCompany = () => {
       return
     }
 
-    toast.success(toastMessage.success, TOAST_OPTIONS)
-
     await refreshToken()
+
+    toast.success(toastMessage.success, TOAST_OPTIONS)
 
     setTimeout(() => router.push(URLS.HOME), PUSH_DELAY)
   };
