@@ -1,4 +1,4 @@
-import { Text } from '@/components';
+import { Loader, Text } from '@/components';
 import Avatar from '@/components/Avatar';
 import ButtonIcon from '@/components/ButtonIcon';
 
@@ -12,12 +12,21 @@ import { useItem } from './Item-hook';
 import { ItemProps } from './Item-types';
 
 const Item: React.FC<ItemProps> = ({ member }) => {
-  const { label, avatar, roleLabel, isButtonVisible, buttonIcon } = useItem({
+  const {
+    label,
+    avatar,
+    roleLabel,
+    isButtonVisible,
+    buttonIcon,
+    submitting,
+    handleClick,
+  } = useItem({
     member,
   });
 
   return (
     <div className={CLASS_NAMES.container}>
+      {submitting && <Loader />}
       <div className={CLASS_NAMES.left}>
         <Avatar {...AVATAR_PROPS} text={label} src={avatar} />
         <div className={CLASS_NAMES.details}>
@@ -25,7 +34,9 @@ const Item: React.FC<ItemProps> = ({ member }) => {
           <Text {...ROLE_PROPS} text={roleLabel} />
         </div>
       </div>
-      {isButtonVisible && <ButtonIcon name={buttonIcon} />}
+      {isButtonVisible && (
+        <ButtonIcon name={buttonIcon} onClick={handleClick} />
+      )}
     </div>
   );
 };

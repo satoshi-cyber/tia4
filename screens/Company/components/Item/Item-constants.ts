@@ -28,3 +28,9 @@ export const ROLE_LABEL = {
   [CompanyMemberRole.Member]: 'member',
 }
 
+export const TOAST_MESSAGE = {
+  deleteInvite: {
+    success: "Invite is deleted successfuly",
+    error: "Error deleting invite"
+  },
+}

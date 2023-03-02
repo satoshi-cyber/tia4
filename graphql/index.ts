@@ -166,7 +166,7 @@ export type MutationDeleteInterviewArgs = {
 
 export type MutationDeleteInviteArgs = {
   companyId: Scalars['ID'];
-  id: Scalars['ID'];
+  recipientEmail: Scalars['String'];
 };
 
 
@@ -422,6 +422,14 @@ export type DeleteInterviewMutationVariables = Exact<{
 
 export type DeleteInterviewMutation = { __typename?: 'Mutation', deleteInterview: { __typename?: 'Interview', id: string } };
 
+export type DeleteInviteMutationVariables = Exact<{
+  companyId: Scalars['ID'];
+  recipientEmail: Scalars['String'];
+}>;
+
+
+export type DeleteInviteMutation = { __typename?: 'Mutation', deleteInvite: { __typename?: 'CompanyInvite', recipientEmail: string, role: CompanyMemberRole } };
+
 export type DeleteJobMutationVariables = Exact<{
   companyId: Scalars['ID'];
   id: Scalars['ID'];
@@ -614,6 +622,18 @@ export const DeleteInterviewDocument = gql`
 
 export function useDeleteInterviewMutation() {
   return Urql.useMutation<DeleteInterviewMutation, DeleteInterviewMutationVariables>(DeleteInterviewDocument);
+};
+export const DeleteInviteDocument = gql`
+    mutation DeleteInvite($companyId: ID!, $recipientEmail: String!) {
+  deleteInvite(companyId: $companyId, recipientEmail: $recipientEmail) {
+    recipientEmail
+    role
+  }
+}
+    `;
+
+export function useDeleteInviteMutation() {
+  return Urql.useMutation<DeleteInviteMutation, DeleteInviteMutationVariables>(DeleteInviteDocument);
 };
 export const DeleteJobDocument = gql`
     mutation DeleteJob($companyId: ID!, $id: ID!) {

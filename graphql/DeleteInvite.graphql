@@ -1,0 +1,6 @@
+mutation DeleteInvite($companyId: ID!, $recipientEmail: String!) {
+  deleteInvite(companyId: $companyId, recipientEmail: $recipientEmail) {
+    recipientEmail
+    role
+  }
+}
