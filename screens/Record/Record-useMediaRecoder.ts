@@ -128,6 +128,7 @@ export const useReactMediaRecorder = ({
     const checkConstraints = (mediaType: MediaTrackConstraints) => {
       const supportedMediaConstraints =
         navigator.mediaDevices.getSupportedConstraints();
+
       const unSupportedConstraints = Object.keys(mediaType).filter(
         (constraint) =>
           !(supportedMediaConstraints as { [key: string]: any })[constraint],

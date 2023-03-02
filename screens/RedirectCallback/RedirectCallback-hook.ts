@@ -11,12 +11,10 @@ export const useRedirectCallback = () => {
   useLayoutEffect(() => {
     if (!router.isReady) return;
 
-    const jobId = router.query.jobId as string
-
-    console.log({ jobId })
+    const from = router.query.from as string
 
     authenticateUserFromRedirect().then((did) => {
-      const url = encodeURIComponent(jobId ? `${DOMAIN}${URLS.DID_CALLBACK}/${jobId}?did=${did}` : `${DOMAIN}${URLS.DID_CALLBACK}?did=${did}`)
+      const url = encodeURIComponent(from ? `${DOMAIN}${URLS.DID_CALLBACK}/${from}?did=${did}` : `${DOMAIN}${URLS.DID_CALLBACK}?did=${did}`)
 
       const href = `https://theinterview.page.link/?link=${url}`
 

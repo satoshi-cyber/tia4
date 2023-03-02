@@ -6,7 +6,7 @@ import { loginSchema } from './Login-validations';
 import { useUser } from "@/hooks";
 import { URLS } from "@/config";
 import { useCallback, useEffect } from "react";
-
+import nextBase64 from 'next-base64';
 
 export const useLogin = () => {
   const router = useRouter()
@@ -19,21 +19,21 @@ export const useLogin = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const jobId = router.query.jobId as string
+  const from = router.query.from as string
 
   const handleSubmit = async ({ email }: LoginData) =>
-    login(email, jobId)
+    login(email)
 
   useEffect(() => {
     if (isUserLoggedin) {
-      router.push(jobId ? URLS.APPLY.replace('[applyJobId]', jobId) : URLS.HOME)
+      router.push(from ? nextBase64.decode(from) : URLS.HOME)
     }
   }, [isUserLoggedin])
 
 
-  const loginWithLinkedin = useCallback(() => loginWithProvider('linkedin', jobId), [])
+  const loginWithLinkedin = useCallback(() => loginWithProvider('linkedin'), [])
 
-  const loginWithFacebook = useCallback(() => loginWithProvider('facebook', jobId), [])
+  const loginWithFacebook = useCallback(() => loginWithProvider('facebook'), [])
 
   return {
     form,

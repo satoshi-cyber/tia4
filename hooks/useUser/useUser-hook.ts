@@ -7,6 +7,7 @@ import jwtDecode from 'jwt-decode'
 import { JWTClaims } from "./useUser-types";
 
 import { AuthContext } from '../../components/AuthProvider'
+import { useRouter } from "next/router";
 
 
 const magic =
@@ -20,9 +21,13 @@ export const useUser = () => {
 
   const [{ fetching }, authenticateUser] = useAuthenticateUserMutation()
 
+  const router = useRouter()
+
+  const from = router.query.from
+
   const login = useCallback(
-    async (email: string, jobId?: string) => {
-      const redirectURI = jobId ? `${window.location.origin}/redirect-callback/${jobId}` : `${window.location.origin}/redirect-callback`
+    async (email: string) => {
+      const redirectURI = from ? `${window.location.origin}/redirect-callback/${from}` : `${window.location.origin}/redirect-callback`
 
       const did = await magic?.auth.loginWithMagicLink({ email, redirectURI });
 
@@ -37,13 +42,13 @@ export const useUser = () => {
     [setToken]
   )
 
-  const loginWithProvider = useCallback((provider: OAuthProvider, jobId?: string) =>
+  const loginWithProvider = useCallback((provider: OAuthProvider) =>
     new Promise((resolve) => {
       window.addEventListener("popstate", () => {
         resolve(true);
       });
 
-      const redirectURI = jobId ? `${window.location.origin}/oauth-callback/${jobId}` : `${window.location.origin}/oauth-callback`
+      const redirectURI = from ? `${window.location.origin}/oauth-callback/${from}` : `${window.location.origin}/oauth-callback`
 
       magic?.oauth.loginWithRedirect({
         provider,

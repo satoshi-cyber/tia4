@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { NextPage, NextPageContext } from 'next';
 import { Cookies, CookiesProvider } from 'react-cookie';
-import { URLS } from '@/config';
+import { DOMAIN, URLS } from '@/config';
 import { TOKEN_COOKIE_KEY } from '@/config/auth';
 import { useUser } from '@/hooks';
 import { useRouter } from 'next/router';
 import Router from 'next/router';
+import nextBase64 from 'next-base64';
 
 const withAuth = <P extends Object>(WrappedComponent: NextPage<P>) => {
   const EnhancedComponent = ({ cookies, ...restProps }: any) => {
@@ -13,17 +14,19 @@ const withAuth = <P extends Object>(WrappedComponent: NextPage<P>) => {
     const { isUserLoggedin } = useUser();
     const isBrowser = typeof window !== 'undefined';
 
-    const query = router.query;
+    const from = nextBase64.encode(`${DOMAIN}${router.asPath}`);
 
-    const url = query.applyJobId
-      ? `${URLS.LOGIN}?jobId=${query.applyJobId}`
-      : URLS.LOGIN;
+    const url = `${URLS.LOGIN}?from=${from}`;
 
     useEffect(() => {
+      if (!router.isReady) {
+        return;
+      }
+
       if (!isUserLoggedin) {
         Router.replace(url);
       }
-    }, [isUserLoggedin]);
+    }, [isUserLoggedin, router.isReady]);
 
     return (
       <CookiesProvider cookies={isBrowser ? undefined : cookies}>
@@ -35,11 +38,9 @@ const withAuth = <P extends Object>(WrappedComponent: NextPage<P>) => {
   EnhancedComponent.getInitialProps = async (ctx: NextPageContext) => {
     const cookies = new Cookies(ctx.req?.headers.cookie);
 
-    const query = ctx.query;
+    const from = nextBase64.encode(`${DOMAIN}${ctx.asPath}`);
 
-    const url = query.applyJobId
-      ? `${URLS.LOGIN}?jobId=${query.applyJobId}`
-      : URLS.LOGIN;
+    const url = `${URLS.LOGIN}?from=${from}`;
 
     if (!cookies || !cookies.get(TOKEN_COOKIE_KEY)) {
       if (ctx.res) {

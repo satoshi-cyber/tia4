@@ -27,4 +27,4 @@ export const URLS = {
     DEMO_INTERVIEW: '/jobs/bd1f9940-eccf-4a59-8de4-d0179a298e34'
 }
 
-export const DOMAIN = 'https://theinterview.io'
+export const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'https://theinterview.io'

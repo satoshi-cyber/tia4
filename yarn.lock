@@ -6633,6 +6633,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
+next-base64@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/next-base64/-/next-base64-1.1.0.tgz#5b073054ca566c83ff47220b425bc9d5f2e5c77d"
+  integrity sha512-roPubI4go4Cnb8oBp3OcXWoNmzDiMv8ykBfFe02c5imGuZJlXMBXfr6vc9gpr0rvImtgvL1FcQCZAvI/ZESVgg==
+
 next-tick@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
