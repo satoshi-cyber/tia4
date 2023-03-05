@@ -1006,6 +1006,13 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@babel/runtime@^7.10.1", "@babel/runtime@^7.18.3":
+  version "7.21.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.0.tgz#5b55c9d394e5fcf304909a8b00c07dc217b56673"
+  integrity sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==
+  dependencies:
+    regenerator-runtime "^0.13.11"
+
 "@babel/template@^7.15.4", "@babel/template@^7.18.10":
   version "7.18.10"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.18.10.tgz#6f9134835970d1dbf0835c0d100c9f38de0c5e71"
@@ -3610,7 +3617,7 @@ classcat@^5.0.3:
   resolved "https://registry.yarnpkg.com/classcat/-/classcat-5.0.4.tgz#e12d1dfe6df6427f260f03b80dc63571a5107ba6"
   integrity sha512-sbpkOw6z413p+HDGcBENe498WM9woqWHiJxCq7nvmxe9WmrUmqfAcxpIwAiMtM5Q3AhYkzXcNQHqsWq0mND51g==
 
-classnames@^2.2.6, classnames@^2.3.1:
+classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.1:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
@@ -7241,6 +7248,23 @@ randombytes@^2.1.0:
   dependencies:
     safe-buffer "^5.1.0"
 
+rc-rate@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/rc-rate/-/rc-rate-2.10.0.tgz#b16fd906c13bfc26b4776e27a14d13d06d50c635"
+  integrity sha512-TCjEpKPeN1m0EnGDDbb1KyxjNTJRzoReiPdtbrBJEey4Ryf/UGOQ6vqmz2yC6DJdYVDVUoZPdoz043ryh0t/nQ==
+  dependencies:
+    "@babel/runtime" "^7.10.1"
+    classnames "^2.2.5"
+    rc-util "^5.0.1"
+
+rc-util@^5.0.1:
+  version "5.28.0"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-5.28.0.tgz#9e5e441d5875b8bf0ba56c2f295042a28dcff580"
+  integrity sha512-KYDjhGodswVj29v0TRciKTqRPgumIFvFDndbCD227pitQ+0Cei196rxk+OXb/blu6V8zdTRK5RjCJn+WmHLvBA==
+  dependencies:
+    "@babel/runtime" "^7.18.3"
+    react-is "^16.12.0"
+
 react-avatar@^5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/react-avatar/-/react-avatar-5.0.3.tgz#42c6b7dc992a2e73fe83c0a1c2ceeac4c7bfae21"
@@ -7311,7 +7335,7 @@ react-html5video@^2.5.1:
   resolved "https://registry.yarnpkg.com/react-html5video/-/react-html5video-2.5.1.tgz#bbc4314be1d583cb991a11ca3480e70a3c964caf"
   integrity sha512-ELx5VIRJMIztYo7jdh0Xp1Ah6CziK3KGbwWsMOlNYyIUQHjFbjAEiAF8uY5CzVLofOA1159pbFgcVAPJSuqG2g==
 
-react-is@^16.13.1, react-is@^16.7.0:
+react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -7386,11 +7410,6 @@ react-ssr-prepass@^1.4.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/react-ssr-prepass/-/react-ssr-prepass-1.5.0.tgz#bc4ca7fcb52365e6aea11cc254a3d1bdcbd030c5"
   integrity sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ==
-
-react-stars@^2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/react-stars/-/react-stars-2.2.5.tgz#911852018e1574a0f9a2c1dfa4f0bc9af071b921"
-  integrity sha512-O//KS6Z9RZnUOU/r+3+wxCzNalVn/wEWIcbAQFRV3dw8WbV+ys/kgcpBPijqTiNpHGrcwZdtb/7wF/UVem20CQ==
 
 react-textarea-autosize@^8.4.0:
   version "8.4.0"

@@ -1,22 +1,14 @@
 import React from 'react';
 import InterviewPlayer from '@/components/InterviewPlayer';
-import {
-  Avatar,
-  ButtonIcon,
-  LoadingProvider,
-  Text,
-  Icon,
-  SkeletonLoader,
-} from '@/components';
-import ReactStars from 'react-stars';
+import { Avatar, ButtonIcon, LoadingProvider, Text, Icon } from '@/components';
 import Link from 'next/link';
 
 import Pdf from './components/Pdf';
 import { useRate } from './RateCadidate-hook';
 import AnimatedDiv from './components/AnimatedDiv';
-import { RATE_PROPS } from './RateCadidate-constants';
+import Rate from '@/components/Rate';
 
-const Rate = () => {
+const RateCandidate = () => {
   const {
     isLoading,
     transforms: {
@@ -135,37 +127,11 @@ const Rate = () => {
                       </div>
                     </div>
                     <div className="hidden md:flex flex-row items-center">
-                      <ButtonIcon
-                        size={50}
-                        name="HiThumbDown"
-                        className="mr-2"
-                      />
-                      <SkeletonLoader
-                        width={170}
-                        height={48}
-                        borderRadius={24}
-                        after={
-                          <ReactStars
-                            {...RATE_PROPS}
-                            className="border rounded-full px-2 hover:border-gray-100 hover:shadow-icon"
-                          />
-                        }
-                      />
+                      <Rate />
                     </div>
                   </AnimatedDiv>
                   <div className="flex md:hidden flex justify-center mb-12 flex-row items-center">
-                    <ButtonIcon size={50} name="HiThumbDown" className="mr-2" />
-                    <SkeletonLoader
-                      width={170}
-                      height={48}
-                      borderRadius={24}
-                      after={
-                        <ReactStars
-                          {...RATE_PROPS}
-                          className="border rounded-full px-2 hover:border-gray-100 hover:shadow-icon"
-                        />
-                      }
-                    />
+                    <Rate />
                   </div>
                 </div>
               </AnimatedDiv>
@@ -185,4 +151,4 @@ const Rate = () => {
   );
 };
 
-export default Rate;
+export default RateCandidate;

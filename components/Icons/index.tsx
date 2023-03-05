@@ -33,6 +33,11 @@ import { HiChevronDown } from '@react-icons/all-files/hi/HiChevronDown';
 import { HiMenu } from '@react-icons/all-files/hi/HiMenu';
 import { HiX } from '@react-icons/all-files/hi/HiX';
 import { HiChevronLeft } from '@react-icons/all-files/hi/HiChevronLeft';
+import { FaRegFrownOpen } from '@react-icons/all-files/fa/FaRegFrownOpen';
+import { FaRegFrown } from '@react-icons/all-files/fa/FaRegFrown';
+import { FaRegMeh } from '@react-icons/all-files/fa/FaRegMeh';
+import { FaRegSmile } from '@react-icons/all-files/fa/FaRegSmile';
+import { FaRegSmileWink } from '@react-icons/all-files/fa/FaRegSmileWink';
 
 import Linkedin from '../../public/linkedin.svg';
 
@@ -77,6 +82,11 @@ const Icons = {
   HiX,
   HiChevronLeft,
   HiLinkedin,
+  FaRegFrownOpen,
+  FaRegFrown,
+  FaRegMeh,
+  FaRegSmile,
+  FaRegSmileWink,
 };
 
 export default Icons;
