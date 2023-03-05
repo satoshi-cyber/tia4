@@ -1,29 +1,30 @@
-import RcRate from 'rc-rate';
-
 import { RateProps } from './Rate-types';
+import { ICONS } from './Rate-constants';
+import { useRate } from './Rate-hook';
 
 import Icon from '../Icon';
 import SkeletonLoader from '../SkeletonLoader';
 
-const ICONS = [
-  'FaRegFrownOpen',
-  'FaRegFrown',
-  'FaRegMeh',
-  'FaRegSmile',
-  'FaRegSmileWink',
-] as const;
+const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
+  const { classNames } = useRate({ className });
 
-const Rate: React.FC<RateProps> = ({ className }) => (
-  <RcRate
-    character={({ index }) => (
-      <SkeletonLoader
-        circle
-        width={30}
-        height={30}
-        after={<Icon name={ICONS[index as number]} />}
-      />
-    )}
-  />
-);
+  return (
+    <div className={classNames.container}>
+      {ICONS.map((icon) => (
+        <SkeletonLoader
+          circle
+          width={size}
+          height={size}
+          after={
+            <button className={classNames.button}>
+              <Icon name={icon} size={size} />
+            </button>
+          }
+          className={className}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default Rate;

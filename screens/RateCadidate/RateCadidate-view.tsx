@@ -64,7 +64,7 @@ const RateCandidate = () => {
                   </AnimatedDiv>
                   <InterviewPlayer answers={answers} />
                   <AnimatedDiv
-                    className="flex justify-between mt-4 mb-4 md:mb-10"
+                    className="flex justify-between mt-4 mb-10"
                     style={{ opacity }}
                   >
                     <div className="flex flex-1 md:flex-none">
@@ -126,12 +126,12 @@ const RateCandidate = () => {
                         )}
                       </div>
                     </div>
-                    <div className="hidden md:flex flex-row items-center">
+                    <div className="hidden md:flex flex-row items-start">
                       <Rate />
                     </div>
                   </AnimatedDiv>
                   <div className="flex md:hidden flex justify-center mb-12 flex-row items-center">
-                    <Rate />
+                    <Rate size={36} />
                   </div>
                 </div>
               </AnimatedDiv>

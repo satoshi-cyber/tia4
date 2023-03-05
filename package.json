@@ -43,7 +43,6 @@
     "next-base64": "^1.1.0",
     "next-urql": "^4.0.2",
     "postcss": "^8.4.16",
-    "rc-rate": "^2.10.0",
     "react": "^18.2.0",
     "react-avatar": "^5.0.3",
     "react-circular-progressbar": "^2.1.0",
