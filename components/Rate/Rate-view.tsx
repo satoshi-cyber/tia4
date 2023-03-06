@@ -19,7 +19,8 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
         title="Rate"
         confirm={<Icon name={ICONS[score]} size={size} />}
       >
-        This action can not be undone or edited.
+        This action can not be undone or edited. Candidate will not see your
+        rating.
       </Dialog>
       {ICONS.map((icon, index) => (
         <SkeletonLoader
