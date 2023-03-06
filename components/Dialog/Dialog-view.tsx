@@ -50,13 +50,15 @@ const Dialog: React.FC<DialogProps> = ({
                   <p className="text-sm text-gray-500">{children}</p>
                 </div>
                 <div className="flex flex-row items-center">
+                  <PrimaryButton
+                    title={confirm || 'Confirm'}
+                    className="mr-4"
+                  />
                   <SecondaryButton
                     onClick={onClose}
                     title="Cancel"
                     variant="cancel"
-                    className="mr-4"
                   />
-                  <PrimaryButton title={confirm || 'Confirm'} />
                 </div>
               </BaseDialog.Panel>
             </Transition.Child>
