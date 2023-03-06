@@ -4,7 +4,7 @@ export const CLASS_NAMES = {
 }
 
 export const ICONS = [
-  'FaRegFrownOpen',
+  'FaRegAngry',
   'FaRegFrown',
   'FaRegMeh',
   'FaRegSmile',
