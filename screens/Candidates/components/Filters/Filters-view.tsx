@@ -13,7 +13,7 @@ const Filters: React.FC = () => {
         <div className="flex flex-1 md:mr-8 md:max-w-[400px] md:-mb-4">
           <Field.Input
             label="Search"
-            placeholder="ex: score: 70% - 90%"
+            placeholder="Search ..."
             type="search"
             name="search"
             after={<FormIcon name="HiSearch" />}
