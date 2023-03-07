@@ -7,7 +7,7 @@ export const useProfile = () => {
 
   const [{ fetching: loading, data }] = useProfileQuery()
 
-  const label = data?.profile.firstName ? `${data?.profile.firstName} ${data?.profile.lastName}` : 'Profile'
+  const label = data?.profile.firstName ? `${data?.profile.firstName} ${data?.profile.lastName}` : 'Edit Profile'
 
   const avatarUrl = data?.profile.avatarUrl || undefined
 
