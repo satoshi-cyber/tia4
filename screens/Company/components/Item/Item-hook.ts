@@ -16,7 +16,7 @@ export const useItem = ({ member }: ItemProps) => {
   const label =
     'recipientEmail' in member
       ? member.recipientEmail
-      : `${member.user.firstName} ${member.user.lastName}`;
+      : member.user.firstName ? `${member.user.firstName} ${member.user.lastName}` : member.user.email;
 
   const roleLabel = `(${'recipientEmail' in member ? 'invited' : ROLE_LABEL[member.role]})`;
 

@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import { useMemo } from "react"
 import { toast } from "react-toastify"
 
-import { DELAY, TOAST_MESSAGE } from "./JoinCompany-constants"
+import { TOAST_MESSAGE } from "./JoinCompany-constants"
 
 export const useJoinCompany = () => {
   const router = useRouter()
@@ -37,7 +37,7 @@ export const useJoinCompany = () => {
 
     toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
 
-    setTimeout(() => router.push(URLS.COMPANY), DELAY)
+    router.push(URLS.COMPANY)
 
   }
 

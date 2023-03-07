@@ -13,4 +13,3 @@ export const TOAST_MESSAGE = {
   error: 'Error joining the company'
 }
 
-export const DELAY = 3000

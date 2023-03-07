@@ -508,7 +508,7 @@ export type MembersQueryVariables = Exact<{
 }>;
 
 
-export type MembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'CompanyInvite', role: CompanyMemberRole, recipientEmail: string } | { __typename: 'CompanyMember', role: CompanyMemberRole, user: { __typename?: 'User', id: string, firstName?: string | null, lastName?: string | null, avatarUrl?: string | null } }> };
+export type MembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'CompanyInvite', role: CompanyMemberRole, recipientEmail: string } | { __typename: 'CompanyMember', role: CompanyMemberRole, user: { __typename?: 'User', id: string, firstName?: string | null, lastName?: string | null, email: string, avatarUrl?: string | null } }> };
 
 export type MyInterviewQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -813,6 +813,7 @@ export const MembersDocument = gql`
         id
         firstName
         lastName
+        email
         avatarUrl
       }
     }
