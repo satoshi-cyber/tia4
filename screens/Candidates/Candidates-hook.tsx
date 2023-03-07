@@ -17,7 +17,10 @@ export const useCandidates = () => {
   const jobId = job === ALL_JOBS_OPTION.value ? undefined : job;
 
   const [{ data, fetching }] = useInterviewsQuery({
-    variables: { companyId: companyId!, filters: { jobId } },
+    variables: {
+      companyId: companyId!,
+      filters: { jobId, query: search ? search : undefined },
+    },
     pause: !companyId,
   });
 

@@ -12,6 +12,7 @@ import Input from '../../UncontrolledField/Input';
 const DebounceField: React.FC<InputFieldProps> = ({
   name,
   label,
+  interval = 500,
   ...restProps
 }) => {
   const { errors } = useFormState({ name, exact: true });
@@ -33,7 +34,7 @@ const DebounceField: React.FC<InputFieldProps> = ({
       <Input
         {...registerProps}
         {...restProps}
-        onChange={debounce(registerProps.onChange, 500)}
+        onChange={debounce(registerProps.onChange, interval)}
       />
       <p
         className={clsx(
