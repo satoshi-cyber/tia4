@@ -5,5 +5,6 @@ export interface PrimaryButtonProps {
   className?: string
   onClick?: () => void
   before?: React.ReactNode
-  isLoading?: boolean
+  isLoading?: boolean,
+  disabled?: boolean
 }
