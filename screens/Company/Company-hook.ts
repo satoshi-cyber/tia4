@@ -1,5 +1,5 @@
 import { TOAST_OPTIONS } from '@/config';
-import { CompanyInvite, useInviteMemberMutation, useMembersQuery } from '@/graphql';
+import { CompanyInvite, CompanyMemberRole, useInviteMemberMutation, useMembersQuery } from '@/graphql';
 import { useUser } from '@/hooks';
 import { useLayoutEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -10,7 +10,7 @@ import {
 } from './Company-constants';
 
 export const useCompany = () => {
-  const { companyId } = useUser();
+  const { companyId, companyRole } = useUser();
 
   const [{ fetching: submitting }, inviteTeamMember] = useInviteMemberMutation()
 
@@ -61,7 +61,7 @@ export const useCompany = () => {
     setInviteTeamMembersVisible(inviteTeamMembers);
   }, [inviteTeamMembers]);
 
-  const context = useMemo(() => ({ additionalTypenames: ['CompanyInvite'] }), []);
+  const context = useMemo(() => ({ additionalTypenames: ['CompanyInvite', 'CompanyMember'] }), []);
 
   const [{ data, fetching }] = useMembersQuery({
     variables: { companyId: companyId! },
@@ -70,6 +70,8 @@ export const useCompany = () => {
   });
 
   const members = fetching ? SKELETON_MEMBERS : data?.members || [];
+
+  const canInviteMember = companyRole === CompanyMemberRole.AdminMember
 
   return {
     form,
@@ -81,5 +83,6 @@ export const useCompany = () => {
     handleInviteTeamMembers,
     inviteTeamMembers,
     inviteTeamMembersVisible,
+    canInviteMember
   }
 };

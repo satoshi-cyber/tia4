@@ -1,5 +1,5 @@
 import { TOAST_OPTIONS } from '@/config';
-import { CompanyMemberRole, useDeleteInviteMutation } from '@/graphql';
+import { CompanyMemberRole, useDeleteInviteMutation, useDeleteMemberMutation } from '@/graphql';
 import { useUser } from '@/hooks';
 import { toast } from 'react-toastify';
 
@@ -10,8 +10,9 @@ export const useItem = ({ member }: ItemProps) => {
   const { claims, companyRole, companyId } = useUser();
 
   const [{ fetching: deletingInvite }, deleteInvite] = useDeleteInviteMutation()
+  const [{ fetching: deletingMember }, deleteMember] = useDeleteMemberMutation()
 
-  const buttonIcon = 'recipientEmail' in member ? 'HiTrash' : 'HiPencil';
+  const buttonIcon = 'HiTrash';
 
   const label =
     'recipientEmail' in member
@@ -26,7 +27,7 @@ export const useItem = ({ member }: ItemProps) => {
     companyRole === CompanyMemberRole.AdminMember &&
     ('recipientEmail' in member || member.user.id !== claims?.userId);
 
-  const submitting = deletingInvite
+  const submitting = deletingInvite || deletingMember
 
   const handleDeleteInvite = async () => {
     if (!('recipientEmail' in member)) {
@@ -46,7 +47,25 @@ export const useItem = ({ member }: ItemProps) => {
 
   }
 
-  const handleClick = 'recipientEmail' in member ? handleDeleteInvite : () => { }
+  const handleDeleteMember = async () => {
+    if (!('user' in member)) {
+      return
+    }
+
+    const toastMessage = TOAST_MESSAGE.deleteMember
+
+    try {
+      await deleteMember({ companyId: companyId!, userId: member.user.id }, { additionalTypenames: ['CompanyMember'] })
+
+      toast.success(toastMessage.success, TOAST_OPTIONS)
+
+    } catch (e) {
+      toast.error(toastMessage.error, TOAST_OPTIONS)
+    }
+
+  }
+
+  const handleClick = 'recipientEmail' in member ? handleDeleteInvite : handleDeleteMember
 
   return {
     buttonIcon,

@@ -179,7 +179,7 @@ export type MutationDeleteJobArgs = {
 
 export type MutationDeleteMemberArgs = {
   companyId: Scalars['ID'];
-  id: Scalars['ID'];
+  userId: Scalars['ID'];
 };
 
 
@@ -444,6 +444,14 @@ export type DeleteJobMutationVariables = Exact<{
 
 export type DeleteJobMutation = { __typename?: 'Mutation', deleteJob: { __typename?: 'Job', id: string } };
 
+export type DeleteMemberMutationVariables = Exact<{
+  companyId: Scalars['ID'];
+  userId: Scalars['ID'];
+}>;
+
+
+export type DeleteMemberMutation = { __typename?: 'Mutation', deleteMember: { __typename?: 'CompanyMember', role: CompanyMemberRole } };
+
 export type DidApplyQueryVariables = Exact<{
   jobId: Scalars['ID'];
 }>;
@@ -658,6 +666,17 @@ export const DeleteJobDocument = gql`
 
 export function useDeleteJobMutation() {
   return Urql.useMutation<DeleteJobMutation, DeleteJobMutationVariables>(DeleteJobDocument);
+};
+export const DeleteMemberDocument = gql`
+    mutation DeleteMember($companyId: ID!, $userId: ID!) {
+  deleteMember(companyId: $companyId, userId: $userId) {
+    role
+  }
+}
+    `;
+
+export function useDeleteMemberMutation() {
+  return Urql.useMutation<DeleteMemberMutation, DeleteMemberMutationVariables>(DeleteMemberDocument);
 };
 export const DidApplyDocument = gql`
     query DidApply($jobId: ID!) {

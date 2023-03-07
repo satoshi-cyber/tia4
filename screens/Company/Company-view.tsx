@@ -31,6 +31,7 @@ const Company = () => {
     members,
     handleInviteTeamMembers,
     fetching,
+    canInviteMember,
   } = useCompany();
 
   return (
@@ -51,11 +52,13 @@ const Company = () => {
         </Transition>
       ) : (
         <>
-          <PrimaryButton
-            {...INVITE_TEAM_MEMBERS_BUTTON_PROPS}
-            onClick={handleInviteTeamMembers}
-            before={<Icon {...INVITE_TEAM_MEMBERS_ICON_PROPS} />}
-          />
+          {canInviteMember && (
+            <PrimaryButton
+              {...INVITE_TEAM_MEMBERS_BUTTON_PROPS}
+              onClick={handleInviteTeamMembers}
+              before={<Icon {...INVITE_TEAM_MEMBERS_ICON_PROPS} />}
+            />
+          )}
           <LoadingProvider isLoading={fetching}>
             <div className={CLASS_NAMES.listContainer}>
               {members.map((member) => (

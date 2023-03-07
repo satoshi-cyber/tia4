@@ -33,4 +33,8 @@ export const TOAST_MESSAGE = {
     success: "Invite is deleted successfuly",
     error: "Error deleting invite"
   },
+  deleteMember: {
+    success: "Member is deleted successfuly",
+    error: "Error deleting member"
+  },
 }
