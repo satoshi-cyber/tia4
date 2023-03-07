@@ -31,12 +31,15 @@ const Company = () => {
     members,
     handleInviteTeamMembers,
     fetching,
-    canInviteMember,
+    isAdmin,
   } = useCompany();
 
   return (
     <Layout.Default>
-      <Header onClose={inviteTeamMembers ? handleCloseForm : undefined} />
+      <Header
+        onClose={inviteTeamMembers ? handleCloseForm : undefined}
+        isAdmin={isAdmin}
+      />
       {inviteTeamMembers ? (
         <Transition
           {...TRANSITION_PROPS}
@@ -52,7 +55,7 @@ const Company = () => {
         </Transition>
       ) : (
         <>
-          {canInviteMember && (
+          {isAdmin && (
             <PrimaryButton
               {...INVITE_TEAM_MEMBERS_BUTTON_PROPS}
               onClick={handleInviteTeamMembers}

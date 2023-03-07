@@ -3,7 +3,13 @@ import { URLS } from '@/config';
 import Link from 'next/link';
 import { useCompanyHeader } from './Header-hook';
 
-const Header = ({ onClose }: { onClose?: () => void }) => {
+const Header = ({
+  onClose,
+  isAdmin,
+}: {
+  onClose?: () => void;
+  isAdmin: boolean;
+}) => {
   const { fetching, title, avatar } = useCompanyHeader();
 
   return (
@@ -18,9 +24,11 @@ const Header = ({ onClose }: { onClose?: () => void }) => {
           onClose && <ButtonIcon name="HiChevronLeft" onClick={onClose} />
         }
         after={
-          <Link href={URLS.EDIT_COMPANY}>
-            <ButtonIcon name="HiCog" />
-          </Link>
+          isAdmin && (
+            <Link href={URLS.EDIT_COMPANY}>
+              <ButtonIcon name="HiCog" />
+            </Link>
+          )
         }
       />
     </LoadingProvider>

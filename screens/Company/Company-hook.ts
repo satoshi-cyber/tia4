@@ -71,7 +71,7 @@ export const useCompany = () => {
 
   const members = fetching ? SKELETON_MEMBERS : data?.members || [];
 
-  const canInviteMember = companyRole === CompanyMemberRole.AdminMember
+  const isAdmin = companyRole === CompanyMemberRole.AdminMember
 
   return {
     form,
@@ -83,6 +83,6 @@ export const useCompany = () => {
     handleInviteTeamMembers,
     inviteTeamMembers,
     inviteTeamMembersVisible,
-    canInviteMember
+    isAdmin
   }
 };
