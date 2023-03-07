@@ -1,6 +1,7 @@
 import { useInterviewsQuery } from '@/graphql';
 import { useUser } from '@/hooks';
 import { useForm, useWatch } from 'react-hook-form';
+
 import { ALL_JOBS_OPTION, SKELETON_INTERVIEWS } from './Candidates-constants';
 import { formatData } from './Candidates-functions';
 
@@ -11,7 +12,7 @@ export const useCandidates = () => {
     defaultValues: { search: '', job: ALL_JOBS_OPTION.value },
   });
 
-  const { job } = useWatch({ control: form.control });
+  const { job, search } = useWatch({ control: form.control });
 
   const jobId = job === ALL_JOBS_OPTION.value ? undefined : job;
 

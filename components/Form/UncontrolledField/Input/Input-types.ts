@@ -9,4 +9,5 @@ export interface InputProps {
   after?: React.ReactElement;
   placeholder?: string;
   autoFocus?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }

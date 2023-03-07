@@ -2,13 +2,14 @@ import React from 'react';
 import get from 'lodash.get';
 import { useFormContext, useFormState } from 'react-hook-form';
 import { Text } from '@/components';
+import { debounce } from 'debounce';
 import clsx from 'clsx';
 
-import { InputFieldProps } from './InputField-types';
+import { InputFieldProps } from './DebounceField-types';
 
 import Input from '../../UncontrolledField/Input';
 
-const InputField: React.FC<InputFieldProps> = ({
+const DebounceField: React.FC<InputFieldProps> = ({
   name,
   label,
   ...restProps
@@ -17,6 +18,8 @@ const InputField: React.FC<InputFieldProps> = ({
   const { register } = useFormContext();
 
   const error = get(errors, name);
+
+  const registerProps = register(name);
 
   return (
     <div className="w-full group/wrapper mb-4" data-error={Boolean(error)}>
@@ -27,7 +30,11 @@ const InputField: React.FC<InputFieldProps> = ({
           skeletonProps={{ width: 80 }}
         />
       )}
-      <Input {...register(name)} {...restProps} />
+      <Input
+        {...registerProps}
+        {...restProps}
+        onChange={debounce(registerProps.onChange, 500)}
+      />
       <p
         className={clsx(
           'transition-all text-sm text-red-600 -mt-2 text-left text overflow-hidden',
@@ -40,4 +47,4 @@ const InputField: React.FC<InputFieldProps> = ({
   );
 };
 
-export default InputField;
+export default DebounceField;

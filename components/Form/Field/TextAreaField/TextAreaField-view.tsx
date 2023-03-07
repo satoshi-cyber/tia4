@@ -27,7 +27,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
           skeletonProps={{ width: 80 }}
         />
       )}
-      <TextArea {...restProps} {...register(name)} />
+      <TextArea {...register(name)} {...restProps} />
       <p
         className={clsx(
           'transition-all text-sm text-red-600 -mt-2 text-left text overflow-hidden',

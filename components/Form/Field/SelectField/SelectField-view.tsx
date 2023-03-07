@@ -27,7 +27,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
           skeletonProps={{ width: 80 }}
         />
       )}
-      <Select {...restProps} {...register(name)} />
+      <Select {...register(name)} {...restProps} />
       <p
         className={clsx(
           'transition-all text-sm text-red-600 -mt-2 text-left text overflow-hidden',
