@@ -3,12 +3,16 @@ import { useRef, useState } from "react"
 import { toast } from "react-toastify"
 import { SubmitInterviewProps } from "./SubmitInterview-types"
 import { useRouter } from "next/router"
+import { TOAST_OPTIONS, URLS } from "@/config"
+import { useUser } from "@/hooks"
 
 import { TOAST_ERROR } from "./SubmitInterview-constants"
-import { TOAST_OPTIONS, URLS } from "@/config"
+
 
 
 export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: SubmitInterviewProps) => {
+  const { refreshToken, claims } = useUser()
+
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [uploadProgres, setUploadProgres] = useState(-1);
 
@@ -54,7 +58,7 @@ export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: S
       const xhr = new XMLHttpRequest()
       xhr.open('PUT', answer.uploadUrl!)
 
-      xhr.upload.addEventListener("progress", (e) => {
+      xhr.upload.addEventListener("progress", async (e) => {
 
         uploadingIds.current[answer.question.id] = e.loaded / e.total * 100
 
@@ -65,8 +69,13 @@ export const useSubmitInterview = ({ videos, questions, deleteVideo, swiper }: S
 
           questions.map(question => deleteVideo(question.id))
 
-          progressInterview({ id: String(res.data?.submitInterview.id) }).then(() => router.push(URLS.MY_INTERVIEWS))
+          await progressInterview({ id: String(res.data?.submitInterview.id) })
 
+          if (!claims?.onboarded) {
+            await refreshToken()
+          }
+
+          router.push(URLS.MY_INTERVIEWS)
         }
       });
 

@@ -10,7 +10,6 @@ import {
   Text,
   ButtonIcon,
 } from '@/components';
-import Link from 'next/link';
 
 import {
   COMPANY_NAME_FIELD_PROPS,
@@ -20,25 +19,17 @@ import {
   TITLE_PROPS,
   INFO_PROPS,
 } from './SetupCompany-constants';
-
 import { useSetupCompany } from './SetupCompany-hook';
-import { URLS } from '@/config';
 import { SetupCompanyProps } from './SetupCompany-types';
 
 const SetupCompany: React.FC<SetupCompanyProps> = ({ showSkip }) => {
-  const { handleSubmit, form, submitting } = useSetupCompany();
+  const { handleSubmit, form, submitting, handleSkip } = useSetupCompany();
 
   return (
     <Layout.Default>
       <Title
         {...TITLE_PROPS}
-        after={
-          showSkip && (
-            <Link href={URLS.HOME}>
-              <ButtonIcon name="HiX" />
-            </Link>
-          )
-        }
+        after={showSkip && <ButtonIcon name="HiX" onClick={handleSkip} />}
       />
       <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
         <Field.Input {...COMPANY_NAME_FIELD_PROPS} />

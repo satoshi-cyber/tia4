@@ -5,9 +5,15 @@ import Router from 'next/router';
 import { useEffect } from 'react';
 
 const Home = () => {
-  const { hasCompany } = useUser();
+  const { hasCompany, claims } = useUser();
 
   useEffect(() => {
+    if (!claims?.onboarded) {
+      Router.replace(URLS.ONBOARDING);
+
+      return;
+    }
+
     if (hasCompany) {
       Router.replace(URLS.JOBS);
 

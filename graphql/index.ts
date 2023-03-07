@@ -135,6 +135,7 @@ export type Mutation = {
   rateInterview: Interview;
   removeResume: User;
   setupCompany: Company;
+  skipOnboarding: User;
   submitInterview: Interview;
   suspendUser: User;
   updateCompany: Company;
@@ -554,6 +555,11 @@ export type SetupCompanyMutationVariables = Exact<{
 
 export type SetupCompanyMutation = { __typename?: 'Mutation', setupCompany: { __typename?: 'Company', id: string } };
 
+export type SkipOnboardingMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SkipOnboardingMutation = { __typename?: 'Mutation', skipOnboarding: { __typename?: 'User', id: string, firstName?: string | null, lastName?: string | null } };
+
 export type SubmitInterviewMutationVariables = Exact<{
   input: NewInterview;
 }>;
@@ -960,6 +966,19 @@ export const SetupCompanyDocument = gql`
 
 export function useSetupCompanyMutation() {
   return Urql.useMutation<SetupCompanyMutation, SetupCompanyMutationVariables>(SetupCompanyDocument);
+};
+export const SkipOnboardingDocument = gql`
+    mutation SkipOnboarding {
+  skipOnboarding {
+    id
+    firstName
+    lastName
+  }
+}
+    `;
+
+export function useSkipOnboardingMutation() {
+  return Urql.useMutation<SkipOnboardingMutation, SkipOnboardingMutationVariables>(SkipOnboardingDocument);
 };
 export const SubmitInterviewDocument = gql`
     mutation SubmitInterview($input: NewInterview!) {

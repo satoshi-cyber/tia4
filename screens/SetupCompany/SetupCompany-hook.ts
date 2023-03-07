@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useRouter } from "next/router";
-import { SetupCompany, useSetupCompanyMutation, } from "@/graphql";
+import { SetupCompany, useSetupCompanyMutation, useSkipOnboardingMutation, } from "@/graphql";
 import { useUser } from "@/hooks";
 
 import { setupCompanySchema } from "./SetupCompany-validations";
@@ -12,8 +12,11 @@ import { TOAST_OPTIONS, URLS } from "@/config";
 
 export const useSetupCompany = () => {
   const router = useRouter()
-  const { refreshToken } = useUser()
-  const [{ fetching: submitting }, setupCompany] = useSetupCompanyMutation();
+  const { refreshToken, fetching: gettingNewToken } = useUser()
+  const [{ fetching: settingUpCompany }, setupCompany] = useSetupCompanyMutation();
+  const [{ fetching: skippingOnboarding }, skipOnboarding] = useSkipOnboardingMutation();
+
+  const submitting = settingUpCompany || skippingOnboarding || gettingNewToken
 
   const form = useForm<SetupCompany>({
     mode: "onBlur",
@@ -37,9 +40,18 @@ export const useSetupCompany = () => {
     setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY)
   };
 
+  const handleSkip = async () => {
+    await skipOnboarding({})
+
+    await refreshToken()
+
+    router.push(URLS.HOME)
+  };
+
   return {
     form,
     handleSubmit,
+    handleSkip,
     submitting,
   };
 };

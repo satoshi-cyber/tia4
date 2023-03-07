@@ -24,6 +24,7 @@ export const URLS = {
     DID_CALLBACK: '/did-callback',
     TERMS_AND_CONDITIONS: '/terms-and-conditions',
     PRIVACY_POLICY: '/privacy-policy',
+    ONBOARDING: '/onboarding',
     DEMO_INTERVIEW: '/jobs/bd1f9940-eccf-4a59-8de4-d0179a298e34'
 }
 
