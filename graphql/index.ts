@@ -130,6 +130,7 @@ export type Mutation = {
   finalizeInterview: Scalars['Boolean'];
   interviews: Array<Interview>;
   inviteMember: CompanyInvite;
+  joinCompany: CompanyMember;
   processInterview: Scalars['Boolean'];
   rateInterview: Interview;
   removeResume: User;
@@ -196,6 +197,11 @@ export type MutationInterviewsArgs = {
 export type MutationInviteMemberArgs = {
   companyId: Scalars['ID'];
   input: InviteMember;
+};
+
+
+export type MutationJoinCompanyArgs = {
+  companyId: Scalars['ID'];
 };
 
 
@@ -490,6 +496,13 @@ export type JobsListQueryVariables = Exact<{
 
 export type JobsListQuery = { __typename?: 'Query', jobs: Array<{ __typename?: 'Job', id: string, title: string, deadline: any }> };
 
+export type JoinCompanyMutationVariables = Exact<{
+  companyId: Scalars['ID'];
+}>;
+
+
+export type JoinCompanyMutation = { __typename?: 'Mutation', joinCompany: { __typename?: 'CompanyMember', role: CompanyMemberRole } };
+
 export type MembersQueryVariables = Exact<{
   companyId: Scalars['ID'];
 }>;
@@ -778,6 +791,17 @@ export const JobsListDocument = gql`
 
 export function useJobsListQuery(options: Omit<Urql.UseQueryArgs<JobsListQueryVariables>, 'query'>) {
   return Urql.useQuery<JobsListQuery, JobsListQueryVariables>({ query: JobsListDocument, ...options });
+};
+export const JoinCompanyDocument = gql`
+    mutation JoinCompany($companyId: ID!) {
+  joinCompany(companyId: $companyId) {
+    role
+  }
+}
+    `;
+
+export function useJoinCompanyMutation() {
+  return Urql.useMutation<JoinCompanyMutation, JoinCompanyMutationVariables>(JoinCompanyDocument);
 };
 export const MembersDocument = gql`
     query Members($companyId: ID!) {

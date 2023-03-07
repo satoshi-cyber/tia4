@@ -7,3 +7,10 @@ export const TITLE_PROPS = {
 export const BUTTON_PROPS = {
   title: 'Join Company'
 }
+
+export const TOAST_MESSAGE = {
+  success: 'You have joined the company successfully',
+  error: 'Error joining the company'
+}
+
+export const DELAY = 3000
