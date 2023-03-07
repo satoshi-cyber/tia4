@@ -19,7 +19,7 @@ export const useApply = () => {
   const [{ fetching: fetchingJob, data: jobData }] = useJobQuery({
     variables: { id: jobId }
   })
-  const [{ fetching: fetchingUser, data: userData }, onUpload] = useProfileQuery({ requestPolicy: 'network-only' })
+  const [{ fetching: fetchingUser, data: userData }, onUpload] = useProfileQuery({ requestPolicy: 'cache-and-network' })
   const [{ fetching: removingResume }, removeResume] = useRemoveResumeMutation()
 
   const loading = fetchingUser || didApplyFetching
