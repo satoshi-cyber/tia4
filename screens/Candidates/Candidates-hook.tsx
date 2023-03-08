@@ -1,5 +1,6 @@
 import { useInterviewsQuery } from '@/graphql';
 import { useUser } from '@/hooks';
+import { useMemo } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 
 import { ALL_JOBS_OPTION, SKELETON_INTERVIEWS } from './Candidates-constants';
@@ -15,11 +16,14 @@ export const useCandidates = () => {
 
   const jobId = job === ALL_JOBS_OPTION.value ? undefined : job;
 
+  const context = useMemo(() => ({ additionalTypenames: ['Rate'] }), []);
+
   const [{ data, fetching }] = useInterviewsQuery({
     variables: {
       companyId: companyId!,
       filters: { jobId, query: search ? search : undefined },
     },
+    context,
     pause: !companyId,
   });
 

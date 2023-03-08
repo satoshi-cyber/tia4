@@ -551,6 +551,13 @@ export type MyInterviewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MyInterviewsQuery = { __typename?: 'Query', myInterviews: Array<{ __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null }> };
 
+export type PendingRatesQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+}>;
+
+
+export type PendingRatesQuery = { __typename?: 'Query', pendingRates?: Array<{ __typename?: 'Rate', value?: number | null, interview?: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null } | null }> | null };
+
 export type ProcessInterviewMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -931,6 +938,20 @@ export const MyInterviewsDocument = gql`
 
 export function useMyInterviewsQuery(options?: Omit<Urql.UseQueryArgs<MyInterviewsQueryVariables>, 'query'>) {
   return Urql.useQuery<MyInterviewsQuery, MyInterviewsQueryVariables>({ query: MyInterviewsDocument, ...options });
+};
+export const PendingRatesDocument = gql`
+    query PendingRates($companyId: ID!) {
+  pendingRates(companyId: $companyId) {
+    value
+    interview {
+      ...InterviewPreview
+    }
+  }
+}
+    ${InterviewPreviewFragmentDoc}`;
+
+export function usePendingRatesQuery(options: Omit<Urql.UseQueryArgs<PendingRatesQueryVariables>, 'query'>) {
+  return Urql.useQuery<PendingRatesQuery, PendingRatesQueryVariables>({ query: PendingRatesDocument, ...options });
 };
 export const ProcessInterviewDocument = gql`
     mutation ProcessInterview($id: ID!) {

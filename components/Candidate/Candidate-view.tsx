@@ -6,7 +6,7 @@ import { CandidateProps } from './Candidate-types';
 import { CLASS_NAMES, VIDEO_PROPS } from './Candidate-constants';
 import { useItem } from './Candidate-hook';
 
-const Item: React.FC<CandidateProps> = ({ interview }) => {
+const Item: React.FC<CandidateProps> = ({ interview, hideScore }) => {
   const { avatar, candidateName, thumbnail, timeAgo, href, scoreLabel } =
     useItem({ interview });
 
@@ -43,11 +43,13 @@ const Item: React.FC<CandidateProps> = ({ interview }) => {
               text={candidateName}
               skeletonProps={{ width: 100 }}
             />
-            <Text
-              className={CLASS_NAMES.score}
-              text={scoreLabel}
-              skeletonProps={{ width: 60 }}
-            />
+            {!hideScore && (
+              <Text
+                className={CLASS_NAMES.score}
+                text={scoreLabel}
+                skeletonProps={{ width: 60 }}
+              />
+            )}
           </div>
           <Text
             className={CLASS_NAMES.appliedDate}

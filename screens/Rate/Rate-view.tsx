@@ -1,15 +1,36 @@
-import { Title, Layout } from '@/components';
+import { Title, Layout, LoadingProvider } from '@/components';
+import Candidate from '@/components/Candidate';
+
 import EmptyScreen from './components/EmptyScreen';
+import { TITLE_PROPS, CLASS_NAMES, LAYOUT_PROPS } from './Rate-constants';
+import { useRate } from './Rate-hook';
 
-import { TITLE_PROPS } from './Rate-constants';
+const Rate = () => {
+  const { isListVisible, interviews, fetching } = useRate();
 
-const Company = () => {
   return (
-    <Layout.Default>
+    <Layout.Default {...LAYOUT_PROPS}>
       <Title {...TITLE_PROPS} />
-      <EmptyScreen />
+      <LoadingProvider isLoading={fetching}>
+        {isListVisible ? (
+          <div className={CLASS_NAMES.list}>
+            {interviews?.map(
+              (interview) =>
+                interview && (
+                  <Candidate
+                    key={interview.id}
+                    interview={interview}
+                    hideScore
+                  />
+                )
+            )}
+          </div>
+        ) : (
+          <EmptyScreen />
+        )}
+      </LoadingProvider>
     </Layout.Default>
   );
 };
 
-export default Company;
+export default Rate;
