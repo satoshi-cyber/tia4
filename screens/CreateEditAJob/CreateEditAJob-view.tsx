@@ -8,6 +8,7 @@ import {
   SubmitButton,
 } from '@/components';
 
+import PostWithAI from './components/PostWithAI';
 import { Questions, Header } from './components';
 import { useCreateUpdateAJob } from './CreateEditAJob-hook';
 import {
@@ -33,6 +34,7 @@ const CreateAJob: React.FC = () => {
   return (
     <Layout.Default>
       <LoadingProvider isLoading={fetching}>
+        {!editJob && <PostWithAI />}
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Header editJob={editJob} handleDeleteJob={handleDeleteJob} />
           <Field.Input

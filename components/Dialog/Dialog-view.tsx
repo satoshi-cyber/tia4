@@ -9,9 +9,11 @@ import { DialogProps } from './Dialog-types';
 const Dialog: React.FC<DialogProps> = ({
   isOpen,
   onClose,
+  onConfirm,
   title,
   children,
   confirm,
+  showCancel = true,
 }) => {
   return ReactDOM.createPortal(
     <Transition appear show={isOpen} as={Fragment}>
@@ -42,7 +44,7 @@ const Dialog: React.FC<DialogProps> = ({
               <BaseDialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ml-0 md:ml-[70px]">
                 <BaseDialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-2xl mb-4 font-medium leading-6 text-gray-900"
                 >
                   {title}
                 </BaseDialog.Title>
@@ -51,14 +53,17 @@ const Dialog: React.FC<DialogProps> = ({
                 </div>
                 <div className="flex flex-row items-center">
                   <PrimaryButton
+                    onClick={onConfirm}
                     title={confirm || 'Confirm'}
-                    className="mr-4"
                   />
-                  <SecondaryButton
-                    onClick={onClose}
-                    title="Cancel"
-                    variant="cancel"
-                  />
+                  {showCancel && (
+                    <SecondaryButton
+                      className="ml-4"
+                      onClick={onClose}
+                      title="Cancel"
+                      variant="cancel"
+                    />
+                  )}
                 </div>
               </BaseDialog.Panel>
             </Transition.Child>

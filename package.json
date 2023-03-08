@@ -33,7 +33,7 @@
     "date-fns": "^2.29.3",
     "debounce": "^1.2.1",
     "extendable-media-recorder": "^7.1.0",
-    "framer-motion": "^7.6.7",
+    "framer-motion": "^10.2.3",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "idb-keyval": "^6.2.0",
