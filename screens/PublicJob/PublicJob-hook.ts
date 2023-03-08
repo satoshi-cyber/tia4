@@ -19,6 +19,8 @@ export const usePublicJob = () => {
 
   const companyName = data?.job.company?.name || 'placeholder'
 
+  const companyWebsite = data?.job.company?.website
+
   const jobDescription = data?.job.description
 
   const isLoading = fetching || !router.isReady
@@ -28,6 +30,7 @@ export const usePublicJob = () => {
     href,
     jobTitle,
     jobDescription,
-    companyName
+    companyName,
+    companyWebsite
   };
 };

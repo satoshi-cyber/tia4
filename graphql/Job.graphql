@@ -13,6 +13,7 @@ query Job($id: ID!) {
       id
       name
       avatarUrl
+      website
     }
   }
 }
