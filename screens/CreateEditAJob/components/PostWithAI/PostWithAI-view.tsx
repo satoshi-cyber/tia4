@@ -10,12 +10,17 @@ import {
   useMotionValueEvent,
 } from 'framer-motion';
 import clsx from 'clsx';
+import { useMediaQuery } from 'react-responsive';
 
 const PostWithAI: React.FC = () => {
+  const isMd = useMediaQuery({
+    query: '(min-width: 768px)',
+  });
+
   const [display, setDisplay] = useState('block');
   const { scrollY } = useScroll();
 
-  const opacity = useTransform(scrollY, [60, 80], [1, 0]);
+  const opacity = useTransform(scrollY, [60, 80], [1, isMd ? 0 : 1]);
 
   useMotionValueEvent(opacity, 'change', (value) => {
     if (value === 0) {
@@ -41,7 +46,7 @@ const PostWithAI: React.FC = () => {
       style={{ opacity }}
       className={clsx(
         display,
-        'fixed bottom-0 right-0 backdrop-blur-2xl z-50 border border-gray-200 p-6'
+        'mb-6 md:mb-0 w-full md:w-auto md:fixed md:bottom-0 md:right-0 md:backdrop-blur-2xl z-50 md:border md:border-gray-200 md:p-6'
       )}
     >
       <Form form={form} onSubmit={onSubmit}>

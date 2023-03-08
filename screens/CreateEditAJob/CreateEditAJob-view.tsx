@@ -34,9 +34,9 @@ const CreateAJob: React.FC = () => {
   return (
     <Layout.Default>
       <LoadingProvider isLoading={fetching}>
-        {!editJob && <PostWithAI />}
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Header editJob={editJob} handleDeleteJob={handleDeleteJob} />
+          {!editJob && <PostWithAI />}
           <Field.Input
             {...TITLE_FIELD_PROPS}
             after={<FormIcon name={TITLE_ICON} />}
