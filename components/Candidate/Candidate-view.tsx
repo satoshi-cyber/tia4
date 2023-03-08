@@ -2,19 +2,13 @@ import React from 'react';
 import { Avatar, Text, SkeletonLoader } from '@/components';
 import Link from 'next/link';
 
-import { ItemProps } from './Item-types';
-import { CLASS_NAMES, VIDEO_PROPS } from './Item-constants';
-import { useItem } from './Item-hook';
+import { CandidateProps } from './Candidate-types';
+import { CLASS_NAMES, VIDEO_PROPS } from './Candidate-constants';
+import { useItem } from './Candidate-hook';
 
-const Item: React.FC<ItemProps> = ({
-  id,
-  thumbnail,
-  date,
-  avatar,
-  candidateName,
-  score,
-}) => {
-  const { timeAgo, href, scoreLabel } = useItem({ date, id, score });
+const Item: React.FC<CandidateProps> = ({ interview }) => {
+  const { avatar, candidateName, thumbnail, timeAgo, href, scoreLabel } =
+    useItem({ interview });
 
   return (
     <div>

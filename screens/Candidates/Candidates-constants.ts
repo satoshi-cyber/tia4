@@ -1,4 +1,4 @@
-import { formatData } from "./Candidates-functions"
+import { InterviewPreviewFragment } from "@/graphql"
 
 export const CLASS_NAMES = {
   form: 'w-full',
@@ -21,27 +21,28 @@ export const ALL_JOBS_OPTION = {
   value: 'ALL'
 }
 
-export const SKELETON_INTERVIEWS: ReturnType<typeof formatData> = [{
+export const SKELETON_INTERVIEWS: InterviewPreviewFragment[] = [{
   id: '1',
   thumbnail: '',
-  candidateName: 'Lorem ipsum',
-  date: undefined,
-  score: undefined,
-  avatar: undefined
+  createdAt: new Date(),
 },
 {
   id: '2',
   thumbnail: '',
-  candidateName: 'Lorem ipsum',
-  date: undefined,
-  score: undefined,
-  avatar: undefined
+  createdAt: new Date(),
 },
 {
   id: '3',
   thumbnail: '',
-  candidateName: 'Lorem ipsum',
-  date: undefined,
-  score: undefined,
-  avatar: undefined
+  createdAt: new Date(),
+},
+{
+  id: '4',
+  thumbnail: '',
+  createdAt: new Date(),
+},
+{
+  id: '5',
+  thumbnail: '',
+  createdAt: new Date(),
 }]

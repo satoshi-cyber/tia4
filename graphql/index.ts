@@ -132,7 +132,7 @@ export type Mutation = {
   inviteMember: CompanyInvite;
   joinCompany: CompanyMember;
   processInterview: Scalars['Boolean'];
-  rateInterview: Interview;
+  rateInterview: Rate;
   removeResume: User;
   setupCompany: Company;
   skipOnboarding: User;
@@ -213,8 +213,7 @@ export type MutationProcessInterviewArgs = {
 
 export type MutationRateInterviewArgs = {
   companyId: Scalars['ID'];
-  id: Scalars['ID'];
-  value: Scalars['ID'];
+  input: RateInput;
 };
 
 
@@ -287,6 +286,7 @@ export type Query = {
   members: Array<Member>;
   myInterview: Interview;
   myInterviews: Array<Interview>;
+  pendingRates?: Maybe<Array<Rate>>;
   profile: User;
   users: Array<User>;
 };
@@ -333,6 +333,11 @@ export type QueryMyInterviewArgs = {
   id: Scalars['ID'];
 };
 
+
+export type QueryPendingRatesArgs = {
+  companyId: Scalars['ID'];
+};
+
 export type Question = {
   __typename?: 'Question';
   id: Scalars['ID'];
@@ -344,6 +349,19 @@ export type QuestionInput = {
   id: Scalars['ID'];
   question: Scalars['String'];
   time: Scalars['Int'];
+};
+
+export type Rate = {
+  __typename?: 'Rate';
+  createdAt: Scalars['Date'];
+  interview?: Maybe<Interview>;
+  raterId?: Maybe<Scalars['ID']>;
+  value?: Maybe<Scalars['Int']>;
+};
+
+export type RateInput = {
+  interviewId: Scalars['ID'];
+  value: Scalars['Int'];
 };
 
 export type SetupCompany = {
@@ -475,6 +493,8 @@ export type InterviewQueryVariables = Exact<{
 
 export type InterviewQuery = { __typename?: 'Query', interview: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null, answers: Array<{ __typename?: 'Answer', url: string, question: { __typename?: 'Question', id: string, question: string, time: number } }>, interviewee?: { __typename?: 'Candidate', linkedInProfile?: string | null, resumeFileName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, email?: string | null, firstName?: string | null, lastName?: string | null, bio?: string | null } | null } };
 
+export type InterviewPreviewFragment = { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null };
+
 export type InterviewsQueryVariables = Exact<{
   companyId: Scalars['ID'];
   filters?: InputMaybe<ListInterviewsFilters>;
@@ -590,7 +610,19 @@ export type UpdateProfileMutationVariables = Exact<{
 
 export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null, linkedInProfile?: string | null } };
 
-
+export const InterviewPreviewFragmentDoc = gql`
+    fragment InterviewPreview on Interview {
+  id
+  thumbnail
+  createdAt
+  score
+  interviewee {
+    avatarUrl
+    firstName
+    lastName
+  }
+}
+    `;
 export const AuthenticateUserDocument = gql`
     mutation AuthenticateUser($input: AuthInput) {
   authenticateUser(input: $input) {
@@ -753,18 +785,10 @@ export function useInterviewQuery(options: Omit<Urql.UseQueryArgs<InterviewQuery
 export const InterviewsDocument = gql`
     query Interviews($companyId: ID!, $filters: ListInterviewsFilters) {
   interviews(companyId: $companyId, filters: $filters) {
-    id
-    thumbnail
-    createdAt
-    score
-    interviewee {
-      avatarUrl
-      firstName
-      lastName
-    }
+    ...InterviewPreview
   }
 }
-    `;
+    ${InterviewPreviewFragmentDoc}`;
 
 export function useInterviewsQuery(options: Omit<Urql.UseQueryArgs<InterviewsQueryVariables>, 'query'>) {
   return Urql.useQuery<InterviewsQuery, InterviewsQueryVariables>({ query: InterviewsDocument, ...options });

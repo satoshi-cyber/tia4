@@ -3,7 +3,6 @@ import { useUser } from '@/hooks';
 import { useForm, useWatch } from 'react-hook-form';
 
 import { ALL_JOBS_OPTION, SKELETON_INTERVIEWS } from './Candidates-constants';
-import { formatData } from './Candidates-functions';
 
 export const useCandidates = () => {
   const { companyId } = useUser();
@@ -28,9 +27,7 @@ export const useCandidates = () => {
 
   const hasFilters = form.formState.isDirty;
 
-  const interviews = fetching
-    ? SKELETON_INTERVIEWS
-    : data && formatData(data?.interviews);
+  const interviews = fetching ? SKELETON_INTERVIEWS : data?.interviews;
 
   const isListVisible = interviews && interviews.length > 0;
 
