@@ -1,4 +1,10 @@
-import { Icon, Loader, LoadingProvider, SkeletonLoader } from '@/components';
+import {
+  Icon,
+  Loader,
+  LoadingProvider,
+  SkeletonLoader,
+  Text,
+} from '@/components';
 import Dialog from '@/components/Dialog';
 
 import { RateProps } from './Rate-types';
@@ -14,14 +20,15 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
     score,
     fetching,
     submitting,
-    value,
+    isScoreVisible,
+    scoreLabel,
     handleConfirm,
   } = useRate({
     className,
   });
 
   return (
-    <div className={classNames.container}>
+    <>
       {submitting && <Loader />}
       <Dialog
         isOpen={isDialogOpen}
@@ -34,9 +41,11 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
         rating.
       </Dialog>
       <LoadingProvider isLoading={fetching}>
-        {value
-          ? `score: ${value} / 4`
-          : ICONS.map((icon, index) => (
+        {isScoreVisible ? (
+          <Text text={scoreLabel} />
+        ) : (
+          <div className={classNames.container}>
+            {ICONS.map((icon, index) => (
               <SkeletonLoader
                 circle
                 width={size}
@@ -52,8 +61,10 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
                 className={className}
               />
             ))}
+          </div>
+        )}
       </LoadingProvider>
-    </div>
+    </>
   );
 };
 

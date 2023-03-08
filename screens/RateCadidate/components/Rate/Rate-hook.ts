@@ -62,12 +62,18 @@ export const useRate = ({ className }: { className?: string }) => {
 
   const value = data?.interviewRate?.value
 
+  const isScoreVisible = value || value === 0
+
+  const scoreLabel = `your score: ${value} / 4`
+
   return {
     fetching,
     submitting,
     value,
     score,
     classNames,
+    isScoreVisible,
+    scoreLabel,
     isDialogOpen,
     handleConfirm,
     closeDialog,
