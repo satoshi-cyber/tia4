@@ -14,7 +14,7 @@ export const useItem = ({ interview }: CandidateProps) => {
 
   const scoreLabel = votesLeft
     ? `votes left: ${votesLeft}`
-    : `score: ${score ? `${score}%` : 'N/A'}`;
+    : `score: ${score || score === 0 ? `${score}%` : 'N/A'}`;
 
   return {
     id,
