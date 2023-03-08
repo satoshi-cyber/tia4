@@ -42,12 +42,16 @@ export const useRate = ({ className }: { className?: string }) => {
     if (interviewId === DEMO_INTERVIEW_ID) {
       toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
 
+      closeDialog()
+
       setTimeout(() => router.push(URLS.RATE), PUSH_DELAY)
 
       return
     }
 
     const { error } = await rateInterview({ companyId: companyId!, input: { interviewId, value: score } }, { additionalTypenames: ['Rate'] })
+
+    closeDialog()
 
     if (error) {
       toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS)
