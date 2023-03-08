@@ -5,14 +5,16 @@ import { formatData } from './Candidate-functions';
 import { CandidateProps } from './Candidate-types';
 
 export const useItem = ({ interview }: CandidateProps) => {
-  const { id, thumbnail, candidateName, date, score, avatar } =
+  const { id, thumbnail, candidateName, date, score, avatar, votesLeft } =
     formatData(interview);
 
   const timeAgo = useTimeAgo(date);
 
   const href = URLS.RATE_INTERVIEW.replace('[interviewId]', String(id));
 
-  const scoreLabel = `score: ${score || 'N/A'}`;
+  const scoreLabel = votesLeft
+    ? `votes left: ${votesLeft}`
+    : `score: ${score ? `${score}%` : 'N/A'}`;
 
   return {
     id,

@@ -1,15 +1,3 @@
-fragment InterviewPreview on Interview {
-  id
-  thumbnail
-  createdAt
-  score
-  interviewee {
-    avatarUrl
-    firstName
-    lastName
-  }
-}
-
 query Interviews($companyId: ID!, $filters: ListInterviewsFilters) {
   interviews(companyId: $companyId, filters: $filters) {
     ...InterviewPreview

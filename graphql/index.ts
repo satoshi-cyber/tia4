@@ -93,6 +93,7 @@ export type Interview = {
   jobId: Scalars['String'];
   score?: Maybe<Scalars['Float']>;
   thumbnail: Scalars['String'];
+  votesLeft?: Maybe<Scalars['Int']>;
 };
 
 export type InviteMember = {
@@ -493,7 +494,7 @@ export type InterviewQueryVariables = Exact<{
 
 export type InterviewQuery = { __typename?: 'Query', interview: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, job?: { __typename?: 'Job', id: string, title: string, deadline: any, company?: { __typename?: 'Company', id: string, name?: string | null, avatarUrl?: string | null } | null } | null, answers: Array<{ __typename?: 'Answer', url: string, question: { __typename?: 'Question', id: string, question: string, time: number } }>, interviewee?: { __typename?: 'Candidate', linkedInProfile?: string | null, resumeFileName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, email?: string | null, firstName?: string | null, lastName?: string | null, bio?: string | null } | null } };
 
-export type InterviewPreviewFragment = { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null };
+export type InterviewPreviewFragment = { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, votesLeft?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null };
 
 export type InterviewsQueryVariables = Exact<{
   companyId: Scalars['ID'];
@@ -501,7 +502,7 @@ export type InterviewsQueryVariables = Exact<{
 }>;
 
 
-export type InterviewsQuery = { __typename?: 'Query', interviews: Array<{ __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null }> };
+export type InterviewsQuery = { __typename?: 'Query', interviews: Array<{ __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, votesLeft?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null }> };
 
 export type InviteMemberMutationVariables = Exact<{
   companyId: Scalars['ID'];
@@ -556,7 +557,7 @@ export type PendingRatesQueryVariables = Exact<{
 }>;
 
 
-export type PendingRatesQuery = { __typename?: 'Query', pendingRates?: Array<{ __typename?: 'Rate', value?: number | null, interview?: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null } | null }> | null };
+export type PendingRatesQuery = { __typename?: 'Query', pendingRates?: Array<{ __typename?: 'Rate', value?: number | null, interview?: { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, votesLeft?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null } | null }> | null };
 
 export type ProcessInterviewMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -628,6 +629,7 @@ export const InterviewPreviewFragmentDoc = gql`
     firstName
     lastName
   }
+  votesLeft
 }
     `;
 export const AuthenticateUserDocument = gql`

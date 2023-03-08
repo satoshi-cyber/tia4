@@ -1,0 +1,12 @@
+fragment InterviewPreview on Interview {
+  id
+  thumbnail
+  createdAt
+  score
+  interviewee {
+    avatarUrl
+    firstName
+    lastName
+  }
+  votesLeft
+}

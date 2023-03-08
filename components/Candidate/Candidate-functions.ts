@@ -6,5 +6,6 @@ export const formatData = (interview?: InterviewsQuery['interviews'][0]) => ({
     candidateName: `${interview?.interviewee?.firstName} ${interview?.interviewee?.lastName}`,
     date: interview?.createdAt,
     score: interview?.score,
-    avatar: interview?.interviewee?.avatarUrl
+    avatar: interview?.interviewee?.avatarUrl,
+    votesLeft: interview?.votesLeft
 })

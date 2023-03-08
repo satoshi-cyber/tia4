@@ -17,11 +17,7 @@ const Rate = () => {
             {interviews?.map(
               (interview) =>
                 interview && (
-                  <Candidate
-                    key={interview.id}
-                    interview={interview}
-                    hideScore
-                  />
+                  <Candidate key={interview.id} interview={interview} />
                 )
             )}
           </div>
