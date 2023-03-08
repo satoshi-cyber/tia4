@@ -10,3 +10,14 @@ export const ICONS = [
   'FaRegSmile',
   'FaRegSmileWink',
 ] as const;
+
+
+export const TOAST_MESSAGE = {
+  success: "Candidate rated successfully",
+  error: "Error rating the candidate"
+}
+
+export const DEMO_INTERVIEW_ID = 'demo'
+
+export const PUSH_DELAY = 300
+

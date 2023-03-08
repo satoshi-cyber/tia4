@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Pdf from './components/Pdf';
 import { useRate } from './RateCadidate-hook';
 import AnimatedDiv from './components/AnimatedDiv';
-import Rate from '@/components/Rate';
+import Rate from './components/Rate';
 
 const RateCandidate = () => {
   const {

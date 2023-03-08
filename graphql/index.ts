@@ -281,6 +281,7 @@ export type Query = {
   company: Company;
   didApply: Scalars['Boolean'];
   interview: Interview;
+  interviewRate?: Maybe<Rate>;
   interviews: Array<Interview>;
   job: Job;
   jobs: Array<Job>;
@@ -306,6 +307,12 @@ export type QueryDidApplyArgs = {
 export type QueryInterviewArgs = {
   companyId: Scalars['ID'];
   id: Scalars['ID'];
+};
+
+
+export type QueryInterviewRateArgs = {
+  companyId: Scalars['ID'];
+  interviewId: Scalars['ID'];
 };
 
 
@@ -496,6 +503,14 @@ export type InterviewQuery = { __typename?: 'Query', interview: { __typename?: '
 
 export type InterviewPreviewFragment = { __typename?: 'Interview', id: string, thumbnail: string, createdAt: any, score?: number | null, votesLeft?: number | null, interviewee?: { __typename?: 'Candidate', avatarUrl?: string | null, firstName?: string | null, lastName?: string | null } | null };
 
+export type InterviewRateQueryVariables = Exact<{
+  companyId: Scalars['ID'];
+  interviewId: Scalars['ID'];
+}>;
+
+
+export type InterviewRateQuery = { __typename?: 'Query', interviewRate?: { __typename?: 'Rate', value?: number | null } | null };
+
 export type InterviewsQueryVariables = Exact<{
   companyId: Scalars['ID'];
   filters?: InputMaybe<ListInterviewsFilters>;
@@ -570,6 +585,14 @@ export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, bio?: string | null, firstName?: string | null, lastName?: string | null, resumeUrl?: string | null, avatarUrl?: string | null, resumeUploadUrl?: string | null, avatarUploadUrl?: string | null, resumeFileName?: string | null, linkedInProfile?: string | null } };
+
+export type RateInterviewMutationVariables = Exact<{
+  companyId: Scalars['ID'];
+  input: RateInput;
+}>;
+
+
+export type RateInterviewMutation = { __typename?: 'Mutation', rateInterview: { __typename?: 'Rate', value?: number | null } };
 
 export type RemoveResumeMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -791,6 +814,17 @@ export const InterviewDocument = gql`
 export function useInterviewQuery(options: Omit<Urql.UseQueryArgs<InterviewQueryVariables>, 'query'>) {
   return Urql.useQuery<InterviewQuery, InterviewQueryVariables>({ query: InterviewDocument, ...options });
 };
+export const InterviewRateDocument = gql`
+    query InterviewRate($companyId: ID!, $interviewId: ID!) {
+  interviewRate(companyId: $companyId, interviewId: $interviewId) {
+    value
+  }
+}
+    `;
+
+export function useInterviewRateQuery(options: Omit<Urql.UseQueryArgs<InterviewRateQueryVariables>, 'query'>) {
+  return Urql.useQuery<InterviewRateQuery, InterviewRateQueryVariables>({ query: InterviewRateDocument, ...options });
+};
 export const InterviewsDocument = gql`
     query Interviews($companyId: ID!, $filters: ListInterviewsFilters) {
   interviews(companyId: $companyId, filters: $filters) {
@@ -983,6 +1017,17 @@ export const ProfileDocument = gql`
 
 export function useProfileQuery(options?: Omit<Urql.UseQueryArgs<ProfileQueryVariables>, 'query'>) {
   return Urql.useQuery<ProfileQuery, ProfileQueryVariables>({ query: ProfileDocument, ...options });
+};
+export const RateInterviewDocument = gql`
+    mutation RateInterview($companyId: ID!, $input: RateInput!) {
+  rateInterview(companyId: $companyId, input: $input) {
+    value
+  }
+}
+    `;
+
+export function useRateInterviewMutation() {
+  return Urql.useMutation<RateInterviewMutation, RateInterviewMutationVariables>(RateInterviewDocument);
 };
 export const RemoveResumeDocument = gql`
     mutation RemoveResume {

@@ -1,0 +1,5 @@
+query InterviewRate($companyId: ID!, $interviewId: ID!) {
+  interviewRate(companyId: $companyId, interviewId: $interviewId) {
+    value
+  }
+}
