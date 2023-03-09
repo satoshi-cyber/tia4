@@ -47,13 +47,6 @@ const Mobile: FC = () => {
 
   return (
     <div className="flex w-full flex-col grid w-full grid-cols-1 md:grid-cols-4 gap-10">
-      <div className="text-left text-2xl font-thin leading-tight">
-        <p>
-          Effortlessly manage your recruitment process{' '}
-          <span className="font-medium text-purple-800">on-the-go</span> with
-          mobile-friendly web-based platform{' '}
-        </p>
-      </div>
       <div className="overflow-hidden relative col-span-2 mx-16 drop-shadow-md">
         <div className="w-full absolute w-[72%] ml-[13%] pt-[4.8%] rounded-xl overflow-hidden">
           <SwiperContainer
@@ -82,7 +75,7 @@ const Mobile: FC = () => {
           className="relative z-20 pointer-events-none"
         />
       </div>
-      <div className="">
+      <div className="col-span-2">
         <div className="flex items-center mb-4">
           <div
             className="flex w-10 h-10 mr-3 cursor-pointer rounded-full border border-gray-300 transition duration-200 ease-out hover:border-gray-100 hover:shadow-icon items-center justify-center"
