@@ -1,10 +1,4 @@
-import {
-  Icon,
-  Loader,
-  LoadingProvider,
-  SkeletonLoader,
-  Text,
-} from '@/components';
+import { Icon, Loader, LoadingProvider, SkeletonLoader } from '@/components';
 import Dialog from '@/components/Dialog';
 
 import { RateProps } from './Rate-types';
@@ -22,6 +16,7 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
     submitting,
     isScoreVisible,
     scoreLabel,
+    value,
     handleConfirm,
   } = useRate({
     className,
@@ -42,7 +37,7 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
       </Dialog>
       <LoadingProvider isLoading={fetching}>
         {isScoreVisible ? (
-          <Text text={scoreLabel} />
+          <Icon name={ICONS[value!]} size={size} className="text-gray-400" />
         ) : (
           <div className={classNames.container}>
             {ICONS.map((icon, index) => (

@@ -21,7 +21,7 @@ export const useRate = () => {
     ? SKELETON_INTERVIEWS
     : data?.pendingRates?.map(({ interview }) => interview);
 
-  const isListVisible = interviews && interviews.length > 0;
+  const isListVisible = !fetching && interviews && interviews.length > 0;
 
   return {
     interviews,

@@ -20,7 +20,11 @@ const Icon: React.FC<IconProps> = ({
       isLoading={isLoading}
       width={size}
       height={size}
-      after={<IconComponent size={size} className={className} {...props} />}
+      after={
+        <div className={className}>
+          <IconComponent size={size} {...props} />
+        </div>
+      }
     />
   );
 };
