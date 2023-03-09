@@ -3,9 +3,9 @@ import Slider from './components/Slider';
 export const Header: React.FC = () => (
   <div className={`flex flex-col`}>
     <h2
-      className={`text-center h-[5rem] md:h-[8rem] text-transparent text-4xl md:text-8xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-10 md:mb-20`}
+      className={`h-[5rem] md:h-[8rem] text-transparent text-5xl  md:text-8xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-10 md:mb-20`}
     >
-      #newagehiring
+      #NewAgeHiring
     </h2>
     <div className={`mt-16 `}>
       <div className="relative">
