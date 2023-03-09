@@ -1,7 +1,7 @@
 export const Description: React.FC = () => (
   <div className="flex flex-col ">
     <div className="text-left font-thin py-2">Why choose the interview?</div>
-    <h1 className="text-left font-medium text-4xl py-2">
+    <h1 className="text-left  text-4xl py-2">
       Revolutionize the way you hire.
     </h1>
     <div className="flex flex-col py-5 sm:py-6 grid grid-cols-1 md:grid-cols-3 gap-10">

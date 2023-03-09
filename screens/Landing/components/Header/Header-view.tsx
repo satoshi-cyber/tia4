@@ -2,7 +2,11 @@ import Slider from './components/Slider';
 
 export const Header: React.FC = () => (
   <div className={`flex flex-col`}>
-    <h2 className={`text-center text-3xl md:text-5xl mb-20`}>#newagehiring</h2>
+    <h2
+      className={`text-center h-[8rem] text-transparent text-5xl md:text-8xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-20`}
+    >
+      #newagehiring
+    </h2>
     <div className={`mt-16 `}>
       <div className="relative">
         <div className="absolute top-[5.7%] left-[13%] z-10 w-[73.7%] h-[75.1%]">
