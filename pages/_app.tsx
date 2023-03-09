@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app';
-
+import { Analytics } from '@vercel/analytics/react';
 import { Provider } from 'urql';
 import { ToastContainer } from 'react-toastify';
 import Menu from '@/components/Menu';
@@ -55,6 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <AuthProvider>
         <Component {...pageProps} />
+        <Analytics />
         <Menu />
         <ToastContainer />
       </AuthProvider>
