@@ -47,9 +47,6 @@ export const useProfile = () => {
 
   };
 
-  const avatar = data?.profile?.avatarUrl || undefined
-  const avatarUploadUrl = data?.profile?.avatarUploadUrl || undefined
-
   const resumeOnUpload = async (resumeFileName: string) => {
     await updateProfile({ input: { resumeFileName } }, { additionalTypenames: ['User'] })
   }
@@ -67,13 +64,20 @@ export const useProfile = () => {
     isLoading: fetching || removingResume
   }
 
+  const src = data?.profile?.avatarUrl || undefined
+  const uploadUrl = data?.profile?.avatarUploadUrl || undefined
+
+  const avatarProps = {
+    src,
+    uploadUrl,
+    onUpload
+  }
+
   return {
     form,
     fetching,
-    onUpload,
     handleSubmit,
-    avatarUploadUrl,
-    avatar,
+    avatarProps,
     resumeProps
   };
 };

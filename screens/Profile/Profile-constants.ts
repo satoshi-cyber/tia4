@@ -1,5 +1,6 @@
 export const CLASS_NAMES = {
-  form: "w-full"
+  form: "w-full",
+  avatar: "mb-6"
 }
 
 export const TITLE_PROPS = {
