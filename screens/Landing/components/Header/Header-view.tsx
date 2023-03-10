@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
         mouseXpercentage +
         '% ' +
         mouseYpercentage +
-        '%, #c084fc, #4f46e5)';
+        '%, #c084fc, #db2777)';
     };
 
     document.addEventListener('mousemove', onMove);
@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
   return (
     <div className={`flex flex-col mouse-cursor-gradient-tracking`}>
       <h2
-        className={`h-[5rem] md:h-[8rem] text-transparent text-5xl md:text-8xl !bg-clip-text mb-10 md:mb-20 bg-gradient-to-r from-purple-400 to-indigo-600 radial-gradient`}
+        className={`h-[5rem] md:h-[8rem] text-transparent text-5xl md:text-8xl !bg-clip-text mb-10 md:mb-20 bg-gradient-to-r from-purple-400 to-pink-600 radial-gradient`}
       >
         #NewAgeHiring
       </h2>
