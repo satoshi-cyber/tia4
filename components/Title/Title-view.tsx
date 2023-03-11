@@ -26,7 +26,7 @@ const Title: React.FC<TitleProps> = ({
       <Text
         as="h1"
         isLoading={isLoading}
-        className="w-full text-2xl md:text-3xl text-normal text-gray-900 text-center break-all"
+        className="w-full text-2xl md:text-3xl text-normal text-gray-900 text-center break-word"
         text={title}
         skeletonProps={skeletonProps}
       />
