@@ -10,7 +10,7 @@ import LoginButton from './components/LoginButton';
 const Landing: React.FC<LayoutProps> = ({ children }) => (
   <div className={`flex flex-1 flex-col w-full items-center pt-40`}>
     <div className="absolute top-0 left-0 p-6 flex flex-row justify-between w-full">
-      <Link href={URLS.LANDING} prefetch={false}>
+      <Link href={URLS.LANDING} prefetch={false} aria-label={'Home'}>
         <Logo className="" width={120} />
       </Link>
       <LoginButton />
