@@ -1,4 +1,3 @@
-import SecondaryButton from '@/components/SecondaryButton';
 import { URLS } from '@/config';
 import Link from 'next/link';
 

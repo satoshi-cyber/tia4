@@ -23,10 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta property="og:locale" content="en_US" />
         <meta property="og:image" content="https://theinterview.io/og.png" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
