@@ -56,8 +56,8 @@ export const Header: React.FC = () => {
           />
         </a>
       </div>
-      <div className={`mt-16`}>
-        <div className="relative">
+      <div className="mt-16 w-full">
+        <div className="relative w-full">
           <div className="absolute top-[5.7%] left-[13%] z-10 w-[73.7%] h-[75.1%]">
             <Slider />
           </div>
