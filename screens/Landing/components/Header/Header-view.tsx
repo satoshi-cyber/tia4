@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
   return (
     <div className={`flex flex-col mouse-cursor-gradient-tracking`}>
       <h2
-        className={`h-[5rem] md:h-[8rem] text-transparent text-4xl md:text-8xl !bg-clip-text mb-10 md:mb-20 bg-gradient-to-r from-purple-400 to-pink-600 radial-gradient text-center`}
+        className={`h-[5rem] md:h-[8rem] text-transparent text-4xl [@media(min-width:380px)]:text-5xl md:!text-8xl !bg-clip-text mb-10 md:mb-20 bg-gradient-to-r from-purple-400 to-pink-600 radial-gradient text-center`}
       >
         #NewAgeHiring
       </h2>

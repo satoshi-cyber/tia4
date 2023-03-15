@@ -1,4 +1,4 @@
-import { getAssetUrl } from '@/lib';
+import Image from 'next/image';
 
 const Security: React.FC = () => (
   <div className="py-5 sm:py-6">
@@ -10,12 +10,12 @@ const Security: React.FC = () => (
             Always have control over your data
           </h2>
         </div>
-        <div className="flex items-center justify-center">
-          <img
-            className="aspect-square md:max-w-[450px] p-10 md:p-2 mt-5 md:mt-10 md:mr-10"
+        <div className="flex items-center justify-center relative aspect-square md:max-w-[450px]">
+          <Image
+            className="p-10 md:p-2 mt-5 md:mt-10 md:mr-10"
             alt="Security"
-            loading="lazy"
-            src={getAssetUrl('/images/privacy.png')}
+            fill
+            src="/images/privacy.png"
           />
         </div>
       </div>
