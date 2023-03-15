@@ -14,8 +14,6 @@ export const useDidCallback = () => {
 
     const from = router.query.from as string
 
-    // const href = `https://theinterview.page.link/?link=${url}`
-
     authenticateUserFromRedirect().then((did) => {
 
       if (!did) {
