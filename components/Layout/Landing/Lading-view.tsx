@@ -14,7 +14,7 @@ const Landing: React.FC<LayoutProps> = ({ children }) => (
       </Link>
       <LoginButton />
     </div>
-    <div className="max-w-[1024px] p-6">{children}</div>
+    <div className="w-full lg:w-[1024px] p-6">{children}</div>
     <footer className="bg-gray-100 py-0 w-full mt-20">
       <div className="container">
         <div className="flex flex-row justify-between items-center min-h-[60px]">
