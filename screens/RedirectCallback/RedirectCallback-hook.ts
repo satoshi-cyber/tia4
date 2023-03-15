@@ -18,5 +18,7 @@ export const useRedirectCallback = () => {
 
     router.replace(href)
 
+    // redirect to dynamic link, in case when user is from andorid and opens the email in some in-app browser, dynamic link will open it on default system browser
+
   }, [router])
 };
