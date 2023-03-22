@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Form, Field, PrimaryButton } from '@/components';
+import { Form, Field, PrimaryButton, Text } from '@/components';
 import Dialog from '@/components/Dialog';
 import { useState } from 'react';
 
@@ -65,15 +65,14 @@ const PostWithAI: React.FC = () => {
           time, and attract a more qualified pool of candidates. Stay tuned for
           the official release of this game-changing feature.
         </Dialog>
-
         <Field.TextArea
-          label="Prompt"
-          placeholder="Job title and required skills"
+          label="Long form?"
+          placeholder="Summarize the key details of this job in just a few words."
           name="prompt"
         />
         <div className="flex flex-1 justify-center">
           <PrimaryButton
-            title="Create job post with AI"
+            title="Let AI assist you"
             className="w-auto"
             onClick={openDialog}
           />
