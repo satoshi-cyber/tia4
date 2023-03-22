@@ -273,7 +273,8 @@ const MenuItems = () => {
           </span>
         </a>
       </ActiveLink>
-      <div className="flex flex-1" />
+      <hr className="mb-4 mt-4 md:hidden" />
+      <div className="flex md:flex-1" />
       <Profile />
     </div>
   );
@@ -309,7 +310,7 @@ const MobileMenu = () => {
       onClick={() => setIsOpen(false)}
       className={clsx(
         'transition-all transform h-screen duration-300 overflow-hidden fixed w-full bg-white md:hidden border-b border-gray z-50 menu',
-        isOpen ? 'max-h-[100vh]' : 'max-h-[90px]'
+        isOpen ? 'max-h-[100vh] overflow-y-scroll' : 'max-h-[90px]'
       )}
     >
       <div className="flex absolute top-0 left-0 w-full flex-row justify-between p-6">
