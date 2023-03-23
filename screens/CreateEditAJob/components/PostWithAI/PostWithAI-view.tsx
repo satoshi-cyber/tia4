@@ -67,7 +67,7 @@ const PostWithAI: React.FC = () => {
         </Dialog>
         <Field.TextArea
           label="Long form?"
-          placeholder="In just a few words write the key details of this job."
+          placeholder="In just a few words write the key details of this job"
           name="prompt"
         />
         <div className="flex flex-1 justify-center">
