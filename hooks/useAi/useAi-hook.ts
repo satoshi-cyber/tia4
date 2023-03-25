@@ -8,8 +8,6 @@ const useAI = <T>(): UseSSEHookReturnType<T> => {
     const [eventSource, setEventSource] = useState<EventSource | null>(null);
     const [urlIndex, setUrlIndex] = useState<number>(-1);
 
-    console.log({ urlIndex })
-
     const currentUrl = urlIndex >= 0 && urlIndex < urls.length ? urls[urlIndex] : null;
 
     useLayoutEffect(() => {
@@ -20,8 +18,6 @@ const useAI = <T>(): UseSSEHookReturnType<T> => {
             setEventSource(newEventSource);
 
             newEventSource.onmessage = (event) => {
-                console.log('message', event)
-
                 setData((prevData) => prevData ? prevData + event.data : event.data);
             };
 
