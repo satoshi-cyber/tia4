@@ -32,11 +32,12 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
 
   useEffect(() => {
     if (urlIndex === 0) {
-      setValue('title', data);
+      setDescription(data as string);
+      setValue('description', data, { shouldDirty: true });
     }
 
     if (urlIndex === 1) {
-      setDescription(data as string);
+      setValue('title', data, { shouldDirty: true });
     }
   }, [urlIndex, data]);
 
