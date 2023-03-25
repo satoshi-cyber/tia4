@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
-import { Form, Field, PrimaryButton, Text } from '@/components';
-import Dialog from '@/components/Dialog';
-import { useState } from 'react';
+import { useForm, useFormContext } from 'react-hook-form';
+import { Form, Field, PrimaryButton, Spinner } from '@/components';
+
+import { useEffect, useState } from 'react';
 
 import {
   motion,
@@ -11,8 +11,16 @@ import {
 } from 'framer-motion';
 import clsx from 'clsx';
 import { useMediaQuery } from 'react-responsive';
+import useAi from '@/hooks/useAi';
+import { DOMAIN } from '@/config';
 
-const PostWithAI: React.FC = () => {
+const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
+  setDescription,
+}) => {
+  const { setValue } = useFormContext();
+
+  const [data, currentUrl, urlIndex, startStream, endStream] = useAi();
+
   const isMd = useMediaQuery({
     query: '(min-width: 768px)',
   });
@@ -21,6 +29,16 @@ const PostWithAI: React.FC = () => {
   const { scrollY } = useScroll();
 
   const opacity = useTransform(scrollY, [60, 80], [1, isMd ? 0 : 1]);
+
+  useEffect(() => {
+    if (urlIndex === 0) {
+      setValue('title', data);
+    }
+
+    if (urlIndex === 1) {
+      setDescription(data as string);
+    }
+  }, [urlIndex, data]);
 
   useMotionValueEvent(opacity, 'change', (value) => {
     if (value === 0) {
@@ -31,15 +49,19 @@ const PostWithAI: React.FC = () => {
     setDisplay('block');
   });
 
-  const [isOpen, setIsOpen] = useState(false);
-
   const form = useForm();
 
   const onSubmit = () => {};
 
-  const openDialog = () => setIsOpen(true);
+  const startAi = async () => {
+    const res = await fetch(
+      `${DOMAIN}/api/get-urls?q=${form.getValues().prompt}`
+    );
 
-  const closeDialog = () => setIsOpen(false);
+    const urls = await res.json();
+
+    startStream(urls);
+  };
 
   return (
     <motion.div
@@ -50,32 +72,30 @@ const PostWithAI: React.FC = () => {
       )}
     >
       <Form form={form} onSubmit={onSubmit}>
-        <Dialog
-          isOpen={isOpen}
-          onClose={closeDialog}
-          onConfirm={closeDialog}
-          title="Coming soon!"
-          confirm="OK"
-          showCancel={false}
-        >
-          Introducing our upcoming AI feature: create job posts effortlessly.
-          Simply input the job title and required skills, and let our system
-          generate an informative, accurate, and easy-to-understand job post.
-          With this feature, you can streamline your recruitment process, save
-          time, and attract a more qualified pool of candidates. Stay tuned for
-          the official release of this game-changing feature.
-        </Dialog>
         <Field.TextArea
           label="Long form?"
           placeholder="In just a few words write the key details of this job"
           name="prompt"
         />
+        {currentUrl && (
+          <div className="mb-6">
+            <Spinner size={30} />
+          </div>
+        )}
         <div className="flex flex-1 justify-center">
-          <PrimaryButton
-            title="Let AI assist you"
-            className="w-auto"
-            onClick={openDialog}
-          />
+          {currentUrl ? (
+            <PrimaryButton
+              title="Stop generating"
+              className="w-auto"
+              onClick={endStream}
+            />
+          ) : (
+            <PrimaryButton
+              title="Let AI assist you"
+              className="w-auto"
+              onClick={startAi}
+            />
+          )}
         </div>
       </Form>
     </motion.div>

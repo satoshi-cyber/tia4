@@ -29,6 +29,7 @@ const CreateAJob: React.FC = () => {
     editJob,
     handleDeleteJob,
     description,
+    setDescription,
   } = useCreateUpdateAJob();
 
   return (
@@ -36,7 +37,7 @@ const CreateAJob: React.FC = () => {
       <LoadingProvider isLoading={fetching}>
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Header editJob={editJob} handleDeleteJob={handleDeleteJob} />
-          {!editJob && <PostWithAI />}
+          {!editJob && <PostWithAI setDescription={setDescription} />}
           <Field.Input
             {...TITLE_FIELD_PROPS}
             after={<FormIcon name={TITLE_ICON} />}
