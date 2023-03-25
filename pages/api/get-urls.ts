@@ -31,5 +31,5 @@ export default async (req: NextRequest) => {
 
     const jobDescription = await encryptAES(`Write a long job description and include Responsibilities as Requirements sections. from this information: ${q}`)
 
-    return NextResponse.json([`http://51.158.201.188:9000/sse?p=${jobTitle}`, `http://51.158.201.188:9000/sse?p=${jobDescription}`]);
+    return NextResponse.json([`https://ai.infinitbit.com/sse?p=${jobTitle}`, `https://ai.infinitbit.com/sse?p=${jobDescription}`]);
 };
