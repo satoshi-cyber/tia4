@@ -73,6 +73,7 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
     >
       <Form form={form} onSubmit={onSubmit}>
         <Field.TextArea
+          minRows={3}
           label="Long form?"
           placeholder="In just a few words write the key details of this job"
           name="prompt"
