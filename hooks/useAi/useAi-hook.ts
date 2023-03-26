@@ -18,7 +18,9 @@ const useAI = <T>(): UseSSEHookReturnType<T> => {
             setEventSource(newEventSource);
 
             newEventSource.onmessage = (event) => {
-                setData((prevData) => prevData ? prevData + event.data : event.data);
+                const newData = JSON.parse(event.data).data
+
+                setData((prevData) => prevData ? prevData + newData : newData);
             };
 
             newEventSource.onerror = () => {
