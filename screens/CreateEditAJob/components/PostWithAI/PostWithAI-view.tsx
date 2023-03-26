@@ -83,7 +83,7 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
 
     setTimeout(() => {
       setMessage('Preparing job description');
-    }, 4000);
+    }, 6000);
 
     startStream(urls);
   };
