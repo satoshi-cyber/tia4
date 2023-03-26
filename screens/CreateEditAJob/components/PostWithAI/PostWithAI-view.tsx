@@ -31,7 +31,11 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
 
   const { scrollY } = useScroll();
 
-  const opacity = useTransform(scrollY, [60, 80], [1, isMd ? 0 : 1]);
+  const opacity = useTransform(
+    scrollY,
+    [60, 80],
+    [1, isMd && !currentUrl ? 0 : 1]
+  );
 
   useEffect(() => {
     if (urlIndex === 0) {
