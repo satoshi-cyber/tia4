@@ -66,7 +66,7 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
     setDisplay('block');
   });
 
-  const form = useForm();
+  const form = useForm({ defaultValues: { prompt: '' } });
 
   const onSubmit = () => {};
 
