@@ -19,6 +19,8 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
 }) => {
   const { setValue } = useFormContext();
 
+  const [message, setMessage] = useState<string | null>(null);
+
   const [data, currentUrl, urlIndex, startStream, endStream] = useAi();
 
   const isMd = useMediaQuery({
@@ -26,17 +28,27 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
   });
 
   const [display, setDisplay] = useState('block');
+
   const { scrollY } = useScroll();
 
   const opacity = useTransform(scrollY, [60, 80], [1, isMd ? 0 : 1]);
 
   useEffect(() => {
     if (urlIndex === 0) {
+      if (data) {
+        setMessage('Writing job description');
+      }
       setDescription(data as string);
       setValue('description', data, { shouldDirty: true });
     }
 
     if (urlIndex === 1) {
+      if (!data) {
+        setMessage('Preparing job title');
+      } else {
+        setMessage('Writing job title');
+      }
+
       setValue('title', data, { shouldDirty: true });
     }
   }, [urlIndex, data]);
@@ -54,12 +66,20 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
 
   const onSubmit = () => {};
 
+  const isDirty = form.formState.isDirty;
+
   const startAi = async () => {
+    setMessage('Please wait, it may take a while!');
+
     const res = await fetch(
       `${DOMAIN}/api/get-urls?q=${form.getValues().prompt}`
     );
 
     const urls = await res.json();
+
+    setTimeout(() => {
+      setMessage('Preparing job description');
+    }, 4000);
 
     startStream(urls);
   };
@@ -75,12 +95,13 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
       <Form form={form} onSubmit={onSubmit}>
         <Field.TextArea
           minRows={3}
-          label="Long form?"
+          label={isDirty ? 'Prompt' : 'Long form?'}
           placeholder="In just a few words write the key details of this job"
           name="prompt"
         />
         {currentUrl && (
-          <div className="mb-6">
+          <div className="mb-6 -mt-3">
+            <p className="text-sm text-gray-800 mb-4">{message}</p>
             <Spinner size={30} />
           </div>
         )}
