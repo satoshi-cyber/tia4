@@ -29,7 +29,7 @@ export default async (req: NextRequest) => {
 
     const jobTitle = await encryptAES(`Write a job title from this information: ${q}`)
 
-    const jobDescription = await encryptAES(`Write a long job description and include Responsibilities as Requirements sections. from this information: ${q}`)
+    const jobDescription = await encryptAES(`Write a long job description and include Responsibilities and Requirements sections. from this information: ${q}`)
 
     return NextResponse.json([`https://ai.infinitbit.com/sse?p=${jobDescription}`, `https://ai.infinitbit.com/sse?p=${jobTitle}`]);
 };
