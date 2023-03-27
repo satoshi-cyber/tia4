@@ -104,7 +104,7 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
           name="prompt"
         />
         {currentUrl && (
-          <div className="mb-6 -mt-3">
+          <div className="mb-6 -mt-4">
             <p className="text-sm text-gray-800 mb-4">{message}</p>
             <Spinner size={30} />
           </div>
