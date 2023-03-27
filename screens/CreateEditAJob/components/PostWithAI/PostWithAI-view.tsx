@@ -73,11 +73,15 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
   const isDirty = form.formState.isDirty;
 
   const startAi = async () => {
+    const prompt = form.getValues().prompt;
+
+    if (!prompt) {
+      return;
+    }
+
     setMessage('Please wait, it may take a while!');
 
-    const res = await fetch(
-      `${DOMAIN}/api/get-urls?q=${form.getValues().prompt}`
-    );
+    const res = await fetch(`${DOMAIN}/api/get-urls?q=${prompt}`);
 
     const urls = await res.json();
 
