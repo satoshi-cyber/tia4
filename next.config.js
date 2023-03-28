@@ -3,6 +3,19 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
+  async headers() {
+    return [
+      {
+        source: '/(.*)?', // Matches all pages
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+        ],
+      },
+    ];
+  },
   reactStrictMode: true,
   swcMinify: true,
   webpack(config) {
