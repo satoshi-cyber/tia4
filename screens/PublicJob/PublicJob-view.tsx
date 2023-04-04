@@ -46,8 +46,8 @@ const PublicJob: React.FC = () => {
         />
         <Link
           href={href}
-          className="w-full mt-10 sticky bottom-6 z-20"
           target="_blank"
+          className="w-full mt-10 sticky bottom-6 z-20"
         >
           <PrimaryButton title="Apply now" />
         </Link>
