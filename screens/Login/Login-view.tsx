@@ -1,5 +1,9 @@
-import { useLogin } from './Login-hook';
-import { isEmbedded } from 'react-device-detect';
+import Layout from '@/components/Layout';
+import Title from '@/components/Title';
+import { Field, Form, FormIcon } from '@/components/Form';
+import SubmitButton from '@/components/SubmitButton';
+import Action from '@/components/Action';
+import SocialButton from '@/components/SocialButton';
 
 import {
   CLASS_NAMES,
@@ -12,15 +16,11 @@ import {
   TITLE_PROPS,
   EMBEDDED_TEXT,
 } from './Login-constants';
-import Layout from '@/components/Layout';
-import Title from '@/components/Title';
-import { Field, Form, FormIcon } from '@/components/Form';
-import SubmitButton from '@/components/SubmitButton';
-import Action from '@/components/Action';
-import SocialButton from '@/components/SocialButton';
+import { useLogin } from './Login-hook';
 
 const Login = () => {
-  const { form, handleSubmit, loginWithLinkedin, loginWithGoogle } = useLogin();
+  const { form, handleSubmit, loginWithLinkedin, loginWithGoogle, isInApp } =
+    useLogin();
 
   return (
     <Layout.CenterLayout>
@@ -33,7 +33,7 @@ const Login = () => {
         <SubmitButton {...SUBMIT_BUTTON_PROPS} />
       </Form>
       <p className={CLASS_NAMES.seperator}>{SEPERATOR_TEXT}</p>
-      {isEmbedded ? (
+      {isInApp ? (
         <p className={CLASS_NAMES.embedded}>{EMBEDDED_TEXT}</p>
       ) : (
         <div className={CLASS_NAMES.socialButtonsContainer}>

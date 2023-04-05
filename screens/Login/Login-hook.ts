@@ -5,10 +5,13 @@ import { LoginData } from './Login-types';
 import { loginSchema } from './Login-validations';
 import { useUser } from "@/hooks";
 import { URLS } from "@/config";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import InApp from 'detect-inapp';
+
 import nextBase64 from 'next-base64';
 
 export const useLogin = () => {
+  const [isInApp, setIsInApp] = useState(false)
   const router = useRouter()
 
   const { login, isUserLoggedin, loginWithProvider } = useUser()
@@ -37,8 +40,16 @@ export const useLogin = () => {
 
   const loginWithGoogle = useCallback(() => loginWithProvider('google'), [])
 
+  useEffect(() => {
+    const inapp = new InApp(navigator.userAgent || navigator.vendor);
+
+    setIsInApp(inapp.isInApp)
+
+  }, [])
+
   return {
     form,
+    isInApp,
     handleSubmit,
     loginWithLinkedin,
     loginWithFacebook,
