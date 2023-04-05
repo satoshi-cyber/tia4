@@ -35,10 +35,13 @@ export const useLogin = () => {
 
   const loginWithFacebook = useCallback(() => loginWithProvider('facebook'), [])
 
+  const loginWithGoogle = useCallback(() => loginWithProvider('google'), [])
+
   return {
     form,
     handleSubmit,
     loginWithLinkedin,
-    loginWithFacebook
+    loginWithFacebook,
+    loginWithGoogle
   };
 };

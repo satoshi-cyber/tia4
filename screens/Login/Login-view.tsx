@@ -4,7 +4,7 @@ import {
   CLASS_NAMES,
   EMAIL_FIELD_ICON,
   EMAIL_FIELD_PROPS,
-  FACEBOOK_BUTTON_PROPS,
+  GOOGLE_BUTTON_PROPS,
   LINKEDIN_BUTTON_PROPS,
   SEPERATOR_TEXT,
   SUBMIT_BUTTON_PROPS,
@@ -18,7 +18,7 @@ import Action from '@/components/Action';
 import SocialButton from '@/components/SocialButton';
 
 const Login = () => {
-  const { form, handleSubmit, loginWithLinkedin } = useLogin();
+  const { form, handleSubmit, loginWithLinkedin, loginWithGoogle } = useLogin();
 
   return (
     <Layout.CenterLayout>
@@ -32,9 +32,9 @@ const Login = () => {
       </Form>
       <p className={CLASS_NAMES.seperator}>{SEPERATOR_TEXT}</p>
       <div className={CLASS_NAMES.socialButtonsContainer}>
-        {/* <Action action={loginWithFacebook}>
-          <SocialButton {...FACEBOOK_BUTTON_PROPS} />
-        </Action> */}
+        <Action action={loginWithGoogle}>
+          <SocialButton {...GOOGLE_BUTTON_PROPS} />
+        </Action>
         <Action action={loginWithLinkedin}>
           <SocialButton {...LINKEDIN_BUTTON_PROPS} />
         </Action>

@@ -1,7 +1,7 @@
 export const CLASS_NAMES = {
   form: "w-full",
   seperator: 'text-gray-600 my-5',
-  socialButtonsContainer: 'grid grid-cols-1 md:grid-cols-1 gap-4 w-full'
+  socialButtonsContainer: 'grid grid-cols-1 md:grid-cols-2 gap-4 w-full'
 }
 
 export const SEPERATOR_TEXT = 'OR'
@@ -23,9 +23,9 @@ export const SUBMIT_BUTTON_PROPS = {
   title: 'Login / Signup',
 }
 
-export const FACEBOOK_BUTTON_PROPS = {
-  provider: "facebook",
-  title: "Continue with Facebook"
+export const GOOGLE_BUTTON_PROPS = {
+  provider: "google",
+  title: "Continue with Google"
 }
 
 export const LINKEDIN_BUTTON_PROPS = {
