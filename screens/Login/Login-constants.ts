@@ -1,10 +1,13 @@
 export const CLASS_NAMES = {
   form: "w-full",
   seperator: 'text-gray-600 my-5',
-  socialButtonsContainer: 'grid grid-cols-1 md:grid-cols-2 gap-4 w-full'
+  socialButtonsContainer: 'grid grid-cols-1 md:grid-cols-2 gap-4 w-full',
+  embedded: 'text-gray-600'
 }
 
 export const SEPERATOR_TEXT = 'OR'
+
+export const EMBEDDED_TEXT = 'To use social logins please open this page from a browser!'
 
 export const TITLE_PROPS = {
   title: 'Change your life Today!',

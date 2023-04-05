@@ -1,4 +1,5 @@
 import { useLogin } from './Login-hook';
+import { isEmbedded } from 'react-device-detect';
 
 import {
   CLASS_NAMES,
@@ -9,6 +10,7 @@ import {
   SEPERATOR_TEXT,
   SUBMIT_BUTTON_PROPS,
   TITLE_PROPS,
+  EMBEDDED_TEXT,
 } from './Login-constants';
 import Layout from '@/components/Layout';
 import Title from '@/components/Title';
@@ -31,14 +33,18 @@ const Login = () => {
         <SubmitButton {...SUBMIT_BUTTON_PROPS} />
       </Form>
       <p className={CLASS_NAMES.seperator}>{SEPERATOR_TEXT}</p>
-      <div className={CLASS_NAMES.socialButtonsContainer}>
-        <Action action={loginWithGoogle}>
-          <SocialButton {...GOOGLE_BUTTON_PROPS} />
-        </Action>
-        <Action action={loginWithLinkedin}>
-          <SocialButton {...LINKEDIN_BUTTON_PROPS} />
-        </Action>
-      </div>
+      {isEmbedded ? (
+        <p className={CLASS_NAMES.embedded}>{EMBEDDED_TEXT}</p>
+      ) : (
+        <div className={CLASS_NAMES.socialButtonsContainer}>
+          <Action action={loginWithGoogle}>
+            <SocialButton {...GOOGLE_BUTTON_PROPS} />
+          </Action>
+          <Action action={loginWithLinkedin}>
+            <SocialButton {...LINKEDIN_BUTTON_PROPS} />
+          </Action>
+        </div>
+      )}
     </Layout.CenterLayout>
   );
 };
