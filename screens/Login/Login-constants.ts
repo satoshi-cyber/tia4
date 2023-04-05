@@ -1,7 +1,7 @@
 export const CLASS_NAMES = {
   form: "w-full",
   seperator: 'text-gray-600 my-5',
-  socialButtonsContainer: 'grid grid-cols-1 md:grid-cols-2 gap-4 w-full'
+  socialButtonsContainer: 'grid grid-cols-1 md:grid-cols-1 gap-4 w-full'
 }
 
 export const SEPERATOR_TEXT = 'OR'

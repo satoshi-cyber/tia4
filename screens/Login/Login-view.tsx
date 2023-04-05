@@ -1,4 +1,4 @@
-import { useLogin } from './Login-hook'
+import { useLogin } from './Login-hook';
 
 import {
   CLASS_NAMES,
@@ -9,17 +9,17 @@ import {
   SEPERATOR_TEXT,
   SUBMIT_BUTTON_PROPS,
   TITLE_PROPS,
-} from './Login-constants'
-import Layout from '@/components/Layout'
-import Title from '@/components/Title'
-import { Field, Form, FormIcon } from '@/components/Form'
-import SubmitButton from '@/components/SubmitButton'
-import Action from '@/components/Action'
-import SocialButton from '@/components/SocialButton'
+} from './Login-constants';
+import Layout from '@/components/Layout';
+import Title from '@/components/Title';
+import { Field, Form, FormIcon } from '@/components/Form';
+import SubmitButton from '@/components/SubmitButton';
+import Action from '@/components/Action';
+import SocialButton from '@/components/SocialButton';
 
 const Login = () => {
   const { form, handleSubmit, loginWithFacebook, loginWithLinkedin } =
-    useLogin()
+    useLogin();
 
   return (
     <Layout.CenterLayout>
@@ -33,15 +33,15 @@ const Login = () => {
       </Form>
       <p className={CLASS_NAMES.seperator}>{SEPERATOR_TEXT}</p>
       <div className={CLASS_NAMES.socialButtonsContainer}>
-        <Action action={loginWithFacebook}>
+        {/* <Action action={loginWithFacebook}>
           <SocialButton {...FACEBOOK_BUTTON_PROPS} />
-        </Action>
+        </Action> */}
         <Action action={loginWithLinkedin}>
           <SocialButton {...LINKEDIN_BUTTON_PROPS} />
         </Action>
       </div>
     </Layout.CenterLayout>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
