@@ -18,8 +18,7 @@ import Action from '@/components/Action';
 import SocialButton from '@/components/SocialButton';
 
 const Login = () => {
-  const { form, handleSubmit, loginWithFacebook, loginWithLinkedin } =
-    useLogin();
+  const { form, handleSubmit, loginWithLinkedin } = useLogin();
 
   return (
     <Layout.CenterLayout>
