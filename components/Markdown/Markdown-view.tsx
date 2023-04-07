@@ -15,7 +15,9 @@ const Markdown: React.FC<TextProps> = ({
     <SkeletonLoader
       isLoading={isLoading}
       {...skeletonProps}
-      after={text && <ReactMarkdown className="prose">{text}</ReactMarkdown>}
+      after={
+        text && <ReactMarkdown className="prose mx-auto">{text}</ReactMarkdown>
+      }
     />
   </div>
 );
