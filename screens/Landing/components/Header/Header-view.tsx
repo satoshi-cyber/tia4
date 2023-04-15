@@ -42,20 +42,6 @@ export const Header: React.FC = () => {
       >
         #NewAgeHiring
       </h2>
-      <div className="flex flex-row w-full justify-center mb-12">
-        <a
-          href="https://www.producthunt.com/posts/the-interview-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-the&#0045;interview&#0045;2"
-          target="_blank"
-        >
-          <img
-            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=383199&theme=light"
-            alt="The&#0032;Interview - &#0035;NewAgeHiring | Product Hunt"
-            style={{ width: 250, height: 54 }}
-            width="250"
-            height="54"
-          />
-        </a>
-      </div>
       <div className="mt-16 min-w-full">
         <div className="relative w-full">
           <div className="absolute top-[5.7%] left-[13%] z-10 w-[73.7%] h-[75.1%]">

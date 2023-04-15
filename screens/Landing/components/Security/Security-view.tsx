@@ -22,14 +22,16 @@ const Security: React.FC = () => (
       <div className="w-full sm:w-1/3 mb-3 sm:mb-4 grid gap-8">
         <div>
           <h3 className="font-thin text-lg sm:text-xl text-left mb-2 sm:mb-3">
-            GDPR compliant
+            Privacy-focused
           </h3>
           <p className="text-left text-md text-gray-800">
-            The Interview prides itself on competing aggressively while holding
-            ourselves to the highest ethical standards, including conduct of our
-            data handling practices. While many businesses are still unaware of
-            the impact the GDPR will have on their business, dedicated teams at
-            The Interview have been preparing to ensure GDPR readiness.
+            At our core, we prioritize your privacy. We do not share or sell
+            your data to third parties, and we do not use your data for targeted
+            advertising. We believe that your personal information should remain
+            confidential and only accessible to you. Our platform is designed
+            with privacy in mind, and we adhere to strict data protection
+            practices to ensure that your information is safe and secure at all
+            times.
           </p>
         </div>
         <div>
