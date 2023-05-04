@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Rate" ALTER COLUMN "value" DROP NOT NULL;

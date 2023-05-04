@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["clientExtensions", "jsonProtocol", "orderByNulls"]
+}
+
+datasource db {
+  provider          = "postgres"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+enum UserRole {
+  user
+  admin
+}
+
+enum CompanyMemberRole {
+  member
+  adminMember
+}
+
+enum InterviewStatus {
+  initialized
+  proccessing
+  ready
+}
+
+model Company {
+  id          String          @id @default(uuid())
+  name        String          @unique
+  description String?
+  website     String?
+  members     CompanyMember[]
+  invites     CompanyInvite[]
+  jobs        Job[]
+}
+
+model Job {
+  id          String      @id @default(uuid())
+  title       String
+  deadline    DateTime
+  questions   Json[]
+  description String?
+  interviews  Interview[]
+  company     Company     @relation(fields: [companyId], references: [id])
+  companyId   String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Interview {
+  id            String          @id @default(uuid())
+  jobId         String
+  intervieweeId String
+  job           Job             @relation(fields: [jobId], references: [id])
+  interviewee   User            @relation(fields: [intervieweeId], references: [id])
+  answers       Json[]
+  rates         Rate[]
+  status        InterviewStatus @default(initialized)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  score         Float?
+
+  @@unique([intervieweeId, jobId])
+}
+
+model User {
+  id              String          @id @default(uuid())
+  email           String          @unique
+  firstName       String?
+  lastName        String?
+  bio             String?
+  issuer          String          @unique
+  publicAddress   String          @unique
+  linkedInProfile String?
+  resumeFileName  String?
+  role            UserRole        @default(user)
+  companies       CompanyMember[]
+  interviews      Interview[]
+  rates           Rate[]
+  onboarded       Boolean         @default(false)
+}
+
+model CompanyMember {
+  role      CompanyMemberRole
+  company   Company           @relation(fields: [companyId], references: [id])
+  user      User              @relation(fields: [userId], references: [id])
+  companyId String
+  userId    String
+
+  @@id([userId, companyId])
+}
+
+model CompanyInvite {
+  company        Company           @relation(fields: [companyId], references: [id])
+  role           CompanyMemberRole
+  recipientEmail String
+  companyId      String
+
+  @@id([recipientEmail, companyId])
+}
+
+model Rate {
+  rater       User       @relation(fields: [raterId], references: [id])
+  value       Int?
+  reason      String?
+  createdAt   DateTime   @default(now())
+  interview   Interview? @relation(fields: [interviewId], references: [id])
+  interviewId String
+  raterId     String
+
+  @@id([raterId, interviewId])
+}
+
+///////////////
