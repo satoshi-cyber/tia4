@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma": "prisma generate",
-    "postinstall": "prisma generate",
+    "prisma": "prisma generate --data-proxy",
+    "postinstall": "prisma generate --data-proxy",
     "codegen": "graphql-codegen --config codegen.ts",
     "analyze": "ANALYZE=true next build",
     "tinejs": "./tinejs.sh"
