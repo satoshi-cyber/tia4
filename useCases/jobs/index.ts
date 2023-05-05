@@ -4,6 +4,7 @@ const jobs = prisma.job.findMany({
     select: {
         id: true,
         title: true,
+        questions: true
     }
 });
 
