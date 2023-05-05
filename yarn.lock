@@ -9686,10 +9686,10 @@ tinejs.payload@^0.0.4:
   resolved "https://registry.yarnpkg.com/tinejs.payload/-/tinejs.payload-0.0.4.tgz#add50a624ae6b7f546cd7b11a10ea4c5159aa6ca"
   integrity sha512-/JfR0eiEYe9KXwYLu1/0JE6BVSNo7Xg/brierbQJn7hul8wD8BonhRHif07kXTl23XA+oVvKsdz4i+CxDzNDTQ==
 
-tinejs.prisma@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.1.tgz#43fa9fb6496735bb5a49f0cd2ce7a9552966d5fe"
-  integrity sha512-FCiRPYy7LLhs+25hnfM+KA8Rz4I5nhqTy80M4aC+xxu6ttsjmzBME3NrYEfv26fkXEalZCsZoiRYGYAeRAHyNQ==
+tinejs.prisma@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.3.tgz#03cd671cf4fd313cadec09d5a6e267198bf8d23a"
+  integrity sha512-NQtwGGj+zWxQh3Ne3FdvTQWL0/0RMchLO/HXpgz7B7uqBOvycMTd7zMxdMRm6E651m3oshVwozCsurKT8z3XPA==
   dependencies:
     tinejs "^0.0.10"
 

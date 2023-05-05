@@ -10,12 +10,13 @@ const handler = async (req: NextRequest) => {
   try {
     const ctx = tineCtx({ headers: req.headers, cookies: req.cookies });
 
-    const res = await jobs.run({ ctx });
+    const json = await req.json();
+
+    const res = await jobs.rawInput(json).run({ ctx });
 
     return NextResponse.json(res);
-  } catch (e) {
-
-    return NextResponse.json({ error: e });
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message });
   }
 };
 

@@ -32,8 +32,8 @@ const handler = async (req: NextRequest) => {
     {{/if}}
 
     return NextResponse.json(res);
-  } catch (e) {
-    return NextResponse.json({ error: e });
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message });
   }
 };
 
