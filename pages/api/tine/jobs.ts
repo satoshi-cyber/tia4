@@ -14,6 +14,7 @@ const handler = async (req: NextRequest) => {
 
     return NextResponse.json(res);
   } catch (e) {
+
     return NextResponse.json({ error: e });
   }
 };
