@@ -1,17 +1,21 @@
-import { useJobsListQuery } from "@/graphql"
-import { useUser } from "@/hooks"
-import { useMemo } from "react"
+import { useJobsListQuery } from '@/graphql';
+import { useUser } from '@/hooks';
+import { useMemo } from 'react';
 
-import { SKELETON_JOBS } from "./List-constants"
+import { SKELETON_JOBS } from './List-constants';
 
 export const useJobs = () => {
-  const { companyId } = useUser()
+  const { companyId } = useUser();
 
-  const context = useMemo(() => ({ additionalTypenames: ['Job'] }), [])
+  const context = useMemo(() => ({ additionalTypenames: ['Job'] }), []);
 
-  const [{ data, fetching }] = useJobsListQuery({ context, variables: { companyId: companyId! }, pause: !companyId })
+  const [{ data, fetching }] = useJobsListQuery({
+    context,
+    variables: { companyId: companyId! },
+    pause: !companyId,
+  });
 
-  const jobs = fetching ? SKELETON_JOBS : data?.jobs
+  const jobs = fetching ? SKELETON_JOBS : data?.jobs;
 
-  return { jobs, fetching }
-}
+  return { jobs, fetching };
+};

@@ -1,3 +1,4 @@
+import auth from '@/actions/auth';
 import condition from '@/actions/condition';
 import magic from '@/actions/magic';
 import prisma from '@/actions/prisma';
@@ -22,9 +23,11 @@ const user = prisma.user.findUnique({
   },
 });
 
+const token = auth.signToken(tineVar(user));
+
 const returnOrCreate = condition([
   tineVar(user, (u) => Boolean(u)),
-  tineVar(user),
+  tineVar(token),
   'no user',
 ]);
 

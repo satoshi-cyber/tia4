@@ -1,8 +1,7 @@
-import React from 'react'
+import Layout from '@/components/Layout';
+import React from 'react';
 
-import { Header, List } from './components'
-
-import { Layout } from '../../components'
+import { Header, List } from './components';
 
 export default function Jobs() {
   return (
@@ -10,5 +9,5 @@ export default function Jobs() {
       <Header />
       <List />
     </Layout.Default>
-  )
+  );
 }

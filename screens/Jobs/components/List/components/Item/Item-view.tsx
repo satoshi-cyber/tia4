@@ -1,5 +1,6 @@
 import React from 'react';
-import { ButtonIcon, Text } from '@/components';
+import ButtonIcon from '@/components/ButtonIcon';
+import Text from '@/components/Text';
 
 import {
   CLASS_NAMES,

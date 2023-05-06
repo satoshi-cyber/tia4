@@ -8,7 +8,10 @@ import {
   bytesToHex,
   hexToBytes,
 } from 'ethereum-cryptography/utils';
+
 import { MetaData } from './magic-types';
+
+import { env } from '../config';
 
 const parsePublicAddressFromIssuer = (issuer: string) => {
   return issuer.split(':')[2]?.toLowerCase() ?? '';
@@ -75,7 +78,7 @@ export const fetchMetadataFromIssuer = async (issuer: string) => {
     `https://api.magic.link/v1/admin/auth/user/get?issuer=${issuer}&wallet_type=NONE`,
     {
       method: 'GET',
-      headers: { 'X-Magic-Secret-key': process.env.MAGIC_SECRET_KEY! },
+      headers: { 'X-Magic-Secret-key': env.MAGIC_SECRET_KEY },
     }
   );
 
