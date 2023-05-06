@@ -71,28 +71,28 @@ export const getIssuer = (did: string) =>
   parseDIDToken(did).withParsedClaim[1].iss;
 
 export const fetchMetadataFromIssuer = async (issuer: string) => {
-  try {
-    const res = await fetch(
-      `https://api.magic.link/v1/admin/auth/user/get?issuer=${issuer}&wallet_type=NONE`,
-      {
-        method: 'GET',
-        headers: { 'X-Magic-Secret-key': process.env.MAGIC_SECRET_KEY! },
-      }
-    );
+  const res = await fetch(
+    `https://api.magic.link/v1/admin/auth/user/get?issuer=${issuer}&wallet_type=NONE`,
+    {
+      method: 'GET',
+      headers: { 'X-Magic-Secret-key': process.env.MAGIC_SECRET_KEY! },
+    }
+  );
 
-    const { data } = await res.json();
+  const { data, status, message } = await res.json();
 
-    return {
-      issuer: data.issuer ?? undefined,
-      publicAddress: data.public_address ?? undefined,
-      email: data.email ?? undefined,
-      oauthProvider: data.oauth_provider ?? undefined,
-      phoneNumber: data.phone_number ?? undefined,
-      wallets: data.wallets ?? undefined,
-    } as MetaData;
-  } catch {
-    throw new Error('Error fetching user data');
+  if (status !== 'ok') {
+    throw new Error(message);
   }
+
+  return {
+    issuer: data.issuer ?? undefined,
+    publicAddress: data.public_address ?? undefined,
+    email: data.email ?? undefined,
+    oauthProvider: data.oauth_provider ?? undefined,
+    phoneNumber: data.phone_number ?? undefined,
+    wallets: data.wallets ?? undefined,
+  } as MetaData;
 };
 
 export const validate = (DIDToken: string, attachment = 'none') => {
