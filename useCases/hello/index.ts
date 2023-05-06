@@ -4,8 +4,6 @@ import payload from 'tinejs.payload';
 
 const input = z.object({ name: z.string().nullable().optional() });
 
-const hello = payload(
-    tineVar(input, ({ name }) => `Hello ${name || 'World'}`),
-);
+const hello = payload(tineVar(input, ({ name }) => `Hello ${name || 'World'}`));
 
 export default hello.withInput(input);
