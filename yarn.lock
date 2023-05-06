@@ -7069,6 +7069,11 @@ jest@^29.5.0:
     import-local "^3.0.2"
     jest-cli "^29.5.0"
 
+jose@^4.14.4:
+  version "4.14.4"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-4.14.4.tgz#59e09204e2670c3164ee24cbfe7115c6f8bff9ca"
+  integrity sha512-j8GhLiKmUAh+dsFXlX1aJCbt5KMibuKb+d7j1JaOJG6s2UjX1PQlW+OKB/sD4a/5ZYF4RcmYmLSndOoU3Lt/3g==
+
 js-sha3@0.8.0, js-sha3@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.8.0.tgz#b9b7a5da73afad7dedd0f8c463954cbde6818840"
@@ -9766,6 +9771,14 @@ tinejs@^0.0.10:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.10.tgz#3102e03032885fdb5c0d72df02a799239417d464"
   integrity sha512-5nC5mzJbfnU0hNt/bIzw+i4a5dzKM7xJGVFvCzgqn56Rp6sVgx0qYUPGEIsBOmVefIrefIAi+qOG447dk03vuQ==
+  dependencies:
+    uuid "^9.0.0"
+    zod "^3.21.4"
+
+tinejs@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.11.tgz#0b72ba733656a1f5462513f906150699c8e05079"
+  integrity sha512-mnhPXGaAA04QQWSL4TxY5eij6c7VdtkatxA+UBWTkrZZcikUtuUykFashkw3XR2inCZezdM4id6bonlCL/r4mQ==
   dependencies:
     uuid "^9.0.0"
     zod "^3.21.4"

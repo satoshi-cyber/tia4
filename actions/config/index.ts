@@ -6,4 +6,8 @@ const envSchema = z.object({
   JWT_SECRET: z.string().nonempty(),
 });
 
-export const env = envSchema.parse(process.env);
+export const env = envSchema.parse({
+  DATABASE_URL: process.env.DATABASE_URL,
+  MAGIC_SECRET_KEY: process.env.MAGIC_SECRET_KEY,
+  JWT_SECRET: process.env.JWT_SECRET,
+});
