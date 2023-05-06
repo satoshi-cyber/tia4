@@ -1,15 +1,15 @@
 import { tineAction, TineActionOptions } from 'tinejs';
 
 const condition = tineAction(
-  async <P, T = undefined>(
-    [$condition, $if, $else]: [boolean, P, T?],
+  async <P, T = null>(
+    [condition, $if, $else = null]: [boolean, P, (T | null)?],
     { parsePayload, ctx }: TineActionOptions
   ) => {
-    if (await parsePayload(ctx, $condition)) {
+    if (await parsePayload(ctx, condition)) {
       return await parsePayload(ctx, $if);
     }
 
-    return (await parsePayload(ctx, $else)) as T;
+    return ((await parsePayload(ctx, $else)) ?? null) as T;
   },
   { action: 'condition', skipParse: true }
 );

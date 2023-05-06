@@ -6,7 +6,16 @@ import {
   validate,
 } from './magic-functions';
 
-const getMetaData = tineAction(
+const issuer = tineAction(
+  async ({ did }: { did: string }) => {
+    await validate(did);
+
+    return getIssuer(did);
+  },
+  { action: 'magic.issuer' }
+);
+
+const metadata = tineAction(
   async ({ did }: { did: string }) => {
     await validate(did);
 
@@ -14,11 +23,12 @@ const getMetaData = tineAction(
 
     return fetchMetadataFromIssuer(issuer);
   },
-  { action: 'magic.getMetaData' }
+  { action: 'magic.metadata' }
 );
 
 const magic = {
-  getMetaData,
+  issuer,
+  metadata,
 };
 
 export default magic;

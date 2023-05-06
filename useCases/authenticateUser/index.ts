@@ -14,7 +14,7 @@ const input = z.object({
   provider: z.string().optional(),
 });
 
-const magicMeta = magic.getMetaData({ did: tineVar(input, 'did') });
+const magicMeta = magic.metadata({ did: tineVar(input, 'did') });
 
 const user = prisma.user.findUnique({
   where: { email: tineVar(magicMeta, 'email') },

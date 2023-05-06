@@ -25,7 +25,7 @@ export const useUser = () => {
 
   const from = router.query.from;
 
-  // magic?.user.getIdToken().then(console.log);
+  magic?.user.getIdToken().then(console.log);
 
   const login = useCallback(
     async (email: string) => {
