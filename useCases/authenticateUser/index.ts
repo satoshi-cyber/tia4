@@ -26,9 +26,8 @@ const user = prisma.user.findUnique({
 const token = auth.signToken(tineVar(user));
 
 const returnOrCreate = condition([
-  tineVar(user, (u) => Boolean(u)),
+  tineVar(user, ($user) => Boolean($user)),
   tineVar(token),
-  'no user',
 ]);
 
 export default returnOrCreate.withInput(input);

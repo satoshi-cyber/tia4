@@ -74,7 +74,7 @@
     "swiper": "^8.3.2",
     "tailwindcss": "^0.0.0-insiders.40c0cbe",
     "tailwindcss-scoped-groups": "^2.0.0",
-    "tinejs": "^0.0.11",
+    "tinejs": "^0.0.12",
     "tinejs.payload": "^0.0.4",
     "tinejs.prisma": "^0.0.3",
     "typescript": "^4.8.4",

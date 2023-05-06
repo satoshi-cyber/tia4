@@ -9775,10 +9775,10 @@ tinejs@^0.0.10:
     uuid "^9.0.0"
     zod "^3.21.4"
 
-tinejs@^0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.11.tgz#0b72ba733656a1f5462513f906150699c8e05079"
-  integrity sha512-mnhPXGaAA04QQWSL4TxY5eij6c7VdtkatxA+UBWTkrZZcikUtuUykFashkw3XR2inCZezdM4id6bonlCL/r4mQ==
+tinejs@^0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.12.tgz#4bf80809c9556a48b1dbecf72a6f0ab017ee6e61"
+  integrity sha512-3RufSlEZSlNtXRyxuprdIp2ESaGRsgIBAheeG2zRRv5O5T3EO1cqmAYUOBMCmPKyIBGwOmoQb5Ve23U9d3eV3w==
   dependencies:
     uuid "^9.0.0"
     zod "^3.21.4"
