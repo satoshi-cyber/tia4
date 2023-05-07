@@ -1,5 +1,6 @@
 import type { AuthenticateUser } from './types';
 import type { Hello } from './types';
+import type { Job } from './types';
 import type { Jobs } from './types';
 
 export const UseCases = {
@@ -67,34 +68,41 @@ export const UseCases = {
             ),
       ] as const,
   },
-  jobs: {
-    input: (input: Parameters<Jobs['input']>[0]) =>
+  job: {
+    input: (input: Parameters<Job['input']>[0]) =>
       [
-        ['jobs', input],
+        ['job', input],
         () =>
-          fetch('/api/tine/jobs', {
+          fetch('/api/tine/job', {
             method: 'POST',
             body: JSON.stringify(input),
           })
             .then((res) => res.json())
             .then(
               (data) =>
-                data as Awaited<ReturnType<ReturnType<Jobs['input']>['run']>>
+                data as Awaited<ReturnType<ReturnType<Job['input']>['run']>>
             ),
       ] as const,
     rawInput: (input: unknown) =>
       [
-        ['jobs', input],
+        ['job', input],
         () =>
-          fetch('/api/tine/jobs', {
+          fetch('/api/tine/job', {
             method: 'POST',
             body: JSON.stringify(input),
           })
             .then((res) => res.json())
             .then(
               (data) =>
-                data as Awaited<ReturnType<ReturnType<Jobs['input']>['run']>>
+                data as Awaited<ReturnType<ReturnType<Job['input']>['run']>>
             ),
       ] as const,
   },
+  jobs: [
+    'jobs',
+    () =>
+      fetch('/api/tine/jobs', { method: 'POST' })
+        .then((res) => res.json())
+        .then((data) => data as Awaited<ReturnType<Jobs['run']>>),
+  ] as const,
 };

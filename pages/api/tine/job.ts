@@ -1,4 +1,4 @@
-import jobs from '@/useCases/jobs';
+import job from '@/useCases/job';
 import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs';
 
@@ -10,7 +10,9 @@ const handler = async (req: NextRequest) => {
   try {
     const ctx = tineCtx({ headers: req.headers, cookies: req.cookies });
 
-    const res = await jobs.run({ ctx });
+    const json = await req.json();
+
+    const res = await job.rawInput(json).run({ ctx });
 
     return NextResponse.json(res);
   } catch (e: any) {
