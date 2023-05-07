@@ -18,4 +18,14 @@ const interview = prisma.interview.findFirstOrThrow({
   },
 });
 
-export default interview.withInput(input);
+const interview2 = prisma.interview.findUnique({
+  where: {
+    id: tineVar(interview, 'id'),
+  },
+  select: {
+    id: true,
+    intervieweeId: true,
+  },
+});
+
+export default interview2.withInput(input);
