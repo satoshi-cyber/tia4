@@ -7,7 +7,7 @@ const input = z.object({ id: z.string() });
 
 const user = payload({ id: 'a4d78962-c38c-4d4c-879c-7ca4b28db656' });
 
-const interview = prisma.interview.findFirstOrThrow({
+const interview = prisma.interview.findUnique({
   where: {
     intervieweeId: tineVar(user, 'id'),
     id: tineVar(input, 'id'),
@@ -18,14 +18,4 @@ const interview = prisma.interview.findFirstOrThrow({
   },
 });
 
-const interview2 = prisma.interview.findUnique({
-  where: {
-    id: tineVar(interview, 'id'),
-  },
-  select: {
-    id: true,
-    intervieweeId: true,
-  },
-});
-
-export default interview2.withInput(input);
+export default interview.withInput(input);
