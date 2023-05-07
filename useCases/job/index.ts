@@ -1,9 +1,9 @@
 import prisma from '@/actions/prisma';
-import { tineVar } from 'tinejs';
+import { tineInput, tineVar } from 'tinejs';
 import payload from 'tinejs.payload';
 import { z } from 'zod';
 
-const input = z.object({ id: z.string() });
+const input = tineInput(z.object({ id: z.string() }));
 
 const user = payload({ id: 'a4d78962-c38c-4d4c-879c-7ca4b28db656' });
 
