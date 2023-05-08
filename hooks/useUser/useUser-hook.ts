@@ -29,11 +29,7 @@ export const useUser = () => {
 
   const login = useCallback(
     async (email: string) => {
-      const redirectURI = from
-        ? `${window.location.origin}/redirect-callback/${from}`
-        : `${window.location.origin}/redirect-callback`;
-
-      const did = await magic?.auth.loginWithMagicLink({ email, redirectURI });
+      const did = await magic?.auth.loginWithEmailOTP({ email });
 
       if (!did) {
         return;
