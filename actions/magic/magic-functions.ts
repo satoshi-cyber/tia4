@@ -89,9 +89,9 @@ export const fetchMetadataFromIssuer = async (issuer: string) => {
   }
 
   return {
-    issuer: data.issuer ?? undefined,
-    publicAddress: data.public_address ?? undefined,
-    email: data.email ?? undefined,
+    issuer: data.issuer,
+    publicAddress: data.public_address,
+    email: data.email,
     oauthProvider: data.oauth_provider ?? undefined,
     phoneNumber: data.phone_number ?? undefined,
     wallets: data.wallets ?? undefined,

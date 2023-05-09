@@ -1,7 +1,7 @@
 export interface MetaData {
-  issuer: string | undefined;
-  publicAddress: string | undefined;
-  email: string | undefined;
+  issuer: string;
+  publicAddress: string;
+  email: string;
   oauthProvider: string | undefined;
   phoneNumber: string | undefined;
   wallets: string[] | undefined;

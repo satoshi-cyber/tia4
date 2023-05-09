@@ -1,4 +1,5 @@
-import auth from '@/actions/auth';
+import attachOauthPicture from '@/actions/auth/attachOAuthPicture';
+import signToken from '@/actions/auth/signToken';
 import condition from '@/actions/condition';
 import magic from '@/actions/magic';
 import prisma from '@/actions/prisma';
@@ -25,11 +26,31 @@ const user = prisma.user.findUnique({
   },
 });
 
-const token = auth.signToken(tineVar(user));
+const userToken = signToken(tineVar(user));
 
-const returnOrCreate = condition([
+const createUser = prisma.user.create({
+  data: {
+    firstName: tineVar(input, 'firstName'),
+    lastName: tineVar(input, 'lastName'),
+    issuer: tineVar(magicMeta, 'issuer'),
+    publicAddress: tineVar(magicMeta, 'publicAddress'),
+    email: tineVar(magicMeta, 'email'),
+  },
+  include: {
+    companies: true,
+  },
+});
+
+const userWithOAuthData = attachOauthPicture({
+  user: tineVar(createUser),
+});
+
+const createUserToken = signToken(tineVar(userWithOAuthData));
+
+const authenticateUser = condition([
   tineVar(user, ($user) => Boolean($user)),
-  tineVar(token),
+  tineVar(userToken),
+  tineVar(createUserToken),
 ]);
 
-export default returnOrCreate.withInput(input);
+export default authenticateUser.withInput(input);

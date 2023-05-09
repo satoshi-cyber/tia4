@@ -2,7 +2,7 @@ import { CompanyMember, User } from '@prisma/client/edge';
 import { tineAction } from 'tinejs';
 import { SignJWT } from 'jose';
 
-import { env } from '../config';
+import { env } from '../../config';
 
 const signToken = tineAction(
   async (
@@ -29,8 +29,4 @@ const signToken = tineAction(
   }
 );
 
-const auth = {
-  signToken,
-};
-
-export default auth;
+export default signToken;
