@@ -3,81 +3,48 @@ import querystring from 'query-string';
 
 const signV4Algorithm = 'AWS4-HMAC-SHA256';
 
-const isString = (arg) => {
-  return typeof arg === 'string';
-};
-
-const isObject = (arg) => {
-  return typeof arg === 'object' && arg !== null;
-};
-
-const isArray = (arg) => {
-  return Array.isArray(arg);
-};
-
-// check if typeof arg function
-const isFunction = (arg) => {
-  return typeof arg === 'function';
-};
-
-const isBoolean = (arg) => {
-  return typeof arg === 'boolean';
-};
-
-const isNumber = (arg) => {
-  return typeof arg === 'number';
-};
-
-// check if arg is a valid date
-const isValidDate = (arg) => {
-  return arg instanceof Date && !isNaN(arg);
-};
-
-const uriResourceEscape = (string) => {
+const uriResourceEscape = (string: string): string => {
   return uriEscape(string).replace(/%2F/g, '/');
 };
 
 // Create a Date string with format:
 // 'YYYYMMDDTHHmmss' + Z
-const makeDateLong = (date) => {
+const makeDateLong = (date?: Date): string => {
   date = date || new Date();
 
   // Gives format like: '2017-08-07T16:28:59.889Z'
-  date = date.toISOString();
+  const dateString = date.toISOString();
 
   return (
-    date.slice(0, 4) +
-    date.slice(5, 7) +
-    date.slice(8, 13) +
-    date.slice(14, 16) +
-    date.slice(17, 19) +
+    dateString.slice(0, 4) +
+    dateString.slice(5, 7) +
+    dateString.slice(8, 13) +
+    dateString.slice(14, 16) +
+    dateString.slice(17, 19) +
     'Z'
   );
 };
 
-const isValidPort = (port) => {
-  // verify if port is a number.
-  if (!isNumber(port)) return false;
-  // port cannot be negative.
-  if (port < 0) return false;
-  // port '0' is valid and special case return true.
-  if (port === 0) return true;
-  var min_port = 1;
-  var max_port = 65535;
-  // Verify if port is in range.
-  return port >= min_port && port <= max_port;
-};
-
-const isAmazonEndpoint = (endpoint) => {
+const isAmazonEndpoint = (endpoint: string): boolean => {
   return (
     endpoint === 's3.amazonaws.com' ||
     endpoint === 's3.cn-north-1.amazonaws.com.cn'
   );
 };
 
+const isValidPort = (port: number): boolean => {
+  // port cannot be negative.
+  if (port < 0) return false;
+  // port '0' is valid and special case return true.
+  if (port === 0) return true;
+  const min_port = 1;
+  const max_port = 65535;
+  // Verify if port is in range.
+  return port >= min_port && port <= max_port;
+};
+
 // isValidDomain - true if input host is a valid domain.
-const isValidDomain = (host) => {
-  if (!isString(host)) return false;
+const isValidDomain = (host: string): boolean => {
   // See RFC 1035, RFC 3696.
   if (host.length === 0 || host.length > 255) {
     return false;
@@ -94,9 +61,9 @@ const isValidDomain = (host) => {
   if (host[0] === '.') {
     return false;
   }
-  var alphaNumerics = '`~!@#$%^&*()+={}[]|\\"\';:><?/'.split('');
+  const alphaNumerics = '`~!@#$%^&*()+={}[]|\\"\';:><?/'.split('');
   // All non alphanumeric characters are invalid.
-  for (var i in alphaNumerics) {
+  for (const i in alphaNumerics) {
     if (host.indexOf(alphaNumerics[i]) > -1) {
       return false;
     }
@@ -106,25 +73,28 @@ const isValidDomain = (host) => {
   return true;
 };
 
-const isValidIP = () => {
-  return true;
+const isValidIP = (ip: string): boolean => {
+  const ipRegex = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
+  return ipRegex.test(ip);
 };
 
-// isValidEndpoint - true if endpoint is valid domain.
-const isValidEndpoint = (endpoint) => {
+const isValidEndpoint = (endpoint: string): boolean => {
   return isValidDomain(endpoint) || isValidIP(endpoint);
 };
 
-const isVirtualHostStyle = (endpoint, protocol, bucket, pathStyle) => {
+const isVirtualHostStyle = (
+  endpoint: string,
+  protocol: string,
+  bucket: string,
+  pathStyle: boolean
+): boolean => {
   if (protocol === 'https:' && bucket.indexOf('.') > -1) {
     return false;
   }
   return isAmazonEndpoint(endpoint) || !pathStyle;
 };
 
-const isValidBucketName = (bucket) => {
-  if (!isString(bucket)) return false;
-
+const isValidBucketName = (bucket: string): boolean => {
   // bucket length should be less than and no more than 63
   // characters long.
   if (bucket.length < 3 || bucket.length > 63) {
@@ -147,31 +117,30 @@ const isValidBucketName = (bucket) => {
 };
 
 // check if prefix is valid
-const isValidPrefix = (prefix) => {
-  if (!isString(prefix)) return false;
+const isValidPrefix = (prefix: string): boolean => {
   if (prefix.length > 1024) return false;
   return true;
 };
 
-const isValidObjectName = (objectName) => {
+const isValidObjectName = (objectName: string): boolean => {
   if (!isValidPrefix(objectName)) return false;
   if (objectName.length === 0) return false;
   return true;
 };
 
 const getStringToSign = async (
-  canonicalRequest,
-  requestDate,
-  region,
-  serviceName = 's3'
-) => {
-  if (!isString(canonicalRequest)) {
+  canonicalRequest: string,
+  requestDate: Date,
+  region: Region,
+  serviceName: string = 's3'
+): Promise<string> => {
+  if (typeof canonicalRequest !== 'string') {
     throw new TypeError('canonicalRequest should be of type "string"');
   }
-  if (!isObject(requestDate)) {
-    throw new TypeError('requestDate should be of type "object"');
+  if (!(requestDate instanceof Date)) {
+    throw new TypeError('requestDate should be of type "Date"');
   }
-  if (!isString(region)) {
+  if (typeof region !== 'string') {
     throw new TypeError('region should be of type "string"');
   }
 
@@ -195,38 +164,7 @@ const getStringToSign = async (
   return stringToSign.join('\n');
 };
 
-// Returns signed headers array - alphabetically sorted
-function getSignedHeaders(headers) {
-  if (!isObject(headers)) {
-    throw new TypeError('request should be of type "object"');
-  }
-  // Excerpts from @lsegal - https://github.com/aws/aws-sdk-js/issues/659#issuecomment-120477258
-  //
-  //  User-Agent:
-  //
-  //      This is ignored from signing because signing this causes problems with generating pre-signed URLs
-  //      (that are executed by other agents) or when customers pass requests through proxies, which may
-  //      modify the user-agent.
-  //
-  //  Content-Length:
-  //
-  //      This is ignored from signing because generating a pre-signed URL should not provide a content-length
-  //      constraint, specifically when vending a S3 pre-signed PUT URL. The corollary to this is that when
-  //      sending regular requests (non-pre-signed), the signature contains a checksum of the body, which
-  //      implicitly validates the payload length (since changing the number of bytes would change the checksum)
-  //      and therefore this header is not valuable in the signature.
-  //
-  //  Content-Type:
-  //
-  //      Signing this header causes quite a number of problems in browser environments, where browsers
-  //      like to modify and normalize the content-type header in different ways. There is more information
-  //      on this in https://github.com/aws/aws-sdk-js/issues/244. Avoiding this field simplifies logic
-  //      and reduces the possibility of future bugs
-  //
-  //  Authorization:
-  //
-  //      Is skipped for obvious reasons
-
+const getSignedHeaders = (headers: Record<string, string>): string[] => {
   const ignoredHeaders = [
     'authorization',
     'content-length',
@@ -235,31 +173,28 @@ function getSignedHeaders(headers) {
   ];
 
   return Object.keys(headers)
-    .map((header) => header)
+    .map((header) => header.toLowerCase())
     .filter((header) => ignoredHeaders.indexOf(header) === -1)
     .sort();
-}
+};
 
-const makeDateShort = (date) => {
+const makeDateShort = (date: Date) => {
   date = date || new Date();
 
   // Gives format like: '2017-08-07T16:28:59.889Z'
-  date = date.toISOString();
+  const dateString = date.toISOString();
 
-  return date.slice(0, 4) + date.slice(5, 7) + date.slice(8, 10);
+  return (
+    dateString.slice(0, 4) + dateString.slice(5, 7) + dateString.slice(8, 10)
+  );
 };
 
-const getSigningKey = async (date, region, secretKey, serviceName = 's3') => {
-  if (!isObject(date)) {
-    throw new TypeError('date should be of type "object"');
-  }
-  if (!isString(region)) {
-    throw new TypeError('region should be of type "string"');
-  }
-  if (!isString(secretKey)) {
-    throw new TypeError('secretKey should be of type "string"');
-  }
-
+const getSigningKey = async (
+  date: Date,
+  region: string,
+  secretKey: string,
+  serviceName = 's3'
+): Promise<ArrayBuffer> => {
   const encoder = new TextEncoder();
   const dateLine = makeDateShort(date);
   const message1 = encoder.encode('AWS4' + secretKey);
@@ -309,51 +244,36 @@ const getSigningKey = async (date, region, secretKey, serviceName = 's3') => {
     .then((key) => crypto.subtle.sign('HMAC', key, message5));
 };
 
-const getScope = (region, date, serviceName = 's3') => {
+const getScope = (
+  region: string,
+  date: Date,
+  serviceName: string = 's3'
+): string => {
   return `${makeDateShort(date)}/${region}/${serviceName}/aws4_request`;
 };
 
-const getCredential = (accessKey, region, requestDate, serviceName = 's3') => {
-  if (!isString(accessKey)) {
-    throw new TypeError('accessKey should be of type "string"');
-  }
-  if (!isString(region)) {
-    throw new TypeError('region should be of type "string"');
-  }
-  if (!isObject(requestDate)) {
-    throw new TypeError('requestDate should be of type "object"');
-  }
+const getCredential = (
+  accessKey: string,
+  region: string,
+  requestDate: Date,
+  serviceName: string = 's3'
+): string => {
   return `${accessKey}/${getScope(region, requestDate, serviceName)}`;
 };
 
 const getCanonicalRequest = (
-  method,
-  path,
-  headers,
-  signedHeaders,
-  hashedPayload
-) => {
-  if (!isString(method)) {
-    throw new TypeError('method should be of type "string"');
-  }
-  if (!isString(path)) {
-    throw new TypeError('path should be of type "string"');
-  }
-  if (!isObject(headers)) {
-    throw new TypeError('headers should be of type "object"');
-  }
-  if (!isArray(signedHeaders)) {
-    throw new TypeError('signedHeaders should be of type "array"');
-  }
-  if (!isString(hashedPayload)) {
-    throw new TypeError('hashedPayload should be of type "string"');
-  }
+  method: string,
+  path: string,
+  headers: Record<string, any>,
+  signedHeaders: string[],
+  hashedPayload: string
+): string => {
   const headersArray = signedHeaders.reduce((acc, i) => {
     // Trim spaces from the value (required by V4 spec)
     const val = `${headers[i]}`.replace(/ +/g, ' ');
     acc.push(`${i.toLowerCase()}:${val}`);
     return acc;
-  }, []);
+  }, [] as string[]);
 
   const requestResource = path.split('?')[0];
   let requestQuery = path.split('?')[1];
@@ -367,7 +287,7 @@ const getCanonicalRequest = (
       .join('&');
   }
 
-  const canonical = [];
+  const canonical: string[] = [];
   canonical.push(method.toUpperCase());
   canonical.push(requestResource);
   canonical.push(requestQuery);
@@ -378,27 +298,14 @@ const getCanonicalRequest = (
 };
 
 const presignSignatureV4 = async (
-  request,
-  accessKey,
-  secretKey,
-  sessionToken,
-  region,
-  requestDate,
-  expires
-) => {
-  if (!isObject(request)) {
-    throw new TypeError('request should be of type "object"');
-  }
-  if (!isString(accessKey)) {
-    throw new TypeError('accessKey should be of type "string"');
-  }
-  if (!isString(secretKey)) {
-    throw new TypeError('secretKey should be of type "string"');
-  }
-  if (!isString(region)) {
-    throw new TypeError('region should be of type "string"');
-  }
-
+  request: RequestOptions,
+  accessKey: string,
+  secretKey: string,
+  sessionToken: string,
+  region: Region,
+  requestDate: Date,
+  expires: number
+): Promise<string> => {
   if (!accessKey) {
     throw new Error('accessKey is required for presigning');
   }
@@ -406,9 +313,6 @@ const presignSignatureV4 = async (
     throw new Error('secretKey is required for presigning');
   }
 
-  if (!isNumber(expires)) {
-    throw new TypeError('expires should be of type "number"');
-  }
   if (expires < 1) {
     throw new Error('expires param cannot be less than 1 seconds');
   }
@@ -423,7 +327,7 @@ const presignSignatureV4 = async (
   const credential = getCredential(accessKey, region, requestDate);
   const hashedPayload = 'UNSIGNED-PAYLOAD';
 
-  const requestQuery = [];
+  const requestQuery: string[] = [];
   requestQuery.push(`X-Amz-Algorithm=${signV4Algorithm}`);
   requestQuery.push(`X-Amz-Credential=${uriEscape(credential)}`);
   requestQuery.push(`X-Amz-Date=${iso8601Date}`);
@@ -479,35 +383,19 @@ const presignSignatureV4 = async (
   const signatureHex = Array.from(new Uint8Array(signature))
     .map((byte) => byte.toString(16).padStart(2, '0'))
     .join('');
+
   const presignedUrl =
     request.protocol +
     '//' +
     request.headers.host +
     path +
     `&X-Amz-Signature=${signatureHex}`;
-  return presignedUrl;
 
-  // const stringToSign = await getStringToSign(
-  //   canonicalRequest,
-  //   requestDate,
-  //   region
-  // );
-  // const signingKey = await getSigningKey(requestDate, region, secretKey);
-  // const signature = Crypto.createHmac('sha256', signingKey)
-  //   .update(stringToSign)
-  //   .digest('hex')
-  //   .toLowerCase();
-  // const presignedUrl =
-  //   request.protocol +
-  //   '//' +
-  //   request.headers.host +
-  //   path +
-  //   `&X-Amz-Signature=${signature}`;
-  // return presignedUrl;
+  return presignedUrl;
 };
 
-const uriEscape = (string) => {
-  return string.split('').reduce((acc, elem) => {
+const uriEscape = (string: string): string => {
+  return string.split('').reduce((acc: string, elem: string) => {
     let buf = Buffer.from(elem);
     if (buf.length === 1) {
       // length 1 indicates that elem is not a unicode character.
@@ -535,12 +423,83 @@ const uriEscape = (string) => {
   }, '');
 };
 
+const AWS_S3_ENDPOINT = {
+  'us-east-1': 's3.amazonaws.com',
+  'us-east-2': 's3-us-east-2.amazonaws.com',
+  'us-west-1': 's3-us-west-1.amazonaws.com',
+  'us-west-2': 's3-us-west-2.amazonaws.com',
+  'ca-central-1': 's3.ca-central-1.amazonaws.com',
+  'eu-west-1': 's3-eu-west-1.amazonaws.com',
+  'eu-west-2': 's3-eu-west-2.amazonaws.com',
+  'eu-east-1': 's3-eu-east-1.amazonaws.com',
+  'sa-east-1': 's3-sa-east-1.amazonaws.com',
+  'eu-central-1': 's3-eu-central-1.amazonaws.com',
+  'ap-south-1': 's3-ap-south-1.amazonaws.com',
+  'ap-southeast-1': 's3-ap-southeast-1.amazonaws.com',
+  'ap-southeast-2': 's3-ap-southeast-2.amazonaws.com',
+  'ap-northeast-1': 's3-ap-northeast-1.amazonaws.com',
+  'cn-north-1': 's3.cn-north-1.amazonaws.com.cn',
+  'ap-east-1': 's3.ap-east-1.amazonaws.com',
+  // Add new endpoints here.
+};
+
+type Region = keyof typeof AWS_S3_ENDPOINT;
+
+const getS3Endpoint = (region: Region): string => {
+  if (typeof region !== 'string') {
+    throw new TypeError(`Invalid region: ${region}`);
+  }
+  const endpoint = AWS_S3_ENDPOINT[region];
+  if (endpoint) {
+    return endpoint;
+  }
+  return 's3.amazonaws.com';
+};
+
+interface MinioClientParams {
+  endPoint: string;
+  region: Region;
+  port?: number;
+  useSSL?: boolean;
+  accessKey?: string;
+  secretKey?: string;
+  sessionToken?: string;
+  pathStyle?: boolean;
+  partSize?: number;
+  s3AccelerateEndpoint?: string;
+}
+
+interface RequestOptions {
+  method: string;
+  region?: Region;
+  bucketName?: string;
+  objectName?: string;
+  headers: Record<string, string>;
+  query?: string;
+  port?: number;
+  protocol?: string;
+  path: string;
+  host?: string;
+  userAgent?: string;
+  reqOptions?: Record<string, any>;
+}
+
 export class MinioClient {
-  constructor(params) {
-    if (typeof params.secure !== 'undefined')
-      throw new Error(
-        '"secure" option deprecated, "useSSL" should be used instead'
-      );
+  private host: string;
+  private port: number;
+  private protocol: string;
+  private accessKey: string;
+  private secretKey: string;
+  private sessionToken: string;
+  private userAgent: string;
+  private pathStyle: boolean;
+  private anonymous: boolean;
+  private region: Region;
+  private partSize: number;
+  private s3AccelerateEndpoint: string | null;
+  private reqOptions: any;
+
+  constructor(params: MinioClientParams) {
     // Default values if not specified.
     if (typeof params.useSSL === 'undefined') params.useSSL = true;
     if (!params.port) params.port = 0;
@@ -551,22 +510,10 @@ export class MinioClient {
     if (!isValidPort(params.port)) {
       throw new Error(`Invalid port : ${params.port}`);
     }
-    if (!isBoolean(params.useSSL)) {
-      throw new Error(
-        `Invalid useSSL flag type : ${params.useSSL}, expected to be of type "boolean"`
-      );
-    }
 
-    // Validate region only if its set.
-    if (params.region) {
-      if (!isString(params.region)) {
-        throw new Error(`Invalid region : ${params.region}`);
-      }
-    }
-
-    var host = params.endPoint.toLowerCase();
-    var port = params.port;
-    var protocol = '';
+    const host = params.endPoint.toLowerCase();
+    let port = params.port;
+    let protocol = '';
 
     // Validate if configuration is not using SSL
     // for constructing relevant endpoints.
@@ -588,16 +535,17 @@ export class MinioClient {
     //
     //       MinIO (OS; ARCH) LIB/VER APP/VER
     //
-    var libraryComments = `(${process.platform}; ${process.arch})`;
-    var libraryAgent = `MinIO ${libraryComments} minio-js/7.0.33`;
+    const libraryComments = `(${process.platform}; ${process.arch})`;
+    const libraryAgent = `MinIO ${libraryComments} minio-js/7.0.33`;
     // User agent block ends.
 
     this.host = host;
+    this.region = params.region;
     this.port = port;
     this.protocol = protocol;
-    this.accessKey = params.accessKey;
-    this.secretKey = params.secretKey;
-    this.sessionToken = params.sessionToken;
+    this.accessKey = params.accessKey || '';
+    this.secretKey = params.secretKey || '';
+    this.sessionToken = params.sessionToken || '';
     this.userAgent = `${libraryAgent}`;
 
     // Default path style is true
@@ -607,19 +555,11 @@ export class MinioClient {
       this.pathStyle = params.pathStyle;
     }
 
-    if (!this.accessKey) this.accessKey = '';
-    if (!this.secretKey) this.secretKey = '';
     this.anonymous = !this.accessKey || !this.secretKey;
-
-    this.regionMap = {};
-    if (params.region) {
-      this.region = params.region;
-    }
 
     this.partSize = 64 * 1024 * 1024;
     if (params.partSize) {
       this.partSize = params.partSize;
-      this.overRidePartSize = true;
     }
     if (this.partSize < 5 * 1024 * 1024) {
       throw new Error(`Part size should be greater than 5MB`);
@@ -628,38 +568,58 @@ export class MinioClient {
       throw new Error(`Part size should be less than 5GB`);
     }
 
-    this.maximumPartSize = 5 * 1024 * 1024 * 1024;
-    this.maxObjectSize = 5 * 1024 * 1024 * 1024 * 1024;
     // SHA256 is enabled only for authenticated http requests. If the request is authenticated
     // and the connection is https we use x-amz-content-sha256=UNSIGNED-PAYLOAD
     // header for signature calculation.
-    this.enableSHA256 = !this.anonymous && !params.useSSL;
+    // this.enableSHA256 = !this.anonymous && !params.useSSL;
 
     this.s3AccelerateEndpoint = params.s3AccelerateEndpoint || null;
     this.reqOptions = {};
   }
 
-  getRequestOptions(opts) {
-    var method = opts.method;
-    var region = opts.region;
-    var bucketName = opts.bucketName;
-    var objectName = opts.objectName;
-    var headers = opts.headers;
-    var query = opts.query;
+  private getAccelerateEndPointIfSet(
+    bucketName: string,
+    objectName: string
+  ): string | false {
+    if (this.s3AccelerateEndpoint && bucketName && objectName) {
+      // http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
+      // Disable transfer acceleration for non-compliant bucket names.
+      if (bucketName.includes('.')) {
+        throw new Error(
+          `Transfer Acceleration is not supported for non compliant bucket:${bucketName}`
+        );
+      }
+      // If transfer acceleration is requested set new host.
+      // For more details about enabling transfer acceleration read here.
+      // http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
+      return this.s3AccelerateEndpoint;
+    }
+    return false;
+  }
 
-    var reqOptions = { method };
+  getRequestOptions(opts: {
+    method: string;
+    region: Region;
+    bucketName: string;
+    objectName: string;
+    query: string;
+    headers?: Record<string, any>;
+    pathStyle?: boolean;
+  }): RequestOptions {
+    const method = opts.method;
+    const region = opts.region;
+    const bucketName = opts.bucketName;
+    let objectName = opts.objectName;
+    const headers = opts.headers;
+    const query = opts.query;
+
+    const reqOptions: any = { method };
     reqOptions.headers = {};
 
     // Verify if virtual host supported.
-    var virtualHostStyle;
-    if (bucketName) {
-      virtualHostStyle = isVirtualHostStyle(
-        this.host,
-        this.protocol,
-        bucketName,
-        this.pathStyle
-      );
-    }
+    const virtualHostStyle: boolean | undefined = bucketName
+      ? isVirtualHostStyle(this.host, this.protocol, bucketName, this.pathStyle)
+      : undefined;
 
     if (this.port) reqOptions.port = this.port;
     reqOptions.protocol = this.protocol;
@@ -702,7 +662,9 @@ export class MinioClient {
     }
 
     if (query) reqOptions.path += `?${query}`;
-    reqOptions.headers.host = reqOptions.host;
+
+    reqOptions.headers.host = reqOptions.host ?? this.host;
+
     if (
       (reqOptions.protocol === 'http:' && reqOptions.port !== 80) ||
       (reqOptions.protocol === 'https:' && reqOptions.port !== 443)
@@ -717,57 +679,28 @@ export class MinioClient {
     // }
 
     // Use any request option specified in minioClient.setRequestOptions()
-    reqOptions = Object.assign({}, this.reqOptions, reqOptions);
+    Object.assign(reqOptions, this.reqOptions);
 
     return reqOptions;
   }
 
   async presignedUrl(
-    method,
-    bucketName,
-    objectName,
-    expires,
-    reqParams,
-    requestDate,
-    cb
-  ) {
+    method: string,
+    bucketName: string,
+    objectName: string,
+    expires: number = 604800, // 7 days in seconds
+    reqParams: Record<string, any> = {},
+    requestDate: Date = new Date()
+  ): Promise<string> {
     if (this.anonymous) {
       throw new Error(
-        'Presigned ' +
-          method +
-          ' url cannot be generated for anonymous requests'
+        `Presigned ${method} url cannot be generated for anonymous requests`
       );
     }
-    if (isFunction(requestDate)) {
-      cb = requestDate;
-      requestDate = new Date();
-    }
-    if (isFunction(reqParams)) {
-      cb = reqParams;
-      reqParams = {};
-      requestDate = new Date();
-    }
-    if (isFunction(expires)) {
-      cb = expires;
-      reqParams = {};
-      expires = 24 * 60 * 60 * 7; // 7 days in seconds
-      requestDate = new Date();
-    }
-    if (!isNumber(expires)) {
-      throw new TypeError('expires should be of type "number"');
-    }
-    // if (!isObject(reqParams)) {
-    //   throw new TypeError('reqParams should be of type "object"');
-    // }
-    // if (!isValidDate(requestDate)) {
-    //   throw new TypeError('requestDate should be of type "Date" and valid');
-    // }
-    // if (!isFunction(cb)) {
-    //   throw new TypeError('callback should be of type "function"');
-    // }
-    var query = querystring.stringify(reqParams);
 
-    var reqOptions = this.getRequestOptions({
+    const query = querystring.stringify(reqParams);
+
+    const reqOptions = this.getRequestOptions({
       method,
       region: this.region,
       bucketName,
@@ -793,27 +726,26 @@ export class MinioClient {
   }
 
   async presignedGetObject(
-    bucketName,
-    objectName,
-    expires,
-    respHeaders,
-    requestDate,
-    cb
-  ) {
+    bucketName: string,
+    objectName: string,
+    expires: number,
+    respHeaders?: Record<string, string>,
+    requestDate?: Date
+  ): Promise<string> {
     if (!isValidBucketName(bucketName)) {
-      throw new Error('Invalid bucket name: ' + bucketName);
+      throw new Error(`Invalid bucket name: ${bucketName}`);
     }
+
     if (!isValidObjectName(objectName)) {
       throw new Error(`Invalid object name: ${objectName}`);
     }
 
-    if (isFunction(respHeaders)) {
-      cb = respHeaders;
-      respHeaders = {};
+    if (typeof respHeaders === 'function') {
       requestDate = new Date();
+      respHeaders = {};
     }
 
-    var validRespHeaders = [
+    const validRespHeaders = [
       'response-content-type',
       'response-content-language',
       'response-expires',
@@ -825,31 +757,31 @@ export class MinioClient {
       if (
         respHeaders !== undefined &&
         respHeaders[header] !== undefined &&
-        !isString(respHeaders[header])
+        typeof respHeaders[header] !== 'string'
       ) {
         throw new TypeError(
           `response header ${header} should be of type "string"`
         );
       }
     });
+
     return await this.presignedUrl(
       'GET',
       bucketName,
       objectName,
       expires,
       respHeaders,
-      requestDate,
-      cb
+      requestDate
     );
   }
 }
 
 var minioClient = new MinioClient({
-  endPoint: process.env.S3_END_POINT,
+  endPoint: process.env.S3_END_POINT!,
   useSSL: true,
   accessKey: process.env.S3_ACCESS_KEY,
   secretKey: process.env.S3_SECRET_KEY,
-  region: 'us-east-1',
+  region: 'eu-east-1',
 });
 
 export const config = {
