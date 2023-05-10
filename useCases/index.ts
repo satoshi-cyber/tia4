@@ -6,6 +6,25 @@ import type { Sign } from './types';
 
 export const UseCases = {
   authenticateUser: {
+    mutate: [
+      'authenticateUser',
+      (
+        _: string,
+        { arg }: { arg: Parameters<AuthenticateUser['input']>[0] }
+      ) => {
+        return fetch('/api/tine/authenticateUser', {
+          method: 'POST',
+          body: JSON.stringify(arg),
+        })
+          .then((res) => res.json())
+          .then(
+            (data) =>
+              data as Awaited<
+                ReturnType<ReturnType<AuthenticateUser['input']>['run']>
+              >
+          );
+      },
+    ] as const,
     input: (input: Parameters<AuthenticateUser['input']>[0]) =>
       [
         ['authenticateUser', input],
@@ -40,6 +59,20 @@ export const UseCases = {
       ] as const,
   },
   hello: {
+    mutate: [
+      'hello',
+      (_: string, { arg }: { arg: Parameters<Hello['input']>[0] }) => {
+        return fetch('/api/tine/hello', {
+          method: 'POST',
+          body: JSON.stringify(arg),
+        })
+          .then((res) => res.json())
+          .then(
+            (data) =>
+              data as Awaited<ReturnType<ReturnType<Hello['input']>['run']>>
+          );
+      },
+    ] as const,
     input: (input: Parameters<Hello['input']>[0]) =>
       [
         ['hello', input],
@@ -70,6 +103,20 @@ export const UseCases = {
       ] as const,
   },
   job: {
+    mutate: [
+      'job',
+      (_: string, { arg }: { arg: Parameters<Job['input']>[0] }) => {
+        return fetch('/api/tine/job', {
+          method: 'POST',
+          body: JSON.stringify(arg),
+        })
+          .then((res) => res.json())
+          .then(
+            (data) =>
+              data as Awaited<ReturnType<ReturnType<Job['input']>['run']>>
+          );
+      },
+    ] as const,
     input: (input: Parameters<Job['input']>[0]) =>
       [
         ['job', input],

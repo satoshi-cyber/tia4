@@ -32,6 +32,21 @@ export const UseCases = {
   {{#if hasInput}}
    '{{useCase}}': 
       { 
+        mutate: [
+          '{{useCase}}',
+          (
+            _: string,
+            { arg }: { arg: Parameters<{{useCaseType}}['input']>[0] }
+          ) => {
+            return fetch('/api/tine/{{useCase}}', {
+              method: 'POST',
+              body: JSON.stringify(arg),
+            }).then((res) => res.json()).then(
+              (data) =>
+                data as Awaited<ReturnType<ReturnType<{{useCaseType}}['input']>['run']>>,
+            )
+          }
+        ] as const,
         input: (input: Parameters<{{useCaseType}}['input']>[0]) => 
           [
             ['{{useCase}}', input], () => fetch('/api/tine/{{useCase}}', 

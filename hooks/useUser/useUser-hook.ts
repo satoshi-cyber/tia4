@@ -1,7 +1,8 @@
 import { Magic } from 'magic-sdk';
+import useSWRMutation from 'swr/mutation';
+import { UseCases } from '@/useCases';
 import { useCallback, useContext, useMemo } from 'react';
 import { OAuthExtension, OAuthProvider } from '@magic-ext/oauth';
-import { useAuthenticateUserMutation } from '@/graphql';
 import jwtDecode from 'jwt-decode';
 
 import { JWTClaims } from './useUser-types';
@@ -19,13 +20,13 @@ const magic =
 export const useUser = () => {
   const { token, setToken } = useContext(AuthContext);
 
-  const [{ fetching }, authenticateUser] = useAuthenticateUserMutation();
+  const { trigger: authenticateUser, isMutating: fetching } = useSWRMutation(
+    ...UseCases.authenticateUser.mutate
+  );
 
   const router = useRouter();
 
   const from = router.query.from;
-
-  magic?.user.getIdToken().then(console.log);
 
   const login = useCallback(
     async (email: string) => {
@@ -35,9 +36,9 @@ export const useUser = () => {
         return;
       }
 
-      const res = await authenticateUser({ input: { did } });
+      const res = await authenticateUser({ did });
 
-      setToken(res.data?.authenticateUser.token);
+      setToken(res?.token);
     },
     [setToken]
   );
@@ -78,10 +79,15 @@ export const useUser = () => {
     const provider = magicRes?.oauth.provider;
 
     const res = await authenticateUser({
-      input: { did, firstName, lastName, accessToken, fk, provider },
+      did,
+      firstName,
+      lastName,
+      accessToken,
+      fk,
+      provider,
     });
 
-    setToken(res.data?.authenticateUser.token);
+    setToken(res?.token);
   }, []);
 
   const authenticateUserFromRedirect = useCallback(async () => {
@@ -91,9 +97,9 @@ export const useUser = () => {
   }, []);
 
   const authenticateUserFromDid = useCallback(async (did: string) => {
-    const res = await authenticateUser({ input: { did } });
+    const res = await authenticateUser({ did });
 
-    setToken(res.data?.authenticateUser.token);
+    setToken(res?.token);
   }, []);
 
   const refreshToken = useCallback(async () => {
@@ -103,9 +109,9 @@ export const useUser = () => {
       return;
     }
 
-    const res = await authenticateUser({ input: { did } });
+    const res = await authenticateUser({ did });
 
-    setToken(res.data?.authenticateUser.token);
+    setToken(res?.token);
   }, [setToken]);
 
   const logout = useCallback(() => {

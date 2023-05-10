@@ -73,6 +73,7 @@
     "reactflow": "^11.2.0",
     "styled-components": "^5.3.5",
     "swiper": "^8.3.2",
+    "swr": "^2.1.5",
     "tailwindcss": "^0.0.0-insiders.40c0cbe",
     "tailwindcss-scoped-groups": "^2.0.0",
     "tinejs": "^0.0.16",
