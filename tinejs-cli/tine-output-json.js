@@ -6,6 +6,12 @@ const outputFile = './useCases/useCases.test.ts';
 const template = `
 import fs from 'fs'
 
+jest.mock('query-string' , () => ({
+  //mock whatever you use from query-string
+  parse :jest.fn(),
+  stringify: jest.fn()
+}));
+
 import { output } from './.types'
 
 describe('Tine', () => {

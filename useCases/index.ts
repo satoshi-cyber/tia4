@@ -2,6 +2,7 @@ import type { AuthenticateUser } from './types';
 import type { Hello } from './types';
 import type { Job } from './types';
 import type { Jobs } from './types';
+import type { Sign } from './types';
 
 export const UseCases = {
   authenticateUser: {
@@ -104,5 +105,12 @@ export const UseCases = {
       fetch('/api/tine/jobs', { method: 'POST' })
         .then((res) => res.json())
         .then((data) => data as Awaited<ReturnType<Jobs['run']>>),
+  ] as const,
+  sign: [
+    'sign',
+    () =>
+      fetch('/api/tine/sign', { method: 'POST' })
+        .then((res) => res.json())
+        .then((data) => data as Awaited<ReturnType<Sign['run']>>),
   ] as const,
 };

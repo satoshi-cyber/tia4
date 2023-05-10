@@ -12,10 +12,14 @@ const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   moduleNameMapper: {
     "^@/actions/(.*)$": "<rootDir>/../actions/$1",
-  }
+  },
+  transformIgnorePatterns: [
+		'node_modules/(?!(query-string|decode-uri-component|split-on-first|filter-obj)/)',
+	],
+	babelConfig: {
+		plugins: ['@babel/plugin-proposal-private-methods'],
+	},
 };
-
-
 
 module.exports = createJestConfig(customJestConfig);
 `;
