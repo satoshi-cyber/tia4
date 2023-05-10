@@ -253,6 +253,20 @@ export class MinioClient {
     }
   }
 
+  async presignedPutObject(
+    bucketName: string,
+    objectName: string,
+    expires: number
+  ) {
+    if (!isValidBucketName(bucketName)) {
+      throw new Error('Invalid bucket name: ${bucketName}');
+    }
+    if (!isValidObjectName(objectName)) {
+      throw new Error('Invalid object name: ${objectName}');
+    }
+    return await this.presignedUrl('PUT', bucketName, objectName, expires);
+  }
+
   async presignedGetObject(
     bucketName: string,
     objectName: string,
