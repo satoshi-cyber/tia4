@@ -10,29 +10,33 @@ const attachOAuthPicture = tineAction(
       return user;
     }
 
-    const avatar = await getLargeAvatar({
-      provider,
-      accessToken,
-      fk,
-    });
+    try {
+      const avatar = await getLargeAvatar({
+        provider,
+        accessToken,
+        fk,
+      });
 
-    if (!avatar) {
-      return user;
+      if (!avatar) {
+        return user;
+      }
+
+      const [imageData, uploadUrl] = await Promise.all([
+        fetch(avatar).then((res) => res.arrayBuffer()),
+        presignedPut({
+          bucketName: 'user-avatars',
+          objectName: `${user.id}.jpg`,
+          expires: 3600,
+        }).run({ ctx }),
+      ]);
+
+      await fetch(uploadUrl, {
+        method: 'PUT',
+        body: imageData,
+      });
+    } catch (e) {
+      console.log(e);
     }
-
-    const [imageData, uploadUrl] = await Promise.all([
-      fetch(avatar).then((res) => res.arrayBuffer()),
-      presignedPut({
-        bucketName: 'user-avatars',
-        objectName: `${user.id}.jpg`,
-        expires: 3600,
-      }).run({ ctx }),
-    ]);
-
-    await fetch(uploadUrl, {
-      method: 'PUT',
-      body: imageData,
-    });
 
     return user;
   },

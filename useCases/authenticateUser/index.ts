@@ -43,6 +43,9 @@ const createUser = prisma.user.create({
 
 const userWithOAuthData = attachOauthPicture({
   user: tineVar(createUser),
+  fk: tineVar(input, 'fk'),
+  accessToken: tineVar(input, 'accessToken'),
+  provider: tineVar(input, 'provider'),
 });
 
 const createUserToken = signToken(tineVar(userWithOAuthData));
