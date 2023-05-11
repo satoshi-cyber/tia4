@@ -8,9 +8,10 @@ const signToken = tineAction(
   async (
     user: Pick<User, 'id' | 'role' | 'onboarded'> & {
       companies: CompanyMember[];
-    }
-  ) => ({
-    token: await new SignJWT({
+    },
+    { ctx }
+  ) => {
+    const token = await new SignJWT({
       userId: user.id,
       userRole: user.role,
       onboarded: user.onboarded,
@@ -22,8 +23,17 @@ const signToken = tineAction(
       .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
       .setIssuedAt()
       .setExpirationTime('1d')
-      .sign(new TextEncoder().encode(env.JWT_SECRET)),
-  }),
+      .sign(new TextEncoder().encode(env.JWT_SECRET));
+
+    ctx.get('cookies').set({
+      name: 'auth',
+      value: token,
+      httpOnly: true,
+      path: '/',
+    });
+
+    return { token };
+  },
   {
     action: 'auth.signToken',
   }
