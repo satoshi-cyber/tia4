@@ -11,7 +11,6 @@ const useCases = useCasesOutput.map(([useCase, hasInput]) => ({
 }));
 
 const template = `
-import { RequestCookies } from '@edge-runtime/cookies'
 import {{useCase}} from '@/useCases/{{useCase}}';
 import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs'
@@ -22,19 +21,17 @@ export const config = {
 
 const handler = async (req: NextRequest) => {
   try {
-    const cookies = new RequestCookies(req.headers)
-
-    const ctx = tineCtx({ headers: req.headers, cookies })
+    const ctx = tineCtx({ headers: req.headers, cookies: req.cookies })
 
     {{#if hasInput}}
     const json = await req.json();
 
-    const res = await {{useCase}}.rawInput(json).run({ ctx });
+    const data = await {{useCase}}.rawInput(json).run({ ctx });
     {{else}}
-    const res = await {{useCase}}.run({ ctx });
+    const data = await {{useCase}}.run({ ctx });
     {{/if}}
 
-    return NextResponse.json(res);
+    return NextResponse.json(data);
   } catch (e: any) {
     return NextResponse.json({ error: e.message });
   }

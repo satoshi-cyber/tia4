@@ -1,4 +1,3 @@
-import { RequestCookies } from '@edge-runtime/cookies';
 import sign from '@/useCases/sign';
 import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs';
@@ -9,13 +8,11 @@ export const config = {
 
 const handler = async (req: NextRequest) => {
   try {
-    const cookies = new RequestCookies(req.headers);
+    const ctx = tineCtx({ headers: req.headers, cookies: req.cookies });
 
-    const ctx = tineCtx({ headers: req.headers, cookies });
+    const data = await sign.run({ ctx });
 
-    const res = await sign.run({ ctx });
-
-    return NextResponse.json(res);
+    return NextResponse.json(data);
   } catch (e: any) {
     return NextResponse.json({ error: e.message });
   }
