@@ -2,6 +2,7 @@ import type { AuthenticateUser } from './types';
 import type { Hello } from './types';
 import type { Job } from './types';
 import type { Jobs } from './types';
+import type { Profile } from './types';
 import type { Sign } from './types';
 
 export const UseCases = {
@@ -208,6 +209,13 @@ export const UseCases = {
             ),
       ] as const,
   },
+  profile: [
+    'profile',
+    () =>
+      fetch('/api/tine/profile', { method: 'POST' })
+        .then((res) => res.json())
+        .then((data) => data as Awaited<ReturnType<Profile['run']>>),
+  ] as const,
   sign: [
     'sign',
     () =>

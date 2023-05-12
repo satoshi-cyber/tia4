@@ -5,7 +5,7 @@ import { jwtVerify } from 'jose';
 import { tineAction } from 'tinejs';
 
 const getClaims = tineAction(
-  async ({ companyId }: { companyId?: string }, { ctx }) => {
+  async ({ companyId }: { companyId?: string } = {}, { ctx }) => {
     try {
       const token = ctx.get('cookies').get(TOKEN_COOKIE_KEY)?.value;
 
