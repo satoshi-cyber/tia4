@@ -1,3 +1,4 @@
+import { StatusError } from '@/types';
 import job from '@/useCases/job';
 import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs';
@@ -16,6 +17,10 @@ const handler = async (req: NextRequest) => {
 
     return NextResponse.json(data);
   } catch (e: any) {
+    if (e instanceof StatusError) {
+      return NextResponse.json({ error: e.message }, { status: e.status });
+    }
+
     return NextResponse.json({ error: e.message });
   }
 };

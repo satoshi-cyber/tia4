@@ -146,13 +146,50 @@ export const UseCases = {
             ),
       ] as const,
   },
-  jobs: [
-    'jobs',
-    () =>
-      fetch('/api/tine/jobs', { method: 'POST' })
-        .then((res) => res.json())
-        .then((data) => data as Awaited<ReturnType<Jobs['run']>>),
-  ] as const,
+  jobs: {
+    mutate: [
+      'jobs',
+      (_: string, { arg }: { arg: Parameters<Jobs['input']>[0] }) => {
+        return fetch('/api/tine/jobs', {
+          method: 'POST',
+          body: JSON.stringify(arg),
+        })
+          .then((res) => res.json())
+          .then(
+            (data) =>
+              data as Awaited<ReturnType<ReturnType<Jobs['input']>['run']>>
+          );
+      },
+    ] as const,
+    input: (input: Parameters<Jobs['input']>[0]) =>
+      [
+        ['jobs', input],
+        () =>
+          fetch('/api/tine/jobs', {
+            method: 'POST',
+            body: JSON.stringify(input),
+          })
+            .then((res) => res.json())
+            .then(
+              (data) =>
+                data as Awaited<ReturnType<ReturnType<Jobs['input']>['run']>>
+            ),
+      ] as const,
+    rawInput: (input: unknown) =>
+      [
+        ['jobs', input],
+        () =>
+          fetch('/api/tine/jobs', {
+            method: 'POST',
+            body: JSON.stringify(input),
+          })
+            .then((res) => res.json())
+            .then(
+              (data) =>
+                data as Awaited<ReturnType<ReturnType<Jobs['input']>['run']>>
+            ),
+      ] as const,
+  },
   sign: [
     'sign',
     () =>

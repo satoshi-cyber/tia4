@@ -11,6 +11,7 @@ const useCases = useCasesOutput.map(([useCase, hasInput]) => ({
 }));
 
 const template = `
+import { StatusError } from '@/types';
 import {{useCase}} from '@/useCases/{{useCase}}';
 import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs'
@@ -33,6 +34,10 @@ const handler = async (req: NextRequest) => {
 
     return NextResponse.json(data);
   } catch (e: any) {
+    if (e instanceof StatusError) {
+      return NextResponse.json({ error: e.message }, { status: e.status });
+    }
+
     return NextResponse.json({ error: e.message });
   }
 };

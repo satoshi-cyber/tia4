@@ -1,11 +1,10 @@
 import { Magic } from 'magic-sdk';
 import useSWRMutation from 'swr/mutation';
 import { UseCases } from '@/useCases';
+import { JWTClaims } from '@/types';
 import { useCallback, useContext, useMemo } from 'react';
 import { OAuthExtension, OAuthProvider } from '@magic-ext/oauth';
 import jwtDecode from 'jwt-decode';
-
-import { JWTClaims } from './useUser-types';
 
 import { AuthContext } from '../../components/AuthProvider';
 import { useRouter } from 'next/router';

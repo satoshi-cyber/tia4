@@ -1,6 +1,6 @@
 export type JWTClaims = {
-  iat: number
-  exp: number
+  iat: number;
+  exp: number;
   userId: string;
   userRole: string;
   onboarded?: boolean;
@@ -8,4 +8,4 @@ export type JWTClaims = {
     companyId: string;
     role: string;
   }>;
-}
+};

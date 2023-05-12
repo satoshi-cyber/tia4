@@ -1,3 +1,4 @@
+import { StatusError } from '@/types';
 import jobs from '@/useCases/jobs';
 import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs';
@@ -10,10 +11,16 @@ const handler = async (req: NextRequest) => {
   try {
     const ctx = tineCtx({ headers: req.headers, cookies: req.cookies });
 
-    const data = await jobs.run({ ctx });
+    const json = await req.json();
+
+    const data = await jobs.rawInput(json).run({ ctx });
 
     return NextResponse.json(data);
   } catch (e: any) {
+    if (e instanceof StatusError) {
+      return NextResponse.json({ error: e.message }, { status: e.status });
+    }
+
     return NextResponse.json({ error: e.message });
   }
 };
