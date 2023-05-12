@@ -25,7 +25,7 @@ const CreateAJob: React.FC = () => {
   const {
     handleSubmit,
     form,
-    fetching,
+    isLoading,
     editJob,
     handleDeleteJob,
     description,
@@ -34,7 +34,7 @@ const CreateAJob: React.FC = () => {
 
   return (
     <Layout.Default>
-      <LoadingProvider isLoading={fetching}>
+      <LoadingProvider isLoading={isLoading}>
         <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
           <Header editJob={editJob} handleDeleteJob={handleDeleteJob} />
           {!editJob && <PostWithAI setDescription={setDescription} />}

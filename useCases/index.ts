@@ -25,6 +25,7 @@ export const UseCases = {
           );
       },
     ] as const,
+    getKey: () => (key: any) => key[0] === 'authenticateUser',
     input: (
       input: Parameters<AuthenticateUser['input']>[0] | '' | undefined | false
     ) =>
@@ -77,6 +78,7 @@ export const UseCases = {
           );
       },
     ] as const,
+    getKey: () => (key: any) => key[0] === 'hello',
     input: (input: Parameters<Hello['input']>[0] | '' | undefined | false) =>
       [
         input ? ['hello', input] : undefined,
@@ -125,6 +127,7 @@ export const UseCases = {
           );
       },
     ] as const,
+    getKey: () => (key: any) => key[0] === 'job',
     input: (input: Parameters<Job['input']>[0] | '' | undefined | false) =>
       [
         input ? ['job', input] : undefined,
@@ -171,6 +174,7 @@ export const UseCases = {
           );
       },
     ] as const,
+    getKey: () => (key: any) => key[0] === 'jobs',
     input: (input: Parameters<Jobs['input']>[0] | '' | undefined | false) =>
       [
         input ? ['jobs', input] : undefined,

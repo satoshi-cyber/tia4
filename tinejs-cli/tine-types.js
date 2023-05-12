@@ -47,6 +47,7 @@ export const UseCases = {
             )
           }
         ] as const,
+        getKey: () => (key: any) => key[0] === '{{useCase}}',
         input: (input: Parameters<{{useCaseType}}['input']>[0] | '' | undefined | false) => 
           [
             input ? ['{{useCase}}', input] : undefined, input ? () => fetch('/api/tine/{{useCase}}', 

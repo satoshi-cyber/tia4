@@ -1,5 +1,10 @@
-import { formatISO } from 'date-fns'
-import { Job } from "@/graphql";
+import { Job } from '@/useCases/types';
 
-export const formatDefaultValues = ({ __typename, company, ...job }: Job) =>
-  ({ ...job, deadline: formatISO(new Date(job.deadline), { representation: 'date' }), questions: job.questions.map(({ __typename, ...question }) => question) })
+export const formatDefaultValues = ({
+  createdAt,
+  updatedAt,
+  companyId,
+  ...job
+}: Awaited<ReturnType<ReturnType<Job['input']>['run']>>) => ({
+  ...job,
+});
