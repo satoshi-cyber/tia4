@@ -43,7 +43,7 @@ const withAuth = <P extends Object>(WrappedComponent: NextPage<P>) => {
     const url = `${URLS.LOGIN}?from=${from}`;
 
     if (!cookies || !cookies.get(TOKEN_COOKIE_KEY)) {
-      if (ctx.res) {
+      if (ctx.res && ctx.res.writeHead) {
         ctx.res.writeHead(302, {
           Location: url,
         });
