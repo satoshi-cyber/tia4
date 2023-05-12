@@ -12,6 +12,13 @@ const job = prisma.job.findUnique({
     companyId: tineVar(claims, 'companyId'),
     id: tineVar(input, 'id'),
   },
+  select: {
+    id: true,
+    title: true,
+    deadline: true,
+    description: true,
+    questions: true,
+  },
 });
 
 export default job.withInput(input);

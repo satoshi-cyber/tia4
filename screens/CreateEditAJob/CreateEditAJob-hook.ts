@@ -19,7 +19,6 @@ import {
   DEFAULT_QUESTION_TIME,
   PUSH_DELAY,
 } from './CreateEditAJob-constants';
-import { formatDefaultValues } from './CreateEditAJob-functions';
 import useLoadData from '@/hooks/useLoadData';
 import { UseCases } from '@/useCases';
 import { mutate } from 'swr';
@@ -48,7 +47,7 @@ export const useCreateUpdateAJob = () => {
     reValidateMode: 'onBlur',
     resolver: yupResolver(createAJobSchema),
     defaultValues: data
-      ? formatDefaultValues(data)
+      ? data
       : {
           questions: [
             { id: uuidv4(), time: DEFAULT_QUESTION_TIME },
@@ -61,7 +60,7 @@ export const useCreateUpdateAJob = () => {
 
   useEffect(() => {
     if (!isLoading && data) {
-      reset(formatDefaultValues(data));
+      reset(data);
     }
   }, [isLoading, reset]);
 
