@@ -1,11 +1,13 @@
 import React from 'react';
 import get from 'lodash.get';
 import { useFormContext, useFormState } from 'react-hook-form';
-import { SkeletonLoader, Text } from '@/components';
+
 import clsx from 'clsx';
 import { Wysimark, useEditor } from '@wysimark/react';
 
 import { MardownFieldProps } from './MardownField-types';
+import SkeletonLoader from '@/components/SkeletonLoader';
+import Text from '@/components/Text';
 
 const MarkdownField: React.FC<MardownFieldProps> = ({
   name,

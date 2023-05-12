@@ -1,4 +1,4 @@
-import { Title } from '@/components';
+import Title from '@/components/Title';
 import SettingsMenu from '@/components/SettingsMenu';
 
 import { useHeader } from './Header-hook';

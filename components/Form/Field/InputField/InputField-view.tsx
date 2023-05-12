@@ -1,7 +1,7 @@
 import React from 'react';
 import get from 'lodash.get';
 import { useFormContext, useFormState } from 'react-hook-form';
-import { Text } from '@/components';
+import Text from '@/components/Text';
 import clsx from 'clsx';
 
 import { InputFieldProps } from './InputField-types';

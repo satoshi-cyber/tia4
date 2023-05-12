@@ -1,12 +1,12 @@
-import Loader from '@/components/Loader'
-import { useFormState } from 'react-hook-form'
+import Loader from '@/components/Loader';
+import { useFormState } from 'react-hook-form';
 
 const FormLoader: React.FC = () => {
-  const { isSubmitting } = useFormState()
+  const { isSubmitting } = useFormState();
 
-  if (!isSubmitting) return null
+  if (!isSubmitting) return null;
 
-  return <Loader />
-}
+  return <Loader />;
+};
 
-export default FormLoader
+export default FormLoader;

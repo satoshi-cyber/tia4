@@ -1,8 +1,9 @@
 import { useForm, useFormContext } from 'react-hook-form';
-import { Form, Field, PrimaryButton, Spinner } from '@/components';
-
+import { DOMAIN } from '@/config';
+import { Field, Form } from '@/components/Form';
+import PrimaryButton from '@/components/PrimaryButton';
+import Spinner from '@/components/Spinner';
 import { useEffect, useState } from 'react';
-
 import {
   motion,
   useScroll,
@@ -12,7 +13,6 @@ import {
 import clsx from 'clsx';
 import { useMediaQuery } from 'react-responsive';
 import useAi from '@/hooks/useAi';
-import { DOMAIN } from '@/config';
 
 const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
   setDescription,

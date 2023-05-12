@@ -1,1 +1,1 @@
-export { default } from './MardownField-view'
+export { default } from './MardownField-view';

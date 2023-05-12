@@ -1,5 +1,8 @@
-import { withAuth } from '@/hocs'
+import { withAuth } from '@/hocs';
+import dynamic from 'next/dynamic';
 
-import CreateEditAJob from "../../../screens/CreateEditAJob";
+export default withAuth(
+  dynamic(() => import('../../../screens/CreateEditAJob'), { ssr: false })
+);
 
-export default withAuth(CreateEditAJob);
+export const runtime = 'experimental-edge';

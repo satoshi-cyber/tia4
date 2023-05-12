@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '@/components';
+import Text from '@/components/Text';
 import SkeletonLoader from '@/components/SkeletonLoader';
 import TextareaAutosize from 'react-textarea-autosize';
 

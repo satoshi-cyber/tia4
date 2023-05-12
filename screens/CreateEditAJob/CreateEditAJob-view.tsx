@@ -1,12 +1,4 @@
 import React from 'react';
-import {
-  Form,
-  Layout,
-  FormIcon,
-  Field,
-  LoadingProvider,
-  SubmitButton,
-} from '@/components';
 
 import PostWithAI from './components/PostWithAI';
 import { Questions, Header } from './components';
@@ -20,6 +12,10 @@ import {
   DESCRIPTION_FIELD_PROPS,
 } from './CreateEditAJob-constants';
 import dynamic from 'next/dynamic';
+import Layout from '@/components/Layout';
+import LoadingProvider from '@/components/LoadingProvider';
+import { Field, Form, FormIcon } from '@/components/Form';
+import SubmitButton from '@/components/SubmitButton';
 
 const CreateAJob: React.FC = () => {
   const {

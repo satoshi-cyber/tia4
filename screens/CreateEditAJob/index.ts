@@ -1,1 +1,1 @@
-export { default } from "./CreateEditAJob-view";
+export { default } from './CreateEditAJob-view';

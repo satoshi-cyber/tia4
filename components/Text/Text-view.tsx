@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import { TextProps } from './Text-types'
+import { TextProps } from './Text-types';
 
-import SkeletonLoader from '../SkeletonLoader'
+import SkeletonLoader from '../SkeletonLoader';
 
 const Text: React.FC<TextProps> = ({
   as: Component = 'p',
@@ -14,6 +14,6 @@ const Text: React.FC<TextProps> = ({
   <Component {...restProps}>
     <SkeletonLoader isLoading={isLoading} {...skeletonProps} after={text} />
   </Component>
-)
+);
 
-export default Text
+export default Text;

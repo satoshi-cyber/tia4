@@ -1,5 +1,3 @@
-import { Icon, Field, SecondaryButton, Text } from '@/components';
-
 import { useQuestions } from './Questions-hook';
 import {
   CLASS_NAMES,
@@ -9,6 +7,10 @@ import {
   TIME_FIELD_PROPS,
   ADD_QUESTION_BUTTON_PROPS,
 } from './Questions-constants';
+import Icon from '@/components/Icon';
+import Text from '@/components/Text';
+import { Field } from '@/components/Form';
+import SecondaryButton from '@/components/SecondaryButton';
 
 const Questions: React.FC = () => {
   const { fields, handleAppend, remove } = useQuestions();

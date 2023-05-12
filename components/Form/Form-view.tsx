@@ -1,8 +1,8 @@
-import React from 'react'
-import { FormProvider } from 'react-hook-form'
+import React from 'react';
+import { FormProvider } from 'react-hook-form';
 
-import { FormProps } from './Form-types'
-import FormLoader from './FormLoader'
+import { FormProps } from './Form-types';
+import FormLoader from './FormLoader';
 
 export const Form: React.FC<FormProps> = ({
   form,
@@ -11,7 +11,7 @@ export const Form: React.FC<FormProps> = ({
   isLoading,
   ...restProps
 }) => {
-  const { handleSubmit } = form
+  const { handleSubmit } = form;
 
   return (
     <FormProvider {...form}>
@@ -20,5 +20,5 @@ export const Form: React.FC<FormProps> = ({
       </form>
       <FormLoader />
     </FormProvider>
-  )
-}
+  );
+};
