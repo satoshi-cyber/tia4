@@ -1,6 +1,5 @@
 import { z } from 'zod';
-import { tineInput, tineVar } from 'tinejs';
-import payload from 'tinejs.payload';
+import { tineInput, tineVar, payload } from 'tinejs';
 
 const input = tineInput(z.object({ name: z.string().nullable().optional() }));
 

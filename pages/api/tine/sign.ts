@@ -11,7 +11,7 @@ const handler = async (req: NextRequest) => {
   try {
     const ctx = tineCtx({ headers: req.headers, cookies: req.cookies });
 
-    const data = await sign.run({ ctx });
+    const data = await sign.run(ctx);
 
     return NextResponse.json(data);
   } catch (e: any) {

@@ -27,7 +27,7 @@ const attachOAuthPicture = tineAction(
           bucketName: 'user-avatars',
           objectName: `${user.id}.jpg`,
           expires: 3600,
-        }).run({ ctx }),
+        }).run(ctx),
       ]);
 
       await fetch(uploadUrl, {

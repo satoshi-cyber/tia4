@@ -1,9 +1,8 @@
 import attachOauthPicture from '@/actions/auth/attachOAuthPicture';
 import signToken from '@/actions/auth/signToken';
-import condition from '@/actions/condition';
 import magic from '@/actions/magic';
 import prisma from '@/actions/prisma';
-import { tineInput, tineVar } from 'tinejs';
+import { condition, tineInput, tineVar } from 'tinejs';
 import { z } from 'zod';
 
 const input = tineInput(

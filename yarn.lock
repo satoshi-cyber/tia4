@@ -9832,20 +9832,15 @@ timed-out@^4.0.1:
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
   integrity sha512-G7r3AhovYtr5YKOWQkta8RKAPb+J9IsO4uVmzjl8AZwfhs8UcUwTiD6gcJYSgOtzyjvQKrKYn41syHbUWMkafA==
 
-tinejs.payload@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/tinejs.payload/-/tinejs.payload-0.0.5.tgz#f4efef53b072965a13529f24751f65bc25b1cb51"
-  integrity sha512-2Y0gMrYdKaNS8K29t6XQ+S+3eHqg+F4zsSqbNvmGyaiEtZw4BaaJcqJviXIN2o4TQZ1p8b2oZkVyh1zObwCleg==
+tinejs.prisma@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.8.tgz#a41ab367d200361040dd5026acc9795824ff3ea1"
+  integrity sha512-v+7nKQJQyDySjXGg4XxwpyoVkRrdp/AOaRvcMQojt1J/4k8Z0Hq2djNmOP0q7EJVba5nMJJQVxIZqxn0VI9BMg==
 
-tinejs.prisma@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.7.tgz#54163b04ff67517ff1645a8ffc1d0cfcbe1b264a"
-  integrity sha512-oF5msgdKws1dBE5t5Y6neQhN+IZXRtY0KYpNAEfXoQMQa1oCT/EhsSMzVLc54Noe69fVJ1X03jbpMzoNnkLQsw==
-
-tinejs@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.17.tgz#ba5d22655426f14b1088aa4aa8ad2a8d4eb18ae1"
-  integrity sha512-rRm2xYL7lFJZdu52I5ypJTIGtWe6UDMEx6bPK1sUHvwZy2PJjBnh+WxoEUt8SE1yJiO2BxQ9ktz5O0KEDN5p3w==
+tinejs@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.18.tgz#0e604ace67180c5ceb2ebcbd24e7f0f10df3b788"
+  integrity sha512-4uriDxBjFzsj92Q49hEbbf3VyBnDIFahNvvE2iCev2Prty27CemS9P+O/onzAcY96FxqlMOIYJlNAiumlPjvFg==
   dependencies:
     uuid "^9.0.0"
     zod "^3.21.4"

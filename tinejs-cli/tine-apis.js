@@ -27,9 +27,9 @@ const handler = async (req: NextRequest) => {
     {{#if hasInput}}
     const json = await req.json();
 
-    const data = await {{useCase}}.rawInput(json).run({ ctx });
+    const data = await {{useCase}}.rawInput(json).run(ctx);
     {{else}}
-    const data = await {{useCase}}.run({ ctx });
+    const data = await {{useCase}}.run(ctx);
     {{/if}}
 
     return NextResponse.json(data);

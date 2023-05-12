@@ -13,7 +13,7 @@ const handler = async (req: NextRequest) => {
 
     const json = await req.json();
 
-    const data = await job.rawInput(json).run({ ctx });
+    const data = await job.rawInput(json).run(ctx);
 
     return NextResponse.json(data);
   } catch (e: any) {
