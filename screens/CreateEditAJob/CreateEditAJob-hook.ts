@@ -22,6 +22,7 @@ import {
 import useLoadData from '@/hooks/useLoadData';
 import { UseCases } from '@/useCases';
 import { mutate } from 'swr';
+import { formatValue } from './CreateEditAJob-functions';
 
 export const useCreateUpdateAJob = () => {
   const router = useRouter();
@@ -47,7 +48,7 @@ export const useCreateUpdateAJob = () => {
     reValidateMode: 'onBlur',
     resolver: yupResolver(createAJobSchema),
     defaultValues: data
-      ? data
+      ? formatValue(data)
       : {
           questions: [
             { id: uuidv4(), time: DEFAULT_QUESTION_TIME },
@@ -60,7 +61,7 @@ export const useCreateUpdateAJob = () => {
 
   useEffect(() => {
     if (!isLoading && data) {
-      reset(data);
+      reset(formatValue(data));
     }
   }, [isLoading, reset]);
 
