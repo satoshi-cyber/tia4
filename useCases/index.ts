@@ -25,21 +25,25 @@ export const UseCases = {
           );
       },
     ] as const,
-    input: (input: Parameters<AuthenticateUser['input']>[0]) =>
+    input: (
+      input: Parameters<AuthenticateUser['input']>[0] | '' | undefined | false
+    ) =>
       [
-        ['authenticateUser', input],
-        () =>
-          fetch('/api/tine/authenticateUser', {
-            method: 'POST',
-            body: JSON.stringify(input),
-          })
-            .then((res) => res.json())
-            .then(
-              (data) =>
-                data as Awaited<
-                  ReturnType<ReturnType<AuthenticateUser['input']>['run']>
-                >
-            ),
+        input ? ['authenticateUser', input] : undefined,
+        input
+          ? () =>
+              fetch('/api/tine/authenticateUser', {
+                method: 'POST',
+                body: JSON.stringify(input),
+              })
+                .then((res) => res.json())
+                .then(
+                  (data) =>
+                    data as Awaited<
+                      ReturnType<ReturnType<AuthenticateUser['input']>['run']>
+                    >
+                )
+          : () => undefined,
       ] as const,
     rawInput: (input: unknown) =>
       [
@@ -73,19 +77,23 @@ export const UseCases = {
           );
       },
     ] as const,
-    input: (input: Parameters<Hello['input']>[0]) =>
+    input: (input: Parameters<Hello['input']>[0] | '' | undefined | false) =>
       [
-        ['hello', input],
-        () =>
-          fetch('/api/tine/hello', {
-            method: 'POST',
-            body: JSON.stringify(input),
-          })
-            .then((res) => res.json())
-            .then(
-              (data) =>
-                data as Awaited<ReturnType<ReturnType<Hello['input']>['run']>>
-            ),
+        input ? ['hello', input] : undefined,
+        input
+          ? () =>
+              fetch('/api/tine/hello', {
+                method: 'POST',
+                body: JSON.stringify(input),
+              })
+                .then((res) => res.json())
+                .then(
+                  (data) =>
+                    data as Awaited<
+                      ReturnType<ReturnType<Hello['input']>['run']>
+                    >
+                )
+          : () => undefined,
       ] as const,
     rawInput: (input: unknown) =>
       [
@@ -117,19 +125,21 @@ export const UseCases = {
           );
       },
     ] as const,
-    input: (input: Parameters<Job['input']>[0]) =>
+    input: (input: Parameters<Job['input']>[0] | '' | undefined | false) =>
       [
-        ['job', input],
-        () =>
-          fetch('/api/tine/job', {
-            method: 'POST',
-            body: JSON.stringify(input),
-          })
-            .then((res) => res.json())
-            .then(
-              (data) =>
-                data as Awaited<ReturnType<ReturnType<Job['input']>['run']>>
-            ),
+        input ? ['job', input] : undefined,
+        input
+          ? () =>
+              fetch('/api/tine/job', {
+                method: 'POST',
+                body: JSON.stringify(input),
+              })
+                .then((res) => res.json())
+                .then(
+                  (data) =>
+                    data as Awaited<ReturnType<ReturnType<Job['input']>['run']>>
+                )
+          : () => undefined,
       ] as const,
     rawInput: (input: unknown) =>
       [
@@ -161,19 +171,23 @@ export const UseCases = {
           );
       },
     ] as const,
-    input: (input: Parameters<Jobs['input']>[0]) =>
+    input: (input: Parameters<Jobs['input']>[0] | '' | undefined | false) =>
       [
-        ['jobs', input],
-        () =>
-          fetch('/api/tine/jobs', {
-            method: 'POST',
-            body: JSON.stringify(input),
-          })
-            .then((res) => res.json())
-            .then(
-              (data) =>
-                data as Awaited<ReturnType<ReturnType<Jobs['input']>['run']>>
-            ),
+        input ? ['jobs', input] : undefined,
+        input
+          ? () =>
+              fetch('/api/tine/jobs', {
+                method: 'POST',
+                body: JSON.stringify(input),
+              })
+                .then((res) => res.json())
+                .then(
+                  (data) =>
+                    data as Awaited<
+                      ReturnType<ReturnType<Jobs['input']>['run']>
+                    >
+                )
+          : () => undefined,
       ] as const,
     rawInput: (input: unknown) =>
       [

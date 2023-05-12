@@ -47,14 +47,14 @@ export const UseCases = {
             )
           }
         ] as const,
-        input: (input: Parameters<{{useCaseType}}['input']>[0]) => 
+        input: (input: Parameters<{{useCaseType}}['input']>[0] | '' | undefined | false) => 
           [
-            ['{{useCase}}', input], () => fetch('/api/tine/{{useCase}}', 
+            input ? ['{{useCase}}', input] : undefined, input ? () => fetch('/api/tine/{{useCase}}', 
               { method: "POST", body: JSON.stringify(input) }
             ).then((res) => res.json()).then(
               (data) =>
                 data as Awaited<ReturnType<ReturnType<{{useCaseType}}['input']>['run']>>,
-            ),
+            ) : () => undefined,
           ] as const,
         rawInput: (input: unknown) => 
           [

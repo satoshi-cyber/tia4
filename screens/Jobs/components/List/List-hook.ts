@@ -1,21 +1,17 @@
-import { useJobsListQuery } from '@/graphql';
 import { useUser } from '@/hooks';
-import { useMemo } from 'react';
+import { UseCases } from '@/useCases';
+import useSwr from 'swr';
 
 import { SKELETON_JOBS } from './List-constants';
 
 export const useJobs = () => {
   const { companyId } = useUser();
 
-  const context = useMemo(() => ({ additionalTypenames: ['Job'] }), []);
+  const { data, isLoading: fetching } = useSwr(
+    ...UseCases.jobs.input(companyId && { companyId })
+  );
 
-  const [{ data, fetching }] = useJobsListQuery({
-    context,
-    variables: { companyId: companyId! },
-    pause: !companyId,
-  });
-
-  const jobs = fetching ? SKELETON_JOBS : data?.jobs;
+  const jobs = fetching ? SKELETON_JOBS : data;
 
   return { jobs, fetching };
 };
