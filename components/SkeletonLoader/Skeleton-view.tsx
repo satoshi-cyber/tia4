@@ -22,7 +22,8 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
     <Wrapper>
       <Skeleton
         {...skeletonProps}
-        className={clsx(className, skeletonProps.height && 'leading-[unset]')}
+        containerClassName={className}
+        className={clsx(skeletonProps.height && 'leading-[unset]')}
       />
     </Wrapper>
   ) : (
