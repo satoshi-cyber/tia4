@@ -1,4 +1,16 @@
-import { ProfileQuery } from "@/graphql";
-
-export const formatDefaultValues = ({ firstName, lastName, linkedInProfile, bio }: ProfileQuery['profile']) =>
-  ({ firstName, lastName, linkedInProfile, bio })
+export const formatValues = ({
+  firstName,
+  lastName,
+  linkedInProfile,
+  bio,
+}: {
+  firstName?: string | null;
+  lastName?: string | null;
+  linkedInProfile?: string | null;
+  bio?: string | null;
+}) => ({
+  firstName,
+  lastName,
+  linkedInProfile,
+  bio: bio ?? null,
+});

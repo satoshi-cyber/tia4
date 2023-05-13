@@ -1,6 +1,6 @@
 import useSwr from 'swr';
 import useSWRMutation from 'swr/mutation';
-
+import { TineInferReturn, TineInferInput } from 'tinejs';
 import type { AuthenticateUser } from './types';
 import type { Company } from './types';
 import type { Hello } from './types';
@@ -11,9 +11,7 @@ import type { Sign } from './types';
 
 export const UseCases = {
   authenticateUser: {
-    load: (
-      input: Parameters<AuthenticateUser['input']>[0] | '' | undefined | false
-    ) =>
+    load: (input: TineInferInput<AuthenticateUser> | '' | undefined | false) =>
       useSwr(
         ...([
           input ? ['authenticateUser', input] : undefined,
@@ -24,12 +22,7 @@ export const UseCases = {
                   body: JSON.stringify(input),
                 })
                   .then((res) => res.json())
-                  .then(
-                    (data) =>
-                      data as Awaited<
-                        ReturnType<ReturnType<AuthenticateUser['input']>['run']>
-                      >
-                  )
+                  .then((data) => data as TineInferReturn<AuthenticateUser>)
             : () => undefined,
         ] as const)
       ),
@@ -37,28 +30,20 @@ export const UseCases = {
       useSWRMutation(
         ...([
           'authenticateUser',
-          (
-            _: string,
-            { arg }: { arg: Parameters<AuthenticateUser['input']>[0] }
-          ) => {
+          (_: string, { arg }: { arg: TineInferInput<AuthenticateUser> }) => {
             return fetch('/api/tine/authenticateUser', {
               method: 'POST',
               body: JSON.stringify(arg),
             })
               .then((res) => res.json())
-              .then(
-                (data) =>
-                  data as Awaited<
-                    ReturnType<ReturnType<AuthenticateUser['input']>['run']>
-                  >
-              );
+              .then((data) => data as TineInferReturn<AuthenticateUser>);
           },
         ] as const)
       ),
     getKey: () => (key: any) => key[0] === 'authenticateUser',
   },
   company: {
-    load: (input: Parameters<Company['input']>[0] | '' | undefined | false) =>
+    load: (input: TineInferInput<Company> | '' | undefined | false) =>
       useSwr(
         ...([
           input ? ['company', input] : undefined,
@@ -69,12 +54,7 @@ export const UseCases = {
                   body: JSON.stringify(input),
                 })
                   .then((res) => res.json())
-                  .then(
-                    (data) =>
-                      data as Awaited<
-                        ReturnType<ReturnType<Company['input']>['run']>
-                      >
-                  )
+                  .then((data) => data as TineInferReturn<Company>)
             : () => undefined,
         ] as const)
       ),
@@ -82,25 +62,20 @@ export const UseCases = {
       useSWRMutation(
         ...([
           'company',
-          (_: string, { arg }: { arg: Parameters<Company['input']>[0] }) => {
+          (_: string, { arg }: { arg: TineInferInput<Company> }) => {
             return fetch('/api/tine/company', {
               method: 'POST',
               body: JSON.stringify(arg),
             })
               .then((res) => res.json())
-              .then(
-                (data) =>
-                  data as Awaited<
-                    ReturnType<ReturnType<Company['input']>['run']>
-                  >
-              );
+              .then((data) => data as TineInferReturn<Company>);
           },
         ] as const)
       ),
     getKey: () => (key: any) => key[0] === 'company',
   },
   hello: {
-    load: (input: Parameters<Hello['input']>[0] | '' | undefined | false) =>
+    load: (input: TineInferInput<Hello> | '' | undefined | false) =>
       useSwr(
         ...([
           input ? ['hello', input] : undefined,
@@ -111,12 +86,7 @@ export const UseCases = {
                   body: JSON.stringify(input),
                 })
                   .then((res) => res.json())
-                  .then(
-                    (data) =>
-                      data as Awaited<
-                        ReturnType<ReturnType<Hello['input']>['run']>
-                      >
-                  )
+                  .then((data) => data as TineInferReturn<Hello>)
             : () => undefined,
         ] as const)
       ),
@@ -124,23 +94,20 @@ export const UseCases = {
       useSWRMutation(
         ...([
           'hello',
-          (_: string, { arg }: { arg: Parameters<Hello['input']>[0] }) => {
+          (_: string, { arg }: { arg: TineInferInput<Hello> }) => {
             return fetch('/api/tine/hello', {
               method: 'POST',
               body: JSON.stringify(arg),
             })
               .then((res) => res.json())
-              .then(
-                (data) =>
-                  data as Awaited<ReturnType<ReturnType<Hello['input']>['run']>>
-              );
+              .then((data) => data as TineInferReturn<Hello>);
           },
         ] as const)
       ),
     getKey: () => (key: any) => key[0] === 'hello',
   },
   job: {
-    load: (input: Parameters<Job['input']>[0] | '' | undefined | false) =>
+    load: (input: TineInferInput<Job> | '' | undefined | false) =>
       useSwr(
         ...([
           input ? ['job', input] : undefined,
@@ -151,12 +118,7 @@ export const UseCases = {
                   body: JSON.stringify(input),
                 })
                   .then((res) => res.json())
-                  .then(
-                    (data) =>
-                      data as Awaited<
-                        ReturnType<ReturnType<Job['input']>['run']>
-                      >
-                  )
+                  .then((data) => data as TineInferReturn<Job>)
             : () => undefined,
         ] as const)
       ),
@@ -164,23 +126,20 @@ export const UseCases = {
       useSWRMutation(
         ...([
           'job',
-          (_: string, { arg }: { arg: Parameters<Job['input']>[0] }) => {
+          (_: string, { arg }: { arg: TineInferInput<Job> }) => {
             return fetch('/api/tine/job', {
               method: 'POST',
               body: JSON.stringify(arg),
             })
               .then((res) => res.json())
-              .then(
-                (data) =>
-                  data as Awaited<ReturnType<ReturnType<Job['input']>['run']>>
-              );
+              .then((data) => data as TineInferReturn<Job>);
           },
         ] as const)
       ),
     getKey: () => (key: any) => key[0] === 'job',
   },
   jobs: {
-    load: (input: Parameters<Jobs['input']>[0] | '' | undefined | false) =>
+    load: (input: TineInferInput<Jobs> | '' | undefined | false) =>
       useSwr(
         ...([
           input ? ['jobs', input] : undefined,
@@ -191,12 +150,7 @@ export const UseCases = {
                   body: JSON.stringify(input),
                 })
                   .then((res) => res.json())
-                  .then(
-                    (data) =>
-                      data as Awaited<
-                        ReturnType<ReturnType<Jobs['input']>['run']>
-                      >
-                  )
+                  .then((data) => data as TineInferReturn<Jobs>)
             : () => undefined,
         ] as const)
       ),
@@ -204,16 +158,13 @@ export const UseCases = {
       useSWRMutation(
         ...([
           'jobs',
-          (_: string, { arg }: { arg: Parameters<Jobs['input']>[0] }) => {
+          (_: string, { arg }: { arg: TineInferInput<Jobs> }) => {
             return fetch('/api/tine/jobs', {
               method: 'POST',
               body: JSON.stringify(arg),
             })
               .then((res) => res.json())
-              .then(
-                (data) =>
-                  data as Awaited<ReturnType<ReturnType<Jobs['input']>['run']>>
-              );
+              .then((data) => data as TineInferReturn<Jobs>);
           },
         ] as const)
       ),
@@ -227,7 +178,7 @@ export const UseCases = {
           () =>
             fetch('/api/tine/profile', { method: 'POST' })
               .then((res) => res.json())
-              .then((data) => data as Awaited<ReturnType<Profile['run']>>),
+              .then((data) => data as TineInferReturn<Profile>),
         ] as const)
       ),
     getKey: () => 'profile',
@@ -240,7 +191,7 @@ export const UseCases = {
           () =>
             fetch('/api/tine/sign', { method: 'POST' })
               .then((res) => res.json())
-              .then((data) => data as Awaited<ReturnType<Sign['run']>>),
+              .then((data) => data as TineInferReturn<Sign>),
         ] as const)
       ),
     getKey: () => 'sign',

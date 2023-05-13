@@ -20,7 +20,7 @@ const avatarUrl = presignedGet({
   expires: 3600,
 });
 
-const uploadAvatarUrl = presignedPut({
+const avatarUploadUrl = presignedPut({
   bucketName: 'user-avatars',
   objectName: tineVar(user, ({ id }) => `${id}.jpg`),
   expires: 3600,
@@ -32,7 +32,7 @@ const resumeUrl = presignedGet({
   expires: 3600,
 });
 
-const uploadResumeUrl = presignedPut({
+const resumeUploadUrl = presignedPut({
   bucketName: 'user-resumes',
   objectName: tineVar(user, ({ id }) => `${id}.pdf`),
   expires: 3600,
@@ -42,9 +42,9 @@ const profile = extend([
   tineVar(user),
   {
     avatarUrl: tineVar(avatarUrl),
-    uploadAvatarUrl: tineVar(uploadAvatarUrl),
+    avatarUploadUrl: tineVar(avatarUploadUrl),
     resumeUrl: tineVar(resumeUrl),
-    uploadResumeUrl: tineVar(uploadResumeUrl),
+    resumeUploadUrl: tineVar(resumeUploadUrl),
   },
 ]);
 

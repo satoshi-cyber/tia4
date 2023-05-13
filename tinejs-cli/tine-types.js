@@ -25,7 +25,7 @@ const useCases = useCasesOutput.map(([useCase, hasInput]) => ({
 const template = `
 import useSwr from 'swr'
 import useSWRMutation from 'swr/mutation';
-
+import { TineInferReturn, TineInferInput } from 'tinejs';
 {{#useCases}}
  import type { {{useCaseType}} } from './types'
 {{/useCases}}
@@ -35,27 +35,25 @@ export const UseCases = {
   {{#if hasInput}}
    '{{useCase}}': 
       { 
-        load: (input: Parameters<{{useCaseType}}['input']>[0] | '' | undefined | false) => 
+        load: (input: TineInferInput<{{useCaseType}}> | '' | undefined | false) => 
           useSwr(...[
             input ? ['{{useCase}}', input] : undefined, input ? () => fetch('/api/tine/{{useCase}}', 
               { method: "POST", body: JSON.stringify(input) }
             ).then((res) => res.json()).then(
-              (data) =>
-                data as Awaited<ReturnType<ReturnType<{{useCaseType}}['input']>['run']>>,
+              (data) => data as TineInferReturn<{{useCaseType}}>,
             ) : () => undefined,
           ] as const),
         mutate: () => useSWRMutation(...[
           '{{useCase}}',
           (
             _: string,
-            { arg }: { arg: Parameters<{{useCaseType}}['input']>[0] }
+            { arg }: { arg: TineInferInput<{{useCaseType}}> }
           ) => {
             return fetch('/api/tine/{{useCase}}', {
               method: 'POST',
               body: JSON.stringify(arg),
             }).then((res) => res.json()).then(
-              (data) =>
-                data as Awaited<ReturnType<ReturnType<{{useCaseType}}['input']>['run']>>,
+              (data) => data as TineInferReturn<{{useCaseType}}>,
             )
           }
         ] as const),
@@ -67,8 +65,7 @@ export const UseCases = {
         '{{useCase}}', () => fetch('/api/tine/{{useCase}}', 
           { method: "POST" }
         ).then((res) => res.json()).then(
-          (data) =>
-            data as Awaited<ReturnType<{{useCaseType}}['run']>>,
+          (data) => data as TineInferReturn<{{useCaseType}}>,
         ),
       ] as const),
       getKey: () => '{{useCase}}',

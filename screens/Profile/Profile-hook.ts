@@ -4,22 +4,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import {
   UpdateProfile,
-  useProfileQuery,
   useRemoveResumeMutation,
   useUpdateProfileMutation,
 } from '@/graphql';
 
 import { updateProfileSchema } from './Profile-validations';
 import { TOAST_MESSAGE } from './Profile-constants';
-import { formatDefaultValues } from './Profile-functions';
+import { formatValues } from './Profile-functions';
 import { TOAST_OPTIONS } from '@/config';
-import { mutate } from 'swr';
 import { UseCases } from '@/useCases';
+import { mutate } from 'swr';
 
 export const useProfile = () => {
-  const [{ fetching, data }, onUpload] = useProfileQuery({
-    requestPolicy: 'network-only',
-  });
+  const { data, isLoading, mutate: onUpload } = UseCases.profile.load();
+
   const [{ fetching: removingResume }, removeResume] =
     useRemoveResumeMutation();
 
@@ -29,20 +27,20 @@ export const useProfile = () => {
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: yupResolver(updateProfileSchema),
-    defaultValues: data && formatDefaultValues(data?.profile),
+    defaultValues: data,
   });
 
   const { reset } = form;
 
   useEffect(() => {
-    if (!fetching && data && !form.formState.isDirty) {
-      reset(formatDefaultValues(data?.profile));
+    if (!isLoading && data && !form.formState.isDirty) {
+      reset(data);
     }
-  }, [fetching, reset, data]);
+  }, [isLoading, reset, data]);
 
   const handleSubmit = async (input: UpdateProfile) => {
     const { error, data } = await updateProfile(
-      { input },
+      { input: formatValues(input) },
       { additionalTypenames: ['User'] }
     );
 
@@ -54,11 +52,16 @@ export const useProfile = () => {
 
     toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
 
-    if (data) {
-      reset(formatDefaultValues(data?.updateProfile));
-    }
-
     mutate(UseCases.profile.getKey(), undefined, true);
+
+    if (data) {
+      reset({
+        firstName: data.updateProfile.firstName,
+        lastName: data.updateProfile.lastName,
+        linkedInProfile: data.updateProfile.linkedInProfile,
+        bio: data.updateProfile.bio,
+      });
+    }
   };
 
   const resumeOnUpload = async (resumeFileName: string) => {
@@ -70,19 +73,21 @@ export const useProfile = () => {
 
   const onRemoveResume = async () => {
     await removeResume({}, { additionalTypenames: ['User'] });
+
+    mutate(UseCases.profile.getKey(), undefined, true);
   };
 
   const resumeProps = {
-    src: data?.profile?.resumeUrl || undefined,
-    uploadUrl: data?.profile?.resumeUploadUrl || undefined,
-    fileName: data?.profile?.resumeFileName || undefined,
+    src: data?.resumeUrl || undefined,
+    uploadUrl: data?.resumeUploadUrl || undefined,
+    fileName: data?.resumeFileName || undefined,
     onUpload: resumeOnUpload,
     onRemove: onRemoveResume,
-    isLoading: fetching || removingResume,
+    isLoading: isLoading || removingResume,
   };
 
-  const src = data?.profile?.avatarUrl || undefined;
-  const uploadUrl = data?.profile?.avatarUploadUrl || undefined;
+  const src = data?.avatarUrl || undefined;
+  const uploadUrl = data?.avatarUploadUrl || undefined;
 
   const avatarProps = {
     src,
@@ -92,7 +97,7 @@ export const useProfile = () => {
 
   return {
     form,
-    fetching,
+    isLoading,
     handleSubmit,
     avatarProps,
     resumeProps,
