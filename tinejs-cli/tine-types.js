@@ -23,6 +23,9 @@ const useCases = useCasesOutput.map(([useCase, hasInput]) => ({
 }));
 
 const template = `
+import useSwr from 'swr'
+import useSWRMutation from 'swr/mutation';
+
 {{#useCases}}
  import type { {{useCaseType}} } from './types'
 {{/useCases}}
@@ -32,7 +35,16 @@ export const UseCases = {
   {{#if hasInput}}
    '{{useCase}}': 
       { 
-        mutate: [
+        load: (input: Parameters<{{useCaseType}}['input']>[0] | '' | undefined | false) => 
+          useSwr(...[
+            input ? ['{{useCase}}', input] : undefined, input ? () => fetch('/api/tine/{{useCase}}', 
+              { method: "POST", body: JSON.stringify(input) }
+            ).then((res) => res.json()).then(
+              (data) =>
+                data as Awaited<ReturnType<ReturnType<{{useCaseType}}['input']>['run']>>,
+            ) : () => undefined,
+          ] as const),
+        mutate: () => useSWRMutation(...[
           '{{useCase}}',
           (
             _: string,
@@ -46,36 +58,21 @@ export const UseCases = {
                 data as Awaited<ReturnType<ReturnType<{{useCaseType}}['input']>['run']>>,
             )
           }
-        ] as const,
+        ] as const),
         getKey: () => (key: any) => key[0] === '{{useCase}}',
-        input: (input: Parameters<{{useCaseType}}['input']>[0] | '' | undefined | false) => 
-          [
-            input ? ['{{useCase}}', input] : undefined, input ? () => fetch('/api/tine/{{useCase}}', 
-              { method: "POST", body: JSON.stringify(input) }
-            ).then((res) => res.json()).then(
-              (data) =>
-                data as Awaited<ReturnType<ReturnType<{{useCaseType}}['input']>['run']>>,
-            ) : () => undefined,
-          ] as const,
-        rawInput: (input: unknown) => 
-          [
-            ['{{useCase}}', input], () => fetch('/api/tine/{{useCase}}', 
-              { method: "POST", body: JSON.stringify(input) }
-            ).then((res) => res.json()).then(
-              (data) =>
-                data as Awaited<ReturnType<ReturnType<{{useCaseType}}['input']>['run']>>,
-            ),
-          ] as const,
       },
   {{else}}
-    '{{useCase}}': [
-      '{{useCase}}', () => fetch('/api/tine/{{useCase}}', 
-        { method: "POST" }
-      ).then((res) => res.json()).then(
-        (data) =>
-          data as Awaited<ReturnType<{{useCaseType}}['run']>>,
-      ),
-    ] as const,
+    '{{useCase}}': {
+      load: () => useSwr(...[
+        '{{useCase}}', () => fetch('/api/tine/{{useCase}}', 
+          { method: "POST" }
+        ).then((res) => res.json()).then(
+          (data) =>
+            data as Awaited<ReturnType<{{useCaseType}}['run']>>,
+        ),
+      ] as const),
+      getKey: () => (key: any) => key[0] === '{{useCase}}',
+    },
   {{/if}}
 {{/useCases}}
 };

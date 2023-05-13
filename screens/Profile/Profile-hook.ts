@@ -58,7 +58,7 @@ export const useProfile = () => {
       reset(formatDefaultValues(data?.updateProfile));
     }
 
-    mutate(UseCases.profile[0], undefined, true);
+    mutate(UseCases.profile.getKey(), undefined, true);
   };
 
   const resumeOnUpload = async (resumeFileName: string) => {

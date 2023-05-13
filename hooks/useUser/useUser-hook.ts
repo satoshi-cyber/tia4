@@ -1,5 +1,4 @@
 import { Magic } from 'magic-sdk';
-import useSWRMutation from 'swr/mutation';
 import { UseCases } from '@/useCases';
 import { JWTClaims } from '@/types';
 import { useCallback, useContext, useMemo } from 'react';
@@ -19,9 +18,8 @@ const magic =
 export const useUser = () => {
   const { token, setToken } = useContext(AuthContext);
 
-  const { trigger: authenticateUser, isMutating: fetching } = useSWRMutation(
-    ...UseCases.authenticateUser.mutate
-  );
+  const { trigger: authenticateUser, isMutating: fetching } =
+    UseCases.authenticateUser.mutate();
 
   const router = useRouter();
 

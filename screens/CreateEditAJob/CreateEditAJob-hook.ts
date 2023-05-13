@@ -19,7 +19,6 @@ import {
   DEFAULT_QUESTION_TIME,
   PUSH_DELAY,
 } from './CreateEditAJob-constants';
-import useLoadData from '@/hooks/useLoadData';
 import { UseCases } from '@/useCases';
 import { mutate } from 'swr';
 import { formatValue } from './CreateEditAJob-functions';
@@ -33,10 +32,8 @@ export const useCreateUpdateAJob = () => {
 
   const editJob = Boolean(jobId);
 
-  const { data, isLoading } = useLoadData(
-    ...UseCases.job.input(
-      typeof jobId === 'string' && companyId && { companyId, id: jobId }
-    )
+  const { data, isLoading } = UseCases.job.load(
+    typeof jobId === 'string' && companyId && { companyId, id: jobId }
   );
 
   const [, createJob] = useCreateJobMutation();
