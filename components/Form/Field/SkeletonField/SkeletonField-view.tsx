@@ -4,17 +4,19 @@ import { SkeletonLoaderProps } from '@/components/SkeletonLoader/SkeletonLoader-
 
 const SkeletonField: React.FC<SkeletonLoaderProps> = ({
   width = '100%',
-  height = 44,
+  height = 42,
   className,
   ...restProps
 }) => (
-  <div className={`w-full mb-8 ${className}`}>
+  <div className={`w-full mb-4 ${className}`}>
     <Text
       isLoading
       className="text-sm text-gray-700 mb-2 text-left font-medium"
       skeletonProps={{ width: 80 }}
     />
-    <SkeletonLoader isLoading {...restProps} width={width} height={height} />
+    <div className="mb-4">
+      <SkeletonLoader isLoading {...restProps} width={width} height={height} />
+    </div>
     <p className=" text-sm  -mt-2 text-left text overflow-hidden max-h-[0px]"></p>
   </div>
 );

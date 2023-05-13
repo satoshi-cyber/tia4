@@ -3,22 +3,22 @@ import SkeletonField from './SkeletonField';
 
 const Input = dynamic(() => import('./InputField'), {
   ssr: false,
-  loading: SkeletonField,
+  loading: () => <SkeletonField />,
 });
 
 const Select = dynamic(() => import('./SelectField'), {
   ssr: false,
-  loading: SkeletonField,
+  loading: () => <SkeletonField />,
 });
 
 const TextArea = dynamic(() => import('./TextAreaField'), {
   ssr: false,
-  loading: () => <SkeletonField height={62} />,
+  loading: () => <SkeletonField height={66} />,
 });
 
 const DebounceField = dynamic(() => import('./DebounceField'), {
   ssr: false,
-  loading: SkeletonField,
+  loading: () => <SkeletonField />,
 });
 
 const MarkdownField = dynamic(() => import('./MardownField'), {
