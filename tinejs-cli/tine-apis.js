@@ -12,25 +12,50 @@ const useCases = useCasesOutput.map(([useCase, hasInput]) => ({
 
 const template = `
 import { StatusError } from '@/types';
-import {{useCase}} from '@/useCases/{{useCase}}';
 import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs'
+{{#useCases}}
+import {{useCase}} from '@/useCases/{{useCase}}'
+{{/useCases}}
 
 export const config = {
   runtime: 'experimental-edge',
 };
 
+const useCasesWithInput = {
+{{#useCases}}
+ {{#if hasInput }}
+ {{useCase}}: {{useCase}},
+ {{/if}}
+{{/useCases}}
+}
+
+const useCases = {
+  {{#useCases}}
+  {{#if hasInput}}
+  {{ else }}
+  {{useCase}}: {{useCase}},
+  {{/if}}
+  {{/useCases}}
+}
+
 const handler = async (req: NextRequest) => {
   try {
+    const params = new URL(req.url).searchParams;
+
+    const endpoint = params.get('endpoint') as string
+
     const ctx = tineCtx({ headers: req.headers, cookies: req.cookies })
 
-    {{#if hasInput}}
-    const json = await req.json();
+    if(endpoint in useCasesWithInput){
+      const json = await req.json();
 
-    const data = await {{useCase}}.rawInput(json).run(ctx);
-    {{else}}
-    const data = await {{useCase}}.run(ctx);
-    {{/if}}
+      const data = await useCasesWithInput[endpoint as keyof typeof useCasesWithInput].rawInput(json).run(ctx);
+
+      return NextResponse.json(data);
+    } 
+
+    const data = await useCases[endpoint as keyof typeof useCases].run(ctx);
 
     return NextResponse.json(data);
   } catch (e: any) {
@@ -46,11 +71,9 @@ export default handler;
 
 `;
 
-useCases.forEach(({ useCase, hasInput }) => {
-  const outputFile = `./pages/api/tine/${useCase}.ts`;
+const outputFile = `./pages/api/tine/[endpoint].ts`;
 
-  const compiledTemplate = Handlebars.compile(template);
-  const generatedCode = compiledTemplate({ useCase, hasInput });
+const compiledTemplate = Handlebars.compile(template);
+const generatedCode = compiledTemplate({ useCases });
 
-  fs.writeFileSync(outputFile, generatedCode);
-});
+fs.writeFileSync(outputFile, generatedCode);
