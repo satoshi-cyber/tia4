@@ -230,7 +230,7 @@ export const UseCases = {
               .then((data) => data as Awaited<ReturnType<Profile['run']>>),
         ] as const)
       ),
-    getKey: () => (key: any) => key[0] === 'profile',
+    getKey: () => 'profile',
   },
   sign: {
     load: () =>
@@ -243,6 +243,6 @@ export const UseCases = {
               .then((data) => data as Awaited<ReturnType<Sign['run']>>),
         ] as const)
       ),
-    getKey: () => (key: any) => key[0] === 'sign',
+    getKey: () => 'sign',
   },
 };

@@ -71,7 +71,7 @@ export const UseCases = {
             data as Awaited<ReturnType<{{useCaseType}}['run']>>,
         ),
       ] as const),
-      getKey: () => (key: any) => key[0] === '{{useCase}}',
+      getKey: () => '{{useCase}}',
     },
   {{/if}}
 {{/useCases}}
