@@ -1,22 +1,25 @@
-import { useProfileQuery } from "@/graphql"
-import { useUser } from "@/hooks/useUser"
-import { MouseEvent } from 'react'
+import useLoadData from '@/hooks/useLoadData';
+import { useUser } from '@/hooks/useUser';
+import { UseCases } from '@/useCases';
+import { MouseEvent } from 'react';
 
 export const useProfile = () => {
-  const { logout } = useUser()
+  const { logout } = useUser();
 
-  const [{ fetching: loading, data }] = useProfileQuery()
+  const { data, isLoading } = useLoadData(...UseCases.profile);
 
-  const label = data?.profile.firstName ? `${data?.profile.firstName} ${data?.profile.lastName}` : 'Edit Profile'
+  const label = data?.firstName
+    ? `${data?.firstName} ${data?.lastName}`
+    : 'Edit Profile';
 
-  const avatarUrl = data?.profile.avatarUrl || undefined
+  const avatarUrl = data?.avatarUrl || undefined;
 
   const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
 
-    logout()
-  }
+    logout();
+  };
 
-  return { loading, handleLogout, label, avatarUrl }
-}
+  return { isLoading, handleLogout, label, avatarUrl };
+};

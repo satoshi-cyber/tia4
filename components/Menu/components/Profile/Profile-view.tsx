@@ -9,10 +9,10 @@ import { URLS } from '@/config';
 import { useProfile } from './Profile-hook';
 
 const Profile = () => {
-  const { handleLogout, label, loading, avatarUrl } = useProfile();
+  const { handleLogout, label, isLoading, avatarUrl } = useProfile();
 
   return (
-    <LoadingProvider isLoading={loading}>
+    <LoadingProvider isLoading={isLoading}>
       <ActiveLink href={URLS.PROFILE}>
         <a className="text-md pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group-one hover:text-gray-800 cursor-pointer transition-all ease-in-out border-r-2 border-r-transparent data-[active=true]:border-purple-800 ">
           <Avatar name={label} size={30} src={avatarUrl} />
