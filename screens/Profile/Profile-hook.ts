@@ -52,7 +52,7 @@ export const useProfile = () => {
 
     toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
 
-    mutate(UseCases.profile.getKey(), undefined, true);
+    mutate(UseCases.profile.getKey());
 
     if (data) {
       reset({
@@ -74,7 +74,7 @@ export const useProfile = () => {
   const onRemoveResume = async () => {
     await removeResume({}, { additionalTypenames: ['User'] });
 
-    mutate(UseCases.profile.getKey(), undefined, true);
+    mutate(UseCases.profile.getKey());
   };
 
   const resumeProps = {

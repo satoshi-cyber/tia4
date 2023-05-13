@@ -73,7 +73,7 @@ export const useCreateUpdateAJob = () => {
           { additionalTypenames: ['Job'] }
         );
 
-    mutate(UseCases.job.getKey(), undefined, true);
+    mutate(UseCases.job.getKey());
 
     const toastMessage = editJob
       ? TOAST_MESSAGE.EDIT_JOB

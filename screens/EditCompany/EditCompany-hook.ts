@@ -72,7 +72,7 @@ export const useEditCompany = () => {
       { additionalTypenames: ['Company'] }
     );
 
-    mutate(UseCases.company.getKey(), undefined, true);
+    mutate(UseCases.company.getKey());
 
     if (error) {
       toast.error(toastMessage.error, TOAST_OPTIONS);
