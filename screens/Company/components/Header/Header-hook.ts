@@ -1,20 +1,17 @@
-import { useCompanyInfoQuery } from "@/graphql"
-import { useUser } from "@/hooks"
-import { useMemo } from "react"
+import { useUser } from '@/hooks';
+import { UseCases } from '@/useCases';
 
 export const useCompanyHeader = () => {
-  const { companyId } = useUser()
+  const { companyId } = useUser();
 
-  const context = useMemo(() => ({ additionalTypenames: ['Company'] }), [])
+  const { data, isLoading } = UseCases.company.load(companyId && { companyId });
 
-  const [{ fetching, data }] = useCompanyInfoQuery({ context, variables: { companyId: companyId! }, pause: !companyId, })
-
-  const title = data?.company?.name || undefined
-  const avatar = data?.company?.avatarUrl || ''
+  const title = data?.name ?? undefined;
+  const avatar = data?.avatarUrl || '';
 
   return {
-    fetching,
+    isLoading,
     avatar,
-    title
-  }
-}
+    title,
+  };
+};

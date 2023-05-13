@@ -1,51 +1,47 @@
-import { TOAST_OPTIONS, URLS } from "@/config"
-import { useCompanyInfoQuery, useJoinCompanyMutation } from "@/graphql"
-import { useUser } from "@/hooks"
-import { useRouter } from "next/router"
-import { useMemo } from "react"
-import { toast } from "react-toastify"
+import { TOAST_OPTIONS, URLS } from '@/config';
+import { useJoinCompanyMutation } from '@/graphql';
+import { useUser } from '@/hooks';
+import { UseCases } from '@/useCases';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
-import { TOAST_MESSAGE } from "./JoinCompany-constants"
+import { TOAST_MESSAGE } from './JoinCompany-constants';
 
 export const useJoinCompany = () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const { refreshToken } = useUser()
+  const { refreshToken } = useUser();
 
-  const companyId = router.query.companyId as string
+  const companyId = router.query.companyId as string;
 
-  const context = useMemo(() => ({ additionalTypenames: ['Company'] }), [])
+  const { data, isLoading } = UseCases.company.load({ companyId });
 
-  const [{ fetching, data }] = useCompanyInfoQuery({ context, variables: { companyId: companyId! }, pause: !companyId, })
+  const [{ fetching: submitting }, joinCompany] = useJoinCompanyMutation();
 
-  const [{ fetching: submitting }, joinCompany] = useJoinCompanyMutation()
-
-  const title = data?.company?.name || undefined
-  const avatar = data?.company?.avatarUrl || ''
-
+  const title = data?.name ?? undefined;
+  const avatar = data?.avatarUrl ?? '';
 
   const handleJoinCompany = async () => {
-    const { error } = await joinCompany({ companyId })
+    const { error } = await joinCompany({ companyId });
 
     if (error) {
-      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS)
+      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
 
-      return
+      return;
     }
 
-    await refreshToken()
+    await refreshToken();
 
-    toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
+    toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
 
-    router.push(URLS.COMPANY)
-
-  }
+    router.push(URLS.COMPANY);
+  };
 
   return {
-    fetching,
+    isLoading,
     avatar,
     title,
     submitting,
-    handleJoinCompany
-  }
-}
+    handleJoinCompany,
+  };
+};

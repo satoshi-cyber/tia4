@@ -10,10 +10,10 @@ const Header = ({
   onClose?: () => void;
   isAdmin: boolean;
 }) => {
-  const { fetching, title, avatar } = useCompanyHeader();
+  const { isLoading, title, avatar } = useCompanyHeader();
 
   return (
-    <LoadingProvider isLoading={fetching}>
+    <LoadingProvider isLoading={isLoading}>
       <Avatar src={avatar} size={60} className="border mb-4" />
       <Title
         title={title}
