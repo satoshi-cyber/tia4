@@ -7,10 +7,10 @@ import { URLS } from '@/config';
 import { useCompany } from './Company-hook';
 
 const Company = () => {
-  const { fetching, title } = useCompany();
+  const { isLoading, title } = useCompany();
 
   return (
-    <LoadingProvider isLoading={fetching}>
+    <LoadingProvider isLoading={isLoading}>
       <ActiveLink href={URLS.COMPANY} shallow>
         <a className="text-md pl-5 py-1 mb-3 flex flex-row items-center text-gray-500 group/link hover:text-gray-800 cursor-pointer transition-all border-r-2 border-r-transparent data-[active=true]:border-purple-800">
           <Icon

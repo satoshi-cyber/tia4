@@ -1,93 +1,115 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import { useRouter } from "next/router";
-import { UpdateCompany, useDeleteCompanyMutation, useEditCompanyQuery, useUpdateCompanyMutation } from "@/graphql";
-import { useUser } from "@/hooks";
-import { TOAST_OPTIONS, URLS } from "@/config";
-import { useEffect, useMemo } from "react";
+import { useRouter } from 'next/router';
+import {
+  UpdateCompany,
+  useDeleteCompanyMutation,
+  useEditCompanyQuery,
+  useUpdateCompanyMutation,
+} from '@/graphql';
+import { useUser } from '@/hooks';
+import { TOAST_OPTIONS, URLS } from '@/config';
+import { useEffect, useMemo } from 'react';
 
-import { setupCompanySchema } from "./EditCompany-validations";
+import { setupCompanySchema } from './EditCompany-validations';
 import { PUSH_DELAY, TOAST_MESSAGE } from './EditCompany-constants';
-import { formatDefaultValues } from "./EditCompany-functions";
-
+import { formatDefaultValues } from './EditCompany-functions';
+import { mutate } from 'swr';
+import { UseCases } from '@/useCases';
 
 export const useEditCompany = () => {
-  const router = useRouter()
-  const { companyId, refreshToken, fetching: refeshingToken } = useUser()
+  const router = useRouter();
+  const { companyId, refreshToken, fetching: refeshingToken } = useUser();
 
-  const context = useMemo(() => ({ additionalTypenames: ['Company'] }), [])
+  const context = useMemo(() => ({ additionalTypenames: ['Company'] }), []);
 
-  const [{ fetching, data }] = useEditCompanyQuery({ context, variables: { companyId: companyId || '' }, pause: !companyId, requestPolicy: 'cache-first' })
-  const [{ fetching: updatingCompany }, updateCompany] = useUpdateCompanyMutation();
-  const [{ fetching: deletingCompany }, deleteCompany] = useDeleteCompanyMutation()
+  const [{ fetching, data }] = useEditCompanyQuery({
+    context,
+    variables: { companyId: companyId || '' },
+    pause: !companyId,
+    requestPolicy: 'cache-first',
+  });
+  const [{ fetching: updatingCompany }, updateCompany] =
+    useUpdateCompanyMutation();
+  const [{ fetching: deletingCompany }, deleteCompany] =
+    useDeleteCompanyMutation();
 
-  const submitting = updatingCompany || deletingCompany || refeshingToken
+  const submitting = updatingCompany || deletingCompany || refeshingToken;
 
-  const avatar = data?.company?.avatarUrl || undefined
-  const avatarUploadUrl = data?.company?.avatarUploadUrl || undefined
+  const avatar = data?.company?.avatarUrl || undefined;
+  const avatarUploadUrl = data?.company?.avatarUploadUrl || undefined;
 
   const onUpload = () => {
-    updateCompany({ companyId: companyId!, input: data?.company ? formatDefaultValues(data?.company) : {} })
-  }
+    updateCompany({
+      companyId: companyId!,
+      input: data?.company ? formatDefaultValues(data?.company) : {},
+    });
+  };
 
   const form = useForm<UpdateCompany>({
-    mode: "onBlur",
-    reValidateMode: "onBlur",
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
     resolver: yupResolver(setupCompanySchema),
-    defaultValues: data ? formatDefaultValues(data?.company) : undefined
+    defaultValues: data ? formatDefaultValues(data?.company) : undefined,
   });
 
-  const { reset } = form
+  const { reset } = form;
 
   useEffect(() => {
     if (!fetching && data) {
-      reset(formatDefaultValues(data?.company))
+      reset(formatDefaultValues(data?.company));
     }
-  }, [fetching, reset])
+  }, [fetching, reset]);
 
   const handleSubmit = async (input: UpdateCompany) => {
-    if (!companyId)
-      return
+    if (!companyId) return;
 
-    const toastMessage = TOAST_MESSAGE.updateCompany
+    const toastMessage = TOAST_MESSAGE.updateCompany;
 
-    const { error } = await updateCompany({ companyId, input }, { additionalTypenames: ['Company'] })
+    const { error } = await updateCompany(
+      { companyId, input },
+      { additionalTypenames: ['Company'] }
+    );
+
+    mutate(UseCases.company.getKey(), undefined, true);
 
     if (error) {
-      toast.error(toastMessage.error, TOAST_OPTIONS)
+      toast.error(toastMessage.error, TOAST_OPTIONS);
 
-      return
+      return;
     }
 
-    toast.success(toastMessage.success, TOAST_OPTIONS)
+    toast.success(toastMessage.success, TOAST_OPTIONS);
 
-    setTimeout(() => router.push(URLS.COMPANY), PUSH_DELAY)
+    setTimeout(() => router.push(URLS.COMPANY), PUSH_DELAY);
   };
 
   const handleDeleteCompany = async () => {
-    const { error } = await deleteCompany({ companyId: companyId! })
+    const { error } = await deleteCompany({ companyId: companyId! });
 
-    const toastMessage = TOAST_MESSAGE.deleteCompany
+    const toastMessage = TOAST_MESSAGE.deleteCompany;
 
     if (error) {
-      toast.error(toastMessage.error, TOAST_OPTIONS)
+      toast.error(toastMessage.error, TOAST_OPTIONS);
 
-      return
+      return;
     }
 
-    await refreshToken()
+    await refreshToken();
 
-    toast.success(toastMessage.success, TOAST_OPTIONS)
+    toast.success(toastMessage.success, TOAST_OPTIONS);
 
-    setTimeout(() => router.push(URLS.HOME), PUSH_DELAY)
+    setTimeout(() => router.push(URLS.HOME), PUSH_DELAY);
   };
 
-  const settingItems = [{
-    label: 'Delete company',
-    activeColor: 'text-red-800',
-    onClick: handleDeleteCompany
-  }]
+  const settingItems = [
+    {
+      label: 'Delete company',
+      activeColor: 'text-red-800',
+      onClick: handleDeleteCompany,
+    },
+  ];
 
   return {
     form,
@@ -97,6 +119,6 @@ export const useEditCompany = () => {
     avatar,
     avatarUploadUrl,
     onUpload,
-    settingItems
+    settingItems,
   };
 };

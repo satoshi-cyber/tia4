@@ -2,6 +2,7 @@ import useSwr from 'swr';
 import useSWRMutation from 'swr/mutation';
 
 import type { AuthenticateUser } from './types';
+import type { Company } from './types';
 import type { Hello } from './types';
 import type { Job } from './types';
 import type { Jobs } from './types';
@@ -55,6 +56,48 @@ export const UseCases = {
         ] as const)
       ),
     getKey: () => (key: any) => key[0] === 'authenticateUser',
+  },
+  company: {
+    load: (input: Parameters<Company['input']>[0] | '' | undefined | false) =>
+      useSwr(
+        ...([
+          input ? ['company', input] : undefined,
+          input
+            ? () =>
+                fetch('/api/tine/company', {
+                  method: 'POST',
+                  body: JSON.stringify(input),
+                })
+                  .then((res) => res.json())
+                  .then(
+                    (data) =>
+                      data as Awaited<
+                        ReturnType<ReturnType<Company['input']>['run']>
+                      >
+                  )
+            : () => undefined,
+        ] as const)
+      ),
+    mutate: () =>
+      useSWRMutation(
+        ...([
+          'company',
+          (_: string, { arg }: { arg: Parameters<Company['input']>[0] }) => {
+            return fetch('/api/tine/company', {
+              method: 'POST',
+              body: JSON.stringify(arg),
+            })
+              .then((res) => res.json())
+              .then(
+                (data) =>
+                  data as Awaited<
+                    ReturnType<ReturnType<Company['input']>['run']>
+                  >
+              );
+          },
+        ] as const)
+      ),
+    getKey: () => (key: any) => key[0] === 'company',
   },
   hello: {
     load: (input: Parameters<Hello['input']>[0] | '' | undefined | false) =>
