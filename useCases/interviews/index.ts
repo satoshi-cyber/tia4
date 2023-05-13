@@ -70,14 +70,22 @@ const data = prisma.interview.findMany({
       nulls: 'first',
     },
   },
-  include: {
-    job: {
-      include: {
-        company: true,
+  select: {
+    id: true,
+    createdAt: true,
+    score: true,
+    interviewee: {
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
       },
     },
-    interviewee: true,
-    rates: true,
+    rates: {
+      select: {
+        value: true,
+      },
+    },
   },
 });
 

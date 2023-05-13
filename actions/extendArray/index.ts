@@ -9,7 +9,7 @@ const extendArray = tineAction(
       data.map(async (item: P) => {
         const resolvedItem = await parsePayload(ctx, fn(item));
 
-        return Object.assign(item, resolvedItem);
+        return Object.assign({}, item, resolvedItem);
       })
     ),
   {
@@ -18,3 +18,9 @@ const extendArray = tineAction(
 );
 
 export default extendArray;
+
+const a = {
+  name: 3,
+};
+
+const b = { ...a, ...{ name: undefined, name2: 'asd' } };
