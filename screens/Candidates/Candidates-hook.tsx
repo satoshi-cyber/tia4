@@ -1,6 +1,5 @@
-import { useInterviewsQuery } from '@/graphql';
 import { useUser } from '@/hooks';
-import { useMemo } from 'react';
+import { UseCases } from '@/useCases';
 import { useForm, useWatch } from 'react-hook-form';
 
 import { ALL_JOBS_OPTION, SKELETON_INTERVIEWS } from './Candidates-constants';
@@ -16,22 +15,15 @@ export const useCandidates = () => {
 
   const jobId = job === ALL_JOBS_OPTION.value ? undefined : job;
 
-  const context = useMemo(() => ({ additionalTypenames: ['Rate'] }), []);
-
-  const [{ data, fetching }] = useInterviewsQuery({
-    variables: {
-      companyId: companyId!,
-      filters: { jobId, query: search ? search : undefined },
-    },
-    context,
-    pause: !companyId,
-  });
+  const { data, isLoading } = UseCases.interviews.load(
+    companyId && { companyId, jobId, query: search ? search : undefined }
+  );
 
   const onSubmit = () => {};
 
   const hasFilters = form.formState.isDirty;
 
-  const interviews = fetching ? SKELETON_INTERVIEWS : data?.interviews;
+  const interviews = isLoading ? SKELETON_INTERVIEWS : data;
 
   const isListVisible = interviews && interviews.length > 0;
 
@@ -41,6 +33,6 @@ export const useCandidates = () => {
     hasFilters,
     interviews,
     isListVisible,
-    fetching,
+    isLoading,
   };
 };

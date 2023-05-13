@@ -4,6 +4,7 @@ import { TineInferReturn, TineInferInput } from 'tinejs';
 import type { AuthenticateUser } from './types';
 import type { Company } from './types';
 import type { Hello } from './types';
+import type { Interviews } from './types';
 import type { Job } from './types';
 import type { Jobs } from './types';
 import type { Profile } from './types';
@@ -105,6 +106,38 @@ export const UseCases = {
         ] as const)
       ),
     getKey: () => (key: any) => key[0] === 'hello',
+  },
+  interviews: {
+    load: (input: TineInferInput<Interviews> | '' | undefined | false) =>
+      useSwr(
+        ...([
+          input ? ['interviews', input] : undefined,
+          input
+            ? () =>
+                fetch('/api/tine/interviews', {
+                  method: 'POST',
+                  body: JSON.stringify(input),
+                })
+                  .then((res) => res.json())
+                  .then((data) => data as TineInferReturn<Interviews>)
+            : () => undefined,
+        ] as const)
+      ),
+    mutate: () =>
+      useSWRMutation(
+        ...([
+          'interviews',
+          (_: string, { arg }: { arg: TineInferInput<Interviews> }) => {
+            return fetch('/api/tine/interviews', {
+              method: 'POST',
+              body: JSON.stringify(arg),
+            })
+              .then((res) => res.json())
+              .then((data) => data as TineInferReturn<Interviews>);
+          },
+        ] as const)
+      ),
+    getKey: () => (key: any) => key[0] === 'interviews',
   },
   job: {
     load: (input: TineInferInput<Job> | '' | undefined | false) =>

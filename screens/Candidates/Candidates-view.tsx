@@ -11,7 +11,7 @@ import Filters from './components/Filters';
 import Candidate from '../../components/Candidate';
 
 export default function Jobs() {
-  const { form, onSubmit, hasFilters, fetching, isListVisible, interviews } =
+  const { form, onSubmit, hasFilters, isLoading, isListVisible, interviews } =
     useCandidates();
 
   return (
@@ -19,7 +19,7 @@ export default function Jobs() {
       <Form form={form} onSubmit={onSubmit} className={CLASS_NAMES.form}>
         <Title {...TITLE_PROPS} />
         <Filters />
-        <LoadingProvider isLoading={fetching}>
+        <LoadingProvider isLoading={isLoading}>
           {isListVisible ? (
             <div className={CLASS_NAMES.list}>
               {interviews?.map((interview) => (

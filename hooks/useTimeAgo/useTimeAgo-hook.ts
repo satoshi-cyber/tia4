@@ -1,9 +1,9 @@
-import { timeAgo } from "@/utils"
+import { timeAgo } from '@/utils';
 
-export const useTimeAgo = (date?: string) => {
+export const useTimeAgo = (date?: string | Date) => {
   if (!date) {
-    return undefined
+    return undefined;
   }
 
-  return timeAgo(date)
-}
+  return timeAgo(date);
+};
