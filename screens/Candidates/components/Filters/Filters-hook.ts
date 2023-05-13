@@ -1,21 +1,14 @@
-import { useJobsListQuery } from '@/graphql';
 import { useUser } from '@/hooks';
-import { useMemo } from 'react';
+import { UseCases } from '@/useCases';
 
 import { formatOptions } from './Filters-functions';
 
 export const useFilters = () => {
   const { companyId } = useUser();
 
-  const context = useMemo(() => ({ additionalTypenames: ['Job'] }), []);
+  const { data, isLoading } = UseCases.jobs.load(companyId && { companyId });
 
-  const [{ data, fetching }] = useJobsListQuery({
-    context,
-    variables: { companyId: companyId! },
-    pause: !companyId,
-  });
+  const jobOptions = formatOptions(data);
 
-  const jobOptions = formatOptions(data?.jobs);
-
-  return { jobOptions, fetching };
+  return { jobOptions, isLoading };
 };

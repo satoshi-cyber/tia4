@@ -5,7 +5,7 @@ import React from 'react';
 import { useFilters } from './Filters-hook';
 
 const Filters: React.FC = () => {
-  const { fetching, jobOptions } = useFilters();
+  const { isLoading, jobOptions } = useFilters();
 
   return (
     <div className="md:sticky md:top-0 md:pt-2 mb-10 w-full bg-white z-10">
@@ -20,7 +20,7 @@ const Filters: React.FC = () => {
           />
         </div>
         <div className="flex -mb-4">
-          <LoadingProvider isLoading={fetching}>
+          <LoadingProvider isLoading={isLoading}>
             <Field.Select
               className="w-[200px]"
               label="Job"
