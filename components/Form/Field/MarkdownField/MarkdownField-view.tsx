@@ -5,7 +5,7 @@ import { useFormContext, useFormState } from 'react-hook-form';
 import clsx from 'clsx';
 import { Wysimark, useEditor } from '@wysimark/react';
 
-import { MardownFieldProps } from './MardownField-types';
+import { MardownFieldProps } from './MarkdownField-types';
 import SkeletonLoader from '@/components/SkeletonLoader';
 import Text from '@/components/Text';
 
