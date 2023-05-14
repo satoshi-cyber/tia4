@@ -26,9 +26,24 @@ const template = `
 import useSwr from 'swr'
 import useSWRMutation from 'swr/mutation';
 import { TineInferReturn, TineInferInput } from 'tinejs';
+import { StatusError } from '@/types'
 {{#useCases}}
  import type { {{useCaseType}} } from './types'
 {{/useCases}}
+
+const fetchData =
+  <T>(url: string, body?: any) =>
+    fetch(url, { method: 'POST', body: body ? JSON.stringify(body) : undefined })
+      .then(async (res) => {
+        if (!res.ok) {
+          const error = await res.json()
+
+          throw new StatusError(error.message, res.status)
+        }
+
+        return await res.json()
+      })
+      .then((data) => data as T);
 
 export const UseCases = {
 {{#useCases}}
@@ -36,38 +51,24 @@ export const UseCases = {
    '{{useCase}}': 
       { 
         load: (input: TineInferInput<{{useCaseType}}> | '' | undefined | false) => 
-          useSwr(...[
-            input ? ['{{useCase}}', input] : undefined, input ? () => fetch('/api/tine/{{useCase}}', 
-              { method: "POST", body: JSON.stringify(input) }
-            ).then((res) => res.json()).then(
-              (data) => data as TineInferReturn<{{useCaseType}}>,
-            ) : () => undefined,
-          ] as const),
-        mutate: () => useSWRMutation(...[
+          useSwr(
+            input ? ['{{useCase}}', input] : undefined, input ? () => 
+            fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}', input) : () => undefined,
+         ),
+        mutate: () => useSWRMutation(
           '{{useCase}}',
           (
             _: string,
             { arg }: { arg: TineInferInput<{{useCaseType}}> }
-          ) => {
-            return fetch('/api/tine/{{useCase}}', {
-              method: 'POST',
-              body: JSON.stringify(arg),
-            }).then((res) => res.json()).then(
-              (data) => data as TineInferReturn<{{useCaseType}}>,
-            )
-          }
-        ] as const),
-        getKey: () => (key: any) => key[0] === '{{useCase}}',
+          ) => fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}', arg)
+        ),
+        getKey: () => (key: any) => key && key[0] === '{{useCase}}',
       },
   {{else}}
     '{{useCase}}': {
-      load: () => useSwr(...[
-        '{{useCase}}', () => fetch('/api/tine/{{useCase}}', 
-          { method: "POST" }
-        ).then((res) => res.json()).then(
-          (data) => data as TineInferReturn<{{useCaseType}}>,
-        ),
-      ] as const),
+      load: () => useSwr(
+        '{{useCase}}', () => fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}'),
+      ),
       getKey: () => '{{useCase}}',
     },
   {{/if}}

@@ -1,6 +1,7 @@
 import useSwr from 'swr';
 import useSWRMutation from 'swr/mutation';
 import { TineInferReturn, TineInferInput } from 'tinejs';
+import { StatusError } from '@/types';
 import type { AuthenticateUser } from './types';
 import type { Company } from './types';
 import type { Hello } from './types';
@@ -10,223 +11,138 @@ import type { Jobs } from './types';
 import type { Profile } from './types';
 import type { Sign } from './types';
 
+const fetchData = <T>(url: string, body?: any) =>
+  fetch(url, { method: 'POST', body: body ? JSON.stringify(body) : undefined })
+    .then(async (res) => {
+      if (!res.ok) {
+        const error = await res.json();
+
+        throw new StatusError(error.message, res.status);
+      }
+
+      return await res.json();
+    })
+    .then((data) => data as T);
+
 export const UseCases = {
   authenticateUser: {
     load: (input: TineInferInput<AuthenticateUser> | '' | undefined | false) =>
       useSwr(
-        ...([
-          input ? ['authenticateUser', input] : undefined,
-          input
-            ? () =>
-                fetch('/api/tine/authenticateUser', {
-                  method: 'POST',
-                  body: JSON.stringify(input),
-                })
-                  .then((res) => res.json())
-                  .then((data) => data as TineInferReturn<AuthenticateUser>)
-            : () => undefined,
-        ] as const)
+        input ? ['authenticateUser', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<AuthenticateUser>>(
+                '/api/tine/authenticateUser',
+                input
+              )
+          : () => undefined
       ),
     mutate: () =>
       useSWRMutation(
-        ...([
-          'authenticateUser',
-          (_: string, { arg }: { arg: TineInferInput<AuthenticateUser> }) => {
-            return fetch('/api/tine/authenticateUser', {
-              method: 'POST',
-              body: JSON.stringify(arg),
-            })
-              .then((res) => res.json())
-              .then((data) => data as TineInferReturn<AuthenticateUser>);
-          },
-        ] as const)
+        'authenticateUser',
+        (_: string, { arg }: { arg: TineInferInput<AuthenticateUser> }) =>
+          fetchData<TineInferReturn<AuthenticateUser>>(
+            '/api/tine/authenticateUser',
+            arg
+          )
       ),
-    getKey: () => (key: any) => key[0] === 'authenticateUser',
+    getKey: () => (key: any) => key && key[0] === 'authenticateUser',
   },
   company: {
     load: (input: TineInferInput<Company> | '' | undefined | false) =>
       useSwr(
-        ...([
-          input ? ['company', input] : undefined,
-          input
-            ? () =>
-                fetch('/api/tine/company', {
-                  method: 'POST',
-                  body: JSON.stringify(input),
-                })
-                  .then((res) => res.json())
-                  .then((data) => data as TineInferReturn<Company>)
-            : () => undefined,
-        ] as const)
+        input ? ['company', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<Company>>('/api/tine/company', input)
+          : () => undefined
       ),
     mutate: () =>
       useSWRMutation(
-        ...([
-          'company',
-          (_: string, { arg }: { arg: TineInferInput<Company> }) => {
-            return fetch('/api/tine/company', {
-              method: 'POST',
-              body: JSON.stringify(arg),
-            })
-              .then((res) => res.json())
-              .then((data) => data as TineInferReturn<Company>);
-          },
-        ] as const)
+        'company',
+        (_: string, { arg }: { arg: TineInferInput<Company> }) =>
+          fetchData<TineInferReturn<Company>>('/api/tine/company', arg)
       ),
-    getKey: () => (key: any) => key[0] === 'company',
+    getKey: () => (key: any) => key && key[0] === 'company',
   },
   hello: {
     load: (input: TineInferInput<Hello> | '' | undefined | false) =>
       useSwr(
-        ...([
-          input ? ['hello', input] : undefined,
-          input
-            ? () =>
-                fetch('/api/tine/hello', {
-                  method: 'POST',
-                  body: JSON.stringify(input),
-                })
-                  .then((res) => res.json())
-                  .then((data) => data as TineInferReturn<Hello>)
-            : () => undefined,
-        ] as const)
+        input ? ['hello', input] : undefined,
+        input
+          ? () => fetchData<TineInferReturn<Hello>>('/api/tine/hello', input)
+          : () => undefined
       ),
     mutate: () =>
       useSWRMutation(
-        ...([
-          'hello',
-          (_: string, { arg }: { arg: TineInferInput<Hello> }) => {
-            return fetch('/api/tine/hello', {
-              method: 'POST',
-              body: JSON.stringify(arg),
-            })
-              .then((res) => res.json())
-              .then((data) => data as TineInferReturn<Hello>);
-          },
-        ] as const)
+        'hello',
+        (_: string, { arg }: { arg: TineInferInput<Hello> }) =>
+          fetchData<TineInferReturn<Hello>>('/api/tine/hello', arg)
       ),
-    getKey: () => (key: any) => key[0] === 'hello',
+    getKey: () => (key: any) => key && key[0] === 'hello',
   },
   interviews: {
     load: (input: TineInferInput<Interviews> | '' | undefined | false) =>
       useSwr(
-        ...([
-          input ? ['interviews', input] : undefined,
-          input
-            ? () =>
-                fetch('/api/tine/interviews', {
-                  method: 'POST',
-                  body: JSON.stringify(input),
-                })
-                  .then((res) => res.json())
-                  .then((data) => data as TineInferReturn<Interviews>)
-            : () => undefined,
-        ] as const)
+        input ? ['interviews', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<Interviews>>(
+                '/api/tine/interviews',
+                input
+              )
+          : () => undefined
       ),
     mutate: () =>
       useSWRMutation(
-        ...([
-          'interviews',
-          (_: string, { arg }: { arg: TineInferInput<Interviews> }) => {
-            return fetch('/api/tine/interviews', {
-              method: 'POST',
-              body: JSON.stringify(arg),
-            })
-              .then((res) => res.json())
-              .then((data) => data as TineInferReturn<Interviews>);
-          },
-        ] as const)
+        'interviews',
+        (_: string, { arg }: { arg: TineInferInput<Interviews> }) =>
+          fetchData<TineInferReturn<Interviews>>('/api/tine/interviews', arg)
       ),
-    getKey: () => (key: any) => key[0] === 'interviews',
+    getKey: () => (key: any) => key && key[0] === 'interviews',
   },
   job: {
     load: (input: TineInferInput<Job> | '' | undefined | false) =>
       useSwr(
-        ...([
-          input ? ['job', input] : undefined,
-          input
-            ? () =>
-                fetch('/api/tine/job', {
-                  method: 'POST',
-                  body: JSON.stringify(input),
-                })
-                  .then((res) => res.json())
-                  .then((data) => data as TineInferReturn<Job>)
-            : () => undefined,
-        ] as const)
+        input ? ['job', input] : undefined,
+        input
+          ? () => fetchData<TineInferReturn<Job>>('/api/tine/job', input)
+          : () => undefined
       ),
     mutate: () =>
       useSWRMutation(
-        ...([
-          'job',
-          (_: string, { arg }: { arg: TineInferInput<Job> }) => {
-            return fetch('/api/tine/job', {
-              method: 'POST',
-              body: JSON.stringify(arg),
-            })
-              .then((res) => res.json())
-              .then((data) => data as TineInferReturn<Job>);
-          },
-        ] as const)
+        'job',
+        (_: string, { arg }: { arg: TineInferInput<Job> }) =>
+          fetchData<TineInferReturn<Job>>('/api/tine/job', arg)
       ),
-    getKey: () => (key: any) => key[0] === 'job',
+    getKey: () => (key: any) => key && key[0] === 'job',
   },
   jobs: {
     load: (input: TineInferInput<Jobs> | '' | undefined | false) =>
       useSwr(
-        ...([
-          input ? ['jobs', input] : undefined,
-          input
-            ? () =>
-                fetch('/api/tine/jobs', {
-                  method: 'POST',
-                  body: JSON.stringify(input),
-                })
-                  .then((res) => res.json())
-                  .then((data) => data as TineInferReturn<Jobs>)
-            : () => undefined,
-        ] as const)
+        input ? ['jobs', input] : undefined,
+        input
+          ? () => fetchData<TineInferReturn<Jobs>>('/api/tine/jobs', input)
+          : () => undefined
       ),
     mutate: () =>
       useSWRMutation(
-        ...([
-          'jobs',
-          (_: string, { arg }: { arg: TineInferInput<Jobs> }) => {
-            return fetch('/api/tine/jobs', {
-              method: 'POST',
-              body: JSON.stringify(arg),
-            })
-              .then((res) => res.json())
-              .then((data) => data as TineInferReturn<Jobs>);
-          },
-        ] as const)
+        'jobs',
+        (_: string, { arg }: { arg: TineInferInput<Jobs> }) =>
+          fetchData<TineInferReturn<Jobs>>('/api/tine/jobs', arg)
       ),
-    getKey: () => (key: any) => key[0] === 'jobs',
+    getKey: () => (key: any) => key && key[0] === 'jobs',
   },
   profile: {
     load: () =>
-      useSwr(
-        ...([
-          'profile',
-          () =>
-            fetch('/api/tine/profile', { method: 'POST' })
-              .then((res) => res.json())
-              .then((data) => data as TineInferReturn<Profile>),
-        ] as const)
+      useSwr('profile', () =>
+        fetchData<TineInferReturn<Profile>>('/api/tine/profile')
       ),
     getKey: () => 'profile',
   },
   sign: {
     load: () =>
-      useSwr(
-        ...([
-          'sign',
-          () =>
-            fetch('/api/tine/sign', { method: 'POST' })
-              .then((res) => res.json())
-              .then((data) => data as TineInferReturn<Sign>),
-        ] as const)
-      ),
+      useSwr('sign', () => fetchData<TineInferReturn<Sign>>('/api/tine/sign')),
     getKey: () => 'sign',
   },
 };

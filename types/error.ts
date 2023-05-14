@@ -1,12 +1,16 @@
-export abstract class StatusError extends Error {
-  abstract status: number;
+export class StatusError extends Error {
+  public status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = 'StatusError';
+    this.status = status;
+  }
 }
 
 export class AuthError extends StatusError {
-  public status: number = 401;
-
   constructor(message: string) {
-    super(message);
+    super(message, 401);
     this.name = 'AuthError';
   }
 }
