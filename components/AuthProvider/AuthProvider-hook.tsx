@@ -1,6 +1,7 @@
 import { TOKEN_COOKIE_KEY } from '@/config/auth';
 import { getCookieOptions } from '@/lib/cookie';
-import { useCallback } from 'react';
+import { StatusError } from '@/types';
+import { useCallback, useMemo } from 'react';
 import { useCookies } from 'react-cookie';
 
 export const useAuthProvider = () => {
@@ -18,5 +19,16 @@ export const useAuthProvider = () => {
     setCookie(TOKEN_COOKIE_KEY, cookieToken, getCookieOptions());
   }, []);
 
-  return { token, setToken };
+  const swrValue = useMemo(
+    () => ({
+      onError: (error: StatusError) => {
+        if (error.status !== 403) {
+          setToken(undefined);
+        }
+      },
+    }),
+    []
+  );
+
+  return { token, setToken, swrValue };
 };
