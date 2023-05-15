@@ -1,16 +1,17 @@
-export const formatValues = ({
+import { Profile } from '@/useCases/types';
+import { TineInferReturn } from 'tinejs';
+
+export const pickValues = ({
   firstName,
   lastName,
   linkedInProfile,
   bio,
-}: {
-  firstName?: string | null;
-  lastName?: string | null;
-  linkedInProfile?: string | null;
-  bio?: string | null;
-}) => ({
+}: Pick<
+  TineInferReturn<Profile>,
+  'firstName' | 'lastName' | 'linkedInProfile' | 'bio'
+>) => ({
   firstName,
   lastName,
   linkedInProfile,
-  bio: bio ?? null,
+  bio: bio,
 });

@@ -1,78 +1,63 @@
+import { mutate } from 'swr';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
-import {
-  UpdateProfile,
-  useRemoveResumeMutation,
-  useUpdateProfileMutation,
-} from '@/graphql';
+import { TOAST_OPTIONS } from '@/config';
+import { UseCases } from '@/useCases';
 
 import { updateProfileSchema } from './Profile-validations';
 import { TOAST_MESSAGE } from './Profile-constants';
-import { formatValues } from './Profile-functions';
-import { TOAST_OPTIONS } from '@/config';
-import { UseCases } from '@/useCases';
-import { mutate } from 'swr';
+import { pickValues } from './Profile-functions';
 
 export const useProfile = () => {
   const { data, isLoading, mutate: onUpload } = UseCases.profile.load();
 
-  const [{ fetching: removingResume }, removeResume] =
-    useRemoveResumeMutation();
+  const { trigger: updateProfile } = UseCases.updateProfile.mutate();
 
-  const [, updateProfile] = useUpdateProfileMutation();
-
-  const form = useForm<UpdateProfile>({
+  const form = useForm<Zod.infer<typeof updateProfileSchema>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(updateProfileSchema),
-    defaultValues: data,
+    resolver: zodResolver(updateProfileSchema),
+    defaultValues: data && pickValues(data),
   });
 
   const { reset } = form;
 
   useEffect(() => {
     if (!isLoading && data && !form.formState.isDirty) {
-      reset(data);
+      reset(pickValues(data));
     }
   }, [isLoading, reset, data]);
 
-  const handleSubmit = async (input: UpdateProfile) => {
-    const { error, data } = await updateProfile(
-      { input: formatValues(input) },
-      { additionalTypenames: ['User'] }
-    );
+  const handleSubmit = async (input: Zod.infer<typeof updateProfileSchema>) => {
+    try {
+      const data = await updateProfile(input);
 
-    if (error) {
+      toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
+
+      mutate(UseCases.profile.getKey());
+
+      if (data) {
+        reset(pickValues(data));
+      }
+    } catch (e) {
       toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
-
-      return;
-    }
-
-    toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
-
-    mutate(UseCases.profile.getKey());
-
-    if (data) {
-      reset({
-        firstName: data.updateProfile.firstName,
-        lastName: data.updateProfile.lastName,
-        linkedInProfile: data.updateProfile.linkedInProfile,
-        bio: data.updateProfile.bio,
-      });
     }
   };
 
   const resumeOnUpload = async (resumeFileName: string) => {
-    await updateProfile(
-      { input: { resumeFileName } },
-      { additionalTypenames: ['User'] }
-    );
+    await updateProfile({
+      resumeFileName,
+    });
+
+    mutate(UseCases.profile.getKey());
   };
 
   const onRemoveResume = async () => {
-    await removeResume({}, { additionalTypenames: ['User'] });
+    await updateProfile({
+      resumeFileName: null,
+    });
 
     mutate(UseCases.profile.getKey());
   };
@@ -83,7 +68,7 @@ export const useProfile = () => {
     fileName: data?.resumeFileName || undefined,
     onUpload: resumeOnUpload,
     onRemove: onRemoveResume,
-    isLoading: isLoading || removingResume,
+    isLoading: isLoading,
   };
 
   const src = data?.avatarUrl || undefined;
