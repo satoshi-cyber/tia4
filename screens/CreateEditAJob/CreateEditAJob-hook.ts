@@ -66,7 +66,6 @@ export const useCreateUpdateAJob = () => {
 
       await upsertJob({
         ...input,
-        deadline: input.deadline.toISOString(),
         id: String(jobId),
         companyId: companyId!,
         questions: input.questions!,
