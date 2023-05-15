@@ -4,8 +4,8 @@ import { TineInferReturn } from 'tinejs';
 
 export const formatValue = (job: TineInferReturn<Job>) => ({
   ...job,
-  deadline: formatISO(new Date(job.deadline), {
+  deadline: formatISO(job.deadline, {
     representation: 'date',
-  }) as unknown as Date,
+  }) as unknown as Date, // default value hack
   description: job.description ?? '',
 });

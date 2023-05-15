@@ -23,6 +23,7 @@ const useCases = useCasesOutput.map(([useCase, hasInput]) => ({
 }));
 
 const template = `
+import superjson from 'superjson';
 import useSwr from 'swr'
 import useSWRMutation from 'swr/mutation';
 import { TineInferReturn, TineInferInput } from 'tinejs';
@@ -33,15 +34,15 @@ import { StatusError } from '@/types'
 
 const fetchData =
   <T>(url: string, body?: any) =>
-    fetch(url, { method: 'POST', body: body ? JSON.stringify(body) : undefined })
+    fetch(\`\${url}?sj=true\`, { method: 'POST', body: body ? JSON.stringify(superjson.serialize(body)) : undefined })
       .then(async (res) => {
         if (!res.ok) {
-          const error = await res.json()
+          const error = superjson.deserialize<{ message: string }>(await res.json())
 
           throw new StatusError(error.message, res.status)
         }
 
-        return await res.json()
+        return superjson.deserialize(await res.json())
       })
       .then((data) => data as T);
 

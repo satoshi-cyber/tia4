@@ -9,7 +9,7 @@ const input = tineInput(
     id: z.string().optional(),
     companyId: z.string(),
     title: z.string(),
-    deadline: z.coerce.date(),
+    deadline: z.date(),
     description: z.string().optional().nullable(),
     questions: z.array(questionSchema),
   })

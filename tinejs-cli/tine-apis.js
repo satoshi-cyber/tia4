@@ -11,6 +11,7 @@ const useCases = useCasesOutput.map(([useCase, hasInput]) => ({
 }));
 
 const template = `
+import superjson from 'superjson';
 import { StatusError } from '@/types';
 import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs'
@@ -48,16 +49,16 @@ const handler = async (req: NextRequest) => {
     const ctx = tineCtx({ headers: req.headers, cookies: req.cookies })
 
     if(endpoint in useCasesWithInput){
-      const json = await req.json();
+      const input = superjson.deserialize(await req.json());
 
-      const data = await useCasesWithInput[endpoint as keyof typeof useCasesWithInput].rawInput(json).run(ctx);
+      const data = await useCasesWithInput[endpoint as keyof typeof useCasesWithInput].rawInput(input).run(ctx);
 
-      return NextResponse.json(data);
+      return NextResponse.json(superjson.serialize(data));
     } 
 
     const data = await useCases[endpoint as keyof typeof useCases].run(ctx);
 
-    return NextResponse.json(data);
+    return NextResponse.json(superjson.serialize(data));
   } catch (e: any) {
     if (e instanceof StatusError) {
       return NextResponse.json({ error: e.message }, { status: e.status });
