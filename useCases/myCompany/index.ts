@@ -34,7 +34,7 @@ const avatarUploadUrl = presignedPut({
   expires: 3600,
 });
 
-const company = extend([
+const myCompany = extend([
   tineVar(companyRow),
   {
     avatarUrl: tineVar(avatarUrl),
@@ -42,5 +42,4 @@ const company = extend([
   },
 ]);
 
-// Is used in join company and needs to be public endpoint
-export default company.withInput(input);
+export default myCompany.withInput(input);
