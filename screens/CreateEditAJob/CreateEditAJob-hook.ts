@@ -4,9 +4,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { NewJob, useCreateJobMutation, useUpdateJobMutation } from '@/graphql';
+import { NewJob } from '@/graphql';
 import { TOAST_OPTIONS, URLS } from '@/config';
 import { useUser } from '@/hooks';
+import * as yup from 'yup';
 
 import { createAJobSchema } from './CreateEditAJob-validations';
 import {
@@ -31,8 +32,7 @@ export const useCreateUpdateAJob = () => {
     typeof jobId === 'string' && companyId && { companyId, id: jobId }
   );
 
-  const [, createJob] = useCreateJobMutation();
-  const [, updateJob] = useUpdateJobMutation();
+  const { trigger: upsertJob } = UseCases.upsertJob.mutate();
   const { trigger: deleteJob } = UseCases.deleteJob.mutate();
 
   const form = useForm<NewJob>({
@@ -57,32 +57,34 @@ export const useCreateUpdateAJob = () => {
     }
   }, [isLoading, reset]);
 
-  const handleSubmit = async (input: NewJob) => {
-    const { error } = editJob
-      ? await updateJob(
-          { input: { ...input, id: String(jobId) }, companyId: companyId! },
-          { additionalTypenames: ['Job'] }
-        )
-      : await createJob(
-          { input, companyId: companyId! },
-          { additionalTypenames: ['Job'] }
-        );
-
-    mutate(UseCases.job.getKey());
-
+  const handleSubmit = async (
+    input: yup.InferType<typeof createAJobSchema>
+  ) => {
     const toastMessage = editJob
       ? TOAST_MESSAGE.EDIT_JOB
       : TOAST_MESSAGE.ADD_JOB;
 
-    if (error) {
+    try {
+      console.log(input);
+
+      await upsertJob({
+        ...input,
+        deadline: input.deadline.toISOString(),
+        id: String(jobId),
+        companyId: companyId!,
+        questions: input.questions!,
+      });
+
+      mutate(UseCases.job.getKey());
+
+      toast.success(toastMessage.success, TOAST_OPTIONS);
+
+      setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY);
+    } catch (e) {
       toast.error(toastMessage.error, TOAST_OPTIONS);
 
       return;
     }
-
-    toast.success(toastMessage.success, TOAST_OPTIONS);
-
-    setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY);
   };
 
   const handleDeleteJob = async () => {

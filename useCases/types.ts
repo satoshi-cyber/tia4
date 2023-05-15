@@ -9,6 +9,7 @@ import { default as jobs } from './jobs';
 import { default as myCompany } from './myCompany';
 import { default as myInterviews } from './myInterviews';
 import { default as profile } from './profile';
+import { default as upsertJob } from './upsertJob';
 
 export type AuthenticateUser = typeof authenticateUser;
 export type Company = typeof company;
@@ -21,3 +22,4 @@ export type Jobs = typeof jobs;
 export type MyCompany = typeof myCompany;
 export type MyInterviews = typeof myInterviews;
 export type Profile = typeof profile;
+export type UpsertJob = typeof upsertJob;

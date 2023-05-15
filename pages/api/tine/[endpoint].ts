@@ -12,6 +12,7 @@ import jobs from '@/useCases/jobs';
 import myCompany from '@/useCases/myCompany';
 import myInterviews from '@/useCases/myInterviews';
 import profile from '@/useCases/profile';
+import upsertJob from '@/useCases/upsertJob';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -26,6 +27,7 @@ const useCasesWithInput = {
   job: job,
   jobs: jobs,
   myCompany: myCompany,
+  upsertJob: upsertJob,
 };
 
 const useCases = {

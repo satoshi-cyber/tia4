@@ -13,6 +13,7 @@ import type { Jobs } from './types';
 import type { MyCompany } from './types';
 import type { MyInterviews } from './types';
 import type { Profile } from './types';
+import type { UpsertJob } from './types';
 
 const fetchData = <T>(url: string, body?: any) =>
   fetch(url, { method: 'POST', body: body ? JSON.stringify(body) : undefined })
@@ -203,5 +204,25 @@ export const UseCases = {
         fetchData<TineInferReturn<Profile>>('/api/tine/profile')
       ),
     getKey: () => 'profile',
+  },
+  upsertJob: {
+    load: (input: TineInferInput<UpsertJob> | '' | undefined | false) =>
+      useSwr(
+        input ? ['upsertJob', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<UpsertJob>>(
+                '/api/tine/upsertJob',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'upsertJob',
+        (_: string, { arg }: { arg: TineInferInput<UpsertJob> }) =>
+          fetchData<TineInferReturn<UpsertJob>>('/api/tine/upsertJob', arg)
+      ),
+    getKey: () => (key: any) => key && key[0] === 'upsertJob',
   },
 };
