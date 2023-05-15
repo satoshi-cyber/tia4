@@ -1,12 +1,8 @@
 import { z } from 'zod';
 
 export const updateProfileSchema = z.object({
-  firstName: z
-    .string({ required_error: 'You must enter your name' })
-    .nullable(),
-  lastName: z
-    .string({ required_error: 'You must enter your last name' })
-    .nullish(),
+  firstName: z.string().min(1, 'You must enter your name'),
+  lastName: z.string().min(1, 'You must enter your last name'),
   linkedInProfile: z.union([
     z.string().url('You must provide a valid url').nullish(),
     z.literal(''),

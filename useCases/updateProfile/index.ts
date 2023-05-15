@@ -6,8 +6,8 @@ import { tineInput, tineVar } from 'tinejs';
 
 const input = tineInput(
   z.object({
-    firstName: z.string().optional().nullable(),
-    lastName: z.string().optional().nullable(),
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
     linkedInProfile: z.string().optional().nullable(),
     resumeFileName: z.string().optional().nullable(),
     bio: z.string().optional().nullable(),

@@ -10,8 +10,8 @@ export const pickValues = ({
   TineInferReturn<Profile>,
   'firstName' | 'lastName' | 'linkedInProfile' | 'bio'
 >) => ({
-  firstName,
-  lastName,
+  firstName: firstName ?? undefined,
+  lastName: lastName ?? undefined,
   linkedInProfile,
   bio: bio,
 });
