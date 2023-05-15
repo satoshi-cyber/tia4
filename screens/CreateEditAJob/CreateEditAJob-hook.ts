@@ -1,13 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { NewJob } from '@/graphql';
+
 import { TOAST_OPTIONS, URLS } from '@/config';
 import { useUser } from '@/hooks';
-import * as yup from 'yup';
 
 import { createAJobSchema } from './CreateEditAJob-validations';
 import {
@@ -35,10 +34,10 @@ export const useCreateUpdateAJob = () => {
   const { trigger: upsertJob } = UseCases.upsertJob.mutate();
   const { trigger: deleteJob } = UseCases.deleteJob.mutate();
 
-  const form = useForm<NewJob>({
+  const form = useForm<Zod.infer<typeof createAJobSchema>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(createAJobSchema),
+    resolver: zodResolver(createAJobSchema),
     defaultValues: data
       ? formatValue(data)
       : {
@@ -52,14 +51,12 @@ export const useCreateUpdateAJob = () => {
   const { reset } = form;
 
   useEffect(() => {
-    if (!isLoading && data) {
-      reset(formatValue(data));
+    if (data) {
+      reset(formatValue(data), { keepDirtyValues: true, keepDirty: true });
     }
-  }, [isLoading, reset]);
+  }, [data, reset]);
 
-  const handleSubmit = async (
-    input: yup.InferType<typeof createAJobSchema>
-  ) => {
+  const handleSubmit = async (input: Zod.infer<typeof createAJobSchema>) => {
     const toastMessage = editJob
       ? TOAST_MESSAGE.EDIT_JOB
       : TOAST_MESSAGE.ADD_JOB;

@@ -27,7 +27,13 @@ const InputField: React.FC<InputFieldProps> = ({
           skeletonProps={{ width: 80 }}
         />
       )}
-      <Input {...register(name)} {...restProps} />
+      <Input
+        {...register(name, {
+          valueAsDate:
+            restProps.type === 'date' || restProps.type === 'datetime-local',
+        })}
+        {...restProps}
+      />
       <p
         className={clsx(
           'transition-all text-sm text-red-600 -mt-2 text-left text overflow-hidden',
