@@ -14,6 +14,7 @@ import type { MyCompany } from './types';
 import type { MyInterviews } from './types';
 import type { Profile } from './types';
 import type { UpdateProfile } from './types';
+import type { UpdateResume } from './types';
 import type { UpsertJob } from './types';
 
 const fetchData = <T>(url: string, body?: any) =>
@@ -228,6 +229,29 @@ export const UseCases = {
           )
       ),
     getKey: () => (key: any) => key && key[0] === 'updateProfile',
+  },
+  updateResume: {
+    load: (input: TineInferInput<UpdateResume> | '' | undefined | false) =>
+      useSwr(
+        input ? ['updateResume', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<UpdateResume>>(
+                '/api/tine/updateResume',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'updateResume',
+        (_: string, { arg }: { arg: TineInferInput<UpdateResume> }) =>
+          fetchData<TineInferReturn<UpdateResume>>(
+            '/api/tine/updateResume',
+            arg
+          )
+      ),
+    getKey: () => (key: any) => key && key[0] === 'updateResume',
   },
   upsertJob: {
     load: (input: TineInferInput<UpsertJob> | '' | undefined | false) =>

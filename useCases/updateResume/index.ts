@@ -6,10 +6,7 @@ import { tineInput, tineVar } from 'tinejs';
 
 const input = tineInput(
   z.object({
-    firstName: z.string(),
-    lastName: z.string(),
-    linkedInProfile: z.string().optional().nullable(),
-    bio: z.string().optional().nullable(),
+    resumeFileName: z.string().nullable(),
   })
 );
 
@@ -20,11 +17,7 @@ const updateProfile = prisma.user.update({
     id: tineVar(claims, 'userId'),
   },
   data: {
-    onboarded: true,
-    firstName: tineVar(input, 'firstName'),
-    lastName: tineVar(input, 'lastName'),
-    linkedInProfile: tineVar(input, 'linkedInProfile'),
-    bio: tineVar(input, 'bio'),
+    resumeFileName: tineVar(input, 'resumeFileName'),
   },
 });
 

@@ -13,6 +13,7 @@ import myCompany from '@/useCases/myCompany';
 import myInterviews from '@/useCases/myInterviews';
 import profile from '@/useCases/profile';
 import updateProfile from '@/useCases/updateProfile';
+import updateResume from '@/useCases/updateResume';
 import upsertJob from '@/useCases/upsertJob';
 
 export const config = {
@@ -29,6 +30,7 @@ const useCasesWithInput = {
   jobs: jobs,
   myCompany: myCompany,
   updateProfile: updateProfile,
+  updateResume: updateResume,
   upsertJob: upsertJob,
 };
 

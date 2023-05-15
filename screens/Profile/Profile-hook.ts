@@ -14,6 +14,7 @@ export const useProfile = () => {
   const { data, isLoading, mutate: onUpload } = UseCases.profile.load();
 
   const { trigger: updateProfile } = UseCases.updateProfile.mutate();
+  const { trigger: updateResume } = UseCases.updateResume.mutate();
 
   const form = useForm<Zod.infer<typeof updateProfileSchema>>({
     mode: 'onBlur',
@@ -47,7 +48,7 @@ export const useProfile = () => {
   };
 
   const resumeOnUpload = async (resumeFileName: string) => {
-    await updateProfile({
+    await updateResume({
       resumeFileName,
     });
 
@@ -55,7 +56,7 @@ export const useProfile = () => {
   };
 
   const onRemoveResume = async () => {
-    await updateProfile({
+    await updateResume({
       resumeFileName: null,
     });
 
