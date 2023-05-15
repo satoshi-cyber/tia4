@@ -1,4 +1,8 @@
-import { Company } from "@/graphql";
+import { MyCompany } from '@/useCases/types';
+import { TineInferReturn } from 'tinejs';
 
-export const formatDefaultValues = ({ name, description, website }: Company) =>
-  ({ name, description, website })
+export const formatDefaultValues = ({
+  name,
+  description,
+  website,
+}: TineInferReturn<MyCompany>) => ({ name, description, website });

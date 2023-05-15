@@ -28,7 +28,7 @@ const EditCompany: React.FC = () => {
     handleSubmit,
     form,
     submitting,
-    fetching,
+    isLoading,
     avatar,
     avatarUploadUrl,
     onUpload,
@@ -38,7 +38,7 @@ const EditCompany: React.FC = () => {
   return (
     <Layout.Default>
       <Title {...TITLE_PROPS} after={<SettingsMenu items={settingItems} />} />
-      <LoadingProvider isLoading={fetching}>
+      <LoadingProvider isLoading={isLoading}>
         <EditAvatar
           src={avatar}
           uploadUrl={avatarUploadUrl}

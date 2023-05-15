@@ -8,6 +8,7 @@ import hello from '@/useCases/hello';
 import interviews from '@/useCases/interviews';
 import job from '@/useCases/job';
 import jobs from '@/useCases/jobs';
+import myCompany from '@/useCases/myCompany';
 import myInterviews from '@/useCases/myInterviews';
 import profile from '@/useCases/profile';
 import sign from '@/useCases/sign';
@@ -24,6 +25,7 @@ const useCasesWithInput = {
   interviews: interviews,
   job: job,
   jobs: jobs,
+  myCompany: myCompany,
 };
 
 const useCases = {

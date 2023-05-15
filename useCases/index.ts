@@ -9,6 +9,7 @@ import type { Hello } from './types';
 import type { Interviews } from './types';
 import type { Job } from './types';
 import type { Jobs } from './types';
+import type { MyCompany } from './types';
 import type { MyInterviews } from './types';
 import type { Profile } from './types';
 import type { Sign } from './types';
@@ -157,6 +158,26 @@ export const UseCases = {
           fetchData<TineInferReturn<Jobs>>('/api/tine/jobs', arg)
       ),
     getKey: () => (key: any) => key && key[0] === 'jobs',
+  },
+  myCompany: {
+    load: (input: TineInferInput<MyCompany> | '' | undefined | false) =>
+      useSwr(
+        input ? ['myCompany', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<MyCompany>>(
+                '/api/tine/myCompany',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'myCompany',
+        (_: string, { arg }: { arg: TineInferInput<MyCompany> }) =>
+          fetchData<TineInferReturn<MyCompany>>('/api/tine/myCompany', arg)
+      ),
+    getKey: () => (key: any) => key && key[0] === 'myCompany',
   },
   myInterviews: {
     load: () =>

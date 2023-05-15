@@ -5,12 +5,11 @@ import { useRouter } from 'next/router';
 import {
   UpdateCompany,
   useDeleteCompanyMutation,
-  useEditCompanyQuery,
   useUpdateCompanyMutation,
 } from '@/graphql';
 import { useUser } from '@/hooks';
 import { TOAST_OPTIONS, URLS } from '@/config';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import { setupCompanySchema } from './EditCompany-validations';
 import { PUSH_DELAY, TOAST_MESSAGE } from './EditCompany-constants';
@@ -22,14 +21,10 @@ export const useEditCompany = () => {
   const router = useRouter();
   const { companyId, refreshToken, fetching: refeshingToken } = useUser();
 
-  const context = useMemo(() => ({ additionalTypenames: ['Company'] }), []);
+  const { data, isLoading } = UseCases.myCompany.load(
+    companyId && { companyId }
+  );
 
-  const [{ fetching, data }] = useEditCompanyQuery({
-    context,
-    variables: { companyId: companyId || '' },
-    pause: !companyId,
-    requestPolicy: 'cache-first',
-  });
   const [{ fetching: updatingCompany }, updateCompany] =
     useUpdateCompanyMutation();
   const [{ fetching: deletingCompany }, deleteCompany] =
@@ -37,13 +32,13 @@ export const useEditCompany = () => {
 
   const submitting = updatingCompany || deletingCompany || refeshingToken;
 
-  const avatar = data?.company?.avatarUrl || undefined;
-  const avatarUploadUrl = data?.company?.avatarUploadUrl || undefined;
+  const avatar = data?.avatarUrl || undefined;
+  const avatarUploadUrl = data?.avatarUploadUrl || undefined;
 
   const onUpload = () => {
     updateCompany({
       companyId: companyId!,
-      input: data?.company ? formatDefaultValues(data?.company) : {},
+      input: data ? formatDefaultValues(data) : {},
     });
   };
 
@@ -51,16 +46,16 @@ export const useEditCompany = () => {
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: yupResolver(setupCompanySchema),
-    defaultValues: data ? formatDefaultValues(data?.company) : undefined,
+    defaultValues: data ? formatDefaultValues(data) : undefined,
   });
 
   const { reset } = form;
 
   useEffect(() => {
-    if (!fetching && data) {
-      reset(formatDefaultValues(data?.company));
+    if (!isLoading && data) {
+      reset(formatDefaultValues(data));
     }
-  }, [fetching, reset]);
+  }, [isLoading, reset]);
 
   const handleSubmit = async (input: UpdateCompany) => {
     if (!companyId) return;
@@ -72,6 +67,7 @@ export const useEditCompany = () => {
       { additionalTypenames: ['Company'] }
     );
 
+    mutate(UseCases.myCompany.getKey());
     mutate(UseCases.company.getKey());
 
     if (error) {
@@ -115,7 +111,7 @@ export const useEditCompany = () => {
     form,
     handleSubmit,
     submitting,
-    fetching,
+    isLoading,
     avatar,
     avatarUploadUrl,
     onUpload,
