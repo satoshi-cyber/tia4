@@ -4,12 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import {
-  NewJob,
-  useCreateJobMutation,
-  useDeleteJobMutation,
-  useUpdateJobMutation,
-} from '@/graphql';
+import { NewJob, useCreateJobMutation, useUpdateJobMutation } from '@/graphql';
 import { TOAST_OPTIONS, URLS } from '@/config';
 import { useUser } from '@/hooks';
 
@@ -38,7 +33,7 @@ export const useCreateUpdateAJob = () => {
 
   const [, createJob] = useCreateJobMutation();
   const [, updateJob] = useUpdateJobMutation();
-  const [, deleteJob] = useDeleteJobMutation();
+  const { trigger: deleteJob } = UseCases.deleteJob.mutate();
 
   const form = useForm<NewJob>({
     mode: 'onBlur',
@@ -91,22 +86,20 @@ export const useCreateUpdateAJob = () => {
   };
 
   const handleDeleteJob = async () => {
-    const { error } = await deleteJob({
-      id: String(jobId),
-      companyId: companyId!,
-    });
-
     const toastMessage = TOAST_MESSAGE.DELETE_JOB;
 
-    if (error) {
+    try {
+      await deleteJob({
+        id: String(jobId),
+        companyId: companyId!,
+      });
+
+      toast.success(toastMessage.success, TOAST_OPTIONS);
+
+      setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY);
+    } catch (e) {
       toast.error(toastMessage.error, TOAST_OPTIONS);
-
-      return;
     }
-
-    toast.success(toastMessage.success, TOAST_OPTIONS);
-
-    setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY);
   };
 
   useEffect(() => {

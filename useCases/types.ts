@@ -1,6 +1,7 @@
 import { default as authenticateUser } from './authenticateUser';
 import { default as company } from './company';
 import { default as companyMembers } from './companyMembers';
+import { default as deleteJob } from './deleteJob';
 import { default as health } from './health';
 import { default as interviews } from './interviews';
 import { default as job } from './job';
@@ -12,6 +13,7 @@ import { default as profile } from './profile';
 export type AuthenticateUser = typeof authenticateUser;
 export type Company = typeof company;
 export type CompanyMembers = typeof companyMembers;
+export type DeleteJob = typeof deleteJob;
 export type Health = typeof health;
 export type Interviews = typeof interviews;
 export type Job = typeof job;

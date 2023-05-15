@@ -5,6 +5,7 @@ import { StatusError } from '@/types';
 import type { AuthenticateUser } from './types';
 import type { Company } from './types';
 import type { CompanyMembers } from './types';
+import type { DeleteJob } from './types';
 import type { Health } from './types';
 import type { Interviews } from './types';
 import type { Job } from './types';
@@ -89,6 +90,26 @@ export const UseCases = {
           )
       ),
     getKey: () => (key: any) => key && key[0] === 'companyMembers',
+  },
+  deleteJob: {
+    load: (input: TineInferInput<DeleteJob> | '' | undefined | false) =>
+      useSwr(
+        input ? ['deleteJob', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<DeleteJob>>(
+                '/api/tine/deleteJob',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'deleteJob',
+        (_: string, { arg }: { arg: TineInferInput<DeleteJob> }) =>
+          fetchData<TineInferReturn<DeleteJob>>('/api/tine/deleteJob', arg)
+      ),
+    getKey: () => (key: any) => key && key[0] === 'deleteJob',
   },
   health: {
     load: () =>
