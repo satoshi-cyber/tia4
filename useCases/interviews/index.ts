@@ -1,9 +1,11 @@
+import { z } from 'zod';
 import getClaims from '@/actions/auth/getClaims';
 import extendArray from '@/actions/extendArray';
 import prisma from '@/actions/prisma';
 import presignedGet from '@/actions/s3/presignedGet';
 import { payload, tineInput, tineVar } from 'tinejs';
-import { z } from 'zod';
+
+import { getQueryParams } from './interview-functions';
 
 const input = tineInput(
   z.object({
@@ -16,44 +18,7 @@ const input = tineInput(
 const claims = getClaims({ companyId: tineVar(input, 'companyId') });
 
 const parts = payload(
-  tineVar(input, ({ query }) =>
-    query
-      ? {
-          OR: query
-            .split(' ')
-            .map(
-              (part) =>
-                [
-                  {
-                    interviewee: {
-                      email: {
-                        contains: part,
-                        mode: 'insensitive',
-                      },
-                    },
-                  },
-                  {
-                    interviewee: {
-                      firstName: {
-                        contains: part,
-                        mode: 'insensitive',
-                      },
-                    },
-                  },
-                  {
-                    interviewee: {
-                      lastName: {
-                        contains: part,
-                        mode: 'insensitive',
-                      },
-                    },
-                  },
-                ] as const
-            )
-            .flat(),
-        }
-      : undefined
-  )
+  tineVar(input, ({ query }) => (query ? getQueryParams(query) : undefined))
 );
 
 const data = prisma.interview.findMany({
