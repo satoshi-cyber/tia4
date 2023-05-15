@@ -1,5 +1,6 @@
-import { CompanyInvite, CompanyMember, User } from "@/graphql";
+import { CompanyMembers } from '@/useCases/types';
+import { TineInferReturn } from 'tinejs';
 
 export interface ItemProps {
-  member: Pick<CompanyMember, 'role'> & { user: Pick<User, 'firstName' | 'lastName' | 'id' | 'avatarUrl' | 'email'> } | CompanyInvite
+  member: TineInferReturn<CompanyMembers>[0];
 }

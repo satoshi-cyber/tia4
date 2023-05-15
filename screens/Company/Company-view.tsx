@@ -30,7 +30,7 @@ const Company = () => {
     onSubmit,
     members,
     handleInviteTeamMembers,
-    fetching,
+    isLoading,
     isAdmin,
   } = useCompany();
 
@@ -62,7 +62,7 @@ const Company = () => {
               before={<Icon {...INVITE_TEAM_MEMBERS_ICON_PROPS} />}
             />
           )}
-          <LoadingProvider isLoading={fetching}>
+          <LoadingProvider isLoading={isLoading}>
             <div className={CLASS_NAMES.listContainer}>
               {members.map((member) => (
                 <Item

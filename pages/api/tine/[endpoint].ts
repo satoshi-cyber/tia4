@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs';
 import authenticateUser from '@/useCases/authenticateUser';
 import company from '@/useCases/company';
+import companyMembers from '@/useCases/companyMembers';
 import hello from '@/useCases/hello';
 import interviews from '@/useCases/interviews';
 import job from '@/useCases/job';
@@ -18,6 +19,7 @@ export const config = {
 const useCasesWithInput = {
   authenticateUser: authenticateUser,
   company: company,
+  companyMembers: companyMembers,
   hello: hello,
   interviews: interviews,
   job: job,

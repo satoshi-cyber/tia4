@@ -4,6 +4,7 @@ import { TineInferReturn, TineInferInput } from 'tinejs';
 import { StatusError } from '@/types';
 import type { AuthenticateUser } from './types';
 import type { Company } from './types';
+import type { CompanyMembers } from './types';
 import type { Hello } from './types';
 import type { Interviews } from './types';
 import type { Job } from './types';
@@ -65,6 +66,29 @@ export const UseCases = {
           fetchData<TineInferReturn<Company>>('/api/tine/company', arg)
       ),
     getKey: () => (key: any) => key && key[0] === 'company',
+  },
+  companyMembers: {
+    load: (input: TineInferInput<CompanyMembers> | '' | undefined | false) =>
+      useSwr(
+        input ? ['companyMembers', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<CompanyMembers>>(
+                '/api/tine/companyMembers',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'companyMembers',
+        (_: string, { arg }: { arg: TineInferInput<CompanyMembers> }) =>
+          fetchData<TineInferReturn<CompanyMembers>>(
+            '/api/tine/companyMembers',
+            arg
+          )
+      ),
+    getKey: () => (key: any) => key && key[0] === 'companyMembers',
   },
   hello: {
     load: (input: TineInferInput<Hello> | '' | undefined | false) =>

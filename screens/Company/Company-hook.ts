@@ -1,18 +1,23 @@
 import { TOAST_OPTIONS } from '@/config';
-import { CompanyInvite, CompanyMemberRole, useInviteMemberMutation, useMembersQuery } from '@/graphql';
+import {
+  CompanyInvite,
+  CompanyMemberRole,
+  useInviteMemberMutation,
+} from '@/graphql';
 import { useUser } from '@/hooks';
-import { useLayoutEffect, useMemo, useState } from 'react';
+import { UseCases } from '@/useCases';
+import { useLayoutEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { mutate } from 'swr';
 
-import {
-  SKELETON_MEMBERS, TOAST_MESSAGE,
-} from './Company-constants';
+import { SKELETON_MEMBERS, TOAST_MESSAGE } from './Company-constants';
 
 export const useCompany = () => {
   const { companyId, companyRole } = useUser();
 
-  const [{ fetching: submitting }, inviteTeamMember] = useInviteMemberMutation()
+  const [{ fetching: submitting }, inviteTeamMember] =
+    useInviteMemberMutation();
 
   const [inviteTeamMembers, setInviteTeamMembers] = useState(false);
 
@@ -34,26 +39,31 @@ export const useCompany = () => {
 
   const onSubmit = async (data: { teamMembers: CompanyInvite[] }) => {
     const invites = data.teamMembers.map(async (invite) => {
-      const res =
-        await inviteTeamMember({ companyId: companyId!, input: invite }, { additionalTypenames: ['CompanyInvite'] })
+      const res = await inviteTeamMember(
+        { companyId: companyId!, input: invite },
+        { additionalTypenames: ['CompanyInvite'] }
+      );
 
       if (res.error) {
-        throw res.error
+        throw res.error;
       }
+    });
 
-    })
-
-    const toastMessage = invites.length === 1 ? TOAST_MESSAGE.one : TOAST_MESSAGE.many
+    const toastMessage =
+      invites.length === 1 ? TOAST_MESSAGE.one : TOAST_MESSAGE.many;
 
     try {
-      await Promise.all(invites)
+      await Promise.all(invites);
 
-      toast.success(toastMessage.success, TOAST_OPTIONS)
+      toast.success(toastMessage.success, TOAST_OPTIONS);
+
+      mutate(UseCases.companyMembers.getKey());
     } catch (e) {
-      toast.error(toastMessage.error, TOAST_OPTIONS)
+      toast.error(toastMessage.error, TOAST_OPTIONS);
     } finally {
       form.reset();
-      setInviteTeamMembers(false)
+
+      setInviteTeamMembers(false);
     }
   };
 
@@ -61,28 +71,24 @@ export const useCompany = () => {
     setInviteTeamMembersVisible(inviteTeamMembers);
   }, [inviteTeamMembers]);
 
-  const context = useMemo(() => ({ additionalTypenames: ['CompanyInvite', 'CompanyMember'] }), []);
+  const { data, isLoading } = UseCases.companyMembers.load(
+    companyId && { companyId }
+  );
 
-  const [{ data, fetching }] = useMembersQuery({
-    variables: { companyId: companyId! },
-    pause: !companyId,
-    context
-  });
+  const members = isLoading ? SKELETON_MEMBERS : data || [];
 
-  const members = fetching ? SKELETON_MEMBERS : data?.members || [];
-
-  const isAdmin = companyRole === CompanyMemberRole.AdminMember
+  const isAdmin = companyRole === CompanyMemberRole.AdminMember;
 
   return {
     form,
     members,
-    fetching,
+    isLoading,
     submitting,
     handleCloseForm,
     onSubmit,
     handleInviteTeamMembers,
     inviteTeamMembers,
     inviteTeamMembersVisible,
-    isAdmin
-  }
+    isAdmin,
+  };
 };

@@ -1,7 +1,13 @@
 import { TOAST_OPTIONS } from '@/config';
-import { CompanyMemberRole, useDeleteInviteMutation, useDeleteMemberMutation } from '@/graphql';
+import {
+  CompanyMemberRole,
+  useDeleteInviteMutation,
+  useDeleteMemberMutation,
+} from '@/graphql';
 import { useUser } from '@/hooks';
+import { UseCases } from '@/useCases';
 import { toast } from 'react-toastify';
+import { mutate } from 'swr';
 
 import { ROLE_LABEL, TOAST_MESSAGE } from './Item-constants';
 import { ItemProps } from './Item-types';
@@ -9,17 +15,23 @@ import { ItemProps } from './Item-types';
 export const useItem = ({ member }: ItemProps) => {
   const { claims, companyRole, companyId } = useUser();
 
-  const [{ fetching: deletingInvite }, deleteInvite] = useDeleteInviteMutation()
-  const [{ fetching: deletingMember }, deleteMember] = useDeleteMemberMutation()
+  const [{ fetching: deletingInvite }, deleteInvite] =
+    useDeleteInviteMutation();
+  const [{ fetching: deletingMember }, deleteMember] =
+    useDeleteMemberMutation();
 
   const buttonIcon = 'HiTrash';
 
   const label =
     'recipientEmail' in member
       ? member.recipientEmail
-      : member.user.firstName ? `${member.user.firstName} ${member.user.lastName}` : member.user.email;
+      : member.user.firstName
+      ? `${member.user.firstName} ${member.user.lastName}`
+      : member.user.email;
 
-  const roleLabel = `(${'recipientEmail' in member ? 'invited' : ROLE_LABEL[member.role]})`;
+  const roleLabel = `(${
+    'recipientEmail' in member ? 'invited' : ROLE_LABEL[member.role]
+  })`;
 
   const avatar = ('user' in member && member.user.avatarUrl) || '';
 
@@ -27,45 +39,52 @@ export const useItem = ({ member }: ItemProps) => {
     companyRole === CompanyMemberRole.AdminMember &&
     ('recipientEmail' in member || member.user.id !== claims?.userId);
 
-  const submitting = deletingInvite || deletingMember
+  const submitting = deletingInvite || deletingMember;
 
   const handleDeleteInvite = async () => {
     if (!('recipientEmail' in member)) {
-      return
+      return;
     }
 
-    const toastMessage = TOAST_MESSAGE.deleteInvite
+    const toastMessage = TOAST_MESSAGE.deleteInvite;
 
     try {
-      await deleteInvite({ companyId: companyId!, recipientEmail: member.recipientEmail }, { additionalTypenames: ['CompanyInvite'] })
+      await deleteInvite(
+        { companyId: companyId!, recipientEmail: member.recipientEmail },
+        { additionalTypenames: ['CompanyInvite'] }
+      );
 
-      toast.success(toastMessage.success, TOAST_OPTIONS)
+      mutate(UseCases.companyMembers.getKey());
 
+      toast.success(toastMessage.success, TOAST_OPTIONS);
     } catch (e) {
-      toast.error(toastMessage.error, TOAST_OPTIONS)
+      toast.error(toastMessage.error, TOAST_OPTIONS);
     }
-
-  }
+  };
 
   const handleDeleteMember = async () => {
     if (!('user' in member)) {
-      return
+      return;
     }
 
-    const toastMessage = TOAST_MESSAGE.deleteMember
+    const toastMessage = TOAST_MESSAGE.deleteMember;
 
     try {
-      await deleteMember({ companyId: companyId!, userId: member.user.id }, { additionalTypenames: ['CompanyMember'] })
+      await deleteMember(
+        { companyId: companyId!, userId: member.user.id },
+        { additionalTypenames: ['CompanyMember'] }
+      );
 
-      toast.success(toastMessage.success, TOAST_OPTIONS)
+      mutate(UseCases.companyMembers.getKey());
 
+      toast.success(toastMessage.success, TOAST_OPTIONS);
     } catch (e) {
-      toast.error(toastMessage.error, TOAST_OPTIONS)
+      toast.error(toastMessage.error, TOAST_OPTIONS);
     }
+  };
 
-  }
-
-  const handleClick = 'recipientEmail' in member ? handleDeleteInvite : handleDeleteMember
+  const handleClick =
+    'recipientEmail' in member ? handleDeleteInvite : handleDeleteMember;
 
   return {
     buttonIcon,
@@ -74,6 +93,6 @@ export const useItem = ({ member }: ItemProps) => {
     avatar,
     isButtonVisible,
     submitting,
-    handleClick
+    handleClick,
   } as const;
 };
