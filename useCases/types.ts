@@ -4,6 +4,7 @@ import { default as hello } from './hello';
 import { default as interviews } from './interviews';
 import { default as job } from './job';
 import { default as jobs } from './jobs';
+import { default as myInterviews } from './myInterviews';
 import { default as profile } from './profile';
 import { default as sign } from './sign';
 
@@ -13,5 +14,6 @@ export type Hello = typeof hello;
 export type Interviews = typeof interviews;
 export type Job = typeof job;
 export type Jobs = typeof jobs;
+export type MyInterviews = typeof myInterviews;
 export type Profile = typeof profile;
 export type Sign = typeof sign;

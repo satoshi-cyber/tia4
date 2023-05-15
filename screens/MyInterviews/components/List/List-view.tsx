@@ -6,10 +6,10 @@ import { CLASS_NAMES } from './List-constants';
 import { useMyInterviews } from './List-hook';
 
 const List: React.FC = () => {
-  const { myInterviews, fetching } = useMyInterviews();
+  const { myInterviews, isLoading } = useMyInterviews();
 
   return (
-    <LoadingProvider isLoading={fetching}>
+    <LoadingProvider isLoading={isLoading}>
       {myInterviews?.length === 0 ? (
         <EmptyScreen />
       ) : (

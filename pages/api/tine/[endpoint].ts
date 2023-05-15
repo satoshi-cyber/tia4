@@ -7,6 +7,7 @@ import hello from '@/useCases/hello';
 import interviews from '@/useCases/interviews';
 import job from '@/useCases/job';
 import jobs from '@/useCases/jobs';
+import myInterviews from '@/useCases/myInterviews';
 import profile from '@/useCases/profile';
 import sign from '@/useCases/sign';
 
@@ -24,6 +25,7 @@ const useCasesWithInput = {
 };
 
 const useCases = {
+  myInterviews: myInterviews,
   profile: profile,
   sign: sign,
 };
@@ -56,7 +58,7 @@ const handler = async (req: NextRequest) => {
       return NextResponse.json({ error: e.message }, { status: e.status });
     }
 
-    return NextResponse.json({ error: e.message });
+    return NextResponse.json({ error: e.message }, { status: 500 });
   }
 };
 

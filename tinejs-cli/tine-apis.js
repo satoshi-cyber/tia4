@@ -63,7 +63,7 @@ const handler = async (req: NextRequest) => {
       return NextResponse.json({ error: e.message }, { status: e.status });
     }
 
-    return NextResponse.json({ error: e.message });
+    return NextResponse.json({ error: e.message }, { status: 500 });
   }
 };
 

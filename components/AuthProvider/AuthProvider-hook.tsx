@@ -22,8 +22,10 @@ export const useAuthProvider = () => {
   const swrValue = useMemo(
     () => ({
       onError: (error: StatusError) => {
-        if (error.status !== 403) {
+        if (error.status === 401) {
           setToken(undefined);
+
+          return;
         }
       },
     }),

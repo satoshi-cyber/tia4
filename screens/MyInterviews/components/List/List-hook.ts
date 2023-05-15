@@ -1,14 +1,11 @@
-import { useMyInterviewsQuery } from "@/graphql"
-import { useMemo } from "react"
+import { UseCases } from '@/useCases';
 
-import { SKELETON_INTERVIEWS } from "./List-constants"
+import { SKELETON_INTERVIEWS } from './List-constants';
 
 export const useMyInterviews = () => {
-  const context = useMemo(() => ({ additionalTypenames: ['Interview'] }), [])
+  const { data, isLoading } = UseCases.myInterviews.load();
 
-  const [{ data, fetching }] = useMyInterviewsQuery({ context })
+  const myInterviews = isLoading ? SKELETON_INTERVIEWS : data;
 
-  const myInterviews = fetching ? SKELETON_INTERVIEWS : data?.myInterviews
-
-  return { myInterviews, fetching }
-}
+  return { myInterviews, isLoading };
+};
