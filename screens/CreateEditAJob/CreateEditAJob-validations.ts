@@ -9,7 +9,9 @@ export const createAJobSchema = z.object({
       z.object({
         id: z.string().min(1, 'You must set the question'),
         question: z.string().min(1, 'You must set the question'),
-        time: z.number({ required_error: 'You must set question duration' }),
+        time: z.coerce.number({
+          required_error: 'You must set question duration',
+        }),
       })
     )
     .min(1),
