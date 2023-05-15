@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { TOAST_OPTIONS, URLS } from '@/config';
 import { useUser } from '@/hooks';
 
-import { createAJobSchema } from './CreateEditAJob-validations';
 import {
   TOAST_MESSAGE,
   DEFAULT_QUESTION_TIME,
@@ -17,13 +16,14 @@ import {
 import { UseCases } from '@/useCases';
 import { mutate } from 'swr';
 import { formatValue } from './CreateEditAJob-functions';
+import { upsertJobSchema } from '@/types';
 
 export const useCreateUpdateAJob = () => {
   const router = useRouter();
   const { companyId } = useUser();
   const [description, setDescription] = useState<string | null>();
 
-  const { jobId } = router.query;
+  const jobId = router.query.jobId as string;
 
   const editJob = Boolean(jobId);
 
@@ -34,10 +34,10 @@ export const useCreateUpdateAJob = () => {
   const { trigger: upsertJob } = UseCases.upsertJob.mutate();
   const { trigger: deleteJob } = UseCases.deleteJob.mutate();
 
-  const form = useForm<Zod.infer<typeof createAJobSchema>>({
+  const form = useForm<Zod.infer<typeof upsertJobSchema>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: zodResolver(createAJobSchema),
+    resolver: zodResolver(upsertJobSchema),
     defaultValues: data
       ? formatValue(data)
       : {
@@ -56,19 +56,20 @@ export const useCreateUpdateAJob = () => {
     }
   }, [data, reset]);
 
-  const handleSubmit = async (input: Zod.infer<typeof createAJobSchema>) => {
+  const handleSubmit = async (input: Zod.infer<typeof upsertJobSchema>) => {
+    if (!companyId) {
+      return;
+    }
+
     const toastMessage = editJob
       ? TOAST_MESSAGE.EDIT_JOB
       : TOAST_MESSAGE.ADD_JOB;
 
     try {
-      console.log(input);
-
       await upsertJob({
         ...input,
-        id: String(jobId),
-        companyId: companyId!,
-        questions: input.questions!,
+        id: jobId,
+        companyId,
       });
 
       mutate(UseCases.job.getKey());
@@ -88,7 +89,7 @@ export const useCreateUpdateAJob = () => {
 
     try {
       await deleteJob({
-        id: String(jobId),
+        id: jobId,
         companyId: companyId!,
       });
 

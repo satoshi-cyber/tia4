@@ -1,18 +1,11 @@
+import { z } from 'zod';
 import getClaims from '@/actions/auth/getClaims';
 import prisma from '@/actions/prisma';
-import { questionSchema } from '@/types';
+import { upsertJobSchema } from '@/types';
 import { tineInput, tineVar } from 'tinejs';
-import { z } from 'zod';
 
 const input = tineInput(
-  z.object({
-    id: z.string().optional(),
-    companyId: z.string(),
-    title: z.string(),
-    deadline: z.date(),
-    description: z.string().optional().nullable(),
-    questions: z.array(questionSchema),
-  })
+  z.intersection(upsertJobSchema, z.object({ companyId: z.string() }))
 );
 
 const claims = getClaims({ companyId: tineVar(input, 'companyId') });

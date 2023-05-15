@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import { TOAST_OPTIONS } from '@/config';
 import { UseCases } from '@/useCases';
 
-import { updateProfileSchema } from './Profile-validations';
 import { TOAST_MESSAGE } from './Profile-constants';
 import { pickValues } from './Profile-functions';
+import { updateProfileSchema } from '@/types';
 
 export const useProfile = () => {
   const { data, isLoading, mutate: onUpload } = UseCases.profile.load();

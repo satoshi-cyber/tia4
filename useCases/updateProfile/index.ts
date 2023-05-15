@@ -1,17 +1,10 @@
-import { z } from 'zod';
+import { updateProfileSchema } from '@/types';
 import getClaims from '@/actions/auth/getClaims';
 import prisma from '@/actions/prisma';
 
 import { tineInput, tineVar } from 'tinejs';
 
-const input = tineInput(
-  z.object({
-    firstName: z.string(),
-    lastName: z.string(),
-    linkedInProfile: z.string().optional().nullable(),
-    bio: z.string().optional().nullable(),
-  })
-);
+const input = tineInput(updateProfileSchema);
 
 const claims = getClaims();
 
