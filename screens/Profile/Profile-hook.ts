@@ -12,7 +12,6 @@ import { pickValues } from './Profile-functions';
 
 export const useProfile = () => {
   const { data, isLoading, mutate: onUpload } = UseCases.profile.load();
-
   const { trigger: updateProfile } = UseCases.updateProfile.mutate();
   const { trigger: updateResume } = UseCases.updateResume.mutate();
 
@@ -26,10 +25,12 @@ export const useProfile = () => {
   const { reset } = form;
 
   useEffect(() => {
-    if (!isLoading && data && !form.formState.isDirty) {
-      reset(pickValues(data));
+    if (!data) {
+      return;
     }
-  }, [isLoading, reset, data]);
+
+    reset(pickValues(data), { keepDirtyValues: true, keepDirty: true });
+  }, [reset, data]);
 
   const handleSubmit = async (input: Zod.infer<typeof updateProfileSchema>) => {
     try {
