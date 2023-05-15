@@ -4,14 +4,13 @@ import { tineCtx } from 'tinejs';
 import authenticateUser from '@/useCases/authenticateUser';
 import company from '@/useCases/company';
 import companyMembers from '@/useCases/companyMembers';
-import hello from '@/useCases/hello';
+import health from '@/useCases/health';
 import interviews from '@/useCases/interviews';
 import job from '@/useCases/job';
 import jobs from '@/useCases/jobs';
 import myCompany from '@/useCases/myCompany';
 import myInterviews from '@/useCases/myInterviews';
 import profile from '@/useCases/profile';
-import sign from '@/useCases/sign';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -21,7 +20,6 @@ const useCasesWithInput = {
   authenticateUser: authenticateUser,
   company: company,
   companyMembers: companyMembers,
-  hello: hello,
   interviews: interviews,
   job: job,
   jobs: jobs,
@@ -29,9 +27,9 @@ const useCasesWithInput = {
 };
 
 const useCases = {
+  health: health,
   myInterviews: myInterviews,
   profile: profile,
-  sign: sign,
 };
 
 const handler = async (req: NextRequest) => {

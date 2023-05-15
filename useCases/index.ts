@@ -5,14 +5,13 @@ import { StatusError } from '@/types';
 import type { AuthenticateUser } from './types';
 import type { Company } from './types';
 import type { CompanyMembers } from './types';
-import type { Hello } from './types';
+import type { Health } from './types';
 import type { Interviews } from './types';
 import type { Job } from './types';
 import type { Jobs } from './types';
 import type { MyCompany } from './types';
 import type { MyInterviews } from './types';
 import type { Profile } from './types';
-import type { Sign } from './types';
 
 const fetchData = <T>(url: string, body?: any) =>
   fetch(url, { method: 'POST', body: body ? JSON.stringify(body) : undefined })
@@ -91,21 +90,12 @@ export const UseCases = {
       ),
     getKey: () => (key: any) => key && key[0] === 'companyMembers',
   },
-  hello: {
-    load: (input: TineInferInput<Hello> | '' | undefined | false) =>
-      useSwr(
-        input ? ['hello', input] : undefined,
-        input
-          ? () => fetchData<TineInferReturn<Hello>>('/api/tine/hello', input)
-          : () => undefined
+  health: {
+    load: () =>
+      useSwr('health', () =>
+        fetchData<TineInferReturn<Health>>('/api/tine/health')
       ),
-    mutate: () =>
-      useSWRMutation(
-        'hello',
-        (_: string, { arg }: { arg: TineInferInput<Hello> }) =>
-          fetchData<TineInferReturn<Hello>>('/api/tine/hello', arg)
-      ),
-    getKey: () => (key: any) => key && key[0] === 'hello',
+    getKey: () => 'health',
   },
   interviews: {
     load: (input: TineInferInput<Interviews> | '' | undefined | false) =>
@@ -192,10 +182,5 @@ export const UseCases = {
         fetchData<TineInferReturn<Profile>>('/api/tine/profile')
       ),
     getKey: () => 'profile',
-  },
-  sign: {
-    load: () =>
-      useSwr('sign', () => fetchData<TineInferReturn<Sign>>('/api/tine/sign')),
-    getKey: () => 'sign',
   },
 };

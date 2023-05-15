@@ -1,23 +1,21 @@
 import { default as authenticateUser } from './authenticateUser';
 import { default as company } from './company';
 import { default as companyMembers } from './companyMembers';
-import { default as hello } from './hello';
+import { default as health } from './health';
 import { default as interviews } from './interviews';
 import { default as job } from './job';
 import { default as jobs } from './jobs';
 import { default as myCompany } from './myCompany';
 import { default as myInterviews } from './myInterviews';
 import { default as profile } from './profile';
-import { default as sign } from './sign';
 
 export type AuthenticateUser = typeof authenticateUser;
 export type Company = typeof company;
 export type CompanyMembers = typeof companyMembers;
-export type Hello = typeof hello;
+export type Health = typeof health;
 export type Interviews = typeof interviews;
 export type Job = typeof job;
 export type Jobs = typeof jobs;
 export type MyCompany = typeof myCompany;
 export type MyInterviews = typeof myInterviews;
 export type Profile = typeof profile;
-export type Sign = typeof sign;
