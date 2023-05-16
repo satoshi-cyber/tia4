@@ -73,12 +73,9 @@ export const useProfile = () => {
     isLoading: isLoading,
   };
 
-  const src = data?.avatarUrl || undefined;
-  const uploadUrl = data?.avatarUploadUrl || undefined;
-
   const avatarProps = {
-    src,
-    uploadUrl,
+    src: data?.avatarUrl,
+    uploadUrl: data?.avatarUploadUrl,
     onUpload,
   };
 
