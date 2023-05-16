@@ -7,19 +7,21 @@ import { TOAST_OPTIONS } from '@/config';
 import { UseCases } from '@/useCases';
 
 import { TOAST_MESSAGE } from './Profile-constants';
-import { pickValues } from './Profile-functions';
 import { updateProfileSchema } from '@/types';
+import { makeParseDefaults } from '@/lib';
 
 export const useProfile = () => {
   const { data, isLoading, mutate: onUpload } = UseCases.profile.load();
   const { trigger: updateProfile } = UseCases.updateProfile.mutate();
   const { trigger: updateResume } = UseCases.updateResume.mutate();
 
+  const parseDefaults = makeParseDefaults(updateProfileSchema);
+
   const form = useForm<Zod.infer<typeof updateProfileSchema>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: zodResolver(updateProfileSchema),
-    defaultValues: data && pickValues(data),
+    defaultValues: parseDefaults(data),
   });
 
   const { reset } = form;
@@ -29,7 +31,10 @@ export const useProfile = () => {
       return;
     }
 
-    reset(pickValues(data), { keepDirtyValues: true, keepDirty: true });
+    reset(parseDefaults(data), {
+      keepDirtyValues: true,
+      keepDirty: true,
+    });
   }, [reset, data]);
 
   const handleSubmit = async (input: Zod.infer<typeof updateProfileSchema>) => {
@@ -41,7 +46,7 @@ export const useProfile = () => {
       mutate(UseCases.profile.getKey());
 
       if (data) {
-        reset(pickValues(data));
+        reset(parseDefaults(data));
       }
     } catch (e) {
       toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
