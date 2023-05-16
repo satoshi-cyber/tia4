@@ -1,5 +1,5 @@
 import { ButtonIcon } from '@/components';
-import { Item } from '@/screens/MyInterviews/components/List/components';
+
 import { Menu } from '@headlessui/react';
 import dynamic from 'next/dynamic';
 import React from 'react';
@@ -13,7 +13,11 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({ items }) => {
       className="relative inline-block text-left mb-8 absolute top-0 left-0"
     >
       <Menu.Button as={React.Fragment}>
-        {({ open }) => <ButtonIcon name="HiCog" active={open} />}
+        {({ open }) => (
+          <div>
+            <ButtonIcon name="HiCog" active={open} />
+          </div>
+        )}
       </Menu.Button>
       <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
         {items.map(({ label, onClick, activeColor }) => (

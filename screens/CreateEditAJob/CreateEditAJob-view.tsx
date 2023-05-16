@@ -38,7 +38,7 @@ const CreateAJob: React.FC = () => {
             {...TITLE_FIELD_PROPS}
             after={<FormIcon name={TITLE_ICON} />}
           />
-          <Field.Input {...DEADLINE_FIELD_PROPS} />
+          <Field.Date {...DEADLINE_FIELD_PROPS} />
           <Field.Markdown
             {...DESCRIPTION_FIELD_PROPS}
             key={description}

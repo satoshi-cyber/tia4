@@ -1,4 +1,4 @@
-import { FORM_THEME } from "../../Form-constants";
+import { FORM_THEME } from '../../Form-constants';
 
 export interface InputProps {
   name: string;
@@ -9,5 +9,9 @@ export interface InputProps {
   after?: React.ReactElement;
   placeholder?: string;
   autoFocus?: boolean;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: any) => void;
+  value?: any;
+  defaultValue?: any;
+  ref?: any;
 }

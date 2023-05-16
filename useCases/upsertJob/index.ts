@@ -2,7 +2,7 @@ import { z } from 'zod';
 import getClaims from '@/actions/auth/getClaims';
 import prisma from '@/actions/prisma';
 import { upsertJobSchema } from '@/types';
-import { tineInput, tineVar } from 'tinejs';
+import { condition, tineInput, tineVar } from 'tinejs';
 
 const input = tineInput(
   z.intersection(upsertJobSchema, z.object({ companyId: z.string() }))
@@ -10,23 +10,12 @@ const input = tineInput(
 
 const claims = getClaims({ companyId: tineVar(input, 'companyId') });
 
-const upsertJob = prisma.job.upsert({
+const updateJob = prisma.job.update({
   where: {
     companyId: tineVar(claims, 'companyId'),
     id: tineVar(input, 'id'),
   },
-  create: {
-    company: {
-      connect: {
-        id: tineVar(input, 'companyId'),
-      },
-    },
-    title: tineVar(input, 'title'),
-    deadline: tineVar(input, 'deadline'),
-    description: tineVar(input, 'description'),
-    questions: tineVar(input, 'questions'),
-  },
-  update: {
+  data: {
     title: tineVar(input, 'title'),
     deadline: tineVar(input, 'deadline'),
     description: tineVar(input, 'description'),
@@ -36,5 +25,28 @@ const upsertJob = prisma.job.upsert({
     id: true,
   },
 });
+
+const createJob = prisma.job.create({
+  data: {
+    company: {
+      connect: {
+        id: tineVar(claims, 'companyId'),
+      },
+    },
+    title: tineVar(input, 'title'),
+    deadline: tineVar(input, 'deadline'),
+    description: tineVar(input, 'description'),
+    questions: tineVar(input, 'questions'),
+  },
+  select: {
+    id: true,
+  },
+});
+
+const upsertJob = condition([
+  tineVar(input, ({ id }) => Boolean(id)),
+  tineVar(updateJob),
+  tineVar(createJob),
+]);
 
 export default upsertJob.withInput(input);

@@ -15,8 +15,8 @@ import {
 } from './CreateEditAJob-constants';
 import { UseCases } from '@/useCases';
 import { mutate } from 'swr';
-import { formatValue } from './CreateEditAJob-functions';
 import { upsertJobSchema } from '@/types';
+import { makeParseDefaults } from '@/lib';
 
 export const useCreateUpdateAJob = () => {
   const router = useRouter();
@@ -34,12 +34,14 @@ export const useCreateUpdateAJob = () => {
   const { trigger: upsertJob } = UseCases.upsertJob.mutate();
   const { trigger: deleteJob } = UseCases.deleteJob.mutate();
 
+  const parseDefaults = makeParseDefaults(upsertJobSchema);
+
   const form = useForm<Zod.infer<typeof upsertJobSchema>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: zodResolver(upsertJobSchema),
     defaultValues: data
-      ? formatValue(data)
+      ? parseDefaults(data)
       : {
           questions: [
             { id: uuidv4(), time: DEFAULT_QUESTION_TIME },
@@ -52,7 +54,7 @@ export const useCreateUpdateAJob = () => {
 
   useEffect(() => {
     if (data) {
-      reset(formatValue(data), { keepDirtyValues: true, keepDirty: true });
+      reset(parseDefaults(data), { keepDirtyValues: true, keepDirty: true });
     }
   }, [data, reset]);
 
