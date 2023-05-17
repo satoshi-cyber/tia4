@@ -13,5 +13,9 @@ declare global {
       question: string;
       time: number;
     };
+
+    type Answer = {
+      question: Question;
+    };
   }
 }

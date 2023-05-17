@@ -62,6 +62,7 @@ model Interview {
   intervieweeId String
   job           Job             @relation(fields: [jobId], references: [id])
   interviewee   User            @relation(fields: [intervieweeId], references: [id])
+  /// [Answer]
   answers       Json[]
   rates         Rate[]
   status        InterviewStatus @default(initialized)

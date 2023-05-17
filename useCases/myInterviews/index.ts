@@ -2,6 +2,7 @@ import getClaims from '@/actions/auth/getClaims';
 import extendArray from '@/actions/extendArray';
 import prisma from '@/actions/prisma';
 import presignedGet from '@/actions/s3/presignedGet';
+import { InterviewStatus } from '@prisma/client/edge';
 import { tineVar } from 'tinejs';
 
 const claims = getClaims();
@@ -14,6 +15,8 @@ const data = prisma.interview.findMany({
   select: {
     id: true,
     createdAt: true,
+    status: true,
+    answers: true,
     job: {
       include: {
         company: {
@@ -44,11 +47,17 @@ const myInterviews = extendArray([
       },
     },
     thumbnail: tineVar(
-      presignedGet({
-        bucketName: 'interview-thumbnails',
-        objectName: `${item.id}.mp4`,
-        expires: 3600,
-      })
+      item.status === InterviewStatus.ready
+        ? presignedGet({
+            bucketName: 'interview-thumbnails',
+            objectName: `${item.id}.mp4`,
+            expires: 3600,
+          })
+        : presignedGet({
+            bucketName: 'answers-original',
+            objectName: `${item.id}-${item.answers[0].question.id}.mp4`,
+            expires: 3600,
+          })
     ),
   }),
 ]);
