@@ -8,20 +8,18 @@ import { UseCases } from '@/useCases';
 
 import { TOAST_MESSAGE } from './Profile-constants';
 import { updateProfileSchema } from '@/types';
-import { makeParseDefaults } from '@/lib';
+import { parseDefaults } from './Profile-functions';
 
 export const useProfile = () => {
   const { data, isLoading, mutate: onUpload } = UseCases.profile.load();
   const { trigger: updateProfile } = UseCases.updateProfile.mutate();
   const { trigger: updateResume } = UseCases.updateResume.mutate();
 
-  const parseDefaults = makeParseDefaults(updateProfileSchema);
-
   const form = useForm<Zod.infer<typeof updateProfileSchema>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: zodResolver(updateProfileSchema),
-    defaultValues: parseDefaults(data),
+    defaultValues: data && parseDefaults(data),
   });
 
   const { reset } = form;

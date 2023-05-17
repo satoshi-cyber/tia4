@@ -4,19 +4,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-
 import { TOAST_OPTIONS, URLS } from '@/config';
 import { useUser } from '@/hooks';
+import { UseCases } from '@/useCases';
+import { mutate } from 'swr';
+import { upsertJobSchema } from '@/types';
 
 import {
   TOAST_MESSAGE,
   DEFAULT_QUESTION_TIME,
   PUSH_DELAY,
 } from './CreateEditAJob-constants';
-import { UseCases } from '@/useCases';
-import { mutate } from 'swr';
-import { upsertJobSchema } from '@/types';
-import { makeParseDefaults } from '@/lib';
+import { parseDefaults } from './CreateEditAJob-functions';
 
 export const useCreateUpdateAJob = () => {
   const router = useRouter();
@@ -33,8 +32,6 @@ export const useCreateUpdateAJob = () => {
 
   const { trigger: upsertJob } = UseCases.upsertJob.mutate();
   const { trigger: deleteJob } = UseCases.deleteJob.mutate();
-
-  const parseDefaults = makeParseDefaults(upsertJobSchema);
 
   const form = useForm<Zod.infer<typeof upsertJobSchema>>({
     mode: 'onBlur',
