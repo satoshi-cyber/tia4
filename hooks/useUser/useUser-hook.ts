@@ -16,7 +16,8 @@ const magic =
     : undefined;
 
 export const useUser = () => {
-  const { token, setToken } = useContext(AuthContext);
+  const { token, setToken, setManualLogout, manualLogout } =
+    useContext(AuthContext);
 
   const { trigger: authenticateUser, isMutating: fetching } =
     UseCases.authenticateUser.mutate();
@@ -113,9 +114,10 @@ export const useUser = () => {
 
   const logout = useCallback(() => {
     setToken(undefined);
+    setManualLogout(true);
 
     magic?.user.logout();
-  }, [setToken]);
+  }, [setToken, setManualLogout]);
 
   const isUserLoggedin = useMemo(() => Boolean(token), [token]);
 
@@ -142,6 +144,8 @@ export const useUser = () => {
     companyId,
     companyRole,
     isUserLoggedin,
+    manualLogout,
+    setManualLogout,
     token,
     refreshToken,
     authenticateUserFromOAuth,

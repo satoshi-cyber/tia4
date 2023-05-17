@@ -11,12 +11,12 @@ import nextBase64 from 'next-base64';
 const withAuth = <P extends Object>(WrappedComponent: NextPage<P>) => {
   const EnhancedComponent = ({ cookies, ...restProps }: any) => {
     const router = useRouter();
-    const { isUserLoggedin } = useUser();
+    const { isUserLoggedin, manualLogout, setManualLogout } = useUser();
     const isBrowser = typeof window !== 'undefined';
 
     const from = nextBase64.encode(`${DOMAIN}${router.asPath}`);
 
-    const url = `${URLS.LOGIN}?from=${from}`;
+    const url = manualLogout ? URLS.LOGIN : `${URLS.LOGIN}?from=${from}`;
 
     useEffect(() => {
       if (!router.isReady) {
@@ -25,6 +25,7 @@ const withAuth = <P extends Object>(WrappedComponent: NextPage<P>) => {
 
       if (!isUserLoggedin) {
         Router.replace(url);
+        setManualLogout(false);
       }
     }, [isUserLoggedin, router.isReady]);
 

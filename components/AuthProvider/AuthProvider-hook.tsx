@@ -1,11 +1,12 @@
 import { TOKEN_COOKIE_KEY } from '@/config/auth';
 import { getCookieOptions } from '@/lib/cookie';
 import { StatusError } from '@/types';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
 export const useAuthProvider = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
+  const [manualLogout, setManualLogout] = useState(false);
 
   const token = cookies[TOKEN_COOKIE_KEY];
 
@@ -32,5 +33,5 @@ export const useAuthProvider = () => {
     []
   );
 
-  return { token, setToken, swrValue };
+  return { token, setToken, swrValue, manualLogout, setManualLogout };
 };
