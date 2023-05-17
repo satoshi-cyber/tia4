@@ -6,6 +6,7 @@ import presignedGet from '@/actions/s3/presignedGet';
 import { payload, tineInput, tineVar } from 'tinejs';
 
 import { getQueryParams } from './interview-functions';
+import { InterviewStatus } from '@prisma/client/edge';
 
 const input = tineInput(
   z.object({
@@ -39,6 +40,8 @@ const data = prisma.interview.findMany({
     id: true,
     createdAt: true,
     score: true,
+    status: true,
+    answers: true,
     interviewee: {
       select: {
         id: true,
@@ -75,11 +78,17 @@ const interviews = extendArray([
       ),
     },
     thumbnail: tineVar(
-      presignedGet({
-        bucketName: 'interview-thumbnails',
-        objectName: `${item.id}.mp4`,
-        expires: 3600,
-      })
+      item.status === InterviewStatus.ready
+        ? presignedGet({
+            bucketName: 'interview-thumbnails',
+            objectName: `${item.id}.mp4`,
+            expires: 3600,
+          })
+        : presignedGet({
+            bucketName: 'answers-original',
+            objectName: `${item.id}-${item.answers[0].question.id}.mp4`,
+            expires: 3600,
+          })
     ),
   }),
 ]);
