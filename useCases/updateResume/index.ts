@@ -19,6 +19,9 @@ const updateProfile = prisma.user.update({
   data: {
     resumeFileName: tineVar(input, 'resumeFileName'),
   },
+  select: {
+    id: true,
+  },
 });
 
 export default updateProfile.withInput(input);

@@ -10094,15 +10094,15 @@ tinejs.openapi@^0.0.1:
     title-case "^3.0.3"
     zod "^3.21.4"
 
-tinejs.prisma@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.8.tgz#a41ab367d200361040dd5026acc9795824ff3ea1"
-  integrity sha512-v+7nKQJQyDySjXGg4XxwpyoVkRrdp/AOaRvcMQojt1J/4k8Z0Hq2djNmOP0q7EJVba5nMJJQVxIZqxn0VI9BMg==
+tinejs.prisma@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.9.tgz#a531978a20f629f23bfdc51cdb5b9d24c4050367"
+  integrity sha512-UxcXctNm6yrRe15wC6BHRxtjYgw6RNtzY8bWoWy52cIA1V8JJjJiA5zpQ+OZWuM9zcc2/MmJylnSMplJXjKKRw==
 
-tinejs@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.24.tgz#1130ee5b87b89a02d07db9ee131f41c4695812ad"
-  integrity sha512-ZL0lpp+o0V2cZspE5lBz8CaIcFaYv0oyHv3d2YnVzyVqcKiVeQ7dippu/uV5zdDtiqFjdXkcHiW4M642JKYQLg==
+tinejs@^0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.25.tgz#59297b962f9c8a5c5f3cc61b8d69ab5334e3ec97"
+  integrity sha512-vMBgePixxqe3HscBVaM4ZLyKNETHVbLEumxm8+SVNQELLR5YwQseiB2gK4KkB+bj5PTbCx4acQFyOYCeDHeEUg==
   dependencies:
     uuid "^9.0.0"
     zod "^3.21.4"
@@ -10319,10 +10319,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^4.8.4:
-  version "4.8.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
-  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
+typescript@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.4.tgz#b217fd20119bd61a94d4011274e0ab369058da3b"
+  integrity sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==
 
 ua-parser-js@^0.7.30:
   version "0.7.32"

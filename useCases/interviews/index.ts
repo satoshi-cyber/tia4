@@ -1,11 +1,9 @@
 import { z } from 'zod';
 import getClaims from '@/actions/auth/getClaims';
 import prisma from '@/actions/prisma';
-import presignedGet from '@/actions/s3/presignedGet';
 import { payload, tineInput, tineVar } from 'tinejs';
 
 import { getQueryParams } from './interview-functions';
-import { InterviewStatus } from '@prisma/client/edge';
 
 const input = tineInput(
   z.object({
@@ -41,11 +39,13 @@ const data = prisma.interview.findMany({
     score: true,
     status: true,
     answers: true,
+    thumbnail: true,
     interviewee: {
       select: {
         id: true,
         firstName: true,
         lastName: true,
+        avatarUrl: true,
       },
     },
     rates: {
@@ -67,29 +67,6 @@ const interviews = payload(
 
         return acc;
       }, 0),
-      interviewee: {
-        ...item.interviewee,
-        avatarUrl: tineVar(
-          presignedGet({
-            bucketName: 'user-avatars',
-            objectName: `${item.interviewee.id}.jpg`,
-            expires: 3600,
-          })
-        ),
-      },
-      thumbnail: tineVar(
-        item.status === InterviewStatus.ready
-          ? presignedGet({
-              bucketName: 'interview-thumbnails',
-              objectName: `${item.id}.mp4`,
-              expires: 3600,
-            })
-          : presignedGet({
-              bucketName: 'answers-original',
-              objectName: `${item.id}-${item.answers[0].question.id}.mp4`,
-              expires: 3600,
-            })
-      ),
     }))
   )
 );

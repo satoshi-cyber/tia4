@@ -1,6 +1,5 @@
 import getClaims from '@/actions/auth/getClaims';
 import prisma from '@/actions/prisma';
-import presignedGet from '@/actions/s3/presignedGet';
 import { payload, tineInput, tineVar } from 'tinejs';
 import { z } from 'zod';
 
@@ -8,28 +7,20 @@ const input = tineInput(z.object({ companyId: z.string() }));
 
 const claims = getClaims({ companyId: tineVar(input, 'companyId') });
 
-const membersData = prisma.companyMember.findMany({
+const members = prisma.companyMember.findMany({
   where: { companyId: tineVar(claims, 'companyId') },
-  include: { user: true },
-});
-
-const members = payload(
-  tineVar(membersData, ($memberData) =>
-    $memberData.map((item) => ({
-      ...item,
-      user: {
-        ...item.user,
-        avatarUrl: tineVar(
-          presignedGet({
-            bucketName: 'user-avatars',
-            objectName: `${item.user.id}.jpg`,
-            expires: 3600,
-          })
-        ),
+  include: {
+    user: {
+      select: {
+        id: true,
+        avatarUrl: true,
+        firstName: true,
+        lastName: true,
+        role: true,
       },
-    }))
-  )
-);
+    },
+  },
+});
 
 const invites = prisma.companyInvite.findMany({
   where: { companyId: tineVar(claims, 'companyId') },
