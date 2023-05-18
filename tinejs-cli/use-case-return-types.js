@@ -12,7 +12,7 @@ const capitalizeFirstLetter = (inputString) => {
 };
 
 const directoryPath = './useCases'; // Directory path
-const outputFile = './useCases/types.ts'; // Output file path
+const outputFile = './useCases/.return-types.ts'; // Output file path
 
 const folders = fs.readdirSync(directoryPath).filter((item) => {
   const itemPath = path.join(directoryPath, item);
@@ -27,12 +27,13 @@ const useCases = folders.map((folder) => ({
 const constants = folders.join(', ');
 
 const template = `
+import { TineInferReturn } from 'tinejs';
 {{#useCases}}
  import { default as {{useCase}} } from './{{useCase}}'
 {{/useCases}}
 
 {{#useCases}}
- export type {{useCaseType}} = typeof {{useCase}}
+ export type {{useCaseType}}ReturnSchema = TineInferReturn<typeof {{useCase}}>
 {{/useCases}}
 `;
 

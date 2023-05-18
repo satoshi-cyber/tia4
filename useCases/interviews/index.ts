@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import getClaims from '@/actions/auth/getClaims';
-import extendArray from '@/actions/extendArray';
 import prisma from '@/actions/prisma';
 import presignedGet from '@/actions/s3/presignedGet';
 import { payload, tineInput, tineVar } from 'tinejs';
@@ -57,40 +56,42 @@ const data = prisma.interview.findMany({
   },
 });
 
-const interviews = extendArray([
-  tineVar(data),
-  (item) => ({
-    votesLeft: item.rates?.reduce((acc, rate) => {
-      if (rate.value === null) {
-        return acc + 1;
-      }
+const interviews = payload(
+  tineVar(data, ($data) =>
+    $data.map((item) => ({
+      ...item,
+      votesLeft: item.rates?.reduce((acc, rate) => {
+        if (rate.value === null) {
+          return acc + 1;
+        }
 
-      return acc;
-    }, 0),
-    interviewee: {
-      ...item.interviewee,
-      avatarUrl: tineVar(
-        presignedGet({
-          bucketName: 'user-avatars',
-          objectName: `${item.interviewee.id}.jpg`,
-          expires: 3600,
-        })
+        return acc;
+      }, 0),
+      interviewee: {
+        ...item.interviewee,
+        avatarUrl: tineVar(
+          presignedGet({
+            bucketName: 'user-avatars',
+            objectName: `${item.interviewee.id}.jpg`,
+            expires: 3600,
+          })
+        ),
+      },
+      thumbnail: tineVar(
+        item.status === InterviewStatus.ready
+          ? presignedGet({
+              bucketName: 'interview-thumbnails',
+              objectName: `${item.id}.mp4`,
+              expires: 3600,
+            })
+          : presignedGet({
+              bucketName: 'answers-original',
+              objectName: `${item.id}-${item.answers[0].question.id}.mp4`,
+              expires: 3600,
+            })
       ),
-    },
-    thumbnail: tineVar(
-      item.status === InterviewStatus.ready
-        ? presignedGet({
-            bucketName: 'interview-thumbnails',
-            objectName: `${item.id}.mp4`,
-            expires: 3600,
-          })
-        : presignedGet({
-            bucketName: 'answers-original',
-            objectName: `${item.id}-${item.answers[0].question.id}.mp4`,
-            expires: 3600,
-          })
-    ),
-  }),
-]);
+    }))
+  )
+);
 
 export default interviews.withInput(input);

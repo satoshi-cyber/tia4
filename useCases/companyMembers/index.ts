@@ -1,5 +1,4 @@
 import getClaims from '@/actions/auth/getClaims';
-import extendArray from '@/actions/extendArray';
 import prisma from '@/actions/prisma';
 import presignedGet from '@/actions/s3/presignedGet';
 import { payload, tineInput, tineVar } from 'tinejs';
@@ -14,21 +13,23 @@ const membersData = prisma.companyMember.findMany({
   include: { user: true },
 });
 
-const members = extendArray([
-  tineVar(membersData),
-  (item) => ({
-    user: {
-      ...item.user,
-      avatarUrl: tineVar(
-        presignedGet({
-          bucketName: 'user-avatars',
-          objectName: `${item.user.id}.jpg`,
-          expires: 3600,
-        })
-      ),
-    },
-  }),
-]);
+const members = payload(
+  tineVar(membersData, ($memberData) =>
+    $memberData.map((item) => ({
+      ...item,
+      user: {
+        ...item.user,
+        avatarUrl: tineVar(
+          presignedGet({
+            bucketName: 'user-avatars',
+            objectName: `${item.user.id}.jpg`,
+            expires: 3600,
+          })
+        ),
+      },
+    }))
+  )
+);
 
 const invites = prisma.companyInvite.findMany({
   where: { companyId: tineVar(claims, 'companyId') },

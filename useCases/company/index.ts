@@ -1,7 +1,6 @@
-import extend from '@/actions/extend';
 import prisma from '@/actions/prisma';
 import presignedGet from '@/actions/s3/presignedGet';
-import { tineInput, tineVar } from 'tinejs';
+import { payload, tineInput, tineVar } from 'tinejs';
 import { z } from 'zod';
 
 const input = tineInput(z.object({ companyId: z.string() }));
@@ -22,12 +21,12 @@ const avatarUrl = presignedGet({
   expires: 3600,
 });
 
-const company = extend([
-  tineVar(companyRow),
-  {
+const company = payload(
+  tineVar(companyRow, ($companyRow) => ({
+    ...$companyRow,
     avatarUrl: tineVar(avatarUrl),
-  },
-]);
+  }))
+);
 
 // Is used in join company and needs to be public endpoint
 export default company.withInput(input);

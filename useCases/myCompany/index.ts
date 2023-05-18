@@ -1,9 +1,8 @@
 import getClaims from '@/actions/auth/getClaims';
-import extend from '@/actions/extend';
 import prisma from '@/actions/prisma';
 import presignedGet from '@/actions/s3/presignedGet';
 import presignedPut from '@/actions/s3/presignedPut';
-import { tineInput, tineVar } from 'tinejs';
+import { payload, tineInput, tineVar } from 'tinejs';
 import { z } from 'zod';
 
 const input = tineInput(z.object({ companyId: z.string() }));
@@ -34,12 +33,12 @@ const avatarUploadUrl = presignedPut({
   expires: 3600,
 });
 
-const myCompany = extend([
-  tineVar(companyRow),
-  {
+const myCompany = payload(
+  tineVar(companyRow, ($company) => ({
+    ...$company,
     avatarUrl: tineVar(avatarUrl),
     avatarUploadUrl: tineVar(avatarUploadUrl),
-  },
-]);
+  }))
+);
 
 export default myCompany.withInput(input);

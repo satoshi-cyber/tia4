@@ -1,10 +1,9 @@
 import getClaims from '@/actions/auth/getClaims';
-import extend from '@/actions/extend';
 import prisma from '@/actions/prisma';
 import presignedGet from '@/actions/s3/presignedGet';
 import presignedPut from '@/actions/s3/presignedPut';
 
-import { tineVar } from 'tinejs';
+import { payload, tineVar } from 'tinejs';
 
 const claims = getClaims();
 
@@ -38,14 +37,14 @@ const resumeUploadUrl = presignedPut({
   expires: 3600,
 });
 
-const profile = extend([
-  tineVar(user),
-  {
+const profile = payload(
+  tineVar(user, ($user) => ({
+    ...$user,
     avatarUrl: tineVar(avatarUrl),
     avatarUploadUrl: tineVar(avatarUploadUrl),
     resumeUrl: tineVar(resumeUrl),
     resumeUploadUrl: tineVar(resumeUploadUrl),
-  },
-]);
+  }))
+);
 
 export default profile.noInput();
