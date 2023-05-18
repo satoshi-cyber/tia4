@@ -29,7 +29,7 @@ export type CompanyReturnSchema = Infer<typeof CompanyReturnSchema>;
 
 export const CompanyMembersReturnSchema = array(
   object({
-    role: literal('member').or(literal('adminMember')),
+    role: literal('adminMember').or(literal('member')),
     companyId: string(),
     recipientEmail: string(),
   }).or(
@@ -40,10 +40,11 @@ export const CompanyMembersReturnSchema = array(
         firstName: Null().or(string()),
         lastName: Null().or(string()),
         role: literal('user').or(literal('admin')),
+        email: string(),
       }),
     }).and(
       object({
-        role: literal('member').or(literal('adminMember')),
+        role: literal('adminMember').or(literal('member')),
         companyId: string(),
         userId: string(),
       })
@@ -173,7 +174,23 @@ export const ProfileReturnSchema = object({
 
 export type ProfileReturnSchema = Infer<typeof ProfileReturnSchema>;
 
-export const UpdateProfileReturnSchema = object({ id: string() });
+export const UpdateProfileReturnSchema = object({
+  id: string(),
+  avatarUrl: string(),
+  avatarUploadUrl: string().or(Undefined()),
+  email: string(),
+  firstName: Null().or(string()),
+  lastName: Null().or(string()),
+  bio: Null().or(string()),
+  issuer: string(),
+  publicAddress: string(),
+  linkedInProfile: Null().or(string()),
+  resumeFileName: Null().or(string()),
+  role: literal('user').or(literal('admin')),
+  onboarded: boolean(),
+  resumeUrl: string(),
+  resumeUploadUrl: string().or(Undefined()),
+});
 
 export type UpdateProfileReturnSchema = Infer<typeof UpdateProfileReturnSchema>;
 

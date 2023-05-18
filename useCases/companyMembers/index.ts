@@ -17,6 +17,7 @@ const members = prisma.companyMember.findMany({
         firstName: true,
         lastName: true,
         role: true,
+        email: true,
       },
     },
   },

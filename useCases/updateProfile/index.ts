@@ -19,9 +19,6 @@ const updateProfile = prisma.user.update({
     linkedInProfile: tineVar(input, 'linkedInProfile'),
     bio: tineVar(input, 'bio'),
   },
-  select: {
-    id: true,
-  },
 });
 
 export default updateProfile.withInput(input);
