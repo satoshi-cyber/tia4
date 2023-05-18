@@ -29,7 +29,7 @@ export type CompanyReturnSchema = Infer<typeof CompanyReturnSchema>;
 
 export const CompanyMembersReturnSchema = array(
   object({
-    role: literal('adminMember').or(literal('member')),
+    role: literal('member').or(literal('adminMember')),
     companyId: string(),
     recipientEmail: string(),
   }).or(
@@ -44,9 +44,9 @@ export const CompanyMembersReturnSchema = array(
       }),
     }).and(
       object({
-        role: literal('adminMember').or(literal('member')),
-        companyId: string(),
+        role: literal('member').or(literal('adminMember')),
         userId: string(),
+        companyId: string(),
       })
     )
   )
@@ -139,14 +139,14 @@ export const MyInterviewsReturnSchema = array(
       object({
         id: string(),
         description: Null().or(string()),
-        createdAt: InstanceOf(Date),
-        updatedAt: InstanceOf(Date),
+        companyId: string(),
         title: string(),
         deadline: InstanceOf(Date),
         questions: array(
           object({ id: string(), question: string(), time: number() })
         ),
-        companyId: string(),
+        createdAt: InstanceOf(Date),
+        updatedAt: InstanceOf(Date),
       })
     ),
   })

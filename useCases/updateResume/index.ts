@@ -1,8 +1,7 @@
 import { z } from 'zod';
-import getClaims from '@/actions/auth/getClaims';
-import prisma from '@/actions/prisma';
-
 import { tineInput, tineVar } from 'tinejs';
+import prisma from '@/actions/prisma';
+import auth from '@/actions/auth';
 
 const input = tineInput(
   z.object({
@@ -10,7 +9,7 @@ const input = tineInput(
   })
 );
 
-const claims = getClaims();
+const claims = auth.getClaims();
 
 const updateProfile = prisma.user.update({
   where: {

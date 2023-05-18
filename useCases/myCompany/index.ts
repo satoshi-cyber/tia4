@@ -1,11 +1,11 @@
-import getClaims from '@/actions/auth/getClaims';
-import prisma from '@/actions/prisma';
-import { tineInput, tineVar } from 'tinejs';
 import { z } from 'zod';
+import { tineInput, tineVar } from 'tinejs';
+import auth from '@/actions/auth';
+import prisma from '@/actions/prisma';
 
 const input = tineInput(z.object({ companyId: z.string() }));
 
-const claims = getClaims({ companyId: tineVar(input, 'companyId') });
+const claims = auth.getClaims({ companyId: tineVar(input, 'companyId') });
 
 const myCompany = prisma.company.findUnique({
   where: {

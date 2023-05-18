@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import getClaims from '@/actions/auth/getClaims';
-import prisma from '@/actions/prisma';
 import { payload, tineInput, tineVar } from 'tinejs';
+import prisma from '@/actions/prisma';
+import auth from '@/actions/auth';
 
 import { getQueryParams } from './interview-functions';
 
@@ -13,7 +13,7 @@ const input = tineInput(
   })
 );
 
-const claims = getClaims({ companyId: tineVar(input, 'companyId') });
+const claims = auth.getClaims({ companyId: tineVar(input, 'companyId') });
 
 const parts = payload(
   tineVar(input, ({ query }) => (query ? getQueryParams(query) : undefined))

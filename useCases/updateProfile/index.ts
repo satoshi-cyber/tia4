@@ -1,12 +1,11 @@
-import { updateProfileSchema } from '@/types';
-import getClaims from '@/actions/auth/getClaims';
-import prisma from '@/actions/prisma';
-
 import { tineInput, tineVar } from 'tinejs';
+import { updateProfileSchema } from '@/types';
+import prisma from '@/actions/prisma';
+import auth from '@/actions/auth';
 
 const input = tineInput(updateProfileSchema);
 
-const claims = getClaims();
+const claims = auth.getClaims();
 
 const updateProfile = prisma.user.update({
   where: {

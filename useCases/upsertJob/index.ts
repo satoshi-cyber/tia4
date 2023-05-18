@@ -1,14 +1,14 @@
 import { z } from 'zod';
-import getClaims from '@/actions/auth/getClaims';
-import prisma from '@/actions/prisma';
-import { upsertJobSchema } from '@/types';
 import { condition, tineInput, tineVar } from 'tinejs';
+import { upsertJobSchema } from '@/types';
+import prisma from '@/actions/prisma';
+import auth from '@/actions/auth';
 
 const input = tineInput(
   z.intersection(upsertJobSchema, z.object({ companyId: z.string() }))
 );
 
-const claims = getClaims({ companyId: tineVar(input, 'companyId') });
+const claims = auth.getClaims({ companyId: tineVar(input, 'companyId') });
 
 const updateJob = prisma.job.update({
   where: {

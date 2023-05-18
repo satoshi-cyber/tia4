@@ -1,8 +1,8 @@
-import getClaims from '@/actions/auth/getClaims';
-import prisma from '@/actions/prisma';
 import { tineVar } from 'tinejs';
+import auth from '@/actions/auth';
+import prisma from '@/actions/prisma';
 
-const claims = getClaims();
+const claims = auth.getClaims();
 
 const myInterviews = prisma.interview.findMany({
   where: {

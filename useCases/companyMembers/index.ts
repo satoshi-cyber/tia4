@@ -1,11 +1,11 @@
-import getClaims from '@/actions/auth/getClaims';
+import auth from '@/actions/auth';
 import prisma from '@/actions/prisma';
 import { payload, tineInput, tineVar } from 'tinejs';
 import { z } from 'zod';
 
 const input = tineInput(z.object({ companyId: z.string() }));
 
-const claims = getClaims({ companyId: tineVar(input, 'companyId') });
+const claims = auth.getClaims({ companyId: tineVar(input, 'companyId') });
 
 const members = prisma.companyMember.findMany({
   where: { companyId: tineVar(claims, 'companyId') },

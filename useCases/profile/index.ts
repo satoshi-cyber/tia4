@@ -1,9 +1,8 @@
-import getClaims from '@/actions/auth/getClaims';
+import { tineVar } from 'tinejs';
+import auth from '@/actions/auth';
 import prisma from '@/actions/prisma';
 
-import { tineVar } from 'tinejs';
-
-const claims = getClaims();
+const claims = auth.getClaims();
 
 const profile = prisma.user.findUnique({
   where: {
