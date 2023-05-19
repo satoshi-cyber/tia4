@@ -17,6 +17,20 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
   const onEnded = () => swiper?.slideNext();
 
   useEffect(() => {
+    if (!swiper) {
+      return;
+    }
+
+    players.current.forEach((player, index) => {
+      if (swiper.realIndex === index) {
+        return player.video.play();
+      }
+
+      player.video.pause();
+    });
+  }, [swiper]);
+
+  useEffect(() => {
     swiper?.on('slideChange', () => {
       players.current.forEach((player, index) => {
         if (swiper.realIndex === index) {
@@ -54,16 +68,6 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
 
     document.body.classList.remove('fullscreen');
   }, [fullScreen]);
-
-  // stop playing when component is unmounted
-  useEffect(
-    () => () => {
-      players.current.forEach((player, index) => {
-        player.video.pause();
-      });
-    },
-    []
-  );
 
   const escFunction = useCallback((event: KeyboardEvent) => {
     if (event.key === 'Escape') {
