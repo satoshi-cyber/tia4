@@ -1,6 +1,6 @@
 import { tineAction } from 'tinejs';
 
-import { EmailTemplateProps, MailServiceResponse } from './types';
+import { EmailTemplateProps } from './types';
 
 import { env } from '../config';
 
@@ -13,7 +13,8 @@ const sendMail = tineAction(
     template: T;
     props: EmailTemplateProps[T];
     to: string;
-  }) =>
+  }) => {
+    // don't wait for email
     fetch(env.MAIL_SERVICE_URI, {
       method: 'POST',
       headers: {
@@ -30,8 +31,12 @@ const sendMail = tineAction(
         },
       }),
     })
-      .then((response) => response.json())
-      .then((data) => data as MailServiceResponse),
+      .then((res) => res.json())
+      .then(console.log)
+      .catch(console.error);
+
+    return true;
+  },
   { action: 'sendMail' }
 );
 

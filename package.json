@@ -78,7 +78,7 @@
     "swr": "^2.1.5",
     "tailwindcss": "^0.0.0-insiders.40c0cbe",
     "tailwindcss-scoped-groups": "^2.0.0",
-    "tinejs": "^0.0.25",
+    "tinejs": "^0.0.26",
     "tinejs.prisma": "^0.0.9",
     "typescript": "^5.0.4",
     "universal-cookie": "^4.0.4",

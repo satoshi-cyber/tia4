@@ -63,8 +63,7 @@ const inviteCompanyMembers = payload(
       });
 
       const inviteMember = condition([
-        tineVar(isMember, ($isMember) => Boolean($isMember)),
-        undefined,
+        tineVar(isMember, ($isMember) => !Boolean($isMember)),
         tineVar(sendInvite),
       ]);
 

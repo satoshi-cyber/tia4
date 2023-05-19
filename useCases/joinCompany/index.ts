@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import { payload, tineInput, tineVar } from 'tinejs';
+import { condition, tineInput, tineVar } from 'tinejs';
 import auth from '@/actions/auth';
 import prisma from '@/actions/prisma';
+import { deleteInviteAndUpdateUser } from './joinCompany-functions';
 
 const input = tineInput(z.object({ companyId: z.string() }));
 
@@ -19,48 +20,27 @@ const isInvited = prisma.companyInvite.findFirstOrThrow({
   },
 });
 
-const deleteInvite = prisma.companyInvite.delete({
-  where: {
-    recipientEmail_companyId: {
-      recipientEmail: tineVar(user, 'email'),
-      companyId: tineVar(input, 'companyId'),
-    },
-  },
-});
+const deletedInvite = deleteInviteAndUpdateUser({ user, input });
 
-const deletePreviousMembership = prisma.companyMember.deleteMany({
-  where: {
-    userId: tineVar(user, 'id'),
-  },
-});
-
-const updateUser = prisma.user.update({
-  where: { id: tineVar(user, 'id') },
-  data: { onboarded: true },
-});
-
-const cleanup = payload({
-  isInvited: tineVar(isInvited),
-  invite: tineVar(
-    [deleteInvite, deletePreviousMembership, updateUser] as const,
-    ([$invite]) => $invite
+const joinCompany = condition([
+  tineVar(isInvited, ($isInvited) => Boolean($isInvited)),
+  tineVar(deletedInvite, ($invite) =>
+    prisma.companyMember.create({
+      data: {
+        company: {
+          connect: {
+            id: tineVar(input, 'companyId'),
+          },
+        },
+        user: {
+          connect: {
+            id: tineVar(user, 'id'),
+          },
+        },
+        role: $invite.role,
+      },
+    })
   ),
-});
-
-const joinCompany = prisma.companyMember.create({
-  data: {
-    company: {
-      connect: {
-        id: tineVar(input, 'companyId'),
-      },
-    },
-    user: {
-      connect: {
-        id: tineVar(user, 'id'),
-      },
-    },
-    role: tineVar(cleanup, 'invite.role'),
-  },
-});
+]);
 
 export default joinCompany.withInput(input);
