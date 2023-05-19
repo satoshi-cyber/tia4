@@ -17,20 +17,6 @@ export const useInterviewPlayer = ({ className }: IntervewPlayerOptions) => {
   const onEnded = () => swiper?.slideNext();
 
   useEffect(() => {
-    if (!swiper) {
-      return;
-    }
-
-    players.current.forEach((player, index) => {
-      if (swiper.realIndex === index) {
-        return player.video.play();
-      }
-
-      player.video.pause();
-    });
-  }, [swiper]);
-
-  useEffect(() => {
     swiper?.on('slideChange', () => {
       players.current.forEach((player, index) => {
         if (swiper.realIndex === index) {
