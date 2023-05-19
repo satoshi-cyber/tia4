@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import MarkdownBase from 'markdown-to-jsx';
 
 import { TextProps } from './Markdown-types';
 
@@ -16,7 +16,7 @@ const Markdown: React.FC<TextProps> = ({
       isLoading={isLoading}
       {...skeletonProps}
       after={
-        text && <ReactMarkdown className="prose mx-auto">{text}</ReactMarkdown>
+        text && <MarkdownBase className="prose mx-auto">{text}</MarkdownBase>
       }
     />
   </div>
