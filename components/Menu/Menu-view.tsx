@@ -347,6 +347,4 @@ const Menu = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Menu), {
-  ssr: false,
-});
+export default Menu;

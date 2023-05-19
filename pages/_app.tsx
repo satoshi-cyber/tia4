@@ -10,8 +10,11 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 import '../styles/globals.css';
 import { client } from '../lib';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { asPath } = useRouter();
+
   return (
     <Provider value={client}>
       <Head>
@@ -53,7 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <AuthProvider>
         <Component {...pageProps} />
         {/* <Analytics /> */}
-        <Menu />
+        {asPath.startsWith('/app/') && <Menu />}
         <ToastContainer />
       </AuthProvider>
     </Provider>
