@@ -1,74 +1,90 @@
-import { TOAST_OPTIONS, URLS } from "@/config"
-import { useInterviewRateQuery, useRateInterviewMutation } from "@/graphql"
-import { useUser } from "@/hooks"
-import clsx from "clsx"
-import { useRouter } from "next/router"
-import { useMemo, useState } from "react"
-import { toast } from "react-toastify"
+import { TOAST_OPTIONS, URLS } from '@/config';
+import { useInterviewRateQuery, useRateInterviewMutation } from '@/graphql';
+import { useUser } from '@/hooks';
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import { useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { CLASS_NAMES, DEMO_INTERVIEW_ID, PUSH_DELAY, TOAST_MESSAGE } from "./Rate-constants"
+import {
+  CLASS_NAMES,
+  DEMO_INTERVIEW_ID,
+  PUSH_DELAY,
+  TOAST_MESSAGE,
+} from './Rate-constants';
+import { mutate } from 'swr';
+import { UseCases } from '@/useCases';
 
 export const useRate = ({ className }: { className?: string }) => {
-  const { companyId } = useUser()
+  const { companyId } = useUser();
 
   const router = useRouter();
 
   const interviewId = router.query.interviewId as string;
 
-  const [score, setScore] = useState(0)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [score, setScore] = useState(0);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const context = useMemo(() => ({ additionalTypenames: ['Rate'] }), []);
 
-  const [{ fetching, data }] = useInterviewRateQuery({ variables: { companyId: companyId!, interviewId }, pause: !companyId || !interviewId || interviewId === DEMO_INTERVIEW_ID, context })
+  const [{ fetching, data }] = useInterviewRateQuery({
+    variables: { companyId: companyId!, interviewId },
+    pause: !companyId || !interviewId || interviewId === DEMO_INTERVIEW_ID,
+    context,
+  });
 
-  const [{ fetching: submitting }, rateInterview] = useRateInterviewMutation()
+  const [{ fetching: submitting }, rateInterview] = useRateInterviewMutation();
 
   const classNames = {
     ...CLASS_NAMES,
-    constainer: clsx(CLASS_NAMES.container, className)
-  }
+    constainer: clsx(CLASS_NAMES.container, className),
+  };
 
   const handleRate = (index: number) => {
-    setScore(index)
-    setIsDialogOpen(true)
-  }
+    setScore(index);
+    setIsDialogOpen(true);
+  };
 
   const closeDialog = () => {
-    setIsDialogOpen(false)
-  }
+    setIsDialogOpen(false);
+  };
 
   const handleConfirm = async () => {
     if (interviewId === DEMO_INTERVIEW_ID) {
-      toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
+      toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
 
-      closeDialog()
+      closeDialog();
 
-      setTimeout(() => router.push(URLS.RATE), PUSH_DELAY)
+      setTimeout(() => router.push(URLS.RATE), PUSH_DELAY);
 
-      return
+      return;
     }
 
-    const { error } = await rateInterview({ companyId: companyId!, input: { interviewId, value: score } }, { additionalTypenames: ['Rate'] })
+    const { error } = await rateInterview(
+      { companyId: companyId!, input: { interviewId, value: score } },
+      { additionalTypenames: ['Rate'] }
+    );
 
-    closeDialog()
+    closeDialog();
 
     if (error) {
-      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS)
+      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
 
-      return
+      return;
     }
 
-    toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
+    toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
 
-    setTimeout(() => router.push(URLS.RATE), PUSH_DELAY)
-  }
+    mutate(UseCases.pendingRates.getKey());
 
-  const value = data?.interviewRate?.value
+    setTimeout(() => router.push(URLS.RATE), PUSH_DELAY);
+  };
 
-  const isScoreVisible = value || value === 0
+  const value = data?.interviewRate?.value;
 
-  const scoreLabel = `your score: ${value} / 4`
+  const isScoreVisible = value || value === 0;
+
+  const scoreLabel = `your score: ${value} / 4`;
 
   return {
     fetching,
@@ -81,6 +97,6 @@ export const useRate = ({ className }: { className?: string }) => {
     isDialogOpen,
     handleConfirm,
     closeDialog,
-    handleRate
-  }
-}
+    handleRate,
+  };
+};

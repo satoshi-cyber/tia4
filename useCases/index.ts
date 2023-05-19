@@ -13,6 +13,7 @@ import type { Job } from './types';
 import type { Jobs } from './types';
 import type { MyCompany } from './types';
 import type { MyInterviews } from './types';
+import type { PendingRates } from './types';
 import type { Profile } from './types';
 import type { UpdateProfile } from './types';
 import type { UpdateResume } from './types';
@@ -205,6 +206,29 @@ export const UseCases = {
         fetchData<TineInferReturn<MyInterviews>>('/api/tine/myInterviews')
       ),
     getKey: () => 'myInterviews',
+  },
+  pendingRates: {
+    load: (input: TineInferInput<PendingRates> | '' | undefined | false) =>
+      useSwr(
+        input ? ['pendingRates', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<PendingRates>>(
+                '/api/tine/pendingRates',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'pendingRates',
+        (_: string, { arg }: { arg: TineInferInput<PendingRates> }) =>
+          fetchData<TineInferReturn<PendingRates>>(
+            '/api/tine/pendingRates',
+            arg
+          )
+      ),
+    getKey: () => (key: any) => key && key[0] === 'pendingRates',
   },
   profile: {
     load: () =>

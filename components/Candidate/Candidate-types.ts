@@ -1,7 +1,5 @@
-import { InterviewPreviewFragment } from '@/graphql';
-import { Interviews } from '@/useCases/types';
-import { TineInferReturn } from 'tinejs';
+import { InterviewPreview } from '@/types';
 
 export interface CandidateProps {
-  interview?: TineInferReturn<Interviews>[0] | InterviewPreviewFragment;
+  interview?: InterviewPreview;
 }

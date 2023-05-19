@@ -1,4 +1,4 @@
-import { InterviewPreviewFragment } from '@/graphql';
+import { InterviewPreview } from '@/types';
 
 export const CLASS_NAMES = {
   list: 'grid sm:grid-cols-2 gap-8 w-full',
@@ -16,7 +16,7 @@ export const LAYOUT_PROPS = {
   width: 'max-w-[600px]',
 };
 
-export const SKELETON_INTERVIEWS: InterviewPreviewFragment[] = [
+export const SKELETON_INTERVIEWS: InterviewPreview[] = [
   {
     id: '1',
     thumbnail: '',

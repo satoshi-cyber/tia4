@@ -6,12 +6,12 @@ import { TITLE_PROPS, CLASS_NAMES, LAYOUT_PROPS } from './Rate-constants';
 import { useRate } from './Rate-hook';
 
 const Rate = () => {
-  const { isListVisible, interviews, fetching } = useRate();
+  const { isListVisible, interviews, isLoading } = useRate();
 
   return (
     <Layout.Default {...LAYOUT_PROPS}>
       <Title {...TITLE_PROPS} />
-      <LoadingProvider isLoading={fetching}>
+      <LoadingProvider isLoading={isLoading}>
         {isListVisible ? (
           <div className={CLASS_NAMES.list}>
             {interviews?.map(

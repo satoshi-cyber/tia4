@@ -1,10 +1,6 @@
-import { InterviewsQuery } from '@/graphql';
-import { Interviews } from '@/useCases/types';
-import { TineInferReturn } from 'tinejs';
+import { InterviewPreview } from '@/types';
 
-export const formatData = (
-  interview?: TineInferReturn<Interviews>[0] | InterviewsQuery['interviews'][0]
-) => ({
+export const formatData = (interview?: InterviewPreview) => ({
   id: interview?.id,
   thumbnail: interview?.thumbnail,
   candidateName: `${interview?.interviewee?.firstName} ${interview?.interviewee?.lastName}`,

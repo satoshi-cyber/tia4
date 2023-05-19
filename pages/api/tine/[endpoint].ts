@@ -12,6 +12,7 @@ import job from '@/useCases/job';
 import jobs from '@/useCases/jobs';
 import myCompany from '@/useCases/myCompany';
 import myInterviews from '@/useCases/myInterviews';
+import pendingRates from '@/useCases/pendingRates';
 import profile from '@/useCases/profile';
 import updateProfile from '@/useCases/updateProfile';
 import updateResume from '@/useCases/updateResume';
@@ -30,6 +31,7 @@ const useCasesWithInput = {
   job: job,
   jobs: jobs,
   myCompany: myCompany,
+  pendingRates: pendingRates,
   updateProfile: updateProfile,
   updateResume: updateResume,
   upsertJob: upsertJob,

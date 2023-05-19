@@ -1,31 +1,24 @@
-import { usePendingRatesQuery } from '@/graphql';
 import { useUser } from '@/hooks';
-import { useMemo } from 'react';
 
 import { SKELETON_INTERVIEWS } from './Rate-constants';
+import { UseCases } from '@/useCases';
 
 export const useRate = () => {
   const { companyId } = useUser();
 
-  const context = useMemo(() => ({ additionalTypenames: ['Rate'] }), []);
+  const { data, isLoading } = UseCases.pendingRates.load(
+    companyId && { companyId }
+  );
 
-  const [{ data, fetching }] = usePendingRatesQuery({
-    variables: {
-      companyId: companyId!,
-    },
-    context,
-    pause: !companyId,
-  });
-
-  const interviews = fetching
+  const interviews = isLoading
     ? SKELETON_INTERVIEWS
-    : data?.pendingRates?.map(({ interview }) => interview);
+    : data?.map(({ interview }) => interview);
 
-  const isListVisible = !fetching && interviews && interviews.length > 0;
+  const isListVisible = !isLoading && interviews && interviews.length > 0;
 
   return {
     interviews,
     isListVisible,
-    fetching,
+    isLoading,
   };
 };
