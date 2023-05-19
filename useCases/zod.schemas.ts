@@ -264,6 +264,39 @@ export const ProfileReturnSchema = object({
 
 export type ProfileReturnSchema = Infer<typeof ProfileReturnSchema>;
 
+export const SetupCompanyReturnSchema = object({
+  id: string(),
+  name: string(),
+  description: Null().or(string()),
+  website: Null().or(string()),
+  avatarUrl: string(),
+  avatarUploadUrl: string().or(Undefined()),
+});
+
+export type SetupCompanyReturnSchema = Infer<typeof SetupCompanyReturnSchema>;
+
+export const SkipOnboardingReturnSchema = object({
+  id: string(),
+  avatarUrl: string(),
+  avatarUploadUrl: string().or(Undefined()),
+  email: string(),
+  firstName: Null().or(string()),
+  lastName: Null().or(string()),
+  bio: Null().or(string()),
+  issuer: string(),
+  publicAddress: string(),
+  linkedInProfile: Null().or(string()),
+  resumeFileName: Null().or(string()),
+  role: literal('user').or(literal('admin')),
+  onboarded: boolean(),
+  resumeUrl: string(),
+  resumeUploadUrl: string().or(Undefined()),
+});
+
+export type SkipOnboardingReturnSchema = Infer<
+  typeof SkipOnboardingReturnSchema
+>;
+
 export const UpdateProfileReturnSchema = object({
   id: string(),
   avatarUrl: string(),

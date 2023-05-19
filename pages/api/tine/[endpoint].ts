@@ -14,6 +14,8 @@ import myCompany from '@/useCases/myCompany';
 import myInterviews from '@/useCases/myInterviews';
 import pendingRates from '@/useCases/pendingRates';
 import profile from '@/useCases/profile';
+import setupCompany from '@/useCases/setupCompany';
+import skipOnboarding from '@/useCases/skipOnboarding';
 import updateProfile from '@/useCases/updateProfile';
 import updateResume from '@/useCases/updateResume';
 import upsertJob from '@/useCases/upsertJob';
@@ -32,6 +34,7 @@ const useCasesWithInput = {
   jobs: jobs,
   myCompany: myCompany,
   pendingRates: pendingRates,
+  setupCompany: setupCompany,
   updateProfile: updateProfile,
   updateResume: updateResume,
   upsertJob: upsertJob,
@@ -41,6 +44,7 @@ const useCases = {
   health: health,
   myInterviews: myInterviews,
   profile: profile,
+  skipOnboarding: skipOnboarding,
 };
 
 const handler = async (req: NextRequest) => {

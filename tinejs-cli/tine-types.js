@@ -70,6 +70,12 @@ export const UseCases = {
       load: () => useSwr(
         '{{useCase}}', () => fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}'),
       ),
+      mutate: () => useSWRMutation(
+        '{{useCase}}',
+        (
+          _: string,
+        ) => fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}')
+      ),
       getKey: () => '{{useCase}}',
     },
   {{/if}}

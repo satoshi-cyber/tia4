@@ -1,3 +1,3 @@
 export interface SetupCompanyProps {
-  showSkip?: boolean
+  showSkip?: boolean;
 }

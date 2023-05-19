@@ -15,6 +15,8 @@ import type { MyCompany } from './types';
 import type { MyInterviews } from './types';
 import type { PendingRates } from './types';
 import type { Profile } from './types';
+import type { SetupCompany } from './types';
+import type { SkipOnboarding } from './types';
 import type { UpdateProfile } from './types';
 import type { UpdateResume } from './types';
 import type { UpsertJob } from './types';
@@ -126,6 +128,10 @@ export const UseCases = {
       useSwr('health', () =>
         fetchData<TineInferReturn<Health>>('/api/tine/health')
       ),
+    mutate: () =>
+      useSWRMutation('health', (_: string) =>
+        fetchData<TineInferReturn<Health>>('/api/tine/health')
+      ),
     getKey: () => 'health',
   },
   interviews: {
@@ -205,6 +211,10 @@ export const UseCases = {
       useSwr('myInterviews', () =>
         fetchData<TineInferReturn<MyInterviews>>('/api/tine/myInterviews')
       ),
+    mutate: () =>
+      useSWRMutation('myInterviews', (_: string) =>
+        fetchData<TineInferReturn<MyInterviews>>('/api/tine/myInterviews')
+      ),
     getKey: () => 'myInterviews',
   },
   pendingRates: {
@@ -235,7 +245,45 @@ export const UseCases = {
       useSwr('profile', () =>
         fetchData<TineInferReturn<Profile>>('/api/tine/profile')
       ),
+    mutate: () =>
+      useSWRMutation('profile', (_: string) =>
+        fetchData<TineInferReturn<Profile>>('/api/tine/profile')
+      ),
     getKey: () => 'profile',
+  },
+  setupCompany: {
+    load: (input: TineInferInput<SetupCompany> | '' | undefined | false) =>
+      useSwr(
+        input ? ['setupCompany', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<SetupCompany>>(
+                '/api/tine/setupCompany',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'setupCompany',
+        (_: string, { arg }: { arg: TineInferInput<SetupCompany> }) =>
+          fetchData<TineInferReturn<SetupCompany>>(
+            '/api/tine/setupCompany',
+            arg
+          )
+      ),
+    getKey: () => (key: any) => key && key[0] === 'setupCompany',
+  },
+  skipOnboarding: {
+    load: () =>
+      useSwr('skipOnboarding', () =>
+        fetchData<TineInferReturn<SkipOnboarding>>('/api/tine/skipOnboarding')
+      ),
+    mutate: () =>
+      useSWRMutation('skipOnboarding', (_: string) =>
+        fetchData<TineInferReturn<SkipOnboarding>>('/api/tine/skipOnboarding')
+      ),
+    getKey: () => 'skipOnboarding',
   },
   updateProfile: {
     load: (input: TineInferInput<UpdateProfile> | '' | undefined | false) =>

@@ -1,51 +1,52 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { useRouter } from "next/router";
-import { SetupCompany, useSetupCompanyMutation, useSkipOnboardingMutation, } from "@/graphql";
-import { useUser } from "@/hooks";
+import { useRouter } from 'next/router';
+import { useUser } from '@/hooks';
+import { TOAST_OPTIONS, URLS } from '@/config';
+import { UseCases } from '@/useCases';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { setupCompanySchema } from '@/types';
 
-import { setupCompanySchema } from "./SetupCompany-validations";
 import { PUSH_DELAY, TOAST_MESSAGE } from './SetupCompany-constants';
 
-import { TOAST_OPTIONS, URLS } from "@/config";
-
 export const useSetupCompany = () => {
-  const router = useRouter()
-  const { refreshToken, fetching: gettingNewToken } = useUser()
-  const [{ fetching: settingUpCompany }, setupCompany] = useSetupCompanyMutation();
-  const [{ fetching: skippingOnboarding }, skipOnboarding] = useSkipOnboardingMutation();
+  const router = useRouter();
+  const { refreshToken, fetching: gettingNewToken } = useUser();
 
-  const submitting = settingUpCompany || skippingOnboarding || gettingNewToken
+  const { trigger: setupCompany, isMutating: settingUpCompany } =
+    UseCases.setupCompany.mutate();
 
-  const form = useForm<SetupCompany>({
-    mode: "onBlur",
-    reValidateMode: "onBlur",
-    resolver: yupResolver(setupCompanySchema),
+  const { trigger: skipOnboarding, isMutating: skippingOnboarding } =
+    UseCases.skipOnboarding.mutate();
+
+  const submitting = settingUpCompany || skippingOnboarding || gettingNewToken;
+
+  const form = useForm<Zod.infer<typeof setupCompanySchema>>({
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: zodResolver(setupCompanySchema),
   });
 
-  const handleSubmit = async (input: SetupCompany) => {
-    const { error } = await setupCompany({ input }, { additionalTypenames: ['Company'] })
+  const handleSubmit = async (input: Zod.infer<typeof setupCompanySchema>) => {
+    try {
+      await setupCompany(input);
 
-    await refreshToken()
+      await refreshToken();
 
-    if (error) {
-      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS)
+      toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
 
-      return
+      setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY);
+    } catch (e) {
+      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
     }
-
-    toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS)
-
-    setTimeout(() => router.push(URLS.JOBS), PUSH_DELAY)
   };
 
   const handleSkip = async () => {
-    await skipOnboarding({})
+    await skipOnboarding();
 
-    await refreshToken()
+    await refreshToken();
 
-    router.push(URLS.HOME)
+    router.push(URLS.HOME);
   };
 
   return {
