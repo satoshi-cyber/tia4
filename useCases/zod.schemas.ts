@@ -113,6 +113,25 @@ export const InterviewsReturnSchema = array(
 
 export type InterviewsReturnSchema = Infer<typeof InterviewsReturnSchema>;
 
+export const InviteCompanyMembersReturnSchema = array(
+  object({
+    result: object({
+      accepted: array(string()),
+      rejected: array(string()),
+      envelopeTime: number(),
+      messageTime: number(),
+      messageSize: number(),
+      response: string(),
+      envelope: object({ from: string(), to: array(string()) }),
+      messageId: string(),
+    }),
+  }).or(Undefined())
+);
+
+export type InviteCompanyMembersReturnSchema = Infer<
+  typeof InviteCompanyMembersReturnSchema
+>;
+
 export const JobReturnSchema = object({
   id: string(),
   title: string(),

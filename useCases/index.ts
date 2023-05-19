@@ -11,6 +11,7 @@ import type { DeleteJob } from './types';
 import type { EditCompany } from './types';
 import type { Health } from './types';
 import type { Interviews } from './types';
+import type { InviteCompanyMembers } from './types';
 import type { Job } from './types';
 import type { Jobs } from './types';
 import type { JoinCompany } from './types';
@@ -199,6 +200,31 @@ export const UseCases = {
           fetchData<TineInferReturn<Interviews>>('/api/tine/interviews', arg)
       ),
     getKey: () => (key: any) => key && key[0] === 'interviews',
+  },
+  inviteCompanyMembers: {
+    load: (
+      input: TineInferInput<InviteCompanyMembers> | '' | undefined | false
+    ) =>
+      useSwr(
+        input ? ['inviteCompanyMembers', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<InviteCompanyMembers>>(
+                '/api/tine/inviteCompanyMembers',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'inviteCompanyMembers',
+        (_: string, { arg }: { arg: TineInferInput<InviteCompanyMembers> }) =>
+          fetchData<TineInferReturn<InviteCompanyMembers>>(
+            '/api/tine/inviteCompanyMembers',
+            arg
+          )
+      ),
+    getKey: () => (key: any) => key && key[0] === 'inviteCompanyMembers',
   },
   job: {
     load: (input: TineInferInput<Job> | '' | undefined | false) =>

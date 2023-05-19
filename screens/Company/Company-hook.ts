@@ -1,9 +1,4 @@
 import { TOAST_OPTIONS } from '@/config';
-import {
-  CompanyInvite,
-  CompanyMemberRole,
-  useInviteMemberMutation,
-} from '@/graphql';
 import { useUser } from '@/hooks';
 import { UseCases } from '@/useCases';
 import { useLayoutEffect, useState } from 'react';
@@ -12,19 +7,21 @@ import { toast } from 'react-toastify';
 import { mutate } from 'swr';
 
 import { SKELETON_MEMBERS, TOAST_MESSAGE } from './Company-constants';
+import { CompanyRoles, inviteCompanyMembersSchema } from '@/types';
+import Zod from 'zod';
 
 export const useCompany = () => {
   const { companyId, companyRole } = useUser();
 
-  const [{ fetching: submitting }, inviteTeamMember] =
-    useInviteMemberMutation();
+  const { trigger: triggerInviteTeamMembers } =
+    UseCases.inviteCompanyMembers.mutate();
 
   const [inviteTeamMembers, setInviteTeamMembers] = useState(false);
 
   const [inviteTeamMembersVisible, setInviteTeamMembersVisible] =
     useState(false);
 
-  const form = useForm({
+  const form = useForm<Zod.infer<typeof inviteCompanyMembersSchema>>({
     defaultValues: {
       teamMembers: [{}],
     },
@@ -37,31 +34,30 @@ export const useCompany = () => {
 
   const handleCloseForm = () => setInviteTeamMembers(false);
 
-  const onSubmit = async (data: { teamMembers: CompanyInvite[] }) => {
-    const invites = data.teamMembers.map(async (invite) => {
-      const res = await inviteTeamMember(
-        { companyId: companyId!, input: invite },
-        { additionalTypenames: ['CompanyInvite'] }
-      );
-
-      if (res.error) {
-        throw res.error;
-      }
-    });
+  const onSubmit = async (
+    data: Zod.infer<typeof inviteCompanyMembersSchema>
+  ) => {
+    if (!companyId) {
+      return;
+    }
 
     const toastMessage =
-      invites.length === 1 ? TOAST_MESSAGE.one : TOAST_MESSAGE.many;
+      data.teamMembers.length === 1 ? TOAST_MESSAGE.one : TOAST_MESSAGE.many;
 
     try {
-      await Promise.all(invites);
+      const rows = await triggerInviteTeamMembers({ ...data, companyId });
+
+      if (rows?.some((row) => !row)) {
+        throw new Error('Some invites failed!');
+      }
 
       toast.success(toastMessage.success, TOAST_OPTIONS);
-
-      mutate(UseCases.companyMembers.getKey());
     } catch (e) {
       toast.error(toastMessage.error, TOAST_OPTIONS);
     } finally {
       form.reset();
+
+      mutate(UseCases.companyMembers.getKey());
 
       setInviteTeamMembers(false);
     }
@@ -77,13 +73,12 @@ export const useCompany = () => {
 
   const members = isLoading ? SKELETON_MEMBERS : data || [];
 
-  const isAdmin = companyRole === CompanyMemberRole.AdminMember;
+  const isAdmin = companyRole === CompanyRoles.adminMember;
 
   return {
     form,
     members,
     isLoading,
-    submitting,
     handleCloseForm,
     onSubmit,
     handleInviteTeamMembers,
