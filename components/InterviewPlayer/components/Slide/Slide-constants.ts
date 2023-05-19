@@ -14,5 +14,5 @@ export const PLAYER_PROPS = {
   fluid: false,
   playsInline: true,
   controls: true,
-  autoPlay: false,
+  autoPlay: true,
 };
