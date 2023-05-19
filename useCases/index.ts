@@ -19,6 +19,7 @@ import type { MyCompany } from './types';
 import type { MyInterviews } from './types';
 import type { PendingRates } from './types';
 import type { Profile } from './types';
+import type { PublicJob } from './types';
 import type { SetupCompany } from './types';
 import type { SkipOnboarding } from './types';
 import type { UpdateProfile } from './types';
@@ -65,7 +66,13 @@ export const UseCases = {
             arg
           )
       ),
-    getKey: () => (key: any) => key && key[0] === 'authenticateUser',
+    getKey: (input?: TineInferInput<AuthenticateUser>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'authenticateUser';
+      }
+
+      return ['authenticateUser', input];
+    },
   },
   company: {
     load: (input: TineInferInput<Company> | '' | undefined | false) =>
@@ -82,7 +89,13 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<Company> }) =>
           fetchData<TineInferReturn<Company>>('/api/tine/company', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'company',
+    getKey: (input?: TineInferInput<Company>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'company';
+      }
+
+      return ['company', input];
+    },
   },
   companyMembers: {
     load: (input: TineInferInput<CompanyMembers> | '' | undefined | false) =>
@@ -105,7 +118,13 @@ export const UseCases = {
             arg
           )
       ),
-    getKey: () => (key: any) => key && key[0] === 'companyMembers',
+    getKey: (input?: TineInferInput<CompanyMembers>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'companyMembers';
+      }
+
+      return ['companyMembers', input];
+    },
   },
   deleteCompany: {
     load: (input: TineInferInput<DeleteCompany> | '' | undefined | false) =>
@@ -128,7 +147,13 @@ export const UseCases = {
             arg
           )
       ),
-    getKey: () => (key: any) => key && key[0] === 'deleteCompany',
+    getKey: (input?: TineInferInput<DeleteCompany>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'deleteCompany';
+      }
+
+      return ['deleteCompany', input];
+    },
   },
   deleteJob: {
     load: (input: TineInferInput<DeleteJob> | '' | undefined | false) =>
@@ -148,7 +173,13 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<DeleteJob> }) =>
           fetchData<TineInferReturn<DeleteJob>>('/api/tine/deleteJob', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'deleteJob',
+    getKey: (input?: TineInferInput<DeleteJob>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'deleteJob';
+      }
+
+      return ['deleteJob', input];
+    },
   },
   editCompany: {
     load: (input: TineInferInput<EditCompany> | '' | undefined | false) =>
@@ -168,7 +199,13 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<EditCompany> }) =>
           fetchData<TineInferReturn<EditCompany>>('/api/tine/editCompany', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'editCompany',
+    getKey: (input?: TineInferInput<EditCompany>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'editCompany';
+      }
+
+      return ['editCompany', input];
+    },
   },
   health: {
     load: () =>
@@ -199,7 +236,13 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<Interviews> }) =>
           fetchData<TineInferReturn<Interviews>>('/api/tine/interviews', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'interviews',
+    getKey: (input?: TineInferInput<Interviews>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'interviews';
+      }
+
+      return ['interviews', input];
+    },
   },
   inviteCompanyMembers: {
     load: (
@@ -224,7 +267,13 @@ export const UseCases = {
             arg
           )
       ),
-    getKey: () => (key: any) => key && key[0] === 'inviteCompanyMembers',
+    getKey: (input?: TineInferInput<InviteCompanyMembers>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'inviteCompanyMembers';
+      }
+
+      return ['inviteCompanyMembers', input];
+    },
   },
   job: {
     load: (input: TineInferInput<Job> | '' | undefined | false) =>
@@ -240,7 +289,13 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<Job> }) =>
           fetchData<TineInferReturn<Job>>('/api/tine/job', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'job',
+    getKey: (input?: TineInferInput<Job>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'job';
+      }
+
+      return ['job', input];
+    },
   },
   jobs: {
     load: (input: TineInferInput<Jobs> | '' | undefined | false) =>
@@ -256,7 +311,13 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<Jobs> }) =>
           fetchData<TineInferReturn<Jobs>>('/api/tine/jobs', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'jobs',
+    getKey: (input?: TineInferInput<Jobs>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'jobs';
+      }
+
+      return ['jobs', input];
+    },
   },
   joinCompany: {
     load: (input: TineInferInput<JoinCompany> | '' | undefined | false) =>
@@ -276,7 +337,13 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<JoinCompany> }) =>
           fetchData<TineInferReturn<JoinCompany>>('/api/tine/joinCompany', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'joinCompany',
+    getKey: (input?: TineInferInput<JoinCompany>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'joinCompany';
+      }
+
+      return ['joinCompany', input];
+    },
   },
   myCompany: {
     load: (input: TineInferInput<MyCompany> | '' | undefined | false) =>
@@ -296,7 +363,13 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<MyCompany> }) =>
           fetchData<TineInferReturn<MyCompany>>('/api/tine/myCompany', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'myCompany',
+    getKey: (input?: TineInferInput<MyCompany>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'myCompany';
+      }
+
+      return ['myCompany', input];
+    },
   },
   myInterviews: {
     load: () =>
@@ -330,7 +403,13 @@ export const UseCases = {
             arg
           )
       ),
-    getKey: () => (key: any) => key && key[0] === 'pendingRates',
+    getKey: (input?: TineInferInput<PendingRates>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'pendingRates';
+      }
+
+      return ['pendingRates', input];
+    },
   },
   profile: {
     load: () =>
@@ -342,6 +421,32 @@ export const UseCases = {
         fetchData<TineInferReturn<Profile>>('/api/tine/profile')
       ),
     getKey: () => 'profile',
+  },
+  publicJob: {
+    load: (input: TineInferInput<PublicJob> | '' | undefined | false) =>
+      useSwr(
+        input ? ['publicJob', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<PublicJob>>(
+                '/api/tine/publicJob',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'publicJob',
+        (_: string, { arg }: { arg: TineInferInput<PublicJob> }) =>
+          fetchData<TineInferReturn<PublicJob>>('/api/tine/publicJob', arg)
+      ),
+    getKey: (input?: TineInferInput<PublicJob>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'publicJob';
+      }
+
+      return ['publicJob', input];
+    },
   },
   setupCompany: {
     load: (input: TineInferInput<SetupCompany> | '' | undefined | false) =>
@@ -364,7 +469,13 @@ export const UseCases = {
             arg
           )
       ),
-    getKey: () => (key: any) => key && key[0] === 'setupCompany',
+    getKey: (input?: TineInferInput<SetupCompany>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'setupCompany';
+      }
+
+      return ['setupCompany', input];
+    },
   },
   skipOnboarding: {
     load: () =>
@@ -398,7 +509,13 @@ export const UseCases = {
             arg
           )
       ),
-    getKey: () => (key: any) => key && key[0] === 'updateProfile',
+    getKey: (input?: TineInferInput<UpdateProfile>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'updateProfile';
+      }
+
+      return ['updateProfile', input];
+    },
   },
   updateResume: {
     load: (input: TineInferInput<UpdateResume> | '' | undefined | false) =>
@@ -421,7 +538,13 @@ export const UseCases = {
             arg
           )
       ),
-    getKey: () => (key: any) => key && key[0] === 'updateResume',
+    getKey: (input?: TineInferInput<UpdateResume>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'updateResume';
+      }
+
+      return ['updateResume', input];
+    },
   },
   upsertJob: {
     load: (input: TineInferInput<UpsertJob> | '' | undefined | false) =>
@@ -441,6 +564,12 @@ export const UseCases = {
         (_: string, { arg }: { arg: TineInferInput<UpsertJob> }) =>
           fetchData<TineInferReturn<UpsertJob>>('/api/tine/upsertJob', arg)
       ),
-    getKey: () => (key: any) => key && key[0] === 'upsertJob',
+    getKey: (input?: TineInferInput<UpsertJob>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'upsertJob';
+      }
+
+      return ['upsertJob', input];
+    },
   },
 };

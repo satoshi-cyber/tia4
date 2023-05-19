@@ -63,7 +63,13 @@ export const UseCases = {
             { arg }: { arg: TineInferInput<{{useCaseType}}> }
           ) => fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}', arg)
         ),
-        getKey: () => (key: any) => key && key[0] === '{{useCase}}',
+        getKey: (input?: TineInferInput<{{useCaseType}}>) => {
+          if(!input){
+            return (key: any) => key && key[0] === '{{useCase}}'
+          }
+          
+          return ['{{useCase}}', input]
+        },
       },
   {{else}}
     '{{useCase}}': {

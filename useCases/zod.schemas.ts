@@ -307,6 +307,15 @@ export const ProfileReturnSchema = object({
 
 export type ProfileReturnSchema = Infer<typeof ProfileReturnSchema>;
 
+export const PublicJobReturnSchema = object({
+  id: string(),
+  title: string(),
+  company: object({ name: string(), website: Null().or(string()) }),
+  description: Null().or(string()),
+});
+
+export type PublicJobReturnSchema = Infer<typeof PublicJobReturnSchema>;
+
 export const SetupCompanyReturnSchema = object({
   id: string(),
   name: string(),

@@ -1,5 +1,4 @@
 import React from 'react';
-import { withUrqlClient } from 'next-urql';
 import Link from 'next/link';
 import {
   Layout,
@@ -8,10 +7,10 @@ import {
   PrimaryButton,
   Title,
 } from '@/components';
-import { GRAPHQL_URL } from '@/config';
 
 import { TITLE_PROPS } from './PublicJob-constants';
 import { usePublicJob } from './PublicJob-hook';
+import Head from 'next/head';
 
 const PublicJob: React.FC = () => {
   const {
@@ -26,6 +25,15 @@ const PublicJob: React.FC = () => {
   return (
     <Layout.Apply>
       <LoadingProvider isLoading={isLoading}>
+        <Head>
+          <title>{`${companyName} - ${jobTitle}`}</title>
+          {jobDescription && (
+            <meta
+              name="description"
+              content={jobDescription.substring(0, 200)}
+            />
+          )}
+        </Head>
         <Title
           {...TITLE_PROPS}
           title={jobTitle}
@@ -52,9 +60,4 @@ const PublicJob: React.FC = () => {
   );
 };
 
-export default withUrqlClient(
-  () => ({
-    url: GRAPHQL_URL,
-  }),
-  { ssr: true }
-)(PublicJob);
+export default PublicJob;

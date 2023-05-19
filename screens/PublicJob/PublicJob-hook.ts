@@ -1,29 +1,29 @@
-import { useJobQuery, } from "@/graphql";
-import { useRouter } from "next/router";
-import { URLS, DOMAIN } from "@/config";
+import { useRouter } from 'next/router';
+import { URLS, DOMAIN } from '@/config';
+import { UseCases } from '@/useCases';
 
 export const usePublicJob = () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const jobId = String(router.query.applyJobId)
+  const jobId = String(router.query.applyJobId);
 
-  const [{ fetching, data }] = useJobQuery({
-    variables: { id: jobId }
-  })
+  const { data, isLoading: fetching } = UseCases.publicJob.load({ id: jobId });
 
-  const url = encodeURIComponent(`${DOMAIN}${URLS.APPLY.replace('[applyJobId]', jobId)}`)
+  const url = encodeURIComponent(
+    `${DOMAIN}${URLS.APPLY.replace('[applyJobId]', jobId)}`
+  );
 
-  const href = `https://theinterview.page.link/?link=${url}`
+  const href = `https://theinterview.page.link/?link=${url}`;
 
-  const jobTitle = data?.job.title
+  const jobTitle = data?.title;
 
-  const companyName = data?.job.company?.name || 'placeholder'
+  const companyName = data?.company?.name || 'placeholder';
 
-  const companyWebsite = data?.job.company?.website
+  const companyWebsite = data?.company?.website;
 
-  const jobDescription = data?.job.description
+  const jobDescription = data?.description;
 
-  const isLoading = fetching || !router.isReady
+  const isLoading = fetching || !router.isReady;
 
   return {
     isLoading,
@@ -31,6 +31,6 @@ export const usePublicJob = () => {
     jobTitle,
     jobDescription,
     companyName,
-    companyWebsite
+    companyWebsite,
   };
 };

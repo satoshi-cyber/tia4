@@ -18,6 +18,7 @@ import myCompany from '@/useCases/myCompany';
 import myInterviews from '@/useCases/myInterviews';
 import pendingRates from '@/useCases/pendingRates';
 import profile from '@/useCases/profile';
+import publicJob from '@/useCases/publicJob';
 import setupCompany from '@/useCases/setupCompany';
 import skipOnboarding from '@/useCases/skipOnboarding';
 import updateProfile from '@/useCases/updateProfile';
@@ -42,6 +43,7 @@ const useCasesWithInput = {
   joinCompany: joinCompany,
   myCompany: myCompany,
   pendingRates: pendingRates,
+  publicJob: publicJob,
   setupCompany: setupCompany,
   updateProfile: updateProfile,
   updateResume: updateResume,
