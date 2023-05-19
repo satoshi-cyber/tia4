@@ -1,7 +1,11 @@
 import React from 'react';
 import InterviewPlayer from '@/components/InterviewPlayer';
-import { Avatar, ButtonIcon, LoadingProvider, Text, Icon } from '@/components';
 import Link from 'next/link';
+import Icon from '@/components/Icon';
+import Text from '@/components/Text';
+import LoadingProvider from '@/components/LoadingProvider';
+import Avatar from '@/components/Avatar';
+import ButtonIcon from '@/components/ButtonIcon';
 
 import Pdf from './components/Pdf';
 import { useRate } from './RateCadidate-hook';
