@@ -1,11 +1,9 @@
-import Icons from "../Icons";
-
 export interface IconProps {
-  name: keyof typeof Icons;
-  isLoading?: boolean
-  active?: boolean
-  onClick?: (e?: any) => void
-  className?: string
-  size?: number
-  circle?: boolean
+  name: string;
+  isLoading?: boolean;
+  active?: boolean;
+  onClick?: (e?: any) => void;
+  className?: string;
+  size?: number;
+  circle?: boolean;
 }

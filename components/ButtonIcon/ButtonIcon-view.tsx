@@ -1,10 +1,11 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
+import clsx from 'clsx';
 
 import { IconProps } from './ButtonIcon-types';
 
 import SkeletonLoader from '../SkeletonLoader';
 import Icons from '../Icons';
-import clsx from 'clsx';
 
 const ButtonIcon: React.FC<IconProps> = ({
   name,
@@ -15,7 +16,25 @@ const ButtonIcon: React.FC<IconProps> = ({
   circle = true,
   ...props
 }) => {
-  const IconComponent = Icons[name];
+  const IconComponent =
+    Icons[name as keyof typeof Icons] ??
+    dynamic(
+      () =>
+        import(`@react-icons/all-files/hi/${name}.js`).then(
+          (data) => data[name]
+        ),
+      {
+        ssr: false,
+        loading: () => (
+          <SkeletonLoader
+            isLoading
+            className={className}
+            width={size}
+            height={size}
+          />
+        ),
+      }
+    );
 
   return (
     <SkeletonLoader
