@@ -10,7 +10,6 @@ import Icon from '../Icon/Icon-view';
 import ActiveLink from '../ActiveLink';
 import { useEffect, useId, useState } from 'react';
 import { URLS } from '@/config';
-import dynamic from 'next/dynamic';
 import ButtonIcon from '../ButtonIcon';
 import clsx from 'clsx';
 import Company from './components/Company';
