@@ -1,16 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  Layout,
-  LoadingProvider,
-  Markdown,
-  PrimaryButton,
-  Title,
-} from '@/components';
+import Head from 'next/head';
 
+import Layout from '@/components/Layout';
+import LoadingProvider from '@/components/LoadingProvider';
+import Title from '@/components/Title';
+import Markdown from '@/components/Markdown';
+import PrimaryButton from '@/components/PrimaryButton';
 import { TITLE_PROPS } from './PublicJob-constants';
 import { usePublicJob } from './PublicJob-hook';
-import Head from 'next/head';
 
 const PublicJob: React.FC = () => {
   const {
