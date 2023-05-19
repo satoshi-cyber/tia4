@@ -1,5 +1,4 @@
 import { TOAST_OPTIONS, URLS } from '@/config';
-import { useJoinCompanyMutation } from '@/graphql';
 import { useUser } from '@/hooks';
 import { UseCases } from '@/useCases';
 import { useRouter } from 'next/router';
@@ -16,32 +15,30 @@ export const useJoinCompany = () => {
 
   const { data, isLoading } = UseCases.company.load({ companyId });
 
-  const [{ fetching: submitting }, joinCompany] = useJoinCompanyMutation();
+  const { trigger: joinCompany, isMutating } = UseCases.joinCompany.mutate();
 
   const title = data?.name ?? undefined;
   const avatar = data?.avatarUrl ?? '';
 
   const handleJoinCompany = async () => {
-    const { error } = await joinCompany({ companyId });
+    try {
+      await joinCompany({ companyId });
 
-    if (error) {
+      await refreshToken();
+
+      toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
+
+      router.push(URLS.COMPANY);
+    } catch (e) {
       toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
-
-      return;
     }
-
-    await refreshToken();
-
-    toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
-
-    router.push(URLS.COMPANY);
   };
 
   return {
     isLoading,
     avatar,
     title,
-    submitting,
+    isMutating,
     handleJoinCompany,
   };
 };

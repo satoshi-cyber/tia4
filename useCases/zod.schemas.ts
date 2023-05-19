@@ -131,6 +131,14 @@ export const JobsReturnSchema = array(
 
 export type JobsReturnSchema = Infer<typeof JobsReturnSchema>;
 
+export const JoinCompanyReturnSchema = object({
+  role: literal('member').or(literal('adminMember')),
+  userId: string(),
+  companyId: string(),
+});
+
+export type JoinCompanyReturnSchema = Infer<typeof JoinCompanyReturnSchema>;
+
 export const MyCompanyReturnSchema = object({
   id: string(),
   name: string(),

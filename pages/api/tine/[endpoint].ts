@@ -12,6 +12,7 @@ import health from '@/useCases/health';
 import interviews from '@/useCases/interviews';
 import job from '@/useCases/job';
 import jobs from '@/useCases/jobs';
+import joinCompany from '@/useCases/joinCompany';
 import myCompany from '@/useCases/myCompany';
 import myInterviews from '@/useCases/myInterviews';
 import pendingRates from '@/useCases/pendingRates';
@@ -36,6 +37,7 @@ const useCasesWithInput = {
   interviews: interviews,
   job: job,
   jobs: jobs,
+  joinCompany: joinCompany,
   myCompany: myCompany,
   pendingRates: pendingRates,
   setupCompany: setupCompany,
