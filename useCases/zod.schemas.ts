@@ -97,6 +97,7 @@ export const InterviewsReturnSchema = array(
       .or(literal('ready')),
     answers: array(
       object({
+        url: string().or(Undefined()).optional(),
         question: object({ id: string(), question: string(), time: number() }),
       })
     ),
@@ -114,18 +115,7 @@ export const InterviewsReturnSchema = array(
 export type InterviewsReturnSchema = Infer<typeof InterviewsReturnSchema>;
 
 export const InviteCompanyMembersReturnSchema = array(
-  object({
-    result: object({
-      accepted: array(string()),
-      rejected: array(string()),
-      envelopeTime: number(),
-      messageTime: number(),
-      messageSize: number(),
-      response: string(),
-      envelope: object({ from: string(), to: array(string()) }),
-      messageId: string(),
-    }),
-  }).or(Undefined())
+  Null().or(literal(false)).or(literal(true))
 );
 
 export type InviteCompanyMembersReturnSchema = Infer<
@@ -150,11 +140,13 @@ export const JobsReturnSchema = array(
 
 export type JobsReturnSchema = Infer<typeof JobsReturnSchema>;
 
-export const JoinCompanyReturnSchema = object({
-  role: literal('member').or(literal('adminMember')),
-  userId: string(),
-  companyId: string(),
-});
+export const JoinCompanyReturnSchema = Null().or(
+  object({
+    role: literal('member').or(literal('adminMember')),
+    userId: string(),
+    companyId: string(),
+  })
+);
 
 export type JoinCompanyReturnSchema = Infer<typeof JoinCompanyReturnSchema>;
 
@@ -178,6 +170,7 @@ export const MyInterviewsReturnSchema = array(
       .or(literal('ready')),
     answers: array(
       object({
+        url: string().or(Undefined()).optional(),
         question: object({ id: string(), question: string(), time: number() }),
       })
     ),
@@ -268,6 +261,7 @@ export const PendingRatesReturnSchema = array(
           intervieweeId: string(),
           answers: array(
             object({
+              url: string().or(Undefined()).optional(),
               question: object({
                 id: string(),
                 question: string(),

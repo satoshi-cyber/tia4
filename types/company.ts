@@ -20,7 +20,7 @@ export const editCompanySchema = z.object({
 export const CompanyRoles = {
   member: 'member',
   adminMember: 'adminMember',
-};
+} as const;
 
 export const inviteCompanyMembersSchema = z.object({
   teamMembers: z

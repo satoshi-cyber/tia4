@@ -1,5 +1,4 @@
-import { Answer } from "@/graphql";
-import { getAssetUrl } from "@/lib";
+import { getAssetUrl } from '@/lib';
 
 export const DEMO_INTERVIEW = {
   date: new Date(),
@@ -7,6 +6,11 @@ export const DEMO_INTERVIEW = {
   name: 'Hanna Hoover',
   resume: getAssetUrl('/sample-cv.pdf'),
   avatarUrl: getAssetUrl('/avatar.jpeg'),
-  answers: [{ question: { question: "Tell me about yourself" }, url: getAssetUrl('/videoplayback.mp4') }] as Answer[],
-  emailLink: `mailto:info@theinterview.io`
-}
+  answers: [
+    {
+      question: { question: 'Tell me about yourself' },
+      url: getAssetUrl('/videoplayback.mp4'),
+    },
+  ] as PrismaJson.Answer[],
+  emailLink: `mailto:info@theinterview.io`,
+};

@@ -27,6 +27,7 @@ declare global {
     };
 
     type Answer = {
+      url?: string;
       question: Question;
     };
   }

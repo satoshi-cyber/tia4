@@ -1,6 +1,6 @@
+import { CompanyRoles } from '@/types';
 import { CompanyMembers } from '@/useCases/types';
 import { TineInferReturn } from 'tinejs';
-import { CompanyMemberRole } from '@/graphql';
 
 export const CLASS_NAMES = {
   formContainer: 'w-full',
@@ -11,17 +11,17 @@ export const CLASS_NAMES = {
 export const SKELETON_MEMBERS: TineInferReturn<CompanyMembers> = [
   {
     companyId: 'asd',
-    role: CompanyMemberRole.AdminMember,
+    role: CompanyRoles.adminMember,
     recipientEmail: 'lorem1@ipsum.com',
   },
   {
     companyId: 'asd',
-    role: CompanyMemberRole.AdminMember,
+    role: CompanyRoles.adminMember,
     recipientEmail: 'lorem2@ipsum.com',
   },
   {
     companyId: 'asd',
-    role: CompanyMemberRole.AdminMember,
+    role: CompanyRoles.adminMember,
     recipientEmail: 'lorem3@ipsum.com',
   },
 ];
