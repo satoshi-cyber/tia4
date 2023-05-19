@@ -1,3 +1,7 @@
+import { HiTrash } from '@react-icons/all-files/hi/HiTrash';
+import { HiCheck } from '@react-icons/all-files/hi/HiCheck';
+import { HiVolumeUp } from '@react-icons/all-files/hi/HiVolumeUp';
+
 import Linkedin from '../../public/linkedin.svg';
 import Smile from '../../public/icons/smile.svg';
 import Angry from '../../public/icons/angry.svg';
@@ -30,6 +34,9 @@ const FaRegSmileWink = ({ size = 24 }: { size?: number }) => (
 );
 
 const Icons = {
+  HiTrash, // Preload icons for record screen
+  HiCheck, // Preload icons for record screen
+  HiVolumeUp, // Preload icons for record screen
   HiLinkedin,
   FaRegAngry,
   FaRegFrown,
