@@ -56,9 +56,31 @@ export type CompanyMembersReturnSchema = Infer<
   typeof CompanyMembersReturnSchema
 >;
 
+export const DeleteCompanyReturnSchema = object({
+  id: string(),
+  name: string(),
+  description: Null().or(string()),
+  website: Null().or(string()),
+  avatarUrl: string(),
+  avatarUploadUrl: string().or(Undefined()),
+});
+
+export type DeleteCompanyReturnSchema = Infer<typeof DeleteCompanyReturnSchema>;
+
 export const DeleteJobReturnSchema = object({ id: string() });
 
 export type DeleteJobReturnSchema = Infer<typeof DeleteJobReturnSchema>;
+
+export const EditCompanyReturnSchema = object({
+  id: string(),
+  name: string(),
+  description: Null().or(string()),
+  website: Null().or(string()),
+  avatarUrl: string(),
+  avatarUploadUrl: string().or(Undefined()),
+});
+
+export type EditCompanyReturnSchema = Infer<typeof EditCompanyReturnSchema>;
 
 export const HealthReturnSchema = object({ success: boolean() });
 

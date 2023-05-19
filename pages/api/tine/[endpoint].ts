@@ -5,7 +5,9 @@ import { tineCtx } from 'tinejs';
 import authenticateUser from '@/useCases/authenticateUser';
 import company from '@/useCases/company';
 import companyMembers from '@/useCases/companyMembers';
+import deleteCompany from '@/useCases/deleteCompany';
 import deleteJob from '@/useCases/deleteJob';
+import editCompany from '@/useCases/editCompany';
 import health from '@/useCases/health';
 import interviews from '@/useCases/interviews';
 import job from '@/useCases/job';
@@ -28,7 +30,9 @@ const useCasesWithInput = {
   authenticateUser: authenticateUser,
   company: company,
   companyMembers: companyMembers,
+  deleteCompany: deleteCompany,
   deleteJob: deleteJob,
+  editCompany: editCompany,
   interviews: interviews,
   job: job,
   jobs: jobs,

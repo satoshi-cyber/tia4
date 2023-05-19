@@ -6,7 +6,9 @@ import { StatusError } from '@/types';
 import type { AuthenticateUser } from './types';
 import type { Company } from './types';
 import type { CompanyMembers } from './types';
+import type { DeleteCompany } from './types';
 import type { DeleteJob } from './types';
+import type { EditCompany } from './types';
 import type { Health } from './types';
 import type { Interviews } from './types';
 import type { Job } from './types';
@@ -103,6 +105,29 @@ export const UseCases = {
       ),
     getKey: () => (key: any) => key && key[0] === 'companyMembers',
   },
+  deleteCompany: {
+    load: (input: TineInferInput<DeleteCompany> | '' | undefined | false) =>
+      useSwr(
+        input ? ['deleteCompany', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<DeleteCompany>>(
+                '/api/tine/deleteCompany',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'deleteCompany',
+        (_: string, { arg }: { arg: TineInferInput<DeleteCompany> }) =>
+          fetchData<TineInferReturn<DeleteCompany>>(
+            '/api/tine/deleteCompany',
+            arg
+          )
+      ),
+    getKey: () => (key: any) => key && key[0] === 'deleteCompany',
+  },
   deleteJob: {
     load: (input: TineInferInput<DeleteJob> | '' | undefined | false) =>
       useSwr(
@@ -122,6 +147,26 @@ export const UseCases = {
           fetchData<TineInferReturn<DeleteJob>>('/api/tine/deleteJob', arg)
       ),
     getKey: () => (key: any) => key && key[0] === 'deleteJob',
+  },
+  editCompany: {
+    load: (input: TineInferInput<EditCompany> | '' | undefined | false) =>
+      useSwr(
+        input ? ['editCompany', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<EditCompany>>(
+                '/api/tine/editCompany',
+                input
+              )
+          : () => undefined
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'editCompany',
+        (_: string, { arg }: { arg: TineInferInput<EditCompany> }) =>
+          fetchData<TineInferReturn<EditCompany>>('/api/tine/editCompany', arg)
+      ),
+    getKey: () => (key: any) => key && key[0] === 'editCompany',
   },
   health: {
     load: () =>

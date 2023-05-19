@@ -1,21 +1,16 @@
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import {
-  UpdateCompany,
-  useDeleteCompanyMutation,
-  useUpdateCompanyMutation,
-} from '@/graphql';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useUser } from '@/hooks';
 import { TOAST_OPTIONS, URLS } from '@/config';
 import { useEffect } from 'react';
 
-import { setupCompanySchema } from './EditCompany-validations';
 import { PUSH_DELAY, TOAST_MESSAGE } from './EditCompany-constants';
 import { formatDefaultValues } from './EditCompany-functions';
 import { mutate } from 'swr';
 import { UseCases } from '@/useCases';
+import { editCompanySchema } from '@/types';
 
 export const useEditCompany = () => {
   const router = useRouter();
@@ -25,10 +20,11 @@ export const useEditCompany = () => {
     companyId && { companyId }
   );
 
-  const [{ fetching: updatingCompany }, updateCompany] =
-    useUpdateCompanyMutation();
-  const [{ fetching: deletingCompany }, deleteCompany] =
-    useDeleteCompanyMutation();
+  const { trigger: updateCompany, isMutating: updatingCompany } =
+    UseCases.editCompany.mutate();
+
+  const { trigger: deleteCompany, isMutating: deletingCompany } =
+    UseCases.deleteCompany.mutate();
 
   const submitting = updatingCompany || deletingCompany || refeshingToken;
 
@@ -36,16 +32,14 @@ export const useEditCompany = () => {
   const avatarUploadUrl = data?.avatarUploadUrl || undefined;
 
   const onUpload = () => {
-    updateCompany({
-      companyId: companyId!,
-      input: data ? formatDefaultValues(data) : {},
-    });
+    mutate(UseCases.myCompany.getKey());
+    mutate(UseCases.company.getKey());
   };
 
-  const form = useForm<UpdateCompany>({
+  const form = useForm<Zod.infer<typeof editCompanySchema>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(setupCompanySchema),
+    resolver: zodResolver(editCompanySchema),
     defaultValues: data ? formatDefaultValues(data) : undefined,
   });
 
@@ -53,50 +47,45 @@ export const useEditCompany = () => {
 
   useEffect(() => {
     if (!isLoading && data) {
-      reset(formatDefaultValues(data));
+      reset(formatDefaultValues(data), {
+        keepDirty: true,
+        keepDefaultValues: true,
+      });
     }
   }, [isLoading, reset]);
 
-  const handleSubmit = async (input: UpdateCompany) => {
+  const handleSubmit = async (input: Zod.infer<typeof editCompanySchema>) => {
     if (!companyId) return;
 
     const toastMessage = TOAST_MESSAGE.updateCompany;
 
-    const { error } = await updateCompany(
-      { companyId, input },
-      { additionalTypenames: ['Company'] }
-    );
+    try {
+      await updateCompany({ ...input, companyId });
 
-    mutate(UseCases.myCompany.getKey());
-    mutate(UseCases.company.getKey());
+      mutate(UseCases.myCompany.getKey());
+      mutate(UseCases.company.getKey());
 
-    if (error) {
+      toast.success(toastMessage.success, TOAST_OPTIONS);
+
+      setTimeout(() => router.push(URLS.COMPANY), PUSH_DELAY);
+    } catch (e) {
       toast.error(toastMessage.error, TOAST_OPTIONS);
-
-      return;
     }
-
-    toast.success(toastMessage.success, TOAST_OPTIONS);
-
-    setTimeout(() => router.push(URLS.COMPANY), PUSH_DELAY);
   };
 
   const handleDeleteCompany = async () => {
-    const { error } = await deleteCompany({ companyId: companyId! });
-
     const toastMessage = TOAST_MESSAGE.deleteCompany;
+    try {
+      await deleteCompany({ companyId: companyId! });
 
-    if (error) {
+      await refreshToken();
+
+      toast.success(toastMessage.success, TOAST_OPTIONS);
+
+      setTimeout(() => router.push(URLS.HOME), PUSH_DELAY);
+    } catch (e) {
       toast.error(toastMessage.error, TOAST_OPTIONS);
-
-      return;
     }
-
-    await refreshToken();
-
-    toast.success(toastMessage.success, TOAST_OPTIONS);
-
-    setTimeout(() => router.push(URLS.HOME), PUSH_DELAY);
   };
 
   const settingItems = [
