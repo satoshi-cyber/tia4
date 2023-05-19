@@ -24,7 +24,7 @@ const deletedInvite = deleteInviteAndUpdateUser({ user, input });
 
 const joinCompany = condition([
   tineVar(isInvited, ($isInvited) => Boolean($isInvited)),
-  tineVar(deletedInvite, ($invite) =>
+  tineVar(
     prisma.companyMember.create({
       data: {
         company: {
@@ -37,7 +37,7 @@ const joinCompany = condition([
             id: tineVar(user, 'id'),
           },
         },
-        role: $invite.role,
+        role: tineVar(deletedInvite, 'role'),
       },
     })
   ),
