@@ -10,7 +10,7 @@ export const runtime = 'experimental-edge';
 export default (props: any) => {
   return (
     <SWRConfig
-      value={{ ...props, revalidateOnMount: false, revalidateOnFocus: false }}
+      value={{ ...props, revalidateIfStale: false, revalidateOnFocus: false }}
     >
       <PublicJob />
     </SWRConfig>
