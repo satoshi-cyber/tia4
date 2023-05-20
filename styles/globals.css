@@ -121,14 +121,16 @@ html .markdown div[role=textbox] {
 
 .markdown > div > div:first-child { 
   top: 90px !important;
+  overflow-x: scroll;
 }
 
 @media (min-width: 640px) { 
 
   .markdown > div > div:first-child { 
     top: 0px !important;
+    overflow-x: hidden;
   }
-  
+
 }
 
 .--mobile-only { display: none !important }
