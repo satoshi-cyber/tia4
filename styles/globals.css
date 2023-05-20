@@ -125,7 +125,7 @@ html .markdown div[role=textbox] {
 
 @media (min-width: 640px) { 
 
-  .markdown > div > div > div:first-child { 
+  .markdown > div > div:first-child { 
     top: 0px !important;
   }
   
