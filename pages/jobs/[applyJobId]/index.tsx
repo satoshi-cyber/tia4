@@ -5,6 +5,8 @@ import publicJob from '@/useCases/publicJob';
 import PublicJob from '../../../screens/PublicJob';
 import { SWRConfig } from 'swr';
 
+export const runtime = 'experimental-edge';
+
 export default (props: any) => {
   return (
     <SWRConfig
