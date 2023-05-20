@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
-import LoadingProvider from '@/components/LoadingProvider';
+import LoadingProvider from '@/context/LoadingProvider';
 import Title from '@/components/Title';
 import Markdown from '@/components/Markdown';
 import PrimaryButton from '@/components/PrimaryButton';

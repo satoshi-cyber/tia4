@@ -1,21 +1,21 @@
-import React, { useContext, useEffect } from 'react'
-import Router from 'next/router'
+import React, { useContext, useEffect } from 'react';
+import Router from 'next/router';
 
-import { ProtectedRouteProps } from './ProtectedRoute-types'
+import { ProtectedRouteProps } from './ProtectedRoute-types';
 
-import { URLS } from '@/config'
-import { AuthContext } from '../AuthProvider'
+import { URLS } from '@/config';
+import { AuthContext } from '../../context/AuthProvider';
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { token } = useContext(AuthContext)
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     if (!token) {
-      Router.replace(URLS.LOGIN)
+      Router.replace(URLS.LOGIN);
     }
-  }, [token])
+  }, [token]);
 
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
-export default ProtectedRoute
+export default ProtectedRoute;

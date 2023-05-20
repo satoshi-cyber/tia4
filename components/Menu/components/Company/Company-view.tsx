@@ -1,7 +1,7 @@
 import ActiveLink from '@/components/ActiveLink';
 import Text from '@/components/Text';
 import Icon from '@/components/Icon';
-import LoadingProvider from '@/components/LoadingProvider';
+import LoadingProvider from '@/context/LoadingProvider';
 import { URLS } from '@/config';
 
 import { useCompany } from './Company-hook';

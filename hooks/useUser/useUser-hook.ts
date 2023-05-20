@@ -5,7 +5,7 @@ import { useCallback, useContext, useMemo } from 'react';
 import { OAuthExtension, OAuthProvider } from '@magic-ext/oauth';
 import jwtDecode from 'jwt-decode';
 
-import { AuthContext } from '../../components/AuthProvider';
+import { AuthContext } from '../../context/AuthProvider';
 import { useRouter } from 'next/router';
 
 const magic =

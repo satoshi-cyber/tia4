@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import LoadingProvider from '../LoadingProvider';
+import LoadingProvider from '../../context/LoadingProvider';
 
 import { SkeletonLoaderProps } from './SkeletonLoader-types';
 

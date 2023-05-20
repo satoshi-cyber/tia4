@@ -1,7 +1,7 @@
 import Text from '@/components/Text';
 import Icon from '@/components/Icon';
 import Avatar from '@/components/Avatar';
-import LoadingProvider from '@/components/LoadingProvider';
+import LoadingProvider from '@/context/LoadingProvider';
 import ActiveLink from '@/components/ActiveLink';
 
 import { URLS } from '@/config';

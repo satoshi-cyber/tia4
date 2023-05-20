@@ -13,7 +13,7 @@ import {
 } from './CreateEditAJob-constants';
 import dynamic from 'next/dynamic';
 import Layout from '@/components/Layout';
-import LoadingProvider from '@/components/LoadingProvider';
+import LoadingProvider from '@/context/LoadingProvider';
 import { Field, Form, FormIcon } from '@/components/Form';
 import SubmitButton from '@/components/SubmitButton';
 

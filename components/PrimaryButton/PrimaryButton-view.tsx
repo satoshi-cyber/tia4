@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 
 import { PrimaryButtonProps } from './PrimaryButton-types';
 
-import LoadingProvider from '../LoadingProvider';
+import LoadingProvider from '../../context/LoadingProvider';
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   title,

@@ -1,4 +1,4 @@
-import LoadingProvider from '@/components/LoadingProvider';
+import LoadingProvider from '@/context/LoadingProvider';
 import React from 'react';
 
 import { Item, EmptyScreen } from './components';

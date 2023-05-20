@@ -3,7 +3,7 @@ import InterviewPlayer from '@/components/InterviewPlayer';
 import Link from 'next/link';
 import Icon from '@/components/Icon';
 import Text from '@/components/Text';
-import LoadingProvider from '@/components/LoadingProvider';
+import LoadingProvider from '@/context/LoadingProvider';
 import Avatar from '@/components/Avatar';
 import ButtonIcon from '@/components/ButtonIcon';
 

@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import { Provider } from 'urql';
 import { ToastContainer } from 'react-toastify';
 import Menu from '@/components/Menu';
-import AuthProvider from '@/components/AuthProvider';
+import AuthProvider from '@/context/AuthProvider';
 import Head from 'next/head';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
