@@ -119,7 +119,7 @@ html .markdown div[role=textbox] {
   display: none !important;
 }
 
-.markdown > div > div > div:first-child { 
+.markdown > div > div:first-child { 
   top: 90px !important;
 }
 
