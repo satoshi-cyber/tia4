@@ -271,8 +271,8 @@ export class MinioClient {
     bucketName: string,
     objectName: string,
     expires: number,
-    respHeaders?: Record<string, string>,
-    requestDate?: Date
+    requestDate?: Date,
+    respHeaders?: Record<string, string>
   ): Promise<string> {
     if (!isValidBucketName(bucketName)) {
       throw new Error(`Invalid bucket name: ${bucketName}`);

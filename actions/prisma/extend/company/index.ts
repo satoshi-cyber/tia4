@@ -14,6 +14,7 @@ const company = {
           bucketName: 'company-avatars',
           objectName: `${company.id}.jpg`,
           expires: 3600,
+          cache: true,
         })
       );
     },

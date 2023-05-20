@@ -301,7 +301,7 @@ export const presignSignatureV4 = async (
   secretKey: string,
   sessionToken: string,
   region: Region,
-  requestDate: Date,
+  requestDate: Date = new Date(),
   expires: number
 ): Promise<string> => {
   if (!accessKey) {
@@ -318,7 +318,7 @@ export const presignSignatureV4 = async (
     throw new Error('expires param cannot be greater than 7 days');
   }
 
-  requestDate = new Date();
+  // requestDate = new Date();
 
   const iso8601Date = makeDateLong(requestDate);
   const signedHeaders = getSignedHeaders(request.headers);

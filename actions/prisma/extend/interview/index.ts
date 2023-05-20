@@ -16,6 +16,7 @@ const interview = {
               bucketName: 'interview-thumbnails',
               objectName: `${interview.id}.mp4`,
               expires: 3600,
+              cache: true,
             })
           : s3.presignedGet({
               bucketName: 'answers-original',
