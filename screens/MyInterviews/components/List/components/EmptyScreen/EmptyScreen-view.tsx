@@ -8,7 +8,7 @@ import { BUTTON_PROPS, CLASS_NAMES, TITLE } from './EmptyScreen-constants';
 const EmptyScreen: React.FC = () => (
   <div className={CLASS_NAMES.container}>
     <Text className={CLASS_NAMES.title} text={TITLE} />
-    <Link href={URLS.DEMO_INTERVIEW}>
+    <Link href={URLS.DEMO_INTERVIEW} shallow>
       <PrimaryButton {...BUTTON_PROPS} />
     </Link>
   </div>
