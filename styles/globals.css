@@ -115,10 +115,6 @@ html .markdown div[role=textbox] {
   @apply p-6 -mt-4 !important; 
 }
 
-.markdown .wm-reset-3 > div > div > div > div > div:first-child { 
-  display: none !important;
-}
-
 .markdown > div > div:first-child { 
   top: 90px !important;
   overflow-x: scroll;
