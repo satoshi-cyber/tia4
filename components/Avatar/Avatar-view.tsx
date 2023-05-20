@@ -5,6 +5,7 @@ import { AvatarProps } from './Avatar-types';
 
 import SkeletonLoader from '../SkeletonLoader';
 import clsx from 'clsx';
+import { getS3Url } from '@/lib/s3url';
 
 const getInitials = (fullName: string) => {
   const allNames = fullName.trim().split(' ');
@@ -44,7 +45,7 @@ const Avatar: React.FC<AvatarProps> = ({
             )}
           >
             <Image
-              src={src}
+              src={src ? getS3Url(src) : undefined}
               alt={text}
               className="aspect-square h-full w-full object-cover"
             />

@@ -4,6 +4,7 @@ import React from 'react';
 
 import { CLASS_NAMES, VIDEO_PROPS } from './Thumbnail-constants';
 import { ThumbnailProps } from './Thumbnail-types';
+import { getS3Url } from '@/lib/s3url';
 
 const Thumbnail: React.FC<ThumbnailProps> = ({ href, thumbnail }) => (
   <SkeletonLoader
@@ -13,7 +14,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({ href, thumbnail }) => (
         <video
           className={CLASS_NAMES.video}
           {...VIDEO_PROPS}
-          src={thumbnail}
+          src={thumbnail ? getS3Url(thumbnail) : undefined}
         ></video>
       </Link>
     }

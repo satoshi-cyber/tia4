@@ -17,11 +17,7 @@ const Item: React.FC<CandidateProps> = ({ interview }) => {
       </div>
       <div className={CLASS_NAMES.description}>
         <div className={CLASS_NAMES.avatarContainer}>
-          <Avatar
-            text={candidateName || undefined}
-            src={avatar || undefined}
-            size={40}
-          />
+          <Avatar text={candidateName || undefined} src={avatar} size={40} />
         </div>
         <div className={CLASS_NAMES.job}>
           <div className={CLASS_NAMES.firstLine}>

@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 
 import { CLASS_NAMES } from './EditAvatar-constants';
 import { EditAvatarProps } from './EditAvatar-types';
+import { removeS3Url } from '@/lib/s3url';
 
 export const useEditAvatar = ({
   uploadUrl,
@@ -25,11 +26,7 @@ export const useEditAvatar = ({
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             if (src) {
-              fetch(src, { cache: 'reload', mode: 'no-cors' }).then(() => {
-                document.body
-                  .querySelectorAll(`img[src='${src}']`)
-                  .forEach((img: any) => (img.src = src));
-              });
+              removeS3Url(src);
             }
 
             setUrl(URL.createObjectURL(file));

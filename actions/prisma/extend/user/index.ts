@@ -13,7 +13,6 @@ const user = {
           bucketName: 'user-avatars',
           objectName: `${user.id}.jpg`,
           expires: 3600,
-          cache: true,
         })
       );
     },
