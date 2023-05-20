@@ -20,4 +20,4 @@ const Thumbnail: React.FC<ThumbnailProps> = ({ href, thumbnail }) => (
   />
 );
 
-export default React.memo(Thumbnail, () => true);
+export default Thumbnail;
