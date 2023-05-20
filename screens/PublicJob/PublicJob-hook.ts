@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { URLS, DOMAIN } from '@/config';
+import { URLS } from '@/config';
 import { UseCases } from '@/useCases';
 
 export const usePublicJob = () => {
@@ -9,11 +9,13 @@ export const usePublicJob = () => {
 
   const { data, isLoading: fetching } = UseCases.publicJob.load({ id: jobId });
 
-  const url = encodeURIComponent(
-    `${DOMAIN}${URLS.APPLY.replace('[applyJobId]', jobId)}`
-  );
+  // const url = encodeURIComponent(
+  //   `${DOMAIN}${URLS.APPLY.replace('[applyJobId]', jobId)}`
+  // );
 
-  const href = `https://theinterview.page.link/?link=${url}`;
+  // const href = `https://theinterview.page.link/?link=${url}`;
+
+  const href = URLS.APPLY.replace('[applyJobId]', jobId);
 
   const jobTitle = data?.title;
 
