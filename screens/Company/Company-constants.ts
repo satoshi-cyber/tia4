@@ -38,7 +38,7 @@ export const SEND_INVITE_BUTTON_PROPS = {
 };
 
 export const INVITE_TEAM_MEMBERS_BUTTON_PROPS = {
-  className: 'w-auto mb-14',
+  className: '!w-auto mb-14',
   title: 'Invite team members',
 };
 

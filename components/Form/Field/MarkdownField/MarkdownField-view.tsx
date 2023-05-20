@@ -3,7 +3,7 @@ import get from 'lodash.get';
 import { useFormContext, useFormState } from 'react-hook-form';
 
 import clsx from 'clsx';
-import { Wysimark, useEditor } from '@wysimark/react';
+import { Editable, useEditor } from '@wysimark/react';
 
 import { MardownFieldProps } from './MarkdownField-types';
 import SkeletonLoader from '@/components/SkeletonLoader';
@@ -18,12 +18,15 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
 
   const error = get(errors, name);
 
-  const editor = useEditor({ initialMarkdown: initialValue || '' });
+  const editor = useEditor({
+    initialMarkdown: initialValue || '',
+    minHeight: 295,
+  });
 
   const { setValue } = useFormContext();
 
-  const handleChange = (e: any) =>
-    setValue(name, e.getMarkdown(), { shouldDirty: true });
+  const handleChange = () =>
+    setValue(name, editor.getMarkdown(), { shouldDirty: true });
 
   return (
     <div className="w-full group/wrapper mb-4" data-error={Boolean(error)}>
@@ -37,9 +40,7 @@ const MarkdownField: React.FC<MardownFieldProps> = ({
       <div className="markdown mb-4">
         <SkeletonLoader
           height={295}
-          after={
-            <Wysimark editor={editor} minHeight={250} onChange={handleChange} />
-          }
+          after={<Editable editor={editor} onChange={handleChange} />}
         />
       </div>
       <p

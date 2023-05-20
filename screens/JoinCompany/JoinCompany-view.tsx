@@ -18,7 +18,7 @@ const JoinCompany = () => {
     <Layout.Default>
       {isMutating && <Loader />}
       <LoadingProvider isLoading={isLoading}>
-        <Avatar src={avatar} size={60} className="border mb-4" />
+        <Avatar src={avatar} size={60} className="mb-4" />
         <Title {...TITLE_PROPS} title={title} />
         <div>
           <PrimaryButton {...BUTTON_PROPS} onClick={handleJoinCompany} />

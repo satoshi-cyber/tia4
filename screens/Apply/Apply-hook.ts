@@ -1,70 +1,88 @@
-import { useForm } from "react-hook-form";
-import { useEffect, } from 'react';
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import { UpdateProfile, useDidApplyQuery, useJobQuery, useProfileQuery, useRemoveResumeMutation, useUpdateProfileMutation } from "@/graphql";
+import {
+  UpdateProfile,
+  useDidApplyQuery,
+  useJobQuery,
+  useProfileQuery,
+  useRemoveResumeMutation,
+  useUpdateProfileMutation,
+} from '@/graphql';
 
-import { updateProfileSchema } from "./Apply-validations";
+import { updateProfileSchema } from './Apply-validations';
 import { TOAST_MESSAGE } from './Apply-constants';
-import { formatDefaultValues } from "./Apply-functions";
-import { useRouter } from "next/router";
-import { TOAST_OPTIONS, URLS } from "@/config";
+import { formatDefaultValues } from './Apply-functions';
+import { useRouter } from 'next/router';
+import { TOAST_OPTIONS, URLS } from '@/config';
 
 export const useApply = () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const jobId = String(router.query.applyJobId)
+  const jobId = String(router.query.applyJobId);
 
-  const [{ fetching: didApplyFetching, data: didApplyData }] = useDidApplyQuery({ variables: { jobId } })
+  const [{ fetching: didApplyFetching, data: didApplyData }] = useDidApplyQuery(
+    { variables: { jobId } }
+  );
   const [{ fetching: fetchingJob, data: jobData }] = useJobQuery({
-    variables: { id: jobId }
-  })
-  const [{ fetching: fetchingUser, data: userData }, onUpload] = useProfileQuery({ requestPolicy: 'cache-and-network' })
-  const [{ fetching: removingResume }, removeResume] = useRemoveResumeMutation()
+    variables: { id: jobId },
+  });
+  const [{ fetching: fetchingUser, data: userData }, onUpload] =
+    useProfileQuery({ requestPolicy: 'cache-and-network' });
+  const [{ fetching: removingResume }, removeResume] =
+    useRemoveResumeMutation();
 
-  const loading = fetchingUser || didApplyFetching
+  const loading = fetchingUser || didApplyFetching;
 
   const [, updateProfile] = useUpdateProfileMutation();
 
   const form = useForm<UpdateProfile>({
-    mode: "onBlur",
-    reValidateMode: "onBlur",
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
     resolver: yupResolver(updateProfileSchema),
   });
 
-  const { reset } = form
+  const { reset } = form;
 
   useEffect(() => {
     if (!fetchingUser && userData && !form.formState.isDirty) {
-      reset(formatDefaultValues(userData?.profile))
+      reset(formatDefaultValues(userData?.profile));
     }
-  }, [fetchingUser, reset, userData])
+  }, [fetchingUser, reset, userData]);
 
   const handleSubmit = async (input: UpdateProfile) => {
-    const { error, data } = await updateProfile({ input }, { additionalTypenames: ['User'] })
+    const { error, data } = await updateProfile(
+      { input },
+      { additionalTypenames: ['User'] }
+    );
 
     if (error) {
-      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS)
+      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
 
-      return
+      return;
     }
 
     if (data) {
-      router.push(URLS.RECORD.replace('[applyJobId]', router.query.applyJobId as string))
+      router.push(
+        URLS.RECORD.replace('[applyJobId]', router.query.applyJobId as string)
+      );
     }
-
   };
 
-  const avatar = userData?.profile?.avatarUrl || undefined
-  const avatarUploadUrl = userData?.profile?.avatarUploadUrl || undefined
+  const avatar = userData?.profile?.avatarUrl || undefined;
+  const avatarUploadUrl = userData?.profile?.avatarUploadUrl || undefined;
 
   const resumeOnUpload = async (resumeFileName: string) => {
-    await updateProfile({ input: { resumeFileName } }, { additionalTypenames: ['User'] })
-  }
+    await updateProfile(
+      { input: { resumeFileName } },
+      { additionalTypenames: ['User'] }
+    );
+  };
 
   const onRemoveResume = async () => {
-    await removeResume({}, { additionalTypenames: ['User'] })
-  }
+    await removeResume({}, { additionalTypenames: ['User'] });
+  };
 
   const resumeProps = {
     src: userData?.profile?.resumeUrl || undefined,
@@ -72,17 +90,18 @@ export const useApply = () => {
     fileName: userData?.profile?.resumeFileName || undefined,
     onUpload: resumeOnUpload,
     onRemove: onRemoveResume,
-    isLoading: loading || removingResume
-  }
+    isLoading: loading || removingResume,
+  };
 
-  const jobTitle = jobData?.job.title || 'placeholder'
+  const jobTitle = jobData?.job.title || 'placeholder';
 
-  const didApply = didApplyData?.didApply
+  const didApply = didApplyData?.didApply;
 
-  const title = `Apply to ${jobData?.job.company?.name}`
+  const title = `Apply to ${jobData?.job.company?.name}`;
 
-  const companyLogo = jobData?.job?.company?.avatarUrl || undefined
+  const companyLogo = jobData?.job?.company?.avatarUrl || undefined;
 
+  const companyName = jobData?.job.company?.name ?? undefined;
 
   return {
     title,
@@ -95,7 +114,8 @@ export const useApply = () => {
     handleSubmit,
     avatarUploadUrl,
     companyLogo,
+    companyName,
     avatar,
-    resumeProps
+    resumeProps,
   };
 };

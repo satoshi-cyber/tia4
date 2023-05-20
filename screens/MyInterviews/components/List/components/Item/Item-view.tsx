@@ -35,11 +35,9 @@ const Item: React.FC<ItemProps> = ({
       <div className={CLASS_NAMES.description}>
         <div className={CLASS_NAMES.avatarContainer}>
           <Avatar
-            name={companyName || undefined}
+            text={companyName || undefined}
             src={avatar || undefined}
-            className={CLASS_NAMES.avatar}
             size={40}
-            round
           />
         </div>
         <div className={CLASS_NAMES.job}>

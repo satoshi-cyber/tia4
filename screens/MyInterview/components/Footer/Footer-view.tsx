@@ -11,13 +11,7 @@ const Footer: React.FC<FooterProps> = ({
 }) => (
   <div className={CLASS_NAMES.container}>
     <div className={CLASS_NAMES.avatarContainer}>
-      <Avatar
-        name={companyName}
-        src={companyLogo}
-        className={CLASS_NAMES.avatar}
-        size={40}
-        round
-      />
+      <Avatar text={companyName} src={companyLogo} size={40} />
     </div>
     <div className={CLASS_NAMES.details}>
       <Text

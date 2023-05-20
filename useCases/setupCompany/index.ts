@@ -10,6 +10,7 @@ const claims = auth.getClaims();
 
 const createCompany = prisma.company.create({
   data: {
+    
     name: tineVar(input, 'name'),
     website: tineVar(input, 'website'),
     members: {

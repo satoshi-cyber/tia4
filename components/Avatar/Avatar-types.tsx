@@ -1,7 +1,7 @@
-import { ReactAvatarProps } from 'react-avatar';
-
-export interface AvatarProps extends Omit<ReactAvatarProps, 'size'> {
-  text?: React.ReactNode;
+export interface AvatarProps {
+  className?: string;
+  text?: string;
   isLoading?: boolean;
   size: number;
+  src?: string;
 }

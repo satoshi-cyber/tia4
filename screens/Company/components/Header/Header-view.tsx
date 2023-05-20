@@ -14,7 +14,7 @@ const Header = ({
 
   return (
     <LoadingProvider isLoading={isLoading}>
-      <Avatar src={avatar} size={60} className="border mb-4" />
+      <Avatar src={avatar} size={60} className="mb-4" />
       <Title
         title={title}
         skeletonProps={{ width: 120 }}

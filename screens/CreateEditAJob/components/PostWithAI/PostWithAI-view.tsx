@@ -97,7 +97,7 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
       style={{ opacity }}
       className={clsx(
         display,
-        'mb-6 md:mb-0 w-full md:w-auto md:fixed md:bottom-0 md:right-0 md:backdrop-blur-2xl z-50 md:border md:border-gray-200 md:p-6'
+        'mb-6 md:mb-0 w-full md:!w-auto md:fixed md:bottom-0 md:right-0 md:backdrop-blur-2xl z-50 md:border md:border-gray-200 md:p-6'
       )}
     >
       <Form form={form} onSubmit={onSubmit}>
@@ -117,13 +117,13 @@ const PostWithAI: React.FC<{ setDescription: (a: string) => void }> = ({
           {currentUrl ? (
             <PrimaryButton
               title="Stop generating"
-              className="w-auto"
+              className="!w-auto"
               onClick={endStream}
             />
           ) : (
             <PrimaryButton
               title="Let AI assist you"
-              className="w-auto"
+              className="!w-auto"
               onClick={startAi}
             />
           )}

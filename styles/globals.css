@@ -106,9 +106,13 @@ video::-webkit-media-controls {
   left: 7px !important;
 }
 
-.markdown .wm-reset-3 > .--focused { 
+html .markdown .--focused { 
+  outline: none !important;
   @apply border-purple-900 !important; 
-  box-shadow: none !important; 
+}
+
+html .markdown div[role=textbox] { 
+  @apply p-6 -mt-4 !important; 
 }
 
 .markdown .wm-reset-3 > div > div > div > div > div:first-child { 

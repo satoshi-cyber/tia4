@@ -39,6 +39,7 @@ const Apply: React.FC = () => {
     jobTitle,
     didApply,
     companyLogo,
+    companyName,
   } = useApply();
 
   return (
@@ -63,6 +64,7 @@ const Apply: React.FC = () => {
             isLoading={false}
           />
           <Avatar
+            text={companyName}
             src={companyLogo}
             size={60}
             className="border"
