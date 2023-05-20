@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { CLASS_NAMES } from './EditAvatar-constants';
 import { EditAvatarProps } from './EditAvatar-types';
-import { removeS3Url } from '@/lib/s3url';
+import S3UrlProvider from '@/context/S3UrlProvider';
 
 export const useEditAvatar = ({
   uploadUrl,
@@ -16,6 +16,8 @@ export const useEditAvatar = ({
   const [url, setUrl] = useState<string | undefined>(undefined);
   const [uploading, setIsUploading] = useState(false);
 
+  const { invalidateUrl, getUrl } = useContext(S3UrlProvider.Context);
+
   const uploadFile = useCallback(
     (file: File) => {
       if (!uploadUrl) return;
@@ -26,7 +28,7 @@ export const useEditAvatar = ({
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             if (src) {
-              removeS3Url(src);
+              invalidateUrl(src);
             }
 
             setUrl(URL.createObjectURL(file));
@@ -69,7 +71,7 @@ export const useEditAvatar = ({
 
   const loading = !src || uploading;
 
-  const imageSrc = url || src;
+  const imageSrc = url || (src && getUrl(src));
 
   const classNames = {
     container: clsx(CLASS_NAMES.container, className),

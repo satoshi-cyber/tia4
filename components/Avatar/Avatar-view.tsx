@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Root, Image, Fallback } from '@radix-ui/react-avatar';
 
 import { AvatarProps } from './Avatar-types';
 
 import SkeletonLoader from '../SkeletonLoader';
 import clsx from 'clsx';
-import { getS3Url } from '@/lib/s3url';
+import S3UrlProvider from '@/context/S3UrlProvider';
 
 const getInitials = (fullName: string) => {
   const allNames = fullName.trim().split(' ');
@@ -26,6 +26,8 @@ const Avatar: React.FC<AvatarProps> = ({
   src,
   text,
 }) => {
+  const { getUrl } = useContext(S3UrlProvider.Context);
+
   const initial = getInitials(text ?? '');
 
   const textSize = size > 40 ? 'text-lg' : size > 30 ? 'text-sm' : 'text-xs';
@@ -45,7 +47,7 @@ const Avatar: React.FC<AvatarProps> = ({
             )}
           >
             <Image
-              src={src ? getS3Url(src) : undefined}
+              src={src ? getUrl(src) : undefined}
               alt={text}
               className="aspect-square h-full w-full object-cover"
             />

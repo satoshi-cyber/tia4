@@ -7,5 +7,4 @@ export const presignedGetSchema = z.object({
   bucketName: z.string(),
   objectName: z.string(),
   expires: z.number(),
-  cache: z.boolean().optional(),
 });

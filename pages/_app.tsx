@@ -4,6 +4,7 @@ import { Provider } from 'urql';
 import { ToastContainer } from 'react-toastify';
 import Menu from '@/components/Menu';
 import AuthProvider from '@/context/AuthProvider';
+import S3UrlProvider from '@/context/S3UrlProvider';
 import Head from 'next/head';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -53,12 +54,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff"></meta>
       </Head>
-      <AuthProvider>
-        <Component {...pageProps} />
-        {/* <Analytics /> */}
-        {asPath.startsWith('/app/') && <Menu />}
-        <ToastContainer />
-      </AuthProvider>
+      <S3UrlProvider>
+        <AuthProvider>
+          <Component {...pageProps} />
+          {/* <Analytics /> */}
+          {asPath.startsWith('/app/') && <Menu />}
+          <ToastContainer />
+        </AuthProvider>
+      </S3UrlProvider>
     </Provider>
   );
 }
