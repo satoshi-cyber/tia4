@@ -50,7 +50,7 @@ const Mobile: FC = () => {
   return (
     <div className="flex w-full flex-col grid w-full grid-cols-1 md:grid-cols-4 gap-10">
       <div className="overflow-hidden relative col-span-2 mx-16 drop-shadow-md">
-        <div className="w-full absolute w-[72%] ml-[13%] pt-[4.8%] rounded-xl overflow-hidden">
+        <div className="w-full absolute !w-[72%] ml-[13%] pt-[4.8%] rounded-xl overflow-hidden">
           <SwiperContainer
             className="w-full rounded-xl"
             modules={[Controller]}
@@ -66,7 +66,9 @@ const Mobile: FC = () => {
             ))}
           </SwiperContainer>
         </div>
-        <Phone className="relative z-20 pointer-events-none w-full" />
+        <div className="aspect-[521/895] relative z-20 pointer-events-none w-full">
+          <Phone className="relative z-20 pointer-events-none w-full" />
+        </div>
       </div>
       <div className="col-span-2">
         <div className="flex items-center mb-4">
