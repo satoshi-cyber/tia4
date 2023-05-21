@@ -48,7 +48,7 @@ const Mobile: FC = () => {
   return (
     <div className="flex w-full flex-col grid w-full grid-cols-1 md:grid-cols-4 gap-10">
       <div className="overflow-hidden relative col-span-2 mx-16 drop-shadow-md">
-        <div className="w-full absolute !w-[72%] ml-[13%] pt-[4.8%] rounded-xl overflow-hidden">
+        <div className="absolute w-[72%] ml-[13%] pt-[4.8%] rounded-xl overflow-hidden">
           <SwiperContainer
             className="w-full rounded-xl"
             modules={[Controller]}
