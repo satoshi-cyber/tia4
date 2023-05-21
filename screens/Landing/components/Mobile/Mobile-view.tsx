@@ -1,11 +1,9 @@
-'use client';
 import { FC, useLayoutEffect, useRef } from 'react';
 import { SwiperSlide, Swiper as SwiperContainer } from 'swiper/react';
 import Swiper, { Controller, EffectFade } from 'swiper';
 import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import dynamic from 'next/dynamic';
 import { HiArrowLeft } from '@react-icons/all-files/hi/HiArrowLeft';
 import { HiArrowRight } from '@react-icons/all-files/hi/HiArrowRight';
 
@@ -111,6 +109,4 @@ const Mobile: FC = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Mobile), {
-  ssr: false,
-});
+export default Mobile;
