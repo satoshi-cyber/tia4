@@ -26,7 +26,7 @@ import updateResume from '@/useCases/updateResume';
 import upsertJob from '@/useCases/upsertJob';
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: 'edge',
 };
 
 const useCasesWithInput = {

@@ -17,7 +17,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { tineCtx } from 'tinejs'
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: 'edge',
 };
 
 const handler = async (req: NextRequest) => {

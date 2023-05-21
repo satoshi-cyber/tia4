@@ -20,7 +20,7 @@ import {{useCase}} from '@/useCases/{{useCase}}'
 {{/useCases}}
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: 'edge',
 };
 
 const useCasesWithInput = {

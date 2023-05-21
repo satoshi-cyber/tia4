@@ -64,8 +64,8 @@ export class MinioClient {
     //
     //       MinIO (OS; ARCH) LIB/VER APP/VER
     //
-    const libraryComments = `(${process.platform}; ${process.arch})`;
-    const libraryAgent = `MinIO ${libraryComments} minio-js/7.0.33`;
+    const libraryComments = `(linux; arm64)`;
+    const libraryAgent = `Tine ${libraryComments} tinejs/0.1.0`;
     // User agent block ends.
 
     this.host = host;
