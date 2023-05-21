@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { IconProps } from './Icon-types';
 import dynamic from 'next/dynamic';
@@ -17,25 +17,28 @@ const Icon: React.FC<IconProps> = ({
     return null;
   }
 
-  const IconComponent =
-    Icons[name as keyof typeof Icons] ??
-    dynamic(
-      () =>
-        import(`@react-icons/all-files/hi/${name}.js`).then(
-          (data) => data[name]
-        ),
-      {
-        ssr: false,
-        loading: () => (
-          <SkeletonLoader
-            isLoading
-            className={className}
-            width={size}
-            height={size}
-          />
-        ),
-      }
+  const IconComponent = useMemo(() => {
+    return (
+      Icons[name as keyof typeof Icons] ??
+      dynamic(
+        () =>
+          import(`@react-icons/all-files/hi/${name}.js`).then(
+            (data) => data[name]
+          ),
+        {
+          ssr: false,
+          loading: () => (
+            <SkeletonLoader
+              isLoading
+              className={className}
+              width={size}
+              height={size}
+            />
+          ),
+        }
+      )
     );
+  }, [name]);
 
   return (
     <SkeletonLoader

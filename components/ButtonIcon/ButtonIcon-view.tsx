@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import clsx from 'clsx';
 
@@ -16,26 +16,29 @@ const ButtonIcon: React.FC<IconProps> = ({
   circle = true,
   ...props
 }) => {
-  const IconComponent =
-    Icons[name as keyof typeof Icons] ??
-    dynamic(
-      () =>
-        import(`@react-icons/all-files/hi/${name}.js`).then(
-          (data) => data[name]
-        ),
-      {
-        ssr: false,
-        loading: () => (
-          <SkeletonLoader
-            isLoading
-            className={className}
-            circle={circle}
-            width={size}
-            height={size}
-          />
-        ),
-      }
-    );
+  const IconComponent = useMemo(
+    () =>
+      Icons[name as keyof typeof Icons] ??
+      dynamic(
+        () =>
+          import(`@react-icons/all-files/hi/${name}.js`).then(
+            (data) => data[name]
+          ),
+        {
+          ssr: false,
+          loading: () => (
+            <SkeletonLoader
+              isLoading
+              className={className}
+              circle={circle}
+              width={size}
+              height={size}
+            />
+          ),
+        }
+      ),
+    [name]
+  );
 
   return (
     <SkeletonLoader
