@@ -8,7 +8,9 @@ const presignedGet = tineAction(
   async ({ credentials, bucketName, objectName, expires }, { ctx }) => {
     const client = getClient({ credentials, ctx });
 
-    return await client.presignedGetObject(bucketName, objectName, expires);
+    return await client.presignedGetObject(bucketName, objectName, expires, {
+      'response-cache-control': 'max-age=604800',
+    });
   },
   {
     action: 's3.presignedGet',
