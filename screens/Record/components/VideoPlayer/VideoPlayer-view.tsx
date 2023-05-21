@@ -1,4 +1,4 @@
-import { Icon } from '@/components';
+import Icon from '@/components/Icon';
 
 import { VIDEO_PROPS, BUTTON_PROPS, ICON_PROPS } from './VideoPlayer-constants';
 import { useVideoPreview } from './VideoPlayer-hook';

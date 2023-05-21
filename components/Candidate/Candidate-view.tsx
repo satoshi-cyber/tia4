@@ -1,10 +1,11 @@
 import React from 'react';
-import { Avatar, Text } from '@/components';
 
 import { CandidateProps } from './Candidate-types';
 import { CLASS_NAMES } from './Candidate-constants';
 import { useItem } from './Candidate-hook';
 import Thumbnail from './components/Thumbnail';
+import Avatar from '../Avatar';
+import Text from '../Text';
 
 const Item: React.FC<CandidateProps> = ({ interview }) => {
   const { avatar, candidateName, thumbnail, timeAgo, href, scoreLabel } =

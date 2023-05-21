@@ -1,15 +1,12 @@
 import React from 'react';
-import {
-  Form,
-  Layout,
-  Field,
-  Loader,
-  SubmitButton,
-  FormIcon,
-  Title,
-  LoadingProvider,
-  EditAvatar,
-} from '@/components';
+import SettingsMenu from '@/components/SettingsMenu';
+import Layout from '@/components/Layout';
+import Title from '@/components/Title';
+import LoadingProvider from '@/context/LoadingProvider';
+import { Field, Form, FormIcon } from '@/components/Form';
+import SubmitButton from '@/components/SubmitButton';
+import EditAvatar from '@/components/EditAvatar';
+import Loader from '@/components/Loader';
 
 import {
   COMPANY_NAME_FIELD_PROPS,
@@ -21,7 +18,6 @@ import {
 } from './EditCompany-constants';
 
 import { useEditCompany } from './EditCompany-hook';
-import SettingsMenu from '@/components/SettingsMenu';
 
 const EditCompany: React.FC = () => {
   const {

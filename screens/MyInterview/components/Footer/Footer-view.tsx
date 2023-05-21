@@ -1,5 +1,6 @@
 import React from 'react';
-import { Avatar, Text } from '@/components/';
+import Avatar from '@/components/Avatar';
+import Text from '@/components/Text';
 
 import { FooterProps } from './Footer-types';
 import { CLASS_NAMES } from './Footer-constants';

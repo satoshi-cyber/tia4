@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 import { URLS } from '@/config';
-import { Icon, PrimaryButton, Title } from '@/components';
+import Title from '@/components/Title';
+import PrimaryButton from '@/components/PrimaryButton';
+import Icon from '@/components/Icon';
 
 import {
   CLASS_NAMES,

@@ -1,11 +1,9 @@
-import {
-  Avatar,
-  Title,
-  LoadingProvider,
-  Layout,
-  PrimaryButton,
-  Loader,
-} from '@/components';
+import Layout from '@/components/Layout';
+import Loader from '@/components/Loader';
+import LoadingProvider from '@/context/LoadingProvider';
+import Avatar from '@/components/Avatar';
+import PrimaryButton from '@/components/PrimaryButton';
+import Title from '@/components/Title';
 
 import { BUTTON_PROPS, TITLE_PROPS } from './JoinCompany-constants';
 import { useJoinCompany } from './JoinCompany-hook';

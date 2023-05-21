@@ -1,6 +1,7 @@
-import { PrimaryButton, Text } from '@/components';
 import { URLS } from '@/config';
 import Link from 'next/link';
+import PrimaryButton from '@/components/PrimaryButton';
+import Text from '@/components/Text';
 
 import { TITLE, CLASS_NAMES, BUTTON_PROPS } from './DidApply-constants';
 

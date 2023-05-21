@@ -1,6 +1,6 @@
-import { PrimaryButton } from '@/components';
-import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import PrimaryButton from '@/components/PrimaryButton';
 
 import { ErrorDialogProps } from './ErrorDialog-types';
 

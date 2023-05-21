@@ -1,6 +1,9 @@
-import { Icon, Layout, Markdown, Title } from '@/components';
-import { Disclosure } from '@headlessui/react';
 import clsx from 'clsx';
+import { Disclosure } from '@headlessui/react';
+import Layout from '@/components/Layout';
+import Title from '@/components/Title';
+import Markdown from '@/components/Markdown';
+import Icon from '@/components/Icon';
 
 import { PRIVACY_POLICY } from '../PrivacyPolicy/PrivacyPolicy-constants';
 import { TERMS_AND_CONDITIONS } from '../TermsAndConditions/TermsAndConditions-constants';

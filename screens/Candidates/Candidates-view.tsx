@@ -1,7 +1,8 @@
-import { Form, LoadingProvider } from '@/components';
+import React from 'react';
 import Layout from '@/components/Layout';
 import Title from '@/components/Title';
-import React from 'react';
+import { Form } from '@/components/Form';
+import LoadingProvider from '@/context/LoadingProvider';
 
 import { LAYOUT_PROPS, TITLE_PROPS, CLASS_NAMES } from './Candidates-constants';
 import { useCandidates } from './Candidates-hook';

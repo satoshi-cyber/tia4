@@ -1,5 +1,9 @@
 import React from 'react';
-import { ButtonIcon, Layout, LoadingProvider, Title } from '@/components/';
+import Footer from './components/Footer';
+import Layout from '@/components/Layout';
+import LoadingProvider from '@/context/LoadingProvider';
+import Title from '@/components/Title';
+import ButtonIcon from '@/components/ButtonIcon';
 import Link from 'next/link';
 import { URLS } from '@/config';
 import InterviewPlayer from '@/components/InterviewPlayer';
@@ -7,7 +11,6 @@ import SettingsMenu from '@/components/SettingsMenu';
 
 import { TITLE_PROPS } from './MyInterview-constants';
 import { useMyInterview } from './MyInterview-hook';
-import Footer from './components/Footer';
 
 const MyInterviews = () => {
   const {

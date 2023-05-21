@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout, Title } from '@/components';
+import Layout from '@/components/Layout';
+import Title from '@/components/Title';
 
 import { TITLE_PROPS } from './MyInterviews-constants';
 import { List } from './components';

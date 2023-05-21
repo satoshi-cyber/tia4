@@ -1,6 +1,6 @@
-import { LoadingProvider } from '@/components';
-import { Field, FormIcon } from '@/components/Form';
 import React from 'react';
+import { Field, FormIcon } from '@/components/Form';
+import LoadingProvider from '@/context/LoadingProvider';
 
 import { useFilters } from './Filters-hook';
 

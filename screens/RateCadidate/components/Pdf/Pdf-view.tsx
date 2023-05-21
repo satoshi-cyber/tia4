@@ -1,7 +1,7 @@
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import { SkeletonLoader } from '@/components';
+import SkeletonLoader from '@/components/SkeletonLoader';
 
 import { CLASS_NAMES, PDF_WORKER_SRC, SKELETON_PROPS } from './Pdf-constants';
 import { PdfProps } from './Pdf-types';

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Avatar, Text, SkeletonLoader } from '@/components';
+import SkeletonLoader from '@/components/SkeletonLoader';
+import Avatar from '@/components/Avatar';
+import Text from '@/components/Text';
 import Link from 'next/link';
 
 import { ItemProps } from './Item-types';

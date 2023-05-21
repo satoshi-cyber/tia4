@@ -1,8 +1,9 @@
-import { PrimaryButton, Text } from '@/components';
+import { Fragment } from 'react';
 import { URLS } from '@/config';
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { Fragment } from 'react';
+import PrimaryButton from '@/components/PrimaryButton';
+import Text from '@/components/Text';
 
 import { BUTTON_PROPS, CLASS_NAMES, TITLE } from './DidApplyDialog-constants';
 

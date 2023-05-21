@@ -1,5 +1,3 @@
-import { Icon, Field, SecondaryButton } from '@/components';
-
 import { useTeamMemberFields } from './TeamMemberFields-hook';
 import {
   CLASS_NAMES,
@@ -9,6 +7,9 @@ import {
   ROLE_FIELD_PROPS,
 } from './TeamMemberFields-constants';
 import { TeamMemberFieldsProps } from './TeamMemberFields-types';
+import Icon from '../Icon';
+import { Field } from '../Form';
+import SecondaryButton from '../SecondaryButton';
 
 const TeamMemberFields: React.FC<TeamMemberFieldsProps> = ({ autoFocus }) => {
   const { fields, handleAppend, remove } = useTeamMemberFields();

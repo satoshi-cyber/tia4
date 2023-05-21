@@ -1,6 +1,7 @@
 import React from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import { Icon, Loader } from '@/components';
+import Icon from '@/components/Icon';
+import Loader from '@/components/Loader';
 import 'react-circular-progressbar/dist/styles.css';
 
 import { CLASS_NAMES, DESCRIPTION } from './SubmitInterview-constants';

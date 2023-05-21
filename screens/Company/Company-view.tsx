@@ -1,14 +1,14 @@
-import {
-  Icon,
-  PrimaryButton,
-  Form,
-  Layout,
-  SubmitButton,
-  LoadingProvider,
-} from '@/components';
-import TeamMemberFields from '@/components/TeamMemberFields';
-import { Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import TeamMemberFields from '@/components/TeamMemberFields';
+import Header from './components/Header';
+import Item from './components/Item';
+import Layout from '@/components/Layout';
+import { Form } from '@/components/Form';
+import SubmitButton from '@/components/SubmitButton';
+import PrimaryButton from '@/components/PrimaryButton';
+import LoadingProvider from '@/context/LoadingProvider';
+import Icon from '@/components/Icon';
+import { Transition } from '@headlessui/react';
 
 import {
   CLASS_NAMES,
@@ -18,8 +18,6 @@ import {
   TRANSITION_PROPS,
 } from './Company-constants';
 import { useCompany } from './Company-hook';
-import Header from './components/Header';
-import Item from './components/Item';
 
 const Company = () => {
   const {

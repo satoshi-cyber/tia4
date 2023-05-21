@@ -1,16 +1,11 @@
 import React from 'react';
-
-import {
-  Form,
-  Layout,
-  Field,
-  LoadingProvider,
-  SubmitButton,
-  Title,
-  EditAvatar,
-  FormIcon,
-  Resume,
-} from '@/components';
+import Layout from '@/components/Layout';
+import Title from '@/components/Title';
+import EditAvatar from '@/components/EditAvatar';
+import LoadingProvider from '@/context/LoadingProvider';
+import { Field, Form, FormIcon } from '@/components/Form';
+import Resume from '@/components/Resume';
+import SubmitButton from '@/components/SubmitButton';
 
 import {
   SUBMIT_BUTTON_PROPS,
@@ -19,7 +14,6 @@ import {
   FIELDS,
   LINKEDIN_PROFILE_ICON,
 } from './Profile-constants';
-
 import { useProfile } from './Profile-hook';
 
 const Profile: React.FC = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Icon, Text, LoadingProvider } from '@/components';
 import Link from 'next/link';
+import LoadingProvider from '@/context/LoadingProvider';
 
 import { ResumeProps } from './Resume-types';
 import { useResume } from './Resume-hook';
@@ -12,6 +12,8 @@ import {
   UPLOAD_LABEL_PROPS,
   FILE_LABEL_APPEND,
 } from './Resume-constants';
+import Icon from '../Icon';
+import Text from '../Text';
 
 const Resume: React.FC<ResumeProps> = ({
   src,

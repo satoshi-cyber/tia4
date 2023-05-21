@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  Form,
-  Layout,
-  Field,
-  Loader,
-  SubmitButton,
-  FormIcon,
-  // Title,
-  Text,
-  // ButtonIcon,
-} from '@/components';
+import Layout from '@/components/Layout';
+import { Field, Form, FormIcon } from '@/components/Form';
+import SubmitButton from '@/components/SubmitButton';
+import Loader from '@/components/Loader';
+import Text from '@/components/Text';
 
 import {
   COMPANY_NAME_FIELD_PROPS,

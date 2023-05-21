@@ -1,5 +1,5 @@
-import { Loader, Text } from '@/components';
 import Avatar from '@/components/Avatar';
+import Text from '@/components/Text';
 import ButtonIcon from '@/components/ButtonIcon';
 
 import {
@@ -10,6 +10,7 @@ import {
 } from './Item-constants';
 import { useItem } from './Item-hook';
 import { ItemProps } from './Item-types';
+import Loader from '@/components/Loader';
 
 const Item: React.FC<ItemProps> = ({ member }) => {
   const {

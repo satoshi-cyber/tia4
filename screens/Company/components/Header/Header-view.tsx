@@ -1,6 +1,10 @@
-import { ButtonIcon, Avatar, Title, LoadingProvider } from '@/components';
+import ButtonIcon from '@/components/ButtonIcon';
+import LoadingProvider from '@/context/LoadingProvider';
+import Avatar from '@/components/Avatar';
+import Title from '@/components/Title';
 import { URLS } from '@/config';
 import Link from 'next/link';
+
 import { useCompanyHeader } from './Header-hook';
 
 const Header = ({

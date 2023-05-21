@@ -1,10 +1,10 @@
-import { ButtonIcon } from '@/components';
-
 import { Menu } from '@headlessui/react';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { SettingsMenuProps } from './SettingsMenu-types';
+
+import ButtonIcon from '../ButtonIcon';
 
 export const SettingsMenu: React.FC<SettingsMenuProps> = ({ items }) => {
   return (

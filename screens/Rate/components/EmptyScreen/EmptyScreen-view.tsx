@@ -1,5 +1,6 @@
-import { PrimaryButton, Text } from '@/components';
 import { URLS } from '@/config';
+import PrimaryButton from '@/components/PrimaryButton';
+import Text from '@/components/Text';
 import Link from 'next/link';
 import React from 'react';
 

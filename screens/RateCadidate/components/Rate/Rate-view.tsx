@@ -1,5 +1,8 @@
-import { Icon, Loader, LoadingProvider, SkeletonLoader } from '@/components';
 import Dialog from '@/components/Dialog';
+import Loader from '@/components/Loader';
+import Icon from '@/components/Icon';
+import LoadingProvider from '@/context/LoadingProvider';
+import SkeletonLoader from '@/components/SkeletonLoader';
 
 import { RateProps } from './Rate-types';
 import { ICONS } from './Rate-constants';

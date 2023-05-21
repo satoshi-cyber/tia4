@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import { Layout } from '@/components';
 import { Dialog, Transition } from '@headlessui/react';
+import Layout from '@/components/Layout';
 
 const Profile: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);

@@ -1,18 +1,13 @@
 import React from 'react';
-
-import {
-  Form,
-  Layout,
-  Field,
-  LoadingProvider,
-  SubmitButton,
-  Title,
-  EditAvatar,
-  FormIcon,
-  Avatar,
-  Resume,
-  Icon,
-} from '@/components';
+import Layout from '@/components/Layout';
+import LoadingProvider from '@/context/LoadingProvider';
+import Title from '@/components/Title';
+import EditAvatar from '@/components/EditAvatar';
+import Icon from '@/components/Icon';
+import Avatar from '@/components/Avatar';
+import { Field, Form, FormIcon } from '@/components/Form';
+import Resume from '@/components/Resume';
+import SubmitButton from '@/components/SubmitButton';
 import dynamic from 'next/dynamic';
 
 import {

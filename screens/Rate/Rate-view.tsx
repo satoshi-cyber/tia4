@@ -1,5 +1,7 @@
-import { Title, Layout, LoadingProvider } from '@/components';
+import LoadingProvider from '@/context/LoadingProvider';
 import Candidate from '@/components/Candidate';
+import Layout from '@/components/Layout';
+import Title from '@/components/Title';
 
 import EmptyScreen from './components/EmptyScreen';
 import { TITLE_PROPS, CLASS_NAMES, LAYOUT_PROPS } from './Rate-constants';

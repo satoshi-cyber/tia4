@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoadingProvider } from '@/components';
+import LoadingProvider from '@/context/LoadingProvider';
 
 import { Item, EmptyScreen } from './components';
 import { CLASS_NAMES } from './List-constants';
