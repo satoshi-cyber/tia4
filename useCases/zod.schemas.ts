@@ -91,6 +91,14 @@ export type DeleteInterviewReturnSchema = Infer<
   typeof DeleteInterviewReturnSchema
 >;
 
+export const DeleteInviteReturnSchema = object({
+  role: literal('member').or(literal('adminMember')),
+  companyId: string(),
+  recipientEmail: string(),
+});
+
+export type DeleteInviteReturnSchema = Infer<typeof DeleteInviteReturnSchema>;
+
 export const DeleteJobReturnSchema = object({ id: string() });
 
 export type DeleteJobReturnSchema = Infer<typeof DeleteJobReturnSchema>;

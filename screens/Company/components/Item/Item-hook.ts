@@ -1,9 +1,5 @@
 import { TOAST_OPTIONS } from '@/config';
-import {
-  CompanyMemberRole,
-  useDeleteInviteMutation,
-  useDeleteMemberMutation,
-} from '@/graphql';
+import { CompanyMemberRole, useDeleteMemberMutation } from '@/graphql';
 import { useUser } from '@/hooks';
 import { UseCases } from '@/useCases';
 import { toast } from 'react-toastify';
@@ -15,8 +11,9 @@ import { ItemProps } from './Item-types';
 export const useItem = ({ member }: ItemProps) => {
   const { claims, companyRole, companyId } = useUser();
 
-  const [{ fetching: deletingInvite }, deleteInvite] =
-    useDeleteInviteMutation();
+  const { isMutating: deletingInvite, trigger: deleteInvite } =
+    UseCases.deleteInvite.mutate();
+
   const [{ fetching: deletingMember }, deleteMember] =
     useDeleteMemberMutation();
 
@@ -42,17 +39,17 @@ export const useItem = ({ member }: ItemProps) => {
   const submitting = deletingInvite || deletingMember;
 
   const handleDeleteInvite = async () => {
-    if (!('recipientEmail' in member)) {
+    if (!('recipientEmail' in member) || !companyId) {
       return;
     }
 
     const toastMessage = TOAST_MESSAGE.deleteInvite;
 
     try {
-      await deleteInvite(
-        { companyId: companyId!, recipientEmail: member.recipientEmail },
-        { additionalTypenames: ['CompanyInvite'] }
-      );
+      await deleteInvite({
+        companyId: companyId,
+        recipientEmail: member.recipientEmail,
+      });
 
       mutate(UseCases.companyMembers.getKey());
 

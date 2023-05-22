@@ -9,6 +9,7 @@ import type { Company } from './types';
 import type { CompanyMembers } from './types';
 import type { DeleteCompany } from './types';
 import type { DeleteInterview } from './types';
+import type { DeleteInvite } from './types';
 import type { DeleteJob } from './types';
 import type { DidApply } from './types';
 import type { DidRateInterview } from './types';
@@ -209,6 +210,39 @@ export const UseCases = {
       }
 
       return ['deleteInterview', input];
+    },
+  },
+  deleteInvite: {
+    load: (
+      input: TineInferInput<DeleteInvite> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['deleteInvite', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<DeleteInvite>>(
+                '/api/tine/deleteInvite',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'deleteInvite',
+        (_: string, { arg }: { arg: TineInferInput<DeleteInvite> }) =>
+          fetchData<TineInferReturn<DeleteInvite>>(
+            '/api/tine/deleteInvite',
+            arg
+          )
+      ),
+    getKey: (input?: TineInferInput<DeleteInvite>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'deleteInvite';
+      }
+
+      return ['deleteInvite', input];
     },
   },
   deleteJob: {
