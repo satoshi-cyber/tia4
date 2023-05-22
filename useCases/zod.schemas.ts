@@ -337,21 +337,10 @@ export const MyInterviewsReturnSchema = array(
     ),
     thumbnail: string(),
     job: object({
+      id: string(),
+      title: string(),
       company: object({ id: string(), name: string(), avatarUrl: string() }),
-    }).and(
-      object({
-        id: string(),
-        description: Null().or(string()),
-        companyId: string(),
-        title: string(),
-        deadline: InstanceOf(Date),
-        questions: array(
-          object({ id: string(), question: string(), time: number() })
-        ),
-        createdAt: InstanceOf(Date),
-        updatedAt: InstanceOf(Date),
-      })
-    ),
+    }),
   })
 );
 

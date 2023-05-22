@@ -16,7 +16,9 @@ const myInterviews = prisma.interview.findMany({
     answers: true,
     thumbnail: true,
     job: {
-      include: {
+      select: {
+        id: true,
+        title: true,
         company: {
           select: {
             id: true,
