@@ -1,4 +1,3 @@
-import { InterviewPreviewFragment } from '@/graphql';
 import { Interviews } from '@/useCases/types';
 import { TineInferReturn } from 'tinejs';
 
