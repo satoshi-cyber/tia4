@@ -1,5 +1,4 @@
 import { TOAST_OPTIONS, URLS } from '@/config';
-import { useUser } from '@/hooks';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -15,8 +14,6 @@ import { mutate } from 'swr';
 import { UseCases } from '@/useCases';
 
 export const useRate = ({ className }: { className?: string }) => {
-  const { companyId } = useUser();
-
   const router = useRouter();
 
   const interviewId = router.query.interviewId as string;
