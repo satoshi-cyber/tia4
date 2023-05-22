@@ -103,6 +103,14 @@ export const DeleteJobReturnSchema = object({ id: string() });
 
 export type DeleteJobReturnSchema = Infer<typeof DeleteJobReturnSchema>;
 
+export const DeleteMemberReturnSchema = object({
+  role: literal('member').or(literal('adminMember')),
+  userId: string(),
+  companyId: string(),
+});
+
+export type DeleteMemberReturnSchema = Infer<typeof DeleteMemberReturnSchema>;
+
 export const DidApplyReturnSchema = boolean();
 
 export type DidApplyReturnSchema = Infer<typeof DidApplyReturnSchema>;

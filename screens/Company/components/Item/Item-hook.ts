@@ -1,5 +1,4 @@
 import { TOAST_OPTIONS } from '@/config';
-import { CompanyMemberRole, useDeleteMemberMutation } from '@/graphql';
 import { useUser } from '@/hooks';
 import { UseCases } from '@/useCases';
 import { toast } from 'react-toastify';
@@ -7,6 +6,7 @@ import { mutate } from 'swr';
 
 import { ROLE_LABEL, TOAST_MESSAGE } from './Item-constants';
 import { ItemProps } from './Item-types';
+import { CompanyRoles } from '@/types';
 
 export const useItem = ({ member }: ItemProps) => {
   const { claims, companyRole, companyId } = useUser();
@@ -14,8 +14,8 @@ export const useItem = ({ member }: ItemProps) => {
   const { isMutating: deletingInvite, trigger: deleteInvite } =
     UseCases.deleteInvite.mutate();
 
-  const [{ fetching: deletingMember }, deleteMember] =
-    useDeleteMemberMutation();
+  const { isMutating: deletingMember, trigger: deleteMember } =
+    UseCases.deleteMember.mutate();
 
   const buttonIcon = 'HiTrash';
 
@@ -33,7 +33,7 @@ export const useItem = ({ member }: ItemProps) => {
   const avatar = ('user' in member && member.user.avatarUrl) || '';
 
   const isButtonVisible =
-    companyRole === CompanyMemberRole.AdminMember &&
+    companyRole === CompanyRoles.adminMember &&
     ('recipientEmail' in member || member.user.id !== claims?.userId);
 
   const submitting = deletingInvite || deletingMember;
@@ -47,7 +47,7 @@ export const useItem = ({ member }: ItemProps) => {
 
     try {
       await deleteInvite({
-        companyId: companyId,
+        companyId,
         recipientEmail: member.recipientEmail,
       });
 
@@ -60,17 +60,14 @@ export const useItem = ({ member }: ItemProps) => {
   };
 
   const handleDeleteMember = async () => {
-    if (!('user' in member)) {
+    if (!('user' in member) || !companyId) {
       return;
     }
 
     const toastMessage = TOAST_MESSAGE.deleteMember;
 
     try {
-      await deleteMember(
-        { companyId: companyId!, userId: member.user.id },
-        { additionalTypenames: ['CompanyMember'] }
-      );
+      await deleteMember({ companyId, userId: member.user.id });
 
       mutate(UseCases.companyMembers.getKey());
 

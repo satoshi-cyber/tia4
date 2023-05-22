@@ -11,6 +11,7 @@ import type { DeleteCompany } from './types';
 import type { DeleteInterview } from './types';
 import type { DeleteInvite } from './types';
 import type { DeleteJob } from './types';
+import type { DeleteMember } from './types';
 import type { DidApply } from './types';
 import type { DidRateInterview } from './types';
 import type { EditCompany } from './types';
@@ -273,6 +274,39 @@ export const UseCases = {
       }
 
       return ['deleteJob', input];
+    },
+  },
+  deleteMember: {
+    load: (
+      input: TineInferInput<DeleteMember> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['deleteMember', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<DeleteMember>>(
+                '/api/tine/deleteMember',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'deleteMember',
+        (_: string, { arg }: { arg: TineInferInput<DeleteMember> }) =>
+          fetchData<TineInferReturn<DeleteMember>>(
+            '/api/tine/deleteMember',
+            arg
+          )
+      ),
+    getKey: (input?: TineInferInput<DeleteMember>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'deleteMember';
+      }
+
+      return ['deleteMember', input];
     },
   },
   didApply: {
