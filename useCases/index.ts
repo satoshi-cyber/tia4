@@ -9,6 +9,7 @@ import type { Company } from './types';
 import type { CompanyMembers } from './types';
 import type { DeleteCompany } from './types';
 import type { DeleteJob } from './types';
+import type { DidApply } from './types';
 import type { DidRateInterview } from './types';
 import type { EditCompany } from './types';
 import type { Health } from './types';
@@ -203,6 +204,33 @@ export const UseCases = {
       }
 
       return ['deleteJob', input];
+    },
+  },
+  didApply: {
+    load: (
+      input: TineInferInput<DidApply> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['didApply', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<DidApply>>('/api/tine/didApply', input)
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'didApply',
+        (_: string, { arg }: { arg: TineInferInput<DidApply> }) =>
+          fetchData<TineInferReturn<DidApply>>('/api/tine/didApply', arg)
+      ),
+    getKey: (input?: TineInferInput<DidApply>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'didApply';
+      }
+
+      return ['didApply', input];
     },
   },
   didRateInterview: {

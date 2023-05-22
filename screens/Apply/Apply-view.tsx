@@ -25,11 +25,11 @@ const Apply: React.FC = () => {
     handleSubmit,
     form,
     avatar,
-    loading,
+    isJobLoading,
     avatarUploadUrl,
     onUpload,
     resumeProps,
-    fetchingJob,
+    isLoading,
     title,
     jobTitle,
     didApply,
@@ -39,12 +39,12 @@ const Apply: React.FC = () => {
 
   return (
     <Layout.Apply>
-      <LoadingProvider isLoading={loading}>
+      <LoadingProvider isLoading={isLoading}>
         <Title
           {...TITLE_PROPS}
           title={title}
           subTitle={jobTitle}
-          isLoading={fetchingJob}
+          isLoading={isJobLoading}
         />
         <div className="flex flex-row items-center mb-6">
           <EditAvatar
@@ -63,7 +63,7 @@ const Apply: React.FC = () => {
             src={companyLogo}
             size={60}
             className="border"
-            isLoading={loading}
+            isLoading={isLoading}
           />
         </div>
         {didApply ? (

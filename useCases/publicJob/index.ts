@@ -16,9 +16,11 @@ const publicJob = prisma.job.findUnique(
         select: {
           name: true,
           website: true,
+          avatarUrl: true,
         },
       },
       description: true,
+      questions: true,
     },
   },
   { name: 'publicJob' }

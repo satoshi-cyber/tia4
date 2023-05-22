@@ -71,6 +71,10 @@ export const DeleteJobReturnSchema = object({ id: string() });
 
 export type DeleteJobReturnSchema = Infer<typeof DeleteJobReturnSchema>;
 
+export const DidApplyReturnSchema = boolean();
+
+export type DidApplyReturnSchema = Infer<typeof DidApplyReturnSchema>;
+
 export const DidRateInterviewReturnSchema = object({
   value: Null().or(number()),
   createdAt: InstanceOf(Date),

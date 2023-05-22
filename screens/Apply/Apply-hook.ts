@@ -4,8 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import {
   UpdateProfile,
-  useDidApplyQuery,
-  useJobQuery,
   useProfileQuery,
   useRemoveResumeMutation,
   useUpdateProfileMutation,
@@ -16,24 +14,26 @@ import { TOAST_MESSAGE } from './Apply-constants';
 import { formatDefaultValues } from './Apply-functions';
 import { useRouter } from 'next/router';
 import { TOAST_OPTIONS, URLS } from '@/config';
+import { UseCases } from '@/useCases';
 
 export const useApply = () => {
   const router = useRouter();
 
   const jobId = String(router.query.applyJobId);
 
-  const [{ fetching: didApplyFetching, data: didApplyData }] = useDidApplyQuery(
-    { variables: { jobId } }
-  );
-  const [{ fetching: fetchingJob, data: jobData }] = useJobQuery({
-    variables: { id: jobId },
+  const { data: jobData, isLoading: isJobLoading } = UseCases.publicJob.load({
+    id: jobId,
   });
+
+  const { isLoading: isDidApplyLoading, data: didApply } =
+    UseCases.didApply.load({ jobId });
+
   const [{ fetching: fetchingUser, data: userData }, onUpload] =
     useProfileQuery({ requestPolicy: 'cache-and-network' });
   const [{ fetching: removingResume }, removeResume] =
     useRemoveResumeMutation();
 
-  const loading = fetchingUser || didApplyFetching;
+  const isLoading = fetchingUser || isDidApplyLoading;
 
   const [, updateProfile] = useUpdateProfileMutation();
 
@@ -90,25 +90,23 @@ export const useApply = () => {
     fileName: userData?.profile?.resumeFileName || undefined,
     onUpload: resumeOnUpload,
     onRemove: onRemoveResume,
-    isLoading: loading || removingResume,
+    isLoading: isLoading || removingResume,
   };
 
-  const jobTitle = jobData?.job.title || 'placeholder';
+  const jobTitle = jobData?.title || 'placeholder';
 
-  const didApply = didApplyData?.didApply;
+  const title = `Apply to ${jobData?.company?.name}`;
 
-  const title = `Apply to ${jobData?.job.company?.name}`;
+  const companyLogo = jobData?.company?.avatarUrl || undefined;
 
-  const companyLogo = jobData?.job?.company?.avatarUrl || undefined;
-
-  const companyName = jobData?.job.company?.name ?? undefined;
+  const companyName = jobData?.company?.name ?? undefined;
 
   return {
     title,
     jobTitle,
-    fetchingJob,
+    isJobLoading,
     form,
-    loading,
+    isLoading,
     didApply,
     onUpload,
     handleSubmit,

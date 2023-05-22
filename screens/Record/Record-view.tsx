@@ -29,7 +29,7 @@ const RecordView = () => {
     classNames,
     isRecording,
     recordDate,
-    loading,
+    isLoading,
     error,
     didApply,
     swiperOptions,
@@ -39,7 +39,7 @@ const RecordView = () => {
     return <Error error={error} />;
   }
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
