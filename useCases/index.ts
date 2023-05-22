@@ -23,6 +23,7 @@ import type { MyInterviews } from './types';
 import type { PendingRates } from './types';
 import type { Profile } from './types';
 import type { PublicJob } from './types';
+import type { RateInterview } from './types';
 import type { SetupCompany } from './types';
 import type { SkipOnboarding } from './types';
 import type { UpdateProfile } from './types';
@@ -573,6 +574,39 @@ export const UseCases = {
       }
 
       return ['publicJob', input];
+    },
+  },
+  rateInterview: {
+    load: (
+      input: TineInferInput<RateInterview> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['rateInterview', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<RateInterview>>(
+                '/api/tine/rateInterview',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'rateInterview',
+        (_: string, { arg }: { arg: TineInferInput<RateInterview> }) =>
+          fetchData<TineInferReturn<RateInterview>>(
+            '/api/tine/rateInterview',
+            arg
+          )
+      ),
+    getKey: (input?: TineInferInput<RateInterview>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'rateInterview';
+      }
+
+      return ['rateInterview', input];
     },
   },
   setupCompany: {

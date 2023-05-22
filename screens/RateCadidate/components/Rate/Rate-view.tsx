@@ -16,7 +16,7 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
     closeDialog,
     score,
     isLoading,
-    submitting,
+    isMutating,
     isScoreVisible,
     value,
     handleConfirm,
@@ -26,7 +26,7 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
 
   return (
     <>
-      {submitting && <Loader />}
+      {isMutating && <Loader />}
       <Dialog
         isOpen={isDialogOpen}
         onClose={closeDialog}

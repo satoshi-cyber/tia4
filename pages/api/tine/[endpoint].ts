@@ -21,6 +21,7 @@ import myInterviews from '@/useCases/myInterviews';
 import pendingRates from '@/useCases/pendingRates';
 import profile from '@/useCases/profile';
 import publicJob from '@/useCases/publicJob';
+import rateInterview from '@/useCases/rateInterview';
 import setupCompany from '@/useCases/setupCompany';
 import skipOnboarding from '@/useCases/skipOnboarding';
 import updateProfile from '@/useCases/updateProfile';
@@ -48,6 +49,7 @@ const useCasesWithInput = {
   myCompany: myCompany,
   pendingRates: pendingRates,
   publicJob: publicJob,
+  rateInterview: rateInterview,
   setupCompany: setupCompany,
   updateProfile: updateProfile,
   updateResume: updateResume,

@@ -1,5 +1,4 @@
 import { TOAST_OPTIONS, URLS } from '@/config';
-import { useRateInterviewMutation } from '@/graphql';
 import { useUser } from '@/hooks';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -29,7 +28,8 @@ export const useRate = ({ className }: { className?: string }) => {
     interviewId && { interviewId }
   );
 
-  const [{ fetching: submitting }, rateInterview] = useRateInterviewMutation();
+  const { isMutating, trigger: rateInterview } =
+    UseCases.rateInterview.mutate();
 
   const classNames = {
     ...CLASS_NAMES,
@@ -56,24 +56,19 @@ export const useRate = ({ className }: { className?: string }) => {
       return;
     }
 
-    const { error } = await rateInterview(
-      { companyId: companyId!, input: { interviewId, value: score } },
-      { additionalTypenames: ['Rate'] }
-    );
+    try {
+      await rateInterview({ interviewId, value: score });
 
-    closeDialog();
+      closeDialog();
 
-    if (error) {
+      toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
+
+      mutate(UseCases.pendingRates.getKey());
+
+      setTimeout(() => router.push(URLS.RATE), PUSH_DELAY);
+    } catch (e) {
       toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
-
-      return;
     }
-
-    toast.success(TOAST_MESSAGE.success, TOAST_OPTIONS);
-
-    mutate(UseCases.pendingRates.getKey());
-
-    setTimeout(() => router.push(URLS.RATE), PUSH_DELAY);
   };
 
   const value = data?.value;
@@ -84,7 +79,7 @@ export const useRate = ({ className }: { className?: string }) => {
 
   return {
     isLoading,
-    submitting,
+    isMutating,
     value,
     score,
     classNames,

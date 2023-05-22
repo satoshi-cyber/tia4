@@ -385,6 +385,76 @@ export const PublicJobReturnSchema = object({
 
 export type PublicJobReturnSchema = Infer<typeof PublicJobReturnSchema>;
 
+export const RateInterviewReturnSchema = object({
+  interview: Null().or(
+    object({
+      job: object({
+        id: string(),
+        description: Null().or(string()),
+        companyId: string(),
+        title: string(),
+        deadline: InstanceOf(Date),
+        questions: array(
+          object({ id: string(), question: string(), time: number() })
+        ),
+        createdAt: InstanceOf(Date),
+        updatedAt: InstanceOf(Date),
+      }),
+      interviewee: object({
+        id: string(),
+        email: string(),
+        firstName: Null().or(string()),
+        lastName: Null().or(string()),
+        bio: Null().or(string()),
+        issuer: string(),
+        publicAddress: string(),
+        linkedInProfile: Null().or(string()),
+        resumeFileName: Null().or(string()),
+        role: literal('user').or(literal('admin')),
+        onboarded: boolean(),
+        avatarUrl: string(),
+        avatarUploadUrl: string().or(Undefined()),
+        resumeUrl: string(),
+        resumeUploadUrl: string().or(Undefined()),
+      }),
+    }).and(
+      object({
+        id: string(),
+        status: literal('initialized')
+          .or(literal('proccessing'))
+          .or(literal('ready')),
+        createdAt: InstanceOf(Date),
+        updatedAt: InstanceOf(Date),
+        jobId: string(),
+        intervieweeId: string(),
+        answers: array(
+          object({
+            url: string(),
+            uploadUrl: string().or(Undefined()),
+            question: object({
+              id: string(),
+              question: string(),
+              time: number(),
+            }),
+          })
+        ),
+        score: Null().or(number()),
+        thumbnail: string(),
+      })
+    )
+  ),
+}).and(
+  object({
+    value: Null().or(number()),
+    createdAt: InstanceOf(Date),
+    reason: Null().or(string()),
+    interviewId: string(),
+    raterId: string(),
+  })
+);
+
+export type RateInterviewReturnSchema = Infer<typeof RateInterviewReturnSchema>;
+
 export const SetupCompanyReturnSchema = object({
   id: string(),
   name: string(),
