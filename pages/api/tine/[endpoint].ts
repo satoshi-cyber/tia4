@@ -6,6 +6,7 @@ import authenticateUser from '@/useCases/authenticateUser';
 import company from '@/useCases/company';
 import companyMembers from '@/useCases/companyMembers';
 import deleteCompany from '@/useCases/deleteCompany';
+import deleteInterview from '@/useCases/deleteInterview';
 import deleteJob from '@/useCases/deleteJob';
 import didApply from '@/useCases/didApply';
 import didRateInterview from '@/useCases/didRateInterview';
@@ -18,6 +19,7 @@ import job from '@/useCases/job';
 import jobs from '@/useCases/jobs';
 import joinCompany from '@/useCases/joinCompany';
 import myCompany from '@/useCases/myCompany';
+import myInterview from '@/useCases/myInterview';
 import myInterviews from '@/useCases/myInterviews';
 import pendingRates from '@/useCases/pendingRates';
 import profile from '@/useCases/profile';
@@ -38,6 +40,7 @@ const useCasesWithInput = {
   company: company,
   companyMembers: companyMembers,
   deleteCompany: deleteCompany,
+  deleteInterview: deleteInterview,
   deleteJob: deleteJob,
   didApply: didApply,
   didRateInterview: didRateInterview,
@@ -49,6 +52,7 @@ const useCasesWithInput = {
   jobs: jobs,
   joinCompany: joinCompany,
   myCompany: myCompany,
+  myInterview: myInterview,
   pendingRates: pendingRates,
   publicJob: publicJob,
   rateInterview: rateInterview,

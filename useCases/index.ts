@@ -8,6 +8,7 @@ import type { AuthenticateUser } from './types';
 import type { Company } from './types';
 import type { CompanyMembers } from './types';
 import type { DeleteCompany } from './types';
+import type { DeleteInterview } from './types';
 import type { DeleteJob } from './types';
 import type { DidApply } from './types';
 import type { DidRateInterview } from './types';
@@ -20,6 +21,7 @@ import type { Job } from './types';
 import type { Jobs } from './types';
 import type { JoinCompany } from './types';
 import type { MyCompany } from './types';
+import type { MyInterview } from './types';
 import type { MyInterviews } from './types';
 import type { PendingRates } from './types';
 import type { Profile } from './types';
@@ -174,6 +176,39 @@ export const UseCases = {
       }
 
       return ['deleteCompany', input];
+    },
+  },
+  deleteInterview: {
+    load: (
+      input: TineInferInput<DeleteInterview> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['deleteInterview', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<DeleteInterview>>(
+                '/api/tine/deleteInterview',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'deleteInterview',
+        (_: string, { arg }: { arg: TineInferInput<DeleteInterview> }) =>
+          fetchData<TineInferReturn<DeleteInterview>>(
+            '/api/tine/deleteInterview',
+            arg
+          )
+      ),
+    getKey: (input?: TineInferInput<DeleteInterview>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'deleteInterview';
+      }
+
+      return ['deleteInterview', input];
     },
   },
   deleteJob: {
@@ -512,6 +547,36 @@ export const UseCases = {
       }
 
       return ['myCompany', input];
+    },
+  },
+  myInterview: {
+    load: (
+      input: TineInferInput<MyInterview> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['myInterview', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<MyInterview>>(
+                '/api/tine/myInterview',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'myInterview',
+        (_: string, { arg }: { arg: TineInferInput<MyInterview> }) =>
+          fetchData<TineInferReturn<MyInterview>>('/api/tine/myInterview', arg)
+      ),
+    getKey: (input?: TineInferInput<MyInterview>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'myInterview';
+      }
+
+      return ['myInterview', input];
     },
   },
   myInterviews: {

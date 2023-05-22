@@ -8,24 +8,27 @@ import Link from 'next/link';
 import { URLS } from '@/config';
 import InterviewPlayer from '@/components/InterviewPlayer';
 import SettingsMenu from '@/components/SettingsMenu';
+import Loader from '@/components/Loader';
 
 import { TITLE_PROPS } from './MyInterview-constants';
 import { useMyInterview } from './MyInterview-hook';
 
 const MyInterviews = () => {
   const {
-    fetching,
+    isLoading,
     title,
     answers,
     companyLogo,
     companyName,
     appliedDate,
     settingItems,
+    isMutating,
   } = useMyInterview();
 
   return (
     <Layout.Default width="max-w-[640px]">
-      <LoadingProvider isLoading={fetching}>
+      {isMutating && <Loader />}
+      <LoadingProvider isLoading={isLoading}>
         <Title
           {...TITLE_PROPS}
           title={title}
