@@ -383,8 +383,15 @@ export type ProfileReturnSchema = Infer<typeof ProfileReturnSchema>;
 export const PublicJobReturnSchema = object({
   id: string(),
   title: string(),
-  company: object({ name: string(), website: Null().or(string()) }),
+  company: object({
+    name: string(),
+    website: Null().or(string()),
+    avatarUrl: string(),
+  }),
   description: Null().or(string()),
+  questions: array(
+    object({ id: string(), question: string(), time: number() })
+  ),
 });
 
 export type PublicJobReturnSchema = Infer<typeof PublicJobReturnSchema>;
