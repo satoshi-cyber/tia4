@@ -1,20 +1,15 @@
+import { mutate } from 'swr';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import {
-  UpdateProfile,
-  useProfileQuery,
-  useRemoveResumeMutation,
-  useUpdateProfileMutation,
-} from '@/graphql';
-
-import { updateProfileSchema } from './Apply-validations';
-import { TOAST_MESSAGE } from './Apply-constants';
-import { formatDefaultValues } from './Apply-functions';
 import { useRouter } from 'next/router';
 import { TOAST_OPTIONS, URLS } from '@/config';
 import { UseCases } from '@/useCases';
+import { updateProfileSchema } from '@/types';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { TOAST_MESSAGE } from './Apply-constants';
+import { parseDefaults } from './Apply-functions';
 
 export const useApply = () => {
   const router = useRouter();
@@ -28,69 +23,80 @@ export const useApply = () => {
   const { isLoading: isDidApplyLoading, data: didApply } =
     UseCases.didApply.load({ jobId });
 
-  const [{ fetching: fetchingUser, data: userData }, onUpload] =
-    useProfileQuery({ requestPolicy: 'cache-and-network' });
-  const [{ fetching: removingResume }, removeResume] =
-    useRemoveResumeMutation();
+  const {
+    data: userData,
+    isLoading: isProfileLoading,
+    mutate: onUpload,
+  } = UseCases.profile.load();
 
-  const isLoading = fetchingUser || isDidApplyLoading;
+  const { trigger: updateProfile } = UseCases.updateProfile.mutate();
+  const { trigger: updateResume } = UseCases.updateResume.mutate();
 
-  const [, updateProfile] = useUpdateProfileMutation();
+  const isLoading = isProfileLoading || isDidApplyLoading;
 
-  const form = useForm<UpdateProfile>({
+  const form = useForm<Zod.infer<typeof updateProfileSchema>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(updateProfileSchema),
+    resolver: zodResolver(updateProfileSchema),
+    defaultValues: userData && parseDefaults(userData),
   });
 
   const { reset } = form;
 
   useEffect(() => {
-    if (!fetchingUser && userData && !form.formState.isDirty) {
-      reset(formatDefaultValues(userData?.profile));
-    }
-  }, [fetchingUser, reset, userData]);
-
-  const handleSubmit = async (input: UpdateProfile) => {
-    const { error, data } = await updateProfile(
-      { input },
-      { additionalTypenames: ['User'] }
-    );
-
-    if (error) {
-      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
-
+    if (!userData) {
       return;
     }
 
-    if (data) {
+    reset(parseDefaults(userData), {
+      keepDirtyValues: true,
+      keepDirty: true,
+    });
+  }, [reset, userData]);
+
+  const handleSubmit = async (input: Zod.infer<typeof updateProfileSchema>) => {
+    try {
+      await updateProfile(input);
+
+      mutate(UseCases.profile.getKey());
+
       router.push(
         URLS.RECORD.replace('[applyJobId]', router.query.applyJobId as string)
       );
+    } catch (e) {
+      toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
     }
   };
 
-  const avatar = userData?.profile?.avatarUrl || undefined;
-  const avatarUploadUrl = userData?.profile?.avatarUploadUrl || undefined;
-
   const resumeOnUpload = async (resumeFileName: string) => {
-    await updateProfile(
-      { input: { resumeFileName } },
-      { additionalTypenames: ['User'] }
-    );
+    await updateResume({
+      resumeFileName,
+    });
+
+    mutate(UseCases.profile.getKey());
   };
 
   const onRemoveResume = async () => {
-    await removeResume({}, { additionalTypenames: ['User'] });
+    await updateResume({
+      resumeFileName: null,
+    });
+
+    mutate(UseCases.profile.getKey());
   };
 
   const resumeProps = {
-    src: userData?.profile?.resumeUrl || undefined,
-    uploadUrl: userData?.profile?.resumeUploadUrl || undefined,
-    fileName: userData?.profile?.resumeFileName || undefined,
+    src: userData?.resumeUrl || undefined,
+    uploadUrl: userData?.resumeUploadUrl || undefined,
+    fileName: userData?.resumeFileName || undefined,
     onUpload: resumeOnUpload,
     onRemove: onRemoveResume,
-    isLoading: isLoading || removingResume,
+    isLoading: isLoading,
+  };
+
+  const avatarProps = {
+    src: userData?.avatarUrl,
+    uploadUrl: userData?.avatarUploadUrl,
+    onUpload,
   };
 
   const jobTitle = jobData?.title || 'placeholder';
@@ -108,12 +114,10 @@ export const useApply = () => {
     form,
     isLoading,
     didApply,
-    onUpload,
     handleSubmit,
-    avatarUploadUrl,
+    avatarProps,
     companyLogo,
     companyName,
-    avatar,
     resumeProps,
   };
 };

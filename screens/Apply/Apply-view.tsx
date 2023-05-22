@@ -24,10 +24,8 @@ const Apply: React.FC = () => {
   const {
     handleSubmit,
     form,
-    avatar,
+    avatarProps,
     isJobLoading,
-    avatarUploadUrl,
-    onUpload,
     resumeProps,
     isLoading,
     title,
@@ -47,11 +45,7 @@ const Apply: React.FC = () => {
           isLoading={isJobLoading}
         />
         <div className="flex flex-row items-center mb-6">
-          <EditAvatar
-            src={avatar}
-            uploadUrl={avatarUploadUrl}
-            onUpload={onUpload}
-          />
+          <EditAvatar {...avatarProps} />
           <Icon
             name="HiChevronRight"
             size={60}
