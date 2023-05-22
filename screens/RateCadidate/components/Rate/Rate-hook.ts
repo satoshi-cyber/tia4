@@ -1,9 +1,9 @@
 import { TOAST_OPTIONS, URLS } from '@/config';
-import { useInterviewRateQuery, useRateInterviewMutation } from '@/graphql';
+import { useRateInterviewMutation } from '@/graphql';
 import { useUser } from '@/hooks';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import {
@@ -25,13 +25,9 @@ export const useRate = ({ className }: { className?: string }) => {
   const [score, setScore] = useState(0);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const context = useMemo(() => ({ additionalTypenames: ['Rate'] }), []);
-
-  const [{ fetching, data }] = useInterviewRateQuery({
-    variables: { companyId: companyId!, interviewId },
-    pause: !companyId || !interviewId || interviewId === DEMO_INTERVIEW_ID,
-    context,
-  });
+  const { data, isLoading } = UseCases.didRateInterview.load(
+    interviewId && { interviewId }
+  );
 
   const [{ fetching: submitting }, rateInterview] = useRateInterviewMutation();
 
@@ -80,14 +76,14 @@ export const useRate = ({ className }: { className?: string }) => {
     setTimeout(() => router.push(URLS.RATE), PUSH_DELAY);
   };
 
-  const value = data?.interviewRate?.value;
+  const value = data?.value;
 
   const isScoreVisible = value || value === 0;
 
   const scoreLabel = `your score: ${value} / 4`;
 
   return {
-    fetching,
+    isLoading,
     submitting,
     value,
     score,

@@ -15,10 +15,9 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
     handleRate,
     closeDialog,
     score,
-    fetching,
+    isLoading,
     submitting,
     isScoreVisible,
-    scoreLabel,
     value,
     handleConfirm,
   } = useRate({
@@ -38,7 +37,7 @@ const Rate: React.FC<RateProps> = ({ className, size = 30 }) => {
         This action cannot be undone or edited. Candidate will not see your
         rating.
       </Dialog>
-      <LoadingProvider isLoading={fetching}>
+      <LoadingProvider isLoading={isLoading}>
         {isScoreVisible ? (
           <Icon name={ICONS[value!]} size={size} className="text-gray-400" />
         ) : (

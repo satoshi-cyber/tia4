@@ -71,6 +71,18 @@ export const DeleteJobReturnSchema = object({ id: string() });
 
 export type DeleteJobReturnSchema = Infer<typeof DeleteJobReturnSchema>;
 
+export const DidRateInterviewReturnSchema = object({
+  value: Null().or(number()),
+  createdAt: InstanceOf(Date),
+  reason: Null().or(string()),
+  interviewId: string(),
+  raterId: string(),
+});
+
+export type DidRateInterviewReturnSchema = Infer<
+  typeof DidRateInterviewReturnSchema
+>;
+
 export const EditCompanyReturnSchema = object({
   id: string(),
   name: string(),

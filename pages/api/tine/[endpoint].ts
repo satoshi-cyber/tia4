@@ -7,6 +7,7 @@ import company from '@/useCases/company';
 import companyMembers from '@/useCases/companyMembers';
 import deleteCompany from '@/useCases/deleteCompany';
 import deleteJob from '@/useCases/deleteJob';
+import didRateInterview from '@/useCases/didRateInterview';
 import editCompany from '@/useCases/editCompany';
 import health from '@/useCases/health';
 import interview from '@/useCases/interview';
@@ -36,6 +37,7 @@ const useCasesWithInput = {
   companyMembers: companyMembers,
   deleteCompany: deleteCompany,
   deleteJob: deleteJob,
+  didRateInterview: didRateInterview,
   editCompany: editCompany,
   interview: interview,
   interviews: interviews,
