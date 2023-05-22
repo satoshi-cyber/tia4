@@ -86,6 +86,60 @@ export const HealthReturnSchema = object({ success: boolean() });
 
 export type HealthReturnSchema = Infer<typeof HealthReturnSchema>;
 
+export const InterviewReturnSchema = object({
+  job: object({
+    id: string(),
+    description: Null().or(string()),
+    companyId: string(),
+    title: string(),
+    deadline: InstanceOf(Date),
+    questions: array(
+      object({ id: string(), question: string(), time: number() })
+    ),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
+  }),
+  interviewee: object({
+    id: string(),
+    email: string(),
+    firstName: Null().or(string()),
+    lastName: Null().or(string()),
+    bio: Null().or(string()),
+    issuer: string(),
+    publicAddress: string(),
+    linkedInProfile: Null().or(string()),
+    resumeFileName: Null().or(string()),
+    role: literal('user').or(literal('admin')),
+    onboarded: boolean(),
+    avatarUrl: string(),
+    avatarUploadUrl: string().or(Undefined()),
+    resumeUrl: string(),
+    resumeUploadUrl: string().or(Undefined()),
+  }),
+}).and(
+  object({
+    id: string(),
+    status: literal('initialized')
+      .or(literal('proccessing'))
+      .or(literal('ready')),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
+    jobId: string(),
+    intervieweeId: string(),
+    answers: array(
+      object({
+        url: string(),
+        uploadUrl: string().or(Undefined()),
+        question: object({ id: string(), question: string(), time: number() }),
+      })
+    ),
+    score: Null().or(number()),
+    thumbnail: string(),
+  })
+);
+
+export type InterviewReturnSchema = Infer<typeof InterviewReturnSchema>;
+
 export const InterviewsReturnSchema = array(
   object({
     votesLeft: number(),
@@ -97,7 +151,8 @@ export const InterviewsReturnSchema = array(
       .or(literal('ready')),
     answers: array(
       object({
-        url: string().or(Undefined()).optional(),
+        url: string(),
+        uploadUrl: string().or(Undefined()),
         question: object({ id: string(), question: string(), time: number() }),
       })
     ),
@@ -170,7 +225,8 @@ export const MyInterviewsReturnSchema = array(
       .or(literal('ready')),
     answers: array(
       object({
-        url: string().or(Undefined()).optional(),
+        url: string(),
+        uploadUrl: string().or(Undefined()),
         question: object({ id: string(), question: string(), time: number() }),
       })
     ),
@@ -225,8 +281,6 @@ export const PendingRatesReturnSchema = array(
         ),
         interviewee: object({
           id: string(),
-          avatarUrl: string(),
-          avatarUploadUrl: string().or(Undefined()),
           email: string(),
           firstName: Null().or(string()),
           lastName: Null().or(string()),
@@ -237,6 +291,8 @@ export const PendingRatesReturnSchema = array(
           resumeFileName: Null().or(string()),
           role: literal('user').or(literal('admin')),
           onboarded: boolean(),
+          avatarUrl: string(),
+          avatarUploadUrl: string().or(Undefined()),
           resumeUrl: string(),
           resumeUploadUrl: string().or(Undefined()),
         }),
@@ -261,7 +317,8 @@ export const PendingRatesReturnSchema = array(
           intervieweeId: string(),
           answers: array(
             object({
-              url: string().or(Undefined()).optional(),
+              url: string(),
+              uploadUrl: string().or(Undefined()),
               question: object({
                 id: string(),
                 question: string(),
@@ -289,8 +346,6 @@ export type PendingRatesReturnSchema = Infer<typeof PendingRatesReturnSchema>;
 
 export const ProfileReturnSchema = object({
   id: string(),
-  avatarUrl: string(),
-  avatarUploadUrl: string().or(Undefined()),
   email: string(),
   firstName: Null().or(string()),
   lastName: Null().or(string()),
@@ -301,6 +356,8 @@ export const ProfileReturnSchema = object({
   resumeFileName: Null().or(string()),
   role: literal('user').or(literal('admin')),
   onboarded: boolean(),
+  avatarUrl: string(),
+  avatarUploadUrl: string().or(Undefined()),
   resumeUrl: string(),
   resumeUploadUrl: string().or(Undefined()),
 });
@@ -329,8 +386,6 @@ export type SetupCompanyReturnSchema = Infer<typeof SetupCompanyReturnSchema>;
 
 export const SkipOnboardingReturnSchema = object({
   id: string(),
-  avatarUrl: string(),
-  avatarUploadUrl: string().or(Undefined()),
   email: string(),
   firstName: Null().or(string()),
   lastName: Null().or(string()),
@@ -341,6 +396,8 @@ export const SkipOnboardingReturnSchema = object({
   resumeFileName: Null().or(string()),
   role: literal('user').or(literal('admin')),
   onboarded: boolean(),
+  avatarUrl: string(),
+  avatarUploadUrl: string().or(Undefined()),
   resumeUrl: string(),
   resumeUploadUrl: string().or(Undefined()),
 });
@@ -351,8 +408,6 @@ export type SkipOnboardingReturnSchema = Infer<
 
 export const UpdateProfileReturnSchema = object({
   id: string(),
-  avatarUrl: string(),
-  avatarUploadUrl: string().or(Undefined()),
   email: string(),
   firstName: Null().or(string()),
   lastName: Null().or(string()),
@@ -363,6 +418,8 @@ export const UpdateProfileReturnSchema = object({
   resumeFileName: Null().or(string()),
   role: literal('user').or(literal('admin')),
   onboarded: boolean(),
+  avatarUrl: string(),
+  avatarUploadUrl: string().or(Undefined()),
   resumeUrl: string(),
   resumeUploadUrl: string().or(Undefined()),
 });

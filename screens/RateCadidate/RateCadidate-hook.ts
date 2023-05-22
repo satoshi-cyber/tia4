@@ -1,53 +1,69 @@
 import { useRouter } from 'next/router';
-import { useInterviewQuery } from '@/graphql';
 import { useTimeAgo, useUser } from '@/hooks';
 
 import { useTransforms } from './RateCadidate-useTransforms';
 import { DEMO_INTERVIEW } from './RateCadidate-constants';
+import { UseCases } from '@/useCases';
 
 export const useRate = () => {
   const router = useRouter();
 
   const { companyId } = useUser();
 
-  const interviewId = router.query.interviewId;
+  const interviewId = String(router.query.interviewId);
 
-  const isDemoInterview = interviewId === 'demo'
+  const isDemoInterview = interviewId === 'demo';
 
-  const [{ data, fetching }] = useInterviewQuery({
-    variables: { companyId: companyId!, id: interviewId as string },
-    pause: !companyId || !interviewId || isDemoInterview,
-  });
+  const { data, isLoading: fetching } = UseCases.interview.load(
+    companyId && !isDemoInterview && { companyId, id: interviewId },
+    { revalidateOnFocus: false }
+  );
 
-
-  const transforms = useTransforms()
+  const transforms = useTransforms();
 
   const isLoading = !interviewId || !router.isReady || fetching;
 
-  const date = useTimeAgo(isDemoInterview ? DEMO_INTERVIEW.date : data?.interview?.createdAt);
+  const date = useTimeAgo(
+    isDemoInterview ? DEMO_INTERVIEW.date : data?.createdAt
+  );
 
-  const answers = isDemoInterview ? DEMO_INTERVIEW.answers : data?.interview?.answers;
-  const avatarUrl = isDemoInterview ? DEMO_INTERVIEW.avatarUrl : data?.interview?.interviewee?.avatarUrl;
+  const answers = isDemoInterview ? DEMO_INTERVIEW.answers : data?.answers;
+  const avatarUrl = isDemoInterview
+    ? DEMO_INTERVIEW.avatarUrl
+    : data?.interviewee?.avatarUrl;
 
-  const candidateName = isDemoInterview ? DEMO_INTERVIEW.name : `${data?.interview?.interviewee?.firstName} ${data?.interview?.interviewee?.lastName}`;
-  const linkedinProfile = data?.interview?.interviewee?.linkedInProfile;
+  const candidateName = isDemoInterview
+    ? DEMO_INTERVIEW.name
+    : `${data?.interviewee?.firstName} ${data?.interviewee?.lastName}`;
+  const linkedinProfile = data?.interviewee?.linkedInProfile;
 
-  const resume =
-    isDemoInterview ? DEMO_INTERVIEW.resume
-      :
-      data?.interview?.interviewee?.resumeFileName &&
-      data?.interview?.interviewee?.resumeUrl
+  const resume = isDemoInterview
+    ? DEMO_INTERVIEW.resume
+    : data?.interviewee?.resumeFileName && data?.interviewee?.resumeUrl;
 
-  const resumeLink = resume &&
+  const resumeLink =
+    resume &&
     `https://docs.google.com/viewer?url=${encodeURIComponent(resume)}`;
 
-
-  const messageUrl = isDemoInterview ? DEMO_INTERVIEW.emailLink : data?.interview?.interviewee?.email
-    ? `mailto:${data?.interview?.interviewee?.email}`
+  const messageUrl = isDemoInterview
+    ? DEMO_INTERVIEW.emailLink
+    : data?.interviewee?.email
+    ? `mailto:${data?.interviewee?.email}`
     : '#';
 
-  const jobTitle = isDemoInterview ? DEMO_INTERVIEW.jobTitle : data?.interview?.job?.title
+  const jobTitle = isDemoInterview ? DEMO_INTERVIEW.jobTitle : data?.job?.title;
 
-  return { jobTitle, transforms, resumeLink, messageUrl, answers, date, avatarUrl, candidateName, linkedinProfile, resume, isLoading }
-
+  return {
+    jobTitle,
+    transforms,
+    resumeLink,
+    messageUrl,
+    answers,
+    date,
+    avatarUrl,
+    candidateName,
+    linkedinProfile,
+    resume,
+    isLoading,
+  };
 };

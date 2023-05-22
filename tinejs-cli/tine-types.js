@@ -25,6 +25,7 @@ const useCases = useCasesOutput.map(([useCase, hasInput]) => ({
 const template = `
 import superjson from 'superjson';
 import useSwr from 'swr'
+import { PublicConfiguration } from 'swr/_internal';
 import useSWRMutation from 'swr/mutation';
 import { TineInferReturn, TineInferInput } from 'tinejs';
 import { StatusError } from '@/types'
@@ -51,10 +52,11 @@ export const UseCases = {
   {{#if hasInput}}
    '{{useCase}}': 
       { 
-        load: (input: TineInferInput<{{useCaseType}}> | '' | undefined | false) => 
+        load: (input: TineInferInput<{{useCaseType}}> | '' | undefined | false, config?: Partial<PublicConfiguration<any, any, any>>) => 
           useSwr(
             input ? ['{{useCase}}', input] : undefined, input ? () => 
             fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}', input) : () => undefined,
+            config
          ),
         mutate: () => useSWRMutation(
           '{{useCase}}',
@@ -73,8 +75,8 @@ export const UseCases = {
       },
   {{else}}
     '{{useCase}}': {
-      load: () => useSwr(
-        '{{useCase}}', () => fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}'),
+      load: (config?: Partial<PublicConfiguration<any, any, any>>) => useSwr(
+        '{{useCase}}', () => fetchData<TineInferReturn<{{useCaseType}}>>('/api/tine/{{useCase}}'),config
       ),
       mutate: () => useSWRMutation(
         '{{useCase}}',

@@ -1,4 +1,4 @@
-import { useScroll, useSpring, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 
 export const useTransforms = () => {
@@ -32,5 +32,13 @@ export const useTransforms = () => {
   const containerMarginTop = useTransform(scrollY, [0, 700], [0, 200]);
   const opacity = useTransform(scrollY, [0, 100], [1, isLargeScreen ? 0 : 1]);
 
-  return { scale, docScale, marginLeft, marginRight, containerMarginTop, containerMarginRight, opacity }
+  return {
+    scale,
+    docScale,
+    marginLeft,
+    marginRight,
+    containerMarginTop,
+    containerMarginRight,
+    opacity,
+  };
 };

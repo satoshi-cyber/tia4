@@ -1,5 +1,6 @@
 import superjson from 'superjson';
 import useSwr from 'swr';
+import { PublicConfiguration } from 'swr/_internal';
 import useSWRMutation from 'swr/mutation';
 import { TineInferReturn, TineInferInput } from 'tinejs';
 import { StatusError } from '@/types';
@@ -10,6 +11,7 @@ import type { DeleteCompany } from './types';
 import type { DeleteJob } from './types';
 import type { EditCompany } from './types';
 import type { Health } from './types';
+import type { Interview } from './types';
 import type { Interviews } from './types';
 import type { InviteCompanyMembers } from './types';
 import type { Job } from './types';
@@ -46,7 +48,10 @@ const fetchData = <T>(url: string, body?: any) =>
 
 export const UseCases = {
   authenticateUser: {
-    load: (input: TineInferInput<AuthenticateUser> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<AuthenticateUser> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['authenticateUser', input] : undefined,
         input
@@ -55,7 +60,8 @@ export const UseCases = {
                 '/api/tine/authenticateUser',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -75,13 +81,17 @@ export const UseCases = {
     },
   },
   company: {
-    load: (input: TineInferInput<Company> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<Company> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['company', input] : undefined,
         input
           ? () =>
               fetchData<TineInferReturn<Company>>('/api/tine/company', input)
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -98,7 +108,10 @@ export const UseCases = {
     },
   },
   companyMembers: {
-    load: (input: TineInferInput<CompanyMembers> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<CompanyMembers> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['companyMembers', input] : undefined,
         input
@@ -107,7 +120,8 @@ export const UseCases = {
                 '/api/tine/companyMembers',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -127,7 +141,10 @@ export const UseCases = {
     },
   },
   deleteCompany: {
-    load: (input: TineInferInput<DeleteCompany> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<DeleteCompany> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['deleteCompany', input] : undefined,
         input
@@ -136,7 +153,8 @@ export const UseCases = {
                 '/api/tine/deleteCompany',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -156,7 +174,10 @@ export const UseCases = {
     },
   },
   deleteJob: {
-    load: (input: TineInferInput<DeleteJob> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<DeleteJob> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['deleteJob', input] : undefined,
         input
@@ -165,7 +186,8 @@ export const UseCases = {
                 '/api/tine/deleteJob',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -182,7 +204,10 @@ export const UseCases = {
     },
   },
   editCompany: {
-    load: (input: TineInferInput<EditCompany> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<EditCompany> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['editCompany', input] : undefined,
         input
@@ -191,7 +216,8 @@ export const UseCases = {
                 '/api/tine/editCompany',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -208,9 +234,11 @@ export const UseCases = {
     },
   },
   health: {
-    load: () =>
-      useSwr('health', () =>
-        fetchData<TineInferReturn<Health>>('/api/tine/health')
+    load: (config?: Partial<PublicConfiguration<any, any, any>>) =>
+      useSwr(
+        'health',
+        () => fetchData<TineInferReturn<Health>>('/api/tine/health'),
+        config
       ),
     mutate: () =>
       useSWRMutation('health', (_: string) =>
@@ -218,8 +246,41 @@ export const UseCases = {
       ),
     getKey: () => 'health',
   },
+  interview: {
+    load: (
+      input: TineInferInput<Interview> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['interview', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<Interview>>(
+                '/api/tine/interview',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'interview',
+        (_: string, { arg }: { arg: TineInferInput<Interview> }) =>
+          fetchData<TineInferReturn<Interview>>('/api/tine/interview', arg)
+      ),
+    getKey: (input?: TineInferInput<Interview>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'interview';
+      }
+
+      return ['interview', input];
+    },
+  },
   interviews: {
-    load: (input: TineInferInput<Interviews> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<Interviews> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['interviews', input] : undefined,
         input
@@ -228,7 +289,8 @@ export const UseCases = {
                 '/api/tine/interviews',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -246,7 +308,8 @@ export const UseCases = {
   },
   inviteCompanyMembers: {
     load: (
-      input: TineInferInput<InviteCompanyMembers> | '' | undefined | false
+      input: TineInferInput<InviteCompanyMembers> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
     ) =>
       useSwr(
         input ? ['inviteCompanyMembers', input] : undefined,
@@ -256,7 +319,8 @@ export const UseCases = {
                 '/api/tine/inviteCompanyMembers',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -276,12 +340,16 @@ export const UseCases = {
     },
   },
   job: {
-    load: (input: TineInferInput<Job> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<Job> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['job', input] : undefined,
         input
           ? () => fetchData<TineInferReturn<Job>>('/api/tine/job', input)
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -298,12 +366,16 @@ export const UseCases = {
     },
   },
   jobs: {
-    load: (input: TineInferInput<Jobs> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<Jobs> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['jobs', input] : undefined,
         input
           ? () => fetchData<TineInferReturn<Jobs>>('/api/tine/jobs', input)
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -320,7 +392,10 @@ export const UseCases = {
     },
   },
   joinCompany: {
-    load: (input: TineInferInput<JoinCompany> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<JoinCompany> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['joinCompany', input] : undefined,
         input
@@ -329,7 +404,8 @@ export const UseCases = {
                 '/api/tine/joinCompany',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -346,7 +422,10 @@ export const UseCases = {
     },
   },
   myCompany: {
-    load: (input: TineInferInput<MyCompany> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<MyCompany> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['myCompany', input] : undefined,
         input
@@ -355,7 +434,8 @@ export const UseCases = {
                 '/api/tine/myCompany',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -372,9 +452,12 @@ export const UseCases = {
     },
   },
   myInterviews: {
-    load: () =>
-      useSwr('myInterviews', () =>
-        fetchData<TineInferReturn<MyInterviews>>('/api/tine/myInterviews')
+    load: (config?: Partial<PublicConfiguration<any, any, any>>) =>
+      useSwr(
+        'myInterviews',
+        () =>
+          fetchData<TineInferReturn<MyInterviews>>('/api/tine/myInterviews'),
+        config
       ),
     mutate: () =>
       useSWRMutation('myInterviews', (_: string) =>
@@ -383,7 +466,10 @@ export const UseCases = {
     getKey: () => 'myInterviews',
   },
   pendingRates: {
-    load: (input: TineInferInput<PendingRates> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<PendingRates> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['pendingRates', input] : undefined,
         input
@@ -392,7 +478,8 @@ export const UseCases = {
                 '/api/tine/pendingRates',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -412,9 +499,11 @@ export const UseCases = {
     },
   },
   profile: {
-    load: () =>
-      useSwr('profile', () =>
-        fetchData<TineInferReturn<Profile>>('/api/tine/profile')
+    load: (config?: Partial<PublicConfiguration<any, any, any>>) =>
+      useSwr(
+        'profile',
+        () => fetchData<TineInferReturn<Profile>>('/api/tine/profile'),
+        config
       ),
     mutate: () =>
       useSWRMutation('profile', (_: string) =>
@@ -423,7 +512,10 @@ export const UseCases = {
     getKey: () => 'profile',
   },
   publicJob: {
-    load: (input: TineInferInput<PublicJob> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<PublicJob> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['publicJob', input] : undefined,
         input
@@ -432,7 +524,8 @@ export const UseCases = {
                 '/api/tine/publicJob',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -449,7 +542,10 @@ export const UseCases = {
     },
   },
   setupCompany: {
-    load: (input: TineInferInput<SetupCompany> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<SetupCompany> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['setupCompany', input] : undefined,
         input
@@ -458,7 +554,8 @@ export const UseCases = {
                 '/api/tine/setupCompany',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -478,9 +575,14 @@ export const UseCases = {
     },
   },
   skipOnboarding: {
-    load: () =>
-      useSwr('skipOnboarding', () =>
-        fetchData<TineInferReturn<SkipOnboarding>>('/api/tine/skipOnboarding')
+    load: (config?: Partial<PublicConfiguration<any, any, any>>) =>
+      useSwr(
+        'skipOnboarding',
+        () =>
+          fetchData<TineInferReturn<SkipOnboarding>>(
+            '/api/tine/skipOnboarding'
+          ),
+        config
       ),
     mutate: () =>
       useSWRMutation('skipOnboarding', (_: string) =>
@@ -489,7 +591,10 @@ export const UseCases = {
     getKey: () => 'skipOnboarding',
   },
   updateProfile: {
-    load: (input: TineInferInput<UpdateProfile> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<UpdateProfile> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['updateProfile', input] : undefined,
         input
@@ -498,7 +603,8 @@ export const UseCases = {
                 '/api/tine/updateProfile',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -518,7 +624,10 @@ export const UseCases = {
     },
   },
   updateResume: {
-    load: (input: TineInferInput<UpdateResume> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<UpdateResume> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['updateResume', input] : undefined,
         input
@@ -527,7 +636,8 @@ export const UseCases = {
                 '/api/tine/updateResume',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(
@@ -547,7 +657,10 @@ export const UseCases = {
     },
   },
   upsertJob: {
-    load: (input: TineInferInput<UpsertJob> | '' | undefined | false) =>
+    load: (
+      input: TineInferInput<UpsertJob> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
       useSwr(
         input ? ['upsertJob', input] : undefined,
         input
@@ -556,7 +669,8 @@ export const UseCases = {
                 '/api/tine/upsertJob',
                 input
               )
-          : () => undefined
+          : () => undefined,
+        config
       ),
     mutate: () =>
       useSWRMutation(

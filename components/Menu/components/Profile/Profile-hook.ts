@@ -5,7 +5,11 @@ import { MouseEvent } from 'react';
 export const useProfile = () => {
   const { logout } = useUser();
 
-  const { data, isLoading } = UseCases.profile.load();
+  const { data, isLoading } = UseCases.profile.load({
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   const label = data?.firstName
     ? `${data?.firstName} ${data?.lastName}`
