@@ -4,7 +4,8 @@ import 'video-react/dist/video-react.css';
 import { SlideProps } from './Slide-types';
 import FullScreenButton from './components/FullScreenButton';
 import { CLASS_NAMES, PLAYER_PROPS } from './Slide-constants';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
+import S3UrlProvider from '@/context/S3UrlProvider';
 
 const PlayerWithWidth = Player as any;
 
@@ -16,6 +17,8 @@ const Slide: React.FC<SlideProps> = ({
   fullScreen,
   toggleFullScreen,
 }) => {
+  const { getUrl } = useContext(S3UrlProvider.Context);
+
   const playerRef = useRef<any>(undefined);
 
   useEffect(
@@ -33,7 +36,7 @@ const Slide: React.FC<SlideProps> = ({
       <PlayerWithWidth
         {...PLAYER_PROPS}
         className={CLASS_NAMES.player}
-        src={answer.url}
+        src={answer.url && getUrl(answer.url)}
         ref={(player: typeof Player) => {
           players.current[index] = player;
           playerRef.current = player;

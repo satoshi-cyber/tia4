@@ -16,7 +16,7 @@ const Item: React.FC<ItemProps> = ({
   companyName,
   jobTitle,
 }) => {
-  const { timeAgo, href } = useItem({ date, id });
+  const { timeAgo, href, src } = useItem({ date, id, thumbnail });
 
   return (
     <div>
@@ -28,7 +28,7 @@ const Item: React.FC<ItemProps> = ({
               <video
                 className={CLASS_NAMES.video}
                 {...VIDEO_PROPS}
-                src={thumbnail}
+                src={src}
               ></video>
             </Link>
           }
