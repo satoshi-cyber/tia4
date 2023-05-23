@@ -29,6 +29,7 @@ import processInterview from '@/useCases/processInterview';
 import profile from '@/useCases/profile';
 import publicJob from '@/useCases/publicJob';
 import rateInterview from '@/useCases/rateInterview';
+import refreshClaims from '@/useCases/refreshClaims';
 import setupCompany from '@/useCases/setupCompany';
 import skipOnboarding from '@/useCases/skipOnboarding';
 import submitInterview from '@/useCases/submitInterview';
@@ -76,6 +77,7 @@ const useCases = {
   health: health,
   myInterviews: myInterviews,
   profile: profile,
+  refreshClaims: refreshClaims,
   skipOnboarding: skipOnboarding,
 };
 

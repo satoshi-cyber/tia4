@@ -19,8 +19,11 @@ export const useUser = () => {
   const { token, setToken, setManualLogout, manualLogout } =
     useContext(AuthContext);
 
-  const { trigger: authenticateUser, isMutating: fetching } =
+  const { trigger: authenticateUser, isMutating: isAuthenticating } =
     UseCases.authenticateUser.mutate();
+
+  const { trigger: refreshClaims, isMutating: isRefreshing } =
+    UseCases.refreshClaims.mutate();
 
   const router = useRouter();
 
@@ -101,13 +104,7 @@ export const useUser = () => {
   }, []);
 
   const refreshToken = useCallback(async () => {
-    const did = await magic?.user.getIdToken();
-
-    if (!did) {
-      return;
-    }
-
-    const res = await authenticateUser({ did });
+    const res = await refreshClaims();
 
     setToken(res?.token);
   }, [setToken]);
@@ -133,6 +130,8 @@ export const useUser = () => {
     claims && claims.companyRoles[0] && claims.companyRoles[0].role;
 
   const hasCompany = Boolean(companyId);
+
+  const fetching = isAuthenticating || isRefreshing;
 
   return {
     fetching,

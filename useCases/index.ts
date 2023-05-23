@@ -31,6 +31,7 @@ import type { ProcessInterview } from './types';
 import type { Profile } from './types';
 import type { PublicJob } from './types';
 import type { RateInterview } from './types';
+import type { RefreshClaims } from './types';
 import type { SetupCompany } from './types';
 import type { SkipOnboarding } from './types';
 import type { SubmitInterview } from './types';
@@ -838,6 +839,20 @@ export const UseCases = {
 
       return ['rateInterview', input];
     },
+  },
+  refreshClaims: {
+    load: (config?: Partial<PublicConfiguration<any, any, any>>) =>
+      useSwr(
+        'refreshClaims',
+        () =>
+          fetchData<TineInferReturn<RefreshClaims>>('/api/tine/refreshClaims'),
+        config
+      ),
+    mutate: () =>
+      useSWRMutation('refreshClaims', (_: string) =>
+        fetchData<TineInferReturn<RefreshClaims>>('/api/tine/refreshClaims')
+      ),
+    getKey: () => 'refreshClaims',
   },
   setupCompany: {
     load: (

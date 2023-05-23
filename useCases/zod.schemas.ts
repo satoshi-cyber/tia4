@@ -572,6 +572,10 @@ export const RateInterviewReturnSchema = object({
 
 export type RateInterviewReturnSchema = Infer<typeof RateInterviewReturnSchema>;
 
+export const RefreshClaimsReturnSchema = object({ token: string() });
+
+export type RefreshClaimsReturnSchema = Infer<typeof RefreshClaimsReturnSchema>;
+
 export const SetupCompanyReturnSchema = object({
   id: string(),
   name: string(),
