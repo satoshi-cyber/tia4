@@ -454,6 +454,12 @@ export const PendingRatesReturnSchema = array(
 
 export type PendingRatesReturnSchema = Infer<typeof PendingRatesReturnSchema>;
 
+export const ProcessInterviewReturnSchema = boolean();
+
+export type ProcessInterviewReturnSchema = Infer<
+  typeof ProcessInterviewReturnSchema
+>;
+
 export const ProfileReturnSchema = object({
   id: string(),
   email: string(),
@@ -591,6 +597,30 @@ export const SkipOnboardingReturnSchema = object({
 
 export type SkipOnboardingReturnSchema = Infer<
   typeof SkipOnboardingReturnSchema
+>;
+
+export const SubmitInterviewReturnSchema = object({
+  id: string(),
+  status: literal('initialized')
+    .or(literal('proccessing'))
+    .or(literal('ready')),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
+  jobId: string(),
+  intervieweeId: string(),
+  answers: array(
+    object({
+      url: string(),
+      uploadUrl: string().or(Undefined()),
+      question: object({ id: string(), question: string(), time: number() }),
+    })
+  ),
+  score: Null().or(number()),
+  thumbnail: string(),
+});
+
+export type SubmitInterviewReturnSchema = Infer<
+  typeof SubmitInterviewReturnSchema
 >;
 
 export const UpdateProfileReturnSchema = object({

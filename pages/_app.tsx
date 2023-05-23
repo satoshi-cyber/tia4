@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app';
 // import { Analytics } from '@vercel/analytics/react';
-import { Provider } from 'urql';
 import { ToastContainer } from 'react-toastify';
 import Menu from '@/components/Menu';
 import AuthProvider from '@/context/AuthProvider';
@@ -10,14 +9,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import '../styles/globals.css';
-import { client } from '../lib';
 import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter();
 
   return (
-    <Provider value={client}>
+    <>
       <Head>
         <meta property="og:title" content="The Interview" />
         <title>The Interview</title>
@@ -62,7 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ToastContainer />
         </AuthProvider>
       </S3UrlProvider>
-    </Provider>
+    </>
   );
 }
 

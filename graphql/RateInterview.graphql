@@ -1,5 +1,0 @@
-mutation RateInterview($companyId: ID!, $input: RateInput!) {
-  rateInterview(companyId: $companyId, input: $input) {
-    value
-  }
-}

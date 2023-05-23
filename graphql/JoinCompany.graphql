@@ -1,5 +1,0 @@
-mutation JoinCompany($companyId: ID!) {
-  joinCompany(companyId: $companyId) {
-    role
-  }
-}

@@ -1,7 +1,0 @@
-query JobsList($companyId: ID!) {
-  jobs(companyId: $companyId) {
-    id
-    title
-    deadline
-  }
-}

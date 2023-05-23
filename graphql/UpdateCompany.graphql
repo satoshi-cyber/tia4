@@ -1,8 +1,0 @@
-mutation UpdateCompany($companyId: ID!, $input: UpdateCompany!) {
-  updateCompany(companyId: $companyId, input: $input) {
-    id
-    name
-    website
-    description
-  }
-}

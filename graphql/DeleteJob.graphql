@@ -1,5 +1,0 @@
-mutation DeleteJob($companyId: ID!, $id: ID!) {
-  deleteJob(companyId: $companyId, id: $id) {
-    id
-  }
-}

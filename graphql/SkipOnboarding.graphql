@@ -1,7 +1,0 @@
-mutation SkipOnboarding {
-  skipOnboarding {
-    id
-    firstName
-    lastName
-  }
-}

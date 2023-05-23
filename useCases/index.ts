@@ -26,11 +26,13 @@ import type { MyCompany } from './types';
 import type { MyInterview } from './types';
 import type { MyInterviews } from './types';
 import type { PendingRates } from './types';
+import type { ProcessInterview } from './types';
 import type { Profile } from './types';
 import type { PublicJob } from './types';
 import type { RateInterview } from './types';
 import type { SetupCompany } from './types';
 import type { SkipOnboarding } from './types';
+import type { SubmitInterview } from './types';
 import type { UpdateProfile } from './types';
 import type { UpdateResume } from './types';
 import type { UpsertJob } from './types';
@@ -694,6 +696,39 @@ export const UseCases = {
       return ['pendingRates', input];
     },
   },
+  processInterview: {
+    load: (
+      input: TineInferInput<ProcessInterview> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['processInterview', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<ProcessInterview>>(
+                '/api/tine/processInterview',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'processInterview',
+        (_: string, { arg }: { arg: TineInferInput<ProcessInterview> }) =>
+          fetchData<TineInferReturn<ProcessInterview>>(
+            '/api/tine/processInterview',
+            arg
+          )
+      ),
+    getKey: (input?: TineInferInput<ProcessInterview>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'processInterview';
+      }
+
+      return ['processInterview', input];
+    },
+  },
   profile: {
     load: (config?: Partial<PublicConfiguration<any, any, any>>) =>
       useSwr(
@@ -818,6 +853,39 @@ export const UseCases = {
         fetchData<TineInferReturn<SkipOnboarding>>('/api/tine/skipOnboarding')
       ),
     getKey: () => 'skipOnboarding',
+  },
+  submitInterview: {
+    load: (
+      input: TineInferInput<SubmitInterview> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['submitInterview', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<SubmitInterview>>(
+                '/api/tine/submitInterview',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'submitInterview',
+        (_: string, { arg }: { arg: TineInferInput<SubmitInterview> }) =>
+          fetchData<TineInferReturn<SubmitInterview>>(
+            '/api/tine/submitInterview',
+            arg
+          )
+      ),
+    getKey: (input?: TineInferInput<SubmitInterview>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'submitInterview';
+      }
+
+      return ['submitInterview', input];
+    },
   },
   updateProfile: {
     load: (

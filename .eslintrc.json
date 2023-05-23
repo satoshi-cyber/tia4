@@ -19,7 +19,6 @@
       "alias": {
         "map": [
           ["@/components", "./components"],
-          ["@/graphql", "./graphql"],
           ["@/config", "./config"],
           ["@/hocs", "./hocs"],
           ["@/lib", "./lib"]

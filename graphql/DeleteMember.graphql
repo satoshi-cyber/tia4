@@ -1,5 +1,0 @@
-mutation DeleteMember($companyId: ID!, $userId: ID!) {
-  deleteMember(companyId: $companyId, userId: $userId) {
-    role
-  }
-}

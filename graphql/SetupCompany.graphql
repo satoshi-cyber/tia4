@@ -1,5 +1,0 @@
-mutation SetupCompany($input: SetupCompany!) {
-  setupCompany(input: $input) {
-    id
-  }
-}

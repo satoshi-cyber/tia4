@@ -1,8 +1,0 @@
-query PendingRates($companyId: ID!) {
-  pendingRates(companyId: $companyId) {
-    value
-    interview {
-      ...InterviewPreview
-    }
-  }
-}

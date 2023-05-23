@@ -1,5 +1,0 @@
-query Interviews($companyId: ID!, $filters: ListInterviewsFilters) {
-  interviews(companyId: $companyId, filters: $filters) {
-    ...InterviewPreview
-  }
-}

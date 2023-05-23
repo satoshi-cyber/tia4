@@ -1,5 +1,0 @@
-mutation UpdateJob($companyId: ID!, $input: UpdateJob!) {
-  updateJob(companyId: $companyId, input: $input) {
-    id
-  }
-}

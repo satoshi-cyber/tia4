@@ -9,6 +9,8 @@ const envSchema = z.object({
   S3_SECRET_KEY: z.string().nonempty(),
   MAIL_SERVICE_URI: z.string().nonempty(),
   MAIL_API_KEY: z.string().nonempty(),
+  CONVERTER_URI: z.string().nonempty(),
+  CONVERTER_SECRET: z.string().nonempty(),
 });
 
 export const env = envSchema.parse({
@@ -20,4 +22,6 @@ export const env = envSchema.parse({
   S3_SECRET_KEY: process.env.S3_SECRET_KEY,
   MAIL_SERVICE_URI: process.env.MAIL_SERVICE_URI,
   MAIL_API_KEY: process.env.MAIL_API_KEY,
+  CONVERTER_URI: process.env.CONVERTER_URI,
+  CONVERTER_SECRET: process.env.CONVERTER_SECRET,
 });
