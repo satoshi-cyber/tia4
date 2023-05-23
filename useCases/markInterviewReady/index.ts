@@ -68,6 +68,8 @@ const markInterviewReady = payload(
       })
       .run(ctx);
 
+    console.log({ avatar, members });
+
     const promises = members.map((member) =>
       sendMail({
         template: 'Rate',
