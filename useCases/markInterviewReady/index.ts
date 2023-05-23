@@ -4,15 +4,25 @@ import { InterviewStatus } from '@prisma/client/edge';
 import prisma from '@/actions/prisma';
 import s3 from '@/actions/s3';
 import sendMail from '@/actions/sendMail';
+import { env } from '@/actions/config';
+import { AuthError } from '@/types';
 
 const input = tineInput(
   z.object({
     id: z.string(),
+    secret: z.string(),
   })
 );
 
 const markInterviewReady = payload(
   tineFn(async (ctx) => {
+    // write better helper for this
+    const checkSecret = await payload(tineVar(input, 'secret')).run(ctx);
+
+    if (checkSecret !== env.CONVERTER_SECRET) {
+      throw new AuthError('Invalid secret');
+    }
+
     const interview = await prisma.interview
       .update({
         where: {
