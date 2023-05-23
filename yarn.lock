@@ -1645,12 +1645,12 @@
   resolved "https://registry.yarnpkg.com/@jsdevtools/ono/-/ono-7.1.3.tgz#9df03bbd7c696a5c58885c34aa06da41c8543796"
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
 
-"@magic-ext/oauth@^3.0.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@magic-ext/oauth/-/oauth-3.1.0.tgz#71e8a45e300c512f97b9737faa879b413d792fd1"
-  integrity sha512-vDQiECb5HuKpwqP/jYyTr07LpwLOHtIZiwkpCSoSxKcazS36z1F2b/JVI5zogSuM5qNC1qwZqXpoN/SRvFgK8A==
+"@magic-ext/oauth@^11.2.0":
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/@magic-ext/oauth/-/oauth-11.2.0.tgz#21b5d8f7a58463f324db2d7315f065fcec3c2046"
+  integrity sha512-F308JC5+dVOutsLtBJBdPshDGPOlchAlcedJoqcBie/NBr8VRq0eI3+cRWcvz6LFHnn6nD83g5FIOYS1C8X4KA==
   dependencies:
-    "@magic-sdk/types" "^8.1.0"
+    "@magic-sdk/types" "^15.2.0"
 
 "@magic-sdk/admin@^1.10.0":
   version "1.10.0"
@@ -1662,24 +1662,24 @@
     ethereum-cryptography "^1.0.1"
     node-fetch "^2.6.0"
 
-"@magic-sdk/commons@^5.0.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@magic-sdk/commons/-/commons-5.1.0.tgz#e84c629d30f7aff10b306221237731bd14fa43f6"
-  integrity sha512-+AeBzzyvg8q6N969or4IyQCOUnDiCtbun/upFwXa0olrayPib3XuYtVc6yoT2u5ff+KbonToJCjS2aNIl4Kjcw==
+"@magic-sdk/commons@^13.2.0":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/commons/-/commons-13.2.0.tgz#81b5e9271da048b9a0a8dd8ec1b2be12f69f3657"
+  integrity sha512-bBPONRJPJCbfk1kdf2pey+gtkKiTJzJX6epVW7Vk8rrgBh8N+4HZDMUt2Y/fiw0n51DJpkWEjIrFIquUFuj2sg==
 
-"@magic-sdk/provider@^9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@magic-sdk/provider/-/provider-9.1.0.tgz#13d18963268e13b5420e1da54fd18b71500aa1e5"
-  integrity sha512-sgY80Per2uscF8sfjwF2J4ZmfeDHM9lSBsqCvrE67Yyr49cIAxkQ9wEOEq/VLSEg3qHsBwNEdK+hmZNV7DPL1w==
+"@magic-sdk/provider@^17.2.0":
+  version "17.2.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/provider/-/provider-17.2.0.tgz#7e7cac5b0d027ce71964525d5ce510158f863e68"
+  integrity sha512-T8TfMd53QbvUhWJ1AxZCqPbrCc5bCYTwjPbUeO5D+k0pcx+Xh2doMxouZiu6oJbgEzHnG8if0FAFbtja7eqxlA==
   dependencies:
-    "@magic-sdk/types" "^8.1.0"
+    "@magic-sdk/types" "^15.2.0"
     eventemitter3 "^4.0.4"
     web3-core "1.5.2"
 
-"@magic-sdk/types@^8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@magic-sdk/types/-/types-8.1.0.tgz#2198a26646d21c52243049341661d5fe312fc353"
-  integrity sha512-Y+9q7UUwfofWzT5ke3F4AbcLsBVnhrpmcJilB4oHTvnYkFbp948x9AtJWLt/kPdrAcXByHE1g62aIOMD2nPGFw==
+"@magic-sdk/types@^15.2.0":
+  version "15.2.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/types/-/types-15.2.0.tgz#b0f1fa352b2cdbd4b1ba2a3666407900e41fc311"
+  integrity sha512-oS6yShBsBWWhTsEZtEPqJ2cY+b/7iQlqh36eeySKlWFPXQXbakTx20Tbr6CI0svFWQNDgX240hfHbyF2PRClxQ==
 
 "@material-tailwind/react@^1.2.4":
   version "1.4.2"
@@ -6372,14 +6372,14 @@ lru-queue@^0.1.0:
   dependencies:
     es5-ext "~0.10.2"
 
-magic-sdk@^9.0.0:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/magic-sdk/-/magic-sdk-9.1.1.tgz#e9951f633f424250ba3caf66b470b66441608e36"
-  integrity sha512-wMdi0qTCGWUeyqLO4D/7/D46ij/RlIBROUT2QswJrGYiygFjkNVFpTb6KAqskQFRejJM7+eOfstzbE9NwKI4IQ==
+magic-sdk@^17.2.0:
+  version "17.2.0"
+  resolved "https://registry.yarnpkg.com/magic-sdk/-/magic-sdk-17.2.0.tgz#609c2dd8f8b07446db4120af79a1fa00cba0288d"
+  integrity sha512-mickdAor1KNujaoI+6Ge4/5OwKIDbhiHH/EpZ5M46DS8SggAXa1qub01IGe75kNI9tD8Iq0/CZaPKsn2EcMaAQ==
   dependencies:
-    "@magic-sdk/commons" "^5.0.0"
-    "@magic-sdk/provider" "^9.1.0"
-    "@magic-sdk/types" "^8.1.0"
+    "@magic-sdk/commons" "^13.2.0"
+    "@magic-sdk/provider" "^17.2.0"
+    "@magic-sdk/types" "^15.2.0"
     localforage "^1.7.4"
 
 make-cancellable-promise@^1.0.0:
