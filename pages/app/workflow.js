@@ -1,3 +1,5 @@
+export const runtime = 'experimental-edge';
+
 export default () => <p>test</p>;
 // import React, { useCallback } from 'react';
 // import { withAuth } from '@/hocs';
