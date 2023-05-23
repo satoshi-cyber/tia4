@@ -261,6 +261,12 @@ export const JoinCompanyReturnSchema = Null().or(
 
 export type JoinCompanyReturnSchema = Infer<typeof JoinCompanyReturnSchema>;
 
+export const MarkInterviewReadyReturnSchema = boolean();
+
+export type MarkInterviewReadyReturnSchema = Infer<
+  typeof MarkInterviewReadyReturnSchema
+>;
+
 export const MyCompanyReturnSchema = object({
   id: string(),
   name: string(),

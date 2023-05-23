@@ -22,6 +22,7 @@ import type { InviteCompanyMembers } from './types';
 import type { Job } from './types';
 import type { Jobs } from './types';
 import type { JoinCompany } from './types';
+import type { MarkInterviewReady } from './types';
 import type { MyCompany } from './types';
 import type { MyInterview } from './types';
 import type { MyInterviews } from './types';
@@ -587,6 +588,39 @@ export const UseCases = {
       }
 
       return ['joinCompany', input];
+    },
+  },
+  markInterviewReady: {
+    load: (
+      input: TineInferInput<MarkInterviewReady> | '' | undefined | false,
+      config?: Partial<PublicConfiguration<any, any, any>>
+    ) =>
+      useSwr(
+        input ? ['markInterviewReady', input] : undefined,
+        input
+          ? () =>
+              fetchData<TineInferReturn<MarkInterviewReady>>(
+                '/api/tine/markInterviewReady',
+                input
+              )
+          : () => undefined,
+        config
+      ),
+    mutate: () =>
+      useSWRMutation(
+        'markInterviewReady',
+        (_: string, { arg }: { arg: TineInferInput<MarkInterviewReady> }) =>
+          fetchData<TineInferReturn<MarkInterviewReady>>(
+            '/api/tine/markInterviewReady',
+            arg
+          )
+      ),
+    getKey: (input?: TineInferInput<MarkInterviewReady>) => {
+      if (!input) {
+        return (key: any) => key && key[0] === 'markInterviewReady';
+      }
+
+      return ['markInterviewReady', input];
     },
   },
   myCompany: {

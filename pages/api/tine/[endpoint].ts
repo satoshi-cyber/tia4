@@ -20,6 +20,7 @@ import inviteCompanyMembers from '@/useCases/inviteCompanyMembers';
 import job from '@/useCases/job';
 import jobs from '@/useCases/jobs';
 import joinCompany from '@/useCases/joinCompany';
+import markInterviewReady from '@/useCases/markInterviewReady';
 import myCompany from '@/useCases/myCompany';
 import myInterview from '@/useCases/myInterview';
 import myInterviews from '@/useCases/myInterviews';
@@ -57,6 +58,7 @@ const useCasesWithInput = {
   job: job,
   jobs: jobs,
   joinCompany: joinCompany,
+  markInterviewReady: markInterviewReady,
   myCompany: myCompany,
   myInterview: myInterview,
   pendingRates: pendingRates,
