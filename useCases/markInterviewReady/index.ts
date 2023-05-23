@@ -68,7 +68,7 @@ const markInterviewReady = payload(
       })
       .run(ctx);
 
-    const promises = await members.map((member) =>
+    const promises = members.map((member) =>
       sendMail({
         template: 'Rate',
         to: member.user.email,
