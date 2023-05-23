@@ -1,5 +1,7 @@
-import withCookies from "@/hocs/withCookies";
+import withCookies from '@/hocs/withCookies';
 
-import DidCallback from '../../screens/DidCallback'
+import DidCallback from '../../screens/DidCallback';
 
-export default withCookies(DidCallback)
+export const runtime = 'experimental-edge';
+
+export default withCookies(DidCallback);

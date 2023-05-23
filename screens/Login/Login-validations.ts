@@ -1,5 +1,7 @@
-import * as yup from "yup";
+import { z } from 'zod';
 
-export const loginSchema = yup.object({
-  email: yup.string().email('You must enter a valid email').required("You must enter your email!"),
-})
+export const loginSchema = z.object({
+  email: z
+    .string({ required_error: 'You must enter your email!' })
+    .email('You must enter a valid email'),
+});

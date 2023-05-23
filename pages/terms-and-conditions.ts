@@ -1,5 +1,7 @@
 import TermsAndConditions from '../screens/TermsAndConditions';
 
+export const runtime = 'experimental-edge';
+
 export default TermsAndConditions;
 
 export async function getStaticProps() {

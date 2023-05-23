@@ -1,5 +1,7 @@
-import { withAuth } from '@/hocs'
+import { withAuth } from '@/hocs';
 
-import JoinCompany from '../../screens/JoinCompany'
+import JoinCompany from '../../screens/JoinCompany';
 
-export default withAuth(JoinCompany)
+export const runtime = 'experimental-edge';
+
+export default withAuth(JoinCompany);

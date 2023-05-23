@@ -4,6 +4,8 @@ import { useUser } from '@/hooks';
 import Router from 'next/router';
 import { useEffect } from 'react';
 
+export const runtime = 'experimental-edge';
+
 const Home = () => {
   const { hasCompany, claims } = useUser();
 

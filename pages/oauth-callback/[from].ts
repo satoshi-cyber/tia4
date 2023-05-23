@@ -1,5 +1,7 @@
-import withCookies from "@/hocs/withCookies";
+import withCookies from '@/hocs/withCookies';
 
-import OAuthCallback from '../../screens/OAuthCallback'
+import OAuthCallback from '../../screens/OAuthCallback';
 
-export default withCookies(OAuthCallback)
+export const runtime = 'experimental-edge';
+
+export default withCookies(OAuthCallback);

@@ -1,5 +1,7 @@
-import { withAuth } from '@/hocs'
+import { withAuth } from '@/hocs';
 
-import MyInterviews from '../../../screens/MyInterviews'
+import MyInterviews from '../../../screens/MyInterviews';
 
-export default withAuth(MyInterviews)
+export const runtime = 'experimental-edge';
+
+export default withAuth(MyInterviews);

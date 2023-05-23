@@ -1,5 +1,7 @@
-import { withAuth } from '@/hocs'
+import { withAuth } from '@/hocs';
 
-import SetupCompany from '../../screens/SetupCompany'
+import SetupCompany from '../../screens/SetupCompany';
 
-export default withAuth(SetupCompany)
+export const runtime = 'experimental-edge';
+
+export default withAuth(SetupCompany);

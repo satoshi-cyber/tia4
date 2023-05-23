@@ -1,5 +1,7 @@
 import PrivacyPolicy from '../screens/PrivacyPolicy';
 
+export const runtime = 'experimental-edge';
+
 export default PrivacyPolicy;
 
 export async function getStaticProps() {

@@ -11,6 +11,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/globals.css';
 import { useRouter } from 'next/router';
 
+export const runtime = 'experimental-edge';
+
 function MyApp({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter();
 
