@@ -13,17 +13,11 @@ export default withSWRFallback(PublicJob);
 export const getServerSideProps: GetServerSideProps<{ fallback: any }> = async (
   ctx
 ) => {
-  if (ctx.req.cookies && ctx.req?.cookies[TOKEN_COOKIE_KEY]) {
-    return {
-      props: {
-        fallback: {},
-      },
-    };
-  }
-
   const jobId = String(ctx.query.applyJobId);
 
-  const publicDataProps = await useSWRProps(publicJob, { id: jobId });
+  const publicDataProps = ctx.req?.cookies[TOKEN_COOKIE_KEY]
+    ? {}
+    : await useSWRProps(publicJob, { id: jobId });
 
   return {
     props: {
