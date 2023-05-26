@@ -17,15 +17,14 @@ import {
 import { useProfile } from './Profile-hook';
 
 const Profile: React.FC = () => {
-  const { handleSubmit, form, isLoading, resumeProps, avatarProps } =
-    useProfile();
+  const { isLoading, resumeProps, avatarProps, formProps } = useProfile();
 
   return (
     <Layout.Default>
       <Title {...TITLE_PROPS} />
       <EditAvatar className={CLASS_NAMES.avatar} {...avatarProps} />
       <LoadingProvider isLoading={isLoading}>
-        <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
+        <Form {...formProps} className={CLASS_NAMES.form}>
           <Field.Input {...FIELDS.firstName} />
           <Field.Input {...FIELDS.lastName} />
           <Field.Input

@@ -1,43 +1,22 @@
 import { mutate } from 'swr';
-import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { TOAST_OPTIONS } from '@/config';
 import { UseCases } from '@/useCases';
 
 import { TOAST_MESSAGE } from './Profile-constants';
 import { updateProfileSchema } from '@/types';
-import { makeParseDefaults } from '@/lib/forms';
+import { FormSubmit } from '@/components/Form';
 
 export const useProfile = () => {
   const { data, isLoading, mutate: onUpload } = UseCases.profile.load();
+
   const { trigger: updateProfile } = UseCases.updateProfile.mutate();
   const { trigger: updateResume } = UseCases.updateResume.mutate();
 
-  const parseDefaults = makeParseDefaults(updateProfileSchema);
-
-  const form = useForm<Zod.infer<typeof updateProfileSchema>>({
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
-    resolver: zodResolver(updateProfileSchema),
-    defaultValues: parseDefaults(data),
-  });
-
-  const { reset } = form;
-
-  useEffect(() => {
-    if (!data) {
-      return;
-    }
-
-    reset(parseDefaults(data), {
-      keepDirtyValues: true,
-      keepDirty: true,
-    });
-  }, [reset, data]);
-
-  const handleSubmit = async (input: Zod.infer<typeof updateProfileSchema>) => {
+  const handleSubmit: FormSubmit<typeof updateProfileSchema> = async (
+    input,
+    { reset }
+  ) => {
     try {
       const data = await updateProfile(input);
 
@@ -46,7 +25,7 @@ export const useProfile = () => {
       mutate(UseCases.profile.getKey());
 
       if (data) {
-        reset(parseDefaults(data));
+        reset(data);
       }
     } catch (e) {
       toast.error(TOAST_MESSAGE.error, TOAST_OPTIONS);
@@ -84,10 +63,15 @@ export const useProfile = () => {
     onUpload,
   };
 
+  const formProps = {
+    data,
+    schema: updateProfileSchema,
+    onSubmit: handleSubmit,
+  };
+
   return {
-    form,
     isLoading,
-    handleSubmit,
+    formProps,
     avatarProps,
     resumeProps,
   };

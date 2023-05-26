@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { z } from 'zod';
 
 type RecursivelyReplaceNullWithUndefined<T> = T extends null
@@ -37,12 +38,15 @@ export function replaceNullsWithUndefineds<T extends object>(
   return newObj;
 }
 
-export const makeParseDefaults =
-  <D extends z.AnyZodObject>(schema: D) =>
-  (data: DeepPartial<DeepNullable<z.infer<typeof schema>>> | undefined) => {
-    if (!data) {
-      return undefined;
-    }
+export const useDefaults = <D extends z.AnyZodObject>(schema: D) => {
+  return useCallback(
+    (data: DeepPartial<DeepNullable<z.infer<typeof schema>>> | undefined) => {
+      if (!data) {
+        return undefined;
+      }
 
-    return replaceNullsWithUndefineds(data);
-  };
+      return replaceNullsWithUndefineds(data);
+    },
+    [schema]
+  );
+};
