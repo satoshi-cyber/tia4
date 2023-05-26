@@ -40,6 +40,8 @@ model Company {
   members     CompanyMember[]
   invites     CompanyInvite[]
   jobs        Job[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @default(now()) @updatedAt
 }
 
 model Job {
@@ -67,7 +69,7 @@ model Interview {
   rates         Rate[]
   status        InterviewStatus @default(initialized)
   createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  updatedAt     DateTime        @default(now()) @updatedAt
   score         Float?
 
   @@unique([intervieweeId, jobId])
@@ -88,6 +90,8 @@ model User {
   interviews      Interview[]
   rates           Rate[]
   onboarded       Boolean         @default(false)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @default(now()) @updatedAt
 }
 
 model CompanyMember {
