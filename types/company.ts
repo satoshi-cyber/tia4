@@ -2,18 +2,16 @@ import { z } from 'zod';
 
 export const setupCompanySchema = z.object({
   name: z.string({ required_error: 'You must provide a company name' }),
-  website: z.union([
-    z.string().url('You must provide a valid url').nullish(),
-    z.literal(''),
-  ]),
+  website: z
+    .string({ required_error: 'You must provide a url' })
+    .url('You must provide a valid url'),
 });
 
 export const editCompanySchema = z.object({
   name: z.string({ required_error: 'You must provide a company name' }),
-  website: z.union([
-    z.string().url('You must provide a valid url').nullish(),
-    z.literal(''),
-  ]),
+  website: z
+    .string({ required_error: 'You must provide a url' })
+    .url('You must provide a valid url'),
   description: z.string().nullable(),
 });
 

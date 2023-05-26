@@ -36,7 +36,7 @@ const PublicJob: React.FC = () => {
           title={jobTitle}
           subTitle={
             companyWebsite ? (
-              <Link target="_blank" href={companyWebsite}>
+              <Link target="_blank" href={companyWebsite} className="underline">
                 {companyName}
               </Link>
             ) : (
