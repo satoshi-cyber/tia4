@@ -2,10 +2,10 @@ import { mutate } from 'swr';
 import { toast } from 'react-toastify';
 import { TOAST_OPTIONS } from '@/config';
 import { UseCases } from '@/useCases';
+import { FormSubmit } from '@/components/Form';
 
 import { TOAST_MESSAGE } from './Profile-constants';
 import { updateProfileSchema } from '@/types';
-import { FormSubmit } from '@/components/Form';
 
 export const useProfile = () => {
   const { data, isLoading, mutate: onUpload } = UseCases.profile.load();
