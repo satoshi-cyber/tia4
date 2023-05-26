@@ -5,4 +5,8 @@ export const formatDefaultValues = ({
   name,
   description,
   website,
-}: TineInferReturn<MyCompany>) => ({ name, description, website });
+}: TineInferReturn<MyCompany>) => ({
+  name,
+  description,
+  website: website ?? undefined,
+});
