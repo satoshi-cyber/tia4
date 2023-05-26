@@ -19,8 +19,7 @@ import SubmitButton from '@/components/SubmitButton';
 
 const CreateAJob: React.FC = () => {
   const {
-    handleSubmit,
-    form,
+    formProps,
     isLoading,
     editJob,
     handleDeleteJob,
@@ -31,7 +30,7 @@ const CreateAJob: React.FC = () => {
   return (
     <Layout.Default>
       <LoadingProvider isLoading={isLoading}>
-        <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
+        <Form {...formProps} className={CLASS_NAMES.form}>
           <Header editJob={editJob} handleDeleteJob={handleDeleteJob} />
           {!editJob && <PostWithAI setDescription={setDescription} />}
           <Field.Input

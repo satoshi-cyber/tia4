@@ -37,7 +37,9 @@ export const Form = <D extends z.AnyZodObject, T extends z.infer<D>>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: zodResolver(props.schema),
-    defaultValues: parseDefaults(props.data as any) as any,
+    defaultValues: props.data
+      ? (parseDefaults(props.data as any) as any)
+      : props.defaultData,
   });
 
   const { handleSubmit, reset } = form;

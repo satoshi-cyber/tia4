@@ -1,6 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -15,7 +13,7 @@ import {
   DEFAULT_QUESTION_TIME,
   PUSH_DELAY,
 } from './CreateEditAJob-constants';
-import { parseDefaults } from './CreateEditAJob-functions';
+import { FormSubmit } from '@/components/Form';
 
 export const useCreateUpdateAJob = () => {
   const router = useRouter();
@@ -24,45 +22,18 @@ export const useCreateUpdateAJob = () => {
 
   const jobId = router.query.jobId as string;
 
-  const editJob = Boolean(jobId);
-
   const { data, isLoading } = UseCases.job.load(
     typeof jobId === 'string' && companyId && { companyId, id: jobId }
   );
-
   const { trigger: upsertJob } = UseCases.upsertJob.mutate();
   const { trigger: deleteJob } = UseCases.deleteJob.mutate();
 
-  const form = useForm<Zod.infer<typeof upsertJobSchema>>({
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
-    resolver: zodResolver(upsertJobSchema),
-    defaultValues: data
-      ? parseDefaults(data)
-      : {
-          questions: [
-            { id: uuidv4(), time: DEFAULT_QUESTION_TIME },
-            { id: uuidv4(), time: DEFAULT_QUESTION_TIME },
-          ],
-        },
-  });
-
-  const { reset } = form;
-
-  useEffect(() => {
-    if (data) {
-      reset(parseDefaults(data), { keepDirtyValues: true, keepDirty: true });
-    }
-  }, [data, reset]);
-
-  const handleSubmit = async (input: Zod.infer<typeof upsertJobSchema>) => {
+  const handleSubmit: FormSubmit<typeof upsertJobSchema> = async (input) => {
     if (!companyId) {
       return;
     }
 
-    const toastMessage = editJob
-      ? TOAST_MESSAGE.EDIT_JOB
-      : TOAST_MESSAGE.ADD_JOB;
+    const toastMessage = jobId ? TOAST_MESSAGE.EDIT_JOB : TOAST_MESSAGE.ADD_JOB;
 
     try {
       await upsertJob({
@@ -104,11 +75,27 @@ export const useCreateUpdateAJob = () => {
     setDescription(data?.description);
   }, [data?.description]);
 
+  const defaultData = {
+    questions: [
+      { id: uuidv4(), time: DEFAULT_QUESTION_TIME, question: '' },
+      { id: uuidv4(), time: DEFAULT_QUESTION_TIME, question: '' },
+    ],
+  };
+
+  const formProps = {
+    defaultData,
+    onSubmit: handleSubmit,
+    schema: upsertJobSchema,
+    data,
+  };
+
+  const editJob = Boolean(jobId);
+
   return {
     description,
     setDescription,
     editJob,
-    form,
+    formProps,
     handleSubmit,
     handleDeleteJob,
     isLoading,
