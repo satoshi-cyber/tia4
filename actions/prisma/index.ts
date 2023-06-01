@@ -75,7 +75,8 @@ const prisma = new PrismaClient()
       const lng = ctx.get('headers').get('X-Vercel-IP-Longitude') || 21.169;
 
       const {
-        location: { client },
+        location: { client, ...meta },
+        distance,
       } = findNearestLocation(
         {
           lat,
@@ -83,6 +84,8 @@ const prisma = new PrismaClient()
         },
         clients
       );
+
+      console.log({ ...meta, distance });
 
       return client;
     })
