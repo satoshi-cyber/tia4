@@ -10,22 +10,21 @@ export const runtime = 'experimental-edge';
 
 export default withSWRFallback(PublicJob);
 
-export const getServerSideProps: GetServerSideProps<{
-  fallback: any;
-}> = async () =>
-  // ctx
-  {
-    // const jobId = String(ctx.query.applyJobId);
+export const getServerSideProps: GetServerSideProps<{ fallback: any }> = async (
+  ctx
+) => {
+  console.log(ctx.req.headers);
+  // const jobId = String(ctx.query.applyJobId);
 
-    // const publicDataProps = ctx.req?.cookies[TOKEN_COOKIE_KEY]
-    //   ? {}
-    //   : await useSWRProps(publicJob, { id: jobId });
+  // const publicDataProps = ctx.req?.cookies[TOKEN_COOKIE_KEY]
+  //   ? {}
+  //   : await useSWRProps(publicJob, { id: jobId });
 
-    return {
-      props: {
-        fallback: {
-          // ...publicDataProps,
-        },
+  return {
+    props: {
+      fallback: {
+        // ...publicDataProps,
       },
-    };
+    },
   };
+};
