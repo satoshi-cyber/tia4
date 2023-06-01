@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client/edge';
-import findNearestLocation from 'map-nearest-location';
+import { findNearestLocation } from '@/lib/disatance';
 import tinejsPrisma from 'tinejs.prisma';
 
 import company from './extend/company';
