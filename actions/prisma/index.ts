@@ -9,6 +9,23 @@ import { env } from '../config';
 
 const clients = [
   {
+    lat: 50.1109,
+    lng: 8.682,
+    client: new PrismaClient({
+      datasources: {
+        db: {
+          url: env.FRA_DATABASE_URL,
+        },
+      },
+    }).$extends({
+      result: {
+        company,
+        interview,
+        user,
+      },
+    }),
+  },
+  {
     lat: 40.8041,
     lng: -74.0124,
     client: new PrismaClient({
