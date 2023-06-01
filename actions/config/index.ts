@@ -11,6 +11,9 @@ const envSchema = z.object({
   MAIL_API_KEY: z.string().nonempty(),
   CONVERTER_URI: z.string().nonempty(),
   CONVERTER_SECRET: z.string().nonempty(),
+  NYC_DATABASE_URL: z.string().nonempty(),
+  SYD_DATABASE_URL: z.string().nonempty(),
+  FRA_DATABASE_URL: z.string().nonempty(),
 });
 
 export const env = envSchema.parse({
@@ -24,4 +27,7 @@ export const env = envSchema.parse({
   MAIL_API_KEY: process.env.MAIL_API_KEY,
   CONVERTER_URI: process.env.CONVERTER_URI,
   CONVERTER_SECRET: process.env.CONVERTER_SECRET,
+  NYC_DATABASE_URL: process.env.NYC_DATABASE_URL,
+  SYD_DATABASE_URL: process.env.SYD_DATABASE_URL,
+  FRA_DATABASE_URL: process.env.FRA_DATABASE_URL,
 });

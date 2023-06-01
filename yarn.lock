@@ -6406,6 +6406,11 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
+map-nearest-location@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/map-nearest-location/-/map-nearest-location-1.1.4.tgz#4466ad648dd7111a69d25f6252009fa90f4abfd8"
+  integrity sha512-pYoaIL2ki1QMf3biWFR5pq0sGqZDfbvq4YdrV0FROt5r+2MrRi+yQ/95X4TFFiNaXYa1fVVhPiUoMVMEzJEQ+w==
+
 markdown-to-jsx@^7.2.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-7.2.0.tgz#e7b46b65955f6a04d48a753acd55874a14bdda4b"
@@ -8122,10 +8127,10 @@ tinejs.openapi@^0.0.1:
     title-case "^3.0.3"
     zod "^3.21.4"
 
-tinejs.prisma@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.9.tgz#a531978a20f629f23bfdc51cdb5b9d24c4050367"
-  integrity sha512-UxcXctNm6yrRe15wC6BHRxtjYgw6RNtzY8bWoWy52cIA1V8JJjJiA5zpQ+OZWuM9zcc2/MmJylnSMplJXjKKRw==
+tinejs.prisma@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.10.tgz#780e48293211477ea3acb8c78d1fca9db07ed716"
+  integrity sha512-HxdM6TV0xEX5HA1qt6xxyJtJxm5NzWcTg7Ty48bOkAMUPW0Zxsx6CPiapz0GAqqPPtDitPA+J2aJyzIlZy6TBQ==
 
 tinejs@^0.0.26:
   version "0.0.26"
