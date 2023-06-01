@@ -15,6 +15,7 @@ import type { DeleteMember } from './types';
 import type { DidApply } from './types';
 import type { DidRateInterview } from './types';
 import type { EditCompany } from './types';
+import type { Geo } from './types';
 import type { Health } from './types';
 import type { Interview } from './types';
 import type { Interviews } from './types';
@@ -402,6 +403,19 @@ export const UseCases = {
 
       return ['editCompany', input];
     },
+  },
+  geo: {
+    load: (config?: Partial<PublicConfiguration<any, any, any>>) =>
+      useSwr(
+        'geo',
+        () => fetchData<TineInferReturn<Geo>>('/api/tine/geo'),
+        config
+      ),
+    mutate: () =>
+      useSWRMutation('geo', (_: string) =>
+        fetchData<TineInferReturn<Geo>>('/api/tine/geo')
+      ),
+    getKey: () => 'geo',
   },
   health: {
     load: (config?: Partial<PublicConfiguration<any, any, any>>) =>

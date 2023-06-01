@@ -58,6 +58,8 @@ export type CompanyMembersReturnSchema = Infer<
 
 export const DeleteCompanyReturnSchema = object({
   id: string(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
   name: string(),
   description: Null().or(string()),
   website: Null().or(string()),
@@ -69,11 +71,11 @@ export type DeleteCompanyReturnSchema = Infer<typeof DeleteCompanyReturnSchema>;
 
 export const DeleteInterviewReturnSchema = object({
   id: string(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
   status: literal('initialized')
     .or(literal('proccessing'))
     .or(literal('ready')),
-  createdAt: InstanceOf(Date),
-  updatedAt: InstanceOf(Date),
   jobId: string(),
   intervieweeId: string(),
   answers: array(
@@ -116,8 +118,8 @@ export const DidApplyReturnSchema = boolean();
 export type DidApplyReturnSchema = Infer<typeof DidApplyReturnSchema>;
 
 export const DidRateInterviewReturnSchema = object({
-  value: Null().or(number()),
   createdAt: InstanceOf(Date),
+  value: Null().or(number()),
   reason: Null().or(string()),
   interviewId: string(),
   raterId: string(),
@@ -129,6 +131,8 @@ export type DidRateInterviewReturnSchema = Infer<
 
 export const EditCompanyReturnSchema = object({
   id: string(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
   name: string(),
   description: Null().or(string()),
   website: Null().or(string()),
@@ -138,6 +142,10 @@ export const EditCompanyReturnSchema = object({
 
 export type EditCompanyReturnSchema = Infer<typeof EditCompanyReturnSchema>;
 
+export const GeoReturnSchema = object({ lat: number(), lon: number() });
+
+export type GeoReturnSchema = Infer<typeof GeoReturnSchema>;
+
 export const HealthReturnSchema = object({ success: boolean() });
 
 export type HealthReturnSchema = Infer<typeof HealthReturnSchema>;
@@ -145,6 +153,8 @@ export type HealthReturnSchema = Infer<typeof HealthReturnSchema>;
 export const InterviewReturnSchema = object({
   job: object({
     id: string(),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
     description: Null().or(string()),
     companyId: string(),
     title: string(),
@@ -152,8 +162,6 @@ export const InterviewReturnSchema = object({
     questions: array(
       object({ id: string(), question: string(), time: number() })
     ),
-    createdAt: InstanceOf(Date),
-    updatedAt: InstanceOf(Date),
   }),
   interviewee: object({
     id: string(),
@@ -167,6 +175,8 @@ export const InterviewReturnSchema = object({
     resumeFileName: Null().or(string()),
     role: literal('user').or(literal('admin')),
     onboarded: boolean(),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
     avatarUrl: string(),
     avatarUploadUrl: string().or(Undefined()),
     resumeUrl: string(),
@@ -175,11 +185,11 @@ export const InterviewReturnSchema = object({
 }).and(
   object({
     id: string(),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
     status: literal('initialized')
       .or(literal('proccessing'))
       .or(literal('ready')),
-    createdAt: InstanceOf(Date),
-    updatedAt: InstanceOf(Date),
     jobId: string(),
     intervieweeId: string(),
     answers: array(
@@ -282,6 +292,8 @@ export const MyInterviewReturnSchema = object({
   job: object({
     company: object({
       id: string(),
+      createdAt: InstanceOf(Date),
+      updatedAt: InstanceOf(Date),
       name: string(),
       description: Null().or(string()),
       website: Null().or(string()),
@@ -291,6 +303,8 @@ export const MyInterviewReturnSchema = object({
   }).and(
     object({
       id: string(),
+      createdAt: InstanceOf(Date),
+      updatedAt: InstanceOf(Date),
       description: Null().or(string()),
       companyId: string(),
       title: string(),
@@ -298,8 +312,6 @@ export const MyInterviewReturnSchema = object({
       questions: array(
         object({ id: string(), question: string(), time: number() })
       ),
-      createdAt: InstanceOf(Date),
-      updatedAt: InstanceOf(Date),
     })
   ),
   interviewee: object({
@@ -314,6 +326,8 @@ export const MyInterviewReturnSchema = object({
     resumeFileName: Null().or(string()),
     role: literal('user').or(literal('admin')),
     onboarded: boolean(),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
     avatarUrl: string(),
     avatarUploadUrl: string().or(Undefined()),
     resumeUrl: string(),
@@ -322,11 +336,11 @@ export const MyInterviewReturnSchema = object({
 }).and(
   object({
     id: string(),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
     status: literal('initialized')
       .or(literal('proccessing'))
       .or(literal('ready')),
-    createdAt: InstanceOf(Date),
-    updatedAt: InstanceOf(Date),
     jobId: string(),
     intervieweeId: string(),
     answers: array(
@@ -375,6 +389,8 @@ export const PendingRatesReturnSchema = array(
         job: object({
           company: object({
             id: string(),
+            createdAt: InstanceOf(Date),
+            updatedAt: InstanceOf(Date),
             name: string(),
             description: Null().or(string()),
             website: Null().or(string()),
@@ -384,6 +400,8 @@ export const PendingRatesReturnSchema = array(
         }).and(
           object({
             id: string(),
+            createdAt: InstanceOf(Date),
+            updatedAt: InstanceOf(Date),
             description: Null().or(string()),
             companyId: string(),
             title: string(),
@@ -391,8 +409,6 @@ export const PendingRatesReturnSchema = array(
             questions: array(
               object({ id: string(), question: string(), time: number() })
             ),
-            createdAt: InstanceOf(Date),
-            updatedAt: InstanceOf(Date),
           })
         ),
         interviewee: object({
@@ -407,6 +423,8 @@ export const PendingRatesReturnSchema = array(
           resumeFileName: Null().or(string()),
           role: literal('user').or(literal('admin')),
           onboarded: boolean(),
+          createdAt: InstanceOf(Date),
+          updatedAt: InstanceOf(Date),
           avatarUrl: string(),
           avatarUploadUrl: string().or(Undefined()),
           resumeUrl: string(),
@@ -414,8 +432,8 @@ export const PendingRatesReturnSchema = array(
         }),
         rates: array(
           object({
-            value: Null().or(number()),
             createdAt: InstanceOf(Date),
+            value: Null().or(number()),
             reason: Null().or(string()),
             interviewId: string(),
             raterId: string(),
@@ -424,11 +442,11 @@ export const PendingRatesReturnSchema = array(
       }).and(
         object({
           id: string(),
+          createdAt: InstanceOf(Date),
+          updatedAt: InstanceOf(Date),
           status: literal('initialized')
             .or(literal('proccessing'))
             .or(literal('ready')),
-          createdAt: InstanceOf(Date),
-          updatedAt: InstanceOf(Date),
           jobId: string(),
           intervieweeId: string(),
           answers: array(
@@ -449,8 +467,8 @@ export const PendingRatesReturnSchema = array(
     ),
   }).and(
     object({
-      value: Null().or(number()),
       createdAt: InstanceOf(Date),
+      value: Null().or(number()),
       reason: Null().or(string()),
       interviewId: string(),
       raterId: string(),
@@ -478,6 +496,8 @@ export const ProfileReturnSchema = object({
   resumeFileName: Null().or(string()),
   role: literal('user').or(literal('admin')),
   onboarded: boolean(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
   avatarUrl: string(),
   avatarUploadUrl: string().or(Undefined()),
   resumeUrl: string(),
@@ -507,6 +527,8 @@ export const RateInterviewReturnSchema = object({
     object({
       job: object({
         id: string(),
+        createdAt: InstanceOf(Date),
+        updatedAt: InstanceOf(Date),
         description: Null().or(string()),
         companyId: string(),
         title: string(),
@@ -514,8 +536,6 @@ export const RateInterviewReturnSchema = object({
         questions: array(
           object({ id: string(), question: string(), time: number() })
         ),
-        createdAt: InstanceOf(Date),
-        updatedAt: InstanceOf(Date),
       }),
       interviewee: object({
         id: string(),
@@ -529,6 +549,8 @@ export const RateInterviewReturnSchema = object({
         resumeFileName: Null().or(string()),
         role: literal('user').or(literal('admin')),
         onboarded: boolean(),
+        createdAt: InstanceOf(Date),
+        updatedAt: InstanceOf(Date),
         avatarUrl: string(),
         avatarUploadUrl: string().or(Undefined()),
         resumeUrl: string(),
@@ -537,11 +559,11 @@ export const RateInterviewReturnSchema = object({
     }).and(
       object({
         id: string(),
+        createdAt: InstanceOf(Date),
+        updatedAt: InstanceOf(Date),
         status: literal('initialized')
           .or(literal('proccessing'))
           .or(literal('ready')),
-        createdAt: InstanceOf(Date),
-        updatedAt: InstanceOf(Date),
         jobId: string(),
         intervieweeId: string(),
         answers: array(
@@ -562,8 +584,8 @@ export const RateInterviewReturnSchema = object({
   ),
 }).and(
   object({
-    value: Null().or(number()),
     createdAt: InstanceOf(Date),
+    value: Null().or(number()),
     reason: Null().or(string()),
     interviewId: string(),
     raterId: string(),
@@ -578,6 +600,8 @@ export type RefreshClaimsReturnSchema = Infer<typeof RefreshClaimsReturnSchema>;
 
 export const SetupCompanyReturnSchema = object({
   id: string(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
   name: string(),
   description: Null().or(string()),
   website: Null().or(string()),
@@ -599,6 +623,8 @@ export const SkipOnboardingReturnSchema = object({
   resumeFileName: Null().or(string()),
   role: literal('user').or(literal('admin')),
   onboarded: boolean(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
   avatarUrl: string(),
   avatarUploadUrl: string().or(Undefined()),
   resumeUrl: string(),
@@ -611,11 +637,11 @@ export type SkipOnboardingReturnSchema = Infer<
 
 export const SubmitInterviewReturnSchema = object({
   id: string(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
   status: literal('initialized')
     .or(literal('proccessing'))
     .or(literal('ready')),
-  createdAt: InstanceOf(Date),
-  updatedAt: InstanceOf(Date),
   jobId: string(),
   intervieweeId: string(),
   answers: array(
@@ -645,6 +671,8 @@ export const UpdateProfileReturnSchema = object({
   resumeFileName: Null().or(string()),
   role: literal('user').or(literal('admin')),
   onboarded: boolean(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
   avatarUrl: string(),
   avatarUploadUrl: string().or(Undefined()),
   resumeUrl: string(),

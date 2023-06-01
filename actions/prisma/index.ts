@@ -5,6 +5,12 @@ import company from './extend/company';
 import interview from './extend/interview';
 import user from './extend/user';
 
+// datasources: {
+//   db: {
+//     url: '',
+//   },
+// },
+
 const prisma = new PrismaClient()
   .$extends({
     result: {

@@ -13,6 +13,7 @@ import deleteMember from '@/useCases/deleteMember';
 import didApply from '@/useCases/didApply';
 import didRateInterview from '@/useCases/didRateInterview';
 import editCompany from '@/useCases/editCompany';
+import geo from '@/useCases/geo';
 import health from '@/useCases/health';
 import interview from '@/useCases/interview';
 import interviews from '@/useCases/interviews';
@@ -74,6 +75,7 @@ const useCasesWithInput = {
 };
 
 const useCases = {
+  geo: geo,
   health: health,
   myInterviews: myInterviews,
   profile: profile,
