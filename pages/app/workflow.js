@@ -50,7 +50,7 @@ export const initialNodes = [
             className="absolute -top-8 -right-8"
           />
           <span>Score &lt; 30</span>
-          <Icon name="FaRegAngry" size={30} className="text-black m-1 ml-2" />,
+          <Icon name="FaRegAngry" size={24} className="text-black m-1 ml-2" />,
         </p>
       ),
     },
@@ -71,7 +71,7 @@ export const initialNodes = [
             className="absolute -top-8 -right-8"
           />
           <span>Score &gt; 30 and Score &lt; 60</span>
-          <Icon name="FaRegMeh" size={30} className="text-black m-1 ml-2" />,
+          <Icon name="FaRegMeh" size={24} className="text-black m-1 ml-2" />,
         </p>
       ),
     },
@@ -87,7 +87,7 @@ export const initialNodes = [
       label: (
         <p className="flex items-center justify-center">
           <span>Score &gt; 60</span>
-          <Icon name="FaRegSmile" size={30} className="text-black m-1 ml-2" />,
+          <Icon name="FaRegSmile" size={24} className="text-black m-1 ml-2" />,
         </p>
       ),
     },
