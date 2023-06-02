@@ -5,7 +5,7 @@ import { EmailTemplateProps } from './types';
 import { env } from '../config';
 
 const sendMail = tineAction(
-  async <T extends keyof EmailTemplateProps>({
+  <T extends keyof EmailTemplateProps>({
     template,
     to,
     props,
@@ -15,7 +15,7 @@ const sendMail = tineAction(
     to: string;
   }) => {
     // don't wait for email
-    await fetch(env.MAIL_SERVICE_URI, {
+    fetch(env.MAIL_SERVICE_URI, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,6 +31,7 @@ const sendMail = tineAction(
         },
       }),
     }).then((res) => res.json());
+
     return true;
   },
   { action: 'sendMail' }
