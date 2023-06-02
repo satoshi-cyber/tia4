@@ -43,14 +43,14 @@ export const initialNodes = [
     id: '2',
     data: {
       label: (
-        <p className="flex items-center">
+        <p className="flex items-center justify-center">
           <ButtonIcon
             size={30}
             name="HiCog"
             className="absolute -top-8 -right-8"
           />
-          <span>Most of team members downvoted</span>
-          <Icon name="HiThumbDown" size={50} className="text-black m-1" />,
+          <span>Score &lt; 30</span>
+          <Icon name="FaRegAngry" size={30} className="text-black m-1 ml-2" />,
         </p>
       ),
     },
@@ -70,8 +70,8 @@ export const initialNodes = [
             name="HiCog"
             className="absolute -top-8 -right-8"
           />
-          <span>Most of team members upvoted</span>
-          <Icon name="HiThumbUp" size={50} className="text-black m-1" />,
+          <span>Score &gt; 30 and Score &lt; 60</span>
+          <Icon name="FaRegMeh" size={30} className="text-black m-1 ml-2" />,
         </p>
       ),
     },
@@ -85,10 +85,9 @@ export const initialNodes = [
     id: '4',
     data: {
       label: (
-        <p className="flex items-center">
-          <span>Equal votes</span>
-          <Icon name="HiThumbDown" size={50} className="text-black m-1" />,
-          <Icon name="HiThumbUp" size={50} className="text-black m-1" />,
+        <p className="flex items-center justify-center">
+          <span>Score &gt; 60</span>
+          <Icon name="FaRegSmile" size={30} className="text-black m-1 ml-2" />,
         </p>
       ),
     },
@@ -113,17 +112,6 @@ export const initialNodes = [
       ),
     },
     position: { x: 0, y: 450 },
-    style: {
-      borderColor: '#bb86fc',
-    },
-    connectable: false,
-  },
-  {
-    id: '6b',
-    data: {
-      label: 'Member clicked "re rate"',
-    },
-    position: { x: 200, y: 450 },
     style: {
       borderColor: '#bb86fc',
     },
@@ -164,7 +152,7 @@ export const initialNodes = [
         </div>
       ),
     },
-    position: { x: 400, y: 450 },
+    position: { x: 700, y: 450 },
     style: {
       borderColor: '#bb86fc',
     },
@@ -179,10 +167,8 @@ export const initialEdges = [
   { id: 'e1-4', source: '1b', target: '4', animated: true },
   { id: 'e1-6', source: '2', target: '6a', animated: true },
   { id: 'e1-6', source: '2', target: '6b', animated: true },
-  { id: 'e1-8', source: '6b', target: '1b', animated: true },
   { id: 'e1-9', source: '6a', target: '7', animated: true },
-  { id: 'e1-10', source: '4', target: '1b', animated: true },
-  { id: 'e1-12', source: '3', target: '9', animated: true },
+  { id: 'e1-12', source: '4', target: '9', animated: true },
 ];
 
 const onInit = (reactFlowInstance) =>
@@ -221,7 +207,6 @@ const Settings = () => {
         attributionPosition="top-right"
       >
         <Controls />
-        <Background color="#aaa" gap={16} />
       </ReactFlow>
     </div>
   );
