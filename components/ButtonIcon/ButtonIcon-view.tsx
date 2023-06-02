@@ -14,6 +14,7 @@ const ButtonIcon: React.FC<IconProps> = ({
   isLoading,
   size = 38,
   circle = true,
+  variant = 'default',
   ...props
 }) => {
   const IconComponent = useMemo(
@@ -55,7 +56,9 @@ const ButtonIcon: React.FC<IconProps> = ({
             className={clsx(
               circle ? 'rounded-full' : 'rounded-md',
               className,
-              'bg-white transition-all p-1 border border-gray-150 text-gray-600 hover:text-purple-800 hover:border-gray-100 hover:shadow-icon flex items-center justify-center',
+              variant === 'default' &&
+                'border border-gray-200 hover:border-gray-100 hover:shadow-icon',
+              'bg-white transition-all p-1 text-gray-600 hover:text-purple-800 flex items-center justify-center',
               active ? 'text-purple-800 border-gray-100 shadow-icon' : ''
             )}
             {...props}

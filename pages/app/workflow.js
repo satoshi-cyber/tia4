@@ -5,7 +5,6 @@ import { withAuth } from '@/hocs';
 import ReactFlow, {
   addEdge,
   Controls,
-  Background,
   useNodesState,
   useEdgesState,
 } from 'reactflow';
@@ -45,12 +44,13 @@ export const initialNodes = [
       label: (
         <p className="flex items-center justify-center">
           <ButtonIcon
+            variant="clean"
             size={30}
             name="HiCog"
             className="absolute -top-8 -right-8"
           />
           <span>Score &lt; 30</span>
-          <Icon name="FaRegAngry" size={24} className="text-black m-1 ml-2" />,
+          <Icon name="FaRegAngry" size={24} className="text-black m-1 ml-2" />
         </p>
       ),
     },
@@ -66,12 +66,13 @@ export const initialNodes = [
       label: (
         <p className="flex items-center">
           <ButtonIcon
+            variant="clean"
             size={30}
             name="HiCog"
             className="absolute -top-8 -right-8"
           />
           <span>Score &gt; 30 and Score &lt; 60</span>
-          <Icon name="FaRegMeh" size={24} className="text-black m-1 ml-2" />,
+          <Icon name="FaRegMeh" size={24} className="text-black m-1 ml-2" />
         </p>
       ),
     },
@@ -87,7 +88,7 @@ export const initialNodes = [
       label: (
         <p className="flex items-center justify-center">
           <span>Score &gt; 60</span>
-          <Icon name="FaRegSmile" size={24} className="text-black m-1 ml-2" />,
+          <Icon name="FaRegSmile" size={24} className="text-black m-1 ml-2" />
         </p>
       ),
     },
@@ -104,6 +105,7 @@ export const initialNodes = [
         <p>
           Wait 2 days
           <ButtonIcon
+            variant="clean"
             size={30}
             name="HiCog"
             className="absolute -top-8 -right-8"
@@ -124,6 +126,7 @@ export const initialNodes = [
         <p>
           Send email "Thank you for your application to the ..." to candidate
           <ButtonIcon
+            variant="clean"
             name="HiCog"
             size={30}
             className="absolute -top-8 -right-8"
@@ -144,6 +147,7 @@ export const initialNodes = [
         <div className="flex flex-col justify-center items-center">
           <p className="mb-2">Configure this step</p>
           <ButtonIcon
+            variant="clean"
             size={30}
             name="HiCog"
             className="absolute -top-8 -right-8"

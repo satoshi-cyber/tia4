@@ -6,4 +6,5 @@ export interface IconProps {
   className?: string;
   size?: number;
   circle?: boolean;
+  variant?: 'default' | 'clean';
 }
