@@ -14,6 +14,7 @@ const envSchema = z.object({
   NYC_DATABASE_URL: z.string().nonempty(),
   SYD_DATABASE_URL: z.string().nonempty(),
   FRA_DATABASE_URL: z.string().nonempty(),
+  SFO_DATABASE_URL: z.string().nonempty(),
 });
 
 export const env = envSchema.parse({
@@ -30,4 +31,5 @@ export const env = envSchema.parse({
   NYC_DATABASE_URL: process.env.NYC_DATABASE_URL,
   SYD_DATABASE_URL: process.env.SYD_DATABASE_URL,
   FRA_DATABASE_URL: process.env.FRA_DATABASE_URL,
+  SFO_DATABASE_URL: process.env.SFO_DATABASE_URL,
 });
