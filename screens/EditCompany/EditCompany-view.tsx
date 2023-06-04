@@ -20,28 +20,15 @@ import {
 import { useEditCompany } from './EditCompany-hook';
 
 const EditCompany: React.FC = () => {
-  const {
-    handleSubmit,
-    form,
-    submitting,
-    isLoading,
-    avatar,
-    avatarUploadUrl,
-    onUpload,
-    settingItems,
-  } = useEditCompany();
+  const { formProps, submitting, isLoading, avatarProps, settingItems } =
+    useEditCompany();
 
   return (
     <Layout.Default>
       <Title {...TITLE_PROPS} after={<SettingsMenu items={settingItems} />} />
       <LoadingProvider isLoading={isLoading}>
-        <EditAvatar
-          src={avatar}
-          uploadUrl={avatarUploadUrl}
-          onUpload={onUpload}
-          className="mb-6"
-        />
-        <Form form={form} onSubmit={handleSubmit} className={CLASS_NAMES.form}>
+        <EditAvatar {...avatarProps} className="mb-6" />
+        <Form {...formProps} className={CLASS_NAMES.form}>
           <Field.Input {...COMPANY_NAME_FIELD_PROPS} />
           <Field.Input
             {...COMPANY_WEBSITE_FIELD_PROPS}

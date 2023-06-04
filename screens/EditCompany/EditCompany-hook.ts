@@ -1,16 +1,13 @@
-import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useUser } from '@/hooks';
-import { TOAST_OPTIONS, URLS } from '@/config';
-import { useEffect } from 'react';
-
-import { PUSH_DELAY, TOAST_MESSAGE } from './EditCompany-constants';
-import { formatDefaultValues } from './EditCompany-functions';
-import { mutate } from 'swr';
 import { UseCases } from '@/useCases';
 import { editCompanySchema } from '@/types';
+import { FormSubmit } from '@/components/Form';
+import { useUser } from '@/hooks';
+import { TOAST_OPTIONS, URLS } from '@/config';
+
+import { PUSH_DELAY, TOAST_MESSAGE } from './EditCompany-constants';
 
 export const useEditCompany = () => {
   const router = useRouter();
@@ -36,25 +33,7 @@ export const useEditCompany = () => {
     mutate(UseCases.company.getKey());
   };
 
-  const form = useForm<Zod.infer<typeof editCompanySchema>>({
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
-    resolver: zodResolver(editCompanySchema),
-    defaultValues: data ? formatDefaultValues(data) : undefined,
-  });
-
-  const { reset } = form;
-
-  useEffect(() => {
-    if (!isLoading && data) {
-      reset(formatDefaultValues(data), {
-        keepDirty: true,
-        keepDefaultValues: true,
-      });
-    }
-  }, [isLoading, reset]);
-
-  const handleSubmit = async (input: Zod.infer<typeof editCompanySchema>) => {
+  const onSubmit: FormSubmit<typeof editCompanySchema> = async (input) => {
     if (!companyId) return;
 
     const toastMessage = TOAST_MESSAGE.updateCompany;
@@ -96,14 +75,23 @@ export const useEditCompany = () => {
     },
   ];
 
+  const formProps = {
+    data,
+    schema: editCompanySchema,
+    onSubmit,
+  };
+
+  const avatarProps = {
+    src: avatar,
+    uploadUrl: avatarUploadUrl,
+    onUpload,
+  };
+
   return {
-    form,
-    handleSubmit,
+    formProps,
     submitting,
     isLoading,
-    avatar,
-    avatarUploadUrl,
-    onUpload,
+    avatarProps,
     settingItems,
   };
 };
