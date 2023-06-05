@@ -35,7 +35,8 @@ const Landing: React.FC<LayoutProps> = ({ children }) => (
             </Link>
           </div>
           <p className="text-right text-xs absolute right-4 md:right-6">
-            © All right's Reserved. The Interview 2023
+            © All right's Reserved.{' '}
+            <a href="https://eightbits.us/">Eightbits LLC</a>
           </p>
         </div>
       </div>
