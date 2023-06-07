@@ -1,12 +1,10 @@
-import { payload, tineFn } from 'tinejs';
+import { task } from 'tinejs';
 
-const geo = payload(
-  tineFn((ctx) => {
-    const lat = ctx.get('headers').get('X-Vercel-IP-Latitude') as number;
-    const lon = ctx.get('headers').get('X-Vercel-IP-Longitude') as number;
+const geo = task((ctx) => {
+  const lat = ctx.get('headers').get('X-Vercel-IP-Latitude') as number;
+  const lon = ctx.get('headers').get('X-Vercel-IP-Longitude') as number;
 
-    return { lat, lon };
-  })
-);
+  return { lat, lon };
+});
 
 export default geo.noInput();

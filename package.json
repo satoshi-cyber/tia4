@@ -73,7 +73,7 @@
     "swr": "^2.1.5",
     "tailwindcss": "^0.0.0-insiders.40c0cbe",
     "tailwindcss-scoped-groups": "^2.0.0",
-    "tinejs": "^0.0.33",
+    "tinejs": "^0.0.36",
     "tinejs.next": "^0.0.4",
     "tinejs.prisma": "^0.0.12",
     "typescript": "^5.0.4",

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { payload, tineFn, tineInput, tineVar } from 'tinejs';
+import { task, tineInput, tineVar } from 'tinejs';
 import auth from '@/actions/auth';
 import prisma from '@/actions/prisma';
 import s3 from '@/actions/s3';
@@ -18,118 +18,85 @@ const input = tineInput(
 
 const claims = auth.getClaims();
 
-const rateInterview = payload(
-  tineFn(async (ctx) => {
-    const rate = await prisma.rate
-      .update({
-        where: {
-          raterId_interviewId: {
-            raterId: tineVar(claims, 'userId'),
-            interviewId: tineVar(input, 'interviewId'),
-          },
-        },
-        data: {
-          value: tineVar(input, 'value'),
-        },
-        include: {
-          interview: {
-            include: {
-              job: true,
-              interviewee: true,
-            },
-          },
-        },
-      })
-      .run(ctx);
-
-    const rates = await prisma.rate
-      .findMany({
-        where: {
+const rateInterview = task(async (ctx) => {
+  const rate = await prisma.rate
+    .update({
+      where: {
+        raterId_interviewId: {
+          raterId: tineVar(claims, 'userId'),
           interviewId: tineVar(input, 'interviewId'),
         },
-        include: {
-          rater: true,
+      },
+      data: {
+        value: tineVar(input, 'value'),
+      },
+      include: {
+        interview: {
+          include: {
+            job: true,
+            interviewee: true,
+          },
+        },
+      },
+    })
+    .run(ctx);
+
+  const rates = await prisma.rate
+    .findMany({
+      where: {
+        interviewId: tineVar(input, 'interviewId'),
+      },
+      include: {
+        rater: true,
+      },
+    })
+    .run(ctx);
+
+  const ratesLeft = rates.reduce((acc, rate) => {
+    if (rate.value === null) {
+      return acc + 1;
+    }
+
+    return acc;
+  }, 0);
+
+  if (ratesLeft === 0) {
+    const totalValue = rates.reduce((acc, rate) => {
+      return acc + (rate.value || 0);
+    }, 0);
+
+    const score = Math.round((totalValue / (rates.length * MAX_SCORE)) * 100);
+
+    await prisma.interview
+      .update({
+        where: {
+          id: tineVar(input, 'interviewId'),
+        },
+        data: {
+          score,
         },
       })
       .run(ctx);
 
-    const ratesLeft = rates.reduce((acc, rate) => {
-      if (rate.value === null) {
-        return acc + 1;
-      }
+    const avatar = await s3
+      .presignedGet({
+        bucketName: 'user-avatars',
+        objectName: `${rate.interview?.intervieweeId}.jpg`,
+        expires: 604800,
+      })
+      .run(ctx);
 
-      return acc;
-    }, 0);
+    const ratersEmails = rates.map(({ rater }) => rater.email);
 
-    if (ratesLeft === 0) {
-      const totalValue = rates.reduce((acc, rate) => {
-        return acc + (rate.value || 0);
-      }, 0);
-
-      const score = Math.round((totalValue / (rates.length * MAX_SCORE)) * 100);
-
-      await prisma.interview
-        .update({
-          where: {
-            id: tineVar(input, 'interviewId'),
-          },
-          data: {
-            score,
-          },
-        })
-        .run(ctx);
-
-      const avatar = await s3
-        .presignedGet({
-          bucketName: 'user-avatars',
-          objectName: `${rate.interview?.intervieweeId}.jpg`,
-          expires: 604800,
-        })
-        .run(ctx);
-
-      const ratersEmails = rates.map(({ rater }) => rater.email);
-
-      if (score < 50) {
-        const promises = ratersEmails.map((raterEmail) =>
-          sendMail({
-            template: 'CadidateDisqualified',
-            to: raterEmail,
-            props: {
-              jobTitle: rate.interview?.job.title ?? '',
-              score,
-              candidate: {
-                email: rate.interview?.interviewee.email ?? '',
-                fullName: `${rate.interview?.interviewee.firstName} ${rate.interview?.interviewee.lastName}`,
-                avatar,
-              },
-            },
-          }).run(ctx)
-        );
-
-        await Promise.all(promises);
-
-        return rate;
-      }
-
-      const resumeUrl = await s3
-        .presignedGet({
-          bucketName: 'user-resumes',
-          objectName: `${rate.interview?.intervieweeId}.pdf`,
-          expires: 604800,
-        })
-        .run(ctx);
-
+    if (score < 50) {
       const promises = ratersEmails.map((raterEmail) =>
         sendMail({
-          template: 'CadidateQualified',
+          template: 'CadidateDisqualified',
           to: raterEmail,
           props: {
             jobTitle: rate.interview?.job.title ?? '',
             score,
             candidate: {
-              resumeUrl: rate.interview?.interviewee.resumeFileName
-                ? resumeUrl
-                : undefined,
               email: rate.interview?.interviewee.email ?? '',
               fullName: `${rate.interview?.interviewee.firstName} ${rate.interview?.interviewee.lastName}`,
               avatar,
@@ -139,10 +106,41 @@ const rateInterview = payload(
       );
 
       await Promise.all(promises);
+
+      return rate;
     }
 
-    return rate;
-  })
-);
+    const resumeUrl = await s3
+      .presignedGet({
+        bucketName: 'user-resumes',
+        objectName: `${rate.interview?.intervieweeId}.pdf`,
+        expires: 604800,
+      })
+      .run(ctx);
+
+    const promises = ratersEmails.map((raterEmail) =>
+      sendMail({
+        template: 'CadidateQualified',
+        to: raterEmail,
+        props: {
+          jobTitle: rate.interview?.job.title ?? '',
+          score,
+          candidate: {
+            resumeUrl: rate.interview?.interviewee.resumeFileName
+              ? resumeUrl
+              : undefined,
+            email: rate.interview?.interviewee.email ?? '',
+            fullName: `${rate.interview?.interviewee.firstName} ${rate.interview?.interviewee.lastName}`,
+            avatar,
+          },
+        },
+      }).run(ctx)
+    );
+
+    await Promise.all(promises);
+  }
+
+  return rate;
+});
 
 export default rateInterview.withInput(input);
