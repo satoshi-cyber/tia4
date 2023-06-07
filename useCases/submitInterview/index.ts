@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { payload, tineInput, tineVar } from 'tinejs';
+import { task, tineInput, tineVar } from 'tinejs';
 import auth from '@/actions/auth';
 import prisma from '@/actions/prisma';
 
@@ -20,7 +20,7 @@ const input = tineInput(
 
 const claims = auth.getClaims();
 
-const interview = prisma.interview.create({
+const createInterview = prisma.interview.create({
   data: {
     answers: tineVar(input, 'answers'),
     job: { connect: { id: tineVar(input, 'jobId') } },
@@ -33,8 +33,13 @@ const setOnboardTrue = prisma.user.update({
   data: { onboarded: true },
 });
 
-const submitInterview = payload(
-  tineVar([interview, setOnboardTrue] as const, ([$interview]) => $interview)
-);
+const submitInterview = task(async (ctx) => {
+  const [interview] = await Promise.all([
+    createInterview.run(ctx),
+    setOnboardTrue.run(ctx),
+  ]);
+
+  return interview;
+});
 
 export default submitInterview.withInput(input);

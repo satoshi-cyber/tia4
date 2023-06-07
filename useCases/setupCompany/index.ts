@@ -1,4 +1,4 @@
-import { payload, tineInput, tineVar } from 'tinejs';
+import { task, tineInput, tineVar } from 'tinejs';
 import auth from '@/actions/auth';
 import prisma from '@/actions/prisma';
 import { CompanyMemberRole } from '@prisma/client/edge';
@@ -26,8 +26,13 @@ const updateUser = prisma.user.update({
   data: { onboarded: true },
 });
 
-const setupCompany = payload(
-  tineVar([createCompany, updateUser] as const, ([$company]) => $company)
-);
+const setupCompany = task(async (ctx) => {
+  const [company] = await Promise.all([
+    createCompany.run(ctx),
+    updateUser.run(ctx),
+  ]);
+
+  return company;
+});
 
 export default setupCompany.withInput(input);
