@@ -16,8 +16,7 @@ const input = tineInput(
 
 const markInterviewReady = payload(
   tineFn(async (ctx) => {
-    // write better helper for this
-    const checkSecret = await payload(tineVar(input, 'secret')).run(ctx);
+    const checkSecret = await tineVar(input, 'secret')(ctx);
 
     if (checkSecret !== env.CONVERTER_SECRET) {
       throw new AuthError('Invalid secret');
@@ -67,8 +66,6 @@ const markInterviewReady = payload(
         expires: 604800,
       })
       .run(ctx);
-
-    console.log({ avatar, members });
 
     const promises = members.map((member) =>
       sendMail({

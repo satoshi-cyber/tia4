@@ -42,13 +42,10 @@ export const CompanyMembersReturnSchema = array(
         role: literal('user').or(literal('admin')),
         email: string(),
       }),
-    }).and(
-      object({
-        role: literal('member').or(literal('adminMember')),
-        userId: string(),
-        companyId: string(),
-      })
-    )
+      role: literal('member').or(literal('adminMember')),
+      userId: string(),
+      companyId: string(),
+    })
   )
 );
 
@@ -182,27 +179,24 @@ export const InterviewReturnSchema = object({
     resumeUrl: string(),
     resumeUploadUrl: string().or(Undefined()),
   }),
-}).and(
-  object({
-    id: string(),
-    createdAt: InstanceOf(Date),
-    updatedAt: InstanceOf(Date),
-    status: literal('initialized')
-      .or(literal('proccessing'))
-      .or(literal('ready')),
-    jobId: string(),
-    intervieweeId: string(),
-    answers: array(
-      object({
-        url: string(),
-        uploadUrl: string().or(Undefined()),
-        question: object({ id: string(), question: string(), time: number() }),
-      })
-    ),
-    score: Null().or(number()),
-    thumbnail: string(),
-  })
-);
+  id: string(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
+  status: literal('initialized')
+    .or(literal('proccessing'))
+    .or(literal('ready')),
+  jobId: string(),
+  intervieweeId: string(),
+  answers: array(
+    object({
+      url: string(),
+      uploadUrl: string().or(Undefined()),
+      question: object({ id: string(), question: string(), time: number() }),
+    })
+  ),
+  score: Null().or(number()),
+  thumbnail: string(),
+});
 
 export type InterviewReturnSchema = Infer<typeof InterviewReturnSchema>;
 
@@ -300,20 +294,17 @@ export const MyInterviewReturnSchema = object({
       avatarUrl: string(),
       avatarUploadUrl: string().or(Undefined()),
     }),
-  }).and(
-    object({
-      id: string(),
-      createdAt: InstanceOf(Date),
-      updatedAt: InstanceOf(Date),
-      description: Null().or(string()),
-      companyId: string(),
-      title: string(),
-      deadline: InstanceOf(Date),
-      questions: array(
-        object({ id: string(), question: string(), time: number() })
-      ),
-    })
-  ),
+    id: string(),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
+    description: Null().or(string()),
+    companyId: string(),
+    title: string(),
+    deadline: InstanceOf(Date),
+    questions: array(
+      object({ id: string(), question: string(), time: number() })
+    ),
+  }),
   interviewee: object({
     id: string(),
     email: string(),
@@ -333,27 +324,24 @@ export const MyInterviewReturnSchema = object({
     resumeUrl: string(),
     resumeUploadUrl: string().or(Undefined()),
   }),
-}).and(
-  object({
-    id: string(),
-    createdAt: InstanceOf(Date),
-    updatedAt: InstanceOf(Date),
-    status: literal('initialized')
-      .or(literal('proccessing'))
-      .or(literal('ready')),
-    jobId: string(),
-    intervieweeId: string(),
-    answers: array(
-      object({
-        url: string(),
-        uploadUrl: string().or(Undefined()),
-        question: object({ id: string(), question: string(), time: number() }),
-      })
-    ),
-    score: Null().or(number()),
-    thumbnail: string(),
-  })
-);
+  id: string(),
+  createdAt: InstanceOf(Date),
+  updatedAt: InstanceOf(Date),
+  status: literal('initialized')
+    .or(literal('proccessing'))
+    .or(literal('ready')),
+  jobId: string(),
+  intervieweeId: string(),
+  answers: array(
+    object({
+      url: string(),
+      uploadUrl: string().or(Undefined()),
+      question: object({ id: string(), question: string(), time: number() }),
+    })
+  ),
+  score: Null().or(number()),
+  thumbnail: string(),
+});
 
 export type MyInterviewReturnSchema = Infer<typeof MyInterviewReturnSchema>;
 
@@ -397,20 +385,17 @@ export const PendingRatesReturnSchema = array(
             avatarUrl: string(),
             avatarUploadUrl: string().or(Undefined()),
           }),
-        }).and(
-          object({
-            id: string(),
-            createdAt: InstanceOf(Date),
-            updatedAt: InstanceOf(Date),
-            description: Null().or(string()),
-            companyId: string(),
-            title: string(),
-            deadline: InstanceOf(Date),
-            questions: array(
-              object({ id: string(), question: string(), time: number() })
-            ),
-          })
-        ),
+          id: string(),
+          createdAt: InstanceOf(Date),
+          updatedAt: InstanceOf(Date),
+          description: Null().or(string()),
+          companyId: string(),
+          title: string(),
+          deadline: InstanceOf(Date),
+          questions: array(
+            object({ id: string(), question: string(), time: number() })
+          ),
+        }),
         interviewee: object({
           id: string(),
           email: string(),
@@ -439,41 +424,35 @@ export const PendingRatesReturnSchema = array(
             raterId: string(),
           })
         ),
-      }).and(
-        object({
-          id: string(),
-          createdAt: InstanceOf(Date),
-          updatedAt: InstanceOf(Date),
-          status: literal('initialized')
-            .or(literal('proccessing'))
-            .or(literal('ready')),
-          jobId: string(),
-          intervieweeId: string(),
-          answers: array(
-            object({
-              url: string(),
-              uploadUrl: string().or(Undefined()),
-              question: object({
-                id: string(),
-                question: string(),
-                time: number(),
-              }),
-            })
-          ),
-          score: Null().or(number()),
-          thumbnail: string(),
-        })
-      )
+        id: string(),
+        createdAt: InstanceOf(Date),
+        updatedAt: InstanceOf(Date),
+        status: literal('initialized')
+          .or(literal('proccessing'))
+          .or(literal('ready')),
+        jobId: string(),
+        intervieweeId: string(),
+        answers: array(
+          object({
+            url: string(),
+            uploadUrl: string().or(Undefined()),
+            question: object({
+              id: string(),
+              question: string(),
+              time: number(),
+            }),
+          })
+        ),
+        score: Null().or(number()),
+        thumbnail: string(),
+      })
     ),
-  }).and(
-    object({
-      createdAt: InstanceOf(Date),
-      value: Null().or(number()),
-      reason: Null().or(string()),
-      interviewId: string(),
-      raterId: string(),
-    })
-  )
+    createdAt: InstanceOf(Date),
+    value: Null().or(number()),
+    reason: Null().or(string()),
+    interviewId: string(),
+    raterId: string(),
+  })
 );
 
 export type PendingRatesReturnSchema = Infer<typeof PendingRatesReturnSchema>;
@@ -556,41 +535,35 @@ export const RateInterviewReturnSchema = object({
         resumeUrl: string(),
         resumeUploadUrl: string().or(Undefined()),
       }),
-    }).and(
-      object({
-        id: string(),
-        createdAt: InstanceOf(Date),
-        updatedAt: InstanceOf(Date),
-        status: literal('initialized')
-          .or(literal('proccessing'))
-          .or(literal('ready')),
-        jobId: string(),
-        intervieweeId: string(),
-        answers: array(
-          object({
-            url: string(),
-            uploadUrl: string().or(Undefined()),
-            question: object({
-              id: string(),
-              question: string(),
-              time: number(),
-            }),
-          })
-        ),
-        score: Null().or(number()),
-        thumbnail: string(),
-      })
-    )
+      id: string(),
+      createdAt: InstanceOf(Date),
+      updatedAt: InstanceOf(Date),
+      status: literal('initialized')
+        .or(literal('proccessing'))
+        .or(literal('ready')),
+      jobId: string(),
+      intervieweeId: string(),
+      answers: array(
+        object({
+          url: string(),
+          uploadUrl: string().or(Undefined()),
+          question: object({
+            id: string(),
+            question: string(),
+            time: number(),
+          }),
+        })
+      ),
+      score: Null().or(number()),
+      thumbnail: string(),
+    })
   ),
-}).and(
-  object({
-    createdAt: InstanceOf(Date),
-    value: Null().or(number()),
-    reason: Null().or(string()),
-    interviewId: string(),
-    raterId: string(),
-  })
-);
+  createdAt: InstanceOf(Date),
+  value: Null().or(number()),
+  reason: Null().or(string()),
+  interviewId: string(),
+  raterId: string(),
+});
 
 export type RateInterviewReturnSchema = Infer<typeof RateInterviewReturnSchema>;
 
