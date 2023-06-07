@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { condition, payload, tineInput, tineVar } from 'tinejs';
+import { condition, shape, tineInput, tineVar } from 'tinejs';
 import auth from '@/actions/auth';
 import { inviteCompanyMembersSchema } from '@/types';
 import prisma from '@/actions/prisma';
@@ -15,7 +15,7 @@ const input = tineInput(
 
 const claims = auth.getClaims({ companyId: tineVar(input, 'companyId') });
 
-const inviteCompanyMembers = payload(
+const inviteCompanyMembers = shape(
   tineVar(input, ({ teamMembers }) =>
     teamMembers.map(($member) => {
       const isMember = prisma.companyMember.findFirst({

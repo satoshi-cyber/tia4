@@ -38,7 +38,7 @@ export const useApply = () => {
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: zodResolver(updateProfileSchema),
-    defaultValues: userData && parseDefaults(userData),
+    defaultValues: userData ? parseDefaults(userData) : undefined,
   });
 
   const { reset } = form;

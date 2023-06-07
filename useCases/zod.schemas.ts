@@ -19,11 +19,9 @@ export type AuthenticateUserReturnSchema = Infer<
   typeof AuthenticateUserReturnSchema
 >;
 
-export const CompanyReturnSchema = object({
-  id: string(),
-  name: string(),
-  avatarUrl: string(),
-});
+export const CompanyReturnSchema = Null().or(
+  object({ id: string(), name: string(), avatarUrl: string() })
+);
 
 export type CompanyReturnSchema = Infer<typeof CompanyReturnSchema>;
 
@@ -114,13 +112,15 @@ export const DidApplyReturnSchema = boolean();
 
 export type DidApplyReturnSchema = Infer<typeof DidApplyReturnSchema>;
 
-export const DidRateInterviewReturnSchema = object({
-  createdAt: InstanceOf(Date),
-  value: Null().or(number()),
-  reason: Null().or(string()),
-  interviewId: string(),
-  raterId: string(),
-});
+export const DidRateInterviewReturnSchema = Null().or(
+  object({
+    createdAt: InstanceOf(Date),
+    value: Null().or(number()),
+    reason: Null().or(string()),
+    interviewId: string(),
+    raterId: string(),
+  })
+);
 
 export type DidRateInterviewReturnSchema = Infer<
   typeof DidRateInterviewReturnSchema
@@ -147,56 +147,58 @@ export const HealthReturnSchema = object({ success: boolean() });
 
 export type HealthReturnSchema = Infer<typeof HealthReturnSchema>;
 
-export const InterviewReturnSchema = object({
-  job: object({
+export const InterviewReturnSchema = Null().or(
+  object({
+    job: object({
+      id: string(),
+      createdAt: InstanceOf(Date),
+      updatedAt: InstanceOf(Date),
+      description: Null().or(string()),
+      companyId: string(),
+      title: string(),
+      deadline: InstanceOf(Date),
+      questions: array(
+        object({ id: string(), question: string(), time: number() })
+      ),
+    }),
+    interviewee: object({
+      id: string(),
+      email: string(),
+      firstName: Null().or(string()),
+      lastName: Null().or(string()),
+      bio: Null().or(string()),
+      issuer: string(),
+      publicAddress: string(),
+      linkedInProfile: Null().or(string()),
+      resumeFileName: Null().or(string()),
+      role: literal('user').or(literal('admin')),
+      onboarded: boolean(),
+      createdAt: InstanceOf(Date),
+      updatedAt: InstanceOf(Date),
+      avatarUrl: string(),
+      avatarUploadUrl: string().or(Undefined()),
+      resumeUrl: string(),
+      resumeUploadUrl: string().or(Undefined()),
+    }),
     id: string(),
     createdAt: InstanceOf(Date),
     updatedAt: InstanceOf(Date),
-    description: Null().or(string()),
-    companyId: string(),
-    title: string(),
-    deadline: InstanceOf(Date),
-    questions: array(
-      object({ id: string(), question: string(), time: number() })
+    status: literal('initialized')
+      .or(literal('proccessing'))
+      .or(literal('ready')),
+    jobId: string(),
+    intervieweeId: string(),
+    answers: array(
+      object({
+        url: string(),
+        uploadUrl: string().or(Undefined()),
+        question: object({ id: string(), question: string(), time: number() }),
+      })
     ),
-  }),
-  interviewee: object({
-    id: string(),
-    email: string(),
-    firstName: Null().or(string()),
-    lastName: Null().or(string()),
-    bio: Null().or(string()),
-    issuer: string(),
-    publicAddress: string(),
-    linkedInProfile: Null().or(string()),
-    resumeFileName: Null().or(string()),
-    role: literal('user').or(literal('admin')),
-    onboarded: boolean(),
-    createdAt: InstanceOf(Date),
-    updatedAt: InstanceOf(Date),
-    avatarUrl: string(),
-    avatarUploadUrl: string().or(Undefined()),
-    resumeUrl: string(),
-    resumeUploadUrl: string().or(Undefined()),
-  }),
-  id: string(),
-  createdAt: InstanceOf(Date),
-  updatedAt: InstanceOf(Date),
-  status: literal('initialized')
-    .or(literal('proccessing'))
-    .or(literal('ready')),
-  jobId: string(),
-  intervieweeId: string(),
-  answers: array(
-    object({
-      url: string(),
-      uploadUrl: string().or(Undefined()),
-      question: object({ id: string(), question: string(), time: number() }),
-    })
-  ),
-  score: Null().or(number()),
-  thumbnail: string(),
-});
+    score: Null().or(number()),
+    thumbnail: string(),
+  })
+);
 
 export type InterviewReturnSchema = Infer<typeof InterviewReturnSchema>;
 
@@ -237,15 +239,17 @@ export type InviteCompanyMembersReturnSchema = Infer<
   typeof InviteCompanyMembersReturnSchema
 >;
 
-export const JobReturnSchema = object({
-  id: string(),
-  title: string(),
-  deadline: InstanceOf(Date),
-  description: Null().or(string()),
-  questions: array(
-    object({ id: string(), question: string(), time: number() })
-  ),
-});
+export const JobReturnSchema = Null().or(
+  object({
+    id: string(),
+    title: string(),
+    deadline: InstanceOf(Date),
+    description: Null().or(string()),
+    questions: array(
+      object({ id: string(), question: string(), time: number() })
+    ),
+  })
+);
 
 export type JobReturnSchema = Infer<typeof JobReturnSchema>;
 
@@ -271,77 +275,81 @@ export type MarkInterviewReadyReturnSchema = Infer<
   typeof MarkInterviewReadyReturnSchema
 >;
 
-export const MyCompanyReturnSchema = object({
-  id: string(),
-  name: string(),
-  website: Null().or(string()),
-  description: Null().or(string()),
-  avatarUploadUrl: string().or(Undefined()),
-  avatarUrl: string(),
-});
+export const MyCompanyReturnSchema = Null().or(
+  object({
+    id: string(),
+    name: string(),
+    website: Null().or(string()),
+    description: Null().or(string()),
+    avatarUploadUrl: string().or(Undefined()),
+    avatarUrl: string(),
+  })
+);
 
 export type MyCompanyReturnSchema = Infer<typeof MyCompanyReturnSchema>;
 
-export const MyInterviewReturnSchema = object({
-  job: object({
-    company: object({
+export const MyInterviewReturnSchema = Null().or(
+  object({
+    job: object({
+      company: object({
+        id: string(),
+        createdAt: InstanceOf(Date),
+        updatedAt: InstanceOf(Date),
+        name: string(),
+        description: Null().or(string()),
+        website: Null().or(string()),
+        avatarUrl: string(),
+        avatarUploadUrl: string().or(Undefined()),
+      }),
       id: string(),
       createdAt: InstanceOf(Date),
       updatedAt: InstanceOf(Date),
-      name: string(),
       description: Null().or(string()),
-      website: Null().or(string()),
+      companyId: string(),
+      title: string(),
+      deadline: InstanceOf(Date),
+      questions: array(
+        object({ id: string(), question: string(), time: number() })
+      ),
+    }),
+    interviewee: object({
+      id: string(),
+      email: string(),
+      firstName: Null().or(string()),
+      lastName: Null().or(string()),
+      bio: Null().or(string()),
+      issuer: string(),
+      publicAddress: string(),
+      linkedInProfile: Null().or(string()),
+      resumeFileName: Null().or(string()),
+      role: literal('user').or(literal('admin')),
+      onboarded: boolean(),
+      createdAt: InstanceOf(Date),
+      updatedAt: InstanceOf(Date),
       avatarUrl: string(),
       avatarUploadUrl: string().or(Undefined()),
+      resumeUrl: string(),
+      resumeUploadUrl: string().or(Undefined()),
     }),
     id: string(),
     createdAt: InstanceOf(Date),
     updatedAt: InstanceOf(Date),
-    description: Null().or(string()),
-    companyId: string(),
-    title: string(),
-    deadline: InstanceOf(Date),
-    questions: array(
-      object({ id: string(), question: string(), time: number() })
+    status: literal('initialized')
+      .or(literal('proccessing'))
+      .or(literal('ready')),
+    jobId: string(),
+    intervieweeId: string(),
+    answers: array(
+      object({
+        url: string(),
+        uploadUrl: string().or(Undefined()),
+        question: object({ id: string(), question: string(), time: number() }),
+      })
     ),
-  }),
-  interviewee: object({
-    id: string(),
-    email: string(),
-    firstName: Null().or(string()),
-    lastName: Null().or(string()),
-    bio: Null().or(string()),
-    issuer: string(),
-    publicAddress: string(),
-    linkedInProfile: Null().or(string()),
-    resumeFileName: Null().or(string()),
-    role: literal('user').or(literal('admin')),
-    onboarded: boolean(),
-    createdAt: InstanceOf(Date),
-    updatedAt: InstanceOf(Date),
-    avatarUrl: string(),
-    avatarUploadUrl: string().or(Undefined()),
-    resumeUrl: string(),
-    resumeUploadUrl: string().or(Undefined()),
-  }),
-  id: string(),
-  createdAt: InstanceOf(Date),
-  updatedAt: InstanceOf(Date),
-  status: literal('initialized')
-    .or(literal('proccessing'))
-    .or(literal('ready')),
-  jobId: string(),
-  intervieweeId: string(),
-  answers: array(
-    object({
-      url: string(),
-      uploadUrl: string().or(Undefined()),
-      question: object({ id: string(), question: string(), time: number() }),
-    })
-  ),
-  score: Null().or(number()),
-  thumbnail: string(),
-});
+    score: Null().or(number()),
+    thumbnail: string(),
+  })
+);
 
 export type MyInterviewReturnSchema = Infer<typeof MyInterviewReturnSchema>;
 
@@ -463,41 +471,45 @@ export type ProcessInterviewReturnSchema = Infer<
   typeof ProcessInterviewReturnSchema
 >;
 
-export const ProfileReturnSchema = object({
-  id: string(),
-  email: string(),
-  firstName: Null().or(string()),
-  lastName: Null().or(string()),
-  bio: Null().or(string()),
-  issuer: string(),
-  publicAddress: string(),
-  linkedInProfile: Null().or(string()),
-  resumeFileName: Null().or(string()),
-  role: literal('user').or(literal('admin')),
-  onboarded: boolean(),
-  createdAt: InstanceOf(Date),
-  updatedAt: InstanceOf(Date),
-  avatarUrl: string(),
-  avatarUploadUrl: string().or(Undefined()),
-  resumeUrl: string(),
-  resumeUploadUrl: string().or(Undefined()),
-});
+export const ProfileReturnSchema = Null().or(
+  object({
+    id: string(),
+    email: string(),
+    firstName: Null().or(string()),
+    lastName: Null().or(string()),
+    bio: Null().or(string()),
+    issuer: string(),
+    publicAddress: string(),
+    linkedInProfile: Null().or(string()),
+    resumeFileName: Null().or(string()),
+    role: literal('user').or(literal('admin')),
+    onboarded: boolean(),
+    createdAt: InstanceOf(Date),
+    updatedAt: InstanceOf(Date),
+    avatarUrl: string(),
+    avatarUploadUrl: string().or(Undefined()),
+    resumeUrl: string(),
+    resumeUploadUrl: string().or(Undefined()),
+  })
+);
 
 export type ProfileReturnSchema = Infer<typeof ProfileReturnSchema>;
 
-export const PublicJobReturnSchema = object({
-  id: string(),
-  title: string(),
-  company: object({
-    name: string(),
-    website: Null().or(string()),
-    avatarUrl: string(),
-  }),
-  description: Null().or(string()),
-  questions: array(
-    object({ id: string(), question: string(), time: number() })
-  ),
-});
+export const PublicJobReturnSchema = Null().or(
+  object({
+    id: string(),
+    title: string(),
+    company: object({
+      name: string(),
+      website: Null().or(string()),
+      avatarUrl: string(),
+    }),
+    description: Null().or(string()),
+    questions: array(
+      object({ id: string(), question: string(), time: number() })
+    ),
+  })
+);
 
 export type PublicJobReturnSchema = Infer<typeof PublicJobReturnSchema>;
 

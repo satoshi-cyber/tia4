@@ -23,7 +23,7 @@ export type FormProps<D extends z.AnyZodObject, T extends z.infer<D>> =
         { reset }: { reset: (data: DeepPartial<DeepNullable<T>>) => void }
       ) => void;
       schema: D;
-      data?: DeepPartial<DeepNullable<T>>;
+      data?: DeepPartial<DeepNullable<T>> | null;
       defaultData?: DeepPartial<DeepNullable<T>>;
       children: React.ReactNode;
       className?: string;

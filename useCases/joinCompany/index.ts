@@ -1,8 +1,7 @@
 import { z } from 'zod';
-import { condition, tineInput, tineVar } from 'tinejs';
+import { task, tineInput, tineVar } from 'tinejs';
 import auth from '@/actions/auth';
 import prisma from '@/actions/prisma';
-import { deleteInviteAndUpdateUser } from './joinCompany-functions';
 
 const input = tineInput(z.object({ companyId: z.string() }));
 
@@ -13,19 +12,48 @@ const user = prisma.user.findUnique({
   select: { id: true, email: true },
 });
 
-const isInvited = prisma.companyInvite.findFirstOrThrow({
-  where: {
-    companyId: tineVar(input, 'companyId'),
-    recipientEmail: tineVar(user, 'email'),
-  },
-});
+const joinCompany = task(async (ctx) => {
+  const isInvited = await prisma.companyInvite
+    .findFirst({
+      where: {
+        companyId: tineVar(input, 'companyId'),
+        recipientEmail: tineVar(user, 'email'),
+      },
+    })
+    .run(ctx);
 
-const deletedInvite = deleteInviteAndUpdateUser({ user, input });
+  if (!isInvited) {
+    return null;
+  }
 
-const joinCompany = condition([
-  tineVar(isInvited, ($isInvited) => Boolean($isInvited)),
-  tineVar(
-    prisma.companyMember.create({
+  const [{ role }] = await Promise.all([
+    prisma.companyInvite
+      .delete({
+        where: {
+          recipientEmail_companyId: {
+            recipientEmail: tineVar(user, 'email'),
+            companyId: tineVar(input, 'companyId'),
+          },
+        },
+      })
+      .run(ctx),
+    prisma.companyMember
+      .deleteMany({
+        where: {
+          userId: tineVar(user, 'id'),
+        },
+      })
+      .run(ctx),
+    prisma.user
+      .update({
+        where: { id: tineVar(user, 'id') },
+        data: { onboarded: true },
+      })
+      .run(ctx),
+  ]);
+
+  return await prisma.companyMember
+    .create({
       data: {
         company: {
           connect: {
@@ -37,10 +65,10 @@ const joinCompany = condition([
             id: tineVar(user, 'id'),
           },
         },
-        role: tineVar(deletedInvite, 'role'),
+        role,
       },
     })
-  ),
-]);
+    .run(ctx);
+});
 
 export default joinCompany.withInput(input);

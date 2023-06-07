@@ -1,5 +1,5 @@
-import { payload } from 'tinejs';
+import { shape } from 'tinejs';
 
-const health = payload({ success: true });
+const health = shape({ success: true });
 
 export default health.noInput();

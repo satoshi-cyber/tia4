@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { payload, tineInput, tineVar } from 'tinejs';
+import { shape, tineInput, tineVar } from 'tinejs';
 import prisma from '@/actions/prisma';
 import auth from '@/actions/auth';
 
@@ -15,7 +15,7 @@ const input = tineInput(
 
 const claims = auth.getClaims({ companyId: tineVar(input, 'companyId') });
 
-const parts = payload(
+const parts = shape(
   tineVar(input, ({ query }) => (query ? getQueryParams(query) : undefined))
 );
 
@@ -56,7 +56,7 @@ const data = prisma.interview.findMany({
   },
 });
 
-const interviews = payload(
+const interviews = shape(
   tineVar(data, ($data) =>
     $data.map((item) => ({
       ...item,
