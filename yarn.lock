@@ -8122,15 +8122,15 @@ tinejs.openapi@^0.0.1:
     title-case "^3.0.3"
     zod "^3.21.4"
 
-tinejs.prisma@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.17.tgz#ae2d33b848b8706a2c7a34872d0e473cd9ad4c54"
-  integrity sha512-FZDRbPIsYvMT4036FnxAxmuLMPqTA07Twoaxa41YY7oqOAKyL5ecKFf38VH13ixugMrtQ6vzdT+Y90a2XDU6tg==
+tinejs.prisma@^0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.21.tgz#39b147377e05928a62fc281bb601cc7f2a3b2c1b"
+  integrity sha512-JgRPwU1zjQ0tZQScjwDBT4f8N9EbgOPTWJlUitX4GP0QW41XfV4cP9J1FFf37RoP5eju6i+mPp/Su2lNLod4Bg==
 
-tinejs@^0.0.37:
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.37.tgz#da0b21570081b4d7ff746e67040fe1f0c4236816"
-  integrity sha512-pZG0HlPtrlqvD5fUGlCihJbj+i2d4OMRkNOP7Y8bEMSyJrTH9P67NPNzFbXymuky6SGdWN3sJE1QG/slVKklLQ==
+tinejs@^0.0.41:
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.41.tgz#9af4cb5976b13516b9439eca03d351b6abab92eb"
+  integrity sha512-bGNfJ+eEWCHugXAOMlytghmsZC9hHfb+yOa0ipyKRLX5L5LO/QjsgfLOWD7V8MGqoidVR7d0478HKN0uLLhIJw==
   dependencies:
     uuid "^9.0.0"
     zod "^3.21.4"

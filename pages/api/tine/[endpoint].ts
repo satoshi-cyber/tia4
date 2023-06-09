@@ -84,15 +84,21 @@ const useCases = {
 };
 
 const handler = async (req: NextRequest) => {
+  const params = new URL(req.url).searchParams;
+
+  const endpoint = params.get('endpoint') as string;
+
+  const ctx = tineCtx({ headers: req.headers, cookies: req.cookies });
+
   try {
-    const params = new URL(req.url).searchParams;
-
-    const endpoint = params.get('endpoint') as string;
-
-    const ctx = tineCtx({ headers: req.headers, cookies: req.cookies });
-
     if (endpoint in useCasesWithInput) {
-      const input = superjson.deserialize(await req.json());
+      let input;
+
+      try {
+        input = superjson.deserialize(await req.json());
+      } catch (e) {
+        throw new Error('Input is required');
+      }
 
       const data = await useCasesWithInput[
         endpoint as keyof typeof useCasesWithInput
@@ -116,6 +122,8 @@ const handler = async (req: NextRequest) => {
     return NextResponse.json(superjson.serialize({ error: e.message }), {
       status: 500,
     });
+  } finally {
+    console.log([...ctx.get('actions').values()]);
   }
 };
 
