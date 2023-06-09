@@ -15,6 +15,7 @@ const presignedGet = tineAction(
   {
     action: 's3.presignedGet',
     schema: presignedGetSchema,
+    skipLog: true,
   }
 );
 

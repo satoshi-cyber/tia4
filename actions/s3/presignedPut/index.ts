@@ -13,6 +13,7 @@ const presignedPut = tineAction(
   {
     action: 's3.presignedPut',
     schema: presignedPutSchema,
+    skipLog: true,
   }
 );
 

@@ -8127,10 +8127,10 @@ tinejs.prisma@^0.0.23:
   resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.23.tgz#04e4f7375ff196a50e36780ee2192648bd07524d"
   integrity sha512-aOPbF7mDwu+9iyHsK0+SX9f3/kOZOujfBW/CQ7Hu70Up/cpPlxZ18zIVJJRAf80VK5sDIxNMq2yaynFnPlOncA==
 
-tinejs@^0.0.43:
-  version "0.0.43"
-  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.43.tgz#5efc77e2aace279acb1fd24ef3bff524fcedccff"
-  integrity sha512-55y30PWrqbvisCeT6evOlnwFFnN7N2Re/Ufv/QZ3m8jB6bcCgcNGVo50FH53uTjb0Z0mGeg2rOIK6xWI8CtToA==
+tinejs@^0.0.46:
+  version "0.0.46"
+  resolved "https://registry.yarnpkg.com/tinejs/-/tinejs-0.0.46.tgz#078b35e29c0fb99f653a344fe6816c1b359900bc"
+  integrity sha512-kbNvDuujpQhrVg+dWzcsJsqxOuT3ASGQAPTKtD/mLHTSXpFm6wR9F6PQtKWjGoUeN9MnjTU4oPl7tmdZ1tKKGw==
   dependencies:
     uuid "^9.0.0"
     zod "^3.21.4"

@@ -2,7 +2,7 @@ import { condition, tineVar } from 'tinejs';
 import s3 from '@/actions/s3';
 import auth from '@/actions/auth';
 
-const claims = auth.getClaimsSafe();
+const claims = auth.getClaimsSafe(undefined, { skipLog: true });
 
 const user = {
   avatarUrl: {
@@ -33,17 +33,20 @@ const user = {
     needs: { id: true },
     compute(user: { id: string }) {
       return tineVar(
-        condition([
-          tineVar(claims, ($claims) => $claims?.userId === user.id),
-          tineVar(
-            s3.presignedPut({
-              bucketName: 'user-resumes',
-              objectName: `${user.id}.pdf`,
-              expires: 3600,
-            })
-          ),
-          undefined,
-        ])
+        condition(
+          [
+            tineVar(claims, ($claims) => $claims?.userId === user.id),
+            tineVar(
+              s3.presignedPut({
+                bucketName: 'user-resumes',
+                objectName: `${user.id}.pdf`,
+                expires: 3600,
+              })
+            ),
+            undefined,
+          ],
+          { skipLog: true }
+        )
       );
     },
   },
@@ -51,17 +54,20 @@ const user = {
     needs: { id: true },
     compute(user: { id: string }) {
       return tineVar(
-        condition([
-          tineVar(claims, ($claims) => $claims?.userId === user.id),
-          tineVar(
-            s3.presignedPut({
-              bucketName: 'user-avatars',
-              objectName: `${user.id}.jpg`,
-              expires: 3600,
-            })
-          ),
-          undefined,
-        ])
+        condition(
+          [
+            tineVar(claims, ($claims) => $claims?.userId === user.id),
+            tineVar(
+              s3.presignedPut({
+                bucketName: 'user-avatars',
+                objectName: `${user.id}.jpg`,
+                expires: 3600,
+              })
+            ),
+            undefined,
+          ],
+          { skipLog: true }
+        )
       );
     },
   },
