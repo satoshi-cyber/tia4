@@ -39,6 +39,7 @@ const getClaimsSafe = tineAction(
   },
   {
     action: 'auth.getClaimsSafe',
+    name: 'safeClaims',
   }
 );
 

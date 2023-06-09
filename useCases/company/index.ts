@@ -4,16 +4,19 @@ import { z } from 'zod';
 
 const input = tineInput(z.object({ companyId: z.string() }));
 
-const company = prisma.company.findUnique({
-  where: {
-    id: tineVar(input, 'companyId'),
+const company = prisma.company.findUnique(
+  {
+    where: {
+      id: tineVar(input, 'companyId'),
+    },
+    select: {
+      id: true,
+      name: true,
+      avatarUrl: true,
+    },
   },
-  select: {
-    id: true,
-    name: true,
-    avatarUrl: true,
-  },
-});
+  { name: 'company' }
+);
 
 // Is used in join company and needs to be public endpoint
 export default company.withInput(input);

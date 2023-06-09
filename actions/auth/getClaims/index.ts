@@ -39,6 +39,7 @@ const getClaims = tineAction(
   },
   {
     action: 'auth.getClaims',
+    name: 'claims',
   }
 );
 

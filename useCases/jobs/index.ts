@@ -7,16 +7,19 @@ const input = tineInput(z.object({ companyId: z.string() }));
 
 const claims = auth.getClaims({ companyId: tineVar(input, 'companyId') });
 
-const jobs = prisma.job.findMany({
-  where: {
-    companyId: tineVar(claims, 'companyId'),
+const jobs = prisma.job.findMany(
+  {
+    where: {
+      companyId: tineVar(claims, 'companyId'),
+    },
+    select: {
+      id: true,
+      title: true,
+      deadline: true,
+    },
+    orderBy: { createdAt: 'desc' },
   },
-  select: {
-    id: true,
-    title: true,
-    deadline: true,
-  },
-  orderBy: { createdAt: 'desc' },
-});
+  { name: 'jobs' }
+);
 
 export default jobs.withInput(input);
