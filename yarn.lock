@@ -8122,10 +8122,10 @@ tinejs.openapi@^0.0.1:
     title-case "^3.0.3"
     zod "^3.21.4"
 
-tinejs.prisma@^0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.22.tgz#124a0909bd758db309ec195d24cc135702b68a09"
-  integrity sha512-Fd0JSK1VKfQYBrpo+oOUNSG3OPmdagJPT4WS3pSg0jlYy0yOkSBhC/+KomzxTJXVa7jI78ai1RFEOGaLsiNMIQ==
+tinejs.prisma@^0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/tinejs.prisma/-/tinejs.prisma-0.0.23.tgz#04e4f7375ff196a50e36780ee2192648bd07524d"
+  integrity sha512-aOPbF7mDwu+9iyHsK0+SX9f3/kOZOujfBW/CQ7Hu70Up/cpPlxZ18zIVJJRAf80VK5sDIxNMq2yaynFnPlOncA==
 
 tinejs@^0.0.43:
   version "0.0.43"
