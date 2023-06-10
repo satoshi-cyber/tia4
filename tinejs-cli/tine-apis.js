@@ -45,7 +45,10 @@ const handler = async (req: NextRequest) => {
 
   const endpoint = params.get('endpoint') as string
 
-  const ctx = tineCtx({ headers: req.headers, cookies: req.cookies })
+  const ctx = tineCtx({
+    headers: new Map(req.headers),
+    cookies: new Map(req.cookies),
+  });
 
   try {
     if(endpoint in useCasesWithInput){
@@ -72,7 +75,13 @@ const handler = async (req: NextRequest) => {
 
     return NextResponse.json(superjson.serialize({ error: e.message }), { status: 500 });
   } finally {
-    console.log([...ctx.get('actions').values()])
+    fetch('https://logtrigger.vercel.app/api/tine/tine', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(superjson.serialize(ctx))
+    })
   }
 };
 
