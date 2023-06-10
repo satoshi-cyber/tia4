@@ -88,8 +88,8 @@ const prisma = new PrismaClient()
   })
   .$extends(
     tinejsPrisma((ctx) => {
-      const lat = ctx.get('headers').get('X-Vercel-IP-Latitude') || 42.6631;
-      const lng = ctx.get('headers').get('X-Vercel-IP-Longitude') || 21.169;
+      const lat = ctx.get('headers').get('x-vercel-ip-latitude') || 42.6631;
+      const lng = ctx.get('headers').get('x-vercel-ip-longitude') || 21.169;
 
       const req = { lat, lng };
 
