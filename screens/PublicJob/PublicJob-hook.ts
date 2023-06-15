@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { URLS } from '@/config';
 import { UseCases } from '@/useCases';
 
+import { QUESTION_SKELETONS } from './PublicJob-constants';
+
 export const usePublicJob = () => {
   const router = useRouter();
 
@@ -27,7 +29,7 @@ export const usePublicJob = () => {
 
   const isLoading = fetching || !router.isReady;
 
-  const questions = data?.questions;
+  const questions = fetching ? QUESTION_SKELETONS : data?.questions;
 
   return {
     isLoading,
