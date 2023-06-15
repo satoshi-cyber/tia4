@@ -8,6 +8,7 @@ import Markdown from '@/components/Markdown';
 import PrimaryButton from '@/components/PrimaryButton';
 import { TITLE_PROPS } from './PublicJob-constants';
 import { usePublicJob } from './PublicJob-hook';
+import Questions from './components/Questions';
 
 const PublicJob: React.FC = () => {
   const {
@@ -17,6 +18,7 @@ const PublicJob: React.FC = () => {
     href,
     jobDescription,
     companyWebsite,
+    questions,
   } = usePublicJob();
 
   return (
@@ -49,6 +51,7 @@ const PublicJob: React.FC = () => {
           text={jobDescription}
           skeletonProps={{ count: 40 }}
         />
+        <Questions questions={questions} />
         <Link
           href={href}
           className="w-full mt-10 sticky bottom-6 z-20"

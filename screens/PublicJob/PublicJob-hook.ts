@@ -27,6 +27,8 @@ export const usePublicJob = () => {
 
   const isLoading = fetching || !router.isReady;
 
+  const questions = data?.questions;
+
   return {
     isLoading,
     href,
@@ -34,5 +36,6 @@ export const usePublicJob = () => {
     jobDescription,
     companyName,
     companyWebsite,
+    questions,
   };
 };
