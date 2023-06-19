@@ -7,6 +7,14 @@ import interview from './extend/interview';
 import user from './extend/user';
 import { env } from '../config';
 
+const extend = {
+  result: {
+    company,
+    interview,
+    user,
+  },
+};
+
 const clients = [
   {
     lat: 37.3541,
@@ -17,13 +25,7 @@ const clients = [
           url: env.SFO_DATABASE_URL,
         },
       },
-    }).$extends({
-      result: {
-        company,
-        interview,
-        user,
-      },
-    }),
+    }).$extends(extend),
   },
   {
     lat: 50.1109,
@@ -34,13 +36,7 @@ const clients = [
           url: env.FRA_DATABASE_URL,
         },
       },
-    }).$extends({
-      result: {
-        company,
-        interview,
-        user,
-      },
-    }),
+    }).$extends(extend),
   },
   {
     lat: 40.8041,
@@ -51,13 +47,7 @@ const clients = [
           url: env.NYC_DATABASE_URL,
         },
       },
-    }).$extends({
-      result: {
-        company,
-        interview,
-        user,
-      },
-    }),
+    }).$extends(extend),
   },
   {
     lat: -33.8678,
@@ -68,47 +58,33 @@ const clients = [
           url: env.SYD_DATABASE_URL,
         },
       },
-    }).$extends({
-      result: {
-        company,
-        interview,
-        user,
-      },
-    }),
+    }).$extends(extend),
   },
 ];
 
-const prisma = new PrismaClient()
-  .$extends({
-    result: {
-      company,
-      interview,
-      user,
-    },
+const prisma = new PrismaClient().$extends(extend).$extends(
+  tinejsPrisma((ctx) => {
+    const lat = ctx.get('headers').get('x-vercel-ip-latitude') || 42.6631;
+    const lng = ctx.get('headers').get('x-vercel-ip-longitude') || 21.169;
+
+    const req = { lat, lng };
+
+    const {
+      location: { client, ...meta },
+      distance,
+    } = findNearestLocation(
+      {
+        lat,
+        lng,
+      },
+      clients
+    );
+
+    console.log({ ...meta, distance, req });
+
+    return client;
   })
-  .$extends(
-    tinejsPrisma((ctx) => {
-      const lat = ctx.get('headers').get('x-vercel-ip-latitude') || 42.6631;
-      const lng = ctx.get('headers').get('x-vercel-ip-longitude') || 21.169;
-
-      const req = { lat, lng };
-
-      const {
-        location: { client, ...meta },
-        distance,
-      } = findNearestLocation(
-        {
-          lat,
-          lng,
-        },
-        clients
-      );
-
-      console.log({ ...meta, distance, req });
-
-      return client;
-    })
-  );
+);
 
 export default prisma;
 
