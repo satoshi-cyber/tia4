@@ -28,8 +28,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         headers: new Map(Object.entries(req.headers)),
         cookies: new Map(Object.entries(req.cookies)),
       }),
-      workflow: payload,
-    } = superjson.deserialize(req.body) as { ctx?: TineCtx; workflow: any };
+      ...payload
+    } = superjson.deserialize(req.body) as {
+      ctx?: TineCtx;
+      payload: any;
+      action: string;
+      name?: string;
+    };
 
     ctx.set('.tine-workflow-actions', actions);
     ctx.set('.tine-placeholder-resolver', ($: any, key: string) =>
