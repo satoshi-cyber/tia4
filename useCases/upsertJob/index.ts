@@ -43,10 +43,10 @@ const createJob = prisma.job.create({
   },
 });
 
-const upsertJob = condition([
-  tineVar(input, ({ id }) => Boolean(id)),
-  tineVar(updateJob),
-  tineVar(createJob),
-]);
+const upsertJob = condition({
+  if: tineVar(input, ({ id }) => Boolean(id)),
+  then: tineVar(updateJob),
+  else: tineVar(createJob),
+});
 
 export default upsertJob.withInput(input);

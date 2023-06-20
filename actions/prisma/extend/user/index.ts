@@ -34,17 +34,17 @@ const user = {
     compute(user: { id: string }) {
       return tineVar(
         condition(
-          [
-            tineVar(claims, ($claims) => $claims?.userId === user.id),
-            tineVar(
+          {
+            if: tineVar(claims, ($claims) => $claims?.userId === user.id),
+            then: tineVar(
               s3.presignedPut({
                 bucketName: 'user-resumes',
                 objectName: `${user.id}.pdf`,
                 expires: 3600,
               })
             ),
-            undefined,
-          ],
+            else: undefined,
+          },
           { skipLog: true }
         )
       );
@@ -55,17 +55,17 @@ const user = {
     compute(user: { id: string }) {
       return tineVar(
         condition(
-          [
-            tineVar(claims, ($claims) => $claims?.userId === user.id),
-            tineVar(
+          {
+            if: tineVar(claims, ($claims) => $claims?.userId === user.id),
+            then: tineVar(
               s3.presignedPut({
                 bucketName: 'user-avatars',
                 objectName: `${user.id}.jpg`,
                 expires: 3600,
               })
             ),
-            undefined,
-          ],
+            else: undefined,
+          },
           { skipLog: true }
         )
       );

@@ -17,8 +17,8 @@ node ./tinejs-cli/tine-types.js
 node ./tinejs-cli/tine-apis.js
 node ./tinejs-cli/tine-rpc.js
 
-# node ./tinejs-cli/use-case-return-types.js
-# node ./tinejs-cli/use-case-zod-types.js
+node ./tinejs-cli/use-case-return-types.js
+node ./tinejs-cli/use-case-zod-types.js
 
 rm ./useCases/.return-types.ts
 rm ./useCases/useCases.json

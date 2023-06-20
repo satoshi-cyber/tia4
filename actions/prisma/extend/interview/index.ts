@@ -30,20 +30,20 @@ const interview = {
               })
         ),
         uploadUrl: tineVar(
-          condition([
-            tineVar(
+          condition({
+            if: tineVar(
               claims,
               ($claims) => $claims?.userId === interview.interviewee.id
             ),
-            tineVar(
+            then: tineVar(
               s3.presignedPut({
                 bucketName: 'answers-original',
                 objectName: `${interview.id}-${answer.question.id}.mp4`,
                 expires: 3600,
               })
             ),
-            undefined,
-          ])
+            else: undefined,
+          })
         ),
       }));
     },

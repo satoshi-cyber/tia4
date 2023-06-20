@@ -22,8 +22,8 @@ const company = {
     needs: { id: true },
     compute(company: { id: string }) {
       return tineVar(
-        condition([
-          tineVar(
+        condition({
+          if: tineVar(
             claims,
             ($claims) =>
               $claims?.companyRoles.findIndex(
@@ -32,15 +32,15 @@ const company = {
                   role.role === CompanyMemberRole.adminMember
               ) !== -1
           ),
-          tineVar(
+          then: tineVar(
             s3.presignedPut({
               bucketName: 'company-avatars',
               objectName: `${company.id}.jpg`,
               expires: 3600,
             })
           ),
-          undefined,
-        ])
+          else: undefined,
+        })
       );
     },
   },

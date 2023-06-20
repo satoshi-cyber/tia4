@@ -49,10 +49,10 @@ const userWithOAuthData = attachOauthPicture({
 
 const createUserToken = signToken(tineVar(userWithOAuthData));
 
-const authenticateUser = condition([
-  tineVar(user, ($user) => Boolean($user)),
-  tineVar(userToken),
-  tineVar(createUserToken),
-]);
+const authenticateUser = condition({
+  if: tineVar(user, ($user) => Boolean($user)),
+  then: tineVar(userToken),
+  else: tineVar(createUserToken),
+});
 
 export default authenticateUser.withInput(input);

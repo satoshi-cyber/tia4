@@ -62,10 +62,10 @@ const inviteCompanyMembers = shape(
         },
       });
 
-      const inviteMember = condition([
-        tineVar(isMember, ($isMember) => !Boolean($isMember)),
-        tineVar(sendInvite),
-      ]);
+      const inviteMember = condition({
+        if: tineVar(isMember, ($isMember) => !Boolean($isMember)),
+        then: tineVar(sendInvite),
+      });
 
       return tineVar(inviteMember);
     })

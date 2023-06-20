@@ -14,10 +14,10 @@ const count = prisma.interview.count({
   },
 });
 
-const didApply = condition([
-  tineVar(count, ($count) => $count > 0),
-  true,
-  false,
-]);
+const didApply = condition({
+  if: tineVar(count, ($count) => $count > 0),
+  then: true,
+  else: false,
+});
 
 export default didApply.withInput(input);
