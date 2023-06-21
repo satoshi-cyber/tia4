@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { condition, tineInput, tineVar } from 'tinejs';
+import { shape, tineInput, tineVar } from 'tinejs';
 import auth from '@/actions/auth';
 import prisma from '@/actions/prisma';
 
@@ -14,10 +14,6 @@ const count = prisma.interview.count({
   },
 });
 
-const didApply = condition({
-  if: tineVar(count, ($count) => $count > 0),
-  then: true,
-  else: false,
-});
+const didApply = shape(tineVar(count, ($count) => $count > 0));
 
 export default didApply.withInput(input);
