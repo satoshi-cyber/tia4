@@ -27,7 +27,7 @@ const processInterview = task(async (ctx) => {
     .run(ctx);
 
   const videos = interview.answers.map(
-    (answer: any) => `${interview.id}-${answer.question.id}.mp4`
+    (answer) => `${interview.id}-${answer.question.id}.mp4`
   );
 
   const response = await fetch(env.CONVERTER_URI, {
