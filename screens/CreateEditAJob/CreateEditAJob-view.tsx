@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PostWithAI from './components/PostWithAI';
+// import PostWithAI from './components/PostWithAI';
 import { Questions, Header } from './components';
 import { useCreateUpdateAJob } from './CreateEditAJob-hook';
 import {
@@ -32,7 +32,7 @@ const CreateAJob: React.FC = () => {
       <LoadingProvider isLoading={isLoading}>
         <Form {...formProps} className={CLASS_NAMES.form}>
           <Header editJob={editJob} handleDeleteJob={handleDeleteJob} />
-          {!editJob && <PostWithAI setDescription={setDescription} />}
+          {/* {!editJob && <PostWithAI setDescription={setDescription} />} */}
           <Field.Input
             {...TITLE_FIELD_PROPS}
             after={<FormIcon name={TITLE_ICON} />}
