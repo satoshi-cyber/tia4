@@ -7,6 +7,7 @@ import ReactFlow, {
   Controls,
   useNodesState,
   useEdgesState,
+  Background,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import ButtonIcon from '@/components/ButtonIcon';
@@ -211,6 +212,7 @@ const Settings = () => {
         attributionPosition="top-right"
       >
         <Controls />
+        <Background color="#bbb" variant="dots" gap="40" />
       </ReactFlow>
     </div>
   );
