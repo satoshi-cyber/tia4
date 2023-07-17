@@ -212,7 +212,7 @@ const Settings = () => {
         attributionPosition="top-right"
       >
         <Controls />
-        <Background color="#bbb" variant="dots" gap="40" />
+        <Background color="#bbb" variant="dots" gap="20" />
       </ReactFlow>
     </div>
   );
