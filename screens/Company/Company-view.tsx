@@ -62,7 +62,7 @@ const Company = () => {
           )}
           <LoadingProvider isLoading={isLoading}>
             <div className={CLASS_NAMES.listContainer}>
-              {members.map((member) => (
+              {members.map((member: any) => (
                 <Item
                   member={member}
                   key={
