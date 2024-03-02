@@ -16,17 +16,17 @@ const extend = {
 };
 
 const clients = [
-  {
-    lat: 37.3541,
-    lng: -121.9555,
-    client: new PrismaClient({
-      datasources: {
-        db: {
-          url: env.SFO_DATABASE_URL,
-        },
-      },
-    }).$extends(extend),
-  },
+  // {
+  //   lat: 37.3541,
+  //   lng: -121.9555,
+  //   client: new PrismaClient({
+  //     datasources: {
+  //       db: {
+  //         url: env.SFO_DATABASE_URL,
+  //       },
+  //     },
+  //   }).$extends(extend),
+  // },
   // {
   //   lat: 50.1109,
   //   lng: 8.682,
@@ -49,17 +49,17 @@ const clients = [
       },
     }).$extends(extend),
   },
-  {
-    lat: -33.8678,
-    lng: 151.207,
-    client: new PrismaClient({
-      datasources: {
-        db: {
-          url: env.SYD_DATABASE_URL,
-        },
-      },
-    }).$extends(extend),
-  },
+  // {
+  //   lat: -33.8678,
+  //   lng: 151.207,
+  //   client: new PrismaClient({
+  //     datasources: {
+  //       db: {
+  //         url: env.SYD_DATABASE_URL,
+  //       },
+  //     },
+  //   }).$extends(extend),
+  // },
 ];
 
 const prisma = new PrismaClient().$extends(extend).$extends(

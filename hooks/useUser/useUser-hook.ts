@@ -31,15 +31,22 @@ export const useUser = () => {
 
   const login = useCallback(
     async (email: string) => {
-      const did = await magic?.auth.loginWithEmailOTP({ email });
+      try {
+        const did = await magic?.auth.loginWithEmailOTP({ email });
+      
 
-      if (!did) {
-        return;
+        if (!did) {
+          return;
+        }
+  
+        const res = await authenticateUser({ did });
+  
+        setToken(res?.token);  
+      } catch(error){
+
+        console.log(error)
       }
-
-      const res = await authenticateUser({ did });
-
-      setToken(res?.token);
+      
     },
     [setToken]
   );
