@@ -27,17 +27,17 @@ const clients = [
   //     },
   //   }).$extends(extend),
   // },
-  // {
-  //   lat: 50.1109,
-  //   lng: 8.682,
-  //   client: new PrismaClient({
-  //     datasources: {
-  //       db: {
-  //         url: env.FRA_DATABASE_URL,
-  //       },
-  //     },
-  //   }).$extends(extend),
-  // },
+  {
+    lat: 50.1109,
+    lng: 8.682,
+    client: new PrismaClient({
+      datasources: {
+        db: {
+          url: env.FRA_DATABASE_URL,
+        },
+      },
+    }).$extends(extend),
+  },
   {
     lat: 40.8041,
     lng: -74.0124,
